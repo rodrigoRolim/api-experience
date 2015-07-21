@@ -1,6 +1,3 @@
-[ ![Codeship Status for willianmano/laravel-convid](https://codeship.io/projects/42e7db80-2485-0132-e980-7e93daead137/status)](https://codeship.io/projects/36895)
-
-
 CODEMED - Experience
 =======================
 
