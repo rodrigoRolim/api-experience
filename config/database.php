@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'oracle'),
 
     /*
     |--------------------------------------------------------------------------
@@ -84,7 +84,16 @@ return [
             'charset'  => 'utf8',
             'prefix'   => '',
         ],
-
+        'oracle' => array(
+            'driver' => 'oracle',
+            'host' => '127.0.0.1',
+            'port' => '1521',
+            'database' => 'xe',
+            'username' => 'lis',
+            'password' => '147258',
+            'charset' => 'AL32UTF8',
+            'prefix' => '',
+        )
     ],
 
     /*
