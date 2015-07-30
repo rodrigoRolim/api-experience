@@ -9,7 +9,9 @@ class HomeController extends Controller {
     {
         $clientes = Cliente::orderBy('nome','ASC')->get();
 
-        dd($clientes);
+        echo '<pre>';
+        var_dump($clientes);
+        exit;
 
 //        return View::make('home.index')->with('clientes',$clientes);
 //
