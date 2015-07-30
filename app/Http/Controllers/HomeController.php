@@ -24,14 +24,14 @@ class HomeController extends Controller {
         echo '<pre>';
 
         $atendimentos = $this->atendimento->all();
-        $postos = $this->posto->all();
-
-        dd($atendimentos);
-
+        $postos = $this->posto->all()->toArray();
 
         foreach ($atendimentos as $key => $atendimento){
-            var_dump($atendimento->registro);
-
+            //dd($atendimento->getPosto()->get()->toArray()[0]['posto']);
+            var_dump($atendimento->getPosto()->first()->toArray()['nome']);
+            dd($atendimento->registro);
+//            var_dump($atendimento->registro);
+//            var_dump($atendimento->getPosto());
             //var_dump($atendimento->get());
 
             exit;

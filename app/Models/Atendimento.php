@@ -23,7 +23,7 @@ class Atendimento extends Model {
      */
     public function getPosto()
     {
-        return $this->hasOne('App\Models\Posto', 'posto');
+        return $this->belongsTo('App\Models\Posto', 'posto');
     }
 
     /**

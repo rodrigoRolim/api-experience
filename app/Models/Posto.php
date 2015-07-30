@@ -16,5 +16,5 @@ class Posto extends Model {
      *
      * @var string
      */
-    protected $primaryKey = 'POSTO';
+    protected $primaryKey = 'posto';
 }
