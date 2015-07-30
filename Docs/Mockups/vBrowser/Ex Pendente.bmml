@@ -1,0 +1,77 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1087" measuredH="749" mockupW="662" mockupH="749">
+  <controls>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::iPhone" x="425" y="0" w="662" h="749" measuredW="282" measuredH="573" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bgPattern>topOnly</bgPattern>
+        <model>IPhone5</model>
+      </controlProperties>
+    </control>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::Link" x="615" y="142" w="-1" h="-1" measuredW="16" measuredH="33" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>Resultado%20Filtro%20ID%26bm%3BResultado%20Filtro%20ID.bmml%26bm%3BResultado%20Filtro%20ID.bmml%26bm%3BResultado%20Filtro%20ID.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22190%2C142%2C206%2C175%22%20href%3D%22Resultado%2520Filtro%2520ID.bmml%22%20alt%3D%22Resultado%20Filtro%20ID%22%20id%3D%225%22/%3E</map>
+        <size>28</size>
+        <text>%3C</text>
+        <underline>false</underline>
+      </controlProperties>
+    </control>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::Canvas" x="605" y="181" w="297" h="459" measuredW="100" measuredH="70" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.75</backgroundAlpha>
+        <color>11982760</color>
+      </controlProperties>
+    </control>
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::Icon" x="863" y="140" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>0</color>
+        <href>Menu%20ID%26bm%3BMenu%20ID.bmml%26bm%3BMenu%20ID.bmml%26bm%3BMenu%20ID.bmml</href>
+        <icon>EllipsisIcon%7Cmedium</icon>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22438%2C140%2C470%2C172%22%20href%3D%22Menu%2520ID.bmml%22%20alt%3D%22Menu%20ID%22%20id%3D%227%22/%3E</map>
+        <rotation>90</rotation>
+      </controlProperties>
+    </control>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::Icon" x="743" y="167" w="-1" h="-1" measuredW="16" measuredH="16" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>0</color>
+        <href>Perfil%20Paciente%20ID%26bm%3BPerfil%20Paciente%20ID.bmml%26bm%3BPerfil%20Paciente%20ID.bmml%26bm%3BPerfil%20Paciente%20ID.bmml</href>
+        <icon>ListIcon%7Cxsmall</icon>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22318%2C167%2C334%2C183%22%20href%3D%22Perfil%2520Paciente%2520ID.bmml%22%20alt%3D%22Perfil%20Paciente%20ID%22%20id%3D%228%22/%3E</map>
+      </controlProperties>
+    </control>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::Canvas" x="605" y="181" w="297" h="320" measuredW="100" measuredH="70" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.75</backgroundAlpha>
+        <borderStyle>square</borderStyle>
+        <color>16777215</color>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::Label" x="646" y="207" w="137" h="-1" measuredW="137" measuredH="25" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <color>0</color>
+        <size>18</size>
+        <text>GLI%09GLICEMIA</text>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::Label" x="646" y="253" w="230" h="-1" measuredW="223" measuredH="24" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>10027008</color>
+        <size>16</size>
+        <text>Explica%E7%F5es%20sobre%20a%20pend%EAncia.</text>
+      </controlProperties>
+    </control>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::Canvas" x="607" y="183" w="16" h="314" measuredW="100" measuredH="70" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>none</borderStyle>
+        <color>14706278</color>
+      </controlProperties>
+    </control>
+    <control controlID="14" controlTypeID="com.balsamiq.mockups::Label" x="689" y="142" w="-1" h="-1" measuredW="143" measuredH="27" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <size>20</size>
+        <text>Nome%20Paciente</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

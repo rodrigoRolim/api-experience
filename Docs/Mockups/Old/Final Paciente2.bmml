@@ -1,0 +1,177 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1431" measuredH="738" mockupW="1060" mockupH="738">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="371" y="0" w="1060" h="738" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>RESULTADOS%0Ahttp%3A//www.codemed.com/resultados</text>
+      </controlProperties>
+    </control>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::Canvas" x="549" y="79" w="634" h="632" measuredW="100" measuredH="70" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>16777215</color>
+      </controlProperties>
+    </control>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::TextInput" x="553" y="80" w="630" h="-1" measuredW="134" measuredH="27" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>14540253</color>
+        <text>Paciente%3A%200000-XXX</text>
+      </controlProperties>
+    </control>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::Canvas" x="559" y="233" w="620" h="432" measuredW="100" measuredH="70" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>16777215</color>
+      </controlProperties>
+    </control>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::TextArea" x="730" y="216" w="434" h="419" measuredW="200" measuredH="140" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>16777215</color>
+        <text>Conv%EAnio%3A%20XXXX%09ID%3A%2000000000%0ASolicitante%3A%20XXXX</text>
+      </controlProperties>
+    </control>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::TextInput" x="562" y="264" w="171" h="-1" measuredW="152" measuredH="25" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>13421772</color>
+        <size>11</size>
+        <text>10/05/2015%20%20HC%20POT%20CREA</text>
+      </controlProperties>
+    </control>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::Icon" x="709" y="268" w="-1" h="-1" measuredW="16" measuredH="16" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>Final%20Paciente%26bm%3BFinal%20Paciente.bmml%26bm%3BFinal%20Paciente.bmml%26bm%3BFinal%20Paciente.bmml</href>
+        <icon>RightArrowIcon%7Cxsmall</icon>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22338%2C268%2C354%2C284%22%20href%3D%22Final%2520Paciente.bmml%22%20alt%3D%22Final%20Paciente%22%20id%3D%226%22/%3E</map>
+      </controlProperties>
+    </control>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::TextArea" x="577" y="114" w="136" h="87" measuredW="200" measuredH="140" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <borderColor>16777215</borderColor>
+        <color>15658734</color>
+        <size>16</size>
+        <text>%20%0ALOGO%0ACLIENTE</text>
+      </controlProperties>
+    </control>
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::TextArea" x="745" y="160" w="433" h="49" measuredW="200" measuredH="140" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>14540253</color>
+        <text>NOME%20PACIENTE%0AIdade%3A%2000%20Anos%20%20%20Sexo%3A%20X</text>
+      </controlProperties>
+    </control>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::SubTitle" x="1132" y="110" w="-1" h="-1" measuredW="38" measuredH="23" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>Paciente%20CPF%26bm%3BPaciente%20CPF.bmml%26bm%3BPaciente%20CPF.bmml%26bm%3BPaciente%20CPF.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22761%2C110%2C799%2C133%22%20href%3D%22Paciente%2520CPF.bmml%22%20alt%3D%22Paciente%20CPF%22%20id%3D%2210%22/%3E</map>
+        <size>20</size>
+        <text>Sair</text>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::TextArea" x="745" y="262" w="407" h="310" measuredW="200" measuredH="140" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>15658734</color>
+        <text>HC%20%7C%20HEMOGRAMA%20COMPLETO%20AUTOMATIZADO%0A%09%0A%20%0AGLI%20%7C%20GLICEMIA%20EM%20JEJUM%0A%09%0A%20%0AEAS%20%7C%20URINA%20EAS%0A%09%0A%20%0A%20%0A%20%0A%09</text>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::Button" x="950" y="583" w="201" h="39" measuredW="187" measuredH="27" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <color>6989903</color>
+        <size>18</size>
+        <text>Visualiza%20resultados</text>
+      </controlProperties>
+    </control>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::Label" x="754" y="326" w="95" h="-1" measuredW="51" measuredH="21" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>3700253</color>
+        <size>13</size>
+        <text>Liberado</text>
+      </controlProperties>
+    </control>
+    <control controlID="14" controlTypeID="com.balsamiq.mockups::Label" x="754" y="373" w="95" h="-1" measuredW="51" measuredH="21" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>3700253</color>
+        <size>13</size>
+        <text>Liberado</text>
+      </controlProperties>
+    </control>
+    <control controlID="17" controlTypeID="com.balsamiq.mockups::CheckBox" x="1102" y="232" w="40" h="38" measuredW="20" measuredH="21" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <state>selected</state>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="18" controlTypeID="com.balsamiq.mockups::CheckBox" x="1102" y="311" w="40" h="38" measuredW="20" measuredH="21" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <state>selected</state>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="19" controlTypeID="com.balsamiq.mockups::CheckBox" x="1102" y="355" w="40" h="38" measuredW="20" measuredH="21" zOrder="16" locked="false" isInGroup="-1">
+      <controlProperties>
+        <state>selected</state>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="21" controlTypeID="com.balsamiq.mockups::VerticalScrollBar" x="1134" y="264" w="-1" h="308" measuredW="16" measuredH="100" zOrder="17" locked="false" isInGroup="-1">
+      <controlProperties>
+        <value>26</value>
+      </controlProperties>
+    </control>
+    <control controlID="22" controlTypeID="com.balsamiq.mockups::TextArea" x="560" y="648" w="157" h="57" measuredW="200" measuredH="140" zOrder="18" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <borderColor>16777215</borderColor>
+        <color>15658734</color>
+        <size>13</size>
+        <text>CODEMED%0ASistemas%20e%20Consultoria%20em%20TI</text>
+      </controlProperties>
+    </control>
+    <control controlID="23" controlTypeID="com.balsamiq.mockups::TextInput" x="562" y="288" w="171" h="-1" measuredW="145" measuredH="25" zOrder="19" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>16777215</color>
+        <size>11</size>
+        <text>10/01/2015%20%20%20HC%20GLI%20EAS%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="25" controlTypeID="com.balsamiq.mockups::TextInput" x="562" y="310" w="171" h="-1" measuredW="154" measuredH="25" zOrder="20" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>13421772</color>
+        <size>11</size>
+        <text>08/10/2014%20%20SOD%20GLI%20EAS%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="26" controlTypeID="com.balsamiq.mockups::TextInput" x="562" y="334" w="171" h="-1" measuredW="150" measuredH="25" zOrder="21" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>13421772</color>
+        <size>11</size>
+        <text>08/06/2014%20%20%20HC%20GLI%20PAR%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="27" controlTypeID="com.balsamiq.mockups::Icon" x="709" y="292" w="-1" h="-1" measuredW="16" measuredH="16" zOrder="22" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>RightArrowIcon%7Cxsmall</icon>
+      </controlProperties>
+    </control>
+    <control controlID="29" controlTypeID="com.balsamiq.mockups::Icon" x="709" y="312" w="-1" h="-1" measuredW="16" measuredH="16" zOrder="23" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>RightArrowIcon%7Cxsmall</icon>
+      </controlProperties>
+    </control>
+    <control controlID="30" controlTypeID="com.balsamiq.mockups::Icon" x="709" y="338" w="-1" h="-1" measuredW="16" measuredH="16" zOrder="24" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>RightArrowIcon%7Cxsmall</icon>
+      </controlProperties>
+    </control>
+    <control controlID="31" controlTypeID="com.balsamiq.mockups::Label" x="754" y="282" w="95" h="-1" measuredW="51" measuredH="21" zOrder="25" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>3700253</color>
+        <size>13</size>
+        <text>Liberado</text>
+      </controlProperties>
+    </control>
+    <control controlID="32" controlTypeID="com.balsamiq.mockups::CheckBox" x="1102" y="270" w="40" h="38" measuredW="20" measuredH="21" zOrder="26" locked="false" isInGroup="-1">
+      <controlProperties>
+        <state>selected</state>
+        <text/>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

@@ -1,0 +1,113 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1060" measuredH="738" mockupW="1060" mockupH="738">
+  <controls>
+    <control controlID="29" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="0" y="0" w="1060" h="738" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>www.codemed.com/acesso</text>
+      </controlProperties>
+    </control>
+    <control controlID="44" controlTypeID="com.balsamiq.mockups::Canvas" x="368" y="110" w="292" h="290" measuredW="100" measuredH="70" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>1</backgroundAlpha>
+        <color>16777215</color>
+      </controlProperties>
+    </control>
+    <control controlID="45" controlTypeID="com.balsamiq.mockups::Button" x="378" y="76" w="85" h="28" measuredW="73" measuredH="27" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <state>selected</state>
+        <text>Paciente</text>
+      </controlProperties>
+    </control>
+    <control controlID="46" controlTypeID="com.balsamiq.mockups::Button" x="472" y="76" w="65" h="28" measuredW="55" measuredH="27" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>posto%26bm%3Bposto.bmml%26bm%3Bposto.bmml%26bm%3Bposto.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22472%2C76%2C537%2C104%22%20href%3D%22posto.bmml%22%20alt%3D%22posto%22%20id%3D%2246%22/%3E</map>
+        <text>Posto</text>
+      </controlProperties>
+    </control>
+    <control controlID="47" controlTypeID="com.balsamiq.mockups::Button" x="544" y="76" w="80" h="28" measuredW="65" measuredH="27" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>medico%26bm%3Bmedico.bmml%26bm%3Bmedico.bmml%26bm%3Bmedico.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22544%2C76%2C624%2C104%22%20href%3D%22medico.bmml%22%20alt%3D%22medico%22%20id%3D%2247%22/%3E</map>
+        <text>M%E9dico</text>
+      </controlProperties>
+    </control>
+    <control controlID="48" controlTypeID="com.balsamiq.mockups::Label" x="387" y="124" w="239" h="-1" measuredW="212" measuredH="36" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>545684</color>
+        <size>28</size>
+        <text>Acesso%20Paciente</text>
+      </controlProperties>
+    </control>
+    <control controlID="49" controlTypeID="com.balsamiq.mockups::RadioButton" x="387" y="160" w="30" h="19" measuredW="30" measuredH="22" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>Paciente%20ID%26bm%3BPaciente%20ID.bmml%26bm%3BPaciente%20ID.bmml%26bm%3BPaciente%20ID.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22387%2C160%2C417%2C179%22%20href%3D%22Paciente%2520ID.bmml%22%20alt%3D%22Paciente%20ID%22%20id%3D%2249%22/%3E</map>
+        <text>ID</text>
+      </controlProperties>
+    </control>
+    <control controlID="50" controlTypeID="com.balsamiq.mockups::RadioButton" x="423" y="162" w="47" h="15" measuredW="41" measuredH="22" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <state>selected</state>
+        <text>CPF</text>
+      </controlProperties>
+    </control>
+    <control controlID="51" controlTypeID="__group__" x="395" y="183" w="222" h="27" measuredW="222" measuredH="27" zOrder="8" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::TextInput" x="0" y="0" w="222" h="-1" measuredW="59" measuredH="27" zOrder="0" locked="false" isInGroup="51">
+          <controlProperties>
+            <state>disabled</state>
+            <text>%20%20%20%20%20CPF</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="52" controlTypeID="com.balsamiq.mockups::Icon" x="398" y="185" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>none</borderStyle>
+        <color>13421772</color>
+        <icon>ContactIcon%7Csmall</icon>
+      </controlProperties>
+    </control>
+    <control controlID="53" controlTypeID="__group__" x="394" y="217" w="223" h="27" measuredW="223" measuredH="27" zOrder="10" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::TextInput" x="0" y="0" w="223" h="-1" measuredW="140" measuredH="27" zOrder="0" locked="false" isInGroup="53">
+          <controlProperties>
+            <state>disabled</state>
+            <text>%20%20%20%20%20%20Data%20Nascimento</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="54" controlTypeID="com.balsamiq.mockups::Icon" x="398" y="220" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>10066329</color>
+        <icon>CalendarIcon%7Csmall</icon>
+      </controlProperties>
+    </control>
+    <control controlID="55" controlTypeID="__group__" x="395" y="252" w="222" h="27" measuredW="222" measuredH="27" zOrder="12" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::TextInput" x="0" y="0" w="222" h="-1" measuredW="71" measuredH="27" zOrder="0" locked="false" isInGroup="55">
+          <controlProperties>
+            <state>disabled</state>
+            <text>%20%20%20%20%20Senha</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="56" controlTypeID="com.balsamiq.mockups::Icon" x="398" y="253" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>14540253</color>
+        <icon>LockIcon%7Csmall</icon>
+      </controlProperties>
+    </control>
+    <control controlID="57" controlTypeID="com.balsamiq.mockups::Button" x="522" y="288" w="95" h="40" measuredW="91" measuredH="27" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>13421772</color>
+        <href>Final%20Paciente%26bm%3BFinal%20Paciente.bmml%26bm%3BFinal%20Paciente.bmml%26bm%3BFinal%20Paciente.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22522%2C288%2C617%2C328%22%20href%3D%22Final%2520Paciente.bmml%22%20alt%3D%22Final%20Paciente%22%20id%3D%2257%22/%3E</map>
+        <size>18</size>
+        <text>Acessar</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

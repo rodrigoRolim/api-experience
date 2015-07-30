@@ -1,0 +1,39 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1362" measuredH="738" mockupW="1060" mockupH="738">
+  <controls>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="302" y="0" w="1060" h="738" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>www.codemed.com/acesso</text>
+      </controlProperties>
+    </control>
+    <control controlID="36" controlTypeID="com.balsamiq.mockups::Button" x="690" y="74" w="85" h="28" measuredW="73" measuredH="27" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <state>selected</state>
+        <text>Paciente</text>
+      </controlProperties>
+    </control>
+    <control controlID="37" controlTypeID="com.balsamiq.mockups::Button" x="784" y="74" w="65" h="28" measuredW="55" measuredH="27" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>posto%26bm%3Bposto.bmml%26bm%3Bposto.bmml%26bm%3Bposto.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22482%2C74%2C547%2C102%22%20href%3D%22posto.bmml%22%20alt%3D%22posto%22%20id%3D%2237%22/%3E</map>
+        <text>Posto</text>
+      </controlProperties>
+    </control>
+    <control controlID="38" controlTypeID="com.balsamiq.mockups::Button" x="856" y="74" w="80" h="28" measuredW="65" measuredH="27" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>medico%26bm%3Bmedico.bmml%26bm%3Bmedico.bmml%26bm%3Bmedico.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22554%2C74%2C634%2C102%22%20href%3D%22medico.bmml%22%20alt%3D%22medico%22%20id%3D%2238%22/%3E</map>
+        <text>M%E9dico</text>
+      </controlProperties>
+    </control>
+    <control controlID="42" controlTypeID="__group__" x="686" y="111" w="292" h="224" measuredW="292" measuredH="224" zOrder="1" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Component" x="0" y="0" w="292" h="224" measuredW="292" measuredH="224" zOrder="0" locked="false" isInGroup="42">
+          <controlProperties>
+            <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22456%2C145%2C503%2C160%22%20href%3D%22Paciente%2520CPF.bmml%22%20alt%3D%22Paciente%20CPF%22%20id%3D%225%22/%3E%3Carea%20shape%3D%22rect%22%20coords%3D%22547%2C261%2C642%2C301%22%20href%3D%22Resultado%2520ID.bmml%22%20alt%3D%22Resultado%20ID%22%20id%3D%226%22/%3E</map>
+            <src>./assets/symbols.bmml#login</src>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+  </controls>
+</mockup>
