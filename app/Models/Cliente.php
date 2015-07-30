@@ -17,4 +17,12 @@ class Cliente extends Model {
      * @var string
      */
     protected $primaryKey = 'REGISTRO';
+
+    /**
+     * Todos os atendimentos do Cliente
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function atendimetos(){
+        return $this->hasMany('App\Models\Atendimento', 'REGISTRO');
+    }
 }

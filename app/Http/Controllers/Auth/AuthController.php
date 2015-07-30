@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+
 use Validator;
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
-use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -21,45 +21,86 @@ class AuthController extends Controller
     |
     */
 
-    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+    protected $auth;
 
     /**
      * Create a new authentication controller instance.
      *
-     * @return void
-     */
-    public function __construct()
+     * @param \Illuminate\Contracts\Auth\Guard     $auth
+    */
+    public function __construct(Guard $auth)
     {
+        $this->auth = $auth;
         $this->middleware('guest', ['except' => 'getLogout']);
     }
 
     /**
-     * Get a validator for an incoming registration request.
+     * Show the application login form.
      *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @return \Illuminate\Http\Response
      */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
-        ]);
-    }
+     public function getIndex()
+     {
+        return view('auth.index');
+     }
 
     /**
-     * Create a new user instance after a valid registration.
+     * Handle a login request to the application.
      *
-     * @param  array  $data
-     * @return User
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\Response
      */
-    protected function create(array $data)
+    public function postLogin(Request $request)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        switch ($request->input('tipoAcesso')) {
+            case 'PACIENTE':
+                if($request->input('tipo') == 'ID'){
+                    $this->validate($request, [
+                        'posto' => 'required|max:3|integer',
+                        'atendimento' => 'required|max:6|integer',
+                        'senhaId' => 'required',
+                    ]);
+
+                    $credentials = [
+                        'posto' => $request->input('posto'),
+                        'atendimento' => $request->input('atendimento'),
+                        'senhaId' => $request->input('senhaId'),
+                    ];
+                }
+
+                if($request->input('tipo') == 'CPF'){
+                    $this->validate($request, [
+                        'cpf' => 'required|cpf',
+                        'nascimento' => 'required|date',
+                        'senhaCpf' => 'required',
+                    ]);
+
+                    $credentials = [
+                        'cpf' => $request->input('cpf'),
+                        'nascimento' => $request->input('nascimento'),
+                        'senhaCpf' => $request->input('senhaCpf')
+                    ];
+                }
+
+                dd($this->auth);
+//
+                if ($this->auth->attempt($credentials, $request->has('remember'))) {
+                    return redirect()->intended('/admin');
+                }
+
+                break;
+        }
+
+
+//        if ($this->auth->attempt($credentials, $request->has('remember'))) {
+//            return redirect()->intended('/admin');
+//        }
+//
+//        return redirect('/auth/login')
+//            ->withInput($request->only('lgn_usuario', 'remember'))
+//            ->withErrors([
+//                'Usuário e/ou senha inválidos.',
+//            ]);
     }
 }
