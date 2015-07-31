@@ -32,9 +32,9 @@ class HomeController extends Controller {
         //dd($atendimentos[0]->cliente()->get());
 
         foreach($atendimentos as $key => $atendimento){
-            echo 'POSTO: '.$atendimento->posto .'<br>';
-            echo 'ATEND: '.$atendimento->atendimento .'<br>';
-            echo 'NOME:  '.$atendimento->cliente()->get()[0]->nome .'<br><br>';
+            echo '<b>POSTO:</b> '.$atendimento->posto .'<br>';
+            echo '<b>ATEND:</b> '.$atendimento->atendimento .'<br>';
+            echo '<b> NOME:</b> '.$atendimento->cliente->nome.'<br><br>';
         }
 
 //        dd($atendimentos->getCliente());
