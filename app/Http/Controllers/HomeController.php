@@ -23,22 +23,37 @@ class HomeController extends Controller {
     {
         echo '<pre>';
 
-        $atendimentos = $this->atendimento->all();
-        $postos = $this->posto->all()->toArray();
+        //$atendimentos = $this->atendimento->model();
 
-        foreach ($atendimentos as $key => $atendimento){
-            //dd($atendimento->getPosto()->get()->toArray()[0]['posto']);
-            var_dump($atendimento->getPosto()->first()->toArray()['nome']);
-            dd($atendimento->registro);
-//            var_dump($atendimento->registro);
-//            var_dump($atendimento->getPosto());
-            //var_dump($atendimento->get());
+        $atendimentos = $this->atendimento->findWhere(['posto' => 0,'atendimento' => 1715]);
 
-            exit;
+        $atendimentos = $atendimentos->all();
+
+        //dd($atendimentos[0]->cliente()->get());
+
+        foreach($atendimentos as $key => $atendimento){
+            echo 'POSTO: '.$atendimento->posto .'<br>';
+            echo 'ATEND: '.$atendimento->atendimento .'<br>';
+            echo 'NOME:  '.$atendimento->cliente()->get()[0]->nome .'<br><br>';
         }
 
-
-        echo 'bruno';
+//        dd($atendimentos->getCliente());
+//        $atendimentos = $this->atendimento->all();
+//        $postos = $this->posto->all()->toArray();
+//
+//        foreach ($atendimentos as $key => $atendimento){
+//            //dd($atendimento->getPosto()->get()->toArray()[0]['posto']);
+//            var_dump($atendimento->getPosto()->first()->toArray()['nome']);
+//            dd($atendimento->registro);
+////            var_dump($atendimento->registro);
+////            var_dump($atendimento->getPosto());
+//            //var_dump($atendimento->get());
+//
+//            exit;
+//        }
+//
+//
+//        echo 'bruno';
 //        $clientes = Cliente::;
 //        return View::make('home.index');
     }

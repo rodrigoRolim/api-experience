@@ -138,6 +138,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Experience\Validation\ValidationServiceProvider::class,
+        Prettus\Repository\Providers\LumenRepositoryServiceProvider::class,
 
         /*
          * Application Service Providers...

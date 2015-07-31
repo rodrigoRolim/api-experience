@@ -2,9 +2,9 @@
 
 namespace App\Repositories;
 
-use Bosnadev\Repositories\Eloquent\Repository;
+use Prettus\Repository\Eloquent\BaseRepository;
 
-class ClienteRepository extends Repository
+class ClienteRepository extends BaseRepository
 {
     /**
      * Specify Model class name.

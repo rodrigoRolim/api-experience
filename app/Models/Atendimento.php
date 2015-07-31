@@ -15,23 +15,23 @@ class Atendimento extends Model {
      *
      * @var string
      */
-//    protected $primaryKey = array('POSTO', 'ATENDIMENTO');
+    protected $primaryKey = array('POSTO', 'ATENDIMENTO');
 
     /**
      * Dados do posto do atendimento
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function getPosto()
+    public function posto()
     {
-        return $this->belongsTo('App\Models\Posto', 'posto');
+        return $this->belongsTo('App\Models\Posto', 'POSTO','POSTO');
     }
 
     /**
      * Dados do cliente do atendimento
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function getCliente()
+    public function cliente()
     {
-        return $this->belongsTo('App\Models\Cliente', 'REGISTRO');
+        return $this->hasOne('App\Models\Cliente', 'registro','registro');
     }
 }
