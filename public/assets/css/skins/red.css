@@ -1,0 +1,22 @@
+.headLogin{
+	background-color: #FBFBFB;
+	border-bottom: 1px solid #C52F33;
+}
+
+.text-navy{
+	color: #C52F33;
+}
+
+.btn-primary{
+	background-color:#C52F33;
+	border-color:#C52F33;
+}
+
+.btn-primary:hover{
+	background-color:#CE5356;
+	border-color:#CE5356;
+}
+
+.form-control:focus{
+	border-color:#CE5356 !important;
+}
