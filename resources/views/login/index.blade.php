@@ -29,42 +29,49 @@
                     <div class="tab-content">
                         <div id="tabLoginPaciente" class="tab-pane active">
                             <div class="panel-body">
+                                Paciente
                                 <form class="m-t" role="form" action="index.html">
                                     <div class="form-group">
+                                        <label>Email</label>
                                         <input type="email" class="form-control" placeholder="Username" required="">
                                     </div>
                                     <div class="form-group">
+                                        <label>Senha</label>
                                         <input type="password" class="form-control" placeholder="Password" required="">
                                     </div>
-                                    <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
+                                    <button type="submit" class="btn btn-primary block full-width m-b">Acessar</button>
                                 </form>
                             </div>
                         </div>
                         <div id="tabLoginPosto" class="tab-pane">
                             <div class="panel-body">
-                                posto
+                                Posto
                                 <form class="m-t" role="form" action="index.html">
                                     <div class="form-group">
+                                        <label>Email</label>
                                         <input type="email" class="form-control" placeholder="Username" required="">
                                     </div>
                                     <div class="form-group">
+                                        <label>Senha</label>
                                         <input type="password" class="form-control" placeholder="Password" required="">
                                     </div>
-                                    <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
+                                    <button type="submit" class="btn btn-primary block full-width m-b">Acessar</button>
                                 </form>
                             </div>
                         </div>
                         <div id="tabLoginMedico" class="tab-pane">
                             <div class="panel-body">
-                                medico
+                                Médico
                                 <form class="m-t" role="form" action="index.html">
                                     <div class="form-group">
+                                        <label>Email</label>
                                         <input type="email" class="form-control" placeholder="Username" required="">
                                     </div>
                                     <div class="form-group">
+                                        <label>Senha</label>
                                         <input type="password" class="form-control" placeholder="Password" required="">
                                     </div>
-                                    <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
+                                    <button type="submit" class="btn btn-primary block full-width m-b">Acessar</button>
                                 </form>
                             </div>
                         </div>

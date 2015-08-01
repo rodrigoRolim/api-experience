@@ -6,3 +6,7 @@
 .panel-body{
 	min-height: 250px;
 }
+
+.content{
+	min-height: 100vh !important;
+}
