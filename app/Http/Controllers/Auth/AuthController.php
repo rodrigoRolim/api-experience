@@ -93,14 +93,14 @@ class AuthController extends Controller
         }
 
 
-//        if ($this->auth->attempt($credentials, $request->has('remember'))) {
-//            return redirect()->intended('/admin');
-//        }
-//
-//        return redirect('/auth/login')
-//            ->withInput($request->only('lgn_usuario', 'remember'))
-//            ->withErrors([
-//                'Usuário e/ou senha inválidos.',
-//            ]);
+        if ($this->auth->attempt($credentials, $request->has('remember'))) {
+            return redirect()->intended('/admin');
+        }
+
+        return redirect('/auth/login')
+            ->withInput($request->only('lgn_usuario', 'remember'))
+            ->withErrors([
+                'Usuário e/ou senha inválidos.',
+            ]);
     }
 }

@@ -21,8 +21,6 @@ class HomeController extends Controller {
 
     public function index()
     {
-        echo '<pre>';
-
         //$atendimentos = $this->atendimento->model();
 
         $atendimentos = $this->atendimento->findWhere(['posto' => 0,'atendimento' => 1715]);
