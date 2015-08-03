@@ -1,10 +1,12 @@
-<form role="form" action="index.html">
+{!! Form::open(array('url'=>'/login','id'=> 'formMedico', 'role'=> 'form')) !!}
+    <input name="tipoAcesso" type="hidden" id="tipoAcesso" values="MED">
     <div class="form-group">
         <label>Informações CR</label>
         <div class="row">
             <div class="col-md-6">
                 <select class="form-control m-b" name="account">
-                    <option>CRM</option>
+                    <option value="">Selecione</option> 
+                    <option vauue="CRM">CRM</option>
                     <option value="COREN">COREN</option>
                     <option value="CRBiO">CRBIO</option>
                     <option value="CRBM">CRBM</option>
@@ -51,12 +53,18 @@
         </div>
     </div>
     <div class="form-group">
-        <label>CR</label>
-        <input type="text" class="form-control" placeholder="CR" required="">
+        <label>Número do CR</label>
+         <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-stethoscope"></i></span>
+                <input type="text" class="form-control" placeholder="CR" required="">
+        </div>       
     </div>
     <div class="form-group">
         <label>Senha</label>
-        <input type="password" class="form-control" placeholder="Senha" required="">
+        <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                <input type="password" class="form-control" placeholder="Senha" required="">
+            </div>
     </div>
     <button type="submit" class="btn btn-primary block full-width m-b">Acessar</button>
-</form>
+{!! Form::close() !!}

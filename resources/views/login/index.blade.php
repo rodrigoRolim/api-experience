@@ -1,8 +1,17 @@
 @extends('layouts.layoutLogin')
 
+@section('stylesheets')
+    {!! Html::style('/assets/css/plugins/datapicker/datepicker.css') !!}    
+    {!! Html::style('/assets/css/plugins/iCheck/custom.css') !!}
+
+    <style type="text/css">
+        .i-checks{
+            margin-bottom: 10px;
+        }
+    </style>
+@stop
+
 @section('content')
-
-
 <body class="gray-bg">
 	<div class="loginColumns animated fadeInDown">
         <div class="row">
@@ -21,9 +30,9 @@
                         <li class=""><a data-toggle="tab" href="#tabLoginPosto" aria-expanded="false">Posto</a></li>
                     </ul>
                     <div class="tab-content">
-                        <div id="tabLoginPaciente" class="tab-pane active">
+                        <div id="tabLoginPaciente" class="tab-pane active">                           
                             <div class="panel-body">
-                                @include('login.includes.formLoginPaciente')
+                               @include('login.includes.formLoginPaciente')                                
                             </div>
                         </div>
                         <div id="tabLoginMedico" class="tab-pane">
