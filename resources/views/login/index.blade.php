@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-md-6 hidden-xs">
                 <h2>
-                	<span class="text-navy">INSPINIA - Responsive Admin Theme</span>
+                    <span class="text-navy">INSPINIA - Responsive Admin Theme</span>
                 	<br><br>is provided with two main layouts 
                     <br>three skins and separate configure options.
                 </h2>
