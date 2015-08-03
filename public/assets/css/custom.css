@@ -3,10 +3,6 @@
 	padding: 5px 0 10px 0;
 }
 
-.panel-body{
-	min-height: 250px;
-}
-
-.content{
-	min-height: 100vh !important;
+.footer{
+	width: 100%;
 }
