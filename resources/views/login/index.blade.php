@@ -8,16 +8,10 @@
         <div class="row">
             <div class="col-md-6 hidden-xs">
                 <h2>
-                    <span class="text-navy">INSPINIA - Responsive Admin Theme</span>
-                	<br><br>is provided with two main layouts 
-                    <br>three skins and separate configure options.
+                    <span class="text-navy">{{config('system.loginText.title')}}</span>
+                	{!!config('system.loginText.subTitle')!!}
                 </h2>
-                <p>
-                    Perfectly designed and precisely prepared admin theme with over 50 pages with extra new web app views.
-                </p>
-                <p>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-                </p>
+                {!!config('system.loginText.description')!!}
             </div>
             <div class="col-md-6">
                 <div class="tabs-container">

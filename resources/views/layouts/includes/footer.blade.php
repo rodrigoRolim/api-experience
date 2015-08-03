@@ -1,5 +1,5 @@
 <div class="footer">
     <div class="pull-right">
-        <strong>Copyright</strong> Codemed ©2014-2015
+         {!!config('system.loginText.footerText')!!}
     </div>
 </div>
