@@ -25,6 +25,7 @@ class HomeController extends Controller {
 
         $atendimentos = $this->atendimento->findWhere(['posto' => 0,'atendimento' => 1715]);
 
+        dd($atendimentos);
         $atendimentos = $atendimentos->all();
 
         //dd($atendimentos[0]->cliente()->get());

@@ -53,7 +53,39 @@ class AuthController extends Controller
      */
     public function postLogin(Request $request)
     {
-        dd($request->all());
+        switch($request->input('tipoAcesso')){
+            case 'PAC':
+                if($request->input('tipoLoginPaciente') == 'ID'){
+                    $validate = [
+                        'posto' => 'required|max:'.config('system.qtdCaracterPosto').'|integer',
+                        'atendimento' => 'required|max:'.config('system.qtdCaracterAtend').'|integer',
+                        'password' => 'required',
+                    ];
+
+                    $dadosAtend = explode('/',$request->input('atendimento'));
+
+                    $credentials = [
+                        'tipoAcesso' => 'PAC',
+                        'tipoLoginPaciente' => $request->input('tipoLoginPaciente'),
+                        'posto' => $dadosAtend[0],
+                        'atendimento' => $dadosAtend[1],
+                        'password' => $request->input('password'),
+                    ];
+                }
+
+                break;
+        }
+
+        if ($this->auth->attempt($credentials, $request->has('remember'))) {
+            dd($this->auth->user());
+            //return redirect()->intended('/admin');
+        }
+
+        return redirect('/auth/login')
+            //->withInput($request->only('lgn_usuario', 'remember'))
+            ->withErrors([
+                'Usuário e/ou senha inválidos.',
+            ]);
 
 
 
@@ -96,22 +128,22 @@ class AuthController extends Controller
 //                break;
 //        }
 
-        $credentials = [
-            'posto' => $request->input('posto'),
-            'atendimento' => $request->input('atendimento'),
-            'senhaId' => $request->input('senhaId'),
-        ];
-
-        if ($this->auth->attempt($credentials, $request->has('remember'))) {
-            dd($this->auth->user());
-
-//            return redirect()->intended('/admin');
-        }
-
-        return redirect('/auth/login')
-            ->withInput($request->only('lgn_usuario', 'remember'))
-            ->withErrors([
-                'Usuário e/ou senha inválidos.',
-            ]);
+//        $credentials = [
+//            'posto' => $request->input('posto'),
+//            'atendimento' => $request->input('atendimento'),
+//            'senhaId' => $request->input('senhaId'),
+//        ];
+//
+//        if ($this->auth->attempt($credentials, $request->has('remember'))) {
+//            dd($this->auth->user());
+//
+////            return redirect()->intended('/admin');
+//        }
+//
+//        return redirect('/auth/login')
+//            ->withInput($request->only('lgn_usuario', 'remember'))
+//            ->withErrors([
+//                'Usuário e/ou senha inválidos.',
+//            ]);
     }
 }
