@@ -147,6 +147,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+         * LOGIN CUSTOM
+         */
+        App\Providers\CustomAuthProvider::class,
+
         /**
          * ORA CONECT
          */

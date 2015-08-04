@@ -53,48 +53,55 @@ class AuthController extends Controller
      */
     public function postLogin(Request $request)
     {
-        switch ($request->input('tipoAcesso')) {
-            case 'PACIENTE':
-                if($request->input('tipo') == 'ID'){
-                    $this->validate($request, [
-                        'posto' => 'required|max:3|integer',
-                        'atendimento' => 'required|max:6|integer',
-                        'senhaId' => 'required',
-                    ]);
-
-                    $credentials = [
-                        'posto' => $request->input('posto'),
-                        'atendimento' => $request->input('atendimento'),
-                        'senhaId' => $request->input('senhaId'),
-                    ];
-                }
-
-                if($request->input('tipo') == 'CPF'){
-                    $this->validate($request, [
-                        'cpf' => 'required|cpf',
-                        'nascimento' => 'required|date',
-                        'senhaCpf' => 'required',
-                    ]);
-
-                    $credentials = [
-                        'cpf' => $request->input('cpf'),
-                        'nascimento' => $request->input('nascimento'),
-                        'senhaCpf' => $request->input('senhaCpf')
-                    ];
-                }
-
-                dd($this->auth);
+//        switch ($request->input('tipoAcesso')) {
+//            case 'PACIENTE':
+//                if($request->input('tipo') == 'ID'){
+//                    $this->validate($request, [
+//                        'posto' => 'required|max:3|integer',
+//                        'atendimento' => 'required|max:6|integer',
+//                        'senhaId' => 'required',
+//                    ]);
 //
-                if ($this->auth->attempt($credentials, $request->has('remember'))) {
-                    return redirect()->intended('/admin');
-                }
+//                    $credentials = [
+//                        'posto' => $request->input('posto'),
+//                        'atendimento' => $request->input('atendimento'),
+//                        'senhaId' => $request->input('senhaId'),
+//                    ];
+//                }
+//
+//                if($request->input('tipo') == 'CPF'){
+//                    $this->validate($request, [
+//                        'cpf' => 'required|cpf',
+//                        'nascimento' => 'required|date',
+//                        'senhaCpf' => 'required',
+//                    ]);
+//
+//                    $credentials = [
+//                        'cpf' => $request->input('cpf'),
+//                        'nascimento' => $request->input('nascimento'),
+//                        'senhaCpf' => $request->input('senhaCpf')
+//                    ];
+//                }
+//
+//                dd($this->auth);
+////
+//                if ($this->auth->attempt($credentials, $request->has('remember'))) {
+//                    return redirect()->intended('/admin');
+//                }
+//
+//                break;
+//        }
 
-                break;
-        }
-
+        $credentials = [
+            'posto' => $request->input('posto'),
+            'atendimento' => $request->input('atendimento'),
+            'senhaId' => $request->input('senhaId'),
+        ];
 
         if ($this->auth->attempt($credentials, $request->has('remember'))) {
-            return redirect()->intended('/admin');
+            dd($this->auth->user());
+
+//            return redirect()->intended('/admin');
         }
 
         return redirect('/auth/login')
