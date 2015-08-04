@@ -35,13 +35,13 @@ class CustomUserProvider implements UserProvider {
 
     public function validateCredentials(UserContract $user, array $credentials)
     {
-        re
+        return true;
     }
 
     protected function dummyUser()
     {
         $attributes = array(
-            'id' => 123,turn true;
+            'id' => 123,
             'remember_token' => "",
             'username' => 'chuckles',
             'password' => \Hash::make('SuperSecret'),
