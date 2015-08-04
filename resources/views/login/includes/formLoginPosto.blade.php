@@ -4,7 +4,7 @@
         <label>Posto</label> 
          <div class="input-group">
 	        <span class="input-group-addon"><i class="fa fa-hospital-o"></i></span>
-			  <input type="text" class="form-control" placeholder="Posto" required="">
+			  <input type="text" data-mask="{{config('system.postoMask')}}" class="form-control" placeholder="Posto" required="">
 	   </div>       
     </div>
     <div class="form-group">

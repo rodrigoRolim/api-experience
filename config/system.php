@@ -13,4 +13,5 @@ return [
     	'footerText'	=> '<strong>Copyright</strong> Codemed ©2014-2015',
     ],
     'atendimentoMask' => '999/999999',
+    'postoMask' => '999',
 ];
