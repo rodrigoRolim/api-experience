@@ -56,21 +56,16 @@
         <label>Número do CR</label>
          <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-stethoscope"></i></span>
-                <input type="text" class="form-control" placeholder="CR" required="">
+                <input type="text" class="form-control" id="cr" placeholder="CR" required="">
         </div>       
     </div>
     <div class="form-group">
         <label>Senha</label>
         <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                <input type="password" class="form-control" placeholder="Senha" required="">
+                <input type="password" class="form-control" id="password" placeholder="Senha" required="">
             </div>
     </div>
     <button type="submit" class="btn btn-primary block full-width m-b">Acessar</button>
 {!! Form::close() !!}
 
-@section('script')
-    <script type="text/javascript">
-        alert('teste'); 
-    </script>
-@stop

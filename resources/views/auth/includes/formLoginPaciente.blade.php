@@ -1,6 +1,6 @@
 {!! Form::open(array('url'=>'/login','id'=> 'formPaciente', 'role'=> 'form')) !!}
 	<label>Acessar como?</label>
-	<input name="tipoAcesso" type="hidden" id="tipoAcesso" values="PAC">
+	<input name="tipoAcesso" type="hidden" id="tipoAcesso" value="PAC">
 	<input name="tipoLoginPaciente" type="hidden" id="tipoLoginPaciente">
 	<div class="i-checks">
 		<label><input type="radio" value="ID" name="tipoLoginPaciente" checked> ID </label>&nbsp;&nbsp;&nbsp;
@@ -11,7 +11,7 @@
 	        <label>Atendimento</label>
 	          <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
-            	<input type="text" data-mask="{{config('system.atendimentoMask')}}" id="numAtdCliente" class="form-control" placeholder="Atendimento" required="">
+            	<input type="text" data-mask="{{config('system.atendimentoMask')}}" id="atendimento" class="form-control" placeholder="Atendimento" required="">
             </div>
 	    </div>
 	</div>	
@@ -20,14 +20,14 @@
 	        <label>CPF</label>
 	        <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
-            	<input type="text" data-mask="999.999.999-99" id="cpfCliente" class="form-control" placeholder="CPF" required="">
+            	<input type="text" data-mask="999.999.999-99" id="cpf" class="form-control" placeholder="CPF" required="">
             </div>	      
 	    </div>
 	    <div class="form-group">
 	        <label>Data de Nascimento</label>
 	        <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-            	<input type="text" id="dataNascimento" data-mask="99/99/9999" class="form-control" placeholder="Data de Nascimento" required="">    
+            	<input type="text" id="nascimento" data-mask="99/99/9999" class="form-control" placeholder="Data de Nascimento" required="">    
             </div>
 	    </div>
 		</div>
@@ -44,15 +44,17 @@
 @section('script')
 	<script type="text/javascript">
 		$('#itemCliente').hide();
-		document.getElementById("numAtdCliente").focus();
+
 
 	     $(document).ready(function(){
-			$('.i-checks').iCheck({
+	     	$('#atendimento').focus();
+	     	
+	     	$('.i-checks').iCheck({
 	            checkboxClass: 'icheckbox_square-grey',
 	            radioClass: 'iradio_square-grey',
 	        });
 
-			$('#dataNascimento').datepicker({
+			$('#nascimento').datepicker({
 	            startView: 1,
 	            todayBtn: "linked",
 	            keyboardNavigation: true,
@@ -67,13 +69,13 @@
 				if( tipoLogin == 'CPF'){
 					$('#itemCliente').show();
 					$('#itemAtendimento').hide();
-					$('#tipoLoginPaciente').val('CPF');
-					document.getElementById("cpfCliente").focus();
+					$('#tipoLoginPaciente').val('CPF');	
+					document.getElementById("cpf").focus();
 				}else{
 					$('#itemCliente').hide();
 					$('#itemAtendimento').show();
 					$('#tipoLoginPaciente').val('ID');
-					document.getElementById("numAtdCliente").focus();
+					document.getElementById("atendimento").focus();
 				}
 
 	        });
