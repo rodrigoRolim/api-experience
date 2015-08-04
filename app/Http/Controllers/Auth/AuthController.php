@@ -53,6 +53,10 @@ class AuthController extends Controller
      */
     public function postLogin(Request $request)
     {
+        dd($request->all());
+
+
+
 //        switch ($request->input('tipoAcesso')) {
 //            case 'PACIENTE':
 //                if($request->input('tipo') == 'ID'){

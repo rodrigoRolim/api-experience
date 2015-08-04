@@ -1,6 +1,6 @@
-{!! Form::open(array('url'=>'/login','id'=> 'formPaciente', 'role'=> 'form')) !!}
+{!! Form::open(array('url'=>'/auth/login','id'=> 'formPaciente', 'role'=> 'form', 'novalidate')) !!}
 	<label>Acessar como?</label>
-	<input name="tipoAcesso" type="hidden" id="tipoAcesso" values="PAC">
+	<input name="tipoAcesso" type="hidden" id="tipoAcesso" value="PAC">
 	<input name="tipoLoginPaciente" type="hidden" id="tipoLoginPaciente">
 	<div class="i-checks">
 		<label><input type="radio" value="ID" name="tipoLoginPaciente" checked> ID </label>&nbsp;&nbsp;&nbsp;
@@ -11,7 +11,7 @@
 	        <label>Atendimento</label>
 	          <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
-            	<input type="text" data-mask="{{config('system.atendimentoMask')}}" id="numAtdCliente" class="form-control" placeholder="Atendimento" required="">
+            	<input type="text" name="atendimento" data-mask="{{config('system.atendimentoMask')}}" id="numAtdCliente" class="form-control" placeholder="Atendimento" required="">
             </div>
 	    </div>
 	</div>	
@@ -20,14 +20,14 @@
 	        <label>CPF</label>
 	        <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
-            	<input type="text" data-mask="999.999.999-99" id="cpfCliente" class="form-control" placeholder="CPF" required="">
+            	<input type="text" name="cpf" data-mask="999.999.999-99" id="cpfCliente" class="form-control" placeholder="CPF" required="">
             </div>	      
 	    </div>
 	    <div class="form-group">
 	        <label>Data de Nascimento</label>
 	        <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-            	<input type="text" id="dataNascimento" data-mask="99/99/9999" class="form-control" placeholder="Data de Nascimento" required="">    
+            	<input type="text" name="nascimento" id="dataNascimento" data-mask="99/99/9999" class="form-control" placeholder="Data de Nascimento" required="">
             </div>
 	    </div>
 		</div>
@@ -35,7 +35,7 @@
 	        <label>Senha</label>
 	        <div class="input-group">
 	            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-				<input type="password" class="form-control" placeholder="Senha" required="">
+				<input type="password" name="password" class="form-control" placeholder="Senha" required="">
 	        </div>
 	    </div>
     <button type="submit" class="btn btn-primary block full-width m-b">Acessar</button>
