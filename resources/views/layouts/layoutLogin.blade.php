@@ -34,6 +34,9 @@
 
 	<script src="{{ asset('/assets/js/jquery-2.1.1.js') }}"></script>
 	<script src="{{ asset('/assets/js/bootstrap.min.js') }}"></script>
+	<script src="{{ asset('/assets/js/plugins/jasny/jasny-bootstrap.min.js') }}"></script>
+	<script src="{{ asset('/assets/js/plugins/datapicker/bootstrap-datepicker.js') }}"></script>
+	<script src="{{ asset('/assets/js/plugins/iCheck/icheck.min.js') }}"></script>
 	
 	@section('script')
 

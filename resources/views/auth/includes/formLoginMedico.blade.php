@@ -68,3 +68,9 @@
     </div>
     <button type="submit" class="btn btn-primary block full-width m-b">Acessar</button>
 {!! Form::close() !!}
+
+@section('script')
+    <script type="text/javascript">
+        alert('teste'); 
+    </script>
+@stop
