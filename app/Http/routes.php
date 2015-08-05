@@ -1,11 +1,15 @@
 <?php
 
 Route::controllers([
-    'auth' => 'Auth\AuthController',
+    'auth' => 'AuthController',
 ]);
 
-Route::get('/', 'HomeController@index');
-
-Route::get('/home', function () {
-   return view('login.index');
+Route::get('/', function () {
+    return redirect('/auth');
 });
+
+Route::group(['prefix' => '/', 'middleware' => ['auth']], function () {
+    Route::get('/home', 'HomeController@index');
+});
+
+

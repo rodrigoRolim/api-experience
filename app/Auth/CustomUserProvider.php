@@ -19,7 +19,7 @@ class CustomUserProvider implements UserProvider {
 
     public function retrieveById($identifier)
     {
-        return new \Exception('not implemented');
+        return new \Exception('-not implemented');
     }
 
     public function retrieveByToken($identifier, $token)
@@ -50,40 +50,40 @@ class CustomUserProvider implements UserProvider {
         switch($credentials['tipoAcesso']){
             case 'PAC':
                 if($credentials['tipoLoginPaciente'] == 'ID'){
+                    //CarregaAtendimento
                     $atendimento = new Atendimento();
                     $atendimento = $atendimento->where(['posto' => $credentials['posto'],'atendimento' => $credentials['atendimento']])->get()->toArray();
 
-                    $posto = str_pad($atendimento[0]['posto'],config('system.qtdCaracterPosto'),'0',STR_PAD_LEFT);
-                    $atend = str_pad($atendimento[0]['atendimento'],config('system.qtdCaracterAtend'),'0',STR_PAD_LEFT);
+                    if(sizeof($atendimento)){
+                        //Completa do 0 a esquerda do posto e do atendimento de acordo com a configuraçao no config.system
+                        $posto = str_pad($atendimento[0]['posto'],config('system.qtdCaracterPosto'),'0',STR_PAD_LEFT);
+                        $atend = str_pad($atendimento[0]['atendimento'],config('system.qtdCaracterAtend'),'0',STR_PAD_LEFT);
 
-//                    echo 'POSTO: '.$posto.' ATEND: '.$atend;
+                        $id = strtoupper(md5($posto.$atend));
 
-//                    echo ' '.$posto.$atend.'<br>';
-                    echo md5('A11PIT');
-                    dd(md5($posto.$atend));
+                        $atendimentoAcesso = new AtendimentoAcesso();
+                        $atendimentoAcesso = $atendimentoAcesso->where(['id' => $id])->get()->toArray();
+
+                        if(strtoupper($atendimentoAcesso[0]['pure']) == strtoupper($credentials['password'])){
+                            $atributes = array(
+                                'id' => 123,
+                                'remember_token' => "",
+                                'username' => 'chuckles',
+                                'password' => 'ddd',
+                                'name' => 'Dummy User',
+                                'tipoAcesso' => 'PAC',
+                                'tipoLoginPaciente' => 'ID',
+                                'id' => $id,
+                                'username' => $credentials['posto'].'/'.$credentials['atendimento'],
+                            );
+
+                            return new GenericUser($atributes);
+                        }
+                    }
                 }
                 break;
         }
 
-
-
-
-
-        dd($credentials);
-
-        if(sizeof($atendimento)){
-            dd($atendimento->toArray()[0]);
-        }
-
-        exit;
-
-        $attributes = array(
-            'id' => 123,
-            'remember_token' => "",
-            'username' => 'chuckles',
-            'password' => \Hash::make('SuperSecret'),
-            'name' => 'Dummy User',
-       );
-       return new GenericUser($attributes);
+        return null;
     }
 }

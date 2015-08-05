@@ -7,37 +7,40 @@
 		<label><input type="radio" value="CPF"  name="tipoLoginPaciente"> CPF </label>
 	</div>	
 	<div id="itemAtendimento">
-	    <div class="form-group">
+	    <div class="form-group @if ($errors->has('atendimento')) has-error @endif">
 	        <label>Atendimento</label>
 	          <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
-            	<input type="text" data-mask="{{config('system.atendimentoMask')}}" id="atendimento" class="form-control" placeholder="Atendimento" required="">          	
-            </div>
-	    </div>
-	</div>	
+            	<input type="text" data-mask="{{config('system.atendimentoMask')}}" name="atendimento" id="atendimento" class="form-control" placeholder="Atendimento" required="">
+			  </div>
+			  @if ($errors->has('atendimento')) <p class="help-block">{{ $errors->first('atendimento') }}</p> @endif
+		</div>
+	</div>
+
 	<div id="itemCliente">
-		<div class="form-group">
+		<div class="form-group @if ($errors->has('cpf')) has-error @endif">
 	        <label>CPF</label>
 	        <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
-
-            	<input type="text" data-mask="999.999.999-99" id="cpf" class="form-control" placeholder="CPF" required="">
-          </div>	      
+            	<input type="text" data-mask="999.999.999-99" name="cpf" id="cpf" class="form-control" placeholder="CPF" required="">
+          	</div>
+		  	@if ($errors->has('cpf')) <p class="help-block">{{ $errors->first('cpf') }}</p> @endif
 	    </div>
-	    <div class="form-group">
+	    <div class="form-group @if ($errors->has('nascimento')) has-error @endif">
 	        <label>Data de Nascimento</label>
 	        <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-            	<input type="text" id="nascimento" data-mask="99/99/9999" class="form-control" placeholder="Data de Nascimento" required="">    
+            	<input type="text" id="nascimento" data-mask="99/99/9999" name="nascimento" class="form-control" placeholder="Data de Nascimento" required="">
             </div>
-	    </div>
-		</div>
-	    <div class="form-group">
+			@if ($errors->has('nascimento')) <p class="help-block">{{ $errors->first('nascimento') }}</p> @endif
+		</div></div>
+	    <div class="form-group @if ($errors->has('password')) has-error @endif">
 	        <label>Senha</label>
 	        <div class="input-group">
 	            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-				<input type="password" name="password" class="form-control" placeholder="Senha" required="">
+				<input type="password" name="password" class="form-control" placeholder="Senha" required="" name="password">
 	        </div>
+			@if ($errors->has('password')) <p class="help-block">{{ $errors->first('password') }}</p> @endif
 	    </div>
     <button type="submit" class="btn btn-primary block full-width m-b">Acessar</button>
 {!! Form::close() !!}

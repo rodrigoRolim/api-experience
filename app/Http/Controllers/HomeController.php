@@ -4,16 +4,21 @@
 use App\Models\Cliente;
 use App\Repositories\AtendimentoRepository;
 use App\Repositories\PostoRepository;
+use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller {
+    protected $auth;
+
     protected $posto;
     protected $atendimento;
     protected $cliente;
 
-    public function __construct(PostoRepository $posto,
+    public function __construct(Guard $auth,PostoRepository $posto,
                                 AtendimentoRepository $atendimento,
                                 Cliente $cliente)
     {
+        $this->auth = $auth;
         $this->posto = $posto;
         $this->atendimento = $atendimento;
         $this->cliente = $cliente;
@@ -21,7 +26,8 @@ class HomeController extends Controller {
 
     public function index()
     {
-        //$atendimentos = $this->atendimento->model();
+        dd($this->auth->user());
+       //$atendimentos = $this->atendimento->model();
 
         $atendimentos = $this->atendimento->findWhere(['posto' => 0,'atendimento' => 1715]);
 

@@ -23,6 +23,13 @@
                 {!!config('system.loginText.description')!!}
             </div>
             <div class="col-md-6">
+                @if (count($errors) == 1)
+                    <div class="alert alert-danger alert-dismissable">
+                        @foreach ($errors->all() as $error)
+                            {{ $error }}
+                        @endforeach
+                    </div>
+                @endif
                 <div class="tabs-container">
                     <ul class="nav nav-tabs">
                         <li class="active"><a data-toggle="tab" href="#tabLoginPaciente" aria-expanded="true">Paciente</a></li>
@@ -30,7 +37,7 @@
                         <li class=""><a data-toggle="tab" href="#tabLoginPosto" aria-expanded="false">Posto</a></li>
                     </ul>
                     <div class="tab-content">
-                        <div id="tabLoginPaciente" class="tab-pane active">                           
+                        <div id="tabLoginPaciente" class="tab-pane active">
                             <div class="panel-body">
                                @include('auth.includes.formLoginPaciente')
                             </div>
