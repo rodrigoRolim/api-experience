@@ -19,10 +19,10 @@
 		
 	@show
 </head>
-	@include('layouts.includes.head')
-	
+<body class="gray-bg">	
+		@include('paciente.includes.head')	
 	<div id="main" role="main">
-    	<div id="content" class="container">
+    	<div class="content">
 			@yield('content')
 		</div>
 	</div>
@@ -40,4 +40,5 @@
 	@section('script')
 
 	@show
+</body>
 </html>

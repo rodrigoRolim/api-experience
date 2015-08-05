@@ -12,4 +12,7 @@ Route::group(['prefix' => '/', 'middleware' => ['auth']], function () {
     Route::get('/home', 'HomeController@index');
 });
 
+Route::get('/paciente', function () {
+    return view('paciente.index');
+});
 

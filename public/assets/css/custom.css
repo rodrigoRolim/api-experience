@@ -10,3 +10,57 @@
 .radio-inline{
 	height: 30px;
 }
+
+/* Estilo da página de atendimentos do Paciente (view Paciente) */
+
+.boxPrincipal{
+	margin: 0 auto;
+	background: #D5DEE3;
+	padding-bottom: 15px;
+	width: 80.27818448023426%;
+}
+
+.boxExames{
+	background-color: #F8FCFF;
+	border-radius:10px;
+	margin-top: 10px;
+	width: 72.91666666666667%;
+	word-wrap: break-word
+}
+
+.listaDeAtendimentos{
+	padding: 0;
+	margin-top: 65px;
+	width: 24.79166666666667%;
+	margin-left: 10px;
+	background-color: red;
+	word-wrap: break-word
+}
+
+.dadosAtendimento{
+	width: 95.71428571428571%;
+	word-wrap: break-word;
+}
+
+.listaDeExames{
+	padding: 10px;
+	margin: 0;
+	border: 2px solid #CCC;
+	border-radius:10px;
+	margin-bottom: 4px;
+	min-height: 350px;
+}
+
+.atendimento,.atendimento2{
+	border: 2px solid #CCC;
+	word-wrap: break-word;
+}
+
+.dadosCliente{
+	width: 80.27818448023426%;
+	background-color: white;
+	margin: 0 auto;
+	min-height: 105px;
+	padding-left: 4px;
+	padding-right: 4px;
+}

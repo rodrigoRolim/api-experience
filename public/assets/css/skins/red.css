@@ -7,7 +7,7 @@
 	color: #C52F33;
 }
 
-.btn-primary{
+.btn-primary,.btn-primary:focus{
 	background-color:#C52F33;
 	border-color:#C52F33;
 }

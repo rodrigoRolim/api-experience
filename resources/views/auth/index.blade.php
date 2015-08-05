@@ -12,7 +12,7 @@
 @stop
 
 @section('content')
-<body class="gray-bg">
+<body class="animated fadeInDown gray-bg">
 	<div class="loginColumns animated fadeInDown">
         <div class="row">
             <div class="col-md-6 hidden-xs">
