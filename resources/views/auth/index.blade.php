@@ -54,28 +54,24 @@
 @stop
 
 @section('script')
-    <script type="text/javascript">
-
- 
+<script type="text/javascript"> 
 
     $('li').on('click', function() {
-
         $('.nav').on('shown.bs.tab', function (e) {
-          var tabAtiva = $(e.target).text();// activated tab
-          console.log(tabAtiva);
+            var tabAtiva = $(e.target).text();
 
-        switch(tabAtiva) {
-            case "Paciente":
-                 $('#atendimento').focus();
-                break;
-            case "Médico":
-                 $('#cr').focus();
-                break;
-            case "Posto":
-                 $('#posto').focus();
-                break;
-        }        
+            switch(tabAtiva) {
+                case "Paciente":
+                    $('#atendimento').focus();
+                    break;
+                case "Médico":
+                    $('#cr').focus();
+                    break;
+                case "Posto":
+                    $('#posto').focus();
+                    break;
+            }        
+        });
     });
- });
-    </script>
+</script>
 @stop

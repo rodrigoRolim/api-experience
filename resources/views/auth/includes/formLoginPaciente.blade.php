@@ -1,4 +1,4 @@
-{!! Form::open(array('url'=>'/login','id'=> 'formPaciente', 'role'=> 'form')) !!}
+{!! Form::open(array('url'=>'/auth/login','id'=> 'formPaciente', 'role'=> 'form', 'novalidate')) !!}
 	<label>Acessar como?</label>
 	<input name="tipoAcesso" type="hidden" id="tipoAcesso" value="PAC">
 	<input name="tipoLoginPaciente" type="hidden" id="tipoLoginPaciente">
@@ -11,7 +11,7 @@
 	        <label>Atendimento</label>
 	          <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
-            	<input type="text" data-mask="{{config('system.atendimentoMask')}}" id="atendimento" class="form-control" placeholder="Atendimento" required="">
+            	<input type="text" data-mask="{{config('system.atendimentoMask')}}" id="atendimento" class="form-control" placeholder="Atendimento" required="">          	
             </div>
 	    </div>
 	</div>	
@@ -20,8 +20,9 @@
 	        <label>CPF</label>
 	        <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
+
             	<input type="text" data-mask="999.999.999-99" id="cpf" class="form-control" placeholder="CPF" required="">
-            </div>	      
+          </div>	      
 	    </div>
 	    <div class="form-group">
 	        <label>Data de Nascimento</label>
@@ -35,7 +36,7 @@
 	        <label>Senha</label>
 	        <div class="input-group">
 	            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-				<input type="password" class="form-control" placeholder="Senha" required="">
+				<input type="password" name="password" class="form-control" placeholder="Senha" required="">
 	        </div>
 	    </div>
     <button type="submit" class="btn btn-primary block full-width m-b">Acessar</button>
@@ -43,8 +44,8 @@
 
 @section('script')
 	<script type="text/javascript">
-		$('#itemCliente').hide();
 
+		$('#itemCliente').hide();
 
 	     $(document).ready(function(){
 	     	$('#atendimento').focus();
