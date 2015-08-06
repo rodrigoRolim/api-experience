@@ -12,6 +12,6 @@ class PacienteController extends Controller {
 
     public function getIndex()
     {
-        dd('PACIENTE');
+        return view('paciente.index');
     }
 }
