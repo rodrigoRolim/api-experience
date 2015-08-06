@@ -11,7 +11,7 @@
 	        <label>Atendimento</label>
 	          <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
-            	<input type="text" data-mask="{{config('system.atendimentoMask')}}" name="atendimento" id="atendimento" class="form-control" placeholder="Atendimento" required="">
+            	<input type="text" value="00/001777" data-mask="{{config('system.atendimentoMask')}}" name="atendimento" id="atendimento" class="form-control" placeholder="Atendimento" required="">
 			  </div>
 			  @if ($errors->has('atendimento')) <p class="help-block">{{ $errors->first('atendimento') }}</p> @endif
 		</div>
@@ -38,7 +38,7 @@
 	        <label>Senha</label>
 	        <div class="input-group">
 	            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-				<input type="password" name="password" class="form-control" placeholder="Senha" required="" name="password">
+				<input type="password" value="fzief2" name="password" class="form-control" placeholder="Senha" required="" name="password">
 	        </div>
 			@if ($errors->has('password')) <p class="help-block">{{ $errors->first('password') }}</p> @endif
 	    </div>
