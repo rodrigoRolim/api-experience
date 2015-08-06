@@ -8,11 +8,11 @@ Route::get('/', function () {
     return redirect('/auth');
 });
 
-Route::group(['prefix' => '/', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => '/', 'middleware' => ['auth','ehPaciente']], function () {
+    Route::controllers([
+        'paciente' => 'PacienteController',
+    ]);
+
     Route::get('/home', 'HomeController@index');
-});
 
-Route::get('/paciente', function () {
-    return view('paciente.index');
 });
-

@@ -26,8 +26,9 @@ class HomeController extends Controller {
 
     public function index()
     {
-        dd($this->auth->user());
-       //$atendimentos = $this->atendimento->model();
+        dd($this->auth);
+
+        $atendimentos = $this->atendimento->model();
 
         $atendimentos = $this->atendimento->findWhere(['posto' => 0,'atendimento' => 1715]);
 

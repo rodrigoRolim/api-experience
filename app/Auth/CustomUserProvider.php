@@ -3,7 +3,6 @@ namespace App\Auth;
 
 use App\Models\Atendimento;
 use App\Models\AtendimentoAcesso;
-use App\Repositories\AtendimentoRepository;
 use Illuminate\Auth\GenericUser;
 use Illuminate\Contracts\Auth\UserProvider;
 use Illuminate\Contracts\Auth\Authenticatable as UserContract;
@@ -19,7 +18,7 @@ class CustomUserProvider implements UserProvider {
 
     public function retrieveById($identifier)
     {
-        return new \Exception('-not implemented');
+        return $identifier;
     }
 
     public function retrieveByToken($identifier, $token)
@@ -52,9 +51,13 @@ class CustomUserProvider implements UserProvider {
                 if($credentials['tipoLoginPaciente'] == 'ID'){
                     //CarregaAtendimento
                     $atendimento = new Atendimento();
-                    $atendimento = $atendimento->where(['posto' => $credentials['posto'],'atendimento' => $credentials['atendimento']])->get()->toArray();
+                    $atendimento = $atendimento->where(['posto' => $credentials['posto'],'atendimento' => $credentials['atendimento']])->get();
 
                     if(sizeof($atendimento)){
+
+                        $cliente = $atendimento[0]->cliente->toArray();
+                        $atendimento = $atendimento->toArray();
+
                         //Completa do 0 a esquerda do posto e do atendimento de acordo com a configuraçao no config.system
                         $posto = str_pad($atendimento[0]['posto'],config('system.qtdCaracterPosto'),'0',STR_PAD_LEFT);
                         $atend = str_pad($atendimento[0]['atendimento'],config('system.qtdCaracterAtend'),'0',STR_PAD_LEFT);
@@ -66,15 +69,15 @@ class CustomUserProvider implements UserProvider {
 
                         if(strtoupper($atendimentoAcesso[0]['pure']) == strtoupper($credentials['password'])){
                             $atributes = array(
-                                'id' => 123,
                                 'remember_token' => "",
-                                'username' => 'chuckles',
-                                'password' => 'ddd',
-                                'name' => 'Dummy User',
-                                'tipoAcesso' => 'PAC',
-                                'tipoLoginPaciente' => 'ID',
-                                'id' => $id,
-                                'username' => $credentials['posto'].'/'.$credentials['atendimento'],
+                                'id' => array(
+                                    'tipoAcesso' => 'PAC',
+                                    'tipoLoginPaciente' => 'ID',
+                                    'name' => $cliente['nome'],
+                                    'sexo' => $cliente['sexo'],
+                                    'idade' => $cliente['data_nas'],
+                                    'username' => $credentials['posto'].'/'.$credentials['atendimento'],
+                                ),
                             );
 
                             return new GenericUser($atributes);
