@@ -17,7 +17,7 @@
 	margin: 0 auto;
 	background: #D5DEE3;
 	padding-bottom: 15px;
-	width: 80.27818448023426%;
+	width: 85.27818448023426%;	
 }
 
 .boxExames{
@@ -25,7 +25,7 @@
 	border-radius:10px;
 	margin-top: 10px;
 	width: 72.91666666666667%;
-	word-wrap: break-word
+	word-wrap: break-word;	
 }
 
 .listaDeAtendimentos{
@@ -33,12 +33,11 @@
 	margin-top: 65px;
 	width: 24.79166666666667%;
 	margin-left: 10px;
-	background-color: red;
+	background-color: #F8FCFF;
 	word-wrap: break-word
 }
 
 .dadosAtendimento{
-	width: 95.71428571428571%;
 	word-wrap: break-word;
 }
 
@@ -51,16 +50,48 @@
 	min-height: 350px;
 }
 
-.atendimento,.atendimento2{
-	border: 2px solid #CCC;
+.atendimento{
 	word-wrap: break-word;
+	padding: 10px;
 }
 
 .dadosCliente{
-	width: 80.27818448023426%;
+	width: 85.27818448023426%;
 	background-color: white;
 	margin: 0 auto;
 	min-height: 105px;
 	padding-left: 4px;
 	padding-right: 4px;
+}
+
+.dadosAtendimento{
+	margin-top: 5px;
+	margin-left: 12px;
+	font-size: 14px;
+}
+
+label{
+	font-weight: none;
+}
+
+.navbar-fixed-top{
+	background: transparent;
+	border-bottom: 0px;
+	border: 0px !important;
+}
+
+.headPadrao{
+	text-align: left;
+}
+
+.headPadrao img{
+	padding: 5px 10px 2px 15px;
+}
+
+.bodyLayoutPadrao{
+	padding-top: 80px;
+}
+
+.page-heading{
+	min-height: 78.8vh;
 }

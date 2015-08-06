@@ -20,3 +20,32 @@
 .form-control:focus{
 	border-color:#CE5356 !important;
 }
+
+body.boxed-layout #wrapper{
+	background-color: #C52F33;
+}
+
+.nav-header{
+	background: #D65357;
+	color: #fff;
+}
+
+#side-menu li a{
+	color: #fff;
+	font-weight: 400;
+}
+
+#side-menu li a:hover{
+	background-color: #fff;
+	color: #C52F33;
+	font-weight: 800;
+}
+
+#side-menu .active{
+	background-color: #fff;
+	border-left: 4px solid blue;
+}
+
+#side-menu .active a{
+	color: #C52F33;
+}
