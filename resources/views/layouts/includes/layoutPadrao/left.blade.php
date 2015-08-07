@@ -6,7 +6,7 @@
             </li>
             
             <li>
-                <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Graphs</span><span class="fa arrow"></span></a>
+                <a href="#"><i class="fa fa-flask"></i> <span class="nav-label">07/07/2015 | <b>HC</b></span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="graph_flot.html">Flot Charts</a></li>
                     <li><a href="graph_morris.html">Morris.js Charts</a></li>
@@ -18,7 +18,7 @@
                 </ul>
             </li>
             <li class="active">
-                <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">Mailbox </span><span class="label label-warning pull-right">16/24</span></a>
+                <a><i></i i class="fa fa-flask"> <span class="nav-label">07/08/2015 | <b>GLI TSH POT</b> </span>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="mailbox.html">Inbox</a></li>
                     <li><a href="mail_detail.html">Email view</a></li>
@@ -27,10 +27,10 @@
                 </ul>
             </li>
             <li>
-                <a href="metrics.html"><i class="fa fa-pie-chart"></i> <span class="nav-label">Metrics</span> <span class="label label-primary pull-right">NEW</span> </a>
+                <a href=""><i class="fa fa-flask"></i> <span class="nav-label">07/07/2015 | <b>TSH</b></span> </a>
             </li>
             <li>
-                <a href="widgets.html"><i class="fa fa-flask"></i> <span class="nav-label">Widgets</span></a>
+                <a href=""><i class="fa fa-flask"></i> <span class="nav-label">07/06/2015 | <b>GLI </span></a>
             </li>
 
         </ul>

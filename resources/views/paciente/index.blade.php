@@ -5,7 +5,7 @@
 @stop
 
 @section('infoAtendimento')
-   INFORMAÇÕES DO ATENDIMENTO
+   <span>Convênio: UNIHOSP <br>Solicitante: SOLICITAÇÃO MÉDICA</span>
 @stop
 
 @section('content')

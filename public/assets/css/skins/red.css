@@ -22,7 +22,7 @@
 }
 
 body.boxed-layout #wrapper{
-	background-color: #C52F33;
+	background-color: #C52F33;	
 }
 
 .nav-header{
@@ -32,8 +32,9 @@ body.boxed-layout #wrapper{
 
 #side-menu li a{
 	color: #fff;
-	font-weight: 400;
+	font-weight: 400; 
 }
+
 
 #side-menu li a:hover{
 	background-color: #fff;

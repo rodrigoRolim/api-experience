@@ -70,44 +70,37 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="ibox">                       
-                                <ul class="sortable-list connectList agile-list ui-sortable">
-                                    <li class="warning-element col-md-6">
-                                       <b>GLI</b> | GLICEMIA EM JEJUM
-                                        <div class="agile-detail">                                              
-                                            <i></i> Em Andamento
-                                        </div>
-                                    </li>
-                                    <li class="success-element col-md-6">
-                                        <b> TSH </b> | TIREOESTIMULANTE HORMONIO (TSH)
-                                        <div class="agile-detail">                                              
-                                            <i></i> Finalizado
-                                        </div>
-                                    </li>                                       
-                                    <li class="danger-element col-md-6">
-                                        All the Lorem Ipsum generators
-                                        <div class="agile-detail">
-                                            <a href="#" class="pull-right btn btn-xs btn-primary">Done</a>
-                                            <i class="fa fa-clock-o"></i> 06.10.2015
-                                        </div>
-                                    </li>
-                                     <li class="warning-element col-md-6">
-                                       <b>GLI</b> | GLICEMIA EM JEJUM
-                                        <div class="agile-detail">                                              
-                                            <i></i> Em Andamento
-                                        </div>
-                                    </li>
-                                </ul>                        
+                              <ul class="sortable-list connectList agile-list ui-sortable">
+                                  <li class="warning-element col-md-6">
+                                     <b>GLI</b> | GLICEMIA EM JEJUM
+                                      <div class="agile-detail">                                              
+                                          <i></i> Em Andamento
+                                      </div>
+                                  </li>
+                                  <li class="success-element col-md-6">
+                                      <b> TSH </b> | TIREOESTIMULANTE HORMONIO (TSH)
+                                      <div class="agile-detail">                                              
+                                          <i></i> Finalizado
+                                      </div>
+                                  </li>
+                                   <li class="danger-element col-md-6">
+                                      <b>POT</b> | POTASSIO (POT)
+                                      <div class="agile-detail">                                              
+                                          <i></i> Pendente
+                                      </div>
+                                  </li>
+                              </ul>                        
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="footer">
-                <div class="pull-right">
+                <div class="pull-left">
                     10GB of <strong>250GB</strong> Free.
                 </div>
-                <div>
-                    <strong>Copyright</strong> Example Company © 2014-2015
+                <div class="pull-right">
+                    <strong>Copyright</strong> Codemed © 2014-2015
                 </div>
             </div>
         </div>
@@ -121,6 +114,48 @@
 	<script src="{{ asset('/assets/js/plugins/iCheck/icheck.min.js') }}"></script>
 	
 	@section('script')
+
+    <script type="text/javascript">
+
+        $('.navbar-minimalize').click(function () {
+            $("body").toggleClass("mini-navbar");
+           // SmoothlyMenu();
+
+        });
+
+        $(window).bind("resize", function () {
+            if ($(this).width() < 769) {
+                $('body').addClass('body-small');
+                $('body').addClass('mini-navbar');
+            } else {
+                $('body').removeClass('body-small');
+                 $('body').removeClass('mini-navbar');
+            }
+        });
+
+  /*      function SmoothlyMenu() {
+            if (!$('body').hasClass('mini-navbar') || $('body').hasClass('body-small')) {
+                // Hide menu in order to smoothly turn on when maximize menu
+                $('#side-menu').hide();
+                // For smoothly turn on menu
+                setTimeout(
+                    function () {
+                        $('#side-menu').fadeIn(500);
+                    }, 100);
+            } else if ($('body').hasClass('fixed-sidebar')) {
+                $('#side-menu').hide();
+                setTimeout(
+                    function () {
+                        $('#side-menu').fadeIn(500);
+                    }, 300);
+            } else {
+                // Remove all inline style from jquery fadeIn function to reset menu state
+                $('#side-menu').removeAttr('style');
+            }
+        }*/
+
+    
+    </script>
 
 	@show
 </body>

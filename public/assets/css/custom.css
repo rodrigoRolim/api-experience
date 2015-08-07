@@ -11,69 +11,6 @@
 	height: 30px;
 }
 
-/* Estilo da página de atendimentos do Paciente (view Paciente) */
-
-.boxPrincipal{
-	margin: 0 auto;
-	background: #D5DEE3;
-	padding-bottom: 15px;
-	width: 85.27818448023426%;	
-}
-
-.boxExames{
-	background-color: #F8FCFF;
-	border-radius:10px;
-	margin-top: 10px;
-	width: 72.91666666666667%;
-	word-wrap: break-word;	
-}
-
-.listaDeAtendimentos{
-	padding: 0;
-	margin-top: 65px;
-	width: 24.79166666666667%;
-	margin-left: 10px;
-	background-color: #F8FCFF;
-	word-wrap: break-word
-}
-
-.dadosAtendimento{
-	word-wrap: break-word;
-}
-
-.listaDeExames{
-	padding: 10px;
-	margin: 0;
-	border: 2px solid #CCC;
-	border-radius:10px;
-	margin-bottom: 4px;
-	min-height: 350px;
-}
-
-.atendimento{
-	word-wrap: break-word;
-	padding: 10px;
-}
-
-.dadosCliente{
-	width: 85.27818448023426%;
-	background-color: white;
-	margin: 0 auto;
-	min-height: 105px;
-	padding-left: 4px;
-	padding-right: 4px;
-}
-
-.dadosAtendimento{
-	margin-top: 5px;
-	margin-left: 12px;
-	font-size: 14px;
-}
-
-label{
-	font-weight: none;
-}
-
 .navbar-fixed-top{
 	background: transparent;
 	border-bottom: 0px;
@@ -94,4 +31,34 @@ label{
 
 .page-heading{
 	min-height: 78.8vh;
+}
+
+.agile-list li.warning-element{
+	margin-right: 10px;
+}
+
+.agile-list li.success-element{
+	margin-right: 10px;
+}
+
+.agile-list li.danger-element{
+	margin-right: 10px;
+}
+
+body.mini-navbar .nav-header{
+	background-color: #D65357;
+}
+
+.navbar-top-links li{
+	margin-top: 10px;
+	font-weight: bold;
+	font-size: 1.1em;
+}
+
+.navbar-toggle:hover{
+	background-color: #fff;
+}
+
+.navbar-toggle{
+	background-color: #fff;
 }
