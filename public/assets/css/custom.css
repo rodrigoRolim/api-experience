@@ -1,6 +1,6 @@
 .headLogin{
 	text-align: center;
-	padding: 5px 0 10px 0;
+	padding: 5px 0 5px 0;
 }
 
 .footer{
@@ -30,7 +30,7 @@
 }
 
 .page-heading{
-	min-height: 78.8vh;
+	min-height: 76vh;
 }
 
 .agile-list li.warning-element{
@@ -61,4 +61,36 @@ body.mini-navbar .nav-header{
 
 .navbar-toggle{
 	background-color: #fff;
+}
+
+.dadosDoAtendimento{
+	padding: 0;
+	margin: 0;
+}
+
+.dadosPessoais{
+	margin:2px auto;
+}
+
+div.row.border-bottom{
+	height: 80px;
+}
+
+.panel{
+	min-width: 28.08771929824561%;
+	float: right;
+	text-align: center;	
+	margin-right: 5px;	
+	background-color: #D65357;
+	color: #fff;
+	border-radius: 0;
+}
+
+.side-menu{
+	height: 100%;
+	overflow: auto;
+}
+
+.fa-angle-right{
+	float: right;
 }

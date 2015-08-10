@@ -7,7 +7,7 @@
 
 	{!! Html::style('/assets/css/bootstrap.min.css') !!}
 
-    {!! Html::style('/assets/css/animate.css') !!} 
+  {!! Html::style('/assets/css/animate.css') !!} 
 	{!! Html::style('/assets/css/inspinia.css') !!}
 	{!! Html::style('/assets/css/custom.css') !!}
 	{!! Html::style('/assets/css/skins/red.css') !!} 
@@ -29,7 +29,7 @@
 		          	{!! Html::image('/assets/images/logo.png', 'SmartAdmin', array('title' => 'logo')) !!}  
 		        </div>
 				
-				<div id="navbar" class="navbar-collapse collapse text-right">
+			     	<div id="navbar" class="navbar-collapse collapse text-right">
 		        	@yield('infoHead')
 		        </div>
 		        
@@ -49,16 +49,18 @@
     		@include('layouts.includes.layoutPadrao.left')
 	        <div id="page-wrapper" class="gray-bg" style="min-height: 356px;">
             <div class="row border-bottom">
-            <nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
+            <nav class="navbar static-top boxDadosAtendimentos" style="margin-bottom: 0">
             <div class="navbar-header">
                 <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
             </div>
 
             <ul class="nav navbar-top-links navbar-right">
                 <li>
-                    <span class="m-r-sm text-muted welcome-message">
+                  <div class="row">
+                    <span class="col-xs-12">
                         @yield('infoAtendimento')
                     </span>
+                  </div>
                 </li>
                 <li class="dropdown">
                     <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">&nbsp;</a>
@@ -112,16 +114,15 @@
 	<script src="{{ asset('/assets/js/plugins/jasny/jasny-bootstrap.min.js') }}"></script>
 	<script src="{{ asset('/assets/js/plugins/datapicker/bootstrap-datepicker.js') }}"></script>
 	<script src="{{ asset('/assets/js/plugins/iCheck/icheck.min.js') }}"></script>
+  <script src="{{ asset('/assets/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
 	
 	@section('script')
 
     <script type="text/javascript">
 
-        $('.navbar-minimalize').click(function () {
+        $('.navbar-minimalize').click(function () { 
             $("body").toggleClass("mini-navbar");
-           // SmoothlyMenu();
-
-        });
+            });
 
         $(window).bind("resize", function () {
             if ($(this).width() < 769) {
@@ -129,30 +130,19 @@
                 $('body').addClass('mini-navbar');
             } else {
                 $('body').removeClass('body-small');
-                 $('body').removeClass('mini-navbar');
+                $('body').removeClass('mini-navbar');
             }
         });
 
-  /*      function SmoothlyMenu() {
-            if (!$('body').hasClass('mini-navbar') || $('body').hasClass('body-small')) {
-                // Hide menu in order to smoothly turn on when maximize menu
-                $('#side-menu').hide();
-                // For smoothly turn on menu
-                setTimeout(
-                    function () {
-                        $('#side-menu').fadeIn(500);
-                    }, 100);
-            } else if ($('body').hasClass('fixed-sidebar')) {
-                $('#side-menu').hide();
-                setTimeout(
-                    function () {
-                        $('#side-menu').fadeIn(500);
-                    }, 300);
-            } else {
-                // Remove all inline style from jquery fadeIn function to reset menu state
-                $('#side-menu').removeAttr('style');
-            }
-        }*/
+        $(function(){
+            $('#side-menu').slimScroll({
+             height: '76vh',
+             railOpacity: 0.4,
+             wheelStep: 10
+            });
+        });
+
+
 
     
     </script>

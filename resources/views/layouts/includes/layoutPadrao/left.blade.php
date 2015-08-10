@@ -6,7 +6,7 @@
             </li>
             
             <li>
-                <a href="#"><i class="fa fa-flask"></i> <span class="nav-label">07/07/2015 | <b>HC</b></span><span class="fa arrow"></span></a>
+                <a href="#"><i class="fa fa-flask"></i> <span class="nav-label">07/07/2015 | <b>HC</b></span><span class="fa fa-angle-right"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="graph_flot.html">Flot Charts</a></li>
                     <li><a href="graph_morris.html">Morris.js Charts</a></li>
@@ -16,7 +16,7 @@
                     <li><a href="graph_peity.html">Peity Charts</a></li>
                     <li><a href="graph_sparkline.html">Sparkline Charts</a></li>
                 </ul>
-            </li>
+            </li>    
             <li class="active">
                 <a><i></i i class="fa fa-flask"> <span class="nav-label">07/08/2015 | <b>GLI TSH POT</b> </span>
                 <ul class="nav nav-second-level collapse">
@@ -27,10 +27,10 @@
                 </ul>
             </li>
             <li>
-                <a href=""><i class="fa fa-flask"></i> <span class="nav-label">07/07/2015 | <b>TSH</b></span> </a>
+                <a href=""><i class="fa fa-flask"></i> <span class="nav-label">07/07/2015 | <b>TSH</b></span><span class="fa fa-angle-right"></span> </a>
             </li>
             <li>
-                <a href=""><i class="fa fa-flask"></i> <span class="nav-label">07/06/2015 | <b>GLI </span></a>
+                <a href=""><i class="fa fa-flask"></i> <span class="nav-label">07/06/2015 | <b>GLI </span><span class="fa fa-angle-right"></span></a>
             </li>
 
         </ul>
