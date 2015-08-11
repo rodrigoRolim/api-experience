@@ -48,12 +48,19 @@ html, body{
 	padding: 5px 10px 2px 15px;
 }
 
+.infoAtendimento{	
+	float: right;	
+	margin-right: 20px;
+	font-size: 1.1em;
+	margin-top: 7px;
+}
+
 .bodyLayoutPadrao{
 	padding-top: 80px;
 }
 
 .page-heading{
-	min-height: 76vh;
+	min-height: 79vh;
 }
 
 .agile-list li.warning-element{
@@ -96,7 +103,7 @@ body.mini-navbar .nav-header{
 }
 
 div.row.border-bottom{
-	height: 80px;
+	height: 60px;
 }
 
 .panel{
@@ -116,4 +123,16 @@ div.row.border-bottom{
 
 .fa-angle-right{
 	float: right;
+}
+
+@media (max-width: 340px){
+
+  	div.row{
+  		margin-top: 60px;
+  	}
+
+  	div.row.border-bottom{
+	height: 10px;
+	}
+
 }

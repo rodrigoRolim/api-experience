@@ -24,10 +24,11 @@
 @stop
 
 @section('infoAtendimento')
-   <span>Convênio: UNIHOSP <br>Solicitante: SOLICITAÇÃO MÉDICA</span>
-
+	<div class="infoAtendimento">
+		<span>Convênio:</span>
+		<span>UNIHOSP</span> <br>
+		<span>Solicitante:</span>
+		<span>SOLICITAÇÃO MÉDICA</span>
+   	</div>
 @stop
 
-@section('content')
-   bruno
-@stop
