@@ -16,8 +16,8 @@ class PacienteController extends Controller {
     public function getIndex()
     {
         $tipoLoginPaciente = $this->auth->user()['tipoLoginPaciente'];
-        $atendimento = $this->atendimento->atendimentos($this->auth->user());
-        
-        return view('paciente.index',compact('atendimento','tipoLoginPaciente'));
+        $atendimentos = $this->atendimento->atendimentos($this->auth->user());
+
+        return view('paciente.index',compact('atendimentos','tipoLoginPaciente'));
     }
 }
