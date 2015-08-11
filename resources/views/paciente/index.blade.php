@@ -8,14 +8,14 @@
 	<ul class="nav navbar-nav pull-right">
 		<li class="dropdown">
 			<a class="btn dropdown-toggle" data-toggle="dropdown">
-				Joae Frederico
+				Olá, {{Auth::user()['name']}}
 				<i class="fa fa-caret-down"></i>
 			</a>
 			<ul class="dropdown-menu">
 				<li class="item">
-					<a href="#">
+					<a href="/auth/logout">
 						<i class="fa fa-user"></i>
-						Opção 1
+						
 					</a>
 				</li>
 			</ul>
@@ -26,9 +26,9 @@
 @section('infoAtendimento')
 	<div class="infoAtendimento">
 		<span>Convênio:</span>
-		<span>UNIHOSP</span> <br>
+		<span>{{ $atendimentos[0]->nome_convenio}}</span> <br>
 		<span>Solicitante:</span>
-		<span>SOLICITAÇÃO MÉDICA</span>
+		<span>{{ $atendimentos[0]->nome_solicitante}}</span>
    	</div>
 @stop
 

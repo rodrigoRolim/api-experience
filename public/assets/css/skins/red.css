@@ -44,7 +44,7 @@ body.boxed-layout #wrapper{
 
 #side-menu .active{
 	background-color: #fff;
-	border-left: 4px solid blue;
+	border-left: 4px solid #C52F33;
 }
 
 #side-menu .active a{

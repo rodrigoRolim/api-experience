@@ -9,10 +9,6 @@ html, body{
 	position: relative;
 }
 
-#header{
-	padding: 10px;
-}
-
 #body{
 	padding: 10px;
 	padding-bottom: 60px;
@@ -79,6 +75,10 @@ body.mini-navbar .nav-header{
 	background-color: #D65357;
 }
 
+li.nav-header{
+	height: 20%;
+}
+
 .navbar-top-links li{
 	margin-top: 10px;
 	font-weight: bold;
@@ -125,14 +125,34 @@ div.row.border-bottom{
 	float: right;
 }
 
+.nav > li > a{
+	padding: 8px;
+}
+
 @media (max-width: 340px){
 
   	div.row{
-  		margin-top: 60px;
+  		margin-top: 30px;
   	}
 
   	div.row.border-bottom{
-	height: 10px;
+		height: 60px;
 	}
 
+	#wrapper{
+		overflow-x: visible; 
+	}
+
+	.bodyLayoutPadrao{
+		padding-top: 50px;
+	}
+
+	li.nav-header{
+		height: 30%;
+	}
+
+
+
 }
+
+

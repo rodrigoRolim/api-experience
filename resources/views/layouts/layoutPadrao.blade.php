@@ -60,13 +60,12 @@
                     <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">&nbsp;</a>
                 </li>
             </ul>
-        </nav>
         </div>
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="ibox">                       
-                              <ul class="sortable-list connectList agile-list ui-sortable">
+                              <ul class="sortable-list connectList agile-list ui-sortable">                                
                                   <li class="warning-element col-md-6">
                                      <b>GLI</b> | GLICEMIA EM JEJUM
                                       <div class="agile-detail">                                              
@@ -114,6 +113,8 @@
 
     <script type="text/javascript">
 
+    $(document).ready(function () {
+
         $('.navbar-minimalize').click(function () { 
             $("body").toggleClass("mini-navbar");
             });
@@ -135,7 +136,7 @@
              wheelStep: 10
             });
         });
-
+  });
 
 
     
