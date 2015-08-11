@@ -27,7 +27,7 @@ class AtendimentoRepository extends BaseRepository
                     FROM vw_atendimentos
                     WHERE posto = :posto AND atendimento = :atendimento';
 
-            $atendimento = current(DB::select(DB::raw($sql), ['posto' => $data[0],'atendimento' => $data[1]]));
+            $atendimento[] = current(DB::select(DB::raw($sql), ['posto' => $data[0],'atendimento' => $data[1]]));
         }
 
         return $atendimento;
