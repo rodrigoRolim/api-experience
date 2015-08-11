@@ -18,8 +18,6 @@ class PacienteController extends Controller {
         $tipoLoginPaciente = $this->auth->user()['tipoLoginPaciente'];
         $atendimentos = $this->atendimento->atendimentos($this->auth->user());
 
-
-        dd($atendimentos);
         return view('paciente.index',compact('atendimentos','tipoLoginPaciente'));
     }
 }
