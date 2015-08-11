@@ -19,25 +19,33 @@
 		
 	@show
 </head>
-	@include('layouts.includes.head')
-	
-	<div id="main" role="main">
-    	<div id="content" class="container">
-			@yield('content')
+
+	<div id="wraper">
+
+		<div id="header">
+			@include('layouts.includes.head')
 		</div>
+
+		<div id="body">
+			<div id="main" role="main">
+		    	<div id="content" class="container">
+					@yield('content')
+				</div>
+			</div>
+		</div>
+			
+		<div id="footer">
+			@include('layouts.includes.footer')
+		</div>
+
+		<script src="{{ asset('/assets/js/jquery-2.1.1.js') }}"></script>
+		<script src="{{ asset('/assets/js/bootstrap.min.js') }}"></script>
+		<script src="{{ asset('/assets/js/plugins/jasny/jasny-bootstrap.min.js') }}"></script>
+		<script src="{{ asset('/assets/js/plugins/datapicker/bootstrap-datepicker.js') }}"></script>
+		<script src="{{ asset('/assets/js/plugins/iCheck/icheck.min.js') }}"></script>
+		
+		@section('script')
+
+		@show
 	</div>
-
-	<footer>
-		@include('layouts.includes.footer')
-	</footer>
-
-	<script src="{{ asset('/assets/js/jquery-2.1.1.js') }}"></script>
-	<script src="{{ asset('/assets/js/bootstrap.min.js') }}"></script>
-	<script src="{{ asset('/assets/js/plugins/jasny/jasny-bootstrap.min.js') }}"></script>
-	<script src="{{ asset('/assets/js/plugins/datapicker/bootstrap-datepicker.js') }}"></script>
-	<script src="{{ asset('/assets/js/plugins/iCheck/icheck.min.js') }}"></script>
-	
-	@section('script')
-
-	@show
 </html>

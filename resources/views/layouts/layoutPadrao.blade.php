@@ -23,7 +23,7 @@
 <body class="gray-bg boxed-layout bodyLayoutPadrao">
 	<nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
-      	<header id="header">
+      	<header>
 			<nav class="navbar navbar-static-top headLogin headPadrao" role="navigation" style="margin-bottom: 0">
 				<div class="navbar-header">
 		          	{!! Html::image('/assets/images/logo.png', 'SmartAdmin', array('title' => 'logo')) !!}  
