@@ -85,7 +85,14 @@ class AuthController extends Controller
         return redirect('/auth')->withErrors(config('system.messages.login.usuarioSenhaInvalidos'));
     }
 
-    public function teste(){
-        dd($this->auth);
+    /**
+     * Log the user out of the application.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getLogout()
+    {
+        $this->auth->logout();
+        return redirect('/');
     }
 }
