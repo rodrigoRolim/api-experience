@@ -12,7 +12,4 @@ Route::group(['prefix' => '/', 'middleware' => ['auth','ehPaciente']], function 
     Route::controllers([
         'paciente' => 'PacienteController',
     ]);
-
-    Route::get('/home', 'HomeController@index');
-
 });

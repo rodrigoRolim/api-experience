@@ -76,6 +76,7 @@ class CustomUserProvider implements UserProvider {
                                     'name' => $cliente['nome'],
                                     'sexo' => $cliente['sexo'],
                                     'idade' => $cliente['data_nas'],
+                                    'registro' => $cliente['registro'],
                                     'username' => $credentials['posto'].'/'.$credentials['atendimento'],
                                 ),
                             );

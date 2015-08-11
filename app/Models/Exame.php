@@ -9,7 +9,7 @@ class Exame extends Model {
      *
      * @var string
      */
-    protected $table = 'EXAMES';
+    protected $table = 'VW_EXAMES';
 
     /**
      * The database primary key
