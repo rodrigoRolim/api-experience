@@ -129,6 +129,30 @@ div.row.border-bottom{
 	padding: 8px;
 }
 
+.feed-element img.img-circle, .dropdown-messages-box img.img-circle{
+	width: auto;	
+}
+
+.infoUser{
+	margin-right: 10px;
+}
+
+.infoUser .img-circle{
+	padding: 0px;
+}
+
+.itensInfoUser{
+	top:65px;
+}
+
+.boxImgUser{
+	float: left;
+}
+
+.boxImgUser img{
+	margin-right: 5px;
+}
+
 @media (max-width: 340px){
 
   	div.row{
@@ -148,10 +172,46 @@ div.row.border-bottom{
 	}
 
 	li.nav-header{
-		height: 30%;
+		height: 80px;
 	}
 
+	.navbar-header.logo img{
+		height: 48px;
+		text-align: center;
+	}
 
+	.navbar-header.logo{
+		width: 100%;
+		text-align: center;
+	}
+
+	.infoUsuario{
+		padding: 0px;
+		background-color: #ff00ff;
+	}
+
+	li.dropdown{
+		font-size: 200px;
+	}
+
+	#navbar{
+		width: 20%;
+	}
+
+	.infoUser{
+		width: 100%;
+		text-align: center;
+		padding: 0px;
+		margin-top: 5px;
+	}
+
+	.infoUser img{
+		opacity: 0;
+	}
+
+	.itensInfoUser{
+		top:100px;
+	}
 
 }
 

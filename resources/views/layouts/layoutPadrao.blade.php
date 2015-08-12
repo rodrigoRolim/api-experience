@@ -22,27 +22,17 @@
 
 <body class="gray-bg boxed-layout bodyLayoutPadrao">
 	<nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-      	<header>
-			<nav class="navbar navbar-static-top headLogin headPadrao" role="navigation" style="margin-bottom: 0">
-				<div class="navbar-header">
-		          	{!! Html::image('/assets/images/logo.png', 'SmartAdmin', array('title' => 'logo')) !!}  
-		        </div>
-				
-			     	<div id="navbar" class="navbar-collapse collapse text-right">
-		        	@yield('infoHead')
-		        </div>
-		        
-		        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-		            <span class="sr-only">Toggle navigation</span>
-		            <span class="icon-bar"></span>
-		            <span class="icon-bar"></span>
-		            <span class="icon-bar"></span>
-		          </button>
-			</nav> 	
-		</header>
-      </div>
-    </nav>
+    <div class="container">
+    	<header>
+  			<nav class="navbar navbar-static-top headLogin headPadrao" role="navigation" style="margin-bottom: 0">
+  				<div class="navbar-header logo">
+            {!! Html::image('/assets/images/logo.png', 'logo_lab', array('title' => 'logo')) !!}  
+  		    </div>		
+		     	@yield('infoHead')
+  			</nav> 	
+	    </header>
+    </div>
+  </nav>
 
     <div class="container">
     	<div id="wrapper">
@@ -90,10 +80,7 @@
                 </div>
             </div>
 
-            <div class="footer">
-                <div class="pull-left">
-                    10GB of <strong>250GB</strong> Free.
-                </div>
+            <div class="footer">               
                 <div class="pull-right">
                     <strong>Copyright</strong> Codemed © 2014-2015
                 </div>
@@ -136,9 +123,7 @@
              wheelStep: 10
             });
         });
-  });
-
-
+    });
     
     </script>
 

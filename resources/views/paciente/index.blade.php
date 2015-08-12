@@ -5,22 +5,23 @@
 		<span><h4>FRANCILIA CANTANHEDE PINHEIRO</h4>  <hr class="dadosPessoais"> <b>Idade:</b> 20 anos | <b>Sexo</b>: F</span>
 	</div>-->
 
-	<ul class="nav navbar-nav pull-right">
-		<li class="dropdown">
-			<a class="btn dropdown-toggle" data-toggle="dropdown">
-				Olá, {{Auth::user()['name']}}
-				<i class="fa fa-caret-down"></i>
-			</a>
-			<ul class="dropdown-menu">
+	<div class="feed-element pull-right infoUser">
+       <a href="#" class="boxImgUser">
+           {!! Html::image('/assets/images/usuario.jpg','logoUser',array('class' => 'img-circle pull-left')) !!}  
+       </a>
+       <div class="media-body">
+       		<span class="font-bold"><strong>Olá Jose Varela</strong></span><br>
+       		20/05/1975
+           	<a class="dropdown-toggle" data-toggle="dropdown"><b class="caret"></b></a>
+			<ul class="dropdown-menu pull-right itensInfoUser">
 				<li class="item">
 					<a href="/auth/logout">
-						<i class="fa fa-user"></i>
-						
+						<i class="fa fa-user"></i> Log out
 					</a>
 				</li>
 			</ul>
-		</li>
-	</ul>
+       </div>
+   </div>
 @stop
 
 @section('infoAtendimento')
