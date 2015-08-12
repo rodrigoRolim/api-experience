@@ -10,7 +10,7 @@
            {!! Html::image('/assets/images/usuario.jpg','logoUser',array('class' => 'img-circle pull-left')) !!}  
        </a>
        <div class="media-body">
-       		<span class="font-bold"><strong>Olá Jose Varela</strong></span><br>
+       		<span class="font-bold"><strong>Olá, Jose Varela</strong></span><br>
        		20/05/1975
            	<a class="dropdown-toggle" data-toggle="dropdown"><b class="caret"></b></a>
 			<ul class="dropdown-menu pull-right itensInfoUser">

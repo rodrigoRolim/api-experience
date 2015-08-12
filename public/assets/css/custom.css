@@ -153,6 +153,18 @@ div.row.border-bottom{
 	margin-right: 5px;
 }
 
+.dataMini{
+	font-size: 13px;
+}
+
+.metismenu li{
+	margin-bottom: 5px;
+}
+
+.nav-header{
+	margin-bottom: 0px;
+}
+
 @media (max-width: 420px){
 
   	div.row{
@@ -168,7 +180,7 @@ div.row.border-bottom{
 	}
 
 	.bodyLayoutPadrao{
-		padding-top: 50px;
+		padding-top: 68px;
 	}
 
 	li.nav-header{
@@ -220,6 +232,7 @@ div.row.border-bottom{
 		top:100px;
 	}
 
+	.metismenu li a{
+		padding: 0px;
+	}
 }
-
-

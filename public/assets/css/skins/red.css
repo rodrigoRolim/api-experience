@@ -35,16 +35,20 @@ body.boxed-layout #wrapper{
 	font-weight: 400; 
 }
 
-
 #side-menu li a:hover{
 	background-color: #fff;
 	color: #C52F33;
 	font-weight: 800;
+	border-left: 4px solid #C52F33;
 }
 
 #side-menu .active{
 	background-color: #fff;
-	border-left: 4px solid #C52F33;
+	border-left: 4px solid #C52F33 !important;
+}
+
+#side-menu .active a:hover{
+	border-left: none;
 }
 
 #side-menu .active a{
