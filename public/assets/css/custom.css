@@ -235,4 +235,8 @@ div.row.border-bottom{
 	.metismenu li a{
 		padding: 0px;
 	}
+
+	.loginColumns{
+		padding: 0px;
+	}
 }
