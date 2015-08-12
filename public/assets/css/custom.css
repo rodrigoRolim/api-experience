@@ -178,6 +178,13 @@ div.row.border-bottom{
 	.navbar-header.logo img{
 		height: 48px;
 		text-align: center;
+		padding: 0px;
+		margin: 0px;
+	}
+
+	.feed-element{
+		padding: 0px;
+		margin: 0px;
 	}
 
 	.navbar-header.logo{
@@ -206,7 +213,7 @@ div.row.border-bottom{
 	}
 
 	.infoUser img{
-		opacity: 0;
+		display: none;
 	}
 
 	.itensInfoUser{
