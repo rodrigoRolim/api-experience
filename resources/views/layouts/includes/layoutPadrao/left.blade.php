@@ -7,7 +7,7 @@
             
             @foreach($atendimentos as $key => $atendimento)
                 <li class="{{ !$key ? 'active'  : '' }}">
-                    <a href="#">
+                    <a href="#" class="btnAtendimento" data-posto="{{$atendimento->posto}}" data-atendimento="{{$atendimento->atendimento}}">
                         <b class="dataMini">
                             <p class="text-center" style="margin:0px;line-height: 14px">{{ date('d/m',strtotime($atendimento->data_atd))}}<br>
                             {{ date('Y',strtotime($atendimento->data_atd))}}</p>
@@ -31,6 +31,48 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
+            $('.btnAtendimento').click(function(e){
+                var posto = $(e.currentTarget).data('posto');
+                var atendimento = $(e.currentTarget).data('atendimento');
+
+                if(posto != null && atendimento != null){
+                    $.get( "/paciente/examesatendimento/"+posto+"/"+atendimento, function( data ) {
+                  
+                    //$(".listaExames li").addClass("success-element col-lg-12");
+                    for(var i = 0; i <= data.data.length; i++){
+                         
+
+                        switch(data.data[i].situacao){
+                            case "I":                    
+                                data.data[i].situacao = "Finalizado";                                               
+                                break;
+                            case "R":
+                                data.data[i].situacao = "Aguardando Liberação";                                                      
+                                break;
+                            case "N":
+                                data.data[i].situacao = "Não realizado"; // !!!!********* Criar constantes para situacao, hashtable.                                                       
+                                break;
+                            }
+
+                        $(".sortable-list.connectList.agile-list.ui-sortable.listaExames").append("<li><b>"
+                            +data.data[i].mnemonico+"</b> | "+data.data[i].nome_procedimento+"<br>"+data.data[i].situacao+"</li>");
+
+                        if(data.data[i].situacao == "Finalizado")                  
+                           $(".listaExames li").addClass("success-element col-lg-12");   
+
+                        if(data.data[i].situacao == "Aguardando Liberação")                  
+                           $(".listaExames li").addClass("warning-element col-lg-12"); 
+
+                        if(data.data[i].situacao == "Não Realizado")                  
+                           $(".listaExames li").addClass("danger-element col-lg-12");   
+  
+   
+                    }
+
+                    }, "json" );
+                }
+            });
+
             $('.metismenu li i').attr('style','display:none');
             resizeDisplay();
 

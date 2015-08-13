@@ -165,6 +165,10 @@ div.row.border-bottom{
 	margin-bottom: 0px;
 }
 
+ul{
+	list-style-type: none;
+}
+
 @media (max-width: 420px){
 
   	div.row{

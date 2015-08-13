@@ -50,36 +50,8 @@
                     <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">&nbsp;</a>
                 </li>
             </ul>
-        </div>
-            <div class="row wrapper border-bottom white-bg page-heading">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="ibox">
-                              <ul class="sortable-list connectList agile-list ui-sortable">
-                                  <li class="warning-element col-md-6">
-                                     <b>GLI</b> | GLICEMIA EM JEJUM
-                                      <div class="agile-detail">
-                                          <i></i> Em Andamento
-                                      </div>
-                                  </li>
-                                  <li class="success-element col-md-6">
-                                      <b> TSH </b> | TIREOESTIMULANTE HORMONIO (TSH)
-                                      <div class="agile-detail">
-                                          <i></i> Finalizado
-                                      </div>
-                                  </li>
-                                   <li class="danger-element col-md-6">
-                                      <b>POT</b> | POTASSIO (POT)
-                                      <div class="agile-detail">
-                                          <i></i> Pendente
-                                      </div>
-                                  </li>
-                              </ul>                        
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+        </div> 
+          @yield('exames')
             <div class="footer">               
                 <div class="pull-right">
                     <strong>Copyright</strong> Codemed © 2014-2015
