@@ -34,26 +34,10 @@
 @stop
 
 @section('exames')
-
 	 <div class="row wrapper border-bottom white-bg page-heading">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="ibox">
-                              <ul class="sortable-list connectList agile-list ui-sortable listaExames">                              	
-                                  <!-- <li class="success-element col-md-6"> -->
-                                                                                 
-                              </ul>                        
-                        </div>
-
-                        <div class="teste">
-                            <ul>
-                              <li></li>
-                            </ul>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
+		<div class="ibox">
+			<ul class="sortable-list connectList agile-list ui-sortable listaExames"></ul>
+		</div>
+	 </div>
 @stop
 

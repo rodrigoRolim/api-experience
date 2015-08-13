@@ -36,42 +36,42 @@
                 var atendimento = $(e.currentTarget).data('atendimento');
 
                 if(posto != null && atendimento != null){
-                    $.get( "/paciente/examesatendimento/"+posto+"/"+atendimento, function( data ) {
-                  
-                    //$(".listaExames li").addClass("success-element col-lg-12");
-                    for(var i = 0; i <= data.data.length; i++){
-                         
-
-                        switch(data.data[i].situacao){
-                            case "I":                    
-                                data.data[i].situacao = "Finalizado";                                               
-                                break;
-                            case "R":
-                                data.data[i].situacao = "Aguardando Liberação";                                                      
-                                break;
-                            case "N":
-                                data.data[i].situacao = "Não realizado"; // !!!!********* Criar constantes para situacao, hashtable.                                                       
-                                break;
-                            }
-
-                        $(".sortable-list.connectList.agile-list.ui-sortable.listaExames").append("<li><b>"
-                            +data.data[i].mnemonico+"</b> | "+data.data[i].nome_procedimento+"<br>"+data.data[i].situacao+"</li>");
-
-                        if(data.data[i].situacao == "Finalizado")                  
-                           $(".listaExames li").addClass("success-element col-lg-12");   
-
-                        if(data.data[i].situacao == "Aguardando Liberação")                  
-                           $(".listaExames li").addClass("warning-element col-lg-12"); 
-
-                        if(data.data[i].situacao == "Não Realizado")                  
-                           $(".listaExames li").addClass("danger-element col-lg-12");   
-  
-   
-                    }
-
-                    }, "json" );
+                    getExames(posto,atendimento);
                 }
             });
+
+            $('.active a').trigger('click');
+
+            function getExames(posto,atendimento){
+                $.get( "/paciente/examesatendimento/"+posto+"/"+atendimento, function( result ) {
+                    $('.listaExames').html('');
+
+                    $.each( result.data, function( index, exame ){
+                        var situacao = '';
+                        var classSituacao = '';
+                        var sizeBox = 'col-md-6';
+
+                        switch(exame.situacao){
+                            case 'I':
+                                situacao = 'Finalizado';
+                                classSituacao = 'success-element';
+                                break;
+
+                            case 'R':
+                                situacao = 'Aguardando Liberação';
+                                classSituacao = 'warning-element';
+                                break;
+
+                            case 'N':
+                                situacao = 'Não realizado';
+                                classSituacao = 'danger-element';
+                                break;
+                        }
+
+                        $('.listaExames').append('<div class="'+sizeBox+' boxExames"><li class="'+classSituacao+'"><b>'+exame.mnemonico+'</b> | '+exame.nome_procedimento+'<br>'+situacao+'</li></div>');
+                    });
+                }, "json" );
+            }
 
             $('.metismenu li i').attr('style','display:none');
             resizeDisplay();

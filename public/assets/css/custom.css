@@ -169,6 +169,11 @@ ul{
 	list-style-type: none;
 }
 
+.boxExames{
+	padding-right: 0px;
+	padding-left: 0px;
+}
+
 @media (max-width: 420px){
 
   	div.row{
