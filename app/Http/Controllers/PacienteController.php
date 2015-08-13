@@ -27,9 +27,9 @@ class PacienteController extends Controller {
     public function getExamesatendimento($posto,$atendimento){
         $registro = $this->auth->user()['registro'];
 
-        $atendimento = $this->atendimento->findWhere(['registro' => $registro, 'posto' => $posto, 'atendimento' => $atendimento])->count();
+        $verify = $this->atendimento->findWhere(['registro' => $registro, 'posto' => $posto, 'atendimento' => $atendimento])->count();
 
-        if(!$atendimento){
+        if(!$verify){
             return response()->json(array(
                 'message' => 'Posto / Atendimento não encontrado',
             ), 404);
