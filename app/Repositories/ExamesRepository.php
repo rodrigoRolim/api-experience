@@ -29,7 +29,7 @@ class ExamesRepository extends BaseRepository
                     $exames[$key]['class'] = 'warning-element';
                     $exames[$key]['msg'] = 'Aguardando Liberação';
                     break;
-                case 'I':
+                case 'N':
                     $exames[$key]['class'] = 'danger-element';
                     $exames[$key]['msg'] = 'Não realizado';
                     break;

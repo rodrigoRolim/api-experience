@@ -29,7 +29,8 @@ class CustomUserProvider implements UserProvider {
 
     public function updateRememberToken(UserContract $user, $token)
     {
-        return new \Exception('not implemented');
+        $user->set("remember_token",$token);
+        $user->save();
     }
 
     public function retrieveByCredentials(array $credentials)
