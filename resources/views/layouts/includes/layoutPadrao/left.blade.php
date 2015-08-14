@@ -13,7 +13,7 @@
                             {{ date('Y',strtotime($atendimento->data_atd))}}</p>
                         </b>
                         <span class="nav-label"><strong>{{ date('d/m/y',strtotime($atendimento->data_atd))}}</strong><br>
-                        {{$atendimento->mnemonicos}}
+                        {{$atendimento->mnemonicos}}</span>
                     </a>
                 </li>
             @endforeach
@@ -46,11 +46,11 @@
                 $.get( "/paciente/examesatendimento/"+posto+"/"+atendimento, function( result ) {
                     $('.listaExames').html('');
 
-                    $.each( result.data, function( index, exame ){                    
+                    $.each( result.data, function( index, exame ){               
                         
                         var sizeBox = 'col-md-6';
                        
-                        $('.listaExames').append('<div class="'+sizeBox+' boxExames"><li class="'+exame.class+'"><b>'+exame.mnemonico+'</b> | '+exame.nome_procedimento+'<br>'+exame.msg+'</li></div>');
+                        $('.listaExames').append('<div class="'+sizeBox+' boxExames"><li class="'+exame.class+' animated fadeInDownBig"><b>'+exame.mnemonico+'</b> | '+exame.nome_procedimento+'<br>'+exame.msg+'</li></div>');
                     });
                 }, "json" );
             }

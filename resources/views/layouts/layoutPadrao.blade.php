@@ -69,13 +69,13 @@
       <script type="text/javascript">
 
         $(function(){
-                $('.page-heading').slimScroll({
-                 height: '78.6vh',
-                 railOpacity: 0.4,
-                 wheelStep: 10,
-                 min-width: 100%      
-                });
-            });
+          $('.page-heading').slimScroll({
+              height: '78.6vh',
+              railOpacity: 0.4,
+              wheelStep: 10,
+              minwidth: '100%',
+          });
+        });
 
 
       </script>

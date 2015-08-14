@@ -4,6 +4,10 @@ html, body{
 	height: 100%;
 }
 
+a:hover{
+  text-decoration:none;
+}
+
 #wraper{
 	min-height: 100%;
 	position: relative;
@@ -158,9 +162,6 @@ div.row.border-bottom{
 	margin-right: 5px;
 }
 
-.dataMini{
-	font-size: 13px;
-}
 
 .metismenu li{
 	margin-bottom: 5px;
@@ -235,10 +236,6 @@ ul{
 	.infoUsuario{
 		padding: 0px;
 		background-color: #ff00ff;
-	}
-
-	li.dropdown{
-		font-size: 200px;
 	}
 
 	#navbar{
