@@ -1,17 +1,13 @@
 @extends('layouts.layoutPadrao')
 
 @section('infoHead')
-	<!--<div class="panel panel-default">
-		<span><h4>FRANCILIA CANTANHEDE PINHEIRO</h4>  <hr class="dadosPessoais"> <b>Idade:</b> 20 anos | <b>Sexo</b>: F</span>
-	</div>-->
-
 	<div class="feed-element pull-right infoUser">
        <a href="#" class="boxImgUser">
            {!! Html::image('/assets/images/usuario.jpg','logoUser',array('class' => 'img-circle pull-left')) !!}  
        </a>
        <div class="media-body">
-       		<span class="font-bold"><strong>Olá, Jose Varela</strong></span><br>
-       		20/05/1975
+       		<span class="font-bold"><strong>Olá, {{Auth::user()['nome']}}</strong></span><br>
+       		{{Auth::user()['data_nas']}}
            	<a class="dropdown-toggle" data-toggle="dropdown"><b class="caret"></b></a>
 			<ul class="dropdown-menu pull-right itensInfoUser">
 				<li class="item">
