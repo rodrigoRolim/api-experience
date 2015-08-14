@@ -16,7 +16,7 @@
 			<ul class="dropdown-menu pull-right itensInfoUser">
 				<li class="item">
 					<a href="/auth/logout">
-						<i class="fa fa-user"></i> Log out
+						<i class="fa fa-user"></i> Sair
 					</a>
 				</li>
 			</ul>

@@ -64,6 +64,21 @@
     @section('script')
       <script src="{{ asset('/assets/js/jquery-2.1.1.js') }}"></script>
       <script src="{{ asset('/assets/js/bootstrap.min.js') }}"></script>
+
+
+      <script type="text/javascript">
+
+        $(function(){
+                $('.page-heading').slimScroll({
+                 height: '79vh',
+                 railOpacity: 0.4,
+                 wheelStep: 10
+                });
+            });
+
+
+      </script>
+
     @show
 </body>
 </html>
