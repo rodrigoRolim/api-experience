@@ -68,13 +68,16 @@
             });
 
             $(function(){
+                sizeBoxExames();
+            });
+
+            function sizeBoxExames(){
                 $('#side-menu').slimScroll({
                  height: '76vh',
                  railOpacity: 0.4,
                  wheelStep: 10
                 });
-            });
-
+            }
 
             function resizeDisplay(){
                if ($(this).width() < 769) {
@@ -86,6 +89,8 @@
                     $('body').removeClass('mini-navbar');
                     $('.metismenu li b').attr('style','display:none');
                 }
+
+                sizeBoxExames();
             }
         });
     </script>
