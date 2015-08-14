@@ -32,4 +32,9 @@ class AtendimentoRepository extends BaseRepository
 
         return $atendimento;
     }
+
+    public function ehCliente($auth,$posto,$atendimento){
+        $registro = $auth->user()['registro'];
+        return (bool) $this->findWhere(['registro' => $registro, 'posto' => $posto, 'atendimento' => $atendimento])->count();
+    }
 }
