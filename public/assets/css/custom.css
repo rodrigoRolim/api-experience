@@ -45,10 +45,14 @@ html, body{
 }
 
 .infoAtendimento{	
-	float: right;	
-	margin-right: 20px;
+	float: left;	
+	margin-left: 25px;
 	font-size: 1.1em;
 	margin-top: 7px;
+}
+
+.nav > li.active:active{
+	background-color: #fff !important;
 }
 
 .bodyLayoutPadrao{
@@ -181,6 +185,8 @@ ul{
 .listaExames{
 	padding-left: 10px;
 }
+
+
 
 @media (max-width: 420px){
 
