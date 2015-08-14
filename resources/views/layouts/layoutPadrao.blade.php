@@ -70,7 +70,7 @@
 
         $(function(){
                 $('.page-heading').slimScroll({
-                 height: '79vh',
+                 height: '78.6vh',
                  railOpacity: 0.4,
                  wheelStep: 10
                 });
