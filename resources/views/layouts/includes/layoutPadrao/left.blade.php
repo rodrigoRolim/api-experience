@@ -43,13 +43,14 @@
             $('.active a').trigger('click');
 
             function getExames(posto,atendimento){
+                $('.listaExames').html('<br><br><br><br><h1 class="text-center"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando registros.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>');
                 $.get( "/paciente/examesatendimento/"+posto+"/"+atendimento, function( result ) {
                     $('.listaExames').html('');
 
-                    $.each( result.data, function( index, exame ){               
-                        
+                    $.each( result.data, function( index, exame ){
+
                         var sizeBox = 'col-md-6';
-                       
+
                         $('.listaExames').append('<div class="'+sizeBox+' boxExames"><li class="'+exame.class+' animated fadeInDownBig"><b>'+exame.mnemonico+'</b> | '+exame.nome_procedimento+'<br>'+exame.msg+'</li></div>');
                     });
                 }, "json" );
