@@ -209,6 +209,14 @@ ul{
 		min-height: 89vh;
 	}
 
+	.infoAtendimento{
+		font-size: 1em;
+	}
+
+	.metismenu li {
+		margin-bottom: 40px;
+	}
+
   	div.row{
   		margin-top: 30px;
   	}
@@ -226,7 +234,7 @@ ul{
 	}
 
 	li.nav-header{
-		height: 80px;
+		height: 90px;
 	}
 
 	.navbar-header.logo img{
