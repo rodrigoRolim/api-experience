@@ -78,7 +78,7 @@ class CustomUserProvider implements UserProvider {
                                     'tipoLoginPaciente' => 'ID',
                                     'name' => $nome,
                                     'sexo' => $cliente['sexo'],
-                                    'idade' => $cliente['data_nas'],
+                                    'data_nas' => $cliente['data_nas'],
                                     'registro' => $cliente['registro'],
                                     'username' => $credentials['posto'].'/'.$credentials['atendimento'],
                                 ),
