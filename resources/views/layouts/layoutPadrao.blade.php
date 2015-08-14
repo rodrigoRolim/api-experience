@@ -72,7 +72,8 @@
                 $('.page-heading').slimScroll({
                  height: '78.6vh',
                  railOpacity: 0.4,
-                 wheelStep: 10
+                 wheelStep: 10,
+                 min-width: 100%      
                 });
             });
 

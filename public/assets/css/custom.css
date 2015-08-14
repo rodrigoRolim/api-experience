@@ -108,6 +108,7 @@ li.nav-header{
 
 div.row.border-bottom{
 	height: 60px;
+	margin: 0;
 }
 
 .panel{
@@ -190,12 +191,16 @@ ul{
 
 @media (max-width: 420px){
 
+	.page-heading{
+		min-height: 89vh;
+	}
+
   	div.row{
   		margin-top: 30px;
   	}
 
   	div.row.border-bottom{
-		height: 60px;
+		height: 90px;
 	}
 
 	#wrapper{
@@ -203,7 +208,7 @@ ul{
 	}
 
 	.bodyLayoutPadrao{
-		padding-top: 68px;
+		padding-top: 98px;
 	}
 
 	li.nav-header{
@@ -262,4 +267,5 @@ ul{
 	.loginColumns{
 		padding: 0px;
 	}
+
 }
