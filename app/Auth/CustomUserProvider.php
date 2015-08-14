@@ -68,14 +68,17 @@ class CustomUserProvider implements UserProvider {
                         $atendimentoAcesso = $atendimentoAcesso->where(['id' => $id])->get()->toArray();
 
                         if(strtoupper($atendimentoAcesso[0]['pure']) == strtoupper($credentials['password'])){
+                            $arrNome = explode(' ',$cliente['nome']);
+                            $nome = ucfirst(strtolower($arrNome[0])).' '.ucfirst(strtolower($arrNome[sizeof($arrNome)-1]));
+
                             $atributes = array(
                                 'remember_token' => "",
                                 'id' => array(
                                     'tipoAcesso' => 'PAC',
                                     'tipoLoginPaciente' => 'ID',
-                                    'name' => $cliente['nome'],
+                                    'name' => $nome,
                                     'sexo' => $cliente['sexo'],
-                                    'idade' => $cliente['data_nas'],
+                                    'data_nas' => $cliente['data_nas'],
                                     'registro' => $cliente['registro'],
                                     'username' => $credentials['posto'].'/'.$credentials['atendimento'],
                                 ),
