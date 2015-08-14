@@ -7,12 +7,12 @@
        </a>
        <div class="media-body">
        		<span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span><br>
-       		{{date('d/m/y',strtotime(Auth::user()['data_nas']))}}&nbsp;
-           	<a class="dropdown-toggle" data-toggle="dropdown"><b class="fa fa-sign-out"></b></a>
+       		{{date('d/m/y',strtotime(Auth::user()['data_nas']))}}&nbsp;	
+           	<a class="dropdown-toggle" data-toggle="dropdown"><b class="caret"></b></a>
 			<ul class="dropdown-menu pull-right itensInfoUser">
 				<li class="item">
 					<a href="/auth/logout">
-						<i class="fa fa-user"></i> Sair
+						<i class="fa fa-sign-out"></i> Sair
 					</a>
 				</li>
 			</ul>
