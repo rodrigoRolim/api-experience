@@ -46,29 +46,11 @@
                 $.get( "/paciente/examesatendimento/"+posto+"/"+atendimento, function( result ) {
                     $('.listaExames').html('');
 
-                    $.each( result.data, function( index, exame ){
-                        var situacao = '';
-                        var classSituacao = '';
+                    $.each( result.data, function( index, exame ){                    
+                        
                         var sizeBox = 'col-md-6';
-
-                        switch(exame.situacao){
-                            case 'I':
-                                situacao = 'Finalizado';
-                                classSituacao = 'success-element';
-                                break;
-
-                            case 'R':
-                                situacao = 'Aguardando Liberação';
-                                classSituacao = 'warning-element';
-                                break;
-
-                            case 'N':
-                                situacao = 'Não realizado';
-                                classSituacao = 'danger-element';
-                                break;
-                        }
-
-                        $('.listaExames').append('<div class="'+sizeBox+' boxExames"><li class="'+classSituacao+'"><b>'+exame.mnemonico+'</b> | '+exame.nome_procedimento+'<br>'+situacao+'</li></div>');
+                       
+                        $('.listaExames').append('<div class="'+sizeBox+' boxExames"><li class="'+exame.class+'"><b>'+exame.mnemonico+'</b> | '+exame.nome_procedimento+'<br>'+exame.msg+'</li></div>');
                     });
                 }, "json" );
             }
