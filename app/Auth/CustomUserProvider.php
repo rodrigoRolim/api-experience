@@ -73,7 +73,7 @@ class CustomUserProvider implements UserProvider {
                             $nome = ucfirst(strtolower($arrNome[0])).' '.ucfirst(strtolower($arrNome[sizeof($arrNome)-1]));
 
                             $atributes = array(
-                                'remember_token' => "",
+                                'remember_token' => str_random(60),
                                 'id' => array(
                                     'tipoAcesso' => 'PAC',
                                     'tipoLoginPaciente' => 'ID',

@@ -1,5 +1,14 @@
 @extends('layouts.layoutPadrao')
 
+@section('stylesheets')
+	{!! Html::style('/assets/css/plugins/iCheck/custom.css') !!}
+	<style type="text/css">
+		.i-checks{
+			float: right;
+		}
+	</style>
+@show
+
 @section('infoHead')
 	<div class="feed-element pull-right infoUser">
        <a href="#" class="boxImgUser">
@@ -30,6 +39,7 @@
 @stop
 
 @section('exames')
+
 	 <div class="row wrapper border-bottom white-bg page-heading">
 		<div class="ibox">
 			<ul class="sortable-list connectList agile-list ui-sortable listaExames"></ul>
@@ -37,3 +47,40 @@
 	 </div>
 @stop
 
+@section('script')
+	@parent
+	<script src="{{ asset('/assets/js/plugins/iCheck/icheck.min.js') }}"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('.btnAtendimento').click(function(e){
+				var posto = $(e.currentTarget).data('posto');
+				var atendimento = $(e.currentTarget).data('atendimento');
+
+				if(posto != null && atendimento != null){
+					getExames(posto,atendimento);
+				}
+			});
+
+			$('.active a').trigger('click');
+
+			function getExames(posto,atendimento){
+				$('.listaExames').html('<br><br><br><br><h1 class="text-center"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando registros.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>');
+				$.get( "/paciente/examesatendimento/"+posto+"/"+atendimento, function( result ) {
+					$('.listaExames').html('');
+
+					$.each( result.data, function( index, exame ){
+
+						var sizeBox = 'col-md-6';
+
+						$('.listaExames').append('<div class="'+sizeBox+' boxExames"><li class="'+exame.class+' animated fadeInDownBig"><b>'+exame.mnemonico+'</b> | '+exame.nome_procedimento+'<br>'+exame.msg+'<div class="i-checks"><input type="checkbox"></div></li></div>');
+
+						$('.i-checks').iCheck({
+							checkboxClass: 'icheckbox_square-grey',
+						});
+					});
+				}, "json" );
+			}
+		});
+	</script>
+@stop

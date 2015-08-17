@@ -20,7 +20,7 @@
 	@show
 </head>
 <body class="gray-bg">	
-		@include('paciente.includes.head')	
+	@include('paciente.includes.head')
 	<div id="main" role="main">
     	<div class="content">
 			@yield('content')
