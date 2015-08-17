@@ -13,7 +13,7 @@
                             {{ date('Y',strtotime($atendimento->data_atd))}}</p>
                         </b>
                         <span class="nav-label"><strong>{{ date('d/m/y',strtotime($atendimento->data_atd))}}</strong><br>
-                        {{$atendimento->mnemonicos}}</spa   n>
+                        {{str_limit($atendimento->mnemonicos,56)}}</span>
                     </a>
                 </li>
             @endforeach

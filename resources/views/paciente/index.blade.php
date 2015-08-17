@@ -4,8 +4,15 @@
 	{!! Html::style('/assets/css/plugins/iCheck/custom.css') !!}
 	<style type="text/css">
 		.i-checks{
-			float: right;
+			float: right;			
 		}
+
+		.all{
+			float: none;
+			margin-left: 5px;			
+			padding: 5px;
+		}
+
 	</style>
 @show
 
@@ -31,9 +38,9 @@
 
 @section('infoAtendimento')
 	<div class="infoAtendimento">
-		<span>Convênio:</span>
+		<span><strong>Convênio</strong>:</span>
 		<span>{{ $atendimentos[0]->nome_convenio}}</span> <br>
-		<span>Solicitante:</span>
+		<span><strong>Solicitante</strong>:</span>
 		<span>{{ $atendimentos[0]->nome_solicitante}}</span>
    	</div>
 @stop
@@ -42,6 +49,9 @@
 
 	 <div class="row wrapper border-bottom white-bg page-heading">
 		<div class="ibox">
+			<div class="i-checks all">			
+				<span><input type="checkbox" class="checkAll"> Selecionar Todos </span>	
+			</div>	
 			<ul class="sortable-list connectList agile-list ui-sortable listaExames"></ul>
 		</div>
 	 </div>
@@ -60,6 +70,7 @@
 				if(posto != null && atendimento != null){
 					getExames(posto,atendimento);
 				}
+
 			});
 
 			$('.active a').trigger('click');
@@ -73,21 +84,31 @@
 
 						var sizeBox = 'col-md-6';
 
-						$('.listaExames').append('<div class="'+sizeBox+' boxExames">' +
-							'<li class="'+exame.class+' animated fadeInDownBig">' +
-								'<div class="row">' +
-									'<div class="col-xs-10">' +
-										'<b>'+exame.mnemonico+'</b> | '+exame.nome_procedimento+'<br>'+exame.msg+'' +
-									'</div>'+
-									'<div class="col-md-2">'+
-										'<div class="i-checks"><input type="checkbox"></div>' +
-									'</div>'+
-								'</div>'+
-							'</li></div>');
+						$('.listaExames').append('<div class="'+sizeBox+' boxExames"><li class="'+exame.class+' animated fadeInDownBig"><b>'+exame.mnemonico+'</b> | '+exame.nome_procedimento+'<br>'+exame.msg+'<div class="i-checks"><input type="checkbox" class="check"></div></li></div>');
 
-						$('.i-checks').iCheck({
+						$('input').iCheck({
 							checkboxClass: 'icheckbox_square-grey',
 						});
+
+						var checkAll = $('input.checkAll');
+					    var checkboxes = $('input.check');	 
+					    
+					    checkAll.on('ifChecked ifUnchecked', function(event) {        
+					        if (event.type == 'ifChecked') {
+					            checkboxes.iCheck('check');
+					        } else {
+					            checkboxes.iCheck('uncheck');
+					        }
+					    });
+					    
+					    checkboxes.on('ifChanged', function(event){
+					        if(checkboxes.filter(':checked').length == checkboxes.length) {
+					            checkAll.prop('checked', 'checked');
+					        } else {
+					            checkAll.removeProp('checked');
+					        }
+					        checkAll.iCheck('update');
+					    });
 					});
 				}, "json" );
 			}

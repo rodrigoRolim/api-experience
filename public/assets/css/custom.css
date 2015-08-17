@@ -202,13 +202,18 @@ ul{
 
 @media (max-width: 420px){
 
+	body,.text-center{
+		font-size: 10px;
+	}
+
 	.page-heading{
 		min-height: 89vh;
 		padding-bottom: 80px;
 	}
 
-	.infoAtendimento{
-		font-size: 1em;
+	.infoAtendimento{		
+		margin: 0;
+		padding: 5px;
 	}
 
 	.metismenu li {
@@ -220,7 +225,7 @@ ul{
   	}
 
   	div.row.border-bottom{
-		height: 90px;
+		height: 60px;
 	}
 
 	#wrapper{
@@ -232,7 +237,7 @@ ul{
 	}
 
 	li.nav-header{
-		height: 90px;
+		height: 60px;
 	}
 
 	.navbar-header.logo img{
