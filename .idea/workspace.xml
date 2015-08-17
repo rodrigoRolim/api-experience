@@ -25,10 +25,10 @@
       <file leaf-file-name="AtendimentoRepository.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Repositories/AtendimentoRepository.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.38618523">
-              <caret line="25" column="77" selection-start-line="25" selection-start-column="77" selection-end-line="25" selection-end-column="77" />
+            <state vertical-scroll-proportion="0.41758242">
+              <caret line="26" column="40" selection-start-line="25" selection-start-column="20" selection-end-line="26" selection-end-column="40" />
               <folding>
-                <marker date="1439819631548" expanded="true" signature="492:751" placeholder="SELECT posto..vw_atendimentos..." />
+                <marker date="1439819736720" expanded="true" signature="492:788" placeholder="SELECT posto..vw_atendimentos..." />
               </folding>
             </state>
           </provider>
@@ -111,7 +111,7 @@
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
     <option name="x" value="43" />
-    <option name="y" value="24" />
+    <option name="y" value="-744" />
     <option name="width" value="1323" />
     <option name="height" value="744" />
   </component>
@@ -273,7 +273,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="43" y="24" width="1323" height="744" extended-state="6" />
+    <frame x="43" y="-744" width="1323" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -679,10 +679,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Repositories/AtendimentoRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.38618523">
-          <caret line="25" column="77" selection-start-line="25" selection-start-column="77" selection-end-line="25" selection-end-column="77" />
+        <state vertical-scroll-proportion="0.41758242">
+          <caret line="26" column="40" selection-start-line="25" selection-start-column="20" selection-end-line="26" selection-end-column="40" />
           <folding>
-            <marker date="1439819631548" expanded="true" signature="492:751" placeholder="SELECT posto..vw_atendimentos..." />
+            <marker date="1439819736720" expanded="true" signature="492:788" placeholder="SELECT posto..vw_atendimentos..." />
           </folding>
         </state>
       </provider>

@@ -23,7 +23,7 @@ class AtendimentoRepository extends BaseRepository
         $data = explode("/",$data);
 
         if($user['tipoLoginPaciente'] == 'ID'){
-            $sql = 'SELECT posto,atendimento,data_atd, INITCAP(nome_convenio), INITCAP(nome_solicitante), (GET_MNEMONICOS(posto,atendimento)) mnemonicos,saldo_devedor
+            $sql = 'SELECT posto,atendimento,data_atd, INITCAP(nome_convenio) AS nome_convenio, INITCAP(nome_solicitante) AS nome_solicitante, (GET_MNEMONICOS(posto,atendimento)) mnemonicos,saldo_devedor
                     FROM vw_atendimentos
                     WHERE posto = :posto AND atendimento = :atendimento';
 
