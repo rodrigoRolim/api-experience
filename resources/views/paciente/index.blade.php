@@ -74,17 +74,16 @@
 						var sizeBox = 'col-md-6';
 
 						$('.listaExames').append('<div class="'+sizeBox+' boxExames">' +
-								'<li class="'+exame.class+' animated fadeInDownBig">' +
-									'<div class="row">' +
-										'<div class="col-xs-10">' +
-											'<b>'+exame.mnemonico+'</b> | '+exame.nome_procedimento+'<br>'+exame.msg+'' +
-										'</div>'+
-										'<div class="col-xs-2">'+
-											'<div class="i-checks"><input type="checkbox"></div>' +
-											'<div class="btn btn-primary btn-md btnVisualizarExames"><i class="fa fa-search"/></div>'+
-										'</div>'+
+							'<li class="'+exame.class+' animated fadeInDownBig">' +
+								'<div class="row">' +
+									'<div class="col-xs-10">' +
+										'<b>'+exame.mnemonico+'</b> | '+exame.nome_procedimento+'<br>'+exame.msg+'' +
 									'</div>'+
-								'</li></div>');
+									'<div class="col-md-2">'+
+										'<div class="i-checks"><input type="checkbox"></div>' +
+									'</div>'+
+								'</div>'+
+							'</li></div>');
 
 						$('.i-checks').iCheck({
 							checkboxClass: 'icheckbox_square-grey',
