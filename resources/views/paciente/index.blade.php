@@ -2,18 +2,6 @@
 
 @section('stylesheets')
 	{!! Html::style('/assets/css/plugins/iCheck/custom.css') !!}
-	<style type="text/css">
-		.i-checks{
-			float: right;			
-		}
-
-		.all{
-			float: none;
-			margin-left: 5px;			
-			padding: 5px;
-		}
-
-	</style>
 @show
 
 @section('infoHead')
@@ -37,21 +25,23 @@
 @stop
 
 @section('infoAtendimento')
+<div class="boxDadosAtendimentos">
 	<div class="infoAtendimento">
 		<span><strong>Convênio</strong>:</span>
 		<span>{{ $atendimentos[0]->nome_convenio}}</span> <br>
 		<span><strong>Solicitante</strong>:</span>
 		<span>{{ $atendimentos[0]->nome_solicitante}}</span>
    	</div>
+   	<div class="i-checks all">			
+		<span>Selecionar Todos <input type="checkbox" class="checkAll"></span>	
+	</div>	   	
+</div>
 @stop
 
 @section('exames')
 
 	 <div class="row wrapper border-bottom white-bg page-heading">
-		<div class="ibox">
-			<div class="i-checks all">			
-				<span><input type="checkbox" class="checkAll"> Selecionar Todos </span>	
-			</div>	
+		<div class="ibox">			
 			<ul class="sortable-list connectList agile-list ui-sortable listaExames"></ul>
 		</div>
 	 </div>

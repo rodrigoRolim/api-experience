@@ -200,6 +200,10 @@ ul{
 	to { transform: scale(1) rotate(360deg);}
 }
 
+.all{
+	float: right;
+}
+
 @media (max-width: 420px){
 
 	body,.text-center{

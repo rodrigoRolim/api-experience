@@ -39,15 +39,7 @@
     		@include('layouts.includes.layoutPadrao.left')
 	        <div id="page-wrapper" class="gray-bg" style="min-height: 356px;">
             <div class="row border-bottom">
-              @yield('infoAtendimento')
-            <nav class="navbar static-top boxDadosAtendimentos" style="margin-bottom: 0">
-       
-
-            <ul class="nav navbar-top-links navbar-right">                
-                <li class="dropdown">
-                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">&nbsp;</a>
-                </li>
-            </ul>
+            @yield('infoAtendimento')
         </div> 
           @yield('exames')
             <div class="footer">               
