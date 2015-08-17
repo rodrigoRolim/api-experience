@@ -190,6 +190,12 @@ ul{
 	-webkit-animation: spin2 .7s infinite linear;
 }
 
+.btnVisualizarExames{
+	float: right;
+	margin-top: 5px;
+	padding: 3.8px;
+}
+
 @-webkit-keyframes spin2 {
 	from { -webkit-transform: rotate(0deg);}
 	to { -webkit-transform: rotate(360deg);}
