@@ -13,7 +13,7 @@
                             {{ date('Y',strtotime($atendimento->data_atd))}}</p>
                         </b>
                         <span class="nav-label"><strong>{{ date('d/m/y',strtotime($atendimento->data_atd))}}</strong><br>
-                        {{$atendimento->mnemonicos}}</span>
+                        {{$atendimento->mnemonicos}}</spa   n>
                     </a>
                 </li>
             @endforeach
@@ -51,17 +51,23 @@
 
                         var sizeBox = 'col-md-6';
 
-                        $('.listaExames').append('<div class="'+sizeBox+' boxExames"><li class="'+exame.class+' animated fadeInDownBig"><b>'+exame.mnemonico+'</b> | '+exame.nome_procedimento+'<br>'+exame.msg+'</li></div>');
+                        $('.listaExames').append('<div class="'+sizeBox+' boxExames"><li class="'+exame.class+' animated fadeInDownBig"><b>'+exame.mnemonico+'</b> | '+exame.nome_procedimento+'<br>'+exame.msg+'<div class="i-checks"><input type="checkbox"></div></li></div>');
                     });
                 }, "json" );
             }
+
+            
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-grey',
+                radioClass: 'iradio_square-grey',
+            });
 
             $('.metismenu li i').attr('style','display:none');
             resizeDisplay();
 
             $('.navbar-minimalize').click(function () { 
-                $("body").toggleClass("mini-navbar");
-                });
+                $("body").toggleClass("mini-navbar");   
+            });
 
             $(window).bind("resize", function () {
               resizeDisplay();
