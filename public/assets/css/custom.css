@@ -185,10 +185,21 @@ ul{
 	padding-left: 10px;
 }
 
+.listaExames li{
+	min-height: 80px;
+}
+
+.checkExames{
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+}
+
 .iconLoad {
 	-animation: spin .7s infinite linear;
 	-webkit-animation: spin2 .7s infinite linear;
 }
+
 
 @-webkit-keyframes spin2 {
 	from { -webkit-transform: rotate(0deg);}
@@ -282,7 +293,8 @@ ul{
 	}
 
 	.itensInfoUser{
-		top:100px;
+		top:100p
+x;
 	}
 
 	.metismenu li a{
