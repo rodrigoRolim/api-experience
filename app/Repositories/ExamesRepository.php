@@ -33,6 +33,10 @@ class ExamesRepository extends BaseRepository
                     $exames[$key]['class'] = 'danger-element';
                     $exames[$key]['msg'] = 'Não realizado';
                     break;
+                default:
+                    $exames[$key]['class'] = 'warning-element';
+                    $exames[$key]['msg'] = 'default';
+                    break;
             }
         }
 
