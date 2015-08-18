@@ -127,6 +127,10 @@ div.row.border-bottom{
 	overflow: auto;
 }
 
+#side-menu .active{
+	margin-top: 100px;
+}
+
 .fa-angle-right{
 	float: right;
 }
@@ -177,6 +181,12 @@ ul{
 	padding-left: 0px;
 }
 
+.dadosExames{
+	margin-top: 10px;
+	width: 80%;
+	height: 10px;
+}
+
 #page-wrapper{
 	padding: 0px;
 }
@@ -190,9 +200,8 @@ ul{
 }
 
 .checkExames{
-	position: absolute;
-	bottom: 0px;
-	right: 0px;
+	float: right;
+	margin-right: 2px;
 }
 
 .iconLoad {
@@ -211,8 +220,12 @@ ul{
 	to { transform: scale(1) rotate(360deg);}
 }
 
+
 .all{
-	float: right;
+	float: none;
+	padding-top: 5px;
+	text-align: right;
+	margin-right: 22px;
 }
 
 @media (max-width: 420px){

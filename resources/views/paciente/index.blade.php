@@ -31,10 +31,7 @@
 		<span>{{ $atendimentos[0]->nome_convenio}}</span> <br>
 		<span><strong>Solicitante</strong>:</span>
 		<span>{{ $atendimentos[0]->nome_solicitante}}</span>
-   	</div>
-   	<div class="i-checks all">			
-		<span>Selecionar Todos <input type="checkbox" class="checkAll"></span>	
-	</div>	   	
+   	</div>	
 </div>
 @stop
 
@@ -42,9 +39,12 @@
 
 	 <div class="row wrapper border-bottom white-bg page-heading">
 		<div class="ibox">			
-			<ul class="sortable-list connectList agile-list ui-sortable listaExames"></ul>
-		</div>
-	 </div>
+			<div class="i-checks all">			
+				<i class="fa fa-check"></i>&nbsp;<span>Selecionar Todos &nbsp;<input type="checkbox" class="checkAll"></span>	
+			</div>	 
+		<ul class="sortable-list connectList agile-list ui-sortable listaExames"></ul>				  
+	</div>
+ </div>
 @stop
 
 @section('script')
@@ -76,8 +76,10 @@
 
 						$('.listaExames').append('<div class="'+sizeBox+' boxExames">' +
 									'<li class="'+exame.class+' animated fadeInDownBig">' +
+										'<div class="dadosExames">' +
 										'<b>'+exame.mnemonico+'</b> | '+exame.nome_procedimento+'<br>'+exame.msg+
-										'<div class="i-checks checkExames"><input type="checkbox" class="check"></div>' +
+										'</div><div class="i-checks checkExames"><input type="checkbox" class="check">'+
+										'</div>' +
 									'</li>' +
 								'</div>');
 
