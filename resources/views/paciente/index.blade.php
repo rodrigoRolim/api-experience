@@ -68,7 +68,7 @@
 
 
 			function getExames(posto,atendimento){
-				$('.listaExames').html('<br><br><br><br><h1 class="text-center"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando registros.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>');
+				$('.listaExames').html('<br><br><br><br><h2 class="text-center"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando registros.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>');
 				$.get( "/paciente/examesatendimento/"+posto+"/"+atendimento, function( result ) {
 					$('.listaExames').html('');
 

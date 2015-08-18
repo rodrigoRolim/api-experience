@@ -127,6 +127,10 @@ div.row.border-bottom{
 	overflow: auto;
 }
 
+.mnemonicos{
+	font-size: 11px;
+}
+
 #side-menu .active{
 	margin-top: 100px;
 }
@@ -306,8 +310,7 @@ ul{
 	}
 
 	.itensInfoUser{
-		top:100p
-x;
+		top:100px;
 	}
 
 	.metismenu li a{
