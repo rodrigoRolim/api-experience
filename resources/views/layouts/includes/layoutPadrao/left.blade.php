@@ -4,7 +4,7 @@
          
             
             @foreach($atendimentos as $key => $atendimento)
-                <li class="{{ !$key ? 'active'  : '' }}">
+                <li class="{{ !$key ? 'active' : '' }}">
                     <a href="#" class="btnAtendimento" data-posto="{{$atendimento->posto}}" data-atendimento="{{$atendimento->atendimento}}">
                         <b class="dataMini">
                             <p class="text-center" style="margin:0px;line-height: 14px">{{ date('d/m',strtotime($atendimento->data_atd))}}<br>
@@ -24,6 +24,7 @@
     <script src="{{ asset('/assets/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
+            $('li:first-child').addClass('active');
             sizeBoxExames();
 
             $('.metismenu li i').attr('style','display:none');
@@ -37,6 +38,14 @@
             $(window).bind("resize", function () {
               resizeDisplay();
             });
+
+            
+            $('li').click(function(event) {
+               $('li').not(this).removeClass('active clicked');    /// Alternancia de fundos ao clicar/selecionar um atendimento da lista. (linhas 63-66).           
+               $('li').not(this).addClass('notClicked');
+               $(this).toggleClass('active clicked');
+               $(this).toggleClass('notClicked');  
+            });  
 
             function sizeBoxExames(){
                 $('#side-menu').slimScroll({

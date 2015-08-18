@@ -51,8 +51,19 @@ html, body{
 	margin-top: 7px;
 }
 
-.nav > li.active:active{
-	background-color: #fff !important;
+li.clicked{
+	background-color: #fff;
+}
+
+li.notClicked{
+	background-color: none;
+}
+
+#side-menu li a:active{
+	background-color: #fff;
+    color: #C52F33;
+    font-weight: 800;
+    border-left: 4px solid #C52F33;
 }
 
 .bodyLayoutPadrao{
@@ -127,12 +138,13 @@ div.row.border-bottom{
 	overflow: auto;
 }
 
+
 .mnemonicos{
 	font-size: 11px;
 }
 
-#side-menu .active{
-	margin-top: 100px;
+#side-menu {
+	margin-top: 60px;	
 }
 
 .fa-angle-right{
