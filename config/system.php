@@ -14,7 +14,7 @@ return [
     ],
     'messages' => [
         'login' => [
-            'usuarioSenhaInvalidos'   => 'Atendimento / senha inválidos',
+            'usuarioSenhaInvalidos'   => 'Credenciais de acesso não confere',
         ]
     ],
     'qtdCaracterPosto' => 2,
