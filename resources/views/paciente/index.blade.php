@@ -89,14 +89,24 @@
 							checkboxClass: 'icheckbox_square-grey',
 						});
 
+						$('input.check').on('ifChecked', function(event){
+						  $('.btnPdf').prop('disabled', false);
+						});
+
+						$('input.check').on('ifUnchecked', function(event){
+						  $('.btnPdf').prop('disabled', true);
+						});
+
 						var checkAll = $('input.checkAll');
 					    var checkboxes = $('input.check');	 
 					    
 					    checkAll.on('ifChecked ifUnchecked', function(event) {        
 					        if (event.type == 'ifChecked') {
 					            checkboxes.iCheck('check');
+					            $('.btnPdf').prop('disabled', false);
 					        } else {
 					            checkboxes.iCheck('uncheck');
+					             $('.btnPdf').prop('disabled', true);
 					        }
 					    });
 					    

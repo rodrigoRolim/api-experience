@@ -43,8 +43,11 @@
         </div> 
           @yield('exames')
             <div class="footer">               
-                <div class="pull-right">
+                <div class="pull-left">
                     <strong>Copyright</strong> Codemed © 2014-2015
+                </div>
+                <div class="pull-right">
+                    <button type="button" class="btn btn-danger btnPdf" disabled>Gerar PDF</button>
                 </div>
             </div>
         </div>
