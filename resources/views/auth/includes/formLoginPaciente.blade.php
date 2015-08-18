@@ -22,7 +22,7 @@
 	        <label>CPF</label>
 	        <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
-            	<input type="text" data-mask="999.999.999-99" name="cpf" id="cpf" class="form-control" placeholder="CPF" required="">
+            	<input type="text" value="028.948.743-91" data-mask="999.999.999-99" name="cpf" id="cpf" class="form-control" placeholder="CPF" required="">
           	</div>
 		  	@if ($errors->has('cpf')) <p class="help-block">{{ $errors->first('cpf') }}</p> @endif
 	    </div>
@@ -30,7 +30,7 @@
 	        <label>Data de Nascimento</label>
 	        <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-            	<input type="text" id="nascimento" data-mask="99/99/9999" name="nascimento" class="form-control" placeholder="Data de Nascimento" required="">
+            	<input type="text" id="nascimento" value="18/08/1934" data-mask="99/99/9999" name="nascimento" class="form-control" placeholder="Data de Nascimento" required="">
             </div>
 			@if ($errors->has('nascimento')) <p class="help-block">{{ $errors->first('nascimento') }}</p> @endif
 		</div></div>
@@ -38,7 +38,7 @@
 	        <label>Senha</label>
 	        <div class="input-group">
 	            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-				<input type="password" value="fzief2" name="password" class="form-control" placeholder="Senha" required="" name="password">
+				<input type="password" value="" name="password" class="form-control" placeholder="Senha" required="" name="password">
 	        </div>
 			@if ($errors->has('password')) <p class="help-block">{{ $errors->first('password') }}</p> @endif
 	    </div>

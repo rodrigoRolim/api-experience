@@ -2,19 +2,19 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Cliente extends Model {
+class ClienteAcesso extends Model {
 
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'CLIENTES';
+    protected $table = 'CLIENTES_PASS';
 
     /**
      * The database primary key
      *
      * @var string
      */
-    protected $primaryKey = 'REGISTRO';
+    protected $primaryKey = 'ID';
 }

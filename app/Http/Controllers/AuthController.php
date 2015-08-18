@@ -75,6 +75,24 @@ class AuthController extends Controller
                     ];
                 }
 
+                if($request->input('tipoLoginPaciente') == 'CPF'){
+                    $validate = [
+                        'cpf' => 'required',
+                        'nascimento' => 'required',
+                        'password' => 'required',
+                    ];
+
+                    $this->validate($request,$validate);
+
+                    $credentials = [
+                        'tipoAcesso' => 'PAC',
+                        'tipoLoginPaciente' => $request->input('tipoLoginPaciente'),
+                        'cpf' => $request->input('cpf'),
+                        'nascimento' => $request->input('nascimento'),
+                        'password' => $request->input('password'),
+                    ];
+                }
+
                 break;
         }
 

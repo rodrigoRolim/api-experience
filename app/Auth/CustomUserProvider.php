@@ -3,6 +3,8 @@ namespace App\Auth;
 
 use App\Models\Atendimento;
 use App\Models\AtendimentoAcesso;
+use App\Models\Cliente;
+use App\Models\ClienteAcesso;
 use Illuminate\Auth\GenericUser;
 use Illuminate\Contracts\Auth\UserProvider;
 use Illuminate\Contracts\Auth\Authenticatable as UserContract;
@@ -49,6 +51,7 @@ class CustomUserProvider implements UserProvider {
     {
         switch($credentials['tipoAcesso']){
             case 'PAC':
+                //Acesso via Atendimento
                 if($credentials['tipoLoginPaciente'] == 'ID'){
                     //CarregaAtendimento
                     $atendimento = new Atendimento();
@@ -82,6 +85,45 @@ class CustomUserProvider implements UserProvider {
                                     'data_nas' => $cliente['data_nas'],
                                     'registro' => $cliente['registro'],
                                     'username' => $credentials['posto'].'/'.$credentials['atendimento'],
+                                ),
+                            );
+
+                            return new GenericUser($atributes);
+                        }
+                    }
+                }
+
+                //Acesso via CPF
+                if($credentials['tipoLoginPaciente'] == 'CPF'){
+                    $cliente = new Cliente();
+
+                    $dataNasc = \DateTime::createFromFormat('d/m/Y', $credentials['nascimento']);
+
+                    $cliente = $cliente->where(['cpf' => $credentials['cpf'],'data_nas' => $dataNasc->format('Y-m-d')])->get()->toArray();
+
+                    if(sizeof($cliente)){
+                        $cliente = $cliente[0];
+
+                        $registro = $cliente['registro'];
+                        $id = strtoupper(md5($registro));
+
+                        $clienteAcesso = new ClienteAcesso();
+                        $clienteAcesso = $clienteAcesso->where(['id' => $id])->get()->toArray();
+
+                        if(strtoupper($clienteAcesso[0]['pure']) == strtoupper($credentials['password'])){
+                            $arrNome = explode(' ',$cliente['nome']);
+                            $nome = ucfirst(strtolower($arrNome[0])).' '.ucfirst(strtolower($arrNome[sizeof($arrNome)-1]));
+
+                            $atributes = array(
+                                'remember_token' => str_random(60),
+                                'id' => array(
+                                    'tipoAcesso' => 'PAC',
+                                    'tipoLoginPaciente' => 'CPF',
+                                    'nome' => $nome,
+                                    'sexo' => $cliente['sexo'],
+                                    'data_nas' => $cliente['data_nas'],
+                                    'registro' => $cliente['registro'],
+                                    'username' => $cliente['cpf'],
                                 ),
                             );
 

@@ -30,6 +30,15 @@ class AtendimentoRepository extends BaseRepository
             $atendimento[] = current(DB::select(DB::raw($sql), ['posto' => $data[0],'atendimento' => $data[1]]));
         }
 
+        if($user['tipoLoginPaciente'] == 'CPF'){
+            $sql = 'SELECT posto,atendimento,data_atd, INITCAP(nome_convenio) AS nome_convenio, INITCAP(nome_solicitante) AS nome_solicitante, (GET_MNEMONICOS(posto,atendimento)) mnemonicos,saldo_devedor
+                    FROM vw_atendimentos
+                    WHERE registro = :registro';
+
+            $atendimento[] = DB::select(DB::raw($sql), ['registro' => $user['registro']]);
+            $atendimento = $atendimento[0];
+        }
+
         return $atendimento;
     }
 
