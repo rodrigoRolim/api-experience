@@ -40,7 +40,7 @@
 	 <div class="row wrapper border-bottom white-bg page-heading">
 		<div class="ibox">			
 			<div class="i-checks all">			
-				<i class="fa fa-check"></i>&nbsp;<span>Selecionar Todos &nbsp;<input type="checkbox" class="checkAll"></span>	
+				<span>Selecionar Todos &nbsp;<input type="checkbox" class="checkAll"></span>	
 			</div>	 
 		<ul class="sortable-list connectList agile-list ui-sortable listaExames"></ul>				  
 	</div>
@@ -50,6 +50,7 @@
 @section('script')
 	@parent
 	<script src="{{ asset('/assets/js/plugins/iCheck/icheck.min.js') }}"></script>
+	<script src="{{ asset('/assets/js/plugins/truncateString/truncate.js') }}"></script>
 
 	<script type="text/javascript">
 		$(document).ready(function () {
@@ -65,6 +66,7 @@
 
 			$('.active a').trigger('click');
 
+
 			function getExames(posto,atendimento){
 				$('.listaExames').html('<br><br><br><br><h1 class="text-center"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando registros.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>');
 				$.get( "/paciente/examesatendimento/"+posto+"/"+atendimento, function( result ) {
@@ -77,7 +79,7 @@
 						$('.listaExames').append('<div class="'+sizeBox+' boxExames">' +
 									'<li class="'+exame.class+' animated fadeInDownBig">' +
 										'<div class="dadosExames">' +
-										'<b>'+exame.mnemonico+'</b> | '+exame.nome_procedimento+'<br>'+exame.msg+
+										'<b>'+exame.mnemonico+'</b> | '+exame.nome_procedimento.trunc(31)+'<br>'+exame.msg+
 										'</div><div class="i-checks checkExames"><input type="checkbox" class="check">'+
 										'</div>' +
 									'</li>' +
