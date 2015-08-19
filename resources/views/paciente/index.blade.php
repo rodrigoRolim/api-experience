@@ -88,15 +88,8 @@
 						$('input').iCheck({
 							checkboxClass: 'icheckbox_square-grey',
 						});
-
-						$('input.check').on('ifChecked', function(event){
-						  $('.btnPdf').prop('disabled', false);
-						});
-
-						$('input.check').on('ifUnchecked', function(event){
-						  $('.btnPdf').prop('disabled', true);
-						});
-
+					
+						
 						var checkAll = $('input.checkAll');
 					    var checkboxes = $('input.check');	 
 					    
@@ -106,10 +99,20 @@
 					            $('.btnPdf').prop('disabled', false);
 					        } else {
 					            checkboxes.iCheck('uncheck');
-					             $('.btnPdf').prop('disabled', true);
+					            $('.btnPdf').prop('disabled', true);
 					        }
 					    });
-					    
+
+					    // Faz o controle do botão de gerar PDF. (Se houver ao menos um selecionado, o botão é habilitado.)
+					    checkboxes.on('ifChanged', function(event){ 
+					        if(checkboxes.filter(':checked').length == 0) {
+					               $('.btnPdf').prop('disabled', true);
+					        } else {
+					               $('.btnPdf').prop('disabled', false);
+					        }
+					        checkAll.iCheck('update');
+					    });		
+
 					    checkboxes.on('ifChanged', function(event){
 					        if(checkboxes.filter(':checked').length == checkboxes.length) {
 					            checkAll.prop('checked', 'checked');
