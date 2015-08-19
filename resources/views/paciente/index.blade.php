@@ -52,7 +52,7 @@
 	<script src="{{ asset('/assets/js/plugins/iCheck/icheck.min.js') }}"></script>
 	<script src="{{ asset('/assets/js/plugins/truncateString/truncate.js') }}"></script>
 
-	<script type="text/javascript">
+	<script type="text/javascript">	
 		$(document).ready(function () {
 			$('.btnAtendimento').click(function(e){
 				var posto = $(e.currentTarget).data('posto');
@@ -92,23 +92,24 @@
 						
 						var checkAll = $('input.checkAll');
 					    var checkboxes = $('input.check');	 
+
 					    
 					    checkAll.on('ifChecked ifUnchecked', function(event) {        
 					        if (event.type == 'ifChecked') {
 					            checkboxes.iCheck('check');
-					            $('.btnPdf').prop('disabled', false);
+					            $('.btnPdf').show();
 					        } else {
 					            checkboxes.iCheck('uncheck');
-					            $('.btnPdf').prop('disabled', true);
+					            $('.btnPdf').hide();
 					        }
 					    });
 
 					    // Faz o controle do botão de gerar PDF. (Se houver ao menos um selecionado, o botão é habilitado.)
 					    checkboxes.on('ifChanged', function(event){ 
 					        if(checkboxes.filter(':checked').length == 0) {
-					               $('.btnPdf').prop('disabled', true);
+					               $('.btnPdf').hide();
 					        } else {
-					               $('.btnPdf').prop('disabled', false);
+					               $('.btnPdf').show();
 					        }
 					        checkAll.iCheck('update');
 					    });		
@@ -125,5 +126,6 @@
 				}, "json" );
 			}
 		});
+	 $('.btnPdf').hide(); // Esconde botão gerar PDF por padrão.
 	</script>
 @stop

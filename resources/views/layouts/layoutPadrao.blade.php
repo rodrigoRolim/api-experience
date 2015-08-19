@@ -39,7 +39,7 @@
     		@include('layouts.includes.layoutPadrao.left')
 	        <div id="page-wrapper" class="gray-bg" style="min-height: 356px;">
             <div class="row border-bottom">
-            @yield('infoAtendimento')
+            @yield('infoAtendimento')            
         </div> 
           @yield('exames')
             <div class="footer">               
@@ -47,7 +47,7 @@
                     <strong>Copyright</strong> Codemed © 2014-2015
                 </div>
                 <div class="pull-right">
-                    <button type="button" class="btn btn-danger btnPdf" disabled>Gerar PDF</button>
+                    <button type="button" class="btn btn-danger btnPdf">Gerar PDF</button>
                 </div>
             </div>
         </div>
