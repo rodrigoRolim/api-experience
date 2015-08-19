@@ -42,7 +42,25 @@
 			<div class="i-checks all">			
 				<span>Selecionar Todos &nbsp;<input type="checkbox" class="checkAll"></span>	
 			</div>	 
-		<ul class="sortable-list connectList agile-list ui-sortable listaExames"></ul>				  
+		<ul class="sortable-list connectList agile-list ui-sortable listaExames"></ul>	
+
+			<div id="myModal" class="modal fade" role="dialog">
+			  <div class="modal-dialog">
+			    <!-- Modal content-->
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal">&times;</button>
+				        <h4 class="modal-title">Modal Header</h4>
+			      </div>
+			      <div class="modal-body">
+			        	<p>Some text in the modal.</p>
+			      </div>
+			      <div class="modal-footer">
+			        	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			      </div>
+			    </div>
+		  	</div>
+		</div>				  
 	</div>
  </div>
 @stop
@@ -81,7 +99,8 @@
 										'<div class="dadosExames">' +
 										'<b>'+exame.mnemonico+'</b> | '+exame.nome_procedimento.trunc(31)+'<br>'+exame.msg+
 										'</div><div class="i-checks checkExames"><input type="checkbox" class="check">'+
-										'</div>' +
+										'</div><button type="button" class="btn btn-success btn-sm btnVisualizarExame" data-toggle="modal"'+
+										'data-target="#myModal">Ver</button>'+
 									'</li>' +
 								'</div>');
 

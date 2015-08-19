@@ -217,8 +217,16 @@ ul{
 }
 
 .checkExames{
-	float: right;
-	margin-right: 2px;
+	position:absolute;
+ 	top:15;
+ 	right:0;	
+	margin-right: 15px;
+}
+
+.btnVisualizarExame{
+	position:absolute;
+     bottom:5;
+     right:5;
 }
 
 .iconLoad {
