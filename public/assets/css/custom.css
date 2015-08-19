@@ -250,7 +250,7 @@ ul{
 	float: none;
 	padding-top: 8px;
 	text-align: right;
-	margin-right: 22px;
+	margin-right: 26px;
 }
 
 @media (max-width: 420px){
@@ -270,7 +270,11 @@ ul{
 	}
 
 	.metismenu li {
-		margin-bottom: 40px;
+		margin-bottom: 20px;
+	}
+
+	.metismenu {
+		padding-bottom: 60px;
 	}
 
   	div.row{
