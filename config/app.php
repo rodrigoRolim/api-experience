@@ -156,7 +156,6 @@ return [
          * ORA CONECT
          */
         yajra\Oci8\Oci8ServiceProvider::class,
-
     ],
 
     /*

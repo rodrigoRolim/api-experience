@@ -22,20 +22,28 @@ class ExamesRepository extends BaseRepository
         foreach($exames as $key => $exame){
             switch($exame['situacao']){
                 case 'I':
+                    //VERDE
                     $exames[$key]['class'] = 'success-element';
                     $exames[$key]['msg'] = 'Finalizado';
+                    $exames[$key]['gerar'] = true;
                     break;
                 case 'R':
+                    //LARANJA
                     $exames[$key]['class'] = 'warning-element';
                     $exames[$key]['msg'] = 'Aguardando Liberação';
+                    $exames[$key]['gerar'] = false;
                     break;
                 case 'N':
+                    //VERMELHO
                     $exames[$key]['class'] = 'danger-element';
                     $exames[$key]['msg'] = 'Não realizado';
+                    $exames[$key]['gerar'] = false;
                     break;
                 default:
+                    //CINZA
                     $exames[$key]['class'] = 'warning-element';
                     $exames[$key]['msg'] = 'default';
+                    $exames[$key]['gerar'] = false;
                     break;
             }
         }
