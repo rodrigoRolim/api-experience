@@ -25,25 +25,25 @@ class ExamesRepository extends BaseRepository
                     //VERDE
                     $exames[$key]['class'] = 'success-element';
                     $exames[$key]['msg'] = 'Finalizado';
-                    $exames[$key]['gerar'] = true;
+                    $exames[$key]['view'] = true;
                     break;
                 case 'R':
                     //LARANJA
                     $exames[$key]['class'] = 'warning-element';
                     $exames[$key]['msg'] = 'Aguardando Liberação';
-                    $exames[$key]['gerar'] = false;
+                    $exames[$key]['view'] = false;
                     break;
                 case 'N':
                     //VERMELHO
                     $exames[$key]['class'] = 'danger-element';
                     $exames[$key]['msg'] = 'Não realizado';
-                    $exames[$key]['gerar'] = false;
+                    $exames[$key]['view'] = false;
                     break;
                 default:
                     //CINZA
                     $exames[$key]['class'] = 'warning-element';
                     $exames[$key]['msg'] = 'default';
-                    $exames[$key]['gerar'] = false;
+                    $exames[$key]['view'] = false;
                     break;
             }
         }

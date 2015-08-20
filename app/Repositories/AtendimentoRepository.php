@@ -33,7 +33,8 @@ class AtendimentoRepository extends BaseRepository
         if($user['tipoLoginPaciente'] == 'CPF'){
             $sql = 'SELECT posto,atendimento,data_atd, INITCAP(nome_convenio) AS nome_convenio, INITCAP(nome_solicitante) AS nome_solicitante, (GET_MNEMONICOS(posto,atendimento)) mnemonicos,saldo_devedor
                     FROM vw_atendimentos
-                    WHERE registro = :registro';
+                    WHERE registro = :registro
+                    ORDER BY data_atd DESC';
 
             $atendimento[] = DB::select(DB::raw($sql), ['registro' => $user['registro']]);
             $atendimento = $atendimento[0];
