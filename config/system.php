@@ -15,6 +15,9 @@ return [
     'messages' => [
         'login' => [
             'usuarioSenhaInvalidos'   => 'Credenciais de acesso não confere',
+        ],
+        'paciente' => [
+            'saldoDevedor' => 'Existe pendência, diriga-se ao laboratório',
         ]
     ],
     'qtdCaracterPosto' => 2,

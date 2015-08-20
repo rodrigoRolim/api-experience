@@ -5,7 +5,12 @@
             
             @foreach($atendimentos as $key => $atendimento)
                 <li class="{{ !$key ? 'active' : '' }}">
-                    <a href="#" class="btnAtendimento" data-posto="{{$atendimento->posto}}" data-atendimento="{{$atendimento->atendimento}}">
+                    <a href="#" class="btnAtendimento" 
+                        data-posto="{{$atendimento->posto}}" 
+                        data-atendimento="{{$atendimento->atendimento}}" 
+                        data-solicitante="{{$atendimento->nome_solicitante}}"
+                        data-convenio="{{$atendimento->nome_convenio}}"
+                        data-saldo="{{$atendimento->saldo_devedor}}">
                         <b class="dataMini">
                             <p class="text-center" style="margin:0px;line-height: 14px">{{ date('d/m',strtotime($atendimento->data_atd))}}<br>
                             {{ date('Y',strtotime($atendimento->data_atd))}}</p>

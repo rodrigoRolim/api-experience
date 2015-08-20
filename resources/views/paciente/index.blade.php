@@ -27,10 +27,11 @@
 @section('infoAtendimento')
 <div class="boxDadosAtendimentos">
 	<div class="infoAtendimento">
+		<span id="saldo">{{ $atendimentos[0]->saldo_devedor}}</span>
 		<span><strong>Convênio</strong>:</span>
-		<span>{{ $atendimentos[0]->nome_convenio}}</span> <br>
+		<span id="convenio"></span> <br>
 		<span><strong>Solicitante</strong>:</span>
-		<span>{{ $atendimentos[0]->nome_solicitante}}</span>
+		<span id="solicitante"></span>
    	</div>	
 </div>
 @stop
@@ -39,10 +40,11 @@
 
 	 <div class="row wrapper border-bottom white-bg page-heading">
 		<div class="ibox">			
-			<div class="i-checks all">			
-				<span>Selecionar Todos &nbsp;<input type="checkbox" class="checkAll"></span>	
-			</div>	 
-		<ul class="sortable-list connectList agile-list ui-sortable listaExames"></ul>	
+			<div class="i-checks all boxSelectAll">
+				
+			</div>
+			
+			<ul class="sortable-list connectList agile-list ui-sortable listaExames"></ul>	
 
 			<div id="myModal" class="modal fade" role="dialog">
 			  <div class="modal-dialog">
@@ -72,14 +74,24 @@
 
 	<script type="text/javascript">	
 		$(document).ready(function () {
+			var posto;
+			var atendimento;
+			var nomeSolicitante;
+			var nomeConvenio;
+			var saldo;
+
 			$('.btnAtendimento').click(function(e){
-				var posto = $(e.currentTarget).data('posto');
-				var atendimento = $(e.currentTarget).data('atendimento');
+				posto = $(e.currentTarget).data('posto');
+				atendimento = $(e.currentTarget).data('atendimento');
+				nomeSolicitante = $(e.currentTarget).data('solicitante');
+				nomeConvenio = $(e.currentTarget).data('convenio');
+				saldo = $(e.currentTarget).data('saldo');
 
 				if(posto != null && atendimento != null){
 					getExames(posto,atendimento);
 				}
 
+				$('.boxSelectAll').html('');
 			});
 
 			$('.active a').trigger('click');
@@ -88,30 +100,46 @@
 			function getExames(posto,atendimento){
 				$('.listaExames').html('<br><br><br><br><h2 class="text-center"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando registros.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>');
 				$.get( "/paciente/examesatendimento/"+posto+"/"+atendimento, function( result ) {
+					//Carrega dados do atendimento
+					$('#solicitante').html(nomeSolicitante);
+					$('#convenio').html(nomeConvenio);
+					$('#saldo').html('Saldo: '+saldo);
+
 					$('.listaExames').html('');
 
 					$.each( result.data, function( index, exame ){
 
 						var sizeBox = 'col-md-6';
 
-						$('.listaExames').append('<a data-toggle="modal" data-target="#myModal"><div class="'+sizeBox+' boxExames">' +
-									'<li class="'+exame.class+' animated fadeInDownBig">' +
-										'<div class="dadosExames">' +
-										'<b>'+exame.mnemonico+'</b> | '+exame.nome_procedimento.trunc(31)+'<br>'+exame.msg+
-										'</div><div class="i-checks checkExames"><input type="checkbox" class="check">'+
-										'</div>'+
-									'</li>' +
-								'</div></a>');
+						var element = '<a data-toggle="modal" data-target="#myModal">'+
+											'<div class="'+sizeBox+' boxExames">' +
+											  	'<li class="'+exame.class+' animated fadeInDownBig">' +
+													'<div class="dadosExames">' +
+														'<b>'+exame.mnemonico+'</b> | '+exame.nome_procedimento.trunc(31)+'<br>'+exame.msg+
+													'</div>';
+						
+						if(saldo == null || saldo == 0){
+							element += '<div class="i-checks checkExames">'+
+								'<input type="checkbox" class="check">'+
+							'</div>';
+
+							$('.boxSelectAll').html('<span>Selecionar Todos &nbsp;<input type="checkbox" class="checkAll"></span>');
+						}
+						
+						element += '</li></div></a>';
+
+						$('.listaExames').append(element);
+					});
+
+					//verifica se o usuario tem saldo devedor
+					if(saldo == null || saldo == 0){						    
+						var checkAll = $('input.checkAll');
+						var checkboxes = $('input.check');	 
 
 						$('input').iCheck({
 							checkboxClass: 'icheckbox_square-grey',
 						});
-					
-						
-						var checkAll = $('input.checkAll');
-					    var checkboxes = $('input.check');	 
 
-					    
 					    checkAll.on('ifChecked ifUnchecked', function(event) {        
 					        if (event.type == 'ifChecked') {
 					            checkboxes.iCheck('check');
@@ -140,10 +168,15 @@
 					        }
 					        checkAll.iCheck('update');
 					    });
-					});
+
+					    $('#boxRodape').html('<button type="button" class="btn btn-danger btnPdf">Gerar PDF</button>');
+					     $('.btnPdf').hide();
+					}else{
+						$('#boxRodape').html('<h3 class="text-danger">{!!config('system.messages.paciente.saldoDevedor')!!}</h3>');
+					}
 				}, "json" );
 			}
 		});
-	 $('.btnPdf').hide(); // Esconde botão gerar PDF por padrão.
+	
 	</script>
 @stop

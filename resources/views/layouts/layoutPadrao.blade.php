@@ -46,8 +46,8 @@
                 <div class="pull-left">
                     <strong>Copyright</strong> Codemed © 2014-2015
                 </div>
-                <div class="pull-right">
-                    <button type="button" class="btn btn-danger btnPdf">Gerar PDF</button>
+                <div class="pull-right" id="boxRodape">
+                    
                 </div>
             </div>
         </div>
