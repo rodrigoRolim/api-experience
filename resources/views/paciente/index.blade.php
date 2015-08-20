@@ -94,15 +94,14 @@
 
 						var sizeBox = 'col-md-6';
 
-						$('.listaExames').append('<div class="'+sizeBox+' boxExames">' +
+						$('.listaExames').append('<a data-toggle="modal" data-target="#myModal"><div class="'+sizeBox+' boxExames">' +
 									'<li class="'+exame.class+' animated fadeInDownBig">' +
 										'<div class="dadosExames">' +
 										'<b>'+exame.mnemonico+'</b> | '+exame.nome_procedimento.trunc(31)+'<br>'+exame.msg+
 										'</div><div class="i-checks checkExames"><input type="checkbox" class="check">'+
-										'</div><button type="button" class="btn btn-success btn-sm btnVisualizarExame" data-toggle="modal"'+
-										'data-target="#myModal">Ver</button>'+
+										'</div>'+
 									'</li>' +
-								'</div>');
+								'</div></a>');
 
 						$('input').iCheck({
 							checkboxClass: 'icheckbox_square-grey',

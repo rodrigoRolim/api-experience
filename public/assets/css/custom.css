@@ -202,6 +202,7 @@ ul{
 	margin-top: 10px;
 	width: 80%;
 	height: 10px;
+	color: #333333;
 }
 
 #page-wrapper{
@@ -217,10 +218,7 @@ ul{
 }
 
 .checkExames{
-	position:absolute;
- 	top:15;
- 	right:0;	
-	margin-right: 15px;
+	float: right;
 }
 
 .btnVisualizarExame{
@@ -250,7 +248,7 @@ ul{
 	float: none;
 	padding-top: 8px;
 	text-align: right;
-	margin-right: 26px;
+	margin-right: 20px;
 }
 
 @media (max-width: 420px){
