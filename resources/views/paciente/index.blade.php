@@ -6,8 +6,12 @@
 
 @section('infoHead')
 	<div class="feed-element pull-right infoUser">
-       <a href="#" class="boxImgUser">
-           {!! Html::image('/assets/images/usuario.jpg','logoUser',array('class' => 'img-circle pull-left')) !!}  
+       <a href="#" class="boxImgUser">	   	    
+       		@if(Auth::user()['sexo'] == 'M')
+       			{!! Html::image('/assets/images/homem.png','logoUser',array('class' => 'img-circle pull-left')) !!}  
+       		@else
+				{!! Html::image('/assets/images/mulher.png','logoUser',array('class' => 'img-circle pull-left')) !!}  
+       		@endif	      
        </a>
        <div class="media-body">
        		<span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span><br>
@@ -46,7 +50,7 @@
 			
 			<ul class="sortable-list connectList agile-list ui-sortable listaExames"></ul>	
 
-			<div id="myModal" class="modal fade" role="dialog">
+			<div id="modalExames" class="modal fade" role="dialog">
 			  <div class="modal-dialog">
 			    <!-- Modal content-->
 			    <div class="modal-content">
@@ -94,6 +98,10 @@
 				$('.boxSelectAll').html('');
 			});
 
+	        $("#btnViewExame").click(function(){
+		        $("#modalExames").modal();
+		     });
+
 			$('.active a').trigger('click');
 
 
@@ -104,26 +112,29 @@
 					$('#solicitante').html(nomeSolicitante);
 					$('#convenio').html(nomeConvenio);
 					$('#saldo').html('Saldo: '+saldo);
+					console.log(atendimento);
 
-					$('.listaExames').html('');
+					$('.listaExames').html('');				
 
 					$.each( result.data, function( index, exame ){
 
 						var sizeBox = 'col-md-6';
 
-						var element = '<a data-toggle="modal" data-target="#myModal">'+
+						var element = '<a id="btnViewExame" data-toggle="modal" data-target="#modalExames">'+
 											'<div class="'+sizeBox+' boxExames">' +
 											  	'<li class="'+exame.class+' animated fadeInDownBig">' +
 													'<div class="dadosExames">' +
 														'<b>'+exame.mnemonico+'</b> | '+exame.nome_procedimento.trunc(31)+'<br>'+exame.msg+
 													'</div>';
 						
-						if(saldo == null || saldo == 0){
+						if(saldo == null || saldo == 0 && exame.class == "success-element"){
 							element += '<div class="i-checks checkExames">'+
 								'<input type="checkbox" class="check">'+
 							'</div>';
 
+
 							$('.boxSelectAll').html('<span>Selecionar Todos &nbsp;<input type="checkbox" class="checkAll"></span>');
+
 						}
 						
 						element += '</li></div></a>';
@@ -134,7 +145,11 @@
 					//verifica se o usuario tem saldo devedor
 					if(saldo == null || saldo == 0){						    
 						var checkAll = $('input.checkAll');
-						var checkboxes = $('input.check');	 
+						var checkboxes = $('input.check');
+
+						checkboxes.iCheck('check');
+						checkAll.iCheck('check');										
+						
 
 						$('input').iCheck({
 							checkboxClass: 'icheckbox_square-grey',
@@ -154,6 +169,7 @@
 					    checkboxes.on('ifChanged', function(event){ 
 					        if(checkboxes.filter(':checked').length == 0) {
 					               $('.btnPdf').hide();
+					               $('.checkAll').trigger('click');
 					        } else {
 					               $('.btnPdf').show();
 					        }
@@ -169,8 +185,9 @@
 					        checkAll.iCheck('update');
 					    });
 
+
 					    $('#boxRodape').html('<button type="button" class="btn btn-danger btnPdf">Gerar PDF</button>');
-					     $('.btnPdf').hide();
+					    $('.btnPdf').hide();					  
 					}else{
 						$('#boxRodape').html('<h3 class="text-danger">{!!config('system.messages.paciente.saldoDevedor')!!}</h3>');
 					}

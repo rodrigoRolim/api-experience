@@ -20,29 +20,34 @@ class ExamesRepository extends BaseRepository
         $exames = $this->findWhere(['posto' => $posto, 'atendimento' => $atendimento])->toArray();
 
         foreach($exames as $key => $exame){
-            switch($exame['situacao']){
-                case 'I':
+            switch($exame['situacao_experience']){
+                case 'FINALIZADO':
                     //VERDE
                     $exames[$key]['class'] = 'success-element';
                     $exames[$key]['msg'] = 'Finalizado';
-                    $exames[$key]['view'] = true;
+                    $exames[$key]['view'] = true; //pode imprimir
                     break;
-                case 'R':
-                    //LARANJA
+                case 'AGUARDANDO':
+                    //AMARELO
                     $exames[$key]['class'] = 'warning-element';
                     $exames[$key]['msg'] = 'Aguardando Liberação';
                     $exames[$key]['view'] = false;
                     break;
-                case 'N':
+                case 'ANDAMENTO':
+                     //LARANJA
+                    $exames[$key]['class'] = 'warning-element';
+                    $exames[$key]['msg'] = 'Em Andamento';
+                    $exames[$key]['view'] = false;
+                case 'PENDENCIA':
                     //VERMELHO
                     $exames[$key]['class'] = 'danger-element';
-                    $exames[$key]['msg'] = 'Não realizado';
+                    $exames[$key]['msg'] = 'Existem Pendências';
                     $exames[$key]['view'] = false;
-                    break;
+                    break;                
                 default:
-                    //CINZA
+                    //CINZA - NAO REALIZADO
                     $exames[$key]['class'] = 'warning-element';
-                    $exames[$key]['msg'] = 'default';
+                    $exames[$key]['msg'] = 'Não Realizado';
                     $exames[$key]['view'] = false;
                     break;
             }
