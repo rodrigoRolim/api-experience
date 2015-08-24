@@ -84,6 +84,8 @@
 			var nomeConvenio;
 			var saldo;
 
+			var control;
+
 			$('.btnAtendimento').click(function(e){
 				posto = $(e.currentTarget).data('posto');
 				atendimento = $(e.currentTarget).data('atendimento');
@@ -106,56 +108,56 @@
 
 
 			function getExames(posto,atendimento){
+				controle = false;
+
+				//Carregando
 				$('.listaExames').html('<br><br><br><br><h2 class="text-center"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando registros.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>');
+
+				//Pega os dados via get de exames do atendimento
 				$.get( "/paciente/examesatendimento/"+posto+"/"+atendimento, function( result ) {
 					//Carrega dados do atendimento
 					$('#solicitante').html(nomeSolicitante);
 					$('#convenio').html(nomeConvenio);
 					$('#saldo').html('Saldo: '+saldo);
-					console.log(atendimento);
 
-					$('.listaExames').html('');				
+					$('.listaExames').html('');
+					$('#boxRodape').html('');
 
 					$.each( result.data, function( index, exame ){
-
 						var sizeBox = 'col-md-6';
-
 						var element = '<a id="btnViewExame" data-toggle="modal" data-target="#modalExames">'+
 											'<div class="'+sizeBox+' boxExames">' +
 											  	'<li class="'+exame.class+' animated fadeInDownBig">' +
 													'<div class="dadosExames">' +
 														'<b>'+exame.mnemonico+'</b> | '+exame.nome_procedimento.trunc(31)+'<br>'+exame.msg+
 													'</div>';
-						
+
 						if(saldo == null || saldo == 0 && exame.class == "success-element"){
+							controle = true;
+
 							element += '<div class="i-checks checkExames">'+
 								'<input type="checkbox" class="check">'+
 							'</div>';
-
-
-							$('.boxSelectAll').html('<span>Selecionar Todos &nbsp;<input type="checkbox" class="checkAll"></span>');
-
 						}
-						
-						element += '</li></div></a>';
 
+						element += '</li></div></a>';
 						$('.listaExames').append(element);
 					});
 
-					//verifica se o usuario tem saldo devedor
-					if(saldo == null || saldo == 0){						    
+					if(controle){
+						$('.boxSelectAll').html('<span>Selecionar Todos &nbsp;<input type="checkbox" class="checkAll"></span>');
+
 						var checkAll = $('input.checkAll');
 						var checkboxes = $('input.check');
-
-						checkboxes.iCheck('check');
-						checkAll.iCheck('check');										
-						
 
 						$('input').iCheck({
 							checkboxClass: 'icheckbox_square-grey',
 						});
+					}
 
-					    checkAll.on('ifChecked ifUnchecked', function(event) {        
+					//verifica se o usuario tem saldo devedor
+					if(saldo == null || saldo == 0){
+						$('input.checkAll').on('ifChecked ifUnchecked', function(event) {
 					        if (event.type == 'ifChecked') {
 					            checkboxes.iCheck('check');
 					            $('.btnPdf').show();
@@ -166,17 +168,16 @@
 					    });
 
 					    // Faz o controle do botão de gerar PDF. (Se houver ao menos um selecionado, o botão é habilitado.)
-					    checkboxes.on('ifChanged', function(event){ 
+						$('input.check').on('ifChanged', function(event){
 					        if(checkboxes.filter(':checked').length == 0) {
-					               $('.btnPdf').hide();
-					               $('.checkAll').trigger('click');
+								$('#boxRodape').html('');
 					        } else {
-					               $('.btnPdf').show();
+								$('#boxRodape').html('<button type="button" class="btn btn-danger btnPdf">Gerar PDF</button>');
 					        }
 					        checkAll.iCheck('update');
-					    });		
+					    });
 
-					    checkboxes.on('ifChanged', function(event){
+						$('input.check').on('ifChanged', function(event){
 					        if(checkboxes.filter(':checked').length == checkboxes.length) {
 					            checkAll.prop('checked', 'checked');
 					        } else {
@@ -186,8 +187,7 @@
 					    });
 
 
-					    $('#boxRodape').html('<button type="button" class="btn btn-danger btnPdf">Gerar PDF</button>');
-					    $('.btnPdf').hide();					  
+						$('.checkAll').trigger('ifChecked');
 					}else{
 						$('#boxRodape').html('<h3 class="text-danger">{!!config('system.messages.paciente.saldoDevedor')!!}</h3>');
 					}

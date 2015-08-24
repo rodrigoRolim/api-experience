@@ -132,6 +132,9 @@ class CustomUserProvider implements UserProvider {
                     }
                 }
                 break;
+            case 'MED':
+
+                break;
         }
 
         return null;
