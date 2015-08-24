@@ -138,6 +138,13 @@
 							element += '<div class="i-checks checkExames">'+
 								'<input type="checkbox" class="check">'+
 							'</div>';
+<<<<<<< HEAD
+=======
+
+
+							$('.boxSelectAll').html('<span>Selecionar Todos &nbsp;<input type="checkbox" class="checkAll"></span>');
+							$('#boxRodape').html('<button type="button" class="btn btn-danger btnPdf">Gerar PDF</button>');	
+>>>>>>> 34233128fb09e9b8819ce2db29c6335ef34f5403
 						}
 
 						element += '</li></div></a>';
@@ -170,7 +177,12 @@
 					    // Faz o controle do botão de gerar PDF. (Se houver ao menos um selecionado, o botão é habilitado.)
 						$('input.check').on('ifChanged', function(event){
 					        if(checkboxes.filter(':checked').length == 0) {
+<<<<<<< HEAD
 								$('#boxRodape').html('');
+=======
+					               $('.btnPdf').hide();
+					               checkAll.iCheck('uncheck');
+>>>>>>> 34233128fb09e9b8819ce2db29c6335ef34f5403
 					        } else {
 								$('#boxRodape').html('<button type="button" class="btn btn-danger btnPdf">Gerar PDF</button>');
 					        }
@@ -186,8 +198,12 @@
 					        checkAll.iCheck('update');
 					    });
 
+<<<<<<< HEAD
 
 						$('.checkAll').trigger('ifChecked');
+=======
+					    				    				  
+>>>>>>> 34233128fb09e9b8819ce2db29c6335ef34f5403
 					}else{
 						$('#boxRodape').html('<h3 class="text-danger">{!!config('system.messages.paciente.saldoDevedor')!!}</h3>');
 					}
