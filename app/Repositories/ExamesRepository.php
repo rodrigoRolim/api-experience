@@ -29,7 +29,7 @@ class ExamesRepository extends BaseRepository
                     break;
                 case 'AGUARDANDO':
                     //AMARELO
-                    $exames[$key]['class'] = 'warning-element';
+                    $exames[$key]['class'] = 'aguardando-element';
                     $exames[$key]['msg'] = 'Aguardando Liberação';
                     $exames[$key]['view'] = false;
                     break;
@@ -46,7 +46,7 @@ class ExamesRepository extends BaseRepository
                     break;                
                 default:
                     //CINZA - NAO REALIZADO
-                    $exames[$key]['class'] = 'warning-element';
+                    $exames[$key]['class'] = 'naoRealizado-element';
                     $exames[$key]['msg'] = 'Não Realizado';
                     $exames[$key]['view'] = false;
                     break;

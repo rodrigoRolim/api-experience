@@ -87,6 +87,14 @@ li.notClicked{
 	margin-right: 10px;
 }
 
+.agile-list li.aguardando-element {
+  margin-right: 10px;
+}
+
+.agile-list li.naoRealizado-element {
+  margin-right: 10px;
+}
+
 body.mini-navbar .nav-header{
 	background-color: #D65357;
 }
