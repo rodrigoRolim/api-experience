@@ -7,7 +7,7 @@
 
 	{!! Html::style('/assets/css/bootstrap.min.css') !!}
 
-    {!! Html::style('/assets/css/animate.css') !!}
+  {!! Html::style('/assets/css/animate.css') !!}
 	{!! Html::style('/assets/css/inspinia.css') !!}
 	{!! Html::style('/assets/css/custom.css') !!}
 	{!! Html::style('/assets/css/skins/red.css') !!}
@@ -28,7 +28,7 @@
   				<div class="navbar-header logo">
             {!! Html::image('/assets/images/logo.png', 'logo_lab', array('title' => 'logo')) !!}  
   		    </div>		
-		     	@yield('infoHead')
+		    
   			</nav> 	
 	    </header>
     </div>
@@ -36,12 +36,12 @@
 
     <div class="container">
     	<div id="wrapper">
-    		@include('layouts.includes.layoutPadrao.left')
+    		
 	        <div id="page-wrapper" class="gray-bg" style="min-height: 356px;">
             <div class="row border-bottom">
-            @yield('infoAtendimento')            
+                
         </div> 
-          @yield('exames')
+         
             <div class="footer">               
                 <div class="pull-left">
                     <strong>Copyright</strong> Codemed © 2014-2015

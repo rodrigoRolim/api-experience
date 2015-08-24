@@ -1,4 +1,4 @@
-@extends('layouts.layoutPadrao')
+@extends('layouts.layoutPaciente')
 
 @section('stylesheets')
 	{!! Html::style('/assets/css/plugins/iCheck/custom.css') !!}
@@ -30,13 +30,14 @@
 
 @section('infoAtendimento')
 	<div class="boxDadosAtendimentos">
-		<div class="infoAtendimento">
-			<span id="saldo">{{ $atendimentos[0]->saldo_devedor}}</span>
+		<div class="infoAtendimento">			
 			<span><strong>Convênio</strong>:</span>
 			<span id="convenio"></span> <br>
 			<span><strong>Solicitante</strong>:</span>
-			<span id="solicitante"></span>
+			<span id="solicitante"></span>			
 		</div>
+		<span class="atendimento"><strong>ID</strong>:
+			<span id="atendimento"></span></span>
 	</div>
 @stop
 
@@ -81,8 +82,7 @@
 			var posto;
 			var atendimento;
 			var nomeSolicitante;
-			var nomeConvenio;
-			var saldo;
+			var nomeConvenio;		
 
 			var controle;
 
@@ -118,8 +118,8 @@
 					//Carrega dados do atendimento
 					$('#solicitante').html(nomeSolicitante);
 					$('#convenio').html(nomeConvenio);
-					$('#saldo').html('Saldo: '+saldo);
-
+					$('#atendimento').html("00/00"+atendimento);
+					
 					$('.listaExames').html('');
 					$('#boxRodape').html('');
 

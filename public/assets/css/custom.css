@@ -146,8 +146,6 @@ div.row.border-bottom{
 	overflow: auto;
 }
 
-
-
 .mnemonicos{
 	font-size: 11px;
 }
@@ -188,6 +186,11 @@ div.row.border-bottom{
 	margin-right: 5px;
 }
 
+.atendimento{
+	float: right;
+	margin-top: 10px;
+	margin-right: 20px;
+}
 
 .metismenu li{
 	margin-bottom: 5px;
