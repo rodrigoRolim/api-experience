@@ -1,1 +1,1 @@
-@extends('layouts.layoutPadrao')
+@extends('layouts.layoutPosto')

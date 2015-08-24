@@ -298,6 +298,14 @@ ul{
 		overflow-x: visible; 
 	}
 
+	.wrapper-content{
+		background-color: #fff !important;
+	}
+
+	.middle-box{
+		max-width: 0px;
+	}
+
 	.bodyLayoutPadrao{
 		padding-top: 98px;
 	}

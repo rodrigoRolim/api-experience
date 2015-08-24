@@ -3277,6 +3277,7 @@ video {
 }
 .wrapper-content {
   padding: 20px 10px 40px;
+  background-color: #fff;
 }
 #page-wrapper {
   padding: 0 15px;
@@ -4169,7 +4170,6 @@ body.modal-open {
 }
 /* ERROR & LOGIN & LOCKSCREEN*/
 .middle-box {
-  max-width: 400px;
   z-index: 100;
   margin: 0 auto;
   padding-top: 40px;
@@ -4202,7 +4202,7 @@ body.modal-open {
   font-size: 170px;
 }
 .wrapper .middle-box {
-  margin-top: 140px;
+  margin-top: 0px;
 }
 .lock-word {
   z-index: 10;

@@ -30,14 +30,22 @@
 
 @section('infoAtendimento')
 	<div class="boxDadosAtendimentos">
-		<div class="infoAtendimento">			
-			<span><strong>Convênio</strong>:</span>
-			<span id="convenio"></span> <br>
-			<span><strong>Solicitante</strong>:</span>
-			<span id="solicitante"></span>			
-		</div>
-		<span class="atendimento"><strong>ID</strong>:
-			<span id="atendimento"></span></span>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="col-md-8">
+					<div class="infoAtendimento">			
+						<span><strong>Convênio</strong>:</span>
+						<span id="convenio"></span> <br>
+						<span><strong>Solicitante</strong>:</span>
+						<span id="solicitante"></span>			
+					</div>
+				</div>
+				<div class="col-md-4">
+					<span class="atendimento"><strong>ID</strong>:
+					<span id="atendimento"></span></span>
+				</div>
+			</div>
+		</div>	
 	</div>
 @stop
 
