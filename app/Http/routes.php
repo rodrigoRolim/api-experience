@@ -13,3 +13,7 @@ Route::group(['prefix' => '/', 'middleware' => ['auth','ehPaciente']], function 
         'paciente' => 'PacienteController',
     ]);
 });
+
+Route::get('/medico', function () {
+    return view('medico.index');
+});
