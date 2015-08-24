@@ -5,6 +5,8 @@ use App\Models\Atendimento;
 use App\Models\AtendimentoAcesso;
 use App\Models\Cliente;
 use App\Models\ClienteAcesso;
+use App\Models\Medico;
+use App\Models\MedicoAcesso;
 use Illuminate\Auth\GenericUser;
 use Illuminate\Contracts\Auth\UserProvider;
 use Illuminate\Contracts\Auth\Authenticatable as UserContract;
@@ -133,6 +135,34 @@ class CustomUserProvider implements UserProvider {
                 }
                 break;
             case 'MED':
+                $medico = new Medico();
+                $medico = $medico->where(['TIPO_CR' => $credentials['tipoCr'],'CRM' => $credentials['cr'],'uf_conselho' => $credentials['uf']])->get()->toArray();
+
+                $id = strtoupper(md5($medico[0]['id_medico']));
+
+                $medicoAcesso = new MedicoAcesso();
+                $medicoAcesso = $medicoAcesso->where(['id' => $id])->get()->toArray();
+
+                if(strtoupper($medicoAcesso[0]['pure']) == strtoupper($credentials['password'])){
+                    $arrNome = explode(' ',$medico[0]['nome']);
+                    $nome = ucfirst(strtolower($arrNome[0])).' '.ucfirst(strtolower($arrNome[sizeof($arrNome)-1]));
+
+                    $atributes = array(
+                        'remember_token' => str_random(60),
+                        'id' => array(
+                            'tipoAcesso' => 'MED',
+                            'nome' => $nome,
+                            'data_nas' => $medico[0]['data_nas'],
+                            'tipo_cr' => $medico[0]['tipo_cr'],
+                            'uf_conselho' => $medico[0]['uf_conselho'],
+                            'crm' => $medico[0]['crm'],
+                            'id_medico' => $medico[0]['id_medico'],
+                            'username' => $medico[0]['cpf'],
+                        ),
+                    );
+
+                    return new GenericUser($atributes);
+                }
 
                 break;
         }

@@ -94,6 +94,26 @@ class AuthController extends Controller
                 }
 
                 break;
+            case 'MED':
+                //Acesso ao medico
+                $validate = [
+                    'tipoCr' => 'required',
+                    'cr' => 'required',
+                    'uf' => 'required|min:2|max:2',
+                    'password' => 'required',
+                ];
+
+                $this->validate($request,$validate);
+
+                $credentials = [
+                    'tipoAcesso' => 'MED',
+                    'tipoCr' => $request->input('tipoCr'),
+                    'cr'  => $request->input('cr'),
+                    'uf'  => $request->input('uf'),
+                    'password' => $request->input('password'),
+                ];
+
+                break;
         }
 
         if ($this->auth->attempt($credentials, $request->has('remember'))) {

@@ -14,6 +14,8 @@ Route::group(['prefix' => '/', 'middleware' => ['auth','ehPaciente']], function 
     ]);
 });
 
-Route::get('/medico', function () {
-    return view('medico.index');
+Route::group(['prefix' => '/', 'middleware' => ['auth','ehMedico']], function () {
+    Route::get('/medico', function () {
+        return view('medico.index');
+    });
 });

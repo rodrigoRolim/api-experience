@@ -1,10 +1,10 @@
-{!! Form::open(array('url'=>'/login','id'=> 'formMedico', 'role'=> 'form')) !!}
-    <input name="tipoAcesso" type="hidden" id="tipoAcesso" values="MED">
+{!! Form::open(array('url'=>'/auth/login','id'=> 'formMedico', 'role'=> 'form')) !!}
+    <input name="tipoAcesso" type="hidden" id="tipoAcesso" value="MED">
     <div class="form-group">
         <label>Informações CR</label>
         <div class="row">
             <div class="col-md-6">
-                <select class="form-control m-b" name="account">
+                <select class="form-control m-b" name="tipoCr">
                     <option value="">Selecione</option> 
                     <option vauue="CRM">CRM</option>
                     <option value="COREN">COREN</option>
@@ -20,7 +20,7 @@
                 </select>
             </div>    
             <div class="col-md-6">
-                <select class="form-control m-b" name="account">
+                <select class="form-control m-b" name="uf">
                     <option value="AC">AC</option> 
                     <option value="AL">AL</option> 
                     <option value="AM">AM</option> 
@@ -56,15 +56,15 @@
         <label>Número do CR</label>
          <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-stethoscope"></i></span>
-                <input type="text" class="form-control" id="cr" placeholder="CR" required="">
+                <input type="text" class="form-control" id="cr" name="cr" placeholder="CR" required="">
         </div>       
     </div>
     <div class="form-group">
         <label>Senha</label>
         <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                <input type="password" class="form-control" id="password" placeholder="Senha" required="">
-            </div>
+            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+            <input type="password" class="form-control" id="password" placeholder="Senha" name="password" required="">
+        </div>
     </div>
     <button type="submit" class="btn btn-primary block full-width m-b">Acessar</button>
 {!! Form::close() !!}
