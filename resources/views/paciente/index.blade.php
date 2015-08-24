@@ -134,7 +134,7 @@
 
 
 							$('.boxSelectAll').html('<span>Selecionar Todos &nbsp;<input type="checkbox" class="checkAll"></span>');
-
+							$('#boxRodape').html('<button type="button" class="btn btn-danger btnPdf">Gerar PDF</button>');	
 						}
 						
 						element += '</li></div></a>';
@@ -169,7 +169,7 @@
 					    checkboxes.on('ifChanged', function(event){ 
 					        if(checkboxes.filter(':checked').length == 0) {
 					               $('.btnPdf').hide();
-					               $('.checkAll').trigger('click');
+					               checkAll.iCheck('uncheck');
 					        } else {
 					               $('.btnPdf').show();
 					        }
@@ -185,9 +185,7 @@
 					        checkAll.iCheck('update');
 					    });
 
-
-					    $('#boxRodape').html('<button type="button" class="btn btn-danger btnPdf">Gerar PDF</button>');
-					    $('.btnPdf').hide();					  
+					    				    				  
 					}else{
 						$('#boxRodape').html('<h3 class="text-danger">{!!config('system.messages.paciente.saldoDevedor')!!}</h3>');
 					}
