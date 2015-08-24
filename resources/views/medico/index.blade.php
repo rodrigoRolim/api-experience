@@ -1,1 +1,1 @@
-INDEX medico
+@extends('layouts.layoutPadrao')
