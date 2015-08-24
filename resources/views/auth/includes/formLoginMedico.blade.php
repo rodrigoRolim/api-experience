@@ -6,7 +6,7 @@
             <div class="col-md-6">
                 <select class="form-control m-b" name="tipoCr">
                     <option value="">Selecione</option> 
-                    <option vauue="CRM">CRM</option>
+                    <option vauue="CRM" selected="selected">CRM</option>
                     <option value="COREN">COREN</option>
                     <option value="CRBiO">CRBIO</option>
                     <option value="CRBM">CRBM</option>
