@@ -17,25 +17,34 @@ class MedicoRepository extends BaseRepository
         return 'App\Models\Medico';
     }
 
-    public function clientes($idMedico,$dataInicio,$dataFim)
+    public function getClientes($idMedico,$dataInicio,$dataFim,$posto=null, $convenio=null,$situacao=null)
     {
-        $sql = 'SELECT
-                  c.nome,GET_ATENDIMENTOS_SOLICITANTE(c.registro, m.id_medico,:maskPosto,:maskAtendimento)
+        $sql = "SELECT
+                  c.nome,c.data_nas,c.registro,get_atendimentos_solicitante(c.registro,m.id_medico,:maskPosto,:maskAtendimento)
                 FROM
                   VW_ATENDIMENTOS A
                   INNER JOIN VW_MEDICOS M ON A.solicitante = m.crm
                   INNER JOIN VW_CLIENTES C ON a.registro = c.registro
-                WHERE A.DATA_ATD >= TO_DATE(:dataInicio,"DD/MM/YYYY HH24:MI")
-                  AND A.DATA_ATD <= TO_DATE(:dataFim,"DD/MM/YYYY HH24:MI")
-                  AND M.ID_MEDICO = :idMedico
-                ORDER BY nome';
+                WHERE M.ID_MEDICO = :idMedico
+                    AND A.DATA_ATD >= TO_DATE(:dataInicio,'DD/MM/YYYY HH24:MI')
+                    AND A.DATA_ATD <= TO_DATE(:dataFim,'DD/MM/YYYY HH24:MI')
+                    AND (:posto IS NULL OR A.POSTO = :posto)
+                    AND (:convenio IS NULL OR A.CONVENIO = :convenio)
+                    AND (:situacao IS NULL OR A.SITUACAO_EXAMES_EXPERIENCE = :situacao)
+                ORDER BY c.nome";
+
+        $mask = config('system.atendimentoMask');
+        $mask = explode("/",$mask);
 
         $clientes[] = DB::select(DB::raw($sql),[
-            'maskPosto'       => '00',
-            'maskAtendimento' => '000000',
-            'dataInicio'      => '01/08/2015 00:00',
-            'dataFim'         => '20/08/2015 23:59',
-            'idMedico'        => '302',
+            'idMedico' => $idMedico,
+            'dataInicio' => $dataInicio.' 00:00',
+            'dataFim' => $dataFim.' 23:59',
+            'maskPosto' => $mask[0],
+            'maskAtendimento' => $mask[1],
+            'posto' => $posto,
+            'convenio' => $convenio,
+            'situacao' => $situacao
         ]);
 
         return $clientes[0];
