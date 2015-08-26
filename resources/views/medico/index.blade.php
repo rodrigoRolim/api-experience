@@ -1,1 +1,1 @@
-@extends('layouts.layoutPosto')
+@extends('layouts.layoutMedico')

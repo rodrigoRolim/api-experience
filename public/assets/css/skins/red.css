@@ -54,3 +54,14 @@ body.boxed-layout #wrapper{
 #side-menu .active a{
 	color: #C52F33;
 }
+
+.corPadrao{
+	background-color: #C52F33;
+	color: black;
+}
+
+.textoBranco{
+	color: white;
+	margin-bottom: 0px;
+	font-weight: normal;
+}

@@ -32,7 +32,7 @@
 	<div class="boxDadosAtendimentos">
 		<div class="row">
 			<div class="col-md-12">
-				<div class="col-md-8">
+				<div class="col-md-10">
 					<div class="infoAtendimento">			
 						<span><strong>Convênio</strong>:</span>
 						<span id="convenio"></span> <br>
@@ -40,7 +40,7 @@
 						<span id="solicitante"></span>			
 					</div>
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-2">
 					<span class="atendimento"><strong>ID</strong>:
 					<span id="atendimento"></span></span>
 				</div>
@@ -51,7 +51,7 @@
 
 @section('exames')
 
-	<div class="row wrapper border-bottom white-bg page-heading">
+	<div class="row wrapper white-bg page-heading">
 		<div class="ibox">
 			<div class="i-checks all boxSelectAll">
 

@@ -8,10 +8,18 @@ html, body{
 	min-height: 100%;
 	position: relative;
 }
+.input-sm, .form-control{
+	height: 34px;
+	margin-bottom: 10px;
+}
 
 #body{
 	padding: 10px;
 	padding-bottom: 60px;
+}
+
+.bodyMedico{
+	min-height: 100%;
 }
 
 #footer{
@@ -127,7 +135,6 @@ li.nav-header{
 }
 
 div.row.border-bottom{
-	height: 60px;
 	margin: 0;
 }
 
@@ -262,6 +269,33 @@ ul{
 	margin-right: 20px;
 }
 
+.boxFiltro{
+	padding: 2px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	min-height: 100%;
+}
+
+.text-left{
+	text-align: left;
+}
+
+.btn .btn-white{
+	border-radius: none;
+}
+
+.fa-filter{
+	color: white;
+}
+
+.input-group .m-b .filtar{
+	margin-bottom: 0px;
+}
+
+.col-md-12{
+	padding-left: 0px;
+}
+
 @media (max-width: 420px){
 
 	body,.text-center{
@@ -276,6 +310,13 @@ ul{
 	.infoAtendimento{		
 		margin: 0;
 		padding: 5px;
+	}
+
+	.atendimento{
+		float: left;
+		margin-top: 0px;
+		margin-right: 0px;
+		margin-left: 5px;
 	}
 
 	.metismenu li {
@@ -363,3 +404,5 @@ ul{
 		padding: 0px;
 	}
 }
+
+		
