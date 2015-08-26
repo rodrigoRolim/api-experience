@@ -5,6 +5,8 @@ use App\Repositories\MedicoRepository;
 use App\Repositories\PostoRepository;
 use Illuminate\Contracts\Auth\Guard;
 
+use Request;
+
 class MedicoController extends Controller {
     protected $auth;
     protected $medico;
@@ -37,5 +39,26 @@ class MedicoController extends Controller {
                 'convenios'=>$convenios,
             )
         );
+    }
+
+    public function postFilterclientes(){
+        $requestData = Request::all();
+        $idMedico = $this->auth->user()['id_medico'];
+
+        if($requestData['dataInicio'] != null && $requestData['dataFim'] != null){
+            $result = $this->medico->getClientes(
+                $idMedico,
+                $requestData['dataInicio'],
+                $requestData['dataFim'],
+                $requestData['posto'],
+                $requestData['convenio'],
+                $requestData['situacao']
+            );
+
+            return response()->json(array(
+                'message' => 'Recebido com sucesso.',
+                'data' => $result,
+            ), 200);
+        }
     }
 }
