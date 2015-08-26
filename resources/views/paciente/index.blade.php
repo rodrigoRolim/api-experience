@@ -29,7 +29,6 @@
 @stop
 
 @section('infoAtendimento')
-	<div class="boxDadosAtendimentos">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="col-md-10">
@@ -44,7 +43,7 @@
 					<span id="atendimento"></span></span>
 			</div>
 		</div>	
-	</div>
+
 @stop
 
 @section('exames')
