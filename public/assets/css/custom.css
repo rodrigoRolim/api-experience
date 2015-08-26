@@ -135,6 +135,7 @@ li.nav-header{
 }
 
 div.row.border-bottom{
+	height: 60px;
 	margin: 0;
 }
 
