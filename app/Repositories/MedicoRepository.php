@@ -49,4 +49,61 @@ class MedicoRepository extends BaseRepository
 
         return $clientes[0];
     }
+
+    /**
+     * Retorna os postos que o medico tenha atendimento
+     * @param $idMedico
+     */
+    public function getPostoAtendimento($idMedico){
+        $sql = 'SELECT p.posto, p.nome
+                FROM
+                  vw_medicos M
+                  INNER JOIN vw_atendimentos A ON M.crm = A.solicitante
+                  INNER JOIN vw_postos P ON A.posto = p.posto
+                WHERE
+                  m.id_medico = :idMedico
+                GROUP BY p.posto,p.nome
+                ORDER BY p.nome';
+
+        $data[] = DB::select(DB::raw($sql),[
+            'idMedico' => $idMedico,
+        ]);
+
+        $postos = array(''=>'Selecione');
+
+        foreach ($data[0] as $key => $value) {
+            $postos[$value->posto] = $value->nome;
+        }
+
+        return $postos;
+    }
+
+    /**
+     * Retorna os convenios que o medico tenha atendimento
+     * @param $idMedico
+     */
+    public function getConvenioAtendimento($idMedico)
+    {
+        $sql = 'SELECT c.convenio,c.nome
+                FROM
+                  vw_medicos M
+                  INNER JOIN vw_atendimentos A ON M.crm = A.solicitante
+                  INNER JOIN vw_convenios C ON a.convenio = c.convenio
+                WHERE
+                  m.id_medico = :IdMedico
+                GROUP BY c.convenio,c.nome
+                ORDER BY c.nome';
+
+        $data[] = DB::select(DB::raw($sql),[
+            'idMedico' => $idMedico,
+        ]);
+
+        $convenios = array(''=>'Selecione');
+
+        foreach ($data[0] as $key => $value) {
+            $convenios[$value->convenio] = $value->nome;
+        }
+
+        return $convenios;
+    }
 }

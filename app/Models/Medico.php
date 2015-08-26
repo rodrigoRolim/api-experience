@@ -17,4 +17,6 @@ class Medico extends Model {
      * @var string
      */
     protected $primaryKey = array('CRM','TIPO_CR','UF_CONSELHO');
+
+
 }

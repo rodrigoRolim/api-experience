@@ -26,12 +26,16 @@ class MedicoController extends Controller {
 
     public function getIndex()
     {
-        $postos = $this->posto->all()->lists('nome', 'posto');
-        $convenios = $this->convenio->all()->lists('nome', 'convenio');
+        $idMedico = $this->auth->user()['id_medico'];
 
-        //$idMedico = $this->auth->user()['id_medico'];
-        //dd($this->medico->getClientes($idMedico,'15/08/2015','26/08/2015'));
+        $postos = $this->medico->getPostoAtendimento($idMedico);
+        $convenios = $this->medico->getConvenioAtendimento($idMedico);
 
-        return view('medico.index')->with(array('postos'=>$postos,'convenios'=>$convenios));
+        return view('medico.index')->with(
+            array(
+                'postos'=>$postos,
+                'convenios'=>$convenios,
+            )
+        );
     }
 }
