@@ -65,3 +65,31 @@ body.boxed-layout #wrapper{
 	margin-bottom: 0px;
 	font-weight: normal;
 }
+
+.btn-warning.btn-outline{
+	color: black;
+	background-color: white;
+}
+
+.btn-warning.btn-outline:hover{
+	color: white;
+	background-color: #DADADA;
+}
+
+.btn-outline{
+	background-color: #DADADA;
+}
+
+.btn-warning.btn-outline{
+	border-color: white;
+}
+
+.btn-outline:hover{
+	border-color: #DADADA;
+}
+
+.infoUsuario{
+	padding: 0px;
+	background-color: #ff00ff;
+}
+

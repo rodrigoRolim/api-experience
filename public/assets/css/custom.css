@@ -224,6 +224,10 @@ ul{
 	color: #333333;
 }
 
+.dadosPaciente{
+	text-align: left;
+}
+
 #page-wrapper{
 	padding: 0px;
 }
@@ -286,7 +290,7 @@ ul{
 }
 
 .fa-filter{
-	color: white;
+
 }
 
 .input-group .m-b .filtar{
@@ -335,10 +339,6 @@ ul{
 
 	#wrapper{
 		overflow-x: visible; 
-	}
-
-	.wrapper-content{
-		background-color: #fff !important;
 	}
 
 	.middle-box{

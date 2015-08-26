@@ -36,7 +36,7 @@
 	    <div class="container">    
 	    	<body class="gray-bg boxed-layout">		          
 		    		<div class="col-md-12 corPadrao boxFiltro">
-		    			<div class="col-sm-3">
+		    			<div class="col-md-3">
 		    				<label class="textoBranco">Atendimentos por datas entre:</label>
 		            		<div class="input-daterange input-group" id="datepicker">
 	                            <input type="text" class="input-sm form-control" name="start" value="05/14/2014">
@@ -44,7 +44,7 @@
 	                            <input type="text" class="input-sm form-control" name="end" value="05/22/2014">
 	                        </div>
 	                    </div>	                  
-	                	<div class="col-sm-2">
+	                	<div class="col-md-2">
 	                		<label class="textoBranco">Posto Realizante</label>
 	                		<select class="form-control m-b" name="postoRealizante">
                                 <option>Selecione</option>
@@ -53,7 +53,7 @@
                                 <option>option 4</option>
                             </select>
 	                	</div>	                
-	                	<div class="col-sm-2">
+	                	<div class="col-md-3">
 	                			<label class="textoBranco">Convênios</label>
 	                		<select class="form-control m-b" name="convenios">
                                 <option>Selecione</option>
@@ -62,7 +62,7 @@
                                 <option>option 4</option>
                             </select>
 	                	</div>
-	                	<div class="col-sm-2">
+	                	<div class="col-md-2">
 	                		<label class="textoBranco">Situação</label>
 	                		<select class="form-control m-b" name="situacao">
                                 <option>Selecione</option>
@@ -71,10 +71,9 @@
                                 <option>option 4</option>
                             </select>
 	                	</div>
-	                	<div class="col-sm-3">
-	                		<div class="input-group m-b filtrar" style="margin-bottom:0px;padding-top:15px;"> <!-- COLOCAR NO CUSTOM.css  -->
-		                		
-		                		<button class="btn btn-warning" type="submit"><i class="fa fa-filter fa-2"></i> Filtrar</button>
+	                	<div class="col-md-2">
+	                		<div class="input-group m-b filtrar col-md-12" style="margin-bottom:0px;padding-top:18px;"> <!-- COLOCAR NO CUSTOM.css  -->                           
+		                		<a class="btn btn-warning btn-outline btnFiltar"><i class="fa fa-filter fa-2"> </i> Filtrar</a>
 	                		</div>	
 	                	</div>
 	            	</div> 
@@ -85,44 +84,33 @@
                         	<div class="col-md-12">	                       	
 		                    	<div class="input-group m-b">
 		                    		<span class="input-group-addon"><i class="fa fa-search"></i></span> 
-		                    		<form>
-		                    		<input type="text" id="filter" placeholder="Paciente/Atendimento" class="form-control">
-		                    	</div>		                        
+		                    		<input type="text" id="filterTeste" placeholder="Paciente/Atendimento" class="form-control">
+                                </div>
+                                <ul class="sortable-list connectList agile-list ui-sortable" id="listFilter">
+                                    <li class="col-md-12 warning-element">
+                                        <div class="col-md-6 dadosPaciente">
+                                            <i class="fa fa-mars"></i> Joao <br>
+                                            Idade: 30 Anos | Contato (98) 99999-9999 <br>
+                                        </div>
+                                        <div class="col-md-6">
+                                            22/08/2015 <b>00/002058</b> |
+                                            23/08/2015 <b>00/002054</b> |
+                                            25/08/2015 <b>00/002053</b> |
+                                        </div>                                                                          
+                                    </li>
+                                    <li class="col-md-12 success-element">
+                                        <div class="col-md-6 dadosPaciente">
+                                            <i class="fa fa-venus"></i> Maria <br>
+                                            Idade: 70 Anos | Contato (98) 99999-9999 <br>
+                                        </div>
+                                        <div class="col-md-6">
+                                            22/08/2015 <b>00/002058</b> |
+                                            23/08/2015 <b>00/002054</b> |
+                                            25/08/2015 <b>00/002053</b> |
+                                        </div>   
+                                    </li>                   
+                                </ul>	                        
 	                        </div>
-	                    </div>
-	                    <div class="row">
-	                       <form>
-    <input type="text" id="filter">
-    <ul>
-        <li>Alpha</li>
-        <li>Bravo</li>
-        <li>Charlie</li>
-        <li>Delta</li>
-        <li>Echo</li>
-        <li>Foxtrot</li>
-        <li>Golf</li>
-        <li>Hotel</li>
-        <li>India</li>
-        <li>Juliet</li>
-        <li>Kilo</li>
-        <li>Lima</li>
-        <li>Mike</li>
-        <li>November</li>
-        <li>Oscar</li>
-        <li>Papa</li>
-        <li>Quebec</li>
-        <li>Romeo</li>
-        <li>Sierra</li>
-        <li>Tango</li>
-        <li>Uniform</li>
-        <li>Victor</li>
-        <li>Whiskey</li>
-        <li>X-ray</li>
-        <li>Yankee</li>
-        <li>Zulu</li>
-    </ul>
-</form>
-	                    </form>
 	                    </div>
                     </div>	                                        
                 </div>
@@ -149,8 +137,8 @@
         });
 
 
-        $('#filter').filterList();
-
+        $('#filterTeste').filterList();
+ 
 
       </script>
 
