@@ -196,7 +196,7 @@ div.row.border-bottom{
 .atendimento{
 	float: right;
 	margin-top: 10px;
-	margin-right: 20px;
+	margin-right: 10px;
 }
 
 .metismenu li{
@@ -313,10 +313,7 @@ ul{
 	}
 
 	.atendimento{
-		float: left;
-		margin-top: 0px;
-		margin-right: 0px;
-		margin-left: 5px;
+		margin-right: 110px;
 	}
 
 	.metismenu li {
@@ -332,7 +329,7 @@ ul{
   	}
 
   	div.row.border-bottom{
-		height: 60px;
+		height: 115px;
 	}
 
 	#wrapper{
