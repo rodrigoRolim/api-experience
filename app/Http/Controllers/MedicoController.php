@@ -43,7 +43,7 @@ class MedicoController extends Controller {
 
     public function postFilterclientes(){
         $requestData = Request::all();
-        $idMedico = $this->auth->user()['id_medico'];
+        $idMedico = $this->auth->user()['id_medico']; 
 
         if($requestData['dataInicio'] != null && $requestData['dataFim'] != null){
             $result = $this->medico->getClientes(

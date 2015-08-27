@@ -24,4 +24,11 @@ return [
     'qtdCaracterAtend' => 6,
     'atendimentoMask'  => '99/999999',
     'postoMask'        => '99',
+    'selectFiltroSituacaoAtendimento' => [
+        '' => 'Selecione',
+        'TF' => 'Finalizados',
+        'PF' => 'Parcialmente Finalizado',
+        'EP' => 'Existêm pendências',
+        'EA' => 'Em Andamento',
+    ]
 ];

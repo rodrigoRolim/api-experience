@@ -232,6 +232,10 @@ ul{
 	padding: 0px;
 }
 
+.wrapper-content{
+	min-height: 500px;
+}
+
 .listaExames{
 	padding-left: 10px;
 }
@@ -368,11 +372,6 @@ ul{
 	.navbar-header.logo{
 		width: 100%;
 		text-align: center;
-	}
-
-	.infoUsuario{
-		padding: 0px;
-		background-color: #ff00ff;
 	}
 
 	#navbar{
