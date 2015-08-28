@@ -30,5 +30,8 @@ return [
         'PF' => 'Parcialmente Finalizado',
         'EP' => 'Existêm pendências',
         'EA' => 'Em Andamento',
+    ],
+    'medico' => [
+        'qtdDiasFiltro' => 5
     ]
 ];
