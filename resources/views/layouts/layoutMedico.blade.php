@@ -40,7 +40,7 @@
                     <form id="formMedico">
 		    				<label class="textoBranco">Atendimentos por datas entre:</label>
 		            		<div class="input-daterange input-group" id="datepicker">
-	                            <input type="text" class="input-sm form-control" name="dataInicio" value="01/04/2015">
+	                            <input type="text" class="input-sm form-control" name="dataInicio" value="12/03/2015">
 	                            	<span class="input-group-addon">até</span>
 	                            <input type="text" class="input-sm form-control" name="dataFim" value="19/04/2015">
 	                        </div>
@@ -119,7 +119,7 @@
        $(document).ready(function () {
 
         $('.input-daterange').datepicker({
-            keyboardNavigation: false,
+            keyboardNavigation: true,
             forceParse: false,
             autoclose: true,
             format: "dd/mm/yyyy"
@@ -133,29 +133,35 @@
         $('.btnFiltar').click(function(e){
 
                 var formMedico = $('#formMedico');
-                var postData = formMedico.serializeArray();
-              
-                $.ajax(
+                var postData = formMedico.serializeArray();   
+
+                getClientes(postData);           
+             
+        });    
+
+        function getClientes(postData){
+             $.ajax(
                 {
                    url : 'medico/filterclientes',
                    type: 'POST',
                    data : postData,
-                   success:function(data, textStatus, jqXHR) 
+                   success:function(result, textStatus, jqXHR) 
                    {
 
-                    console.log(data.data.length);
+                    console.log(result.data.length);
+                    $('.listaPacientes').html('');
 
-                    for(var i = 0; i < data.data.length; i++){
+                  $.each( result.data, function( index ){
                      $('.listaPacientes').append('<li class="col-md-12 warning-element">'+
-                                        '<div class="col-md-6 dadosPaciente">'+
-                                            '<i class="fa fa-mars"></i> '+data.data[i].nome+'<br>'+
-                                            'Idade: 30 Anos | Contato (98) 99999-9999 <br>'+
-                                        '</div>'+
-                                        '<div class="col-md-6">'+
-                                            ''+data.data[i].atendimentos+''+                                            
-                                        '</div>'+                                                                         
-                                    '</li>');  
-                        }
+                              '<div class="col-md-6 dadosPaciente">'+
+                                  '<i class="fa fa-mars"></i> '+result.data[index].nome+'<br>'+
+                                  'Idade: 30 Anos | Contato (98) 99999-9999 <br>'+
+                              '</div>'+
+                              '<div class="col-md-6">'+
+                                  ''+result.data[index].atendimentos+''+                                            
+                              '</div>'+                                                                         
+                          '</li>');  
+                    });
                    },
                    error: function(jqXHR, textStatus, errorThrown) 
                    {
@@ -164,11 +170,8 @@
 
                        $('#msgPrograma').html('<div class="alert alert-danger alert-dismissable animated fadeIn">'+msg.message+'</div>');
                    }
-                });
-           
-
-            });  
-    
+                });  
+        }
 
       </script>
 
