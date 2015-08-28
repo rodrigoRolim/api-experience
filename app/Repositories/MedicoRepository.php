@@ -20,7 +20,7 @@ class MedicoRepository extends BaseRepository
     public function getClientes($idMedico,$dataInicio,$dataFim,$posto=null, $convenio=null,$situacao=null)
     {
         $sql = "SELECT
-                  c.nome,c.data_nas,c.registro,get_atendimentos_solicitante(c.registro,m.id_medico,:maskPosto,:maskAtendimento) as atendimentos
+                  c.nome,c.data_nas,c.registro,c.sexo,c.telefone,c.telefone2,get_atendimentos_solicitante(c.registro,m.id_medico,:maskPosto,:maskAtendimento) as atendimentos
                 FROM
                   VW_ATENDIMENTOS A
                   INNER JOIN VW_MEDICOS M ON A.solicitante = m.crm
