@@ -29,21 +29,20 @@
 @stop
 
 @section('infoAtendimento')
-		<div class="row">
-			<div class="col-md-12">
-				<div class="col-md-10">
-					<div class="infoAtendimento">			
-						<span><strong>Convênio</strong>:</span>
-						<span id="convenio"></span> <br>
-						<span><strong>Solicitante</strong>:</span>
-						<span id="solicitante"></span>					
-					</div>		
-				</div>
-				<span class="atendimento"><strong>ID</strong>:
-					<span id="atendimento"></span></span>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="col-md-10">
+				<div class="infoAtendimento">			
+					<span><strong>Convênio</strong>:</span>
+					<span id="convenio"></span> <br>
+					<span><strong>Solicitante</strong>:</span>
+					<span id="solicitante"></span>					
+				</div>		
 			</div>
-		</div>	
-
+			<span class="atendimento"><strong>ID</strong>:
+				<span id="atendimento"></span></span>
+		</div>
+	</div>	
 @stop
 
 @section('exames')

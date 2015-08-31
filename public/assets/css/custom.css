@@ -305,6 +305,10 @@ ul{
 	padding-left: 0px;
 }
 
+.listaPacientes{
+	padding-bottom: 55px;
+}
+
 @media (max-width: 420px){
 
 	body,.text-center{

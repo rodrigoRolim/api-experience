@@ -7,7 +7,7 @@
 
 	{!! Html::style('/assets/css/bootstrap.min.css') !!}
 
-    {!! Html::style('/assets/css/animate.css') !!}
+  {!! Html::style('/assets/css/animate.css') !!}
 	{!! Html::style('/assets/css/inspinia.css') !!}
 	{!! Html::style('/assets/css/custom.css') !!}
 	{!! Html::style('/assets/css/skins/red.css') !!}
@@ -16,7 +16,6 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
     @section('stylesheets')
-
     	{!! Html::style('/assets/css/plugins/datapicker/datepicker.css') !!}   
 
 	@show
@@ -29,7 +28,8 @@
 	  			<nav class="navbar navbar-static-top headLogin headPadrao" role="navigation" style="margin-bottom: 0">
 	  				<div class="navbar-header logo">
 	            {!! Html::image('/assets/images/logo.png', 'logo_lab', array('title' => 'logo')) !!}  
-	  			</nav> 			  
+	  			</nav>
+          @yield('infoHead') 			  
 		</div>
     </div>
   	<div class="bodyMedico">
@@ -74,15 +74,13 @@
 		                    		<input type="text" id="filterTeste" placeholder="Paciente/Atendimento" class="form-control">
                                 </div>
                                 <ul class="sortable-list connectList agile-list ui-sortable listaPacientes" id="listFilter">
-                <!--                     <li class="col-md-12 warning-element">
+                              <!-- <li class="col-md-12 warning-element">
                                         <div class="col-md-6 dadosPaciente">
                                             <i class="fa fa-mars"></i> Joao <br>
                                             Idade: 30 Anos | Contato (98) 99999-9999 <br>
                                         </div>
                                         <div class="col-md-6">
-                                            22/08/2015 <b>00/002058</b> |
-                                            23/08/2015 <b>00/002054</b> |
-                                            25/08/2015 <b>00/002053</b> |
+                                            22/08/2015 <b>00/002058</b> |                                          
                                         </div>                                                                          
                                     </li>
                                     <li class="col-md-12 success-element">
@@ -94,8 +92,8 @@
                                             22/08/2015 <b>00/002047</b> |
                                             23/08/2015 <b>00/002025</b> |
                                             25/08/2015 <b>00/002053</b> |
-                                        </div> -->   
-                                    </li>                   
+                                        </div>  
+                                    </li>   -->                 
                                 </ul>	                        
 	                        </div>
 	                    </div>
@@ -114,6 +112,7 @@
       <script src="{{ asset('/assets/js/bootstrap.min.js') }}"></script>
       <script src="{{ asset('/assets/js/plugins/datapicker/bootstrap-datepicker.js') }}"></script>
       <script src="{{ asset('/assets/js/plugins/listJs/list.min.js') }}"></script>
+      <script src="{{ asset('/assets/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
 
       <script type="text/javascript">
        $(document).ready(function () {
@@ -125,8 +124,19 @@
             format: "dd/mm/yyyy"
         });
 
+        $('.btnFiltar').trigger('click');
 
-    });
+         $(function(){
+          $('.listaPacientes').slimScroll({
+              height: '58.6vh',
+              railOpacity: 0.4,
+              wheelStep: 10,
+              minwidth: '100%',
+          });
+        });
+
+
+        });
 
         $('#filterTeste').filterList();
 
@@ -139,28 +149,54 @@
              
         });    
 
+
         function getClientes(postData){
+
+          $('.listaPacientes').html('<br><br><br><br><h2 class="text-center"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando registros.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>');
              $.ajax(
                 {
                    url : 'medico/filterclientes',
                    type: 'POST',
                    data : postData,
-                   success:function(result, textStatus, jqXHR) 
-                   {
+                   success:function(result){
 
-                    console.log(result.data.length);
-                    $('.listaPacientes').html('');
+                  $('.listaPacientes').html('');
 
                   $.each( result.data, function( index ){
-                     $('.listaPacientes').append('<li class="col-md-12 warning-element">'+
+
+                    var cliente = result.data[index];
+
+                    if (cliente.atendimentos.indexOf(',') != -1) {
+                        var atendimento = cliente.atendimentos.split(',');
+                    }
+
+                    console.log(atendimento);
+                    console.log(atendimento.length);
+                               
+
+                     $('.listaPacientes').append('<li class="col-md-12 naoRealizado-element">'+
                               '<div class="col-md-6 dadosPaciente">'+
-                                  '<i class="fa fa-mars"></i> '+result.data[index].nome+'<br>'+
-                                  'Idade: 30 Anos | Contato (98) 99999-9999 <br>'+
+                                  '<i class="fa fa-mars"></i> '+cliente.nome+'<br>'+
+                                  'Idade: xxx | Sexo:'+cliente.sexo+' | Contato: '+cliente.telefone+' / '+cliente.telefone2+' <br>'+
                               '</div>'+
                               '<div class="col-md-6">'+
-                                  ''+result.data[index].atendimentos+''+                                            
+                                  ''+cliente.atendimentos+''+
+                                  '<div class="btn-group">'+
+                                    '<button type="button" class="btn btn-white dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'+
+                                      'Ver Mais <span class="caret"></span>'+
+                                    '</button>'+
+                                    '<ul class="dropdown-menu">'+    
+                                    '<li class="atendimentosPaciente">'+    
+                                    '</li>'+                                                             
+                                   '</ul>'+
+                                  '</div>'+                                           
                               '</div>'+                                                                         
                           '</li>');  
+
+                    for(var i = 0; i < atendimento.length; i++){
+                        $('.atendimentosPaciente').append('<a href="#">'+atendimento[i]+'</a>');
+                     } 
+
                     });
                    },
                    error: function(jqXHR, textStatus, errorThrown) 
