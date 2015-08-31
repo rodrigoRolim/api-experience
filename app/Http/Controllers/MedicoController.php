@@ -73,6 +73,12 @@ class MedicoController extends Controller {
 
         $atendimentos = $this->medico->getAtendimentosPacienteByMedico($registro,$idMedico);
 
+        if(!sizeof($atendimentos)){
+            return response()->json(array(
+                'message' => 'Atendimento não encontrado',
+            ), 404);
+        }
+
         return view('medico.paciente',compact('atendimentos'));
     }
 
