@@ -61,4 +61,10 @@ class MedicoController extends Controller {
             ), 200);
         }
     }
+
+    public function getTeste(){
+        $result = $this->medico->getClientes(302,'12/03/2015','19/04/2015',null,null,null);
+
+        dd($result);
+    }
 }

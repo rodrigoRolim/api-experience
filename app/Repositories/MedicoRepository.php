@@ -47,8 +47,16 @@ class MedicoRepository extends BaseRepository
             'situacao' => $situacao
         ]);
 
-        return $clientes[0];
-    }
+        $clientes = $clientes[0];
+
+        for($i=0;$i<sizeof($clientes);$i++){
+            $atd = explode(",",$clientes[$i]->atendimentos);
+            array_pop($atd);
+            $clientes[$i]->atendimentos = $atd;
+        }
+
+        return $clientes;
+   }
 
     /**
      * Retorna os postos que o medico tenha atendimento
