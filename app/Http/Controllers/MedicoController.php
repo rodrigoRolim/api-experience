@@ -1,6 +1,8 @@
 <?php namespace App\Http\Controllers;
 
+use App\Models\Atendimento;
 use App\Repositories\ConvenioRepository;
+use App\Repositories\ExamesRepository;
 use App\Repositories\MedicoRepository;
 use App\Repositories\PostoRepository;
 use Illuminate\Contracts\Auth\Guard;
@@ -12,18 +14,21 @@ class MedicoController extends Controller {
     protected $medico;
     protected $convenio;
     protected $posto;
+    protected $exames;
 
     public function __construct(
         Guard $auth,
         MedicoRepository $medico,
         ConvenioRepository $convenio,
-        PostoRepository $posto
+        PostoRepository $posto,
+        ExamesRepository $exames
     )
     {
         $this->auth = $auth;
         $this->medico = $medico;
         $this->convenio = $convenio;
         $this->posto = $posto;
+        $this->exames = $exames;
     }
 
     public function getIndex()
@@ -62,9 +67,34 @@ class MedicoController extends Controller {
         }
     }
 
+    public function getPaciente($registro){
+        $registro = base64_decode($registro);
+        $idMedico = $this->auth->user()['id_medico'];
+
+        $atendimentos = $this->medico->getAtendimentosPacienteByMedico($registro,$idMedico);
+
+        return view('medico.paciente',compact('atendimentos'));
+    }
+
+    public function getExamesatendimento($posto,$atendimento){
+        $ehAtendimentoMedico = $this->medico->ehAtendimentoMedico($this->auth->user()['id_medico'],$posto,$atendimento);
+
+        if(!$ehAtendimentoMedico){
+            return response()->json(array(
+                'message' => 'Posto / Atendimento não encontrado',
+            ), 404);
+        }
+
+        $exames = $this->exames->getExames($posto, $atendimento);
+
+        return response()->json(array(
+            'message' => 'Recebido com sucesso.',
+            'data' => $exames,
+        ), 200);
+    }
+
     public function getTeste(){
         $result = $this->medico->getClientes(302,'12/03/2015','19/04/2015',null,null,null);
-
         dd($result);
     }
 }

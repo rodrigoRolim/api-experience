@@ -56,7 +56,19 @@ class MedicoRepository extends BaseRepository
         }
 
         return $clientes;
-   }
+    }
+
+    public function getAtendimentosPacienteByMedico($registro,$solicitante){
+        $sql = 'SELECT c.nome,c.data_nas,c.registro,c.sexo,c.telefone,c.telefone2,a.posto,a.atendimento,data_atd, INITCAP(a.nome_convenio) AS nome_convenio, INITCAP(a.nome_solicitante) AS nome_solicitante, (GET_MNEMONICOS(a.posto,a.atendimento)) mnemonicos,a.saldo_devedor
+                FROM vw_atendimentos a
+                  INNER JOIN VW_MEDICOS m ON a.solicitante = m.crm
+                  INNER JOIN VW_CLIENTES c ON a.registro = c.registro
+                WHERE c.registro = :registro AND m.ID_MEDICO = :solicitante
+                ORDER BY data_atd DESC';
+
+        $atendimento[] = DB::select(DB::raw($sql), ['registro' => $registro, 'solicitante' => $solicitante]);
+        return $atendimento[0];
+    }
 
     /**
      * Retorna os postos que o medico tenha atendimento
@@ -113,5 +125,16 @@ class MedicoRepository extends BaseRepository
         }
 
         return $convenios;
+    }
+
+    public function ehAtendimentoMedico($idMedico,$posto,$atendimento){
+        $sql = "SELECT * FROM vw_medicos M
+                  INNER JOIN vw_atendimentos A ON M.crm = A.solicitante
+                WHERE
+                  m.id_medico = :idMedico
+                  AND a.posto = :posto AND a.atendimento = :atendimento";
+
+        $data = DB::select(DB::raw($sql),['idMedico'=>$idMedico,'posto'=>$posto,'atendimento'=>$atendimento]);
+        return (bool) sizeof($data);
     }
 }
