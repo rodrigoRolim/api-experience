@@ -159,7 +159,7 @@ div.row.border-bottom{
 }
 
 #side-menu {
-	margin-top: 60px;	
+	margin-top: 10px;	
 }
 
 .fa-angle-right{
@@ -278,6 +278,16 @@ ul{
 	margin-right: 20px;
 }
 
+.topExames{	
+	padding: 5px;
+}
+
+.btnVoltar{
+	min-width: 0px;
+	margin-left: 20px;
+	margin-top: 16px;
+}
+
 .boxFiltro{
 	padding: 2px;
 	padding-top: 1px;
@@ -358,7 +368,11 @@ ul{
   	}
 
   	div.row.border-bottom{
-		height: 100px;
+		height: 120px;
+	}
+
+	#side-menu {
+		margin-top: 120px;	
 	}
 
 	#wrapper{
@@ -370,7 +384,7 @@ ul{
 	}
 
 	.bodyLayoutPadrao{
-		padding-top: 98px;
+		padding-top: 60px;
 	}
 
 	li.nav-header{

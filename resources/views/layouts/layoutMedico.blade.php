@@ -171,7 +171,7 @@
 
                     var cliente = result.data[index];
 
-                    var item =   '<li class="col-md-12 naoRealizado-element" data-id="'+cliente.registro+'">'+
+                    var item =   '<li class="col-md-12 naoRealizado-element" data-key="'+cliente.key+'">'+
                                     '<div class="col-md-5 dadosPaciente text-left">'+
                                       '<strong><i class="'+((cliente.sexo == "M")?"fa fa-mars":"fa fa-venus")+'"></i> '+cliente.nome+'</strong><br>'+cliente.idade+
                                     '</div>'+
@@ -199,9 +199,8 @@
                     });
 
                     $('.listaPacientes li').click(function(e){       
-                      var registro = $(e.currentTarget).data('id');
-                      registro = btoa(registro);
-                      window.location.replace("/medico/paciente/"+registro);
+                      var key = $(e.currentTarget).data('key');
+                      window.location.replace("/medico/paciente/"+key);
                     });
 
                    },
