@@ -45,7 +45,7 @@ class MedicoRepository extends BaseRepository
             'maskAtendimento' => $mask[1],
             'posto' => $posto,
             'convenio' => $convenio,
-            'situacao' => $situacao
+            'situacao' => $situacao,
         ]);
 
         $clientes = $clientes[0];
@@ -80,6 +80,7 @@ class MedicoRepository extends BaseRepository
             }
 
             $clientes[$i]->idade = $resultData;
+            $cliente[$i]->key = trim(base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, config('system.key'), $cliente[$i]->registro, MCRYPT_MODE_ECB, mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB), MCRYPT_RAND))));
         }
 
         return $clientes;

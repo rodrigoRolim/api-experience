@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'key' => 'DHXR|e4H>Q38ZjERT"4L+7~|^P0W_j',
     'clienteNome' => 'Lab. Teste',
     'clienteLogo' => '/assets/img/logo.png',
     'clienteUrl'  => 'http://www.cliente.com',
