@@ -172,10 +172,10 @@
                     var cliente = result.data[index];
 
                     var item =   '<li class="col-md-12 naoRealizado-element" data-id="'+cliente.registro+'">'+
-                                    '<div class="col-md-4 dadosPaciente text-left">'+
-                                      '<strong><i class="'+((cliente.sexo == "M")?"fa fa-mars":"fa fa-venus")+'"></i> '+cliente.nome+'</strong> - XX Anos'+
+                                    '<div class="col-md-5 dadosPaciente text-left">'+
+                                      '<strong><i class="'+((cliente.sexo == "M")?"fa fa-mars":"fa fa-venus")+'"></i> '+cliente.nome+'</strong><br>'+cliente.idade+
                                     '</div>'+
-                                    '<div class="col-md-3 text-left"><span class="ajusteFonte">Contato: '+cliente.telefone+' </span></div>'+
+                                    '<div class="col-md-2 text-left"><span class="ajusteFonte">Contato: '+cliente.telefone+' </span></div>'+
                                     '<div class="com-md-5 text-left"><span class="ajusteFonte">Últ. Atendimentos: </span>';
                                     
                     var count = 0;

@@ -5,6 +5,7 @@ use App\Repositories\ConvenioRepository;
 use App\Repositories\ExamesRepository;
 use App\Repositories\MedicoRepository;
 use App\Repositories\PostoRepository;
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\Guard;
 
 use Request;

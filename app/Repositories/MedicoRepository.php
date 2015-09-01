@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use Carbon\Carbon;
 use Prettus\Repository\Eloquent\BaseRepository;
 use DB;
 
@@ -49,10 +50,36 @@ class MedicoRepository extends BaseRepository
 
         $clientes = $clientes[0];
 
+        $dtNow = Carbon::now();
+
         for($i=0;$i<sizeof($clientes);$i++){
             $atd = explode(",",$clientes[$i]->atendimentos);
             array_pop($atd);
             $clientes[$i]->atendimentos = $atd;
+
+            //Calcular idade
+            $dtNascimento = Carbon::parse('1987-10-2 00:00:00');
+            $data = $dtNow->diff($dtNascimento);
+
+            $ano = (int) $data->y;
+            $mes = (int) $data->m;
+            $dia = (int) $data->d;
+
+            $resultData = '';
+
+            if($ano > 0){
+                $resultData .= $ano.' ano'.($ano>1?'s':'').' ';
+            }
+
+            if($mes > 0){
+                $resultData .= $mes.' mes'.($mes>1?'es':'').' ';
+            }
+
+            if($dia > 0){
+                $resultData .= $dia.' dia'.($dia>1?'s':'').' ';
+            }
+
+            $clientes[$i]->idade = $resultData;
         }
 
         return $clientes;
