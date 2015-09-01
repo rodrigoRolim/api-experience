@@ -309,6 +309,22 @@ ul{
 	padding-bottom: 55px;
 }
 
+.labelAtendimentosClientes{
+	margin-right: 5px;
+	margin-top: 5px;
+	background-color: #fff;
+	font-size: 11px;
+	border: 1px solid #DEDEDE !important;
+}
+
+.listaClientes:hover{
+	background-color: #F1DCDD !important;
+}
+
+.ajusteFonte{
+	font-size: 11px;
+}
+
 @media (max-width: 420px){
 
 	body,.text-center{

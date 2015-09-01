@@ -40,9 +40,9 @@
                     <form id="formMedico">
 		    				<label class="textoBranco">Atendimentos por datas entre:</label>
 		            		<div class="input-daterange input-group" id="datepicker">
-	                            <input type="text" class="input-sm form-control" name="dataInicio" value="12/03/2015">
+	                            <input type="text" class="input-sm form-control" id="dataInicio" name="dataInicio">
 	                            	<span class="input-group-addon">até</span>
-	                            <input type="text" class="input-sm form-control" name="dataFim" value="19/04/2015">
+	                            <input type="text" class="input-sm form-control" id="dataFim" name="dataFim">
 	                        </div>
 	                    </div>	                  
 	                	<div class="col-md-2">
@@ -113,45 +113,50 @@
       <script src="{{ asset('/assets/js/plugins/datapicker/bootstrap-datepicker.js') }}"></script>
       <script src="{{ asset('/assets/js/plugins/listJs/list.min.js') }}"></script>
       <script src="{{ asset('/assets/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
+      <script src="{{ asset('/assets/js/plugins/moments/moments.js') }}"></script>
 
       <script type="text/javascript">
-       $(document).ready(function () {
+        $(document).ready(function () {
 
-        $('.input-daterange').datepicker({
-            keyboardNavigation: true,
-            forceParse: false,
-            autoclose: true,
-            format: "dd/mm/yyyy"
-        });
-
-        $('.btnFiltar').trigger('click');
-
-         $(function(){
-          $('.listaPacientes').slimScroll({
-              height: '58.6vh',
-              railOpacity: 0.4,
-              wheelStep: 10,
-              minwidth: '100%',
+          $('.input-daterange').datepicker({
+              keyboardNavigation: true,
+              forceParse: false,
+              autoclose: true,
+              format: "dd/mm/yyyy"
           });
-        });
 
+          var dataInicio = new moment();
+          var dataFim = new moment();
+          var qtdDiasFiltro = {{config('system.medico.qtdDiasFiltro')}};
+         
+          dataInicio = dataInicio.subtract(qtdDiasFiltro,'days');
+          dataInicio = dataInicio.format('DD/MM/YYYY');
+          dataFim = dataFim.format('DD/MM/YYYY');
+         
+          $('#dataInicio').val(dataInicio);
+          $('#dataFim').val(dataFim);
 
-        });
+          $('.btnFiltar').trigger('click');
+            $(function(){
+              $('.listaPacientes').slimScroll({
+                  height: '58.6vh',
+                  railOpacity: 0.4,
+                  wheelStep: 10,
+                  minwidth: '100%',
+              });
+            });
+          });
 
         $('#filterTeste').filterList();
 
         $('.btnFiltar').click(function(e){
+              var formMedico = $('#formMedico');
+              var postData = formMedico.serializeArray();   
 
-                var formMedico = $('#formMedico');
-                var postData = formMedico.serializeArray();   
-
-                getClientes(postData);           
-             
+              getClientes(postData);      
         });    
 
-
         function getClientes(postData){
-
           $('.listaPacientes').html('<br><br><br><br><h2 class="text-center"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando registros.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>');
              $.ajax(
                 {
@@ -166,38 +171,39 @@
 
                     var cliente = result.data[index];
 
-                    if (cliente.atendimentos.indexOf(',') != -1) {
-                        var atendimento = cliente.atendimentos.split(',');
-                    }
+                    var item =   '<li class="col-md-12 naoRealizado-element" data-id="'+cliente.registro+'">'+
+                                    '<div class="col-md-4 dadosPaciente text-left">'+
+                                      '<strong><i class="'+((cliente.sexo == "M")?"fa fa-mars":"fa fa-venus")+'"></i> '+cliente.nome+'</strong> - XX Anos'+
+                                    '</div>'+
+                                    '<div class="col-md-3 text-left"><span class="ajusteFonte">Contato: '+cliente.telefone+' </span></div>'+
+                                    '<div class="com-md-5 text-left"><span class="ajusteFonte">Últ. Atendimentos: </span>';
+                                    
+                    var count = 0;
 
-                    console.log(atendimento);
-                    console.log(atendimento.length);
-                               
+                    $.each( cliente.atendimentos, function( index ){
+                      count++;
+                      var atendimento = cliente.atendimentos[index];
 
-                     $('.listaPacientes').append('<li class="col-md-12 naoRealizado-element">'+
-                              '<div class="col-md-6 dadosPaciente">'+
-                                  '<i class="fa fa-mars"></i> '+cliente.nome+'<br>'+
-                                  'Idade: xxx | Sexo:'+cliente.sexo+' | Contato: '+cliente.telefone+' / '+cliente.telefone2+' <br>'+
-                              '</div>'+
-                              '<div class="col-md-6">'+
-                                  ''+cliente.atendimentos+''+
-                                  '<div class="btn-group">'+
-                                    '<button type="button" class="btn btn-white dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'+
-                                      'Ver Mais <span class="caret"></span>'+
-                                    '</button>'+
-                                    '<ul class="dropdown-menu">'+    
-                                    '<li class="atendimentosPaciente">'+    
-                                    '</li>'+                                                             
-                                   '</ul>'+
-                                  '</div>'+                                           
-                              '</div>'+                                                                         
-                          '</li>');  
-
-                    for(var i = 0; i < atendimento.length; i++){
-                        $('.atendimentosPaciente').append('<a href="#">'+atendimento[i]+'</a>');
-                     } 
+                      item += '<span class="label labelAtendimentosClientes">'+atendimento+"</span>";
+                      
+                      if(count == 3){
+                        return false;
+                      }
 
                     });
+
+                    item += '</div></div></li>';
+
+                    $('.listaPacientes').append(item); 
+                  
+                    });
+
+                    $('.listaPacientes li').click(function(e){       
+                      var registro = $(e.currentTarget).data('id');
+                      registro = btoa(registro);
+                      window.location.replace("/medico/paciente/"+registro);
+                    });
+
                    },
                    error: function(jqXHR, textStatus, errorThrown) 
                    {
@@ -206,7 +212,7 @@
 
                        $('#msgPrograma').html('<div class="alert alert-danger alert-dismissable animated fadeIn">'+msg.message+'</div>');
                    }
-                });  
+                });           
         }
 
       </script>

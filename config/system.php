@@ -32,6 +32,6 @@ return [
         'EA' => 'Em Andamento',
     ],
     'medico' => [
-        'qtdDiasFiltro' => 5
+        'qtdDiasFiltro' => 30
     ]
 ];
