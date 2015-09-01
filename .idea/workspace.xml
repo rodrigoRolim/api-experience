@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/app/Http/Controllers/MedicoController.php" line="108" />
+    <bookmark url="file://$PROJECT_DIR$/app/Http/Controllers/MedicoController.php" line="102" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="161de429-feec-4a46-b3d4-26be17519dde" name="Default" comment="" />
@@ -31,20 +31,22 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="layoutMedico.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/layouts/layoutMedico.blade.php">
+      <file leaf-file-name="MedicoController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/MedicoController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.4827585">
-              <caret line="162" column="49" selection-start-line="162" selection-start-column="49" selection-end-line="162" selection-end-column="49" />
-              <folding />
+            <state vertical-scroll-proportion="0.62794346">
+              <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+              <folding>
+                <element signature="e#39#79#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MedicoRepository.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MedicoRepository.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Repositories/MedicoRepository.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.59183675">
+            <state vertical-scroll-proportion="-9.4827585">
               <caret line="82" column="119" selection-start-line="82" selection-start-column="119" selection-end-line="82" selection-end-column="119" />
               <folding>
                 <element signature="e#36#54#0#PHP" expanded="true" />
@@ -112,8 +114,8 @@
         <option value="$PROJECT_DIR$/composer.json" />
         <option value="$PROJECT_DIR$/resources/views/layouts/layoutMedico.blade.php" />
         <option value="$PROJECT_DIR$/config/system.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/MedicoController.php" />
         <option value="$PROJECT_DIR$/app/Repositories/MedicoRepository.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/MedicoController.php" />
       </list>
     </option>
   </component>
@@ -134,7 +136,7 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="43" />
+    <option name="x" value="-1323" />
     <option name="y" value="24" />
     <option name="width" value="1323" />
     <option name="height" value="744" />
@@ -416,7 +418,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="43" y="24" width="1323" height="744" extended-state="6" />
+    <frame x="-1323" y="24" width="1323" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -781,16 +783,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/MedicoController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.40345368">
-          <caret line="34" column="211" selection-start-line="34" selection-start-column="19" selection-end-line="34" selection-end-column="211" />
-          <folding>
-            <element signature="e#39#79#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/medico/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0">
@@ -809,15 +801,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/layouts/layoutMedico.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.4827585">
-          <caret line="162" column="49" selection-start-line="162" selection-start-column="49" selection-end-line="162" selection-end-column="49" />
+        <state vertical-scroll-proportion="0.34065935">
+          <caret line="161" column="17" selection-start-line="161" selection-start-column="17" selection-end-line="161" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Repositories/MedicoRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.59183675">
+        <state vertical-scroll-proportion="-9.4827585">
           <caret line="82" column="119" selection-start-line="82" selection-start-column="119" selection-end-line="82" selection-end-column="119" />
           <folding>
             <element signature="e#36#54#0#PHP" expanded="true" />
@@ -826,6 +818,16 @@
             <marker date="1441116540912" expanded="true" signature="3883:4227" placeholder="SELECT p.pos..vw_medicos..." />
             <marker date="1441116540912" expanded="true" signature="4684:5042" placeholder="SELECT c.con..vw_medicos..." />
             <marker date="1441116540912" expanded="true" signature="5425:5659" placeholder="SELECT * FRO..vw_medicos..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/MedicoController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.62794346">
+          <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+          <folding>
+            <element signature="e#39#79#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>

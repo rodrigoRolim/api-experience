@@ -32,13 +32,6 @@ class MedicoController extends Controller {
 
     public function getIndex()
     {
-//        $cript = trim(base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, config('system.key'), '235', MCRYPT_MODE_ECB, mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB), MCRYPT_RAND))));
-//        var_dump(urlencode($cript));
-//
-//        $decr = trim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, config('system.key'), base64_decode(urldecode($cript)), MCRYPT_MODE_ECB, mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB), MCRYPT_RAND)));
-//        var_dump($decr);
-//        exit;
-
         $idMedico = $this->auth->user()['id_medico'];
 
         $postos = $this->medico->getPostoAtendimento($idMedico);
@@ -74,7 +67,8 @@ class MedicoController extends Controller {
     }
 
     public function getPaciente($registro){
-        $registro = trim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, config('system.key'), base64_decode(urldecode($registro)), MCRYPT_MODE_ECB, mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB), MCRYPT_RAND)));
+        $registro = trim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, config('system.key'), base64_decode('454RNgayD5duv8gdycyWqeJnOCXjs0tQc2Xj+y0HVK8='), MCRYPT_MODE_ECB, mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB), MCRYPT_RAND)));
+
         $idMedico = $this->auth->user()['id_medico'];
 
         $atendimentos = $this->medico->getAtendimentosPacienteByMedico($registro,$idMedico);
