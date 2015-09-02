@@ -212,6 +212,13 @@ div.row.infoCliente{
 	height: 60px;
 }
 
+div.row.infoClientePaciente{
+	margin-right: 0;
+	margin-left: 0;
+	height: 60px;
+}
+
+
 .infoAtendimento{       
     margin: 0 6;
     margin-top: 8px;
@@ -371,7 +378,16 @@ ul{
 
 	.page-heading{
 		min-height: 89vh;
-		padding-bottom: 80px;
+	}
+
+	.topoMenu{
+		height: 1px;
+	}
+
+	.btnVoltar{
+		padding: 2px;
+		margin: 2px;
+		margin-left: 5px;
 	}
 
 	.infoAtendimento{		
@@ -379,8 +395,13 @@ ul{
 		padding: 5px;
 	}
 
+
 	div.row.infoCliente{
 		height: 10px;
+	}
+
+	div.row.infoClientePaciente{
+		height: 60px;
 	}
 
 	.atendimento{

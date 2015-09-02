@@ -56,19 +56,16 @@
 @stop
 
 @section('content')
-	<div class="row">
-		<div class="col-md-12">
-			<div class="col-md-10">
-				<div class="infoAtendimento">
-					<span><strong>Convênio</strong>:</span>
-					<span id="convenio"></span> <br>
-					<span><strong>Solicitante</strong>:</span>
-					<span id="solicitante"></span>
-				</div>
-			</div>
-			<span><strong>ID</strong>:<span id="atendimento"></span></span>
-		</div>
-	</div>
+	  <div class="row infoClientePaciente">
+        <div class="col-md-12">  
+                <div class="infoAtendimento">
+                    <strong>ID</strong>:
+                    <span id="atendimento"></span> <br>
+                    <strong>Convênio</strong>:
+                    <span id="convenio"></span> <br>                          
+                </div>           
+        </div>
+    </div>
 
 	<div class="row wrapper border-bottom white-bg page-heading">
 		<div class="ibox">
