@@ -57,15 +57,15 @@
 
 @section('content')
 	  <div class="row infoClientePaciente">
-        <div class="col-md-12">  
-                <div class="infoAtendimento">
-                    <strong>ID</strong>:
-                    <span id="atendimento"></span> <br>
-                    <strong>Convênio</strong>:
-                    <span id="convenio"></span> <br>                          
-                </div>           
-        </div>
-    </div>
+	        <div class="col-md-12">  
+	                <div class="infoAtendimento">
+	                    <strong>ID</strong>:
+	                    <span id="atendimento"></span> <br>
+	                    <strong>Convênio</strong>:
+	                    <span id="convenio"></span> <br>                          
+	                </div>           
+	        </div>
+    	</div>
 
 	<div class="row wrapper border-bottom white-bg page-heading">
 		<div class="ibox">
@@ -125,8 +125,6 @@
 			});
 
 			$('.active a').trigger('click');
-
-			$('.topoMenu').append('<button type="button" class="btn btn-w-m btn-default btnVoltar"><i class="fa fa-arrow-circle-o-left"></i> Voltar</button>')
 
 
 			function getExames(posto,atendimento){
