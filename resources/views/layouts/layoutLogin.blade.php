@@ -6,7 +6,6 @@
 	<title></title>
 
 	{!! Html::style('/assets/css/bootstrap.min.css') !!}
-
     {!! Html::style('/assets/css/animate.css') !!} 
 	{!! Html::style('/assets/css/inspinia.css') !!}
 	{!! Html::style('/assets/css/custom.css') !!}
@@ -16,26 +15,27 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
 	@section('stylesheets')
-		
+
 	@show
 </head>
-
+<body>
 	<div id="wraper">
-
 		<div id="header">
-			@include('layouts.includes.head')
+			<header>
+				<nav class="navbar navbar-static-top headLogin" role="navigation" style="margin-bottom: 0">
+					{!! Html::image('/assets/images/logo.png', 'SmartAdmin', array('title' => 'logo')) !!}
+				</nav>
+			</header>
 		</div>
-
 		<div id="body">
 			<div id="main" role="main">
-		    	<div id="content" class="container">
+				<div id="content" class="container">
 					@yield('content')
 				</div>
 			</div>
 		</div>
-			
 		<div id="footer">
-			@include('layouts.includes.footer')
+			@include('layouts.includes.base.footer')
 		</div>
 
 		<script src="{{ asset('/assets/js/jquery-2.1.1.js') }}"></script>
@@ -43,9 +43,10 @@
 		<script src="{{ asset('/assets/js/plugins/jasny/jasny-bootstrap.min.js') }}"></script>
 		<script src="{{ asset('/assets/js/plugins/datapicker/bootstrap-datepicker.js') }}"></script>
 		<script src="{{ asset('/assets/js/plugins/iCheck/icheck.min.js') }}"></script>
-		
+
 		@section('script')
 
 		@show
 	</div>
+</body>
 </html>

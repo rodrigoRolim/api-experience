@@ -1,8 +1,8 @@
-@extends('layouts.layoutPaciente')
+@extends('layouts.layoutBaseLeft')
 
 @section('stylesheets')
 	{!! Html::style('/assets/css/plugins/iCheck/custom.css') !!}
-@show
+@stop
 
 @section('infoHead')
 	<div class="feed-element pull-right infoUser">
@@ -28,50 +28,61 @@
 	</div>
 @stop
 
-@section('infoAtendimento')
+@section('left')
+	<nav class="navbar-default navbar-static-side" role="navigation">
+		<div class="topoMenu">
+			<br><br><br>
+		</div>
+		<ul class="nav metismenu" id="side-menu">
+			@foreach($atendimentos as $key => $atendimento)
+				<li class="{{ !$key ? 'active' : '' }}">
+					<a href="#" class="btnAtendimento"
+					   data-posto="{{$atendimento->posto}}"
+					   data-atendimento="{{$atendimento->atendimento}}"
+					   data-solicitante="{{$atendimento->nome_solicitante}}"
+					   data-convenio="{{$atendimento->nome_convenio}}"
+					   data-saldo="{{$atendimento->saldo_devedor}}">
+						<b class="dataMini">
+							<p class="text-center" style="margin:0px;line-height: 14px">{{ date('d/m',strtotime($atendimento->data_atd))}}<br>
+								{{ date('Y',strtotime($atendimento->data_atd))}}</p>
+						</b>
+                        <span class="nav-label mnemonicos"><strong>{{ date('d/m/y',strtotime($atendimento->data_atd))}}</strong><br>
+							{{str_limit($atendimento->mnemonicos,56)}}</span>
+					</a>
+				</li>
+			@endforeach
+		</ul>
+	</nav>
+@stop
+
+@section('content')
 	<div class="row">
 		<div class="col-md-12">
 			<div class="col-md-10">
-				<div class="infoAtendimento">			
+				<div class="infoAtendimento">
 					<span><strong>Convênio</strong>:</span>
 					<span id="convenio"></span> <br>
 					<span><strong>Solicitante</strong>:</span>
-					<span id="solicitante"></span>					
-				</div>		
+					<span id="solicitante"></span>
+				</div>
 			</div>
-			<span class="atendimento"><strong>ID</strong>:
-				<span id="atendimento"></span></span>
+			<span><strong>ID</strong>:<span id="atendimento"></span></span>
 		</div>
-	</div>	
-@stop
-
-@section('exames')
+	</div>
 
 	<div class="row wrapper border-bottom white-bg page-heading">
 		<div class="ibox">
-			<div class="i-checks all boxSelectAll">
 
-			</div>
-
+			<div class="i-checks all boxSelectAll"> </div>
 			<ul class="sortable-list connectList agile-list ui-sortable listaExames"></ul>
+		</div>
+	</div>
+	<div class="footer">
+		<div class="pull-left">
+			{!!config('system.loginText.footerText')!!}
+		</div>
+		<div class="pull-right" id="boxRodape">
 
-			<div id="modalExames" class="modal fade" role="dialog">
-				<div class="modal-dialog">
-					<!-- Modal content-->
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title">Modal Header</h4>
-						</div>
-						<div class="modal-body">
-							<p>Some text in the modal.</p>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						</div>
-					</div>
-				</div>
-			</div>
 		</div>
 	</div>
 @stop
@@ -80,13 +91,14 @@
 	@parent
 	<script src="{{ asset('/assets/js/plugins/iCheck/icheck.min.js') }}"></script>
 	<script src="{{ asset('/assets/js/plugins/truncateString/truncate.js') }}"></script>
+	<script src="{{ asset('/assets/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
 
 	<script type="text/javascript">
 		$(document).ready(function () {
 			var posto;
 			var atendimento;
 			var nomeSolicitante;
-			var nomeConvenio;		
+			var nomeConvenio;
 
 			var controle;
 
@@ -104,11 +116,20 @@
 				$('.boxSelectAll').html('');
 			});
 
+			$('.page-heading').slimScroll({
+				height: '72.5vh',
+				railOpacity: 0.4,
+				wheelStep: 10,
+				minwidth: '100%',
+			});
+
 			$("#btnViewExame").click(function(){
 				$("#modalExames").modal();
 			});
 
 			$('.active a').trigger('click');
+
+			$('.topoMenu').append('<button type="button" class="btn btn-w-m btn-default btnVoltar"><i class="fa fa-arrow-circle-o-left"></i> Voltar</button>')
 
 
 			function getExames(posto,atendimento){
@@ -123,7 +144,7 @@
 					$('#solicitante').html(nomeSolicitante);
 					$('#convenio').html(nomeConvenio);
 					$('#atendimento').html("00/00"+atendimento);
-					
+
 					$('.listaExames').html('');
 					$('#boxRodape').html('');
 
@@ -198,6 +219,5 @@
 				}, "json" );
 			}
 		});
-
 	</script>
 @stop

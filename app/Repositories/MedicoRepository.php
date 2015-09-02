@@ -58,7 +58,7 @@ class MedicoRepository extends BaseRepository
             $clientes[$i]->atendimentos = $atd;
 
             //Calcular idade
-            $dtNascimento = Carbon::parse('1987-10-2 00:00:00');
+            $dtNascimento = Carbon::parse($clientes[$i]->data_nas);
             $data = $dtNow->diff($dtNascimento);
 
             $ano = (int) $data->y;

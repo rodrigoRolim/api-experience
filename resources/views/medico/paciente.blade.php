@@ -1,14 +1,61 @@
-@extends('layouts.layoutPaciente')
+@extends('layouts.layoutBaseLeft')
 
 @section('stylesheets')
     {!! Html::style('/assets/css/plugins/iCheck/custom.css') !!}
 @show
 
+@section('infoHead')
+    <div class="feed-element pull-right infoUser">
+        <a href="#" class="boxImgUser">
+            {{--@if(Auth::user()['sexo'] == 'M')--}}
+                {{--{!! Html::image('/assets/images/homem.png','logoUser',array('class' => 'img-circle pull-left')) !!}--}}
+            {{--@else--}}
+                {{--{!! Html::image('/assets/images/mulher.png','logoUser',array('class' => 'img-circle pull-left')) !!}--}}
+            {{--@endif--}}
+        </a>
+        <div class="media-body">
+            <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span><br>
+            {{date('d/m/y',strtotime(Auth::user()['data_nas']))}}&nbsp;
+            <a class="dropdown-toggle" data-toggle="dropdown"><b class="caret"></b></a>
+            <ul class="dropdown-menu pull-right itensInfoUser">
+                <li class="item">
+                    <a href="/auth/logout">
+                        <i class="fa fa-sign-out"></i> Sair
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+@stop
 
+@section('left')
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="topoMenu">
+            <br><br><br>
+        </div>
+        <ul class="nav metismenu" id="side-menu">
+            @foreach($atendimentos as $key => $atendimento)
+                <li class="{{ !$key ? 'active' : '' }}">
+                    <a href="#" class="btnAtendimento"
+                       data-posto="{{$atendimento->posto}}"
+                       data-atendimento="{{$atendimento->atendimento}}"
+                       data-solicitante="{{$atendimento->nome_solicitante}}"
+                       data-convenio="{{$atendimento->nome_convenio}}"
+                       data-saldo="{{$atendimento->saldo_devedor}}">
+                        <b class="dataMini">
+                            <p class="text-center" style="margin:0px;line-height: 14px">{{ date('d/m',strtotime($atendimento->data_atd))}}<br>
+                                {{ date('Y',strtotime($atendimento->data_atd))}}</p>
+                        </b>
+                        <span class="nav-label mnemonicos"><strong>{{ date('d/m/y',strtotime($atendimento->data_atd))}}</strong><br>
+                            {{str_limit($atendimento->mnemonicos,56)}}</span>
+                    </a>
+                </li>
+            @endforeach
+        </ul>
+    </nav>
+@stop
 
-
-
-@section('infoAtendimento')
+@section('content')
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-10">
@@ -19,22 +66,25 @@
                     <span id="solicitante"></span>
                 </div>
             </div>
-			<span class="atendimento"><strong>ID</strong>:
-				<span id="atendimento"></span></span>
+            <span><strong>ID</strong>:<span id="atendimento"></span></span>
         </div>
     </div>
-@stop
 
-@section('exames')
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="ibox">
 
-        <div class="i-checks all boxSelectAll"> </div>
+            <div class="i-checks all boxSelectAll"> </div>
             <ul class="sortable-list connectList agile-list ui-sortable listaExames"></ul>
         </div>
     </div>
+    <div class="footer">
+        <div class="pull-left">
+            {!!config('system.loginText.footerText')!!}
+        </div>
+        <div class="pull-right" id="boxRodape">
 
-
+        </div>
+    </div>
 @stop
 
 @section('script')
@@ -47,7 +97,7 @@
             var posto;
             var atendimento;
             var nomeSolicitante;
-            var nomeConvenio;       
+            var nomeConvenio;
 
             var controle;
 
@@ -86,7 +136,7 @@
                     $('#solicitante').html(nomeSolicitante);
                     $('#convenio').html(nomeConvenio);
                     $('#atendimento').html("00/00"+atendimento);
-                    
+
                     $('.listaExames').html('');
                     $('#boxRodape').html('');
 
