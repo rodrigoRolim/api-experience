@@ -313,7 +313,7 @@ ul{
 .btnVoltar{
 	min-width: 0px;
 	margin-left: 20px;
-	margin-top: 16px;
+	margin-top: 10px;
 }
 
 .boxFiltro{
@@ -380,7 +380,7 @@ ul{
 	}
 
 	div.row.infoCliente{
-		height: 120px;
+		height: 10px;
 	}
 
 	.atendimento{
@@ -394,15 +394,11 @@ ul{
 	.metismenu {
 		padding-bottom: 60px;
 	}
-
-  	div.row{
-  		margin-top: 30px;
-  	}
-
-  	div.row.infoCliente{
+  
+	div.row.infoCliente{
 		margin-right: 0;
 		margin-left: 0;
-		height: 60px;
+		height: 170px;
 	}
 
 	#side-menu {
@@ -412,6 +408,7 @@ ul{
 	#wrapper{
 		overflow-x: visible; 
 	}
+
 
 	.middle-box{
 		max-width: 0px;
