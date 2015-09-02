@@ -31,7 +31,7 @@
 @section('left')
     <nav class="navbar-default navbar-static-side" role="navigation">
         <div class="topoMenu">
-            <br><br><br>
+            
         </div>
         <ul class="nav metismenu" id="side-menu">
             @foreach($atendimentos as $key => $atendimento)
@@ -41,7 +41,8 @@
                        data-atendimento="{{$atendimento->atendimento}}"
                        data-solicitante="{{$atendimento->nome_solicitante}}"
                        data-convenio="{{$atendimento->nome_convenio}}"
-                       data-saldo="{{$atendimento->saldo_devedor}}">
+                       data-saldo="{{$atendimento->saldo_devedor}}"
+                       data-nome="{{$atendimento->nome}}">                       
                         <b class="dataMini">
                             <p class="text-center" style="margin:0px;line-height: 14px">{{ date('d/m',strtotime($atendimento->data_atd))}}<br>
                                 {{ date('Y',strtotime($atendimento->data_atd))}}</p>
@@ -56,17 +57,25 @@
 @stop
 
 @section('content')
-    <div class="row">
+    <div class="row infoCliente">
         <div class="col-md-12">
-            <div class="col-md-10">
-                <div class="infoAtendimento">
-                    <span><strong>Convênio</strong>:</span>
-                    <span id="convenio"></span> <br>
-                    <span><strong>Solicitante</strong>:</span>
-                    <span id="solicitante"></span>
+            <div class="col-md-5">
+                <div class="infoPaciente">
+                    <strong><span id="nome" class="nomePaciente"></span></strong> <br>
+                    <span id="idade">XX Anos xx Meses</span>
                 </div>
             </div>
-            <span><strong>ID</strong>:<span id="atendimento"></span></span>
+            <div class="col-md-5">
+                <div class="infoAtendimento">
+                    <strong>ID</strong>:
+                    <span id="atendimento"></span> <br>
+                    <strong>Convênio</strong>:
+                    <span id="convenio"></span> <br>                          
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="areaBtnVoltar"></div>
+            </div>
         </div>
     </div>
 
@@ -91,6 +100,7 @@
     @parent
     <script src="{{ asset('/assets/js/plugins/iCheck/icheck.min.js') }}"></script>
     <script src="{{ asset('/assets/js/plugins/truncateString/truncate.js') }}"></script>
+    <script src="{{ asset('/assets/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -98,6 +108,7 @@
             var atendimento;
             var nomeSolicitante;
             var nomeConvenio;
+            var nomePaciente;
 
             var controle;
 
@@ -107,6 +118,7 @@
                 nomeSolicitante = $(e.currentTarget).data('solicitante');
                 nomeConvenio = $(e.currentTarget).data('convenio');
                 saldo = $(e.currentTarget).data('saldo');
+                nomePaciente = $(e.currentTarget).data('nome');
 
                 if(posto != null && atendimento != null){
                     getExames(posto,atendimento);
@@ -115,14 +127,24 @@
                 $('.boxSelectAll').html('');
             });
 
+            $('.page-heading').slimScroll({
+                height: '72.5vh',
+                railOpacity: 0.4,
+                wheelStep: 10,
+                minwidth: '100%',
+            });
+
             $("#btnViewExame").click(function(){
                 $("#modalExames").modal();
             });
 
             $('.active a').trigger('click');
 
-            $('.topoMenu').append('<button type="button" class="btn btn-w-m btn-default btnVoltar"><i class="fa fa-arrow-circle-o-left"></i> Voltar</button>')
+            $('.areaBtnVoltar').append('<button type="button" class="btn btn-w-m btn-default btnVoltar"><i class="fa fa-arrow-circle-o-left"></i> Voltar</button>');
 
+            $('.btnVoltar').click(function(){
+                window.location.replace("/medico");
+            });
 
             function getExames(posto,atendimento){
                 controle = false;
@@ -133,6 +155,7 @@
                 //Pega os dados via get de exames do atendimento
                 $.get( "/medico/examesatendimento/"+posto+"/"+atendimento, function( result ) {
                     //Carrega dados do atendimento
+                    $('#nome').html(nomePaciente);
                     $('#solicitante').html(nomeSolicitante);
                     $('#convenio').html(nomeConvenio);
                     $('#atendimento').html("00/00"+atendimento);
@@ -211,6 +234,5 @@
                 }, "json" );
             }
         });
-
     </script>
 @stop

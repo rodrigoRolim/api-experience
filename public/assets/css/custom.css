@@ -64,6 +64,10 @@ html, body{
 	margin-top: 7px;
 }
 
+.nomePaciente{
+	font-size: 1.3em;
+}
+
 #boxRodape h3{
 	margin: 0px;
 }
@@ -196,6 +200,26 @@ div.row.border-bottom{
 
 .boxImgUser img{
 	margin-right: 5px;
+}
+
+.topoMenu{
+	height: 50px;
+}
+
+div.row.infoCliente{
+	margin-right: 0;
+	margin-left: 0;
+	height: 60px;
+}
+
+.infoAtendimento{       
+    margin: 0 6;
+    margin-top: 8px;
+}
+
+.infoPaciente{
+    margin: 0 6;
+    margin-top: 8px;
 }
 
 .atendimento{
@@ -355,6 +379,10 @@ ul{
 		padding: 5px;
 	}
 
+	div.row.infoCliente{
+		height: 120px;
+	}
+
 	.atendimento{
 		margin-right: 127px;
 	}
@@ -371,8 +399,10 @@ ul{
   		margin-top: 30px;
   	}
 
-  	div.row.border-bottom{
-		height: 120px;
+  	div.row.infoCliente{
+		margin-right: 0;
+		margin-left: 0;
+		height: 60px;
 	}
 
 	#side-menu {

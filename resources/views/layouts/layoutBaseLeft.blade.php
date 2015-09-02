@@ -77,6 +77,13 @@
                     $('.metismenu li b').attr('style','display:none');
                 }
             }
+
+            $('li').click(function(event) {
+               $('li').not(this).removeClass('active clicked');    /// Alternancia de fundos ao clicar/selecionar um atendimento da lista. (linhas 63-66).           
+               $('li').not(this).addClass('notClicked');
+               $(this).toggleClass('active clicked');
+               $(this).toggleClass('notClicked');  
+            });  
         });
     </script>
 @show
