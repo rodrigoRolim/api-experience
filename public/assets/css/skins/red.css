@@ -1,95 +1,126 @@
-.headLogin{
-	background-color: #fff;
-	border-bottom: 1px solid #C52F33;
+.headLogin {
+  background-color: #fff;
+  border-bottom: 1px solid #c52f33;
 }
-
-.text-navy{
-	color: #C52F33;
+.text-navy {
+  color: #c52f33;
 }
-
-.btn-primary,.btn-primary:focus{
-	background-color:#C52F33;
-	border-color:#C52F33;
+.btn-primary,
+.btn-primary:focus {
+  background-color: #c52f33;
+  border-color: #c52f33;
 }
-
-.btn-primary:hover{
-	background-color:#CE5356;
-	border-color:#CE5356;
+.btn-primary:hover {
+  background-color: #CE5356;
+  border-color: #CE5356;
 }
-
-.form-control:focus{
-	border-color:#CE5356 !important;
+.form-control:focus {
+  border-color: #CE5356 !important;
 }
-
-body.boxed-layout #wrapper{
-	background-color: #C52F33;	
+body.boxed-layout #wrapper {
+  background-color: #c52f33;
 }
-
-.nav-header{
-	background: #D65357;
-	color: #fff;
+.nav-header {
+  background: #D65357;
+  color: #fff;
 }
-
-#side-menu li a{
-	color: #fff;
-	font-weight: 400; 
+#side-menu li a {
+  color: #fff;
+  font-weight: 400;
 }
-
-#side-menu li a:hover{
-	background-color: #fff;
-	color: #C52F33;
-	font-weight: 800;
-	border-left: 4px solid #C52F33;
+#side-menu li a:hover {
+  background-color: #fff;
+  color: #c52f33;
+  font-weight: 800;
+  border-left: 4px solid #c52f33;
 }
-
-#side-menu .active{
-	background-color: #fff;
-	border-left: 4px solid #C52F33 !important;
+#side-menu .active {
+  background-color: #fff;
+  border-left: 4px solid #c52f33 !important;
 }
-
-#side-menu .active a:hover{
-	border-left: none;
+#side-menu .active a:hover {
+  border-left: none;
 }
-
-#side-menu .active a{
-	color: #C52F33;
+#side-menu .active a {
+  color: #c52f33;
 }
-
-.corPadrao{
-	background-color: #C52F33;
-	color: black;
+.corPadrao {
+  background-color: #c52f33;
+  color: black;
 }
-
-.textoBranco{
-	color: white;
-	margin-bottom: 0px;
-	font-weight: normal;
+.textoBranco {
+  color: white;
+  margin-bottom: 0px;
+  font-weight: normal;
 }
-
-.btn-warning.btn-outline{
-	color: black;
-	background-color: white;
+.btn-warning.btn-outline {
+  color: black;
+  background-color: white;
 }
-
-.btn-warning.btn-outline:hover{
-	color: white;
-	background-color: #DADADA;
+.btn-warning.btn-outline:hover {
+  color: white;
+  background-color: #DADADA;
 }
-
-.btn-outline{
-	background-color: #DADADA;
+.btn-outline {
+  background-color: #DADADA;
 }
-
-.btn-warning.btn-outline{
-	border-color: white;
+.btn-warning.btn-outline {
+  border-color: white;
 }
-
-.btn-outline:hover{
-	border-color: #DADADA;
+.btn-outline:hover {
+  border-color: #DADADA;
 }
-
-.infoUsuario{
-	padding: 0px;
-	background-color: #ff00ff;
+.infoUsuario {
+  padding: 0px;
+  background-color: #ff00ff;
 }
-
+body.mini-navbar .nav-header {
+  background-color: #D65357;
+}
+.navbar-toggle:hover {
+  background-color: #fff;
+}
+.navbar-toggle {
+  background-color: #fff;
+}
+.panel {
+  min-width: 28.08771929824561%;
+  float: right;
+  text-align: center;
+  margin-right: 5px;
+  background-color: #D65357;
+  color: #fff;
+  border-radius: 0;
+}
+.dadosExames {
+  margin-top: 10px;
+  width: 80%;
+  height: 10px;
+  color: #333333;
+}
+.labelAtendimentosClientes {
+  margin-right: 5px;
+  margin-top: 5px;
+  background-color: #fff;
+  font-size: 11px;
+  border: 1px solid #DEDEDE !important;
+}
+.listaClientes:hover {
+  background-color: #F1DCDD !important;
+}
+.boxCenter {
+  background-color: #fff;
+  min-height: 58vh;
+}
+li.clicked {
+  background-color: #fff;
+}
+li.notClicked {
+  background-color: none;
+}
+#side-menu li a:active {
+  background-color: #fff;
+  color: #c52f33;
+  font-weight: 800;
+  border-left: 4px solid #c52f33;
+}

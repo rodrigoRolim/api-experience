@@ -4,19 +4,43 @@ html, body{
 	height: 100%;
 }
 
-#wraper{
-	min-height: 100%;
-	position: relative;
-}
-.input-sm, .form-control{
-	height: 34px;
-	margin-bottom: 10px;
+body,.text-center{
+	font-size: 10px;
 }
 
-.boxCenter{
-	background-color: #fff;
-	min-height: 58vh;
+.textoTamanho{
+	font-size: 22px;
+	text-align: center;
 }
+
+ul{
+	list-style-type: none;
+}
+
+/* ========= header ======== */
+
+.headLogin{
+	text-align: center;
+	padding: 5px 0 5px 0;
+}
+
+.headPadrao{
+	text-align: left;
+}
+
+.headPadrao img{
+	padding: 5px 10px 2px 15px;
+}
+
+.boxImgUser{
+	float: left;
+}
+
+.boxImgUser img{
+	margin-right: 5px;
+}
+
+/* ======== auth - LayoutLogin.blade.php - includes/formLogin ======= */
 
 #body{
 	padding: 10px;
@@ -30,32 +54,84 @@ html, body{
 	height: 60px;
 }
 
-.headLogin{
-	text-align: center;
-	padding: 5px 0 5px 0;
+.radio-inline{ 
+	height: 30px;
 }
 
-.radio-inline{
-	height: 30px;
+
+
+/* ======== auth - Login -index.blade.php ======= */
+
+
+
+
+
+
+
+
+/* ========= layoutBase ======== */
+
+
+#wraper{
+	min-height: 100%;
+	position: relative;
+	font-size: 1.3em;
+}
+
+.infoUser{
+	margin-right: 10px;
+}
+
+.infoUser .img-circle{
+	padding: 0px;
+}
+
+.nav > li > a{
+	padding: 8px;
+}
+
+
+/* ========= layoutBaseLeft ======== */
+
+#page-wrapper{
+	padding: 0px;
+}
+
+.side-menu{
+	height: 100%;
+	overflow: auto;
+}
+
+#side-menu {
+	margin-top: 10px;	
+}
+
+.topoMenu{
+	height: 50px;
+}
+
+.metismenu li{
+	margin-bottom: 5px;
+}
+
+
+/* ========== index.blade.php - Medico =========== */
+
+.input-sm, .form-control{
+	height: 34px;
+	margin-bottom: 10px;
 }
 
 .wrapper-content{
 	padding-bottom: 0px !important;
 }
 
-.navbar-fixed-top{
-	background: transparent;
-	border-bottom: 0px;
-	border: 0px !important;
-}
-
-.headPadrao{
+.dadosPaciente{
 	text-align: left;
 }
 
-.headPadrao img{
-	padding: 5px 10px 2px 15px;
-}
+/* ========= index.blade.php/paciente.blade.php - Paciente/Medico ==========*/
+
 
 .infoAtendimento{	
 	float: left;	
@@ -72,138 +148,12 @@ html, body{
 	margin: 0px;
 }
 
-li.clicked{
-	background-color: #fff;
-}
-
-li.notClicked{
-	background-color: none;
-}
-
-#side-menu li a:active{
-	background-color: #fff;
-    color: #C52F33;
-    font-weight: 800;
-    border-left: 4px solid #C52F33;
-}
-
-.bodyLayoutPadrao{
-	padding-top: 80px;
-}
-
-.agile-list li.warning-element{
+.agile-list, li.warning-element, li.success-element, li.danger-element, li.aguardando-element, li.naoRealizado-element{
 	margin-right: 10px;
-}
-
-.agile-list li.success-element{
-	margin-right: 10px;
-}
-
-.agile-list li.danger-element{
-	margin-right: 10px;
-}
-
-.agile-list li.aguardando-element {
-  margin-right: 10px;
-}
-
-.agile-list li.naoRealizado-element {
-  margin-right: 10px;
-}
-
-body.mini-navbar .nav-header{
-	background-color: #D65357;
-}
-
-li.nav-header{
-	height: 20%;
-}
-
-.navbar-top-links li{
-	margin-top: 10px;
-	font-weight: bold;
-	font-size: 1.1em;
-}
-
-.navbar-toggle:hover{
-	background-color: #fff;
-}
-
-.navbar-toggle{
-	background-color: #fff;
-}
-
-.dadosDoAtendimento{
-	padding: 0;
-	margin: 0;
-}
-
-.dadosPessoais{
-	margin:2px auto;
-}
-
-div.row.border-bottom{
-	height: 60px;
-	margin: 0;
-}
-
-.panel{
-	min-width: 28.08771929824561%;
-	float: right;
-	text-align: center;	
-	margin-right: 5px;	
-	background-color: #D65357;
-	color: #fff;
-	border-radius: 0;
-}
-
-.side-menu{
-	height: 100%;
-	overflow: auto;
 }
 
 .mnemonicos{
 	font-size: 11px;
-}
-
-#side-menu {
-	margin-top: 10px;	
-}
-
-.fa-angle-right{
-	float: right;
-}
-
-.nav > li > a{
-	padding: 8px;
-}
-
-.feed-element img.img-circle, .dropdown-messages-box img.img-circle{
-	width: auto;	
-}
-
-.infoUser{
-	margin-right: 10px;
-}
-
-.infoUser .img-circle{
-	padding: 0px;
-}
-
-.itensInfoUser{
-	top:65px;
-}
-
-.boxImgUser{
-	float: left;
-}
-
-.boxImgUser img{
-	margin-right: 5px;
-}
-
-.topoMenu{
-	height: 50px;
 }
 
 div.row.infoCliente{
@@ -211,13 +161,6 @@ div.row.infoCliente{
 	margin-left: 0;
 	height: 60px;
 }
-
-div.row.infoClientePaciente{
-	margin-right: 0;
-	margin-left: 0;
-	height: 60px;
-}
-
 
 .infoAtendimento{       
     margin: 0 6;
@@ -235,32 +178,20 @@ div.row.infoClientePaciente{
 	margin-right: 10px;
 }
 
-.metismenu li{
-	margin-bottom: 5px;
-}
-
-.nav-header{
-	margin-bottom: 0px;
-}
-
-ul{
-	list-style-type: none;
-}
-
 .boxExames{
 	padding-right: 0px;
 	padding-left: 0px;
 }
 
-.dadosExames{
-	margin-top: 10px;
-	width: 80%;
-	height: 10px;
-	color: #333333;
+.checkExames{
+	float: right;
 }
 
-.dadosPaciente{
-	text-align: left;
+.all{
+	float: none;
+	padding-top: 8px;
+	text-align: right;
+	margin-right: 30px;
 }
 
 #page-wrapper{
@@ -279,15 +210,6 @@ ul{
 	min-height: 80px;
 }
 
-.checkExames{
-	float: right;
-}
-
-.btnVisualizarExame{
-	position:absolute;
-     bottom:5;
-     right:5;
-}
 
 .iconLoad {
 	-animation: spin .7s infinite linear;
@@ -306,16 +228,8 @@ ul{
 }
 
 
-.all{
-	float: none;
-	padding-top: 8px;
-	text-align: right;
-	margin-right: 20px;
-}
+/* =========== ===========*/
 
-.topExames{	
-	padding: 5px;
-}
 
 .btnVoltar{
 	min-width: 0px;
@@ -338,14 +252,6 @@ ul{
 	border-radius: none;
 }
 
-.fa-filter{
-
-}
-
-.input-group .m-b .filtar{
-	margin-bottom: 0px;
-}
-
 .col-md-12{
 	padding-left: 0px;
 }
@@ -354,30 +260,41 @@ ul{
 	padding-bottom: 55px;
 }
 
-.labelAtendimentosClientes{
-	margin-right: 5px;
-	margin-top: 5px;
-	background-color: #fff;
-	font-size: 11px;
-	border: 1px solid #DEDEDE !important;
-}
-
-.listaClientes:hover{
-	background-color: #F1DCDD !important;
-}
-
 .ajusteFonte{
 	font-size: 11px;
 }
 
 @media (max-width: 420px){
 
-	body,.text-center{
-		font-size: 10px;
+/* ===== header ====== */
+
+	.navbar-header.logo img{
+		height: 48px;
+		text-align: center;
+		padding: 0px;
+		margin: 0px;
 	}
 
+	li.nav-header{
+		height: 60px;
+	}
+
+	.navbar-header.logo{
+		width: 100%;
+		text-align: center;
+	}
+
+
+	#navbar{
+		width: 20%;
+	}
+
+
+/* ========  ======== */
+
+
 	.page-heading{
-		min-height: 89vh;
+		min-height: 89vh;		
 	}
 
 	.topoMenu{
@@ -439,31 +356,12 @@ ul{
 	.bodyLayoutPadrao{
 		padding-top: 60px;
 	}
-
-	li.nav-header{
-		height: 60px;
-	}
-
-	.navbar-header.logo img{
-		height: 48px;
-		text-align: center;
-		padding: 0px;
-		margin: 0px;
-	}
-
+	
 	.feed-element{
 		padding: 0px;
 		margin: 0px;
 	}
-
-	.navbar-header.logo{
-		width: 100%;
-		text-align: center;
-	}
-
-	#navbar{
-		width: 20%;
-	}
+	
 
 	.infoUser{
 		width: 100%;
