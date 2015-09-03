@@ -5,6 +5,7 @@ use App\Repositories\ExamesRepository;
 use App\Repositories\MedicoRepository;
 use App\Repositories\PostoRepository;
 use Illuminate\Contracts\Auth\Guard;
+//use Vinkla\Hashids\Facades\Hashids;
 
 use Request;
 
@@ -37,6 +38,9 @@ class MedicoController extends Controller {
         $postos = $this->medico->getPostoAtendimento($idMedico);
         $convenios = $this->medico->getConvenioAtendimento($idMedico);
 
+//        $bruno = base64_encode(Hashids::encode(80));
+//        dd($bruno);
+
         return view('medico.index')->with(
             array(
                 'postos'=>$postos,
@@ -67,7 +71,8 @@ class MedicoController extends Controller {
     }
 
     public function getPaciente($registro){
-        $registro = trim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, config('system.key'), base64_decode('454RNgayD5duv8gdycyWqeJnOCXjs0tQc2Xj+y0HVK8='), MCRYPT_MODE_ECB, mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB), MCRYPT_RAND)));
+        $registro = base64_decode(strtr($registro, '-_', '+/'));
+        $registro = (int) trim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, config('system.key'),$registro, MCRYPT_MODE_ECB, mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB), MCRYPT_RAND)));
 
         $idMedico = $this->auth->user()['id_medico'];
 
@@ -83,6 +88,7 @@ class MedicoController extends Controller {
     }
 
     public function getExamesatendimento($posto,$atendimento){
+
         $ehAtendimentoMedico = $this->medico->ehAtendimentoMedico($this->auth->user()['id_medico'],$posto,$atendimento);
 
         if(!$ehAtendimentoMedico){
@@ -97,10 +103,5 @@ class MedicoController extends Controller {
             'message' => 'Recebido com sucesso.',
             'data' => $exames,
         ), 200);
-    }
-
-    public function getTeste(){
-        $result = $this->medico->getClientes(302,'12/03/2015','19/04/2015',null,null,null);
-        dd($result);
     }
 }

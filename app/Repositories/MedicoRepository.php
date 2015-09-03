@@ -80,7 +80,11 @@ class MedicoRepository extends BaseRepository
             }
 
             $clientes[$i]->idade = $resultData;
-            $clientes[$i]->key = trim(base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, config('system.key'), $clientes[$i]->registro, MCRYPT_MODE_ECB, mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB), MCRYPT_RAND))));
+
+            $key = mcrypt_encrypt(MCRYPT_RIJNDAEL_256, config('system.key'), $clientes[$i]->registro, MCRYPT_MODE_ECB, mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB), MCRYPT_RAND));
+            $id = strtr(rtrim(base64_encode($key), '='), '+/', '-_');
+
+            $clientes[$i]->key = $id;
         }
 
         return $clientes;
