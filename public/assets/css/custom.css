@@ -143,7 +143,6 @@ ul{
 	margin-left: 25px;
 	font-size: 1.1em;
 	margin-top: 7px;
-    margin: 0 6;
     margin-top: 0px;
     margin-bottom: 9px;
 }
@@ -172,6 +171,12 @@ ul{
 }
 
 div.row.infoCliente{
+	margin-right: 0;
+	margin-left: 0;
+	height: 60px;
+}
+
+div.row.infoClienteMed{
 	margin-right: 0;
 	margin-left: 0;
 	height: 60px;
@@ -264,10 +269,11 @@ div.row.infoCliente{
 }
 
 @media (max-width: 1280px){
-	div.row.infoCliente{
+	div.row.infoClienteMed{
 		margin-right: 0;
 		margin-left: 0;
 		height: 120px;
+		font-size: 11px;
 	}
 
 	.topoMenu{
@@ -302,21 +308,12 @@ div.row.infoCliente{
 		min-height: 89vh;		
 	}
 
-	.topoMenu{
-		height: 90px;
-	}
-
+	
 	.btnVoltar{
 		padding: 2px;
 		margin: 2px;
 		margin-left: 5px;
 	}
-
-	.infoAtendimento{		
-		margin: 0;
-		padding: 5px;		
-	}
-
 
 	div.row.infoCliente{
 		height: 10px;
@@ -337,11 +334,22 @@ div.row.infoCliente{
 	.metismenu {
 		padding-bottom: 60px;
 	}
+
+	.topoMenu{
+		height: 30px;
+	}
   
 	div.row.infoCliente{
 		margin-right: 0;
 		margin-left: 0;
-		height: 210px;
+		height: 150px;
+	}
+
+	div.row.infoClienteMed{
+		margin-right: 0;
+		margin-left: 0;
+		height: 150px;
+		font-size: 10px;
 	}
 
 	#side-menu {
@@ -392,7 +400,7 @@ div.row.infoCliente{
 	}
 
 	.boxFiltro{
-		height: 300px;
+		min-height: 300px;
 	}
 }
 

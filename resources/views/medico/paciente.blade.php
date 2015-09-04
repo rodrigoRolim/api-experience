@@ -53,7 +53,7 @@
 @stop
 
 @section('content')
-    <div class="row infoCliente">
+    <div class="row infoClienteMed">
         <div class="col-md-12">
             <div class="col-md-5">
                 <div class="infoPaciente">
