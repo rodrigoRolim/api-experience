@@ -173,7 +173,7 @@ ul{
 div.row.infoCliente{
 	margin-right: 0;
 	margin-left: 0;
-	height: 60px;
+	height: 61px;
 }
 
 div.row.infoClienteMed{
@@ -342,7 +342,7 @@ div.row.infoClienteMed{
 	div.row.infoCliente{
 		margin-right: 0;
 		margin-left: 0;
-		height: 160px;
+		height: 210px;
 	}
 
 	div.row.infoClienteMed{
@@ -400,7 +400,7 @@ div.row.infoClienteMed{
 	}
 
 	.boxFiltro{
-		min-height: 300px;
+		height: 300px;
 	}
 }
 
