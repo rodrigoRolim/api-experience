@@ -13,8 +13,16 @@ body,.text-center{
 	text-align: center;
 }
 
+.text-left{
+	text-align: left;
+}
+
 ul{
 	list-style-type: none;
+}
+
+.ajusteFonte{
+	font-size: 11px;
 }
 
 /* ========= header ======== */
@@ -57,17 +65,6 @@ ul{
 .radio-inline{ 
 	height: 30px;
 }
-
-
-
-/* ======== auth - Login -index.blade.php ======= */
-
-
-
-
-
-
-
 
 /* ========= layoutBase ======== */
 
@@ -130,6 +127,14 @@ ul{
 	text-align: left;
 }
 
+.boxFiltro{
+	padding: 2px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	min-height: 100%;
+}
+
+
 /* ========= index.blade.php/paciente.blade.php - Paciente/Medico ==========*/
 
 
@@ -138,6 +143,16 @@ ul{
 	margin-left: 25px;
 	font-size: 1.1em;
 	margin-top: 7px;
+    margin: 0 6;
+    margin-top: 0px;
+    margin-bottom: 9px;
+}
+
+.infoAtendimentoMedico{	
+	float: left;	
+	margin-left: 25px;
+	font-size: 1.1em;
+	margin-top: 8px;
 }
 
 .nomePaciente{
@@ -162,10 +177,6 @@ div.row.infoCliente{
 	height: 60px;
 }
 
-.infoAtendimento{       
-    margin: 0 6;
-    margin-top: 8px;
-}
 
 .infoPaciente{
     margin: 0 6;
@@ -227,46 +238,34 @@ div.row.infoCliente{
 	to { transform: scale(1) rotate(360deg);}
 }
 
+.listaPacientes{
+	padding-bottom: 55px;
+}
 
-/* =========== ===========*/
+.areaBtnVoltar{
+	padding-right: 5px;
+}
 
-
-.btnVoltar{
+.btnVoltar{ /* View paciente/Medico */
 	min-width: 0px;
 	margin-left: 20px;
 	margin-top: 10px;
 }
 
-.boxFiltro{
-	padding: 2px;
-	padding-top: 1px;
-	padding-bottom: 1px;
-	min-height: 100%;
-}
-
-.text-left{
-	text-align: left;
-}
+/* =========== ===========*/
 
 .btn .btn-white{
 	border-radius: none;
 }
 
-.col-md-12{
+ .areaPaciente{
 	padding-left: 0px;
+	padding-top: 12px;
 }
 
-.listaPacientes{
-	padding-bottom: 55px;
-}
-
-.ajusteFonte{
-	font-size: 11px;
-}
 
 @media (max-width: 420px){
 
-/* ===== header ====== */
 
 	.navbar-header.logo img{
 		height: 48px;
@@ -289,10 +288,6 @@ div.row.infoCliente{
 		width: 20%;
 	}
 
-
-/* ========  ======== */
-
-
 	.page-heading{
 		min-height: 89vh;		
 	}
@@ -309,7 +304,7 @@ div.row.infoCliente{
 
 	.infoAtendimento{		
 		margin: 0;
-		padding: 5px;
+		padding: 5px;		
 	}
 
 
@@ -386,5 +381,3 @@ div.row.infoCliente{
 		padding: 0px;
 	}
 }
-
-		

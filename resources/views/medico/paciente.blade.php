@@ -7,11 +7,7 @@
 @section('infoHead')
     <div class="feed-element pull-right infoUser">
         <a href="#" class="boxImgUser">
-            {{--@if(Auth::user()['sexo'] == 'M')--}}
-                {{--{!! Html::image('/assets/images/homem.png','logoUser',array('class' => 'img-circle pull-left')) !!}--}}
-            {{--@else--}}
-                {{--{!! Html::image('/assets/images/mulher.png','logoUser',array('class' => 'img-circle pull-left')) !!}--}}
-            {{--@endif--}}
+          {!! Html::image('/assets/images/medico.png','logoUser',array('class' => 'img-circle pull-left')) !!}
         </a>
         <div class="media-body">
             <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span><br>
@@ -66,16 +62,14 @@
                 </div>
             </div>
             <div class="col-md-5">
-                <div class="infoAtendimento">
+                <div class="infoAtendimentoMedico">
                     <strong>ID</strong>:
                     <span id="atendimento"></span> <br>
                     <strong>Convênio</strong>:
                     <span id="convenio"></span> <br>                          
                 </div>
             </div>
-            <div class="col-md-2">
-                <div class="areaBtnVoltar"></div>
-            </div>
+            <div class="col-md-2 areaBtnVoltar"></div>
         </div>
     </div>
 
@@ -134,13 +128,21 @@
                 minwidth: '100%',
             });
 
+            $('#side-menu').slimScroll({
+                height: '77vh',
+                railOpacity: 0.4,
+                wheelStep: 10,
+                minwidth: '100%',
+            });
+
+
             $("#btnViewExame").click(function(){
                 $("#modalExames").modal();
             });
 
             $('.active a').trigger('click');
 
-            $('.areaBtnVoltar').append('<button type="button" class="btn btn-w-m btn-default btnVoltar"><i class="fa fa-arrow-circle-o-left"></i> Voltar</button>');
+            $('.areaBtnVoltar').append('<button type="button" class="btn btn-w-m btn-default btnVoltar pull-right"><i class="fa fa-arrow-circle-o-left"></i> Voltar</button>');
 
             $('.btnVoltar').click(function(){
                 window.location.replace("/medico");

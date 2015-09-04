@@ -6,7 +6,7 @@
 
 @section('infoHead')
     <a href="#" class="boxImgUser">
-       {!! Html::image('/assets/images/homem.png','logoUser',array('class' => 'img-circle pull-left')) !!}
+       {!! Html::image('/assets/images/medico.png','logoUser',array('class' => 'img-circle pull-left')) !!}
     </a>
     <div class="media-body">
         <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span><br>
@@ -143,12 +143,17 @@
                             item += '</div></div></li>';
 
                             $('#listFilter').append(item);
+                           
                         });
 
                         $('#listFilter li').click(function(e){
                             var key = $(e.currentTarget).data('key');
                             window.location.replace("/medico/paciente/"+key);
                         });
+                        console.log(result.data.length);
+                        if(result.data.length == 0){
+                            $('#listFilter').append('<h2 class="textoTamanho">Não foram encontrados atendimentos.</h2>');
+                        }
                     },
                     error: function(jqXHR, textStatus, errorThrown){
                         var msg = jqXHR.responseText;

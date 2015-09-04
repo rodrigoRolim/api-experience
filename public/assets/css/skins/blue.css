@@ -1,27 +1,27 @@
 .headLogin {
   background-color: #ffffff;
-  border-bottom: 1px solid #c52f33;
+  border-bottom: 1px solid #2795ba;
 }
 .text-navy {
-  color: #c52f33;
+  color: #2795ba;
 }
 .btn-primary,
 .btn-primary:focus {
-  background-color: #c52f33;
-  border-color: #c52f33;
+  background-color: #2795ba;
+  border-color: #2795ba;
 }
 .btn-primary:hover {
-  background-color: #ce5356;
-  border-color: #ce5356;
+  background-color: #84afbd;
+  border-color: #84afbd;
 }
 .form-control:focus {
-  border-color: #ce5356 !important;
+  border-color: #84afbd !important;
 }
 body.boxed-layout #wrapper {
-  background-color: #c52f33;
+  background-color: #2795ba;
 }
 .nav-header {
-  background: #d65357;
+  background: #b6ced6;
   color: #ffffff;
 }
 #side-menu li a {
@@ -30,22 +30,22 @@ body.boxed-layout #wrapper {
 }
 #side-menu li a:hover {
   background-color: #ffffff;
-  color: #c52f33;
+  color: #2795ba;
   font-weight: 800;
-  border-left: 4px solid #c52f33;
+  border-left: 4px solid #2795ba;
 }
 #side-menu .active {
   background-color: #ffffff;
-  border-left: 4px solid #c52f33 !important;
+  border-left: 4px solid #2795ba !important;
 }
 #side-menu .active a:hover {
   border-left: none;
 }
 #side-menu .active a {
-  color: #c52f33;
+  color: #2795ba;
 }
 .corPadrao {
-  background-color: #c52f33;
+  background-color: #2795ba;
   color: #333333;
 }
 .textoBranco {
@@ -74,7 +74,7 @@ body.boxed-layout #wrapper {
   padding: 0px;
 }
 body.mini-navbar .nav-header {
-  background-color: #d65357;
+  background-color: #b6ced6;
 }
 .navbar-toggle:hover {
   background-color: #ffffff;
@@ -87,7 +87,7 @@ body.mini-navbar .nav-header {
   float: right;
   text-align: center;
   margin-right: 5px;
-  background-color: #d65357;
+  background-color: #b6ced6;
   color: #ffffff;
   border-radius: 0;
 }
@@ -105,7 +105,7 @@ body.mini-navbar .nav-header {
   border: 1px solid #dadada !important;
 }
 #listFilter li:hover {
-  background-color: #f1dcdd !important;
+  background-color: #b8dae6 !important;
 }
 .boxCenter {
   background-color: #ffffff;
@@ -119,7 +119,7 @@ li.notClicked {
 }
 #side-menu li a:active {
   background-color: #ffffff;
-  color: #c52f33;
+  color: #2795ba;
   font-weight: 800;
-  border-left: 4px solid #c52f33;
+  border-left: 4px solid #2795ba;
 }

@@ -57,15 +57,22 @@
 
 @section('content')
 	  <div class="row infoClientePaciente">
-	        <div class="col-md-12">  
+	        <div class="col-md-12 areaPaciente"> 
+        		<div class="col-md-6"> 
 	                <div class="infoAtendimento">
 	                    <strong>ID</strong>:
 	                    <span id="atendimento"></span> <br>
 	                    <strong>Convênio</strong>:
-	                    <span id="convenio"></span> <br>                          
-	                </div>           
-	        </div>
-    	</div>
+	                    <span id="convenio"></span> <br>
+	                </div>
+	            </div>
+                <div class="col-md-6">
+                    <strong>Solicitante</strong>:
+                    <span id="solicitante"></span> <br> 
+                </div>  
+            </div>                          
+        </div>           
+
 
 	<div class="row wrapper border-bottom white-bg page-heading">
 		<div class="ibox">
