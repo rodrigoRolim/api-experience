@@ -125,6 +125,7 @@
 				railOpacity: 0.4,
 				wheelStep: 10,
 				minwidth: '100%',
+				touchScrollStep: 50,
 			});
 
 			$("#btnViewExame").click(function(){
