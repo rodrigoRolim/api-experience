@@ -1,5 +1,5 @@
 <div class="footer">
-    <div class="pull-right col-sd-12">
-         {!!config('system.loginText.footerText')!!}
-    </div>
+	<div class="container text-right">
+    	{!!config('system.loginText.footerText')!!}
+	</div>
 </div>

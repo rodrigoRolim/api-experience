@@ -263,9 +263,19 @@ div.row.infoCliente{
 	padding-top: 12px;
 }
 
+@media (max-width: 1280px){
+	div.row.infoCliente{
+		margin-right: 0;
+		margin-left: 0;
+		height: 120px;
+	}
+
+	.topoMenu{
+		height: 110px;
+	}
+}
 
 @media (max-width: 420px){
-
 
 	.navbar-header.logo img{
 		height: 48px;
@@ -293,7 +303,7 @@ div.row.infoCliente{
 	}
 
 	.topoMenu{
-		height: 1px;
+		height: 90px;
 	}
 
 	.btnVoltar{
@@ -331,7 +341,7 @@ div.row.infoCliente{
 	div.row.infoCliente{
 		margin-right: 0;
 		margin-left: 0;
-		height: 170px;
+		height: 210px;
 	}
 
 	#side-menu {
@@ -380,4 +390,9 @@ div.row.infoCliente{
 	.loginColumns{
 		padding: 0px;
 	}
+
+	.boxFiltro{
+		height: 300px;
+	}
 }
+

@@ -42,10 +42,13 @@
                 @yield('content')
             </div>
         </div>
+        <div id="footer">
+            @include('layouts.includes.base.footer')
+        </div>
     </div>
 </body>
 
-@include('layouts.includes.base.footer')
+
 
 @section('script')
     <script src="{{ asset('/assets/js/jquery-2.1.1.js') }}"></script>
