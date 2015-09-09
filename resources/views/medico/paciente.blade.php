@@ -77,7 +77,28 @@
         <div class="ibox">
 
             <div class="i-checks all boxSelectAll"> </div>
-            <ul class="sortable-list connectList agile-list ui-sortable listaExames"></ul>
+            <ul class="sortable-list connectList agile-list ui-sortable listaExames">  </ul>
+
+            <!-- Modal -->
+              <div class="modal fade" id="modalExames" role="dialog">
+                <div class="modal-dialog">
+                
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Exames Descrição</h4>
+                    </div>
+                    <div class="modal-body">
+                      <p>Some text in the modal.</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
         </div>
     </div>
     <div class="footer">
@@ -122,7 +143,7 @@
             });
 
             $('.page-heading').slimScroll({
-                height: '72.5vh',
+                height: '66.5vh',
                 railOpacity: 0.4,
                 wheelStep: 10,
                 minwidth: '100%',
@@ -130,17 +151,12 @@
             });
 
             $('#side-menu').slimScroll({
-                height: '77vh',
+                height: '65vh',
                 railOpacity: 0.4,
                 wheelStep: 10,
                 minwidth: '100%',
                 touchScrollStep: 50,
-            });
-
-
-            $("#btnViewExame").click(function(){
-                $("#modalExames").modal();
-            });
+            });          
 
             $('.active a').trigger('click');
 
@@ -149,6 +165,15 @@
             $('.btnVoltar').click(function(){
                 window.location.replace("/medico");
             });
+
+            $("#btnViewExame").click(function(){
+                $("#modalExames").modal();
+            });
+
+            function verificaSaldoDevedor(saldo,situacao){
+                if(saldo == null || saldo == 0 && situacao == "success-element")
+                   return true;
+            }
 
             function getExames(posto,atendimento){
                 controle = false;
@@ -169,14 +194,18 @@
 
                     $.each( result.data, function( index, exame ){
                         var sizeBox = 'col-md-6';
-                        var element = '<a id="btnViewExame" data-toggle="modal" data-target="#modalExames">'+
-                                '<div class="'+sizeBox+' boxExames">' +
+                        var element = [];
+                        if(verificaSaldoDevedor(saldo,exame.class)){
+                            element += '<a id="btnViewExame" data-toggle="modal" data-target="#modalExames">';
+                        }
+
+                         element += '<div class="'+sizeBox+' boxExames">' +
                                 '<li class="'+exame.class+' animated fadeInDownBig">' +
                                 '<div class="dadosExames">' +
                                 '<b>'+exame.mnemonico+'</b> | '+exame.nome_procedimento.trunc(31)+'<br>'+exame.msg+
                                 '</div>';
 
-                        if(saldo == null || saldo == 0 && exame.class == "success-element"){
+                        if(verificaSaldoDevedor(saldo,exame.class)){
                             controle = true;
 
                             element += '<div class="i-checks checkExames">'+
@@ -230,8 +259,8 @@
                             checkAll.iCheck('update');
                         });
 
-
                         $('.checkAll').trigger('ifChecked');
+                          
                     }else{
                         $('#boxRodape').html('<h3 class="text-danger">{!!config('system.messages.paciente.saldoDevedor')!!}</h3>');
                     }

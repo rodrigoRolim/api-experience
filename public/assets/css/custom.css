@@ -104,7 +104,7 @@ ul{
 }
 
 .topoMenu{
-	height: 50px;
+	height: 80px;
 }
 
 .metismenu li{
@@ -179,7 +179,7 @@ div.row.infoCliente{
 div.row.infoClienteMed{
 	margin-right: 0;
 	margin-left: 0;
-	height: 60px;
+	height: 75px;
 }
 
 
@@ -303,11 +303,6 @@ div.row.infoClienteMed{
 	#navbar{
 		width: 20%;
 	}
-
-	.page-heading{
-		min-height: 89vh;		
-	}
-
 	
 	.btnVoltar{
 		padding: 2px;
