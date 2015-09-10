@@ -210,9 +210,6 @@ div.row.infoClienteMed{
 	margin-right: 30px;
 }
 
-#page-wrapper{
-	padding: 0px;
-}
 
 .wrapper-content{
 	min-height: 500px;
@@ -299,6 +296,9 @@ div.row.infoClienteMed{
 		text-align: center;
 	}
 
+	.listaExames li{
+		min-height: 120px;
+	}
 
 	#navbar{
 		width: 20%;
@@ -312,6 +312,19 @@ div.row.infoClienteMed{
 
 	div.row.infoCliente{
 		height: 10px;
+	}
+
+	.infoAtendimentoMedico{	
+		float: left;	
+		margin-left: 5px;
+		font-size: 1.1em;
+		margin-top: 8px;
+	}
+
+	.btnVoltar{ /* View paciente/Medico */
+		min-width: 0px;
+		margin-right: 50px;
+		margin-top: 10px;
 	}
 
 	div.row.infoClientePaciente{
@@ -362,7 +375,7 @@ div.row.infoClienteMed{
 	}
 
 	.bodyLayoutPadrao{
-		padding-top: 60px;
+		padding-top: 80px;
 	}
 	
 	.feed-element{

@@ -154,6 +154,11 @@
 
 			$('.active a').trigger('click');
 
+			function verificaSaldoDevedor(saldo,situacao){
+                if(saldo == null || saldo == 0 && situacao == "success-element")
+                   return true;
+            }
+
 
 			function getExames(posto,atendimento){
 				controle = false;
@@ -173,14 +178,17 @@
 
 					$.each( result.data, function( index, exame ){
 						var sizeBox = 'col-md-6';
-						var element = '<a id="btnViewExame" data-toggle="modal" data-target="#modalExames">'+
-								'<div class="'+sizeBox+' boxExames">' +
+						var element = [];
+                        if(verificaSaldoDevedor(saldo,exame.class)){
+                            element += '<a id="btnViewExame" data-toggle="modal" data-target="#modalExames">';
+                        }
+							element += '<div class="'+sizeBox+' boxExames">' +
 								'<li class="'+exame.class+' animated fadeInDownBig">' +
 								'<div class="dadosExames">' +
 								'<b>'+exame.mnemonico+'</b> | '+exame.nome_procedimento.trunc(31)+'<br>'+exame.msg+
 								'</div>';
 
-						if(saldo == null || saldo == 0 && exame.class == "success-element"){
+						if(verificaSaldoDevedor(saldo,exame.class)){
 							controle = true;
 
 							element += '<div class="i-checks checkExames">'+

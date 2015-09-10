@@ -124,11 +124,11 @@
                         $.each( result.data, function( index ){
                             var cliente = result.data[index];
                             var item =   '<li class="col-md-12 naoRealizado-element" data-key="'+cliente.key+'">'+
-                                            '<div class="col-md-5 dadosPaciente text-left">'+
+                                            '<div class="col-md-4 dadosPaciente text-left">'+
                                                 '<strong>'+cliente.nome+'</strong><br><i class="'+((cliente.sexo == "M")?"fa fa-mars":"fa fa-venus")+'"></i> &nbsp;'+cliente.idade+
                                             '</div>'+
                                             '<div class="col-md-2 text-left"><span class="ajusteFonte">Contato: '+cliente.telefone+' </span></div>'+
-                                            '<div class="com-md-5 text-left"><span class="ajusteFonte">Últ. Atendimentos: </span>';
+                                            '<div class="col-md-6 text-left"><span class="ajusteFonte">Últ. Atendimentos: </span>';
                             var count = 0;
 
                             $.each( cliente.atendimentos, function( index ){
@@ -141,7 +141,7 @@
                                 }
                             });
 
-                            item += '</div></div></li>';
+                            item += '</div></li>';
 
                             $('#listFilter').append(item);
                            
