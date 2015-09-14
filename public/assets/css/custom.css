@@ -361,10 +361,6 @@ div.row.infoClienteMed{
 		margin-left: 5px;
 	}
 
-	div.row.infoCliente{
-		height: 10px;
-	}
-
 	.infoAtendimentoMedico{	
 		float: left;	
 		margin-left: 5px;
@@ -397,11 +393,16 @@ div.row.infoClienteMed{
 	.topoMenu{
 		height: 30px;
 	}
+
+	 .areaPaciente{
+		padding-left: 0px;
+		padding-top: 12px;
+	}
   
 	div.row.infoCliente{
 		margin-right: 0;
 		margin-left: 0;
-		height: 210px;
+		min-height: 150px;
 	}
 
 	div.row.infoClienteMed{
