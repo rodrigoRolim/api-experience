@@ -30,7 +30,7 @@
 	        <label>Data de Nascimento</label>
 	        <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-            	<input type="text" id="nascimento" value="18/08/1934" data-mask="99/99/9999" name="nascimento" class="form-control" placeholder="Data de Nascimento" required="">
+            	<input type="text" id="nascimento" value="18/08/1934" name="nascimento" class="form-control" placeholder="Data de Nascimento" required="">
             </div>
 			@if ($errors->has('nascimento')) <p class="help-block">{{ $errors->first('nascimento') }}</p> @endif
 		</div></div>
@@ -46,6 +46,7 @@
 {!! Form::close() !!}
 
 @section('script')
+<script src="{{ asset('/assets/js/plugins/vanillamasker/vanilla-masker.min.js') }}"></script>
 	<script type="text/javascript">
 
 		$('#itemCliente').hide();
@@ -66,6 +67,8 @@
 	            autoclose: true,
 	            format: "dd/mm/yyyy"
 	        });
+
+	        VMasker(document.getElementById("nascimento")).maskPattern('99/99/9999');     
 
 	        $('.i-checks').on('ifChecked', function(event){
 	        	var tipoLogin = event.target.defaultValue;
