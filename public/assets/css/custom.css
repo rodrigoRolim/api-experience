@@ -173,7 +173,7 @@ ul{
 div.row.infoCliente{
 	margin-right: 0;
 	margin-left: 0;
-	height: 61px;
+	min-height: 70px;
 }
 
 div.row.infoClienteMed{
@@ -309,6 +309,7 @@ div.row.infoClienteMed{
 }
 
 @media (max-width: 800px){
+
 	div.row.infoClienteMed{
 		margin-right: 0;
 		margin-left: 0;
