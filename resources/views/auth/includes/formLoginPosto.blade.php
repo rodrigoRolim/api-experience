@@ -4,7 +4,7 @@
         <label>Posto</label> 
          <div class="input-group">
 	        <span class="input-group-addon"><i class="fa fa-hospital-o"></i></span>
-			  <input type="text" data-mask="{{config('system.postoMask')}}" class="form-control" id="posto" placeholder="Posto" required="">
+			  <input type="text" class="form-control" id="posto" placeholder="Posto" required="">
 	   </div>       
     </div>
     <div class="form-group">
@@ -16,3 +16,16 @@
     </div>
     <button type="submit" class="btn btn-primary block full-width m-b">Acessar</button>
 {!! Form::close() !!}
+
+@section('script')
+<script src="{{ asset('/assets/js/plugins/vanillamasker/vanilla-masker.min.js') }}"></script>
+    <script type="text/javascript">
+
+
+    VMasker(document.getElementById("posto")).maskPattern("{{config('system.postoMask')}}");    
+
+
+    </script>
+
+    @parent
+@stop

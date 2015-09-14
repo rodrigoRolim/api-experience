@@ -11,7 +11,7 @@
 	        <label>Atendimento</label>
 	          <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
-            	<input type="text" value="00/001777" data-mask="{{config('system.atendimentoMask')}}" name="atendimento" id="atendimento" class="form-control" placeholder="Atendimento" required="">
+            	<input type="text" value="00/001777" name="atendimento" id="atendimento" class="form-control" placeholder="Atendimento" required="">
 			  </div>
 			  @if ($errors->has('atendimento')) <p class="help-block">{{ $errors->first('atendimento') }}</p> @endif
 		</div>
@@ -22,7 +22,7 @@
 	        <label>CPF</label>
 	        <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
-            	<input type="text" value="028.948.743-91" data-mask="999.999.999-99" name="cpf" id="cpf" class="form-control" placeholder="CPF" required="">
+            	<input type="text" value="028.948.743-91" name="cpf" id="cpf" class="form-control" placeholder="CPF" required="">
           	</div>
 		  	@if ($errors->has('cpf')) <p class="help-block">{{ $errors->first('cpf') }}</p> @endif
 	    </div>
@@ -68,7 +68,13 @@
 	            format: "dd/mm/yyyy"
 	        });
 
-	        VMasker(document.getElementById("nascimento")).maskPattern('99/99/9999');     
+	        VMasker(document.getElementById("nascimento")).maskPattern('99/99/9999');
+
+	        VMasker(document.getElementById("atendimento")).maskPattern("{{config('system.atendimentoMask')}}");    
+
+	        VMasker(document.getElementById("cpf")).maskPattern('999.999.999-99');    
+
+	         
 
 	        $('.i-checks').on('ifChecked', function(event){
 	        	var tipoLogin = event.target.defaultValue;

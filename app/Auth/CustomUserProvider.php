@@ -75,7 +75,7 @@ class CustomUserProvider implements UserProvider {
 
                         if(strtoupper($atendimentoAcesso[0]['pure']) == strtoupper($credentials['password'])){
                             $arrNome = explode(' ',$cliente['nome']);
-                            $nome = ucfirst(md_strtolower($arrNome[0])).' '.ucfirst(md_strtolower($arrNome[sizeof($arrNome)-1]));
+                            $nome = ucfirst(mb_strtolower($arrNome[0])).' '.ucfirst(mb_strtolower($arrNome[sizeof($arrNome)-1]));
 
                             $atributes = array(
                                 'remember_token' => str_random(60),
