@@ -54,7 +54,7 @@
 
 @section('content')
     <div class="row infoClienteMed">
-        <div class="col-md-12">
+        <div class="col-md-12 colunaInfoPaciente">
             <div class="col-md-5">
                 <div class="infoPaciente">
                     <strong><span id="nome" class="nomePaciente"></span></strong> <br>
