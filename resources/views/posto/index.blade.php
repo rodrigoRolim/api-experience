@@ -56,6 +56,7 @@
                     <input type="text" id="filtroPaciente" placeholder="Localizar paciente na relação abaixo" class="form-control">
                 </div>
                 <ul class="sortable-list connectList agile-list ui-sortable" id="listFilter"></ul>
+                <li><?php print_r($atendimentosPosto) ?></li>
             </div>
         </div>
     </div>

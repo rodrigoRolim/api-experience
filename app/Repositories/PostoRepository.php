@@ -18,12 +18,12 @@ class PostoRepository extends BaseRepository
     }
 
     public function getAtendimentosPosto($idPosto){
-        $sql = 'SELECT posto,atendimento,registro,data_atd,nome_solicitante,nome_convenio,nome_posto,situacao_exames_experience
+        $sql = 'SELECT a.posto,a.atendimento,a.registro,a.data_atd,a.nome_solicitante,c.nome,a.nome_convenio,a.nome_posto,a.situacao_exames_experience
                 FROM
-                  vw_atendimentos                 
+                  vw_atendimentos A
+                  INNER JOIN VW_CLIENTES C ON a.registro = c.registro
                 WHERE
-                  posto = :idPosto
-               	';
+                  posto = :idPosto';
 
         $data[] = DB::select(DB::raw($sql),[
             'idPosto' => $idPosto,
@@ -52,7 +52,7 @@ class PostoRepository extends BaseRepository
 
         $convenios = array(''=>'Selecione ');       
 
-	   	foreach ($data[0] as $key => $value) {
+	   foreach ($data[0] as $key => $value) {
             $convenios[$value->convenio] = $value->nome_convenio;
         }       
 
