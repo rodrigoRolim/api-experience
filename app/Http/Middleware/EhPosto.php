@@ -4,8 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Http\RedirectResponse;
 
-class RedirectIfAuthenticated
+class EhPosto
 {
     /**
      * The Guard implementation.
@@ -17,8 +18,7 @@ class RedirectIfAuthenticated
     /**
      * Create a new filter instance.
      *
-     * @param  Guard  $auth
-     * @return void
+     * @param Guard $auth
      */
     public function __construct(Guard $auth)
     {
@@ -28,26 +28,19 @@ class RedirectIfAuthenticated
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure                 $next
+     *
      * @return mixed
      */
     public function handle($request, Closure $next)
     {
         $tipoAcesso = $this->auth->user()['tipoAcesso'];
 
-        if ($tipoAcesso == 'PAC'){
-            return redirect('/paciente');
-        }
-
-        if ($tipoAcesso == 'MED'){
-            return redirect('/medico');
-        }
-
         if ($tipoAcesso == 'POS'){
-            return redirect('/posto');
+            return $next($request);
+        }else{
+            return response('Página não encontrada', 404);
         }
-
-        return $next($request);
     }
 }

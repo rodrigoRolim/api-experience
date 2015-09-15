@@ -7,6 +7,7 @@ use App\Models\Cliente;
 use App\Models\ClienteAcesso;
 use App\Models\Medico;
 use App\Models\MedicoAcesso;
+use App\Models\Posto;
 use Illuminate\Auth\GenericUser;
 use Illuminate\Contracts\Auth\UserProvider;
 use Illuminate\Contracts\Auth\Authenticatable as UserContract;
@@ -167,6 +168,25 @@ class CustomUserProvider implements UserProvider {
                 }
 
                 break;
+            case 'POS';                            
+                $posto = new Posto();
+                $posto = $posto->where(['posto' => $credentials['posto']])->get()->toArray();       
+
+                if(sizeof($posto)){
+                   
+                    if(strtoupper($posto[0]['pass']) == strtoupper($credentials['password'])){
+                        $atributes = array(
+                            'remember_token' => str_random(60),
+                            'id' => array(
+                                'tipoAcesso' => 'POS',
+                                'nome' => $posto[0]['nome'],
+                                'posto' => $posto[0]['posto'],
+                            ),
+                        );
+
+                        return new GenericUser($atributes);
+                    }
+                }
         }
 
         return null;

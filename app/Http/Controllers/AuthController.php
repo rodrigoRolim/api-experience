@@ -103,7 +103,9 @@ class AuthController extends Controller
                     'password' => 'required',
                 ];
 
+
                 $this->validate($request,$validate);
+
 
                 $credentials = [
                     'tipoAcesso' => 'MED',
@@ -113,6 +115,27 @@ class AuthController extends Controller
                     'password' => $request->input('password'),
                 ];
 
+
+                break;
+            case 'POS':
+                //Acesso ao posto
+                $qtdCaracter = config('system.qtdCaracterPosto');
+
+                $validate = [
+                    'posto' => 'required|max:'.$qtdCaracter.'',                  
+                    'password' => 'required',
+                ]; 
+
+                               
+                $this->validate($request,$validate);
+
+                $credentials = [
+                    'tipoAcesso' => 'POS',  
+                    'posto' => $request->input('posto'),                  
+                    'password' => $request->input('password'),
+                ];
+
+              
                 break;
         }
 

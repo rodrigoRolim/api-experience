@@ -25,6 +25,8 @@ ul{
 	font-size: 11px;
 }
 
+
+
 /* ========= header ======== */
 
 .headLogin{
@@ -266,6 +268,15 @@ div.row.infoClienteMed{
  .areaPaciente{
 	padding-left: 0px;
 	padding-top: 12px;
+}
+
+#listFilter li:hover,#listFilter li{
+	transition: background-color 0.5s ease;
+}
+
+
+.metismenu li,.metismenu li a, .metismenu li:hover, .metismenu li a:hover{
+	transition: background-color 0.2s ease;
 }
 
 @media (max-width: 1280px){

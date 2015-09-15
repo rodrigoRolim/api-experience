@@ -25,3 +25,11 @@ Route::group(['prefix' => '/', 'middleware' => ['auth','ehMedico']], function ()
         'medico' => 'MedicoController',
     ]);
 });
+
+Route::group(['prefix' => '/', ], function () {    
+    Route::controllers([
+        'posto' => 'PostoController',
+    ]);
+});
+
+
