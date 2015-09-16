@@ -24,12 +24,13 @@
 @section('content')
     <div class="col-md-12 corPadrao boxFiltro">
         <form id="formPosto">
+            <input hidden type="text" value="0" name="posto">
             <div class="col-md-3">
                 <label class="textoBranco">Atendimentos por datas entre:</label>
                 <div class="input-daterange input-group" id="datepicker">
                     <input type="text" class="input-sm form-control" id="dataInicio" name="dataInicio">
                     <span class="input-group-addon">até</span>
-                    <input type="text" class="input-sm form-control" id="dataFim" name="dataFim">
+                    <input type="text" class="input-sm form-control" id="dataFim" name="dataFim">                    
                 </div>
             </div>            
             <div class="col-md-3">
@@ -55,8 +56,7 @@
                     <span class="input-group-addon"><i class="fa fa-search"></i></span>
                     <input type="text" id="filtroPaciente" placeholder="Localizar paciente na relação abaixo" class="form-control">
                 </div>
-                <ul class="sortable-list connectList agile-list ui-sortable" id="listFilter"></ul>
-                <li><?php print_r($atendimentosPosto) ?></li>
+                <ul class="sortable-list connectList agile-list ui-sortable" id="listFilter"></ul>                
             </div>
         </div>
     </div>
@@ -101,18 +101,18 @@
             $('#filtroPaciente').filterList();
 
             $('#btnFiltrar').click(function(e){
-                var formMedico = $('#formPosto');
-                var postData = formMedico.serializeArray();
+                var formPosto = $('#formPosto');
+                var postData = formPosto.serializeArray();
 
                 getClientes(postData);
             });
 
-            
+
 
             function getClientes(postData){
                 $('#listFilter').html('<br><br><br><br><h2 class="textoTamanho"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando registros.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>');
                 $.ajax({
-                    url : 'medico/filterclientes',
+                    url : 'posto/filterclientes',
                     type: 'POST',
                     data : postData,
                     success:function(result){
@@ -148,6 +148,7 @@
                             var key = $(e.currentTarget).data('key');
                             window.location.replace("/medico/paciente/"+key);
                         });
+
                         console.log(result.data.length);
                         if(result.data.length == 0){
                             $('#listFilter').append('<h2 class="textoTamanho">Não foram encontrados atendimentos.</h2>');

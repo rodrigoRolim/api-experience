@@ -26,7 +26,7 @@ Route::group(['prefix' => '/', 'middleware' => ['auth','ehMedico']], function ()
     ]);
 });
 
-Route::group(['prefix' => '/', ], function () {    
+Route::group(['prefix' => '/','middleware' => ['auth','ehPosto']], function () {    
     Route::controllers([
         'posto' => 'PostoController',
     ]);

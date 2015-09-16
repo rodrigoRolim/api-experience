@@ -31,19 +31,37 @@ class PostoController extends Controller {
 
     public function getIndex()
     {   
-        $idPosto = $this->auth->user()['posto'];
-        
-        $atendimentosPosto = $this->posto->getAtendimentosPosto($idPosto);  
+        $idPosto = $this->auth->user()['posto'];        
+  
         $convenios = $this->posto->getConveniosPosto($idPosto);
 
         return view('posto.index')->with(
-            array(
-                'atendimentosPosto'=>$atendimentosPosto,
+            array(                
                 'convenios'=>$convenios,               
             )
         );
         
 
+    }
+
+    public function postFilterclientes(){
+        $requestData = Request::all();
+        $idPosto = $this->auth->user()['posto']; 
+
+        if($requestData['dataInicio'] != null && $requestData['dataFim'] != null){
+            $result = $this->posto->getClientes(
+                $idPosto,
+                $requestData['dataInicio'],
+                $requestData['dataFim'],              
+                $requestData['convenio'],
+                $requestData['situacao']
+            );
+
+            return response()->json(array(
+                'message' => 'Recebido com sucesso.',
+                'data' => $result,
+            ), 200);
+        }
     }
 
    
