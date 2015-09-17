@@ -104,10 +104,12 @@
                 var formPosto = $('#formPosto');
                 var postData = formPosto.serializeArray();
 
+                console.log(postData);
+
                 getClientes(postData);
             });
 
-
+            $('#btnFiltrar').trigger('click');
 
             function getClientes(postData){
                 $('#listFilter').html('<br><br><br><br><h2 class="textoTamanho"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando registros.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>');
@@ -146,10 +148,9 @@
 
                         $('#listFilter li').click(function(e){
                             var key = $(e.currentTarget).data('key');
-                            window.location.replace("/medico/paciente/"+key);
+                            window.location.replace("/posto/paciente/"+key);
                         });
-
-                        console.log(result.data.length);
+                        
                         if(result.data.length == 0){
                             $('#listFilter').append('<h2 class="textoTamanho">Não foram encontrados atendimentos.</h2>');
                         }

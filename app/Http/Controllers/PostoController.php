@@ -33,15 +33,15 @@ class PostoController extends Controller {
     {   
         $idPosto = $this->auth->user()['posto'];        
   
+        $atendimentos = $this->posto->getAtendimentosPosto($idPosto);
         $convenios = $this->posto->getConveniosPosto($idPosto);
 
         return view('posto.index')->with(
-            array(                
+            array(         
+                'atendimentos'=>$atendimentos,       
                 'convenios'=>$convenios,               
             )
         );
-        
-
     }
 
     public function postFilterclientes(){
@@ -62,6 +62,42 @@ class PostoController extends Controller {
                 'data' => $result,
             ), 200);
         }
+    }
+
+    public function getPaciente($registro){
+        $registro = base64_decode(strtr($registro, '-_', '+/'));
+        $registro = (int) trim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, config('system.key'),$registro, MCRYPT_MODE_ECB, mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB), MCRYPT_RAND)));
+
+        $idPosto = $this->auth->user()['posto'];
+
+        $atendimentos = $this->posto->getAtendimentosPacienteByPosto($registro,$idPosto);
+
+        if(!sizeof($atendimentos)){
+            return response()->json(array(
+                'message' => 'Atendimento não encontrado',
+            ), 404);
+        }
+
+        return view('posto.paciente',compact('atendimentos'));
+    }
+
+    public function getExamesatendimento($posto,$atendimento){
+
+        $ehAtendimentoPosto = $this->posto->ehAtendimentoPosto($this->auth->user()['posto'],$posto,$atendimento);
+
+       /* if(!$ehAtendimentoPosto){
+            return response()->json(array(
+                'message' => 'Posto / Atendimento não encontrado',
+            ), 404);
+        }*/
+
+        $exames = $this->exames->getExames($posto, $atendimento);
+
+     
+        return response()->json(array(
+            'message' => 'Recebido com sucesso.',
+            'data' => $exames,
+        ), 200);
     }
 
    

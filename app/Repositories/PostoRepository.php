@@ -18,7 +18,7 @@ class PostoRepository extends BaseRepository
         return 'App\Models\Posto';
     }
 
-    public function getClientes($idPosto,$dataInicio,$dataFim,$posto=null, $convenio=null,$situacao=null)
+    public function getClientes($idPosto,$dataInicio,$dataFim, $convenio=null,$situacao=null)
     {
         $sql = "SELECT
                   c.nome,c.data_nas,c.registro,c.sexo,c.telefone,c.telefone2 as atendimentos
@@ -122,5 +122,30 @@ class PostoRepository extends BaseRepository
         }       
 
         return $convenios;
+    }
+
+    public function getAtendimentosPacienteByPosto($registro,$idPosto){
+
+        $sql = 'SELECT c.nome,c.data_nas,c.registro,c.sexo,c.telefone,c.telefone2,a.posto,a.atendimento,data_atd, INITCAP(a.nome_convenio) AS nome_convenio, INITCAP(a.nome_solicitante) AS nome_solicitante, (GET_MNEMONICOS(a.posto,a.atendimento)) mnemonicos,a.saldo_devedor
+            FROM vw_atendimentos a              
+              INNER JOIN VW_CLIENTES c ON a.registro = c.registro
+            WHERE c.registro = :registro 
+            AND posto = :idPosto 
+            ORDER BY data_atd DESC';
+
+        $atendimento[] = DB::select(DB::raw($sql), ['registro' => $registro, 'idPosto' => $idPosto]);
+
+
+        return $atendimento[0];
+    }
+
+    public function ehAtendimentoPosto($idPosto,$atendimento){
+        $sql = "SELECT * FROM vw_atendimentos a                 
+                WHERE
+                  posto = :idPosto
+                AND a.atendimento = :atendimento";
+
+        $data = DB::select(DB::raw($sql),['idPosto'=>$idPosto,'atendimento'=>$atendimento]);
+        return (bool) sizeof($data);
     }
 }
