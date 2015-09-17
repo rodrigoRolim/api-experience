@@ -61,12 +61,12 @@
         		<div class="col-md-6"> 
 	                <div class="infoAtendimento">
 	                    <strong>ID</strong>:
-	                    <span id="atendimento"></span> <br>	                    
+	                    <span id="atendimento"></span> <br>	
+	                    <strong>Convênio</strong>:
+                    	<span id="convenio"></span> <br>                    
 	                </div>
 	            </div>
-                <div class="col-md-6">
-                	<strong>Convênio</strong>:
-                    <span id="convenio"></span> <br>
+                <div class="col-md-6">                	
                     <strong>Solicitante</strong>:
                     <span id="solicitante"></span> <br> 
                 </div>  
