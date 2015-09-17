@@ -61,12 +61,12 @@
         		<div class="col-md-6"> 
 	                <div class="infoAtendimento">
 	                    <strong>ID</strong>:
-	                    <span id="atendimento"></span> <br>
-	                    <strong>Convênio</strong>:
-	                    <span id="convenio"></span> <br>
+	                    <span id="atendimento"></span> <br>	                    
 	                </div>
 	            </div>
                 <div class="col-md-6">
+                	<strong>Convênio</strong>:
+                    <span id="convenio"></span> <br>
                     <strong>Solicitante</strong>:
                     <span id="solicitante"></span> <br> 
                 </div>  
@@ -243,7 +243,7 @@
 
 						$('.checkAll').trigger('ifChecked');
 					}else{
-						$('#boxRodape').html('<h3 class="text-danger">{!!config('system.messages.paciente.saldoDevedor')!!}</h3>');
+						$('#boxRodape').html('<h3 class="text-danger msgCliente">{!!config('system.messages.paciente.saldoDevedor')!!}</h3>');
 					}
 				}, "json" );
 			}
