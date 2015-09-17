@@ -25,6 +25,10 @@ ul{
 	font-size: 11px;
 }
 
+.dropdown-menu{
+	top: 80% !important;
+}
+
 
 
 /* ========= header ======== */
@@ -344,10 +348,17 @@ div.row.infoClienteMed{
 @media (max-width: 420px){
 
 	.navbar-header.logo img{
-		height: 48px;
-		text-align: center;
-		padding: 0px;
+		height: 28px;
+		float: left;			
+		padding-left: 5px;
 		margin: 0px;
+	}
+
+	.media-body{
+		float: right;
+		padding-right: 5px;
+		padding-top: 5px;
+		font-size: 0.8em;
 	}
 
 	li.nav-header{
@@ -355,8 +366,19 @@ div.row.infoClienteMed{
 	}
 
 	.navbar-header.logo{
-		width: 100%;
+		width: 30%;
 		text-align: center;
+	}
+
+	.infoUser{
+		width: 70%;
+		text-align: center;
+		padding: 0px;
+		margin-top: 5px;
+	}
+
+	.infoAtendimento{			
+		margin-left: 0px;
 	}
 
 	.listaExames li{
@@ -445,14 +467,6 @@ div.row.infoClienteMed{
 	.feed-element{
 		padding: 0px;
 		margin: 0px;
-	}
-	
-
-	.infoUser{
-		width: 100%;
-		text-align: center;
-		padding: 0px;
-		margin-top: 5px;
 	}
 
 	.infoUser img{

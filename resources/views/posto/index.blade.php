@@ -122,6 +122,7 @@
 
                         $.each( result.data, function( index ){
                             var cliente = result.data[index];
+                            console.log(cliente);
                             var item =   '<li class="col-md-12 naoRealizado-element" data-key="'+cliente.key+'">'+
                                             '<div class="col-md-4 dadosPaciente text-left">'+
                                                 '<strong>'+cliente.nome+'</strong><br><i class="'+((cliente.sexo == "M")?"fa fa-mars":"fa fa-venus")+'"></i> &nbsp;'+cliente.idade+

@@ -102,12 +102,10 @@
 		</div>
 	</div>
 	<div class="footer">
+		<div class="pull-right" id="boxRodape">	</div>
 		<div class="pull-left">
 			{!!config('system.loginText.footerText')!!}
-		</div>
-		<div class="pull-right" id="boxRodape">
-
-		</div>
+		</div>		
 	</div>
 @stop
 
