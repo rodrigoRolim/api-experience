@@ -21,7 +21,7 @@ class PostoRepository extends BaseRepository
     public function getClientes($idPosto,$dataInicio,$dataFim, $convenio=null,$situacao=null)
     {
         $sql = "SELECT
-                  c.nome,c.data_nas,c.registro,c.sexo,c.telefone,c.telefone2 as atendimentos
+                  c.nome,c.data_nas,c.registro,c.sexo,c.telefone,c.telefone2, get_atendimentos_posto(c.registro,a.posto,:maskPosto,:maskAtendimento) as atendimentos
                 FROM
                   VW_ATENDIMENTOS A                  
                   INNER JOIN VW_CLIENTES C ON a.registro = c.registro
@@ -36,6 +36,8 @@ class PostoRepository extends BaseRepository
             'idPosto' => $idPosto,
             'dataInicio' => $dataInicio.' 00:00',
             'dataFim' => $dataFim.' 23:59',
+            'maskPosto' =>'00',
+            'maskAtendimento' =>'000000',
             'convenio' => $convenio,
             'situacao' => $situacao,
         ]);

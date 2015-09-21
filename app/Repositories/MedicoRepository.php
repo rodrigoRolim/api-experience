@@ -50,6 +50,7 @@ class MedicoRepository extends BaseRepository
 
         $clientes = $clientes[0];
 
+        
         $dtNow = Carbon::now();
 
         for($i=0;$i<sizeof($clientes);$i++){

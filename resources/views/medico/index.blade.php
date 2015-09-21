@@ -130,7 +130,7 @@
                                             '<div class="col-md-2 text-left"><span class="ajusteFonte">Contato: '+cliente.telefone+' </span></div>'+
                                             '<div class="col-md-6 text-left"><span class="ajusteFonte">Últ. Atendimentos: </span>';
                             var count = 0;
-
+                            
                             $.each( cliente.atendimentos, function( index ){
                                 count++;
                                 var atendimento = cliente.atendimentos[index];

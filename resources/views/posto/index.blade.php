@@ -91,7 +91,7 @@
             $('#dataFim').val(dataFim);
 
             $('#listFilter').slimScroll({
-                height: '60vh',
+                height: '80vh',
                 railOpacity: 0.4,
                 wheelStep: 10,
                 minwidth: '100%',
@@ -103,8 +103,7 @@
             $('#btnFiltrar').click(function(e){
                 var formPosto = $('#formPosto');
                 var postData = formPosto.serializeArray();
-
-                console.log(postData);
+                
 
                 getClientes(postData);
             });
