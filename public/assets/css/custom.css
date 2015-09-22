@@ -21,8 +21,9 @@ ul{
 	list-style-type: none;
 }
 
-.ajusteFonte{
+.ultimos{
 	font-size: 11px;
+	margin-left: 6px;
 }
 
 
@@ -274,6 +275,7 @@ div.row.infoClienteMed{
 	padding-top: 12px;
 }
 
+
 #listFilter li:hover,#listFilter li{
 	transition: background-color 0.5s ease;
 }
@@ -301,6 +303,7 @@ div.row.infoClienteMed{
 		font-size: 1.1em;
 		margin-top: 8px;
 	}
+
 }
 
 @media (max-width: 1024px){
@@ -321,6 +324,7 @@ div.row.infoClienteMed{
 		font-size: 1.1em;
 		margin-top: 8px;
 	}
+
 }
 
 @media (max-width: 800px){
@@ -342,6 +346,15 @@ div.row.infoClienteMed{
 		font-size: 1.1em;
 		margin-top: 8px;
 	}
+
+	.boxFiltroPosto{
+		height: 250px;
+	}
+
+	.label, .labelAtendimentosClientes{
+		display: block !important;
+	}
+
 }
 
 
@@ -380,9 +393,12 @@ div.row.infoClienteMed{
 	.infoAtendimento{			
 		margin-left: 0px;
 	}
-
 	.listaExames li{
 		min-height: 120px;
+	}
+
+	.label, .labelAtendimentosClientes{
+		display: block !important;
 	}
 
 	#navbar{
@@ -404,7 +420,7 @@ div.row.infoClienteMed{
 
 	.btnVoltar{ /* View paciente/Medico */
 		min-width: 0px;
-		margin-right: 50px;
+		margin-right: 102px;
 		margin-top: 10px;
 	}
 
@@ -487,6 +503,10 @@ div.row.infoClienteMed{
 
 	.boxFiltro{
 		height: 300px;
+	}
+
+	.boxFiltroPosto{
+		height: 240px;
 	}
 }
 

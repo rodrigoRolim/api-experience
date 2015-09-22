@@ -99,9 +99,10 @@ body.mini-navbar .nav-header {
 }
 .labelAtendimentosClientes {
   margin-right: 5px;
+  margin-left: 5px;
   margin-top: 5px;
   background-color: #ffffff;
-  font-size: 11px;
+  font-size: 10.5px;
   border: 1px solid #dadada !important;
 }
 #listFilter li:hover {

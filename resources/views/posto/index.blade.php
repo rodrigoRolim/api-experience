@@ -10,7 +10,7 @@
     </a>
     <div class="media-body">
         <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span><br>        
-        <a class="dropdown-toggle" data-toggle="dropdown"><b class="caret"></b></a>
+        <a class="dropdown-toggle" data-toggle="dropdown"><b class="fa fa-caret-square-o-down fa-2x"></b></a>
         <ul class="dropdown-menu pull-right itensInfoUser">
             <li class="item">
                 <a href="/auth/logout">
@@ -22,7 +22,7 @@
 @stop
 
 @section('content')
-    <div class="col-md-12 corPadrao boxFiltro">
+    <div class="col-md-12 corPadrao boxFiltroPosto">
         <form id="formPosto">
             <input hidden type="text" value="0" name="posto">
             <div class="col-md-3">
@@ -126,8 +126,8 @@
                                             '<div class="col-md-4 dadosPaciente text-left">'+
                                                 '<strong>'+cliente.nome+'</strong><br><i class="'+((cliente.sexo == "M")?"fa fa-mars":"fa fa-venus")+'"></i> &nbsp;'+cliente.idade+
                                             '</div>'+
-                                            '<div class="col-md-2 text-left"><span class="ajusteFonte">Contato: '+cliente.telefone+' </span></div>'+
-                                            '<div class="col-md-6 text-left"><span class="ajusteFonte">Últ. Atendimentos: </span>';
+                                            '<div class="col-md-3 text-left"><span class="ajusteFonte">Contato: '+cliente.telefone+' </span></div>'+
+                                            '<div class="col-md-5 text-left"><span class="ultimos pull-left">Últimos Atendimentos: </span><br>';
                             var count = 0;
 
                             $.each( cliente.atendimentos, function( index ){
