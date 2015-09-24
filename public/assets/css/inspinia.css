@@ -493,7 +493,7 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
   padding: 7px 20px;
 }
 .navbar .dropdown-menu {
-  margin-top: 0px;
+  margin-top: -15px;
 }
 .top-navigation .navbar-brand {
   background: #1ab394;

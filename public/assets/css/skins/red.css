@@ -127,3 +127,6 @@ li.notClicked {
   font-weight: 800;
   border-left: 4px solid #c52f33;
 }
+.fa-caret-square-o-down{
+  color: #c52f33;
+}

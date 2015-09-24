@@ -9,7 +9,7 @@
        {!! Html::image('/assets/images/medico.png','logoUser',array('class' => 'img-circle pull-left')) !!}
     </a>
     <div class="media-body">
-        <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span><br>        
+        <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span>      
         <a class="dropdown-toggle" data-toggle="dropdown"><b class="fa fa-caret-square-o-down fa-2x"></b></a>
         <ul class="dropdown-menu pull-right itensInfoUser">
             <li class="item">
@@ -122,12 +122,12 @@
                         $.each( result.data, function( index ){
                             var cliente = result.data[index];
                             console.log(cliente);
-                            var item =   '<li class="col-md-12 naoRealizado-element" data-key="'+cliente.key+'">'+
-                                            '<div class="col-md-4 dadosPaciente text-left">'+
+                            var item =   '<li class="col-sm-12 naoRealizado-element" data-key="'+cliente.key+'">'+
+                                            '<div class="col-sm-4 dadosPaciente text-left">'+
                                                 '<strong>'+cliente.nome+'</strong><br><i class="'+((cliente.sexo == "M")?"fa fa-mars":"fa fa-venus")+'"></i> &nbsp;'+cliente.idade+
                                             '</div>'+
-                                            '<div class="col-md-3 text-left"><span class="ajusteFonte">Contato: '+cliente.telefone+' </span></div>'+
-                                            '<div class="col-md-5 text-left"><span class="ultimos pull-left">Últimos Atendimentos: </span><br>';
+                                            '<div class="col-sm-3 text-left"><span class="ajusteFonte">Contato: '+cliente.telefone+' </span></div>'+
+                                            '<div class="col-sm-5 text-left"><span class="ultimos pull-left">Últimos Atendimentos: </span><br>';
                             var count = 0;
 
                             $.each( cliente.atendimentos, function( index ){

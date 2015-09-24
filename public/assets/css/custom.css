@@ -51,6 +51,12 @@ ul{
 	margin-right: 5px;
 }
 
+.fa-caret-square-o-down{
+	margin-top: 10px;
+	margin-left: 2px;
+	font-size: 15px !important;
+}
+
 /* ======== auth - LayoutLogin.blade.php - includes/formLogin ======= */
 
 #body{

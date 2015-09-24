@@ -10,8 +10,8 @@
           {!! Html::image('/assets/images/medico.png','logoUser',array('class' => 'img-circle pull-left')) !!}
         </a>
         <div class="media-body">
-            <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span><br>            
-            <a class="dropdown-toggle" data-toggle="dropdown"><b class="caret"></b></a>
+            <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span>
+            <a class="dropdown-toggle" data-toggle="dropdown"><b class="fa fa-caret-square-o-down fa-1x"></b></a>    
             <ul class="dropdown-menu pull-right itensInfoUser">
                 <li class="item">
                     <a href="/auth/logout">
