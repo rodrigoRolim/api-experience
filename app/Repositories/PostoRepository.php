@@ -84,8 +84,10 @@ class PostoRepository extends BaseRepository
 
     public function getPostosRealizantes()
     {
-        $sql = 'SELECT posto,nome FROM POSTOS WHERE realiza_exames = "S" order by nome';
-        $data [] = DB::select(DB::raw($sql));
+        $sql = 'SELECT posto,nome FROM POSTOS WHERE realiza_exames = :tipo order by nome';
+        $data [] = DB::select(DB::raw($sql),[
+            'tipo' => 'S'
+        ]);
 
         $postos = array ('' => 'Selecione');
 

@@ -37,8 +37,8 @@ class PostoController extends Controller {
 
         return view('posto.index')->with(
             array(
-                'postoRealizante'=>$postoRealizante,
-                'convenios'=>$convenios,   
+                'postoRealizante' => $postoRealizante,
+                'convenios' => $convenios,   
             )
         );
     }
@@ -54,7 +54,7 @@ class PostoController extends Controller {
                 $requestData['dataFim'],              
                 $requestData['convenio'],
                 $requestData['situacao'],
-                $requestData['postoRealizante'],
+                $requestData['postoRealizante']
             );
 
             return response()->json(array(
