@@ -18,7 +18,7 @@ class PostoRepository extends BaseRepository
         return 'App\Models\Posto';
     }
 
-    public function getAtendimentos($idPosto,$dataInicio,$dataFim, $convenio=null,$situacao=null,$idPostoRealizante=null)
+    public function getAtendimentos($idPosto,$dataInicio,$dataFim, $convenio=null,$situacao=null,$postoRealizante=null)
     {
         $sql = "SELECT DISTINCT
                    a.posto, a.atendimento,a.data_atd,a.nome_convenio, c.nome,c.data_nas,c.registro,c.sexo,c.telefone,c.telefone2, get_mnemonicos(a.posto, a.atendimento) as mnemonicos
@@ -40,7 +40,7 @@ class PostoRepository extends BaseRepository
             'dataFim' => $dataFim.' 23:59',            
             'convenio' => $convenio,
             'situacao' => $situacao,
-            'postoRealizante' => $idPostoRealizante
+            'postoRealizante' => $postoRealizante
         ]);
 
         $clientes = $clientes[0];

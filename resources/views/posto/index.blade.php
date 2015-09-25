@@ -42,6 +42,10 @@
                 {!! Form::select('situacao', config('system.selectFiltroSituacaoAtendimento'), '', array('class' => 'form-control m-b', 'id'=>'situacao')) !!}
             </div>
             <div class="col-md-2">
+                <label class="textoBranco" name="situacao">Posto Realizante</label>
+                {!! Form::select('postoRealizante', config('system.selectFiltroSituacaoAtendimento'), '', array('class' => 'form-control m-b', 'id'=>'postoRealizante')) !!}
+            </div>
+            <div class="col-md-2">
                 <div class="input-group m-b filtrar col-md-12" style="margin-bottom:0px;padding-top:17px;">
                     <a class="btn btn-warning btn-outline col-md-12" id="btnFiltrar"><i class="fa fa-filter fa-2"> </i> Filtrar</a>
                 </div>
