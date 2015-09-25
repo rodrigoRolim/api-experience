@@ -27,7 +27,6 @@ class PostoController extends Controller {
         $this->exames = $exames;
     }
 
-
     public function getIndex()
     {   
         $idPosto = $this->auth->user()['posto'];
