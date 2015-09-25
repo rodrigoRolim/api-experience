@@ -131,12 +131,12 @@
 
                             var item =   '<li class="col-sm-12 boxatendimento naoRealizado-element" data-key="'+atendimento.key+'">'+
                                             '<div class="col-sm-12 dadosPaciente text-left">'+
-                                              '<div class="col-md-6">'
+                                              '<div class="col-sm-6">'+
                                                 '<span class="postoAtendimento"><i class="fa fa-heartbeat"></i><strong> '+atendimento.posto+'/'+atendimento.atendimento+'</span></strong>'+
                                                 '<span class="dataAtendimento"><i class="fa fa-calendar-check-o"></i> '+dataAtendimento+'</span>'+
                                                 '<span class="convenioAtendimento"><i class="fa fa-credit-card"></i> '+atendimento.nome_convenio+'</span>'+                                                
                                                 '<div class="dadosPessoais"><strong>'+atendimento.nome+'</strong>'+' <br><i class="'+((atendimento.sexo == "M")?"fa fa-mars":"fa fa-venus")+'"></i>'+atendimento.idade+'  '+dataNascimento+'</div>'+
-                                               '</div><div class="col-md-6">'
+                                               '</div><div class="col-sm-6">'+
                                                 '<i class="fa fa-flask"></i> '+atendimento.mnemonicos+'</div>'+
                                             '</div></li>';  
 

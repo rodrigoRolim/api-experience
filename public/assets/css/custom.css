@@ -134,6 +134,7 @@ ul{
 
 .dadosPaciente{
 	text-align: left;
+	padding: 0px;
 }
 
 .boxFiltro{
@@ -144,15 +145,15 @@ ul{
 }
 
 .postoAtendimento{
-	margin-right: 30px;
+	margin-right: 120px;
 }
 
 .dataAtendimento{
-	margin-right: 30px;
+	margin-right: 120px;
 }
 
 .convenioAtendimento{
-	margin-right: 30px;
+	margin-right: 120px;
 }
 
 .dadosPessoais{
