@@ -18,10 +18,10 @@ class PostoRepository extends BaseRepository
         return 'App\Models\Posto';
     }
 
-    public function getClientes($idPosto,$dataInicio,$dataFim, $convenio=null,$situacao=null)
+    public function getAtendimentos($idPosto,$dataInicio,$dataFim, $convenio=null,$situacao=null)
     {
-        $sql = "SELECT
-                  c.nome,c.data_nas,c.registro,c.sexo,c.telefone,c.telefone2, get_atendimentos_posto(c.registro,a.posto,:maskPosto,:maskAtendimento) as atendimentos
+        $sql = "SELECT DISTINCT
+                   a.posto, a.atendimento,a.data_atd,a.nome_convenio, c.nome,c.data_nas,c.registro,c.sexo,c.telefone,c.telefone2, get_mnemonicos(a.posto, a.atendimento) as mnemonicos
                 FROM
                   VW_ATENDIMENTOS A                  
                   INNER JOIN VW_CLIENTES C ON a.registro = c.registro
@@ -35,9 +35,7 @@ class PostoRepository extends BaseRepository
         $clientes[] = DB::select(DB::raw($sql),[
             'idPosto' => $idPosto,
             'dataInicio' => $dataInicio.' 00:00',
-            'dataFim' => $dataFim.' 23:59',
-            'maskPosto' =>'00',
-            'maskAtendimento' =>'000000',
+            'dataFim' => $dataFim.' 23:59',            
             'convenio' => $convenio,
             'situacao' => $situacao,
         ]);
@@ -46,10 +44,7 @@ class PostoRepository extends BaseRepository
 
         $dtNow = Carbon::now();
 
-        for($i=0;$i<sizeof($clientes);$i++){
-            $atd = explode(",",$clientes[$i]->atendimentos);
-            array_pop($atd);
-            $clientes[$i]->atendimentos = $atd;
+        for($i=0;$i<sizeof($clientes);$i++){           
 
             //Calcular idade
             $dtNascimento = Carbon::parse($clientes[$i]->data_nas);

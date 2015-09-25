@@ -44,12 +44,12 @@ class PostoController extends Controller {
         );
     }
 
-    public function postFilterclientes(){
+    public function postFilteratendimentos(){
         $requestData = Request::all();
         $idPosto = $this->auth->user()['posto']; 
 
         if($requestData['dataInicio'] != null && $requestData['dataFim'] != null){
-            $result = $this->posto->getClientes(
+            $result = $this->posto->getAtendimentos(
                 $idPosto,
                 $requestData['dataInicio'],
                 $requestData['dataFim'],              
@@ -83,13 +83,13 @@ class PostoController extends Controller {
 
     public function getExamesatendimento($posto,$atendimento){
 
-        $ehAtendimentoPosto = $this->posto->ehAtendimentoPosto($this->auth->user()['posto'],$posto,$atendimento);
+        $ehAtendimentoPosto = $this->posto->ehAtendimentoPosto($this->auth->user()['posto'],$atendimento);
 
-       /* if(!$ehAtendimentoPosto){
+        if(!$ehAtendimentoPosto){
             return response()->json(array(
                 'message' => 'Posto / Atendimento não encontrado',
             ), 404);
-        }*/
+        }
 
         $exames = $this->exames->getExames($posto, $atendimento);
 

@@ -143,6 +143,22 @@ ul{
 	min-height: 100%;
 }
 
+.postoAtendimento{
+	margin-right: 30px;
+}
+
+.dataAtendimento{
+	margin-right: 30px;
+}
+
+.convenioAtendimento{
+	margin-right: 30px;
+}
+
+.dadosPessoais{
+	padding-top: 10px;
+}
+
 
 /* ========= index.blade.php/paciente.blade.php - Paciente/Medico ==========*/
 

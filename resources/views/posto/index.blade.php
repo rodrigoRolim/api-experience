@@ -74,7 +74,7 @@
         $(document).ready(function (){
             var dataInicio = new moment();
             var dataFim = new moment();
-            var qtdDiasFiltro = {{config('system.medico.qtdDiasFiltro')}};
+            var qtdDiasFiltro = {{config('system.posto.qtdDiasFiltro')}};
 
             $('.input-daterange').datepicker({
                 keyboardNavigation: true,
@@ -109,38 +109,36 @@
             });
 
             $('#btnFiltrar').trigger('click');
-
+            
             function getClientes(postData){
                 $('#listFilter').html('<br><br><br><br><h2 class="textoTamanho"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando registros.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>');
                 $.ajax({
-                    url : 'posto/filterclientes',
+                    url : 'posto/filteratendimentos',
                     type: 'POST',
                     data : postData,
-                    success:function(result){
+                    success:function(result){   
                         $('#listFilter').html('');
+                        var dataAtendimento = [];
 
                         $.each( result.data, function( index ){
-                            var cliente = result.data[index];
-                            console.log(cliente);
-                            var item =   '<li class="col-sm-12 naoRealizado-element" data-key="'+cliente.key+'">'+
-                                            '<div class="col-sm-4 dadosPaciente text-left">'+
-                                                '<strong>'+cliente.nome+'</strong><br><i class="'+((cliente.sexo == "M")?"fa fa-mars":"fa fa-venus")+'"></i> &nbsp;'+cliente.idade+
-                                            '</div>'+
-                                            '<div class="col-sm-3 text-left"><span class="ajusteFonte">Contato: '+cliente.telefone+' </span></div>'+
-                                            '<div class="col-sm-5 text-left"><span class="ultimos pull-left">Últimos Atendimentos: </span><br>';
-                            var count = 0;
+                            var atendimento = result.data[index];
+                            console.log(atendimento);
+                            atendimento.telefone = atendimento.telefone.replace(/ /g,""); //Remove espaços
+                            dataAtendimento = new moment(atendimento.data_atd);                            
+                            dataAtendimento = dataAtendimento.format('DD/MM/YYYY');     
+                            dataNascimento = new moment(atendimento.data_nas);
+                            dataNascimento = dataNascimento.format('DD/MM/YYYY');
 
-                            $.each( cliente.atendimentos, function( index ){
-                                count++;
-                                var atendimento = cliente.atendimentos[index];
-                                item += '<span class="label labelAtendimentosClientes">'+atendimento+"</span>";
-
-                                if(count == 3){
-                                    return false;
-                                }
-                            });
-
-                            item += '</div></li>';
+                            var item =   '<li class="col-sm-12 boxatendimento naoRealizado-element" data-key="'+atendimento.key+'">'+
+                                            '<div class="col-sm-12 dadosPaciente text-left">'+
+                                              '<div class="col-md-6">'
+                                                '<span class="postoAtendimento"><i class="fa fa-heartbeat"></i><strong> '+atendimento.posto+'/'+atendimento.atendimento+'</span></strong>'+
+                                                '<span class="dataAtendimento"><i class="fa fa-calendar-check-o"></i> '+dataAtendimento+'</span>'+
+                                                '<span class="convenioAtendimento"><i class="fa fa-credit-card"></i> '+atendimento.nome_convenio+'</span>'+                                                
+                                                '<div class="dadosPessoais"><strong>'+atendimento.nome+'</strong>'+' <br><i class="'+((atendimento.sexo == "M")?"fa fa-mars":"fa fa-venus")+'"></i>'+atendimento.idade+'  '+dataNascimento+'</div>'+
+                                               '</div><div class="col-md-6">'
+                                                '<i class="fa fa-flask"></i> '+atendimento.mnemonicos+'</div>'+
+                                            '</div></li>';  
 
                             $('#listFilter').append(item);
                            

@@ -34,7 +34,7 @@
                 </div>
             </div>
             <div class="col-md-2">
-                <label class="textoBranco" name="posto">Posto Realizante</label>
+                <label class="textoBranco" name="posto">Posto de Cadastro</label>
                 {!! Form::select('posto', $postos, '', array('class' => 'form-control m-b', 'id'=>'posto')) !!}
             </div>
             <div class="col-md-3">

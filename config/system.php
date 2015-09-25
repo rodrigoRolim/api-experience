@@ -34,6 +34,9 @@ return [
         'EA' => 'Em Andamento',
     ],
     'medico' => [
-        'qtdDiasFiltro' => 30
+        'qtdDiasFiltro' => 7
+    ],
+    'posto' => [
+        'qtdDiasFiltro' => 60
     ]
 ];
