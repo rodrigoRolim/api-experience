@@ -40,7 +40,7 @@ class EhMedico
         if ($tipoAcesso == 'MED'){
             return $next($request);
         }else{
-            return response('Página não encontrada', 404);
+            \App::abort(404);
         }
     }
 }

@@ -40,7 +40,7 @@ class EhPaciente
         if ($tipoAcesso == 'PAC'){
             return $next($request);
         }else{
-            return response('Página não encontrada', 404);
+            \App::abort(404);
         }
     }
 }

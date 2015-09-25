@@ -76,9 +76,7 @@ class MedicoController extends Controller {
         $atendimentos = $this->medico->getAtendimentosPacienteByMedico($registro,$idMedico);
 
         if(!sizeof($atendimentos)){
-            return response()->json(array(
-                'message' => 'Atendimento não encontrado',
-            ), 404);
+            \App::abort(404);
         }
 
         return view('medico.paciente',compact('atendimentos'));
@@ -89,9 +87,7 @@ class MedicoController extends Controller {
         $ehAtendimentoMedico = $this->medico->ehAtendimentoMedico($this->auth->user()['id_medico'],$posto,$atendimento);
 
         if(!$ehAtendimentoMedico){
-            return response()->json(array(
-                'message' => 'Posto / Atendimento não encontrado',
-            ), 404);
+            \App::abort(404);
         }
 
         $exames = $this->exames->getExames($posto, $atendimento);

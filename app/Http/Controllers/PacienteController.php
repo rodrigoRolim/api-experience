@@ -28,9 +28,7 @@ class PacienteController extends Controller {
         $ehCliente = $this->atendimento->ehCliente($this->auth,$posto,$atendimento);
 
         if(!$ehCliente){
-            return response()->json(array(
-                'message' => 'Posto / Atendimento não encontrado',
-            ), 404);
+            \App::abort(404);
         }
 
         $exames = $this->exames->getExames($posto, $atendimento);

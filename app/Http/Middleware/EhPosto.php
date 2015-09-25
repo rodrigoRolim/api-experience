@@ -40,7 +40,7 @@ class EhPosto
         if ($tipoAcesso == 'POS'){
             return $next($request);
         }else{
-            return response('Página não encontrada', 404);
+            \App::abort(404);
         }
     }
 }

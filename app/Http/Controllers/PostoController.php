@@ -72,9 +72,7 @@ class PostoController extends Controller {
         $atendimentos = $this->posto->getAtendimentosPacienteByPosto($registro,$idPosto);
 
         if(!sizeof($atendimentos)){
-            return response()->json(array(
-                'message' => 'Atendimento não encontrado',
-            ), 404);
+            \App::abort(404);
         }
 
         $postoRealizante = $this->posto->getPostosRealizantes();
@@ -87,9 +85,7 @@ class PostoController extends Controller {
         $ehAtendimentoPosto = $this->posto->ehAtendimentoPosto($this->auth->user()['posto'],$atendimento);
 
         if(!$ehAtendimentoPosto){
-            return response()->json(array(
-                'message' => 'Posto / Atendimento não encontrado',
-            ), 404);
+            \App::abort(404);
         }
 
         $exames = $this->exames->getExames($posto, $atendimento,$postoRealizante);
