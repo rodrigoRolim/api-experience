@@ -53,6 +53,7 @@
 @stop
 
 @section('content')
+<div id="page-wrapper" class="gray-bg" style="min-height: 85.6vh;">
     <div class="row infoClienteMed">
         <div class="col-md-12 colunaInfoPaciente">
             <div class="col-md-5">
@@ -109,6 +110,7 @@
 
         </div>
     </div>
+</div>
 @stop
 
 @section('script')

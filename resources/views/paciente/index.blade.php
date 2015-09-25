@@ -56,6 +56,7 @@
 @stop
 
 @section('content')
+<div id="page-wrapper" class="gray-bg" style="min-height: 85.6vh;">
 	  <div class="row infoCliente">
 	        <div class="col-md-12 areaPaciente"> 
         		<div class="col-md-6"> 
@@ -107,6 +108,7 @@
 			{!!config('system.loginText.footerText')!!}
 		</div>		
 	</div>
+</div>
 @stop
 
 @section('script')

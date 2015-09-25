@@ -103,6 +103,12 @@ ul{
 	padding: 0px;
 }
 
+
+#page-wrapper-posto{
+	padding: 0px;
+	margin-left: 0px;
+}
+
 .side-menu{
 	height: 100%;
 	overflow: auto;
@@ -230,10 +236,13 @@ div.row.infoClienteMed{
 }
 
 .all{
-	float: none;
-	padding-top: 8px;
-	text-align: right;
+	float: right;
+	padding-top: 8px;	
 	margin-right: 30px;
+}
+
+.selectPosto{
+	margin-left: 20px;
 }
 
 .wrapper-content{

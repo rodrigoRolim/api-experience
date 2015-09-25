@@ -2,6 +2,7 @@
 
 @section('stylesheets')
     {!! Html::style('/assets/css/plugins/iCheck/custom.css') !!}
+    {!! Html::style('/assets/css/plugins/chosen/chosen.css') !!}
 @show
 
 @section('infoHead')
@@ -37,13 +38,7 @@
                        data-solicitante="{{$atendimento->nome_solicitante}}"
                        data-convenio="{{$atendimento->nome_convenio}}"
                        data-saldo="{{$atendimento->saldo_devedor}}"
-                       data-nome="{{$atendimento->nome}}">                       
-                        <b class="dataMini">
-                            <p class="text-center" style="margin:0px;line-height: 14px">{{ date('d/m',strtotime($atendimento->data_atd))}}<br>
-                                {{ date('Y',strtotime($atendimento->data_atd))}}</p>
-                        </b>
-                        <span class="nav-label mnemonicos"><strong>{{ date('d/m/y',strtotime($atendimento->data_atd))}}</strong><br>
-                            {{str_limit($atendimento->mnemonicos,56)}}</span>
+                       data-nome="{{$atendimento->nome}}"> 
                     </a>
                 </li>
             @endforeach
@@ -52,6 +47,7 @@
 @stop
 
 @section('content')
+<div id="page-wrapper-posto" class="gray-bg">
     <div class="row infoClienteMed">
         <div class="col-md-12 colunaInfoPaciente">
             <div class="col-md-5">
@@ -74,10 +70,12 @@
 
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="ibox">
-
-            <div class="i-checks all boxSelectAll"> </div>
+        
+        <div class="row">
+            <div class="i-checks all boxSelectAll">    </div>
+            {!! Form::select('postoRealizante', $postoRealizante, '', array('tabindex'=>'4','multiple','data-placeholder'=>'Todos os postos','class' => 'chosen-select selectPosto', 'id'=>'situacao')) !!}        
+        </div>   
             <ul class="sortable-list connectList agile-list ui-sortable listaExames">  </ul>
-
             <!-- Modal -->
               <div class="modal fade" id="modalExames" role="dialog">
                 <div class="modal-dialog">
@@ -108,6 +106,7 @@
 
         </div>
     </div>
+</div>
 @stop
 
 @section('script')
@@ -115,6 +114,7 @@
     <script src="{{ asset('/assets/js/plugins/iCheck/icheck.min.js') }}"></script>
     <script src="{{ asset('/assets/js/plugins/truncateString/truncate.js') }}"></script>
     <script src="{{ asset('/assets/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/plugins/chosen/chosen.jquery.js') }}"></script>    
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -141,6 +141,20 @@
                 $('.boxSelectAll').html('');
             });
 
+            $('.btnAtendimento').hide();         
+            $('.navbar-static-side').remove();   
+
+              var config = {
+                '.chosen-select'           : {},
+                '.chosen-select-deselect'  : {allow_single_deselect:true},
+                '.chosen-select-no-single' : {disable_search_threshold:10},
+                '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
+                '.chosen-select-width'     : {width:"95%"}
+                }
+            for (var selector in config) {
+                $(selector).chosen(config[selector]);
+            }
+
             $('.page-heading').slimScroll({
                 height: '66.5vh',
                 railOpacity: 0.4,
@@ -148,14 +162,7 @@
                 minwidth: '100%',
                 touchScrollStep: 50,
             });
-
-            $('#side-menu').slimScroll({
-                height: '65vh',
-                railOpacity: 0.4,
-                wheelStep: 10,
-                minwidth: '100%',
-                touchScrollStep: 50,
-            });          
+                    
 
             $('.active a').trigger('click');
 

@@ -38,10 +38,8 @@
         </div>
         <div class="container">
             <div id="wrapper">
-                @yield('left')
-                <div id="page-wrapper" class="gray-bg" style="min-height: 85.6vh;">
-                    @yield('content')
-                </div>
+                @yield('left')                
+                    @yield('content')                
             </div>
         </div>
     </div>
