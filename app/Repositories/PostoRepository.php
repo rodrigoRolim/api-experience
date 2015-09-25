@@ -18,18 +18,20 @@ class PostoRepository extends BaseRepository
         return 'App\Models\Posto';
     }
 
-    public function getAtendimentos($idPosto,$dataInicio,$dataFim, $convenio=null,$situacao=null)
+    public function getAtendimentos($idPosto,$dataInicio,$dataFim, $convenio=null,$situacao=null,$idPostoRealizante=null)
     {
         $sql = "SELECT DISTINCT
                    a.posto, a.atendimento,a.data_atd,a.nome_convenio, c.nome,c.data_nas,c.registro,c.sexo,c.telefone,c.telefone2, get_mnemonicos(a.posto, a.atendimento) as mnemonicos
                 FROM
                   VW_ATENDIMENTOS A                  
                   INNER JOIN VW_CLIENTES C ON a.registro = c.registro
+                  INNER JOIN VW_EXAMES E ON a.posto = e.posto AND a.atendimento = e.atendimento
                 WHERE a.posto = :idPosto
                     AND A.DATA_ATD >= TO_DATE(:dataInicio,'DD/MM/YYYY HH24:MI')
                     AND A.DATA_ATD <= TO_DATE(:dataFim,'DD/MM/YYYY HH24:MI')                   
                     AND (:convenio IS NULL OR A.CONVENIO = :convenio)
                     AND (:situacao IS NULL OR A.SITUACAO_EXAMES_EXPERIENCE = :situacao)
+                    AND (:postoRealizante IS NULL OR E.posto_realizante = :postoRealizante)
                 ORDER BY c.nome";       
 
         $clientes[] = DB::select(DB::raw($sql),[
@@ -38,6 +40,7 @@ class PostoRepository extends BaseRepository
             'dataFim' => $dataFim.' 23:59',            
             'convenio' => $convenio,
             'situacao' => $situacao,
+            'postoRealizante' => $idPostoRealizante
         ]);
 
         $clientes = $clientes[0];
@@ -79,22 +82,18 @@ class PostoRepository extends BaseRepository
         return $clientes;
     }
 
-    public function getAtendimentosPosto($idPosto){
-        $sql = 'SELECT a.posto,a.atendimento,a.registro,a.data_atd,a.nome_solicitante,c.nome,a.nome_convenio,a.nome_posto,a.situacao_exames_experience
-                FROM
-                  vw_atendimentos A
-                  INNER JOIN VW_CLIENTES C ON a.registro = c.registro
-                WHERE
-                  posto = :idPosto';
+    public function getPostosRealizantes()
+    {
+        $sql = 'SELECT posto,nome FROM POSTOS WHERE realiza_exames = "S" order by nome';
+        $data [] = DB::select(DB::raw($sql));
 
-        $data[] = DB::select(DB::raw($sql),[
-            'idPosto' => $idPosto,
-        ]);
+        $postos = array ('' => 'Selecione');
 
-        $atendimentos = $data;
+        foreach ($data[0] as $key => $value) {
+            $postos[$value->posto] = $value->nome;
+        }
 
-        
-        return $atendimentos;
+        return $postos;
     }
 
     public function getConveniosPosto($idPosto)

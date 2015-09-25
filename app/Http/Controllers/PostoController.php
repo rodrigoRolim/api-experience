@@ -4,7 +4,6 @@ use App\Repositories\ConvenioRepository;
 use App\Repositories\ExamesRepository;
 use App\Repositories\PostoRepository;
 use Illuminate\Contracts\Auth\Guard;
-//use Vinkla\Hashids\Facades\Hashids;
 
 use Request;
 
@@ -31,15 +30,15 @@ class PostoController extends Controller {
 
     public function getIndex()
     {   
-        $idPosto = $this->auth->user()['posto'];        
-  
-        $atendimentos = $this->posto->getAtendimentosPosto($idPosto);
+        $idPosto = $this->auth->user()['posto'];
+
+        $postoRealizante = $this->posto->getPostosRealizantes();
         $convenios = $this->posto->getConveniosPosto($idPosto);
 
         return view('posto.index')->with(
-            array(         
-                'atendimentos'=>$atendimentos,       
-                'convenios'=>$convenios,               
+            array(
+                'postoRealizante'=>$postoRealizante,
+                'convenios'=>$convenios,   
             )
         );
     }
@@ -54,7 +53,8 @@ class PostoController extends Controller {
                 $requestData['dataInicio'],
                 $requestData['dataFim'],              
                 $requestData['convenio'],
-                $requestData['situacao']
+                $requestData['situacao'],
+                $requestData['postoRealizante'],
             );
 
             return response()->json(array(
@@ -78,10 +78,12 @@ class PostoController extends Controller {
             ), 404);
         }
 
-        return view('posto.paciente',compact('atendimentos'));
+        $postoRealizante = $this->posto->getPostosRealizantes();
+
+        return view('posto.paciente',compact('atendimentos','postoRealizante'));
     }
 
-    public function getExamesatendimento($posto,$atendimento){
+    public function getExamesatendimento($posto,$atendimento,$postoRealizante = null){
 
         $ehAtendimentoPosto = $this->posto->ehAtendimentoPosto($this->auth->user()['posto'],$atendimento);
 
@@ -91,15 +93,11 @@ class PostoController extends Controller {
             ), 404);
         }
 
-        $exames = $this->exames->getExames($posto, $atendimento);
-
+        $exames = $this->exames->getExames($posto, $atendimento,$postoRealizante);
      
         return response()->json(array(
             'message' => 'Recebido com sucesso.',
             'data' => $exames,
         ), 200);
     }
-
-   
-   
 }

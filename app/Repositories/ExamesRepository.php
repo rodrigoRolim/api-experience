@@ -16,8 +16,12 @@ class ExamesRepository extends BaseRepository
         return 'App\Models\Exame';
     }
 
-    public function getExames($posto,$atendimento){
-        $exames = $this->findWhere(['posto' => $posto, 'atendimento' => $atendimento])->toArray();
+    public function getExames($posto,$atendimento,$postoRealizante = null){
+        if(!is_null($postoRealizante)){
+            $exames = $this->findWhere(['posto' => $posto, 'atendimento' => $atendimento,'posto_rea' => $postoRealizante])->toArray();
+        }else{
+            $exames = $this->findWhere(['posto' => $posto, 'atendimento' => $atendimento])->toArray();
+        }
 
         foreach($exames as $key => $exame){
             switch($exame['situacao_experience']){

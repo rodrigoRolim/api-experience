@@ -38,9 +38,6 @@ class MedicoController extends Controller {
         $postos = $this->medico->getPostoAtendimento($idMedico);
         $convenios = $this->medico->getConvenioAtendimento($idMedico);
 
-//        $bruno = base64_encode(Hashids::encode(80));
-//        dd($bruno);
-
         return view('medico.index')->with(
             array(
                 'postos'=>$postos,
