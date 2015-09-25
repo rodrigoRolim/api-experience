@@ -41,7 +41,7 @@
     <body>
         <div class="container">
             <div class="content">
-            	{!! Html::image('/assets/images/logo.png', 'Codemed', array('title' => 'logo')) !!}
+            	{!! Html::image('/assets/images/logo_g.png', 'Codemed', array('title' => 'logo', 'style' => 'height:120px')) !!}
                 <div class="title">Página não encontrada</div>
             </div>
         </div>

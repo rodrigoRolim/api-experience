@@ -89,8 +89,6 @@ class PostoRepository extends BaseRepository
             'tipo' => 'S'
         ]);
 
-        $postos = array ('' => 'Selecione');
-
         foreach ($data[0] as $key => $value) {
             $postos[$value->posto] = $value->nome;
         }
