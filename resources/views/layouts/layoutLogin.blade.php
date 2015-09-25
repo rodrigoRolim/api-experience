@@ -24,7 +24,7 @@
 		<div id="header">
 			<header>
 				<nav class="navbar navbar-static-top headLogin" role="navigation" style="margin-bottom: 0">
-					{!! Html::image('/assets/images/logo.png', 'SmartAdmin', array('title' => 'logo')) !!}
+					{!! Html::image('/assets/images/logo.png', 'CodeMed', array('title' => 'logo')) !!}
 				</nav>
 			</header>
 		</div>
