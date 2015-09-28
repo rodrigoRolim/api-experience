@@ -63,13 +63,13 @@ class PostoController extends Controller {
         }
     }
 
-    public function getPaciente($registro){
+    public function getPaciente($registro,$idAtendimento){
         $registro = base64_decode(strtr($registro, '-_', '+/'));
         $registro = (int) trim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, config('system.key'),$registro, MCRYPT_MODE_ECB, mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB), MCRYPT_RAND)));
 
         $idPosto = $this->auth->user()['posto'];
 
-        $atendimentos = $this->posto->getAtendimentosPacienteByPosto($registro,$idPosto);
+        $atendimentos = $this->posto->getAtendimentosPacienteByPosto($registro,$idPosto,$idAtendimento);
 
         if(!sizeof($atendimentos)){
             \App::abort(404);

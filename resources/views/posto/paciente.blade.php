@@ -38,6 +38,7 @@
                        data-solicitante="{{$atendimento->nome_solicitante}}"
                        data-convenio="{{$atendimento->nome_convenio}}"
                        data-saldo="{{$atendimento->saldo_devedor}}"
+                       data-idade="{{$atendimento->data_nas}}"
                        data-nome="{{$atendimento->nome}}"> 
                     </a>
                 </li>
@@ -53,7 +54,7 @@
             <div class="col-md-5">
                 <div class="infoPaciente">
                     <strong><span id="nome" class="nomePaciente"></span></strong> <br>
-                    <span id="idade">XX Anos xx Meses</span>
+                    <span id="idade"></span>
                 </div>
             </div>
             <div class="col-md-5">
@@ -114,7 +115,8 @@
     <script src="{{ asset('/assets/js/plugins/iCheck/icheck.min.js') }}"></script>
     <script src="{{ asset('/assets/js/plugins/truncateString/truncate.js') }}"></script>
     <script src="{{ asset('/assets/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
-    <script src="{{ asset('/assets/js/plugins/chosen/chosen.jquery.js') }}"></script>    
+    <script src="{{ asset('/assets/js/plugins/chosen/chosen.jquery.js') }}"></script>   
+    <script src="{{ asset('/assets/js/plugins/moments/moments.js') }}"></script>     
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -133,6 +135,12 @@
                 nomeConvenio = $(e.currentTarget).data('convenio');
                 saldo = $(e.currentTarget).data('saldo');
                 nomePaciente = $(e.currentTarget).data('nome');
+                idade = $(e.currentTarget).data('idade');
+
+                var dataNascimento = moment(idade).format('DD/MM/YYYY');
+                var idadeCliente = new moment().diff(idade, 'years');  
+
+                $('#idade').html(dataNascimento + ' - ' + idadeCliente + ' Anos');
 
                 if(posto != null && atendimento != null){
                     getExames(posto,atendimento);
@@ -141,7 +149,8 @@
                 $('.boxSelectAll').html('');
             });
 
-            $('.btnAtendimento').hide();         
+            $('.btnAtendimento').hide(); 
+            $('.btnAtendimento').trigger('click');         
             $('.navbar-static-side').remove();   
 
               var config = {
@@ -161,10 +170,7 @@
                 wheelStep: 10,
                 minwidth: '100%',
                 touchScrollStep: 50,
-            });
-                    
-
-            $('.active a').trigger('click');
+            });    
 
             $('.areaBtnVoltar').append('<button type="button" class="btn btn-w-m btn-default btnVoltar pull-right"><i class="fa fa-arrow-circle-o-left"></i> Voltar</button>');
 

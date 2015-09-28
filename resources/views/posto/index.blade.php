@@ -133,7 +133,7 @@
                             dataNascimento = new moment(atendimento.data_nas);
                             dataNascimento = dataNascimento.format('DD/MM/YYYY');
 
-                            var item =   '<li class="col-sm-12 boxatendimento naoRealizado-element" data-key="'+atendimento.key+'">'+
+                            var item =   '<li class="col-sm-12 boxatendimento naoRealizado-element" data-key="'+atendimento.key+'"  data-atendimento="'+atendimento.atendimento+'">'+
                                             '<div class="col-sm-12 dadosPaciente text-left">'+
                                               '<div class="col-sm-6">'+
                                                 '<span class="postoAtendimento"><i class="fa fa-heartbeat"></i><strong> '+atendimento.posto+'/'+atendimento.atendimento+'</span></strong>'+
@@ -150,7 +150,10 @@
 
                         $('#listFilter li').click(function(e){
                             var key = $(e.currentTarget).data('key');
-                            window.location.replace("/posto/paciente/"+key);
+                            var atendimento = $(e.currentTarget).data('atendimento');
+                            console.log(atendimento);
+
+                            window.location.replace("/posto/paciente/"+key+"/"+atendimento);
                         });
                         
                         if(result.data.length == 0){

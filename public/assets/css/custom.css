@@ -296,6 +296,12 @@ div.row.infoClienteMed{
 	font-size: 0.9em;
 }
 
+.chosen-container-multi{
+	margin-left: 25px;
+	padding-top: 5px;
+}
+
+
 /* =========== ===========*/
 
 .btn .btn-white{
