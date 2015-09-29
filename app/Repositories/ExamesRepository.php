@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
+use DB;
 
 class ExamesRepository extends BaseRepository
 {
@@ -58,5 +59,17 @@ class ExamesRepository extends BaseRepository
         }
 
         return $exames;
+    }
+
+    public function getDetalheAtendimentoExameCorrel($posto,$atendimento,$correl){
+        $sql = "SELECT get_resultado_json(:posto,:atendimento,:correl) as resultado FROM DUAL";
+
+        $detalheExames[] = DB::select(DB::raw($sql),[
+            'posto' => $posto,
+            'atendimento' => $atendimento,
+            'correl' => $correl,
+        ]);
+
+        return $detalheExames[0][0]->resultado;
     }
 }
