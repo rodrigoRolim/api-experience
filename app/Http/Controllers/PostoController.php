@@ -3,6 +3,7 @@
 use App\Repositories\ConvenioRepository;
 use App\Repositories\ExamesRepository;
 use App\Repositories\PostoRepository;
+use App\Repositories\AtendimentoRepository;
 use Illuminate\Contracts\Auth\Guard;
 
 use Request;
@@ -12,19 +13,22 @@ class PostoController extends Controller {
     protected $auth;    
     protected $convenio;
     protected $posto;
+    protected $atendimento;
     protected $exames;
 
       public function __construct(
         Guard $auth,        
         ConvenioRepository $convenio,
         PostoRepository $posto,
-        ExamesRepository $exames
+        ExamesRepository $exames,
+        AtendimentoRepository $atendimento
     )
     {
         $this->auth = $auth;        
         $this->convenio = $convenio;
         $this->posto = $posto;
         $this->exames = $exames;
+        $this->atendimento = $atendimento;
     }
 
     public function getIndex()
@@ -98,7 +102,6 @@ class PostoController extends Controller {
     }
 
     public function getExamesatendimento($posto,$atendimento,$postoRealizante = null){
-
         $ehAtendimentoPosto = $this->posto->ehAtendimentoPosto($this->auth->user()['posto'],$atendimento);
 
         if(!$ehAtendimentoPosto){
@@ -110,6 +113,31 @@ class PostoController extends Controller {
         return response()->json(array(
             'message' => 'Recebido com sucesso.',
             'data' => $exames,
+        ), 200);
+    }
+
+    public function getDetalheatendimentoexamecorrel($posto,$atendimento,$correl){
+        $ehAtendimentoPosto = $this->posto->ehAtendimentoPosto($posto,$atendimento);
+
+        if(!$ehAtendimentoPosto){
+            return response()->json(array(
+                'message' => 'Atendimento não é do posto'
+            ), 203);
+        }
+
+        $saldoDevedor = $this->atendimento->getSaldoDevedor($posto,$atendimento);
+
+        if($saldoDevedor){
+            return response()->json(array(
+                'message' => 'Existe pendências'
+            ), 203);
+        }
+
+        $exames = $this->exames->getDetalheAtendimentoExameCorrel($posto, $atendimento,$correl);
+
+        return response()->json(array(
+            'message' => 'Recebido com sucesso.',
+            'data' => json_decode($exames),
         ), 200);
     }
 }

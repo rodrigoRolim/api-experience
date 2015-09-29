@@ -47,4 +47,14 @@ class AtendimentoRepository extends BaseRepository
         $registro = $auth->user()['registro'];
         return (bool) $this->findWhere(['registro' => $registro, 'posto' => $posto, 'atendimento' => $atendimento])->count();
     }
+
+    public function getSaldoDevedor($posto,$atendimento){
+        $sql = 'SELECT saldo_devedor FROM vw_atendimentos WHERE posto = :posto AND atendimento = :atendimento';
+
+        $atendimento = DB::select(DB::raw($sql), ['posto' => $posto,'atendimento' => $atendimento]);
+        $saldo = $atendimento[0];
+        $saldo = $saldo->saldo_devedor;
+        
+        return (($saldo > 0) ? true : false);
+    }
 }
