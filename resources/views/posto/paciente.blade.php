@@ -39,6 +39,7 @@
                        data-convenio="{{$atendimento->nome_convenio}}"
                        data-saldo="{{$atendimento->saldo_devedor}}"
                        data-idade="{{$atendimento->data_nas}}"
+                       data-sexo="{{$atendimento->sexo}}"
                        data-nome="{{$atendimento->nome}}"> 
                     </a>
                 </li>
@@ -54,12 +55,12 @@
             <div class="col-md-5">
                 <div class="infoPaciente">
                     <strong><span id="nome" class="nomePaciente"></span></strong> <br>
-                    <span id="idade"></span>
+                    <div class="idadePaciente"></div>
                 </div>
             </div>
             <div class="col-md-5">
                 <div class="infoAtendimentoMedico">
-                    <i class="fa fa-heartbeat" data-toggle="tooltip" data-placement="right" title="Posto/Atendimento"></i><strong></strong>
+                    <i class="fa fa-heartbeat" data-toggle="tooltip" data-placement="right" title="Posto/Atendimento"></i>
                     <span id="atendimento"></span> <br>
                     <i class="fa fa-credit-card" data-toggle="tooltip" title="Convênio"></i>
                     <span id="convenio"></span> <br>                          
@@ -140,6 +141,10 @@
                 saldo = $(e.currentTarget).data('saldo');
                 nomePaciente = $(e.currentTarget).data('nome');
                 idade = $(e.currentTarget).data('idade');
+                sexo = $(e.currentTarget).data('sexo');
+
+                $('.idadePaciente').append('<i class="'+((sexo == "M")?"fa fa-mars":"fa fa-venus")+'"></i> <span id="idade"></span>');
+
 
                 var dataNascimento = moment(idade).format('DD/MM/YYYY');
                 var idadeCliente = new moment().diff(idade, 'years');  

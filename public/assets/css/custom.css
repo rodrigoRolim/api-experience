@@ -197,6 +197,7 @@ ul{
 
 #boxRodape h3{
 	margin: 0px;
+	font-size: 1em;
 }
 
 .agile-list, li.warning-element, li.success-element, li.danger-element, li.aguardando-element, li.naoRealizado-element{

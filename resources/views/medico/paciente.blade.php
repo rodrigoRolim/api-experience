@@ -38,6 +38,8 @@
                        data-solicitante="{{$atendimento->nome_solicitante}}"
                        data-convenio="{{$atendimento->nome_convenio}}"
                        data-saldo="{{$atendimento->saldo_devedor}}"
+                       data-idade="{{$atendimento->data_nas}}"
+                       data-idade="{{$atendimento->sexo}}"
                        data-nome="{{$atendimento->nome}}">                       
                         <b class="dataMini">
                             <p class="text-center" style="margin:0px;line-height: 14px">{{ date('d/m',strtotime($atendimento->data_atd))}}<br>
@@ -59,15 +61,15 @@
             <div class="col-md-5">
                 <div class="infoPaciente">
                     <strong><span id="nome" class="nomePaciente"></span></strong> <br>
-                    <span id="idade">XX Anos xx Meses</span>
+                    <div class="idadePaciente"></div>
                 </div>
             </div>
             <div class="col-md-5">
                 <div class="infoAtendimentoMedico">
-                    <strong>ID</strong>:
+                    <i class="fa fa-heartbeat" data-toggle="tooltip" data-placement="right" title="Posto/Atendimento"></i>
                     <span id="atendimento"></span> <br>
-                    <strong>Convênio</strong>:
-                    <span id="convenio"></span> <br>                          
+                    <i class="fa fa-credit-card" data-toggle="tooltip" title="Convênio"></i>
+                    <span id="convenio"></span> <br>                           
                 </div>
             </div>
             <div class="col-md-2 areaBtnVoltar"></div>
@@ -76,9 +78,11 @@
 
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="ibox">
+            <div class="row">
+                <div class="i-checks all boxSelectAll"> </div>
+           </div>
+         <ul class="sortable-list connectList agile-list ui-sortable listaExames">  </ul>
 
-            <div class="i-checks all boxSelectAll"> </div>
-            <ul class="sortable-list connectList agile-list ui-sortable listaExames">  </ul>
 
             <!-- Modal -->
               <div class="modal fade" id="modalExames" role="dialog">
@@ -118,7 +122,8 @@
     <script src="{{ asset('/assets/js/plugins/iCheck/icheck.min.js') }}"></script>
     <script src="{{ asset('/assets/js/plugins/truncateString/truncate.js') }}"></script>
     <script src="{{ asset('/assets/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
-
+    <script src="{{ asset('/assets/js/plugins/moments/moments.js') }}"></script>     
+    
     <script type="text/javascript">
         $(document).ready(function () {
             var posto;
@@ -135,7 +140,17 @@
                 nomeSolicitante = $(e.currentTarget).data('solicitante');
                 nomeConvenio = $(e.currentTarget).data('convenio');
                 saldo = $(e.currentTarget).data('saldo');
+                idade = $(e.currentTarget).data('idade');
+                sexo = $(e.currentTarget).data('sexo');
                 nomePaciente = $(e.currentTarget).data('nome');
+
+                $('.idadePaciente').append('<i class="'+((sexo == "M")?"fa fa-mars":"fa fa-venus")+'"></i> <span id="idade"></span>');
+
+
+                var dataNascimento = moment(idade).format('DD/MM/YYYY');
+                var idadeCliente = new moment().diff(idade, 'years');  
+
+                $('#idade').html(dataNascimento + ' - ' + idadeCliente + ' Anos');
 
                 if(posto != null && atendimento != null){
                     getExames(posto,atendimento);
