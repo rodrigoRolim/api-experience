@@ -123,7 +123,7 @@
     <script src="{{ asset('/assets/js/plugins/truncateString/truncate.js') }}"></script>
     <script src="{{ asset('/assets/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
     <script src="{{ asset('/assets/js/plugins/moments/moments.js') }}"></script>     
-    
+
     <script type="text/javascript">
         $(document).ready(function () {
             var posto;
@@ -144,8 +144,8 @@
                 sexo = $(e.currentTarget).data('sexo');
                 nomePaciente = $(e.currentTarget).data('nome');
 
+                $('.idadePaciente').html('');
                 $('.idadePaciente').append('<i class="'+((sexo == "M")?"fa fa-mars":"fa fa-venus")+'"></i> <span id="idade"></span>');
-
 
                 var dataNascimento = moment(idade).format('DD/MM/YYYY');
                 var idadeCliente = new moment().diff(idade, 'years');  
@@ -159,6 +159,7 @@
                 $('.boxSelectAll').html('');
             });
 
+           
             $('.page-heading').slimScroll({
                 height: '66.5vh',
                 railOpacity: 0.4,
@@ -208,45 +209,49 @@
 
                     $('.listaExames').html('');
                     $('#boxRodape').html('');
-
+                    
                     $.each( result.data, function( index, exame ){
                         var sizeBox = 'col-md-6';
-                        var element = [];
-                        if(verificaSaldoDevedor(saldo,exame.class)){
-                            element += '<a id="btnViewExame" data-toggle="modal" data-target="#modalExames">';
+                        var conteudo = '';
+                        var msg = '';
+                        var check = '';
+                        var link = '';
+
+                        if(!verificaSaldoDevedor(saldo)){
+                            if(exame.class == 'success-element'){
+                                $('.boxSelectAll').html('<span>Selecionar Todos &nbsp;<input type="checkbox" class="checkAll"></span>');
+                                if(exame.tipo_entrega == '*'){
+                                    link = '<a id="btnViewExame" data-toggle="modal"'+
+                                           'data-tipoEntrega="'+exame.tipo_entrega+'" data-posto="'+exame.posto+
+                                           '" data-atendimento="'+exame.atendimento+'" data-correl="'+exame.correl+
+                                           '" data-target="#modalExames">';
+
+                                    check = '<div class="i-checks checkExames"><input type="checkbox" class="check"></div>';
+                                }else{
+                                    msg = 'Só pode ser impresso no lab.';
+                                }
+                            }
                         }
 
-                         element += '<div class="'+sizeBox+' boxExames">' +
-                                '<li class="'+exame.class+' animated fadeInDownBig">' +
-                                '<div class="dadosExames">' +
-                                '<b>'+exame.mnemonico+'</b> | '+exame.nome_procedimento.trunc(31)+'<br>'+exame.msg+
-                                '</div>';
+                        conteudo = link+'<div class="'+sizeBox+' boxExames"><li class="'+exame.class+' animated fadeInDownBig">'+check+
+                                        '<div class="dadosExames">' +
+                                            '<b>'+exame.mnemonico+'</b> | '+exame.nome_procedimento.trunc(31)+
+                                            '<br>'+exame.msg+'<br>'+msg+'</li></div>';
 
-                        if(verificaSaldoDevedor(saldo,exame.class)){
-                            controle = true;
-
-                            element += '<div class="i-checks checkExames">'+
-                                    '<input type="checkbox" class="check">'+
-                                    '</div>';
-                        }
-
-                        element += '</li></div></a>';
-                        $('.listaExames').append(element);
+                        conteudo += ((link != '') ? '</a>' : '');
+                        $('.listaExames').append(conteudo);
                     });
 
-                    if(controle){
-                        $('.boxSelectAll').html('<span>Selecionar Todos &nbsp;<input type="checkbox" class="checkAll"></span>');
+                    var checkAll = $('input.checkAll');
+                    var checkboxes = $('input.check');
 
-                        var checkAll = $('input.checkAll');
-                        var checkboxes = $('input.check');
+                    $('input').iCheck({
+                        checkboxClass: 'icheckbox_square-grey',
+                    });
 
-                        $('input').iCheck({
-                            checkboxClass: 'icheckbox_square-grey',
-                        });
-                    }
-
+                    
                     //verifica se o usuario tem saldo devedor
-                    if(saldo == null || saldo == 0){
+                    if(!verificaSaldoDevedor(saldo)){
                         $('input.checkAll').on('ifChecked ifUnchecked', function(event) {
                             if (event.type == 'ifChecked') {
                                 checkboxes.iCheck('check');

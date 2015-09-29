@@ -162,13 +162,14 @@
             $('.btnAtendimento').trigger('click');         
             $('.navbar-static-side').remove();   
 
-              var config = {
+            var config = {
                 '.chosen-select'           : {},
                 '.chosen-select-deselect'  : {allow_single_deselect:true},
                 '.chosen-select-no-single' : {disable_search_threshold:10},
                 '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
                 '.chosen-select-width'     : {width:"95%"}
-                }
+            }
+
             for (var selector in config) {
                 $(selector).chosen(config[selector]);
             }
@@ -191,14 +192,15 @@
                 $("#modalExames").modal();
             });
 
-            function verificaSaldoDevedor(saldo,situacao){
-                if(saldo == null || saldo == 0 && situacao == "success-element")
-                   return true;
+            function verificaSaldoDevedor(saldo){
+                if(saldo == null || saldo == 0){
+                   return false;
+                }
+
+                return true;
             }
 
             function getExames(posto,atendimento){
-                controle = false;
-
                 //Carregando
                 $('.listaExames').html('<br><br><br><br><h2 class="textoTamanho"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando registros.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>');
 
@@ -214,44 +216,48 @@
                     $('#boxRodape').html('');
 
                     $.each( result.data, function( index, exame ){
-                        console.log(exame);
                         var sizeBox = 'col-md-6';
-                        var element = [];
-                        if(verificaSaldoDevedor(saldo,exame.class)){
-                            element += '<a id="btnViewExame" data-toggle="modal" data-correl="'+exame.correl+'" data-target="#modalExames">';
+                        var conteudo = '';
+                        var msg = '';
+                        var check = '';
+                        var link = '';
+
+                        if(!verificaSaldoDevedor(saldo)){
+                            if(exame.class == 'success-element'){
+                                $('.boxSelectAll').html('<span>Selecionar Todos &nbsp;<input type="checkbox" class="checkAll"></span>');
+                                if(exame.tipo_entrega == '*'){
+                                    link = '<a id="btnViewExame" data-toggle="modal"'+
+                                           'data-tipoEntrega="'+exame.tipo_entrega+'" data-posto="'+exame.posto+
+                                           '" data-atendimento="'+exame.atendimento+'" data-correl="'+exame.correl+
+                                           '" data-target="#modalExames">';
+
+                                    check = '<div class="i-checks checkExames"><input type="checkbox" class="check"></div>';
+                                }else{
+                                    msg = 'Só pode ser impresso no lab.';
+                                }
+                            }
                         }
 
-                         element += '<div class="'+sizeBox+' boxExames">' +
-                                '<li class="'+exame.class+' animated fadeInDownBig">' +
-                                '<div class="dadosExames">' +
-                                '<b>'+exame.mnemonico+'</b> | '+exame.nome_procedimento.trunc(31)+'<br>'+exame.msg+
-                                '</div>';
+                        conteudo = link+'<div class="'+sizeBox+' boxExames"><li class="'+exame.class+' animated fadeInDownBig">'+check+
+                                        '<div class="dadosExames">' +
+                                            '<b>'+exame.mnemonico+'</b> | '+exame.nome_procedimento.trunc(31)+
+                                            '<br>'+exame.msg+'<br>'+msg+'</li></div>';
 
-                        if(verificaSaldoDevedor(saldo,exame.class)){
-                            controle = true;
-
-                            element += '<div class="i-checks checkExames">'+
-                                    '<input type="checkbox" class="check">'+
-                                    '</div>';
-                        }
-
-                        element += '</li></div></a>';
-                        $('.listaExames').append(element);
+                        conteudo += ((link != '') ? '</a>' : '');
+                        $('.listaExames').append(conteudo);
                     });
 
-                    if(controle){
-                        $('.boxSelectAll').html('<span>Selecionar Todos &nbsp;<input type="checkbox" class="checkAll"></span>');
+                    
 
-                        var checkAll = $('input.checkAll');
-                        var checkboxes = $('input.check');
+                    var checkAll = $('input.checkAll');
+                    var checkboxes = $('input.check');
 
-                        $('input').iCheck({
-                            checkboxClass: 'icheckbox_square-grey',
-                        });
-                    }
+                    $('input').iCheck({
+                        checkboxClass: 'icheckbox_square-grey',
+                    });
 
                     //verifica se o usuario tem saldo devedor
-                    if(saldo == null || saldo == 0){
+                    if(!verificaSaldoDevedor(saldo)){
                         $('input.checkAll').on('ifChecked ifUnchecked', function(event) {
                             if (event.type == 'ifChecked') {
                                 checkboxes.iCheck('check');
@@ -283,38 +289,7 @@
 
                         $('.checkAll').trigger('ifChecked');
 
-                    $('#btnFiltrar').click(function(e){ /* !!!!!!!!!!!!*/
-                        var formPosto = $('#formPosto');
-                        var postData = formPosto.serializeArray();
-                        
-
-                        getClientes(postData);
-                    });
-
-                    function getClientes(postData){
-                        $('#listFilter').html('<br><br><br><br><h2 class="textoTamanho"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando Descrição.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>');
-                        $.ajax({
-                            url : 'posto/getdescricao',
-                            type: 'POST',
-                            data : postData,
-                            success:function(result){                                                             
-
-                                $.each( result.data, function( index ){
-                                    var descricao = result.data[index];    
-                                });
-
-                                if(result.data.length == 0){
-                                    $('#listFilter').append('<h2 class="textoTamanho">Não foram encontrados atendimentos.</h2>');
-                                }
-                            },
-                            error: function(jqXHR, textStatus, errorThrown){
-                                var msg = jqXHR.responseText;
-                                msg = JSON.parse(msg);
-                                $('#msgPrograma').html('<div class="alert alert-danger alert-dismissable animated fadeIn">'+msg.message+'</div>');
-                            }
-                        });
-                    }
-                          
+                       
                     }else{
                         $('#boxRodape').html('<h3 class="text-danger">{!!config('system.messages.paciente.saldoDevedor')!!}</h3>');
                     }
