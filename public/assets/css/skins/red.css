@@ -99,14 +99,14 @@ body.mini-navbar .nav-header {
 }
 .labelAtendimentosClientes {
   margin-right: 5px;
-  margin-left: 5px;
   margin-top: 5px;
   background-color: #ffffff;
-  font-size: 10.5px;
+  font-size: 11px;
   border: 1px solid #dadada !important;
 }
 #listFilter li:hover {
   background-color: #f1dcdd !important;
+  cursor: pointer;
 }
 #listFilter li {
   transition: background-color 0.5s ease;
@@ -126,7 +126,4 @@ li.notClicked {
   color: #c52f33;
   font-weight: 800;
   border-left: 4px solid #c52f33;
-}
-.fa-caret-square-o-down{
-  color: #c52f33;
 }
