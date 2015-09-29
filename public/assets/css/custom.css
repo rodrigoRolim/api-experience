@@ -26,10 +26,9 @@ ul{
 	margin-left: 6px;
 }
 
-.linhaDiv{
-	
+.btnPdf{
+	padding: 5px;
 }
-
 
 /* ========= header ======== */
 
@@ -172,6 +171,9 @@ ul{
 
 /* ========= index.blade.php/paciente.blade.php - Paciente/Medico ==========*/
 
+.page-heading{
+	height: 650px !important;
+}
 
 .infoAtendimento{	
 	float: left;	

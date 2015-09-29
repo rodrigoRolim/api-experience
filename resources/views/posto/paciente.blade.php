@@ -59,9 +59,9 @@
             </div>
             <div class="col-md-5">
                 <div class="infoAtendimentoMedico">
-                    <strong>ID</strong>:
+                    <i class="fa fa-heartbeat" data-toggle="tooltip" data-placement="right" title="Posto/Atendimento"></i><strong></strong>
                     <span id="atendimento"></span> <br>
-                    <strong>Convênio</strong>:
+                    <i class="fa fa-credit-card" data-toggle="tooltip" title="Convênio"></i>
                     <span id="convenio"></span> <br>                          
                 </div>
             </div>
@@ -122,6 +122,8 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
+            $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+
             var posto;
             var atendimento;
             var nomeSolicitante;
@@ -207,10 +209,11 @@
                     $('#boxRodape').html('');
 
                     $.each( result.data, function( index, exame ){
+                        console.log(exame);
                         var sizeBox = 'col-md-6';
                         var element = [];
                         if(verificaSaldoDevedor(saldo,exame.class)){
-                            element += '<a id="btnViewExame" data-toggle="modal" data-target="#modalExames">';
+                            element += '<a id="btnViewExame" data-toggle="modal" data-correl="'+exame.correl+'" data-target="#modalExames">';
                         }
 
                          element += '<div class="'+sizeBox+' boxExames">' +
