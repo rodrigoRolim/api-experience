@@ -43,7 +43,7 @@
             </div>
             <div class="col-md-2">
                 <label class="textoBranco" name="situacao">Posto Realizante</label>
-                {!! Form::select('postoRealizante', config('system.selectFiltroSituacaoAtendimento'), '', array('class' => 'form-control m-b', 'id'=>'postoRealizante')) !!}
+                {!! Form::select('postoRealizante', $postoRealizante, '', array('class' => 'form-control m-b', 'id'=>'postoRealizante')) !!}
             </div>
             <div class="col-md-2">
                 <div class="input-group m-b filtrar col-md-12" style="margin-bottom:0px;padding-top:17px;">
@@ -58,7 +58,7 @@
             <div class="row">
                 <div class="input-group m-b">
                     <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                    <input type="text" id="filtroPaciente" placeholder="Localizar paciente na relação abaixo" class="form-control">
+                    <input type="text" id="filtroPaciente" placeholder="Localizar Paciente" class="form-control">
                 </div>
                 <ul class="sortable-list connectList agile-list ui-sortable" id="listFilter"></ul>                
             </div>
@@ -76,6 +76,7 @@
 
     <script type="text/javascript">
         $(document).ready(function (){
+            $("body").tooltip({ selector: '[data-toggle=tooltip]' });
             var dataInicio = new moment();
             var dataFim = new moment();
             var qtdDiasFiltro = {{config('system.posto.qtdDiasFiltro')}};
@@ -136,12 +137,16 @@
                             var item =   '<li class="col-sm-12 boxatendimento naoRealizado-element" data-key="'+atendimento.key+'"  data-atendimento="'+atendimento.atendimento+'">'+
                                             '<div class="col-sm-12 dadosPaciente text-left">'+
                                               '<div class="col-sm-6">'+
-                                                '<span class="postoAtendimento"><i class="fa fa-heartbeat"></i><strong> '+atendimento.posto+'/'+atendimento.atendimento+'</span></strong>'+
-                                                '<span class="dataAtendimento"><i class="fa fa-calendar-check-o"></i> '+dataAtendimento+'</span>'+
-                                                '<span class="convenioAtendimento"><i class="fa fa-credit-card"></i> '+atendimento.nome_convenio+'</span>'+                                                
-                                                '<div class="dadosPessoais"><strong>'+atendimento.nome+'</strong>'+' <br><i class="'+((atendimento.sexo == "M")?"fa fa-mars":"fa fa-venus")+'"></i>'+atendimento.idade+'  '+dataNascimento+'</div>'+
+                                                '<div class="linhaDiv">'+
+                                                '<span class="postoAtendimento">'+
+                                                '<i class="fa fa-heartbeat" data-toggle="tooltip" data-placement="right" title="Posto/Atendimento"></i><strong> '+atendimento.posto+'/'+atendimento.atendimento+'</span></strong>'+
+                                                '<span class="dataAtendimento">'+
+                                                '<i class="fa fa-calendar-check-o" data-toggle="tooltip" title="Data do Atendimento"></i> '+dataAtendimento+'</span>'+
+                                                '<span class="convenioAtendimento"><i class="fa fa-credit-card" data-toggle="tooltip" title="Convênio"></i> '+atendimento.nome_convenio+'</span>'+                                                
+                                                '<div class="dadosPessoais"><strong>'+atendimento.nome+'</strong>'+' <br><i class="'+((atendimento.sexo == "M")?"fa fa-mars":"fa fa-venus")+'"></i>'+" "+atendimento.idade+'</div>'+
+                                                '</div>'+
                                                '</div><div class="col-sm-6">'+
-                                                '<i class="fa fa-flask"></i> '+atendimento.mnemonicos+'</div>'+
+                                                '<i class="fa fa-flask" data-toggle="tooltip" title="Mnemônicos"></i> '+atendimento.mnemonicos+'</div>'+
                                             '</div></li>';  
 
                             $('#listFilter').append(item);
@@ -151,8 +156,6 @@
                         $('#listFilter li').click(function(e){
                             var key = $(e.currentTarget).data('key');
                             var atendimento = $(e.currentTarget).data('atendimento');
-                            console.log(atendimento);
-
                             window.location.replace("/posto/paciente/"+key+"/"+atendimento);
                         });
                         

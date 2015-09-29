@@ -26,6 +26,9 @@ ul{
 	margin-left: 6px;
 }
 
+.linhaDiv{
+	
+}
 
 
 /* ========= header ======== */
@@ -297,10 +300,20 @@ div.row.infoClienteMed{
 }
 
 .chosen-container-multi{
-	margin-left: 25px;
-	padding-top: 5px;
+	width: 100% !important;
 }
 
+.selectPostoRealizante{
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+
+.btnSearchPosto{
+	margin-left: 30px;	
+	margin-bottom: 10px;
+	padding-top: 5px;
+}
 
 /* =========== ===========*/
 

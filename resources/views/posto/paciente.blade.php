@@ -72,10 +72,14 @@
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="ibox">
         
-        <div class="row">
-            <div class="i-checks all boxSelectAll">    </div>
-            {!! Form::select('postoRealizante', $postoRealizante, '', array('tabindex'=>'4','multiple','data-placeholder'=>'Todos os postos','class' => 'chosen-select selectPosto', 'id'=>'situacao')) !!}        
-        </div>   
+        <div class="col-md-12 selectPostoRealizante">
+            <div class="row">
+                <div class="i-checks all boxSelectAll">    </div>           
+                    <div class="input-group m-b btnSearchPosto">
+                        <span class="input-group-addon"><i class="fa fa-search searchPosto"></i></span>{!! Form::select('postoRealizante', $postoRealizante, '', array('tabindex'=>'4','multiple','data-placeholder'=>'Todos os postos','class' => 'chosen-select selectPosto', 'id'=>'situacao')) !!}        
+                    </div>
+            </div>   
+        </div>
             <ul class="sortable-list connectList agile-list ui-sortable listaExames">  </ul>
             <!-- Modal -->
               <div class="modal fade" id="modalExames" role="dialog">
@@ -272,6 +276,38 @@
                         });
 
                         $('.checkAll').trigger('ifChecked');
+
+                    $('#btnFiltrar').click(function(e){ /* !!!!!!!!!!!!*/
+                        var formPosto = $('#formPosto');
+                        var postData = formPosto.serializeArray();
+                        
+
+                        getClientes(postData);
+                    });
+
+                    function getClientes(postData){
+                        $('#listFilter').html('<br><br><br><br><h2 class="textoTamanho"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando Descrição.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>');
+                        $.ajax({
+                            url : 'posto/getdescricao',
+                            type: 'POST',
+                            data : postData,
+                            success:function(result){                                                             
+
+                                $.each( result.data, function( index ){
+                                    var descricao = result.data[index];    
+                                });
+
+                                if(result.data.length == 0){
+                                    $('#listFilter').append('<h2 class="textoTamanho">Não foram encontrados atendimentos.</h2>');
+                                }
+                            },
+                            error: function(jqXHR, textStatus, errorThrown){
+                                var msg = jqXHR.responseText;
+                                msg = JSON.parse(msg);
+                                $('#msgPrograma').html('<div class="alert alert-danger alert-dismissable animated fadeIn">'+msg.message+'</div>');
+                            }
+                        });
+                    }
                           
                     }else{
                         $('#boxRodape').html('<h3 class="text-danger">{!!config('system.messages.paciente.saldoDevedor')!!}</h3>');

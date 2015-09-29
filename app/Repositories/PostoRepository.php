@@ -82,11 +82,45 @@ class PostoRepository extends BaseRepository
         return $clientes;
     }
 
+    public function getDescricaoExame($idPosto,$atendimento,$correlativo)
+    {
+         $sql = "SELECT get_resultado_json(:idPosto,:atendimento,:correlativo)";     
+
+         $descricao[] = DB::select(DB::raw($sql),[
+            'idPosto' => $idPosto,
+            'atendimento' => $atendimento,
+            'correlativo' => $correlativo
+        ]); 
+
+         return $descricao;
+    }
+
     public function getPostosRealizantes()
     {
         $sql = 'SELECT posto,nome FROM POSTOS WHERE realiza_exames = :tipo order by nome';
         $data [] = DB::select(DB::raw($sql),[
             'tipo' => 'S'
+        ]);
+
+        foreach ($data[0] as $key => $value) {
+            $postos[$value->posto] = $value->nome;
+        }
+
+        return $postos;
+    }
+
+     public function getPostosRealizantesAtendimento($posto,$atendimento)
+    {
+        $sql = 'SELECT DISTINCT p.posto,p.nome 
+                FROM POSTOS p
+                  INNER JOIN VW_EXAMES e ON e.posto_realizante = p.posto
+                WHERE p.realiza_exames = :tipo AND e.posto = :posto AND e.atendimento = :atendimento
+                ORDER BY p.nome';
+        
+        $data [] = DB::select(DB::raw($sql),[
+            'tipo' => 'S',
+            'posto' => $posto,
+            'atendimento' => $atendimento
         ]);
 
         foreach ($data[0] as $key => $value) {
