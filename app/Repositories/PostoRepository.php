@@ -81,19 +81,7 @@ class PostoRepository extends BaseRepository
 
         return $clientes;
     }
-
-    public function getDescricaoExame($idPosto,$atendimento,$correlativo)
-    {
-         $sql = "SELECT get_resultado_json(:idPosto,:atendimento,:correlativo)";     
-
-         $descricao[] = DB::select(DB::raw($sql),[
-            'idPosto' => $idPosto,
-            'atendimento' => $atendimento,
-            'correlativo' => $correlativo
-        ]); 
-
-         return $descricao;
-    }
+   
 
     public function getPostosRealizantes()
     {
@@ -102,10 +90,11 @@ class PostoRepository extends BaseRepository
             'tipo' => 'S'
         ]);
 
+        $postos[''] = 'Selecione';
+
         foreach ($data[0] as $key => $value) {
             $postos[$value->posto] = $value->nome;
         }
-
         return $postos;
     }
 

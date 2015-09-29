@@ -102,15 +102,13 @@
                 </div>
               </div>
         </div>
-    </div>
-    <div class="footer">
-        <div class="pull-left">
-            {!!config('system.loginText.footerText')!!}
+          <div class="footer">
+            <div class="pull-left">
+                {!!config('system.loginText.footerText')!!}
+            </div>
+                <div class="pull-right" id="boxRodape"></div>
         </div>
-        <div class="pull-right" id="boxRodape">
-
-        </div>
-    </div>
+    </div>  
 </div>
 @stop
 
@@ -169,7 +167,7 @@
             }
 
             $('.page-heading').slimScroll({
-                height: '66.5vh',
+                height: '75.0vh',
                 railOpacity: 0.4,
                 wheelStep: 10,
                 minwidth: '100%',
