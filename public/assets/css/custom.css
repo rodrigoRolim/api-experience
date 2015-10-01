@@ -172,7 +172,8 @@ ul{
 /* ========= index.blade.php/paciente.blade.php - Paciente/Medico ==========*/
 
 .page-heading{
-	height: 650px !important;
+	padding-top: 10px;
+	padding-bottom: 40px;
 }
 
 .infoAtendimento{	
@@ -239,6 +240,7 @@ div.row.infoClienteMed{
 
 .checkExames{
 	float: right;
+	margin-top: 20px;
 }
 
 .all{
@@ -312,11 +314,38 @@ div.row.infoClienteMed{
 	padding-right: 0px;
 }
 
-
 .btnSearchPosto{
 	margin-left: 30px;	
 	margin-bottom: 10px;
 	padding-top: 5px;
+}
+
+.msgExameTipoEntrega{
+	color: red;
+	font-style: italic;
+	font-size: 0.90em;
+}
+
+.modal-body{
+	padding-bottom: 300px;
+	padding-right: 0px;
+	padding-top: 20px;
+	padding-left: 0px;
+}
+
+.modal-footer{
+	font-size: 0.65em;
+	font-weight: bold;
+	border-top: 1px solid #e5e5e5;
+}
+
+.descricaoExames{
+	font-family: "Lucida Console", Monaco, monospace;
+	font-size: 1.2em;
+}
+
+.analitos{
+	margin-bottom: 10px;
 }
 
 /* =========== ===========*/
@@ -328,6 +357,7 @@ div.row.infoClienteMed{
  .areaPaciente{
 	padding-left: 0px;
 	padding-top: 12px;
+	font-size: 1.2em;
 }
 
 

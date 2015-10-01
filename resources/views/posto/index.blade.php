@@ -77,6 +77,7 @@
     <script type="text/javascript">
         $(document).ready(function (){
             $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+            
             var dataInicio = new moment();
             var dataFim = new moment();
             var qtdDiasFiltro = {{config('system.posto.qtdDiasFiltro')}};
@@ -107,8 +108,7 @@
 
             $('#btnFiltrar').click(function(e){
                 var formPosto = $('#formPosto');
-                var postData = formPosto.serializeArray();
-                
+                var postData = formPosto.serializeArray();              
 
                 getClientes(postData);
             });

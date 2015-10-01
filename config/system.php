@@ -20,6 +20,9 @@ return [
         ],
         'paciente' => [
             'saldoDevedor' => 'Existe pendência, diriga-se ao laboratório',
+        ],
+        'exame' => [
+            'tipoEntregaInvalido' => 'Este exame só poderá ser impresso no laboratório.'
         ]
     ],
     'qtdCaracterPosto' => 2,

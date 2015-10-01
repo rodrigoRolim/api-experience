@@ -68,7 +68,7 @@
 	                </div>
 	            </div>
                 <div class="col-md-6">                	
-                    <i class="fa fa-user-md" data-toggle="tooltip" title="Médico Solicitante"> </i>
+                    <i class="fa fa-user-md" data-toggle="tooltip" data-placement="right" title="Médico Solicitante"> </i>
                     <span id="solicitante"></span> <br> 
                 </div>  
             </div>                          
@@ -120,6 +120,8 @@
 
 	<script type="text/javascript">
 		$(document).ready(function () {
+			$("body").tooltip({ selector: '[data-toggle=tooltip]' });
+
 			var posto;
 			var atendimento;
 			var nomeSolicitante;
@@ -189,7 +191,7 @@
 
 	                        	  	check = '<div class="i-checks checkExames"><input type="checkbox" class="check"></div>';                     	  				
                     		  }else{
-            	  	   			msg = 'Este Exame só pode ser impresso no lab.';
+            	  	   			msg = '{!!config('system.messages.exame.tipoEntregaInvalido')!!}';
                 	    	}   
                 		  }
                 		}
@@ -198,8 +200,8 @@
 						conteudo =  link+'<div class="'+sizeBox+' boxExames">'+
 									'<li class="'+exame.class+' animated fadeInDownBig">'+check+
 									'<div class="dadosExames">' +
-									'<b>'+exame.mnemonico+'</b> | '+exame.nome_procedimento.trunc(31)+'<br>'+exame.msg+'<br>' +msg+
-									'</div></li></div></a>'
+									'<b>'+exame.mnemonico+'</b> | '+exame.nome_procedimento.trunc(31)+'<br>'+exame.msg+'<br><span class="msgExameTipoEntrega">' +msg+
+									'</span></div></li></div></a>'
 
 						$('.listaExames').append(conteudo);
 					});

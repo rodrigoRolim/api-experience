@@ -39,7 +39,6 @@
                        data-convenio="{{$atendimento->nome_convenio}}"
                        data-saldo="{{$atendimento->saldo_devedor}}"
                        data-idade="{{$atendimento->data_nas}}"
-                       data-idade="{{$atendimento->sexo}}"
                        data-nome="{{$atendimento->nome}}">                       
                         <b class="dataMini">
                             <p class="text-center" style="margin:0px;line-height: 14px">{{ date('d/m',strtotime($atendimento->data_atd))}}<br>
@@ -126,6 +125,8 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
+            $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+
             var posto;
             var atendimento;
             var nomeSolicitante;
@@ -228,7 +229,7 @@
 
                                     check = '<div class="i-checks checkExames"><input type="checkbox" class="check"></div>';
                                 }else{
-                                    msg = 'Só pode ser impresso no lab.';
+                                    msg = '{!!config('system.messages.exame.tipoEntregaInvalido')!!}';
                                 }
                             }
                         }
@@ -236,7 +237,7 @@
                         conteudo = link+'<div class="'+sizeBox+' boxExames"><li class="'+exame.class+' animated fadeInDownBig">'+check+
                                         '<div class="dadosExames">' +
                                             '<b>'+exame.mnemonico+'</b> | '+exame.nome_procedimento.trunc(31)+
-                                            '<br>'+exame.msg+'<br>'+msg+'</li></div>';
+                                            '<br>'+exame.msg+'<br><span class="msgExameTipoEntrega">'+msg+'</span></li></div>';
 
                         conteudo += ((link != '') ? '</a>' : '');
                         $('.listaExames').append(conteudo);
