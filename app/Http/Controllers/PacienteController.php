@@ -38,4 +38,22 @@ class PacienteController extends Controller {
             'data' => $exames,
         ), 200);
     }
+
+    public function getDetalheatendimentoexamecorrel($posto,$atendimento,$correl){        
+
+        $saldoDevedor = $this->atendimento->getSaldoDevedor($posto,$atendimento);
+
+        if($saldoDevedor){
+            return response()->json(array(
+                'message' => 'Existe pendências'
+            ), 203);
+        }
+
+        $exames = $this->exames->getDetalheAtendimentoExameCorrel($posto, $atendimento,$correl);
+
+        return response()->json(array(
+            'message' => 'Recebido com sucesso.',
+            'data' => json_decode($exames),
+        ), 200);
+    }
 }

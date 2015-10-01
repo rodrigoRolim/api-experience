@@ -96,8 +96,7 @@
                     <div class="modal-body">
                       <p>Some text in the modal.</p>
                     </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <div class="modal-footer">                     
                     </div>
                   </div>
                   
@@ -222,10 +221,7 @@
                             if(exame.class == 'success-element'){
                                 $('.boxSelectAll').html('<span>Selecionar Todos &nbsp;<input type="checkbox" class="checkAll"></span>');
                                 if(exame.tipo_entrega == '*'){
-                                    link = '<a id="btnViewExame" data-toggle="modal"'+
-                                           'data-tipoEntrega="'+exame.tipo_entrega+'" data-posto="'+exame.posto+
-                                           '" data-atendimento="'+exame.atendimento+'" data-correl="'+exame.correl+
-                                           '" data-target="#modalExames">';
+                                    link = '<a id="btnViewExame" data-toggle="modal" data-target="#modalExames" "data-tipoEntrega="'+exame.tipo_entrega+'">';
 
                                     check = '<div class="i-checks checkExames"><input type="checkbox" class="check"></div>';
                                 }else{
@@ -234,7 +230,8 @@
                             }
                         }
 
-                        conteudo = link+'<div class="'+sizeBox+' boxExames"><li class="'+exame.class+' animated fadeInDownBig">'+check+
+                       conteudo = link+'<div class="'+sizeBox+' boxExames "'+
+                                        'data-correl="'+exame.correl+'" data-atendimento="'+exame.atendimento+'" data-posto="'+exame.posto+'"><li class="'+exame.class+' animated fadeInDownBig">'+check+
                                         '<div class="dadosExames">' +
                                             '<b>'+exame.mnemonico+'</b> | '+exame.nome_procedimento.trunc(31)+
                                             '<br>'+exame.msg+'<br><span class="msgExameTipoEntrega">'+msg+'</span></li></div>';
@@ -242,6 +239,67 @@
                         conteudo += ((link != '') ? '</a>' : '');
                         $('.listaExames').append(conteudo);
                     });
+
+                     $('.boxExames').click(function(e){
+                            var dadosExames = $(e.currentTarget).data();                                               
+                            getDescricaoExame(dadosExames);                 
+                    });   
+
+                    function getDescricaoExame(dadosExames){                        
+                        $.ajax({
+                            url : '/medico/detalheatendimentoexamecorrel/'+dadosExames.posto+'/'+dadosExames.atendimento+'/'+dadosExames.correl+'',
+                            type: 'GET',                           
+                            success:function(result){      
+                                var descricao = result.data;  
+                                var analitos = result.data.ANALITOS;
+                                var conteudo = '';                                                          
+                                console.log(descricao);
+
+                                $('.modal-title').html('');    
+                                $('.modal-body').html('');   
+                                $('.modal-footer').html('');                         
+                                $('.modal-title').append(descricao.PROCEDIMENTO); 
+
+                                $('.modal-footer').append('Liberado em '+descricao.DATA_REALIZANTE+' por '+descricao.REALIZANTE.NOME+' - '+
+                                    descricao.REALIZANTE.TIPO_CR+' '+descricao.REALIZANTE.UF_CONSELHO+' : '+descricao.REALIZANTE.CRM+' Data e Hora da Coleta: '+descricao.DATA_COLETA);
+
+
+                                $.each( analitos, function( index ){
+
+                                    switch(analitos[index].UNIDADE) {
+                                        case 'NULL':
+                                            analitos[index].UNIDADE = '';
+                                            break;                                                                      
+                                    }       
+
+                                    var valorAnalito = analitos[index].VALOR;
+                                    if(!isNaN(valorAnalito)){
+                                        var valorAnalito = Math.round(analitos[index].VALOR);
+                                        valorAnalito = valorAnalito.toFixed(analitos[index].DECIMAIS);
+                                    }
+
+                                    conteudo = '<div class ="col-md-12 descricaoExames">'+
+                                                 '<div class="col-md-8 analitos">'+
+                                                    ''+analitos[index].ANALITO+'</div>'+
+                                                 '<div class="col-md-4 valoresAnalitos">'+
+                                                    '<strong>'+valorAnalito+' '+analitos[index].UNIDADE+'</strong></div>'+
+                                                 '</div>';
+
+                                    $('.modal-body').append(conteudo);
+
+                                });             
+                           
+                                if(result.data.length == 0){
+                                    $('.modal-body').append('<h2 class="textoTamanho">Não foram encontrados atendimentos.</h2>');
+                                }
+                            },
+                            error: function(jqXHR, textStatus, errorThrown){
+                                var msg = jqXHR.responseText;
+                                msg = JSON.parse(msg);
+                                $('#msgPrograma').html('<div class="alert alert-danger alert-dismissable animated fadeIn">'+msg.message+'</div>');
+                            }
+                        });
+                    }   
 
                     var checkAll = $('input.checkAll');
                     var checkboxes = $('input.check');

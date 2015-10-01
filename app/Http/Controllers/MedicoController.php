@@ -3,6 +3,7 @@
 use App\Repositories\ConvenioRepository;
 use App\Repositories\ExamesRepository;
 use App\Repositories\MedicoRepository;
+use App\Repositories\AtendimentoRepository;
 use App\Repositories\PostoRepository;
 use Illuminate\Contracts\Auth\Guard;
 //use Vinkla\Hashids\Facades\Hashids;
@@ -14,6 +15,7 @@ class MedicoController extends Controller {
     protected $medico;
     protected $convenio;
     protected $posto;
+    protected $atendimento;
     protected $exames;
 
     public function __construct(
@@ -21,7 +23,8 @@ class MedicoController extends Controller {
         MedicoRepository $medico,
         ConvenioRepository $convenio,
         PostoRepository $posto,
-        ExamesRepository $exames
+        ExamesRepository $exames,
+        AtendimentoRepository $atendimento
     )
     {
         $this->auth = $auth;
@@ -29,6 +32,7 @@ class MedicoController extends Controller {
         $this->convenio = $convenio;
         $this->posto = $posto;
         $this->exames = $exames;
+        $this->atendimento = $atendimento;
     }
 
     public function getIndex()
@@ -95,6 +99,31 @@ class MedicoController extends Controller {
         return response()->json(array(
             'message' => 'Recebido com sucesso.',
             'data' => $exames,
+        ), 200);
+    }
+
+    public function getDetalheatendimentoexamecorrel($posto,$atendimento,$correl){
+        $ehAtendimentoMedico = $this->medico->ehAtendimentoMedico($this->auth->user()['id_medico'],$posto,$atendimento);
+
+        if(!$ehAtendimentoMedico){
+            return response()->json(array(
+                'message' => 'Atendimento não é do medico autenticado.'
+            ), 203);
+        }
+
+        $saldoDevedor = $this->atendimento->getSaldoDevedor($posto,$atendimento);
+
+        if($saldoDevedor){
+            return response()->json(array(
+                'message' => 'Existe pendências'
+            ), 203);
+        }
+
+        $exames = $this->exames->getDetalheAtendimentoExameCorrel($posto, $atendimento,$correl);
+
+        return response()->json(array(
+            'message' => 'Recebido com sucesso.',
+            'data' => json_decode($exames),
         ), 200);
     }
 }
