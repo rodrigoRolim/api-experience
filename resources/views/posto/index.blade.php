@@ -132,9 +132,28 @@
                             dataAtendimento = new moment(atendimento.data_atd);                            
                             dataAtendimento = dataAtendimento.format('DD/MM/YYYY');     
                             dataNascimento = new moment(atendimento.data_nas);
-                            dataNascimento = dataNascimento.format('DD/MM/YYYY');
+                            dataNascimento = dataNascimento.format('DD/MM/YYYY');   
 
-                            var item =   '<li class="col-sm-12 boxatendimento naoRealizado-element" data-key="'+atendimento.key+'"  data-atendimento="'+atendimento.atendimento+'">'+
+
+                            switch(atendimento.situacao_exames_experience){
+                                case 'EA':
+                                    atendimento.situacao_exames_experience = 'warning-element'
+                                    break;
+                                case 'TF':
+                                    atendimento.situacao_exames_experience = 'success-element'
+                                    break;
+                                case 'PF':
+                                    atendimento.situacao_exames_experience = 'aguardando-element'
+                                    break;
+                                case 'EP':
+                                    atendimento.situacao_exames_experience = 'danger-element'
+                                    break;
+                                default:
+                                    atendimento.situacao_exames_experience = 'naoRealizado-element'
+                                    break;
+                            }                       
+
+                            var item =   '<li class="col-sm-12 boxatendimento '+atendimento.situacao_exames_experience+'"data-key="'+atendimento.key+'"  data-atendimento="'+atendimento.atendimento+'">'+
                                             '<div class="col-sm-12 dadosPaciente text-left">'+
                                               '<div class="col-sm-6">'+
                                                 '<div class="linhaDiv">'+

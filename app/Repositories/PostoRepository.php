@@ -21,7 +21,7 @@ class PostoRepository extends BaseRepository
     public function getAtendimentos($idPosto,$dataInicio,$dataFim, $convenio=null,$situacao=null,$postoRealizante=null)
     {
         $sql = "SELECT DISTINCT
-                   a.posto, a.atendimento,a.data_atd,a.nome_convenio, c.nome,c.data_nas,c.registro,c.sexo,c.telefone,c.telefone2, get_mnemonicos(a.posto, a.atendimento) as mnemonicos
+                   a.situacao_exames_experience, a.posto, a.atendimento,a.data_atd,a.nome_convenio, c.nome,c.data_nas,c.registro,c.sexo,c.telefone,c.telefone2, get_mnemonicos(a.posto, a.atendimento) as mnemonicos
                 FROM
                   VW_ATENDIMENTOS A                  
                   INNER JOIN VW_CLIENTES C ON a.registro = c.registro

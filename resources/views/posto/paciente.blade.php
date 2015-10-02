@@ -179,7 +179,15 @@
                 wheelStep: 10,
                 minwidth: '100%',
                 touchScrollStep: 50,
-            });    
+            });   
+
+            $('.modal-body').slimScroll({
+                height: '55.0vh',
+                railOpacity: 0.4,
+                wheelStep: 10,
+                minwidth: '100%',
+                touchScrollStep: 50,
+            });     
 
             $('.areaBtnVoltar').append('<button type="button" class="btn btn-w-m btn-default btnVoltar pull-right"><i class="fa fa-arrow-circle-o-left"></i> Voltar</button>');
 
@@ -221,7 +229,7 @@
                             if(exame.class == 'success-element'){
                                 $('.boxSelectAll').html('<span>Selecionar Todos &nbsp;<input type="checkbox" class="checkAll"></span>');
                                 if(exame.tipo_entrega == '*'){
-                                    link = '<a id="btnViewExame" data-toggle="modal" data-target="#modalExames" "data-tipoEntrega="'+exame.tipo_entrega+'">';                                          
+                                    link = '<a id="btnViewExame" data-target="#modalExames" "data-tipoEntrega="'+exame.tipo_entrega+'">';                                          
 
                                     check = '<div class="i-checks checkExames"><input type="checkbox" class="check"></div>';
                                 }else{
@@ -246,23 +254,27 @@
                     });   
 
                     function getDescricaoExame(dadosExames){                        
+                        $('#modalExames').modal('show');
+                        $('.modal-title').html('');   
+                        $('.modal-body').html('<br><br><br><br><h2 class="textoTamanho"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando registros.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>');   
+                        $('.modal-footer').html('');    
+
                         $.ajax({
                             url : '/posto/detalheatendimentoexamecorrel/'+dadosExames.posto+'/'+dadosExames.atendimento+'/'+dadosExames.correl+'',
                             type: 'GET',
                             data : dadosExames,
-                            success:function(result){      
-                                var descricao = result.data;  
+                            success:function(result){
+                                var descricao = result.data;
                                 var analitos = result.data.ANALITOS;
                                 var conteudo = '';                                                          
                                 console.log(descricao);
 
-                                $('.modal-title').html('');    
-                                $('.modal-body').html('');   
-                                $('.modal-footer').html('');                         
-                                $('.modal-title').append(descricao.PROCEDIMENTO); 
+                                $('.modal-title').append(descricao.PROCEDIMENTO);
+                                $('.modal-body').html(''); 
 
                                 $('.modal-footer').append('Liberado em '+descricao.DATA_REALIZANTE+' por '+descricao.REALIZANTE.NOME+' - '+
                                     descricao.REALIZANTE.TIPO_CR+' '+descricao.REALIZANTE.UF_CONSELHO+' : '+descricao.REALIZANTE.CRM+' Data e Hora da Coleta: '+descricao.DATA_COLETA);
+
 
 
                                 $.each( analitos, function( index ){
