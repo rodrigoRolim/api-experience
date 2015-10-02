@@ -90,7 +90,7 @@
                   <div class="modal-content">
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h4 class="modal-title">Exames Descrição</h4>
+                      <h2 class="modal-title">Exames Descrição</h2>
                     </div>
                     <div class="modal-body">
                   

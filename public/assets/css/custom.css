@@ -326,6 +326,10 @@ div.row.infoClienteMed{
 	font-size: 0.90em;
 }
 
+.modal-title{
+	text-align: center;
+}
+
 .modal-body{	
 	padding-bottom: 300px;
 	padding-right: 0px;

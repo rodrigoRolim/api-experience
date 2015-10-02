@@ -188,9 +188,12 @@
                 $("#modalExames").modal();
             });
 
-            function verificaSaldoDevedor(saldo,situacao){
-                if(saldo == null || saldo == 0 && situacao == "success-element")
-                   return true;
+            function verificaSaldoDevedor(saldo){
+                if(saldo == null || saldo == 0){
+                   return false;
+                }
+
+                return true;
             }
 
             function getExames(posto,atendimento){

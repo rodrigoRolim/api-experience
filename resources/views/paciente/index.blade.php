@@ -72,8 +72,7 @@
                     <span id="solicitante"></span> <br> 
                 </div>  
             </div>                          
-        </div>           
-
+        </div> 
 
 	<div class="row wrapper border-bottom white-bg page-heading">
 		<div class="ibox">
@@ -89,7 +88,7 @@
                   <div class="modal-content">
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h4 class="modal-title">Exames Descrição</h4>
+                      <h2 class="modal-title">Exames Descrição</h2>
                     </div>
                     <div class="modal-body">
                       <p>Some text in the modal.</p>
@@ -149,23 +148,32 @@
 				touchScrollStep: 50,
 			});
 
+			$('#side-menu').slimScroll({
+				height: '72.5vh',
+				railOpacity: 0.4,
+				wheelStep: 10,
+				minwidth: '100%',
+				touchScrollStep: 50,
+			});
+
 			$("#btnViewExame").click(function(){
 				$("#modalExames").modal();
 			});
 
 			$('.active a').trigger('click');
 
-			function verificaSaldoDevedor(saldo,situacao){
-                if(saldo == null || saldo == 0 && situacao == "success-element")
-                   return true;
-            }
+			function verificaSaldoDevedor(saldo){
+                if(saldo == null || saldo == 0){
+                   return false;
+                }
 
+                return true;
+            }
 
 			function getExames(posto,atendimento){
 
 				//Carregando
 				$('.listaExames').html('<br><br><br><br><h2 class="textoTamanho"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando registros.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>');
-
 				//Pega os dados via get de exames do atendimento
 				$.get( "/paciente/examesatendimento/"+posto+"/"+atendimento, function( result ) {
 					//Carrega dados do atendimento
@@ -195,7 +203,6 @@
                 	    	}   
                 		  }
                 		}
-
 
 						 conteudo = link+'<div class="'+sizeBox+' boxExames "'+
 	                                    'data-correl="'+exame.correl+'" data-atendimento="'+exame.atendimento+'" data-posto="'+exame.posto+'"><li class="'+exame.class+' animated fadeInDownBig">'+check+
@@ -273,7 +280,6 @@
                     $('input').iCheck({
                         checkboxClass: 'icheckbox_square-grey',
                     });
-
 					
 					//verifica se o usuario tem saldo devedor
 					if(!verificaSaldoDevedor(saldo)){
