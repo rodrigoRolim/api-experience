@@ -77,6 +77,11 @@
     <script type="text/javascript">
         $(document).ready(function (){
             $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+            $(".txtRodape").append("<i class='fa fa-heartbeat'></i> Posto/Atendimento &nbsp;|&nbsp; <i class='fa fa-calendar-check-o'></i> Data do Atendimento");
+            $(".txtRodape").append("&nbsp;| &nbsp;<i class='fa fa-credit-card'></i> Convênio &nbsp |&nbsp; <i class='fa fa-flask'></i>  Mnemônicos");
+            $(".txtRodape").append("<span class='statusAtendimentos'></span>");
+            $(".statusAtendimentos").append("<span class='statusFinalizados'></span> Finalizados &nbsp;&nbsp;<span class='statusAguardando'></span> Parc. Finalizado");
+            $(".statusAtendimentos").append("&nbsp;&nbsp;<span class='statusEmAndamento'></span> Em Andamento &nbsp;&nbsp;<span class='statusPendencias'></span> Existem Pendências");
             
             var dataInicio = new moment();
             var dataFim = new moment();
@@ -153,7 +158,7 @@
                                     break;
                             }                       
 
-                            var item =   '<li class="col-sm-12 boxatendimento '+atendimento.situacao_exames_experience+'"data-key="'+atendimento.key+'"  data-atendimento="'+atendimento.atendimento+'">'+
+                            var item =   '<li class="col-sm-12 boxatendimento '+atendimento.situacao_exames_experience+'"data-key="'+atendimento.key+'" data-atendimento="'+atendimento.atendimento+'">'+
                                             '<div class="col-sm-12 dadosPaciente text-left">'+
                                               '<div class="col-sm-6">'+
                                                 '<div class="linhaDiv">'+
@@ -162,7 +167,7 @@
                                                 '<span class="dataAtendimento">'+
                                                 '<i class="fa fa-calendar-check-o" data-toggle="tooltip" title="Data do Atendimento"></i> '+dataAtendimento+'</span>'+
                                                 '<span class="convenioAtendimento"><i class="fa fa-credit-card" data-toggle="tooltip" title="Convênio"></i> '+atendimento.nome_convenio+'</span>'+                                                
-                                                '<div class="dadosPessoais"><strong>'+atendimento.nome+'</strong>'+' <br><i class="'+((atendimento.sexo == "M")?"fa fa-mars":"fa fa-venus")+'"></i>'+" "+atendimento.idade+'</div>'+
+                                                '<div class="dadosPessoais"><strong>'+atendimento.nome+'</strong>'+' <br><i class="'+((atendimento.sexo == "M")?"fa fa-mars":"fa fa-venus")+'"></i>'+" "+atendimento.idade+'</div>'+                                                
                                                 '</div>'+
                                                '</div><div class="col-sm-6">'+
                                                 '<i class="fa fa-flask" data-toggle="tooltip" title="Mnemônicos"></i> '+atendimento.mnemonicos+'</div>'+

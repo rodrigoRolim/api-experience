@@ -30,6 +30,32 @@ ul{
 	padding: 5px;
 }
 
+.txtRodape{
+	font-size: 0.9em;
+}
+
+.statusAtendimentos{
+	margin-left: 60px;
+	font-size: 0.9em;
+}
+
+.statusFinalizados{
+	border-left: 3px solid #1ab394;
+}
+
+.statusAguardando{
+	border-left: 3px solid #F7F01D;
+}
+
+.statusEmAndamento{
+	border-left: 3px solid #f8ac59;
+}
+
+.statusPendencias{
+	border-left: 3px solid #ed5565;;
+}
+
+
 /* ========= header ======== */
 
 .headLogin{

@@ -225,6 +225,7 @@
                         var check = '';
                         var link = '';
 
+
                         if(!verificaSaldoDevedor(saldo)){
                             if(exame.class == 'success-element'){
                                 $('.boxSelectAll').html('<span>Selecionar Todos &nbsp;<input type="checkbox" class="checkAll"></span>');
@@ -240,6 +241,7 @@
 
                         conteudo = link+'<div class="'+sizeBox+' boxExames "'+
                                         'data-correl="'+exame.correl+'" data-atendimento="'+exame.atendimento+'" data-posto="'+exame.posto+'"><li class="'+exame.class+' animated fadeInDownBig">'+check+
+                                        '<div style="display:none">'+exame.nome_posto_realizante+'</div>'+
                                         '<div class="dadosExames">' +
                                             '<b>'+exame.mnemonico+'</b> | '+exame.nome_procedimento.trunc(31)+
                                             '<br>'+exame.msg+'<br><span class="msgExameTipoEntrega">'+msg+'</span></li></div>';
@@ -261,8 +263,7 @@
 
                         $.ajax({
                             url : '/posto/detalheatendimentoexamecorrel/'+dadosExames.posto+'/'+dadosExames.atendimento+'/'+dadosExames.correl+'',
-                            type: 'GET',
-                            data : dadosExames,
+                            type: 'GET',                           
                             success:function(result){
                                 var descricao = result.data;
                                 var analitos = result.data.ANALITOS;
