@@ -308,9 +308,8 @@
                                 }
                             },
                             error: function(jqXHR, textStatus, errorThrown){
-                                var msg = jqXHR.responseText;
-                                msg = JSON.parse(msg);
-                                $('#msgPrograma').html('<div class="alert alert-danger alert-dismissable animated fadeIn">'+msg.message+'</div>');
+                                $('.modal-body').html('');
+                                $('.modal-body').append('<div class="text-center alert alert-danger alert-dismissable animated fadeIn"><h2>Erro ao carregar Descrição do Exame!</h2></div>');
                             }
                         });
                     }                 

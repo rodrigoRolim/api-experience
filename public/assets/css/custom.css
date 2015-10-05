@@ -281,7 +281,7 @@ div.row.infoClienteMed{
 }
 
 .wrapper-content{
-	min-height: 500px;
+	margin-bottom: 20px;
 }
 
 .listaExames{
@@ -623,7 +623,16 @@ div.row.infoClienteMed{
 	}
 
 	.boxFiltroPosto{
-		height: 240px;
+		height: 300px;
 	}
+
+	.txtRodape{
+		display: none;
+	}
+
+	.statusAtendimentos{
+		display: none;
+	}
+
 }
 
