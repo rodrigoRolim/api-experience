@@ -148,6 +148,14 @@
 				touchScrollStep: 50,
 			});
 
+			$('.modal-body').slimScroll({
+                height: '55.0vh',
+                railOpacity: 0.4,
+                wheelStep: 10,
+                minwidth: '100%',
+                touchScrollStep: 50,
+            }); 
+
 			$('#side-menu').slimScroll({
 				height: '72.5vh',
 				railOpacity: 0.4,
