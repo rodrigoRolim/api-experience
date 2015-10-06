@@ -176,6 +176,14 @@
                 touchScrollStep: 50,
             });          
 
+            $('.modal-body').slimScroll({
+                height: '55.0vh',
+                railOpacity: 0.4,
+                wheelStep: 10,
+                minwidth: '100%',
+                touchScrollStep: 50,
+            }); 
+
             $('.active a').trigger('click');
 
             $('.areaBtnVoltar').append('<button type="button" class="btn btn-w-m btn-default btnVoltar pull-right"><i class="fa fa-arrow-circle-o-left"></i> Voltar</button>');
