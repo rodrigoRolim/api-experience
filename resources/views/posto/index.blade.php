@@ -156,7 +156,7 @@
 
                             var item =   '<li class="col-sm-12 boxatendimento '+atendimento.situacao_exames_experience+'"data-key="'+atendimento.key+'" data-atendimento="'+atendimento.atendimento+'">'+
                                             '<div class="col-sm-12 dadosPaciente text-left">'+
-                                              '<div class="col-sm-6">'+
+                                              '<div class="col-sm-8">'+
                                                 '<div class="linhaDiv">'+
                                                 '<span class="postoAtendimento">'+
                                                 '<i class="fa fa-heartbeat" data-toggle="tooltip" data-placement="right" title="Posto/Atendimento"></i><strong> '+atendimento.posto+'/'+atendimento.atendimento+'</span></strong>'+
@@ -165,7 +165,7 @@
                                                 '<span class="convenioAtendimento"><i class="fa fa-credit-card" data-toggle="tooltip" title="Convênio"></i> '+atendimento.nome_convenio+'</span>'+                                                
                                                 '<div class="dadosPessoais"><strong>'+atendimento.nome+'</strong>'+' <br><i class="'+((atendimento.sexo == "M")?"fa fa-mars":"fa fa-venus")+'"></i>'+" "+atendimento.idade+'</div>'+                                                
                                                 '</div>'+
-                                               '</div><div class="col-sm-6">'+
+                                               '</div><div class="col-sm-4">'+
                                                 '<i class="fa fa-flask" data-toggle="tooltip" title="Mnemônicos"></i> '+atendimento.mnemonicos+'</div>'+
                                             '</div></li>';  
 
@@ -176,7 +176,7 @@
                         $('#listFilter li').click(function(e){
                             var key = $(e.currentTarget).data('key');
                             var atendimento = $(e.currentTarget).data('atendimento');
-                            window.location.replace("/posto/paciente/"+key+"/"+atendimento);
+                            window.open("/posto/paciente/"+key+"/"+atendimento); //location.replace
                         });
                         
                         if(result.data.length == 0){

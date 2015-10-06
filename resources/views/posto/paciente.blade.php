@@ -77,7 +77,7 @@
             <div class="row">
                 <div class="i-checks all boxSelectAll">    </div>           
                     <div class="input-group m-b btnSearchPosto">
-                        <span class="input-group-addon"><i class="fa fa-search searchPosto"></i></span>{!! Form::select('postoRealizante', $postoRealizante, '', array('tabindex'=>'4','multiple','data-placeholder'=>'Todos os postos','class' => 'chosen-select selectPosto', 'id'=>'situacao')) !!}        
+                        <span class="input-group-addon"><i class="fa fa-search searchPosto"></i></span>{!! Form::select('postoRealizante', $postoRealizante, '', array('tabindex'=>'4','multiple','data-placeholder'=>'Buscar por postos realizantes','class' => 'chosen-select selectPosto', 'id'=>'situacao')) !!}        
                     </div>
             </div>   
         </div>
@@ -187,7 +187,7 @@
                 wheelStep: 10,
                 minwidth: '100%',
                 touchScrollStep: 50,
-            });     
+            }); 
 
             $('.areaBtnVoltar').append('<button type="button" class="btn btn-w-m btn-default btnVoltar pull-right"><i class="fa fa-arrow-circle-o-left"></i> Voltar</button>');
 
@@ -202,6 +202,11 @@
 
                 return true;
             }
+
+
+            $('.selectPosto').change(function(e) {
+               alert( $('.search-choice').text() );
+            });
 
             function getExames(posto,atendimento){
                 //Carregando
@@ -224,23 +229,27 @@
                         var msg = '';
                         var check = '';
                         var link = '';
-
+                        var visualizacao = '';
+                        
 
                         if(!verificaSaldoDevedor(saldo)){
                             if(exame.class == 'success-element'){
                                 $('.boxSelectAll').html('<span>Selecionar Todos &nbsp;<input type="checkbox" class="checkAll"></span>');
                                 if(exame.tipo_entrega == '*'){
-                                    link = '<a id="btnViewExame" data-target="#modalExames" "data-tipoEntrega="'+exame.tipo_entrega+'">';                                          
+                                    link = '<a id="btnViewExame" data-target="#modalExames" "data-tipoEntrega="'+exame.tipo_entrega+'">'; 
+
+                                    visualizacao = "data-visualizacao='OK'";                                        
 
                                     check = '<div class="i-checks checkExames"><input type="checkbox" class="check"></div>';
                                 }else{
                                     msg = '{!!config('system.messages.exame.tipoEntregaInvalido')!!}';
+                                    exame.class = "success-elementNoHov";
                                 }
                             }
                         }
-
+                        
                         conteudo = link+'<div class="'+sizeBox+' boxExames "'+
-                                        'data-correl="'+exame.correl+'" data-atendimento="'+exame.atendimento+'" data-posto="'+exame.posto+'"><li class="'+exame.class+' animated fadeInDownBig">'+check+
+                                        'data-correl="'+exame.correl+'" data-atendimento="'+exame.atendimento+'" data-posto="'+exame.posto+' "'+visualizacao+'""><li class="'+exame.class+' animated fadeInDownBig">'+check+
                                         '<div style="display:none">'+exame.nome_posto_realizante+'</div>'+
                                         '<div class="dadosExames">' +
                                             '<b>'+exame.mnemonico+'</b> | '+exame.nome_procedimento.trunc(31)+
@@ -251,8 +260,13 @@
                     });
 
                     $('.boxExames').click(function(e){
-                            var dadosExames = $(e.currentTarget).data();                                               
-                            getDescricaoExame(dadosExames);                 
+                            if($(e.currentTarget).data('visualizacao') == 'OK'){
+                                var dadosExames = $(e.currentTarget).data();                                               
+                                getDescricaoExame(dadosExames);                 
+                            }
+                            else{
+                                return false;
+                            }
                     });   
 
                     function getDescricaoExame(dadosExames){                        
@@ -265,18 +279,21 @@
                             url : '/posto/detalheatendimentoexamecorrel/'+dadosExames.posto+'/'+dadosExames.atendimento+'/'+dadosExames.correl+'',
                             type: 'GET',                           
                             success:function(result){
+                                console.log(result.data);
+                                if(result.data == null){
+                                    $('#modalExames').modal('hide');
+                                    alert("Não há resultados disponíveis para visualização.");
+                                    return false;
+                                }
                                 var descricao = result.data;
                                 var analitos = result.data.ANALITOS;
                                 var conteudo = '';                                                          
-                                console.log(descricao);
-
+                                
                                 $('.modal-title').append(descricao.PROCEDIMENTO);
                                 $('.modal-body').html(''); 
 
                                 $('.modal-footer').append('Liberado em '+descricao.DATA_REALIZANTE+' por '+descricao.REALIZANTE.NOME+' - '+
                                     descricao.REALIZANTE.TIPO_CR+' '+descricao.REALIZANTE.UF_CONSELHO+' : '+descricao.REALIZANTE.CRM+' Data e Hora da Coleta: '+descricao.DATA_COLETA);
-
-
 
                                 $.each( analitos, function( index ){
 
@@ -309,7 +326,7 @@
                             },
                             error: function(jqXHR, textStatus, errorThrown){
                                 $('.modal-body').html('');
-                                $('.modal-body').append('<div class="text-center alert alert-danger alert-dismissable animated fadeIn"><h2>Erro ao carregar Descrição do Exame!</h2></div>');
+                                $('.modal-body').append('<div class="text-center alert alert-danger alert-dismissable animated fadeIn erro"><h2>Erro ao carregar Descrição do Exame!</h2></div>');
                             }
                         });
                     }                 

@@ -94,7 +94,7 @@
                       <p>Some text in the modal.</p>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      
                     </div>
                   </div>
                   
@@ -154,11 +154,7 @@
 				wheelStep: 10,
 				minwidth: '100%',
 				touchScrollStep: 50,
-			});
-
-			$("#btnViewExame").click(function(){
-				$("#modalExames").modal();
-			});
+			});			
 
 			$('.active a').trigger('click');
 
@@ -171,7 +167,6 @@
             }
 
 			function getExames(posto,atendimento){
-
 				//Carregando
 				$('.listaExames').html('<br><br><br><br><h2 class="textoTamanho"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando registros.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>');
 				//Pega os dados via get de exames do atendimento
@@ -190,6 +185,8 @@
                         var msg = '';
                         var check = '';
                         var link = '';
+                        var visualizacao = 'OK';
+
 
                         if(!verificaSaldoDevedor(saldo)){
                     	 	if(exame.class == 'success-element'){
@@ -197,15 +194,18 @@
                     	 		 if(exame.tipo_entrega == '*'){
 	                        	  	link = '<a id="btnViewExame" data-toggle="modal" data-target="#modalExames" "data-tipoEntrega="'+exame.tipo_entrega+'">';   
 
+	                        	  	visualizacao = "data-visualizacao='OK'"; 
+
 	                        	  	check = '<div class="i-checks checkExames"><input type="checkbox" class="check"></div>';                     	  				
                     		  }else{
             	  	   			msg = '{!!config('system.messages.exame.tipoEntregaInvalido')!!}';
+            	  	   			exame.class = "success-elementNoHov";
                 	    	}   
                 		  }
                 		}
 
 						 conteudo = link+'<div class="'+sizeBox+' boxExames "'+
-	                                    'data-correl="'+exame.correl+'" data-atendimento="'+exame.atendimento+'" data-posto="'+exame.posto+'"><li class="'+exame.class+' animated fadeInDownBig">'+check+
+	                                    'data-correl="'+exame.correl+'" data-atendimento="'+exame.atendimento+'" data-posto="'+exame.posto+'"" '+visualizacao+' "><li class="'+exame.class+' animated fadeInDownBig">'+check+
 	                                    '<div class="dadosExames">' +
 	                                        '<b>'+exame.mnemonico+'</b> | '+exame.nome_procedimento.trunc(31)+
 	                                        '<br>'+exame.msg+'<br><span class="msgExameTipoEntrega">'+msg+'</span></li></div>';
@@ -213,12 +213,20 @@
 						$('.listaExames').append(conteudo);
 					});
 
-					 $('.boxExames').click(function(e){
-                            var dadosExames = $(e.currentTarget).data();                                               
-                            getDescricaoExame(dadosExames);                 
-                    });   
+					 $('.boxExames').click(function(e){	
+                            if($(e.currentTarget).data('visualizacao') == 'OK'){
+                                var dadosExames = $(e.currentTarget).data();                                               
+                                getDescricaoExame(dadosExames);                 
+                            }
+                            else{
+                                return false;
+                            }
+                    });     
 
-                    function getDescricaoExame(dadosExames){                        
+                    function getDescricaoExame(dadosExames){ 
+                    	 $('.modal-body').html('<br><br><br><br><h2 class="textoTamanho"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando registros.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>');   
+                         $('.modal-title').html('');
+                         $('.modal-footer').html('');
                         $.ajax({
                             url : '/paciente/detalheatendimentoexamecorrel/'+dadosExames.posto+'/'+dadosExames.atendimento+'/'+dadosExames.correl+'',
                             type: 'GET',                            
@@ -228,10 +236,11 @@
                                 var conteudo = '';                                                          
                                 console.log(descricao);
 
-                                $('.modal-title').html('');    
-                                $('.modal-body').html('');   
-                                $('.modal-footer').html('');                         
+                                $('#modalExames').modal('show');  
+                                                      
                                 $('.modal-title').append(descricao.PROCEDIMENTO); 
+
+                                $('.modal-body').html('');
 
                                 $('.modal-footer').append('Liberado em '+descricao.DATA_REALIZANTE+' por '+descricao.REALIZANTE.NOME+' - '+
                                     descricao.REALIZANTE.TIPO_CR+' '+descricao.REALIZANTE.UF_CONSELHO+' : '+descricao.REALIZANTE.CRM+' Data e Hora da Coleta: '+descricao.DATA_COLETA);
@@ -267,9 +276,8 @@
                                 }
                             },
                             error: function(jqXHR, textStatus, errorThrown){
-                                var msg = jqXHR.responseText;
-                                msg = JSON.parse(msg);
-                                $('#msgPrograma').html('<div class="alert alert-danger alert-dismissable animated fadeIn">'+msg.message+'</div>');
+                                $('.modal-body').html('');
+                                $('.modal-body').append('<div class="text-center alert alert-danger alert-dismissable animated fadeIn erro"><h2>Erro ao carregar Descrição do Exame!</h2></div>');
                             }
                         });
                     }

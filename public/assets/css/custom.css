@@ -231,6 +231,15 @@ ul{
 	margin-right: 10px;
 }
 
+li.success-elementNoHov{
+	border-left: 3px solid #1ab394;
+	margin-right: 10px;
+}
+
+li.success-elementNoHov:hover{
+	
+}
+
 .mnemonicos{
 	font-size: 11px;
 }
