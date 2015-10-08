@@ -119,7 +119,7 @@ li.clicked {
   background-color: #ffffff;
 }
 li.notClicked {
-  background-color: none;
+  background-color: transparent;
 }
 #side-menu li a:active {
   background-color: #ffffff;

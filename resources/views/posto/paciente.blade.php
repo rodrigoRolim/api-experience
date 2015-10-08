@@ -38,7 +38,7 @@
                        data-solicitante="{{$atendimento->nome_solicitante}}"
                        data-convenio="{{$atendimento->nome_convenio}}"
                        data-saldo="{{$atendimento->saldo_devedor}}"
-                       data-idade="{{$atendimento->data_nas}}"
+                       data-idade="{{$atendimento->idade}}"
                        data-sexo="{{$atendimento->sexo}}"
                        data-nome="{{$atendimento->nome}}"> 
                     </a>
@@ -143,12 +143,7 @@
                 sexo = $(e.currentTarget).data('sexo');
 
                 $('.idadePaciente').append('<i class="'+((sexo == "M")?"fa fa-mars":"fa fa-venus")+'"></i> <span id="idade"></span>');
-
-
-                var dataNascimento = moment(idade).format('DD/MM/YYYY');
-                var idadeCliente = new moment().diff(idade, 'years');  
-
-                $('#idade').html(dataNascimento + ' - ' + idadeCliente + ' Anos');
+                $('#idade').html(idade);
 
                 if(posto != null && atendimento != null){
                     getExames(posto,atendimento);

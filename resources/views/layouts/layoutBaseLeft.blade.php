@@ -51,8 +51,6 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('li:first-child').addClass('active');
-
             $('.metismenu li i').attr('style','display:none');
 
             resizeDisplay();
@@ -77,11 +75,9 @@
                 }
             }
 
-            $('li').click(function(event) {
-               $('li').not(this).removeClass('active clicked');    /// Alternancia de fundos ao clicar/selecionar um atendimento da lista. (linhas 63-66).           
-               $('li').not(this).addClass('notClicked');
-               $(this).toggleClass('active clicked');
-               $(this).toggleClass('notClicked');  
+            $('.metismenu li').click(function(event) {
+               $('.metismenu li').not(this).removeClass('active clicked');    /// Alternancia de fundos ao clicar/selecionar um atendimento da lista. (linhas 63-66).           
+               $(this).attr('class','active clicked notClicked');
             });  
         });
     </script>

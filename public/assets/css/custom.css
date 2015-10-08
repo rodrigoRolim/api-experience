@@ -55,6 +55,54 @@ ul{
 	border-left: 3px solid #ed5565;;
 }
 
+.modal-conteudo {
+  position: relative;
+  background-color: #fff;
+  -webkit-background-clip: padding-box;
+          background-clip: padding-box;
+  border: 1px solid #999;
+  border: 1px solid rgba(0, 0, 0, .2);
+  border-radius: 6px;
+  outline: 0;
+  -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
+          box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
+}
+
+.modal-topo {
+  min-height: 16.42857143px;
+  padding: 15px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.modal-topo .close {
+  margin-top: -2px;
+}
+
+.modal-titulo {
+  margin: 0;
+  line-height: 1.42857143;
+}
+.modal-corpo {
+  position: relative;
+  padding: 15px;
+  height: 450px;
+}
+.modal-rodape {
+  padding: 15px;
+  text-align: right;
+  border-top: 1px solid #e5e5e5;
+}
+.modal-rodape .btn + .btn {
+  margin-bottom: 0;
+  margin-left: 5px;
+}
+.modal-rodape .btn-group .btn + .btn {
+  margin-left: -1px;
+}
+.modal-rodape .btn-block + .btn-block {
+  margin-left: 0;
+}
+
 
 /* ========= header ======== */
 
@@ -242,12 +290,6 @@ li.success-elementNoHov:hover{
 
 .mnemonicos{
 	font-size: 11px;
-}
-
-div.row.infoCliente{
-	margin-right: 0;
-	margin-left: 0;
-	min-height: 70px;
 }
 
 div.row.infoClienteMed{
@@ -519,6 +561,11 @@ div.row.infoClienteMed{
 	.infoAtendimento{			
 		margin-left: 0px;
 	}
+
+	.medicoSolicitante{
+		margin-right: 50px;
+	}
+
 	.listaExames li{
 		min-height: 120px;
 	}

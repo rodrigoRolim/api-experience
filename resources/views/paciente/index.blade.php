@@ -2,6 +2,7 @@
 
 @section('stylesheets')
 	{!! Html::style('/assets/css/plugins/iCheck/custom.css') !!}
+	{!! Html::style('/assets/css/plugins/datapicker/datepicker.css') !!}  
 @stop
 
 @section('infoHead')
@@ -17,12 +18,17 @@
 			<span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span>
 			<a class="dropdown-toggle" data-toggle="dropdown"><b class="fa fa-caret-square-o-down fa"></b></a><br>
 			{{date('d/m/y',strtotime(Auth::user()['data_nas']))}}&nbsp;
-			<ul class="dropdown-menu pull-right itensInfoUser">
+			<ul class="dropdown-menu pull-right itensInfoUser">				
+				<li class="item">
+					<a class="btnCadastrarSenha">
+						<i class="fa fa-user"></i> Cadastrar Senha
+					</a>
+				</li>
 				<li class="item">
 					<a href="/auth/logout">
 						<i class="fa fa-sign-out"></i> Sair
 					</a>
-				</li>
+				</li>							
 			</ul>
 		</div>
 	</div>
@@ -35,7 +41,7 @@
 		</div>
 		<ul class="nav metismenu" id="side-menu">
 			@foreach($atendimentos as $key => $atendimento)
-				<li class="{{ !$key ? 'active' : '' }}">
+				<li class="leftMenu {{ !$key ? 'active' : '' }}">
 					<a href="#" class="btnAtendimento"
 					   data-posto="{{$atendimento->posto}}"
 					   data-atendimento="{{$atendimento->atendimento}}"
@@ -59,18 +65,22 @@
 <div id="page-wrapper" class="gray-bg" style="min-height: 85.6vh;">
 	  <div class="row infoCliente">
 	        <div class="col-md-12 areaPaciente"> 
-        		<div class="col-md-6"> 
+        		<div class="col-md-3"> 
 	                <div class="infoAtendimento">
 	                  	<i class="fa fa-heartbeat" data-toggle="tooltip" data-placement="right" title="Posto/Atendimento"> </i>
-	                    <span id="atendimento"></span> <br>
-	                    <i class="fa fa-credit-card" data-toggle="tooltip" title="Convênio"> </i>
-	                    <span id="convenio"></span> <br>                 
+	                    <span id="atendimento"></span>                   
 	                </div>
 	            </div>
-                <div class="col-md-6">                	
-                    <i class="fa fa-user-md" data-toggle="tooltip" data-placement="right" title="Médico Solicitante"> </i>
-                    <span id="solicitante"></span> <br> 
+                <div class="col-md-5">    
+                	<div class="medicoSolicitante">            	
+	                    <i class="fa fa-user-md" data-toggle="tooltip" data-placement="right" title="Médico Solicitante"> </i>
+	                    &nbsp;<span id="solicitante"></span> 
+                	</div>
                 </div>  
+	            <div class="col-md-4">
+	            	<i class="fa fa-credit-card" data-toggle="tooltip" title="Convênio"> </i>
+                    <span id="convenio"></span>                 
+	            </div>              
             </div>                          
         </div> 
 
@@ -84,7 +94,7 @@
               <div class="modal fade" id="modalExames" role="dialog">
                 <div class="modal-dialog">
                 
-                  <!-- Modal content-->
+                  <!-- Área Modal -->
                   <div class="modal-content">
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -94,6 +104,51 @@
                       <p>Some text in the modal.</p>
                     </div>
                     <div class="modal-footer">
+                      
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+
+              <!-- Modal Cadastrar Senha Paciente -->
+              <div class="modal fade" id="modalCadastrarSenha" role="dialog">
+                <div class="modal-dialog">
+                
+                  <!-- Área Modal -->
+                  <div class="modal-conteudo">
+                    <div class="modal-topo">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h2 class="modal-titulo">Cadastrar Senha</h2>
+                    </div>
+                    <div class="modal-corpo">
+                       <div class="col-md-12">
+                      		<form>
+                      			  <div class="form-group">
+								    <label for="CPF">CPF</label>
+								    <input type="text" class="form-control" id="CPF" placeholder="CPF">
+								  </div>
+								  <div class="form-group">
+								    <label for="DataNascimento">Data de Nascimento</label>
+								    <input type="text" class="form-control" id="dataDeNascimento" name="dataDeNascimento" placeholder="Data de Nascimento">
+								  </div>
+								  <div class="form-group">
+								    <label for="SenhaAtual">Senha Atual</label>
+								    <input type="password" class="form-control" name="senhaAtual" placeholder="Senha Atual">
+								  </div>
+								   <div class="form-group">
+								    <label for="novaSenha">Nova Senha</label>
+								    <input type="password" class="form-control" name="novaSenha" placeholder="Nova Senha">
+								  </div>
+								   <div class="form-group">
+								    <label for="confNovaSenha">Confirmar Nova Senha</label>
+								    <input type="password" class="form-control" name="confNovaSenha" placeholder="Confirmar Nova Senha">
+								  </div>
+								  <button type="submit" class="btn btn-default">Salvar</button>
+                      		</form>
+                      	</div>      
+                    </div>
+                    <div class="modal-rodape">
                       
                     </div>
                   </div>
@@ -116,6 +171,8 @@
 	<script src="{{ asset('/assets/js/plugins/iCheck/icheck.min.js') }}"></script>
 	<script src="{{ asset('/assets/js/plugins/truncateString/truncate.js') }}"></script>
 	<script src="{{ asset('/assets/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
+	<script src="{{ asset('/assets/js/plugins/datapicker/bootstrap-datepicker.js') }}"></script>
+	<script src="{{ asset('/assets/js/plugins/vanillamasker/vanilla-masker.min.js') }}"></script>
 
 	<script type="text/javascript">
 		$(document).ready(function () {
@@ -140,8 +197,24 @@
 				$('.boxSelectAll').html('');
 			});
 
+			$('.btnCadastrarSenha').click(function(e){
+				$('#modalCadastrarSenha').modal('show');
+			});
+
+			VMasker(document.getElementById("dataDeNascimento")).maskPattern('99/99/9999');
+			$('#dataDeNascimento').datepicker({
+	            startView: 1,
+	            todayBtn: "linked",
+	            keyboardNavigation: true,
+	            forceParse: false,
+	            autoclose: true,
+	            format: "dd/mm/yyyy"
+	        });
+
+	        VMasker(document.getElementById("CPF")).maskPattern('999.999.999-99');    
+
 			$('.page-heading').slimScroll({
-				height: '72.5vh',
+				height: '67.1vh',
 				railOpacity: 0.4,
 				wheelStep: 10,
 				minwidth: '100%',
@@ -157,20 +230,19 @@
             }); 
 
 			$('#side-menu').slimScroll({
-				height: '72.5vh',
+				height: '67.2vh',
 				railOpacity: 0.4,
 				wheelStep: 10,
 				minwidth: '100%',
 				touchScrollStep: 50,
 			});			
 
-			$('.active a').trigger('click');
+			$('.leftMenu.active a').trigger('click');
 
 			function verificaSaldoDevedor(saldo){
                 if(saldo == null || saldo == 0){
                    return false;
                 }
-
                 return true;
             }
 

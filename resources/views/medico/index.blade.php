@@ -14,7 +14,7 @@
         {{date('d/m/y',strtotime(Auth::user()['data_nas']))}}&nbsp;        
         <ul class="dropdown-menu pull-right itensInfoUser">
             <li class="item">
-                <a href="/auth/logout">
+                <a href="{{url()}}/auth/logout">
                     <i class="fa fa-sign-out"></i> Sair
                 </a>
             </li>
