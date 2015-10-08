@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use Carbon\Carbon;
 use Prettus\Repository\Eloquent\BaseRepository;
+use Experience\Util\DataNascimento;
 use DB;
 
 class PostoRepository extends BaseRepository
@@ -47,31 +48,8 @@ class PostoRepository extends BaseRepository
 
         $dtNow = Carbon::now();
 
-        for($i=0;$i<sizeof($clientes);$i++){           
-
-            //Calcular idade
-            $dtNascimento = Carbon::parse($clientes[$i]->data_nas);
-            $data = $dtNow->diff($dtNascimento);
-
-            $ano = (int) $data->y;
-            $mes = (int) $data->m;
-            $dia = (int) $data->d;
-
-            $resultData = '';
-
-            if($ano > 0){
-                $resultData .= $ano.' ano'.($ano>1?'s':'').' ';
-            }
-
-            if($mes > 0){
-                $resultData .= $mes.' mes'.($mes>1?'es':'').' ';
-            }
-
-            if($dia > 0){
-                $resultData .= $dia.' dia'.($dia>1?'s':'').' ';
-            }
-
-            $clientes[$i]->idade = $resultData;
+        for($i=0;$i<sizeof($clientes);$i++){
+            $clientes[$i]->idade = DataNascimento::idade($clientes[$i]->data_nas);
 
             $key = mcrypt_encrypt(MCRYPT_RIJNDAEL_256, config('system.key'), $clientes[$i]->registro, MCRYPT_MODE_ECB, mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB), MCRYPT_RAND));
             $id = strtr(rtrim(base64_encode($key), '='), '+/', '-_');
@@ -155,6 +133,7 @@ class PostoRepository extends BaseRepository
 
         $atendimento[] = DB::select(DB::raw($sql), ['registro' => $registro, 'idPosto' => $idPosto, 'idAtendimento' => $idAtendimento]);
 
+        $atendimento[0][0]->idade = DataNascimento::idade($atendimento[0][0]->data_nas);
 
         return $atendimento[0];
     }
