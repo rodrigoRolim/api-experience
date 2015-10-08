@@ -21,7 +21,7 @@
 			<ul class="dropdown-menu pull-right itensInfoUser">				
 				<li class="item">
 					<a class="btnCadastrarSenha">
-						<i class="fa fa-user"></i> Cadastrar Senha
+						<i class="fa fa-user"></i> Perfil
 					</a>
 				</li>
 				<li class="item">
@@ -119,11 +119,11 @@
                   <div class="modal-conteudo">
                     <div class="modal-topo">
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h2 class="modal-titulo">Cadastrar Senha</h2>
+                      <h2 class="modal-titulo">Perfil</h2>
                     </div>
                     <div class="modal-corpo">
                        <div class="col-md-12">
-                      		<form>
+                      		<form id="formPerfil">
                       			  <div class="form-group">
 								    <label for="CPF">CPF</label>
 								    <input type="text" class="form-control" id="CPF" placeholder="CPF">
@@ -144,7 +144,7 @@
 								    <label for="confNovaSenha">Confirmar Nova Senha</label>
 								    <input type="password" class="form-control" name="confNovaSenha" placeholder="Confirmar Nova Senha">
 								  </div>
-								  <button type="submit" class="btn btn-default">Salvar</button>
+								  <a class="btn btn-success CadastrarSenha">Salvar</a>
                       		</form>
                       	</div>      
                     </div>
@@ -221,6 +221,13 @@
 				touchScrollStep: 50,
 			});
 
+			 $('.CadastrarSenha').click(function(e){
+                var formSetSenha = $('#formPerfil');
+                var postData = formSetSenha.serializeArray();
+
+                console.log(postData);
+            });
+
 			$('.modal-body').slimScroll({
                 height: '55.0vh',
                 railOpacity: 0.4,
@@ -276,7 +283,7 @@
 
 	                        	  	visualizacao = "data-visualizacao='OK'"; 
 
-	                        	  	check = '<div class="i-checks checkExames"><input type="checkbox" class="check"></div>';                     	  				
+	                        	  	check = '<div class="i-checks checkExames"><input type="checkbox" class="check" value="'+exame.correl+'"></div>';                     	  				
                     		  }else{
             	  	   			msg = '{!!config('system.messages.exame.tipoEntregaInvalido')!!}';
             	  	   			exame.class = "success-elementNoHov";
@@ -402,11 +409,38 @@
 
 
 						$('.checkAll').trigger('ifChecked');
+
+						 $('.btnPdf').click(function(e){	
+			                 var checkboxes = $('input.check:checked');
+			                 console.log(checkboxes.length);
+
+			                 var correl = [];
+
+			                 checkboxes.each(function () {
+                                    correl.push($(this).val());
+                                });   
+
+                            console.log(correl);
+
+                            var url = 'http://192.168.0.3:8084/datasnap/rest/TsmExperience/getLaudoPDF/' + '0' + "/" + '2053' + "/" + 'DIK3UR' + "/" + correl; 
+
+                            $.getJSON(url,
+                                function (data) {
+                                    if (data.result[0].Action === "actOK") { // VERIFICAR SE O RETORNO FOR actOK
+                                        var caminhoPDF = data.result[0].Value;
+                                        window.open('http://127.0.0.1/TempPDF/' + caminhoPDF);
+                                    } else {
+                                        console.log(data.result[0].Msg);
+                                    }
+                                });           
+			            });   
+
 					}else{
 						$('#boxRodape').html('<h3 class="text-danger msgCliente">{!!config('system.messages.paciente.saldoDevedor')!!}</h3>');
 					}
 				}, "json" );
 			}
 		});
+
 	</script>
 @stop
