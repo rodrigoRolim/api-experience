@@ -87,7 +87,9 @@ class PacienteController extends Controller {
 
         $arquivoPdf = $responsePdf->result[0]->Value;
 
-        return 'http://192.168.0.3:8083/TempPDF/'.$arquivoPdf;
+        $caminhoPdf = 'http://192.168.0.3:8083/TempPDF/'.$arquivoPdf;
+
+        return $caminhoPdf;
 
     }
 }

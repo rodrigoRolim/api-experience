@@ -235,7 +235,7 @@
 
                                     visualizacao = "data-visualizacao='OK'";                                        
 
-                                    check = '<div class="i-checks checkExames"><input type="checkbox" class="check"></div>';
+                                    check = '<div class="i-checks checkExames" data-posto="'+exame.posto+'" data-atendimento="'+exame.atendimento+'"><input type="checkbox" class="check" value="'+exame.correl+'"></div>';
                                 }else{
                                     msg = '{!!config('system.messages.exame.tipoEntregaInvalido')!!}';
                                     exame.class = "success-elementNoHov";
@@ -273,8 +273,7 @@
                         $.ajax({
                             url : '/posto/detalheatendimentoexamecorrel/'+dadosExames.posto+'/'+dadosExames.atendimento+'/'+dadosExames.correl+'',
                             type: 'GET',                           
-                            success:function(result){
-                                console.log(result.data);
+                            success:function(result){                                
                                 if(result.data == null){
                                     $('#modalExames').modal('hide');
                                     alert("Não há resultados disponíveis para visualização.");
@@ -365,6 +364,31 @@
                         });
 
                         $('.checkAll').trigger('ifChecked');
+
+                         $('.btnPdf').click(function(e){    
+                             console.log("certo");
+                             var checkboxes = $('input.check:checked');                                  
+                             var posto = $('.checkExames').data('posto');
+                             var atendimento = $('.checkExames').data('atendimento');
+
+                             var correl = [];
+                             checkboxes.each(function () {
+                                    correl.push($(this).val());
+                                });   
+
+                             var dadosExame = {};                           
+                             dadosExame = [{'posto':posto,'atendimento':atendimento,'correlativos':correl}];                                                 
+
+                         $.ajax({ // Faz verificação de dados do cliente dentro do formulario(modal) de cadastrar senha.
+                             url: '/posto/exportarpdf',
+                             type: 'post',
+                             data: {"dados" : dadosExame},
+                             success: function(data){   
+                                    window.open(data);               
+                               }
+
+                            });          
+                    }); 
                        
                     }else{
                         $('#boxRodape').html('<h3 class="text-danger">{!!config('system.messages.paciente.saldoDevedor')!!}</h3>');
