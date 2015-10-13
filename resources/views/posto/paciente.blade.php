@@ -323,7 +323,9 @@
                                 $('.modal-body').append('<div class="text-center alert alert-danger alert-dismissable animated fadeIn erro"><h2>Erro ao carregar Descrição do Exame!</h2></div>');
                             }
                         });
-                    }                 
+                    }  
+                      
+                     $('#boxRodape').html('<button type="button" class="btn btn-danger btnPdf">Gerar PDF</button>');             
 
                     var checkAll = $('input.checkAll');
                     var checkboxes = $('input.check');
@@ -348,9 +350,7 @@
                         $('input.check').on('ifChanged', function(event){
                             if(checkboxes.filter(':checked').length == 0) {
                                 $('#boxRodape').html('');
-                            } else {
-                                $('#boxRodape').html('<button type="button" class="btn btn-danger btnPdf">Gerar PDF</button>');
-                            }
+                            } 
                             checkAll.iCheck('update');
                         });
 
