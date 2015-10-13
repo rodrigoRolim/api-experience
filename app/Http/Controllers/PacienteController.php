@@ -1,8 +1,15 @@
 <?php namespace App\Http\Controllers;
 
 use App\Repositories\AtendimentoRepository;
+use App\Models\AtendimentoAcesso;
 use App\Repositories\ExamesRepository;
 use Illuminate\Contracts\Auth\Guard;
+
+use Request;
+use Redirect;
+
+
+
 
 class PacienteController extends Controller {
     protected $auth;
@@ -55,5 +62,32 @@ class PacienteController extends Controller {
             'message' => 'Recebido com sucesso.',
             'data' => json_decode($exames),
         ), 200);
+    }
+
+    public function postExportarpdf(){    
+
+        $dados = Request::input('dados');
+        $posto = $dados[0]['posto'];
+        $atendimento = $dados[0]['atendimento'];
+        $correlativos = $dados[0]['correlativos'];    
+        
+        $postoID = str_pad($posto,config('system.qtdCaracterPosto'),'0',STR_PAD_LEFT);
+        $atendimentoID = str_pad($atendimento,config('system.qtdCaracterAtend'),'0',STR_PAD_LEFT);
+
+        $id = strtoupper(md5($postoID.$atendimentoID));
+
+        $atendimentoAcesso = new AtendimentoAcesso();
+        $atendimentoAcesso = $atendimentoAcesso->where(['id' => $id])->get()->toArray();
+
+        $pure = $atendimentoAcesso[0]['pure'];            
+
+        $json = file_get_contents('http://192.168.0.3:8084/datasnap/rest/TsmExperience/getLaudoPDF/'.$posto.'/'.$atendimento.'/'.$pure.'/');
+        
+        $responsePdf = json_decode($json);
+
+        $arquivoPdf = $responsePdf->result[0]->Value;
+
+        return 'http://192.168.0.3:8083/TempPDF/'.$arquivoPdf;
+
     }
 }

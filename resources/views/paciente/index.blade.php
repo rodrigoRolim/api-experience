@@ -214,7 +214,7 @@
 	        VMasker(document.getElementById("CPF")).maskPattern('999.999.999-99');    
 
 			$('.page-heading').slimScroll({
-				height: '67.1vh',
+				height: '71.1vh',
 				railOpacity: 0.4,
 				wheelStep: 10,
 				minwidth: '100%',
@@ -274,7 +274,7 @@
                         var link = '';
                         var visualizacao = 'OK';
 
-
+                        
                         if(!verificaSaldoDevedor(saldo)){
                     	 	if(exame.class == 'success-element'){
                     	 		$('.boxSelectAll').html('<span>Selecionar Todos &nbsp;<input type="checkbox" class="checkAll"></span>');
@@ -283,7 +283,7 @@
 
 	                        	  	visualizacao = "data-visualizacao='OK'"; 
 
-	                        	  	check = '<div class="i-checks checkExames"><input type="checkbox" class="check" value="'+exame.correl+'"></div>';                     	  				
+	                        	  	check = '<div class="i-checks checkExames" data-posto="'+exame.posto+'" data-atendimento="'+exame.atendimento+'"><input type="checkbox" class="check" value="'+exame.correl+'"></div>';                     	  				
                     		  }else{
             	  	   			msg = '{!!config('system.messages.exame.tipoEntregaInvalido')!!}';
             	  	   			exame.class = "success-elementNoHov";
@@ -324,11 +324,8 @@
                                 console.log(descricao);
 
                                 $('#modalExames').modal('show');  
-                                                      
                                 $('.modal-title').append(descricao.PROCEDIMENTO); 
-
                                 $('.modal-body').html('');
-
                                 $('.modal-footer').append('Liberado em '+descricao.DATA_REALIZANTE+' por '+descricao.REALIZANTE.NOME+' - '+
                                     descricao.REALIZANTE.TIPO_CR+' '+descricao.REALIZANTE.UF_CONSELHO+' : '+descricao.REALIZANTE.CRM+' Data e Hora da Coleta: '+descricao.DATA_COLETA);
 
@@ -411,28 +408,27 @@
 						$('.checkAll').trigger('ifChecked');
 
 						 $('.btnPdf').click(function(e){	
-			                 var checkboxes = $('input.check:checked');
-			                 console.log(checkboxes.length);
+			                 var checkboxes = $('input.check:checked');					                 
+			                 var posto = $('.checkExames').data('posto');
+			                 var atendimento = $('.checkExames').data('atendimento');
 
 			                 var correl = [];
-
 			                 checkboxes.each(function () {
                                     correl.push($(this).val());
                                 });   
 
-                            console.log(correl);
+			                 var dadosExame = {};			                
+         					 dadosExame = [{'posto':posto,'atendimento':atendimento,'correlativos':correl}];			                 	                 
 
-                            var url = 'http://192.168.0.3:8084/datasnap/rest/TsmExperience/getLaudoPDF/' + '0' + "/" + '2053' + "/" + 'DIK3UR' + "/" + correl; 
+			                 $.ajax({ // Faz verificação de dados do cliente dentro do formulario(modal) de cadastrar senha.
+						         url: 'paciente/exportarpdf',
+						         type: 'post',
+						         data: {"dados" : dadosExame},
+						         success: function(data){   
+						         		window.open(data);		         
+						           }
 
-                            $.getJSON(url,
-                                function (data) {
-                                    if (data.result[0].Action === "actOK") { // VERIFICAR SE O RETORNO FOR actOK
-                                        var caminhoPDF = data.result[0].Value;
-                                        window.open('http://127.0.0.1/TempPDF/' + caminhoPDF);
-                                    } else {
-                                        console.log(data.result[0].Msg);
-                                    }
-                                });           
+						        });		     
 			            });   
 
 					}else{
