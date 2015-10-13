@@ -377,14 +377,16 @@
                                 });   
 
                              var dadosExame = {};                           
-                             dadosExame = [{'posto':posto,'atendimento':atendimento,'correlativos':correl}];                                                 
+                             dadosExame = [{'posto':posto,'atendimento':atendimento,'correlativos':correl}]; 
+                             var paginaPdf = window.open ('', '', '');       
+                             paginaPdf.document.write("<br><h2 class='textoTamanho'><b><span class='fa fa-refresh iconLoad'></span><br>Exportando PDF com os exames selecionados.</br><small>Esse processo pode levar alguns instantes. Aguarde!</small></h1>");                                         
 
                          $.ajax({ // Faz verificação de dados do cliente dentro do formulario(modal) de cadastrar senha.
                              url: '/posto/exportarpdf',
                              type: 'post',
                              data: {"dados" : dadosExame},
                              success: function(data){   
-                                    window.open(data);               
+                                    paginaPdf.location = data;              
                                }
 
                             });          
