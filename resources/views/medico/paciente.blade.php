@@ -233,7 +233,7 @@
 
                                     visualizacao = "data-visualizacao='OK'";       
 
-                                    check = '<div class="i-checks checkExames"><input type="checkbox" class="check"></div>';
+                                     check = '<div class="i-checks checkExames" data-posto="'+exame.posto+'" data-atendimento="'+exame.atendimento+'"><input type="checkbox" class="check" value="'+exame.correl+'"></div>';
                                 }else{
                                     msg = '{!!config('system.messages.exame.tipoEntregaInvalido')!!}';
                                     exame.class = "success-elementNoHov";
@@ -316,7 +316,9 @@
                                 $('.modal-body').append('<div class="text-center alert alert-danger alert-dismissable animated fadeIn erro"><h2>Erro ao carregar Descrição do Exame!</h2></div>');
                             }
                         });
-                    }  
+                    }
+
+                    $('#boxRodape').html('<button type="button" class="btn btn-danger btnPdf">Gerar PDF</button>');  
 
                     var checkAll = $('input.checkAll');
                     var checkboxes = $('input.check');
@@ -340,12 +342,12 @@
 
                         // Faz o controle do botão de gerar PDF. (Se houver ao menos um selecionado, o botão é habilitado.)
                         $('input.check').on('ifChanged', function(event){
-                            if(checkboxes.filter(':checked').length == 0) {
-                                $('#boxRodape').html('');
-                            } else {
-                                $('#boxRodape').html('<button type="button" class="btn btn-danger btnPdf">Gerar PDF</button>');
+                            if(checkboxes.filter(':checked').length == 0) {                             
+                                $('.btnPdf').hide();
+                            }else{                               
+                                $('.btnPdf').show();
+                                checkAll.iCheck('update');
                             }
-                            checkAll.iCheck('update');
                         });
 
                         $('input.check').on('ifChanged', function(event){
@@ -358,6 +360,32 @@
                         });
 
                         $('.checkAll').trigger('ifChecked');
+
+                        $('.btnPdf').click(function(e){ 
+                             var checkboxes = $('input.check:checked');                                  
+                             var posto = $('.checkExames').data('posto');
+                             var atendimento = $('.checkExames').data('atendimento');
+
+                             var correl = [];
+                             checkboxes.each(function () {
+                                    correl.push($(this).val());
+                                });   
+
+                             var dadosExame = {};                           
+                             dadosExame = [{'posto':posto,'atendimento':atendimento,'correlativos':correl}]; 
+                             var paginaPdf = window.open ('', '', '');       
+                             paginaPdf.document.write("<br><h2><b><span></span><br>Exportando PDF com os exames selecionados.</br><small>Esse processo pode levar alguns instantes. Aguarde!</small></h1>");                                         
+
+                            $.ajax({ // Faz verificação de dados do cliente dentro do formulario(modal) de cadastrar senha.
+                             url: '/medico/exportarpdf',
+                             type: 'post',
+                             data: {"dados" : dadosExame},
+                             success: function(data){   
+                                    paginaPdf.location = data;              
+                               }
+
+                            });          
+                        }); 
                           
                     }else{
                         $('#boxRodape').html('<h3 class="text-danger">{!!config('system.messages.paciente.saldoDevedor')!!}</h3>');

@@ -60,9 +60,9 @@
             </div>
             <div class="col-md-5">
                 <div class="infoAtendimentoMedico">
-                    <i class="fa fa-heartbeat" data-toggle="tooltip" data-placement="right" title="Posto/Atendimento"></i>
+                    <i class="fa fa-heartbeat" data-toggle="tooltip" data-placement="bottom" title="Posto/Atendimento"></i>
                     <span id="atendimento"></span> <br>
-                    <i class="fa fa-credit-card" data-toggle="tooltip" title="Convênio"></i>
+                    <i class="fa fa-credit-card" data-toggle="tooltip" data-placement="bottom" title="Convênio"></i>
                     <span id="convenio"></span> <br>                          
                 </div>
             </div>
@@ -348,10 +348,12 @@
 
                         // Faz o controle do botão de gerar PDF. (Se houver ao menos um selecionado, o botão é habilitado.)
                         $('input.check').on('ifChanged', function(event){
-                            if(checkboxes.filter(':checked').length == 0) {
-                                $('#boxRodape').html('');
-                            } 
-                            checkAll.iCheck('update');
+                            if(checkboxes.filter(':checked').length == 0) {                             
+                                $('.btnPdf').hide();
+                            }else{                               
+                                $('.btnPdf').show();
+                                checkAll.iCheck('update');
+                            }
                         });
 
                         $('input.check').on('ifChanged', function(event){
@@ -379,9 +381,9 @@
                              var dadosExame = {};                           
                              dadosExame = [{'posto':posto,'atendimento':atendimento,'correlativos':correl}]; 
                              var paginaPdf = window.open ('', '', '');       
-                             paginaPdf.document.write("<br><h2 class='textoTamanho'><b><span class='fa fa-refresh iconLoad'></span><br>Exportando PDF com os exames selecionados.</br><small>Esse processo pode levar alguns instantes. Aguarde!</small></h1>");                                         
+                             paginaPdf.document.write("<br><h2><b><span></span><br>Exportando PDF com os exames selecionados.</br><small>Esse processo pode levar alguns instantes. Aguarde!</small></h1>");                                         
 
-                         $.ajax({ // Faz verificação de dados do cliente dentro do formulario(modal) de cadastrar senha.
+                            $.ajax({ // Faz verificação de dados do cliente dentro do formulario(modal) de cadastrar senha.
                              url: '/posto/exportarpdf',
                              type: 'post',
                              data: {"dados" : dadosExame},
@@ -390,7 +392,7 @@
                                }
 
                             });          
-                    }); 
+                        }); 
                        
                     }else{
                         $('#boxRodape').html('<h3 class="text-danger">{!!config('system.messages.paciente.saldoDevedor')!!}</h3>');

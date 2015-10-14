@@ -67,18 +67,18 @@
 	        <div class="col-md-12 areaPaciente"> 
         		<div class="col-md-3"> 
 	                <div class="infoAtendimento">
-	                  	<i class="fa fa-heartbeat" data-toggle="tooltip" data-placement="right" title="Posto/Atendimento"> </i>
+	                  	<i class="fa fa-heartbeat" data-toggle="tooltip" data-placement="bottom" title="Posto/Atendimento"> </i>
 	                    <span id="atendimento"></span>                   
 	                </div>
 	            </div>
                 <div class="col-md-5">    
                 	<div class="medicoSolicitante">            	
-	                    <i class="fa fa-user-md" data-toggle="tooltip" data-placement="right" title="Médico Solicitante"> </i>
+	                    <i class="fa fa-user-md" data-toggle="tooltip" data-placement="bottom" title="Médico Solicitante"> </i>
 	                    &nbsp;<span id="solicitante"></span> 
                 	</div>
                 </div>  
 	            <div class="col-md-4">
-	            	<i class="fa fa-credit-card" data-toggle="tooltip" title="Convênio"> </i>
+	            	<i class="fa fa-credit-card" data-toggle="tooltip" data-placement="bottom" title="Convênio"> </i>
                     <span id="convenio"></span>                 
 	            </div>              
             </div>                          
@@ -366,46 +366,45 @@
                         });
                     }
 
-					var checkAll = $('input.checkAll');
+                    $('#boxRodape').html('<button type="button" class="btn btn-danger btnPdf">Gerar PDF</button>');             
+
+                    var checkAll = $('input.checkAll');
                     var checkboxes = $('input.check');
 
                     $('input').iCheck({
                         checkboxClass: 'icheckbox_square-grey',
                     });
-					
-					//verifica se o usuario tem saldo devedor
-					if(!verificaSaldoDevedor(saldo)){
-						$('input.checkAll').on('ifChecked ifUnchecked', function(event) {
-							if (event.type == 'ifChecked') {
-								checkboxes.iCheck('check');
-								$('.btnPdf').show();
-							} else {
-								checkboxes.iCheck('uncheck');
-								$('.btnPdf').hide();
-							}
-						});
 
-						// Faz o controle do botão de gerar PDF. (Se houver ao menos um selecionado, o botão é habilitado.)
-						$('input.check').on('ifChanged', function(event){
-							if(checkboxes.filter(':checked').length == 0) {
-								$('#boxRodape').html('');
-							} else {
-								$('#boxRodape').html('<button type="button" class="btn btn-danger btnPdf">Gerar PDF</button>');
-							}
-							checkAll.iCheck('update');
-						});
+                    //verifica se o usuario tem saldo devedor
+                    if(!verificaSaldoDevedor(saldo)){
+                        $('input.checkAll').on('ifChecked ifUnchecked', function(event) {
+                            if (event.type == 'ifChecked') {
+                                checkboxes.iCheck('check');                               
+                            } else {
+                                checkboxes.iCheck('uncheck');                                
+                            }
+                        });
 
-						$('input.check').on('ifChanged', function(event){
-							if(checkboxes.filter(':checked').length == checkboxes.length) {
-								checkAll.prop('checked', 'checked');
-							} else {
-								checkAll.removeProp('checked');
-							}
-							checkAll.iCheck('update');
-						});
+                        // Faz o controle do botão de gerar PDF. (Se houver ao menos um selecionado, o botão é habilitado.)
+                        $('input.check').on('ifChanged', function(event){
+                            if(checkboxes.filter(':checked').length == 0) {                            	
+                                $('.btnPdf').hide();
+                            }else{                            	 
+	                            $('.btnPdf').show();
+	                            checkAll.iCheck('update');
+	                        }
+                        });
 
+                        $('input.check').on('ifChanged', function(event){
+                            if(checkboxes.filter(':checked').length == checkboxes.length) {
+                                checkAll.prop('checked', 'checked');
+                            } else {
+                                checkAll.removeProp('checked');
+                            }
+                            checkAll.iCheck('update');
+                        });
 
-						$('.checkAll').trigger('ifChecked');
+                        $('.checkAll').trigger('ifChecked');
 
 						 $('.btnPdf').click(function(e){	
 			                 var checkboxes = $('input.check:checked');					                 
@@ -418,14 +417,16 @@
                                 });   
 
 			                 var dadosExame = {};			                
-         					 dadosExame = [{'posto':posto,'atendimento':atendimento,'correlativos':correl}];			                 	                 
+         					 dadosExame = [{'posto':posto,'atendimento':atendimento,'correlativos':correl}];
+         					 var paginaPdf = window.open ('', '', '');       
+                             paginaPdf.document.write("<br><h2 class='textoTamanho'><b><span class='fa fa-refresh iconLoad'></span><br>Exportando PDF com os exames selecionados.</br><small>Esse processo pode levar alguns instantes. Aguarde!</small></h1>");			                 	                 
 
 			                 $.ajax({ // Faz verificação de dados do cliente dentro do formulario(modal) de cadastrar senha.
 						         url: 'paciente/exportarpdf',
 						         type: 'post',
 						         data: {"dados" : dadosExame},
 						         success: function(data){   
-						         		window.open(data);		         
+						         		paginaPdf.location = data; 		         
 						           }
 
 						        });		     

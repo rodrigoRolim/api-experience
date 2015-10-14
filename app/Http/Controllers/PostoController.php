@@ -140,7 +140,15 @@ class PostoController extends Controller {
         $atendimentoAcesso = new AtendimentoAcesso();
         $atendimentoAcesso = $atendimentoAcesso->where(['id' => $id])->get()->toArray();
 
-        $pure = $atendimentoAcesso[0]['pure'];            
+        $pure = $atendimentoAcesso[0]['pure'];  
+
+        $ehAtendimentoPosto = $this->posto->ehAtendimentoPosto($posto,$atendimento); 
+
+        if(!$ehAtendimentoPosto){
+            return response()->json(array(
+                'message' => 'Atendimento não é do posto'
+            ), 203);
+        }
 
         $json = file_get_contents('http://192.168.0.3:8084/datasnap/rest/TsmExperience/getLaudoPDF/'.$posto.'/'.$atendimento.'/'.$pure.'/'.implode(",",$correlativos));
         

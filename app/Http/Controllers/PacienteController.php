@@ -79,9 +79,15 @@ class PacienteController extends Controller {
         $atendimentoAcesso = new AtendimentoAcesso();
         $atendimentoAcesso = $atendimentoAcesso->where(['id' => $id])->get()->toArray();
 
-        $pure = $atendimentoAcesso[0]['pure'];            
+        $pure = $atendimentoAcesso[0]['pure'];   
 
-        $json = file_get_contents('http://192.168.0.3:8084/datasnap/rest/TsmExperience/getLaudoPDF/'.$posto.'/'.$atendimento.'/'.$pure.'/');
+        $ehCliente = $this->atendimento->ehCliente($this->auth,$posto,$atendimento);
+
+        if(!$ehCliente){
+            \App::abort(404);
+        }         
+
+        $json = file_get_contents('http://192.168.0.3:8084/datasnap/rest/TsmExperience/getLaudoPDF/'.$posto.'/'.$atendimento.'/'.$pure.'/'.implode(",",$correlativos));
         
         $responsePdf = json_decode($json);
 
