@@ -287,6 +287,8 @@
                     		  }else{
             	  	   			msg = '{!!config('system.messages.exame.tipoEntregaInvalido')!!}';
             	  	   			exame.class = "success-elementNoHov";
+            	  	   			check = '';
+                                $('.boxSelectAll').html('');
                 	    	}   
                 		  }
                 		}
@@ -375,8 +377,7 @@
                         checkboxClass: 'icheckbox_square-grey',
                     });
 
-                    if(checkboxes.filter(':checked').length == 0) {     
-                        console.log(checkboxes.filter(':checked').length);                        
+                    if(checkboxes.filter(':checked').length == 0) { 
                         $('.btnPdf').hide();
                     }
 
