@@ -325,7 +325,7 @@
                         });
                     }  
                       
-                     $('#boxRodape').html('<button type="button" class="btn btn-danger btnPdf">Gerar PDF</button>');             
+                    $('#boxRodape').html('<button type="button" class="btn btn-danger btnPdf">Gerar PDF</button>');  
 
                     var checkAll = $('input.checkAll');
                     var checkboxes = $('input.check');
@@ -333,6 +333,11 @@
                     $('input').iCheck({
                         checkboxClass: 'icheckbox_square-grey',
                     });
+
+                    if(checkboxes.filter(':checked').length == 0) {     
+                        console.log(checkboxes.filter(':checked').length);                        
+                        $('.btnPdf').hide();
+                    }
 
                     //verifica se o usuario tem saldo devedor
                     if(!verificaSaldoDevedor(saldo)){
@@ -348,7 +353,7 @@
 
                         // Faz o controle do botão de gerar PDF. (Se houver ao menos um selecionado, o botão é habilitado.)
                         $('input.check').on('ifChanged', function(event){
-                            if(checkboxes.filter(':checked').length == 0) {                             
+                            if(checkboxes.filter(':checked').length == 0) { 
                                 $('.btnPdf').hide();
                             }else{                               
                                 $('.btnPdf').show();
@@ -367,8 +372,7 @@
 
                         $('.checkAll').trigger('ifChecked');
 
-                         $('.btnPdf').click(function(e){    
-                             console.log("certo");
+                         $('.btnPdf').click(function(e){ 
                              var checkboxes = $('input.check:checked');                                  
                              var posto = $('.checkExames').data('posto');
                              var atendimento = $('.checkExames').data('atendimento');

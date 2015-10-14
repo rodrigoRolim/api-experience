@@ -375,6 +375,11 @@
                         checkboxClass: 'icheckbox_square-grey',
                     });
 
+                    if(checkboxes.filter(':checked').length == 0) {     
+                        console.log(checkboxes.filter(':checked').length);                        
+                        $('.btnPdf').hide();
+                    }
+
                     //verifica se o usuario tem saldo devedor
                     if(!verificaSaldoDevedor(saldo)){
                         $('input.checkAll').on('ifChecked ifUnchecked', function(event) {
