@@ -6,6 +6,9 @@ use App\Repositories\MedicoRepository;
 use App\Repositories\AtendimentoRepository;
 use App\Models\AtendimentoAcesso;
 use App\Repositories\PostoRepository;
+
+use App\Services\DataSnapService;
+
 use Illuminate\Contracts\Auth\Guard;
 //use Vinkla\Hashids\Facades\Hashids;
 
@@ -18,6 +21,7 @@ class MedicoController extends Controller {
     protected $posto;
     protected $atendimento;
     protected $exames;
+    protected $dataSnap;
 
     public function __construct(
         Guard $auth,
@@ -25,7 +29,8 @@ class MedicoController extends Controller {
         ConvenioRepository $convenio,
         PostoRepository $posto,
         ExamesRepository $exames,
-        AtendimentoRepository $atendimento
+        AtendimentoRepository $atendimento,
+        DataSnapService $dataSnap
     )
     {
         $this->auth = $auth;
@@ -34,6 +39,7 @@ class MedicoController extends Controller {
         $this->posto = $posto;
         $this->exames = $exames;
         $this->atendimento = $atendimento;
+        $this->dataSnap = $dataSnap;
     }
 
     public function getIndex()
@@ -143,17 +149,14 @@ class MedicoController extends Controller {
         $atendimentoAcesso = new AtendimentoAcesso();
         $atendimentoAcesso = $atendimentoAcesso->where(['id' => $id])->get()->toArray();
 
-        $pure = $atendimentoAcesso[0]['pure'];  
-        
-        $json = file_get_contents('http://192.168.0.3:8084/datasnap/rest/TsmExperience/getLaudoPDF/'.$posto.'/'.$atendimento.'/'.$pure.'/'.implode(",",$correlativos));
-        
-        $responsePdf = json_decode($json);
+        $pure = $atendimentoAcesso[0]['pure'];
 
-        $arquivoPdf = $responsePdf->result[0]->Value;
+        $ehAtendimentoMedico = $this->medico->ehAtendimentoMedico($this->auth->user()['id_medico'],$posto,$atendimento);
 
-        $caminhoPdf = 'http://192.168.0.3:8083/TempPDF/'.$arquivoPdf;
+        if(!$ehAtendimentoMedico){
+            \App::abort(404);
+        }
 
-        return $caminhoPdf;
-
+        return $this->dataSnap->exportarPdf($posto,$atendimento,$pure,$correlativos);
     }
 }

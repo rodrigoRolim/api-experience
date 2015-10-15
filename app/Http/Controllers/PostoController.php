@@ -5,6 +5,9 @@ use App\Repositories\ExamesRepository;
 use App\Repositories\PostoRepository;
 use App\Repositories\AtendimentoRepository;
 use App\Models\AtendimentoAcesso;
+
+use App\Services\DataSnapService;
+
 use Illuminate\Contracts\Auth\Guard;
 
 use Request;
@@ -16,13 +19,15 @@ class PostoController extends Controller {
     protected $posto;
     protected $atendimento;
     protected $exames;
+    protected $dataSnap;
 
-      public function __construct(
+    public function __construct(
         Guard $auth,        
         ConvenioRepository $convenio,
         PostoRepository $posto,
         ExamesRepository $exames,
-        AtendimentoRepository $atendimento
+        AtendimentoRepository $atendimento,
+        DataSnapService $dataSnap
     )
     {
         $this->auth = $auth;        
@@ -30,6 +35,7 @@ class PostoController extends Controller {
         $this->posto = $posto;
         $this->exames = $exames;
         $this->atendimento = $atendimento;
+        $this->dataSnap = $dataSnap;
     }
 
     public function getIndex()
@@ -145,20 +151,9 @@ class PostoController extends Controller {
         $ehAtendimentoPosto = $this->posto->ehAtendimentoPosto($posto,$atendimento); 
 
         if(!$ehAtendimentoPosto){
-            return response()->json(array(
-                'message' => 'Atendimento não é do posto'
-            ), 203);
+            \App::abort(404);
         }
 
-        $json = file_get_contents('http://192.168.0.3:8084/datasnap/rest/TsmExperience/getLaudoPDF/'.$posto.'/'.$atendimento.'/'.$pure.'/'.implode(",",$correlativos));
-        
-        $responsePdf = json_decode($json);
-
-        $arquivoPdf = $responsePdf->result[0]->Value;
-
-        $caminhoPdf = 'http://192.168.0.3:8083/TempPDF/'.$arquivoPdf;
-
-        return $caminhoPdf;
-
+        return $this->dataSnap->exportarPdf($posto,$atendimento,$pure,$correlativos);
     }
 }

@@ -176,7 +176,7 @@
                         $('#listFilter li').click(function(e){
                             var key = $(e.currentTarget).data('key');
                             var atendimento = $(e.currentTarget).data('atendimento');
-                            window.open("/posto/paciente/"+key+"/"+atendimento); //location.replace
+                            location.replace("/posto/paciente/"+key+"/"+atendimento);
                         });
                         
                         if(result.data.length == 0){

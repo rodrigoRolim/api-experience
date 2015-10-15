@@ -8,9 +8,6 @@ use Illuminate\Contracts\Auth\Guard;
 use Request;
 use Redirect;
 
-
-
-
 class PacienteController extends Controller {
     protected $auth;
     protected $atendimento;
@@ -87,15 +84,6 @@ class PacienteController extends Controller {
             \App::abort(404);
         }         
 
-        $json = file_get_contents('http://192.168.0.3:8084/datasnap/rest/TsmExperience/getLaudoPDF/'.$posto.'/'.$atendimento.'/'.$pure.'/'.implode(",",$correlativos));
-        
-        $responsePdf = json_decode($json);
-
-        $arquivoPdf = $responsePdf->result[0]->Value;
-
-        $caminhoPdf = 'http://192.168.0.3:8083/TempPDF/'.$arquivoPdf;
-
-        return $caminhoPdf;
-
+        return $this->dataSnap->exportarPdf($posto,$atendimento,$pure,$correlativos);
     }
 }

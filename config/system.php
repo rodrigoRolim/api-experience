@@ -7,6 +7,7 @@ return [
     'clienteLogo' => '/assets/img/logo.png',
     'clienteUrl'  => 'http://www.cliente.com',
     'PDFUrl'      => 'http://192.168.0.3:8084/datasnap/rest/TsmExperience/getLaudoPDF/',
+    'PDFUrlTemp'  => 'http://192.168.0.3:8083/TempPDF/',
     'clienteUF'   => 'MA',
     'clienteMsg'  => 'Fone: 98 9988 8798',
     'loginText'	  =>  [
