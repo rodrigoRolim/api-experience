@@ -5,6 +5,8 @@ use App\Models\AtendimentoAcesso;
 use App\Repositories\ExamesRepository;
 use Illuminate\Contracts\Auth\Guard;
 
+use App\Services\DataSnapService;
+
 use Request;
 use Redirect;
 
@@ -12,12 +14,15 @@ class PacienteController extends Controller {
     protected $auth;
     protected $atendimento;
     protected $exames;
+    protected $dataSnap;
 
-    public function __construct(Guard $auth, AtendimentoRepository $atendimento, ExamesRepository $exames)
+    public function __construct(Guard $auth, AtendimentoRepository $atendimento, ExamesRepository $exames, DataSnapService $dataSnap)
     {
         $this->auth = $auth;
         $this->atendimento = $atendimento;
         $this->exames = $exames;
+        $this->dataSnap = $dataSnap;
+
     }
 
     public function getIndex()
@@ -86,4 +91,6 @@ class PacienteController extends Controller {
 
         return $this->dataSnap->exportarPdf($posto,$atendimento,$pure,$correlativos);
     }
+
+
 }

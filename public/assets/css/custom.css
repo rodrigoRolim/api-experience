@@ -28,6 +28,7 @@ ul{
 
 .btnPdf{
 	padding: 5px;
+	float: right;
 }
 
 .txtRodape{
@@ -36,6 +37,11 @@ ul{
 
 .statusAtendimentos{
 	margin-left: 60px;
+	font-size: 0.9em;
+}
+
+.statusAtendimentosViewPaciente{
+	margin-left: 0px;
 	font-size: 0.9em;
 }
 
@@ -85,7 +91,7 @@ ul{
 .modal-corpo {
   position: relative;
   padding: 15px;
-  height: 450px;
+  height: 250px;
 }
 .modal-rodape {
   padding: 15px;
@@ -332,7 +338,7 @@ div.row.infoClienteMed{
 }
 
 .wrapper-content{
-	margin-bottom: 20px;
+	margin-bottom: 0px;
 }
 
 .listaExames{
@@ -516,7 +522,7 @@ div.row.infoClienteMed{
 	}
 
 	.boxFiltroPosto{
-		height: 250px;
+		height: 300px;
 	}
 
 	.label, .labelAtendimentosClientes{

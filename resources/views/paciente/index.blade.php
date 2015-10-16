@@ -22,6 +22,7 @@
 				<li class="item">
 					<a class="btnCadastrarSenha">
 						<i class="fa fa-user"></i> Perfil
+						<?php var_dump(Auth::user()) ?>
 					</a>
 				</li>
 				<li class="item">
@@ -47,6 +48,7 @@
 					   data-atendimento="{{$atendimento->atendimento}}"
 					   data-solicitante="{{$atendimento->nome_solicitante}}"
 					   data-convenio="{{$atendimento->nome_convenio}}"
+					   data-cpf="{}"
 					   data-saldo="{{$atendimento->saldo_devedor}}">
 						<b class="dataMini">
 							<p class="text-center" style="margin:0px;line-height: 14px">{{ date('d/m',strtotime($atendimento->data_atd))}}<br>
@@ -121,36 +123,39 @@
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
                       <h2 class="modal-titulo">Perfil</h2>
                     </div>
-                    <div class="modal-corpo">
-                       <div class="col-md-12">
-                      		<form id="formPerfil">
-                      			  <div class="form-group">
-								    <label for="CPF">CPF</label>
-								    <input type="text" class="form-control" id="CPF" placeholder="CPF">
+	                <div class="modal-corpo">
+			           <div class="col-md-12">
+			           	{!! Form::open(array('id' => 'formPefil')) !!}   
+			           			<div class="col-md-6">                   		
+			          			  <div class="form-group">
+			          			  	{!! Form::label('cpf', 'CPF') !!}
+			          			  	{!! Form::text('cpf','',array('class' => 'form-control', 'id' =>'CPF', 'placeholder' => 'CPF' )) !!}
 								  </div>
 								  <div class="form-group">
-								    <label for="DataNascimento">Data de Nascimento</label>
-								    <input type="text" class="form-control" id="dataDeNascimento" name="dataDeNascimento" placeholder="Data de Nascimento">
+								  	{!! Form::label('DataNascimento', 'Data de Nascimento') !!}
+			          			  	{!! Form::text('dataDeNascimento','',array('class' => 'form-control', 'id' =>'dataDeNascimento', 'placeholder' => 'Data de Nascimento' )) !!}								    
 								  </div>
+								</div>
+								<div class="col-md-6">
 								  <div class="form-group">
-								    <label for="SenhaAtual">Senha Atual</label>
-								    <input type="password" class="form-control" name="senhaAtual" placeholder="Senha Atual">
+								  	{!! Form::label('SenhaAtual', 'Senha Atual') !!}
+			          			  	{!! Form::password('senhaAtual',array('class' => 'form-control', 'id' =>'senhaAtual', 'placeholder' => 'SenhaAtual' )) !!}								   
 								  </div>
 								   <div class="form-group">
-								    <label for="novaSenha">Nova Senha</label>
-								    <input type="password" class="form-control" name="novaSenha" placeholder="Nova Senha">
+								   	{!! Form::label('novaSenha', 'Nova Senha') !!}
+			          			  	{!! Form::password('novaSenha',array('class' => 'form-control', 'id' =>'novaSenha', 'placeholder' => 'Nova Senha' )) !!}								
 								  </div>
 								   <div class="form-group">
-								    <label for="confNovaSenha">Confirmar Nova Senha</label>
-								    <input type="password" class="form-control" name="confNovaSenha" placeholder="Confirmar Nova Senha">
+								   	{!! Form::label('confNovaSenha', 'Confirmar Nova Senha') !!}
+			          			  	{!! Form::password('confNovaSenha',array('class' => 'form-control', 'id' =>'confNova Senha', 'placeholder' => 'Confirmar Nova Senha' )) !!}				
 								  </div>
-								  <a class="btn btn-success CadastrarSenha">Salvar</a>
-                      		</form>
-                      	</div>      
-                    </div>
-                    <div class="modal-rodape">
-                      
-                    </div>
+								</div>					  
+			          	</div>      
+			        </div>
+			        <div class="modal-rodape">
+			          <a class="btn btn-success" id="btnSalvarPerfil">Salvar</a>
+			          		{!! Form::close() !!}
+			        </div>
                   </div>
                   
                 </div>
@@ -158,10 +163,10 @@
 		</div>
 	</div>
 	<div class="footer">
-		<div class="pull-right" id="boxRodape">	</div>
-		<div class="pull-left">
-			{!!config('system.loginText.footerText')!!}
-		</div>		
+		<div class="row col-md-12">
+			<div class="col-md-4 pull-right" id="boxRodape">	</div>
+			<div class="col-md-8 txtRodape">	</div>	
+		</div>	
 	</div>
 </div>
 @stop
@@ -173,8 +178,9 @@
 	<script src="{{ asset('/assets/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
 	<script src="{{ asset('/assets/js/plugins/datapicker/bootstrap-datepicker.js') }}"></script>
 	<script src="{{ asset('/assets/js/plugins/vanillamasker/vanilla-masker.min.js') }}"></script>
-
+	<script src="{{ asset('/assets/js/plugins/validate/jquery.validate.min.js') }}"></script>
 	<script type="text/javascript">
+
 		$(document).ready(function () {
 			$("body").tooltip({ selector: '[data-toggle=tooltip]' });
 
@@ -201,7 +207,7 @@
 				$('#modalCadastrarSenha').modal('show');
 			});
 
-			VMasker(document.getElementById("dataDeNascimento")).maskPattern('99/99/9999');
+			VMasker($("#dataDeNascimento")).maskPattern('99/99/9999');
 			$('#dataDeNascimento').datepicker({
 	            startView: 1,
 	            todayBtn: "linked",
@@ -211,7 +217,7 @@
 	            format: "dd/mm/yyyy"
 	        });
 
-	        VMasker(document.getElementById("CPF")).maskPattern('999.999.999-99');    
+	        VMasker($('#cpf')).maskPattern('999.999.999-99');    
 
 			$('.page-heading').slimScroll({
 				height: '71.1vh',
@@ -221,7 +227,7 @@
 				touchScrollStep: 50,
 			});
 
-			 $('.CadastrarSenha').click(function(e){
+			 $('#btnSalvarPerfil').click(function(e){
                 var formSetSenha = $('#formPerfil');
                 var postData = formSetSenha.serializeArray();
 
@@ -322,8 +328,7 @@
                             success:function(result){      
                                 var descricao = result.data;  
                                 var analitos = result.data.ANALITOS;
-                                var conteudo = '';                                                          
-                                console.log(descricao);
+                                var conteudo = '';
 
                                 $('#modalExames').modal('show');  
                                 $('.modal-title').append(descricao.PROCEDIMENTO); 
@@ -443,7 +448,10 @@
 					}
 				}, "json" );
 			}
-		});
-
+		});			
+            $(".txtRodape").append("<span class='statusAtendimentosViewPaciente'></span>");            
+            $(".statusAtendimentosViewPaciente").append(" <span class='statusFinalizados'></span>&nbsp; Finalizados &nbsp;&nbsp;<span class='statusAguardando'></span> Parc. Finalizado");
+            $(".statusAtendimentosViewPaciente").append("&nbsp;&nbsp;<span class='statusEmAndamento'></span> Em Andamento &nbsp;&nbsp;<span class='statusPendencias'></span> Existem Pendências");
+            $(".txtRodape").append('<br><span class="devFooter">{!!config('system.loginText.footerText')!!}</span>');
 	</script>
 @stop

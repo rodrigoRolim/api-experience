@@ -15,4 +15,5 @@ class ClienteRepository extends BaseRepository
     {
         return 'App\Models\Cliente';
     }
+
 }

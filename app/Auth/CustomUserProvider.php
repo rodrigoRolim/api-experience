@@ -62,7 +62,7 @@ class CustomUserProvider implements UserProvider {
 
                     if(sizeof($atendimento)){
 
-                        $cliente = $atendimento[0]->cliente->toArray();
+                        $cliente = $atendimento[0]->cliente->toArray();                     
                         $atendimento = $atendimento->toArray();
 
                         //Completa do 0 a esquerda do posto e do atendimento de acordo com a configuraçao no config.system
@@ -86,6 +86,8 @@ class CustomUserProvider implements UserProvider {
                                     'nome' => $nome,
                                     'sexo' => $cliente['sexo'],
                                     'data_nas' => $cliente['data_nas'],
+                                    'cpf' => $cliente['cpf'],
+                                    'pure' => $atendimentoAcesso[0]['pure'],
                                     'registro' => $cliente['registro'],
                                     'username' => $credentials['posto'].'/'.$credentials['atendimento'],
                                 ),
