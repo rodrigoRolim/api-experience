@@ -176,13 +176,13 @@
                     novaSenha: {
                         required: true,
                         minlength: 6,
-                        maxlength:8
+                        maxlength:15
                     },
                     confirmarSenha: {
                         required: true,
                         equalTo: "#novaSenha",
                         minlength: 6,
-                        maxlength:8
+                        maxlength:15
                     }
                 },
             });

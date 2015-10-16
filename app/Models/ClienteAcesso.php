@@ -23,6 +23,6 @@ class ClienteAcesso extends Model {
     public $timestamps = false;
 
     public $rules = array(
-        'novaSenha' => 'required|min:6|max:8',
+        'novaSenha' => 'required|min:6|max:15',
     );
 }
