@@ -135,12 +135,12 @@
 								  	{!! Form::label('DataNascimento', 'Data de Nascimento') !!}
 			          			  	{!! Form::text('dataDeNascimento','',array('class' => 'form-control', 'id' =>'dataDeNascimento', 'placeholder' => 'Data de Nascimento' )) !!}								    
 								  </div>
-								</div>
-								<div class="col-md-6">
-								  <div class="form-group">
+								   <div class="form-group">
 								  	{!! Form::label('SenhaAtual', 'Senha Atual') !!}
 			          			  	{!! Form::password('senhaAtual',array('class' => 'form-control', 'id' =>'senhaAtual', 'placeholder' => 'SenhaAtual' )) !!}								   
 								  </div>
+								</div>
+								<div class="col-md-6">								 
 								   <div class="form-group">
 								   	{!! Form::label('novaSenha', 'Nova Senha') !!}
 			          			  	{!! Form::password('novaSenha',array('class' => 'form-control', 'id' =>'novaSenha', 'placeholder' => 'Nova Senha' )) !!}								
