@@ -203,11 +203,13 @@
 
             $('.btnShowModal').click(function(e){
                 $('#modalAlterarSenha').modal('show');
-                $('#senhaAtual').focus();
+                $('#msg').html(' ');
+                $('#senhaAtual').val('');
+                $('#novaSenha').val('');
+                $('#confirmarSenha').val('');               
             });
 
-            $('#btnSalvarPerfil').click(function(e){
-                $('#msg').html('');
+            $('#btnSalvarPerfil').click(function(e){                
 
                 if(form.valid()){
                     //serializa dos dados do formulario
@@ -221,12 +223,7 @@
                         {
                             var msg = jqXHR.responseText;
                             msg = JSON.parse(msg);
-
-                            console.log(jqXHR);
-
                             var style = (jqXHR['status'] == 200 ? 'success':'danger');
-
-                            console.log(style);
 
                             $('#msg').html('<div class="alert alert-'+style+' alert-dismissable animated fadeIn">'+msg.message+'</div>');    
                         },
