@@ -494,6 +494,7 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
 }
 .navbar .dropdown-menu {
   margin-top: -15px;
+  margin-right: 10px;
 }
 .top-navigation .navbar-brand {
   background: #1ab394;

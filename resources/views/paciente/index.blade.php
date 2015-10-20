@@ -15,9 +15,10 @@
             @endif
         </a>
         <div class="media-body">
-            <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span>
-            <a class="dropdown-toggle" data-toggle="dropdown"><b class="fa fa-caret-square-o-down fa"></b></a><br>
-            {{date('d/m/y',strtotime(Auth::user()['data_nas']))}}&nbsp;
+            <button data-toggle="dropdown" class="btn btn-usuario dropdown-toggle">
+                <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span> <span class="caret"></span><br>
+                {{date('d/m/y',strtotime(Auth::user()['data_nas']))}}&nbsp;
+            </button>
             <ul class="dropdown-menu pull-right itensInfoUser">             
                 @if(Auth::user()['tipoLoginPaciente'] == 'CPF')
                     <li class="item">
@@ -33,7 +34,7 @@
                 </li>                           
             </ul>
         </div>
-    </div>
+    </div>    
 @stop
 
 @section('left')
@@ -459,7 +460,7 @@
                         });   
 
                     }else{
-                        $('#boxRodape').html('<h3 class="text-danger msgCliente">{!!config('system.messages.paciente.saldoDevedor')!!}</h3>');
+                        $('#boxRodape').html('<h3 class="text-danger msgCliente">{!!config('system.messages.pacientes.saldoDevedor')!!}</h3>');
                     }
                 }, "json" );
             }

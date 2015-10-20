@@ -18,9 +18,8 @@
 	</div>
 
 	<div id="itemCliente">
-		<div class="form-group @if ($errors->has('cpf')) has-error @endif">
-			<div class="msgCpfAcesso"></div>
-	        <label>CPF</label>
+		<div class="form-group @if ($errors->has('cpf')) has-error @endif">			
+	        <label class="labelCpf">CPF</label>
 	        <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
             	<input type="text" value="028.948.743-91" name="cpf" id="cpf" class="form-control" placeholder="CPF" required="">
@@ -84,7 +83,7 @@
 					$('#itemCliente').show();
 					$('#itemAtendimento').hide();
 					$('#tipoLoginPaciente').val('CPF');	
-					$('.msgCpfAcesso').html("{{config('system.messages.paciente.msgCpfAcesso')}}")
+					$('.labelCpf').append(" <span class='msgCpfAcesso'>({{config('system.messages.paciente.msgCpfAcesso')}})")
 					document.getElementById("cpf").focus();
 				}else{
 					$('#itemCliente').hide();

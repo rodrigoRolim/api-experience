@@ -8,17 +8,14 @@
     <a href="#" class="boxImgUser">
        {!! Html::image('/assets/images/medico.png','logoUser',array('class' => 'img-circle pull-left')) !!}
     </a>
-    <div class="media-body">
-        <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span>      
-        <a class="dropdown-toggle" data-toggle="dropdown"><b class="fa fa-caret-square-o-down fa-2x"></b></a>
-        <ul class="dropdown-menu pull-right itensInfoUser">
-            <li class="item">
-                <a href="/auth/logout">
-                    <i class="fa fa-sign-out"></i> Sair
-                </a>
-            </li>
+    <div class="media-body">        
+        <button data-toggle="dropdown" class="btn btn-usuario dropdown-toggle">
+            <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span> <span class="caret"></span><br>            
+        </button>         
+        <ul class="dropdown-menu pull-right itensInfoUser">            
+            <li class="item"><a href="{{url()}}/auth/logout"><i class="fa fa-sign-out"></i> Sair</a></li>
         </ul>
-    </div>
+    </div>    
 @stop
 
 @section('content')

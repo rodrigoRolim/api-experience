@@ -11,8 +11,9 @@
           {!! Html::image('/assets/images/medico.png','logoUser',array('class' => 'img-circle pull-left')) !!}
         </a>
         <div class="media-body">
-            <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span>
-            <a class="dropdown-toggle" data-toggle="dropdown"><b class="fa fa-caret-square-o-down fa-1x"></b></a>    
+           <button data-toggle="dropdown" class="btn btn-usuario dropdown-toggle">
+                <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span> <span class="caret"></span><br>               
+            </button>
             <ul class="dropdown-menu pull-right itensInfoUser">
                 <li class="item">
                     <a href="/auth/logout">
@@ -400,7 +401,7 @@
                         }); 
                        
                     }else{
-                        $('#boxRodape').html('<h3 class="text-danger">{!!config('system.messages.paciente.saldoDevedor')!!}</h3>');
+                        $('#boxRodape').html('<h3 class="text-danger">{!!config('system.messages.pacientes.saldoDevedor')!!}</h3>');
                     }
                 }, "json" );
             }

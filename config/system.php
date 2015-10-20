@@ -20,11 +20,11 @@ return [
         'login' => [
             'usuarioSenhaInvalidos'   => 'Credenciais de acesso não confere',
         ],
-        'paciente' => [
+        'pacientes' => [
             'saldoDevedor' => 'Existe pendência, diriga-se ao laboratório',
         ],
         'paciente' => [
-            'msgCpfAcesso' => 'Solicite sua senha de acesso no laboratório.',
+            'msgCpfAcesso' => 'Solicite sua senha de acesso no laboratório',
         ],
         'exame' => [
             'tipoEntregaInvalido' => 'Este exame só poderá ser impresso no laboratório.'

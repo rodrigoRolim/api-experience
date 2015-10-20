@@ -8,23 +8,16 @@
     <a href="#" class="boxImgUser">
        {!! Html::image('/assets/images/medico.png','logoUser',array('class' => 'img-circle pull-left')) !!}
     </a>
-    <div class="media-body">
-        <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span>
-        <a class="dropdown-toggle" data-toggle="dropdown"><b class="fa fa-caret-square-o-down fa"></b></a><br>
-        {{date('d/m/y',strtotime(Auth::user()['data_nas']))}}&nbsp;        
+     <div class="media-body">        
+        <button data-toggle="dropdown" class="btn btn-usuario dropdown-toggle">
+            <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span> <span class="caret"></span><br>
+            {{date('d/m/y',strtotime(Auth::user()['data_nas']))}}&nbsp;
+        </button>         
         <ul class="dropdown-menu pull-right itensInfoUser">
-             <li class="item">
-                <a class="btnShowModal">
-                    <i class="fa fa-user"></i> Alterar Senha
-                </a>
-            </li>
-            <li class="item">
-                <a href="{{url()}}/auth/logout">
-                    <i class="fa fa-sign-out"></i> Sair
-                </a>
-            </li>
+            <li class="item"><a class="btnShowModal"><i class="fa fa-user"></i> Alterar Senha</a></li>
+            <li class="item"><a href="{{url()}}/auth/logout"><i class="fa fa-sign-out"></i> Sair</a></li>
         </ul>
-    </div>
+    </div>    
 @stop
 
 @section('content')

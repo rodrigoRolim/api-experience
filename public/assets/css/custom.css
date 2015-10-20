@@ -131,6 +131,7 @@ ul{
 
 .boxImgUser img{
 	margin-right: 5px;
+	margin-top: 2px;
 }
 
 .fa-caret-square-o-down{
@@ -152,6 +153,11 @@ ul{
 	width: 100%;
 	height: 50px;
 }
+
+.footer{
+   padding-right: 0px;	
+}
+
 
 .radio-inline{ 
 	height: 30px;
@@ -278,7 +284,11 @@ ul{
 
 #boxRodape h3{
 	margin: 0px;
-	font-size: 1em;
+	font-size: 1em;	
+}
+
+#boxRodape{
+	padding-right: 0px;
 }
 
 .agile-list, li.warning-element, li.success-element, li.danger-element, li.aguardando-element, li.naoRealizado-element{
@@ -446,8 +456,15 @@ div.row.infoClienteMed{
 .msgCpfAcesso{
 	color: red;
 	font-style: italic;
-	font-size: 0.9em;
+	font-size: 0.8em;
 }
+
+.btn-usuario{
+	background-color: #FFFDFD;
+    border-color: #c2c2c2;
+    color: #848080;
+
+}   
 
  .areaPaciente{
 	padding-left: 0px;
