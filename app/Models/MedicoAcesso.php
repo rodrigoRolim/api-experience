@@ -16,5 +16,13 @@ class MedicoAcesso extends Model {
      *
      * @var string
      */
-    protected $primaryKey = 'ID';
+    protected $primaryKey = 'id';
+
+    protected $fillable = array('id','pure');
+
+    public $timestamps = false;
+
+    public $rules = array(
+        'novaSenha' => 'required|min:6|max:15',
+    );
 }

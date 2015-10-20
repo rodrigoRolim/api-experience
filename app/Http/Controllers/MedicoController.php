@@ -5,6 +5,7 @@ use App\Repositories\ExamesRepository;
 use App\Repositories\MedicoRepository;
 use App\Repositories\AtendimentoRepository;
 use App\Models\AtendimentoAcesso;
+use App\Repositories\MedicoAcessoRepository;
 use App\Repositories\PostoRepository;
 
 use App\Services\DataSnapService;
@@ -13,6 +14,8 @@ use Illuminate\Contracts\Auth\Guard;
 //use Vinkla\Hashids\Facades\Hashids;
 
 use Request;
+use Redirect;
+use Validator;
 
 class MedicoController extends Controller {
     protected $auth;
@@ -28,6 +31,7 @@ class MedicoController extends Controller {
         MedicoRepository $medico,
         ConvenioRepository $convenio,
         PostoRepository $posto,
+        MedicoAcessoRepository $medicoAcesso,
         ExamesRepository $exames,
         AtendimentoRepository $atendimento,
         DataSnapService $dataSnap
@@ -35,6 +39,7 @@ class MedicoController extends Controller {
     {
         $this->auth = $auth;
         $this->medico = $medico;
+        $this->medicoAcesso = $medicoAcesso;
         $this->convenio = $convenio;
         $this->posto = $posto;
         $this->exames = $exames;
@@ -158,5 +163,29 @@ class MedicoController extends Controller {
         }
 
         return $this->dataSnap->exportarPdf($posto,$atendimento,$pure,$correlativos);
+    }
+
+    public function postAlterarsenha(){
+        $validator = Validator::make(Request::all(), $this->medicoAcesso->getValidator());
+        
+        if ($validator->fails()) {
+            return response(['message'=>'Erro ao validar','data' => Request::all()],400);
+        }
+        
+        $id = strtoupper(md5($this->auth->user()['id_medico']));
+
+        $verifyAcesso = $this->medicoAcesso->findWhere(['id' => $id, 'pure' => strtoupper(Request::input('senhaAtual'))])->count();
+
+        if(!$verifyAcesso){
+            return response(['message'=>'Senha atual não confere','data' => Request::all()],203);
+        }
+
+        $acesso = $this->medicoAcesso->alterarSenha($id,Request::input('novaSenha'));
+        
+        if(!$acesso){
+            return response(['message' => 'Erro ao salvar.','data' => $acesso],500);
+        }
+
+        return response(['message' => 'Salvo com sucesso.','data' => $acesso],200);
     }
 }
