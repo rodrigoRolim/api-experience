@@ -23,9 +23,12 @@ return [
         'paciente' => [
             'saldoDevedor' => 'Existe pendência, diriga-se ao laboratório',
         ],
+        'paciente' => [
+            'msgCpfAcesso' => 'Solicite sua senha de acesso no laboratório.',
+        ],
         'exame' => [
             'tipoEntregaInvalido' => 'Este exame só poderá ser impresso no laboratório.'
-        ]
+        ],
     ],
     'qtdCaracterPosto' => 2,
     'qtdCaracterAtend' => 6,

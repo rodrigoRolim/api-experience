@@ -19,6 +19,7 @@
 
 	<div id="itemCliente">
 		<div class="form-group @if ($errors->has('cpf')) has-error @endif">
+			<div class="msgCpfAcesso"></div>
 	        <label>CPF</label>
 	        <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
@@ -83,6 +84,7 @@
 					$('#itemCliente').show();
 					$('#itemAtendimento').hide();
 					$('#tipoLoginPaciente').val('CPF');	
+					$('.msgCpfAcesso').html("{{config('system.messages.paciente.msgCpfAcesso')}}")
 					document.getElementById("cpf").focus();
 				}else{
 					$('#itemCliente').hide();

@@ -443,6 +443,12 @@ div.row.infoClienteMed{
 	border-radius: none;
 }
 
+.msgCpfAcesso{
+	color: red;
+	font-style: italic;
+	font-size: 0.9em;
+}
+
  .areaPaciente{
 	padding-left: 0px;
 	padding-top: 12px;
