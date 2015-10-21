@@ -15,10 +15,8 @@
             @endif
         </a>
         <div class="media-body">
-            <button data-toggle="dropdown" class="btn btn-usuario dropdown-toggle">
-                <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span> <span class="caret"></span><br>
-                {{date('d/m/y',strtotime(Auth::user()['data_nas']))}}&nbsp;
-            </button>
+            <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span><br>            
+            {{date('d/m/y',strtotime(Auth::user()['data_nas']))}}&nbsp;<a class="dropdown-toggle" data-toggle="dropdown"><b class="fa fa-caret-square-o-down fa" style="margin-top:0px"></b></a>
             <ul class="dropdown-menu pull-right itensInfoUser">             
                 @if(Auth::user()['tipoLoginPaciente'] == 'CPF')
                     <li class="item">
@@ -34,7 +32,7 @@
                 </li>                           
             </ul>
         </div>
-    </div>    
+    </div>
 @stop
 
 @section('left')
@@ -77,12 +75,12 @@
             </div>
             <div class="col-md-4">
                 <div class="medicoSolicitante">             
-                    <i class="fa fa-user-md" data-toggle="tooltip" data-placement="bottom" title="Médico Solicitante"> </i>
+                    <i class="fa fa-user-md" data-toggle="tooltip" data-placement="bottom" title="MÃ©dico Solicitante"> </i>
                     &nbsp;<span id="solicitante"></span>
                 </div>
             </div>
             <div class="col-md-4">
-                <i class="fa fa-credit-card" data-toggle="tooltip" data-placement="bottom" title="Convênio"> </i>
+                <i class="fa fa-credit-card" data-toggle="tooltip" data-placement="bottom" title="ConvÃªnio"> </i>
                 <span id="convenio"></span>    
             </div>
         </div>
@@ -98,7 +96,7 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h2 class="modal-title">Exames Descrição</h2>
+                                <h2 class="modal-title">Exames DescriÃ§Ã£o</h2>
                             </div>
                             <div class="modal-body"></div>
                             <div class="modal-footer"></div>
@@ -379,12 +377,12 @@
                                 });             
                            
                                 if(result.data.length == 0){
-                                    $('.modal-body').append('<h2 class="textoTamanho">Não foram encontrados atendimentos.</h2>');
+                                    $('.modal-body').append('<h2 class="textoTamanho">NÃ£o foram encontrados atendimentos.</h2>');
                                 }
                             },
                             error: function(jqXHR, textStatus, errorThrown){
                                 $('.modal-body').html('');
-                                $('.modal-body').append('<div class="text-center alert alert-danger alert-dismissable animated fadeIn erro"><h2>Erro ao carregar Descrição do Exame!</h2></div>');
+                                $('.modal-body').append('<div class="text-center alert alert-danger alert-dismissable animated fadeIn erro"><h2>Erro ao carregar DescriÃ§Ã£o do Exame!</h2></div>');
                             }
                         });
                     }
@@ -412,7 +410,7 @@
                             }
                         });
 
-                        // Faz o controle do botão de gerar PDF. (Se houver ao menos um selecionado, o botão é habilitado.)
+                        // Faz o controle do botÃ£o de gerar PDF. (Se houver ao menos um selecionado, o botÃ£o Ã© habilitado.)
                         $('input.check').on('ifChanged', function(event){
                             if(checkboxes.filter(':checked').length == 0) {                             
                                 $('.btnPdf').hide();
@@ -448,7 +446,7 @@
                              var paginaPdf = window.open ('', '', '');       
                              paginaPdf.document.write("<br><h2 class='textoTamanho'><b><span class='fa fa-refresh iconLoad'></span><br>Exportando PDF com os exames selecionados.</br><small>Esse processo pode levar alguns instantes. Aguarde!</small></h1>");                                                 
 
-                             $.ajax({ // Faz verificação de dados do cliente dentro do formulario(modal) de cadastrar senha.
+                             $.ajax({ // Faz verificaÃ§Ã£o de dados do cliente dentro do formulario(modal) de cadastrar senha.
                                  url: 'paciente/exportarpdf',
                                  type: 'post',
                                  data: {"dados" : dadosExame},
@@ -460,7 +458,7 @@
                         });   
 
                     }else{
-                        $('#boxRodape').html('<h3 class="text-danger msgCliente">{!!config('system.messages.pacientes.saldoDevedor')!!}</h3>');
+                        $('#boxRodape').html('<h3 class="text-danger msgCliente">{!!config('system.messages.paciente.saldoDevedor')!!}</h3>');
                     }
                 }, "json" );
             }

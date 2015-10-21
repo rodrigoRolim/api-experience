@@ -25,3 +25,9 @@ Route::group(['prefix' => '/','middleware' => ['auth','ehPosto']], function () {
         'posto' => 'PostoController',
     ]);
 });
+
+Route::group(['prefix' => '/', 'middleware' => ['auth']], function () {
+    Route::get('/impressao', function () {
+        return view('layouts.exportacaoPdf');
+    });
+});
