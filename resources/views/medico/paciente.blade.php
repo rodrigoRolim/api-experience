@@ -107,12 +107,10 @@
         </div>
     </div>
     <div class="footer">
-        <div class="pull-left">
-            {!!config('system.loginText.footerText')!!}
-        </div>
-        <div class="pull-right" id="boxRodape">
-
-        </div>
+        <div class="row col-md-12">
+            <div class="col-md-4 pull-right" id="boxRodape">    </div>
+            <div class="col-md-8 txtRodape">    </div>  
+        </div>  
     </div>
 </div>
 @stop
@@ -164,7 +162,7 @@
 
            
             $('.page-heading').slimScroll({
-                height: '66.5vh',
+                height: '67.5vh',
                 railOpacity: 0.4,
                 wheelStep: 10,
                 minwidth: '100%',
@@ -405,5 +403,9 @@
                 }, "json" );
             }
         });
+            $(".txtRodape").append("<span class='statusAtendimentosViewPaciente'></span>");            
+            $(".statusAtendimentosViewPaciente").append(" <span class='statusFinalizados'></span>&nbsp; Finalizados &nbsp;&nbsp;<span class='statusAguardando'></span> Parc. Finalizado");
+            $(".statusAtendimentosViewPaciente").append("&nbsp;&nbsp;<span class='statusEmAndamento'></span> Em Andamento &nbsp;&nbsp;<span class='statusPendencias'></span> Existem Pendências");
+            $(".txtRodape").append('<br><span class="devFooter">{!!config('system.loginText.footerText')!!}</span>');
     </script>
 @stop
