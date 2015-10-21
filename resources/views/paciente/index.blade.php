@@ -341,7 +341,12 @@
                         $.ajax({
                             url : '/paciente/detalheatendimentoexamecorrel/'+dadosExames.posto+'/'+dadosExames.atendimento+'/'+dadosExames.correl+'',
                             type: 'GET',                            
-                            success:function(result){      
+                            success:function(result){
+                                if(result.data == null){
+                                    $('#modalExames').modal('hide');
+                                    swal("Erro ao carregar descrição do exame..", "Não há resultados disponíveis para visualização.", "error");                                    
+                                    return false;
+                                }      
                                 var descricao = result.data;  
                                 var analitos = result.data.ANALITOS;
                                 var conteudo = '';
@@ -453,6 +458,7 @@
                                  data: {"dados" : dadosExame},
                                  success: function(data){   
                                      if(data != 'false'){
+                                        paginaPdf.close();
                                         paginaPdf.location = data;   
                                     }else{
                                         swal("Erro ao exportar resultados para PDF", "Tente novamente mais tarde.!", "error");

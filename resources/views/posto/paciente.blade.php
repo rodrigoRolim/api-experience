@@ -281,7 +281,7 @@
                             success:function(result){                                
                                 if(result.data == null){
                                     $('#modalExames').modal('hide');
-                                    alert("Não há resultados disponíveis para visualização.");
+                                    swal("Erro ao carregar descrição do exame..", "Não há resultados disponíveis para visualização.", "error");                                    
                                     return false;
                                 }
                                 var descricao = result.data;
@@ -398,6 +398,7 @@
                                     if(data != 'false'){
                                         paginaPdf.location = data;   
                                     }else{
+                                        paginaPdf.close();
                                         swal("Erro ao exportar resultados para PDF", "Tente novamente mais tarde.!", "error");
                                     }             
                                }
