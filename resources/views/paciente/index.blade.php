@@ -3,6 +3,7 @@
 @section('stylesheets')
     {!! Html::style('/assets/css/plugins/iCheck/custom.css') !!}
     {!! Html::style('/assets/css/plugins/datapicker/datepicker.css') !!}  
+    {!! Html::style('/assets/css/plugins/sweetalert/sweetalert.css') !!}
 @stop
 
 @section('infoHead')
@@ -154,6 +155,7 @@
     <script src="{{ asset('/assets/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
     <script src="{{ asset('/assets/js/plugins/datapicker/bootstrap-datepicker.js') }}"></script>   
     <script src="{{ asset('/assets/js/plugins/validate/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/plugins/sweetalert/sweetalert.min.js') }}"></script>
 
     <script type="text/javascript">
 
@@ -443,16 +445,19 @@
 
                              var dadosExame = {};                           
                              dadosExame = [{'posto':posto,'atendimento':atendimento,'correlativos':correl}];
-                             var paginaPdf = window.open ('', '', '');       
-                             paginaPdf.document.write("<br><h2 class='textoTamanho'><b><span class='fa fa-refresh iconLoad'></span><br>Exportando PDF com os exames selecionados.</br><small>Esse processo pode levar alguns instantes. Aguarde!</small></h1>");                                                 
+                             var paginaPdf = window.open ('/impressao', '', '');       
 
                              $.ajax({ // Faz verificaÃ§Ã£o de dados do cliente dentro do formulario(modal) de cadastrar senha.
                                  url: 'paciente/exportarpdf',
                                  type: 'post',
                                  data: {"dados" : dadosExame},
                                  success: function(data){   
-                                        paginaPdf.location = data;               
-                                   }
+                                     if(data != 'false'){
+                                        paginaPdf.location = data;   
+                                    }else{
+                                        swal("Erro ao exportar resultados para PDF", "Tente novamente mais tarde.!", "error");
+                                    }                      
+                                 }
 
                                 });          
                         });   

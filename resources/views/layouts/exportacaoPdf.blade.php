@@ -38,6 +38,7 @@
 
             h1{
                 margin-bottom: 5px;
+                margin-top: 0px;
             }
 
             .fa-refresh , .fa-spin{
@@ -48,9 +49,9 @@
     <body>
         <div class="container">
             <div class="content">
-            	<h1>Exportando PDF</h1>
-                <h2>Aguarde! Esse processo pode levar alguns instantes.</h2>
                 <i class="fa fa-refresh fa-spin"></i>
+                <h1>Exportando PDF</h1>
+                <h2>Aguarde! Esse processo pode levar alguns instantes.</h2>
             </div>
         </div>
     </body>
