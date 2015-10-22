@@ -16,8 +16,10 @@
             @endif
         </a>
         <div class="media-body">
-            <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span><br>            
-            {{date('d/m/y',strtotime(Auth::user()['data_nas']))}}&nbsp;<a class="dropdown-toggle" data-toggle="dropdown"><b class="fa fa-caret-square-o-down fa" style="margin-top:0px"></b></a>
+            <button data-toggle="dropdown" class="btn btn-usuario dropdown-toggle">
+                <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span> <span class="caret"></span><br>
+                {{date('d/m/y',strtotime(Auth::user()['data_nas']))}}&nbsp;
+            </button> 
             <ul class="dropdown-menu pull-right itensInfoUser">             
                 @if(Auth::user()['tipoLoginPaciente'] == 'CPF')
                     <li class="item">
@@ -65,7 +67,7 @@
 @stop
 
 @section('content')
-<div id="page-wrapper" class="gray-bg" style="min-height: 83vh;">
+<div id="page-wrapper" class="gray-bg" style="min-height: 85.1vh;">
     <div class="row infoCliente">
         <div class="col-md-12 areaPaciente">
             <div class="col-md-4">
@@ -76,13 +78,15 @@
             </div>
             <div class="col-md-4">
                 <div class="medicoSolicitante">             
-                    <i class="fa fa-user-md" data-toggle="tooltip" data-placement="bottom" title="MÃ©dico Solicitante"> </i>
+                    <i class="fa fa-user-md" data-toggle="tooltip" data-placement="bottom" title="Médico Solicitante"> </i>
                     &nbsp;<span id="solicitante"></span>
                 </div>
             </div>
             <div class="col-md-4">
-                <i class="fa fa-credit-card" data-toggle="tooltip" data-placement="bottom" title="ConvÃªnio"> </i>
-                <span id="convenio"></span>    
+                <div class="convenioPaciente">
+                    <i class="fa fa-credit-card" data-toggle="tooltip" data-placement="bottom" title="Convênio"> </i>
+                    <span id="convenio"></span> 
+                </div>                   
             </div>
         </div>
     </div>
@@ -457,10 +461,10 @@
                                  type: 'post',
                                  data: {"dados" : dadosExame},
                                  success: function(data){   
-                                     if(data != 'false'){
-                                        paginaPdf.close();
+                                     if(data != 'false'){                                        
                                         paginaPdf.location = data;   
                                     }else{
+                                        paginaPdf.close();
                                         swal("Erro ao exportar resultados para PDF", "Tente novamente mais tarde.!", "error");
                                     }                      
                                  }

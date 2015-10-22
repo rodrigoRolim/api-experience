@@ -239,15 +239,15 @@ ul{
 }
 
 .postoAtendimento{
-	margin-right: 120px;
+	margin-right: 80px;
 }
 
 .dataAtendimento{
-	margin-right: 120px;
+	margin-right: 80px;
 }
 
 .convenioAtendimento{
-	margin-right: 120px;
+	margin-right: 80px;
 }
 
 .dadosPessoais{
@@ -485,13 +485,16 @@ div.row.infoClienteMed{
 @media (max-width: 1280px){
 	div.row.infoClienteMed{
 		margin-right: 0;
-		margin-left: 0;
-		height: 120px;
+		margin-left: 0;		
 		font-size: 11px;
 	}
 
 	.topoMenu{
 		height: 110px;
+	}
+
+	.btnPdf{
+		margin-right: 20px;
 	}
 
 	.infoAtendimentoMedico{	
@@ -500,6 +503,7 @@ div.row.infoClienteMed{
 		font-size: 1.1em;
 		margin-top: 8px;
 	}
+
 
 }
 
@@ -515,11 +519,24 @@ div.row.infoClienteMed{
 		height: 80px;
 	}
 
+	.medicoSolicitante{
+		clear: both;
+		margin-left: 25px;
+	}
+
+	.convenioPaciente{
+		margin-left: 25px;
+	}
+
 	.infoAtendimentoMedico{	
 		float: left;	
 		margin-left: 5px;
 		font-size: 1.1em;
 		margin-top: 8px;
+	}
+
+	.statusAtendimentos{
+		display: block;
 	}
 
 }
@@ -544,12 +561,30 @@ div.row.infoClienteMed{
 		margin-top: 8px;
 	}
 
+	.medicoSolicitante{
+		clear: both;
+		margin-left: 25px;
+	}
+
+	.convenioPaciente{
+		margin-left: 25px;
+	}
+
 	.boxFiltroPosto{
 		height: 300px;
 	}
 
 	.label, .labelAtendimentosClientes{
 		display: block !important;
+	}
+
+	.dataAtendimento{
+		display: block;
+	}
+
+	.statusAtendimentos{
+		display: block;
+		margin-left: 0px;
 	}
 
 }
@@ -589,6 +624,7 @@ div.row.infoClienteMed{
 
 	.infoAtendimento{			
 		margin-left: 0px;
+		margin-bottom: 0px;
 	}
 
 	.medicoSolicitante{
@@ -717,6 +753,10 @@ div.row.infoClienteMed{
 
 	.statusAtendimentos{
 		display: none;
+	}
+
+	.dataAtendimento{
+		display: block;
 	}
 
 }

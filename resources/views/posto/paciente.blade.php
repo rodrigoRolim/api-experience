@@ -2,7 +2,6 @@
 
 @section('stylesheets')
     {!! Html::style('/assets/css/plugins/iCheck/custom.css') !!}
-    {!! Html::style('/assets/css/plugins/chosen/chosen.css') !!}
     {!! Html::style('/assets/css/plugins/sweetalert/sweetalert.css') !!}
 @show
 
@@ -75,14 +74,6 @@
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="ibox">
         
-        <div class="col-md-12 selectPostoRealizante">
-            <div class="row">
-                <div class="i-checks all boxSelectAll">    </div>           
-                    <div class="input-group m-b btnSearchPosto">
-                        <span class="input-group-addon"><i class="fa fa-search searchPosto"></i></span>{!! Form::select('postoRealizante', $postoRealizante, '', array('tabindex'=>'4','multiple','data-placeholder'=>'Buscar por postos realizantes','class' => 'chosen-select selectPosto', 'id'=>'situacao')) !!}        
-                    </div>
-            </div>   
-        </div>
             <ul class="sortable-list connectList agile-list ui-sortable listaExames">  </ul>
             <!-- Modal -->
               <div class="modal fade" id="modalExames" role="dialog">
@@ -118,8 +109,7 @@
     @parent
     <script src="{{ asset('/assets/js/plugins/iCheck/icheck.min.js') }}"></script>
     <script src="{{ asset('/assets/js/plugins/truncateString/truncate.js') }}"></script>
-    <script src="{{ asset('/assets/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
-    <script src="{{ asset('/assets/js/plugins/chosen/chosen.jquery.js') }}"></script>   
+    <script src="{{ asset('/assets/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>      
     <script src="{{ asset('/assets/js/plugins/moments/moments.js') }}"></script>    
     <script src="{{ asset('/assets/js/plugins/sweetalert/sweetalert.min.js') }}"></script> 
 
@@ -158,18 +148,6 @@
             $('.btnAtendimento').hide(); 
             $('.btnAtendimento').trigger('click');         
             $('.navbar-static-side').remove();   
-
-            var config = {
-                '.chosen-select'           : {},
-                '.chosen-select-deselect'  : {allow_single_deselect:true},
-                '.chosen-select-no-single' : {disable_search_threshold:10},
-                '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
-                '.chosen-select-width'     : {width:"95%"}
-            }
-
-            for (var selector in config) {
-                $(selector).chosen(config[selector]);
-            }
 
             $('.page-heading').slimScroll({
                 height: '75.0vh',
