@@ -67,7 +67,7 @@
 @stop
 
 @section('content')
-<div id="page-wrapper" class="gray-bg" style="min-height: 85.1vh;">
+<div id="page-wrapper" class="gray-bg" style="min-height: 83.1vh;">
     <div class="row infoCliente">
         <div class="col-md-12 areaPaciente">
             <div class="col-md-4">

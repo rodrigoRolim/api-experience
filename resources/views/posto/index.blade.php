@@ -19,7 +19,8 @@
 @stop
 
 @section('content')
-    <div class="col-md-12 corPadrao boxFiltroPosto">
+    <span class="menu-trigger text-center"> <i class="fa fa-filter fa-2x"> </i> Filtrar Atendimentos </span>
+    <div class="col-md-12 corPadrao boxFiltroPosto">       
         <form id="formPosto">
             <input hidden type="text" value="0" name="posto">
             <div class="col-md-3">
@@ -74,7 +75,13 @@
     <script type="text/javascript">
         $(document).ready(function (){
             $("body").tooltip({ selector: '[data-toggle=tooltip]' });
-            
+
+            $(".menu-trigger").click(function() {
+                $(".boxFiltroPosto").slideToggle(400, function() {
+                    $(this).toggleClass("nav-expanded").css('display', '');
+                });
+
+            });            
             
             var dataInicio = new moment();
             var dataFim = new moment();

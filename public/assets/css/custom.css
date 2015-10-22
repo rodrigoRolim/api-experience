@@ -8,6 +8,10 @@ body,.text-center{
 	font-size: 10px;
 }
 
+.nav-expanded{
+	display: block !important;
+}
+
 .textoTamanho{
 	font-size: 22px;
 	text-align: center;
@@ -414,7 +418,6 @@ div.row.infoClienteMed{
 }
 
 .msgExameTipoEntrega{
-	color: red;
 	font-style: italic;
 	font-size: 0.90em;
 }
@@ -453,34 +456,19 @@ div.row.infoClienteMed{
 	border-radius: none;
 }
 
-.msgCpfAcesso{
-	color: red;
+.msgCpfAcesso{	
 	font-style: italic;
 	font-size: 0.8em;
 }
 
 .btn-usuario{
-	background-color: #FFFDFD;
-    border-color: #c2c2c2;
-    color: #848080;
-
-}   
-
+}
  .areaPaciente{
 	padding-left: 0px;
 	padding-top: 12px;
 	font-size: 1.2em;
 }
 
-
-#listFilter li:hover,#listFilter li{
-	transition: background-color 0.5s ease;
-}
-
-
-.metismenu li,.metismenu li a, .metismenu li:hover, .metismenu li a:hover{
-	transition: background-color 0.2s ease;
-}
 
 @media (max-width: 1280px){
 	div.row.infoClienteMed{
@@ -589,8 +577,17 @@ div.row.infoClienteMed{
 
 }
 
+.menu-trigger{
+	display: none;	
+	font-size: 1.0em;
+}
+
 
 @media (max-width: 420px){
+
+	.menu-trigger{
+		display: block;
+	}
 
 	.navbar-header.logo img{
 		height: 28px;
@@ -741,10 +738,12 @@ div.row.infoClienteMed{
 
 	.boxFiltro{
 		height: 300px;
+		display: none;
 	}
 
 	.boxFiltroPosto{
 		height: 300px;
+		display: none;
 	}
 
 	.txtRodape{

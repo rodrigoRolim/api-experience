@@ -21,6 +21,7 @@
 @stop
 
 @section('content')
+<span class="menu-trigger text-center"> <i class="fa fa-filter fa-2x"> </i> Filtrar Atendimentos </span>
     <div class="col-md-12 corPadrao boxFiltro">
         <form id="formMedico">
             <div class="col-md-3">
@@ -105,6 +106,14 @@
 
     <script type="text/javascript">
         $(document).ready(function (){
+
+            $(".menu-trigger").click(function() {
+                $(".boxFiltro").slideToggle(400, function() {
+                    $(this).toggleClass("nav-expanded").css('display', '');
+                });
+
+            });            
+            
             var dataInicio = new moment();
             var dataFim = new moment();
             var qtdDiasFiltro = {{config('system.medico.qtdDiasFiltro')}};

@@ -24,6 +24,10 @@ body.boxed-layout #wrapper {
   background: #d65357;
   color: #ffffff;
 }
+.menu-trigger{
+  background-color: #E04F53;
+  color: white;
+  }
 #side-menu li a {
   color: #ffffff;
   font-weight: 400;
@@ -126,4 +130,27 @@ li.notClicked {
   color: #c52f33;
   font-weight: 800;
   border-left: 4px solid #c52f33;
+}
+
+.msgExameTipoEntrega{
+  color: red;
+}
+
+.msgCpfAcesso{
+  color: red;
+}
+
+.btn-usuario{
+    background-color: #FFFDFD;
+    border-color: #c2c2c2;
+    color: #848080;
+}
+
+#listFilter li:hover,#listFilter li{
+  transition: background-color 0.5s ease;
+}
+
+
+.metismenu li,.metismenu li a, .metismenu li:hover, .metismenu li a:hover{
+  transition: background-color 0.2s ease;
 }
