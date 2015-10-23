@@ -5,12 +5,12 @@
 @stop
 
 @section('infoHead')
-    <a href="#" class="boxImgUser">
-       {!! Html::image('/assets/images/medico.png','logoUser',array('class' => 'img-circle pull-left')) !!}
-    </a>
     <div class="media-body">        
         <button data-toggle="dropdown" class="btn btn-usuario dropdown-toggle">
-            <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span> <span class="caret"></span><br>            
+            <!-- <a href="#" class="boxImgUser">
+               {!! Html::image('/assets/images/medico.png','logoUser',array('class' => 'img-circle pull-left')) !!}
+            </a> -->
+            <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span> <span class="caret"></span><br>
         </button>         
         <ul class="dropdown-menu pull-right itensInfoUser">            
             <li class="item"><a href="{{url()}}/auth/logout"><i class="fa fa-sign-out"></i> Sair</a></li>

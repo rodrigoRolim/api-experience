@@ -41,7 +41,7 @@
 @section('left')
     <nav class="navbar-default navbar-static-side" role="navigation">
         <div class="topoMenu">
-            <br><br><br>
+            <strong>Relação de Atendimentos</strong>
         </div>
         <ul class="nav metismenu" id="side-menu">
             @foreach($atendimentos as $key => $atendimento)
