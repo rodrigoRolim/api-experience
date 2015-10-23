@@ -73,7 +73,9 @@
 
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="ibox">
-        
+            <div class="row">
+                <div class="i-checks all boxSelectAll"> </div>
+            </div>        
             <ul class="sortable-list connectList agile-list ui-sortable listaExames">  </ul>
             <!-- Modal -->
               <div class="modal fade" id="modalExames" role="dialog">
