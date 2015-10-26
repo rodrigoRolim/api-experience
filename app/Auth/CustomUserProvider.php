@@ -142,10 +142,13 @@ class CustomUserProvider implements UserProvider {
                 $medico = $medico->where(['TIPO_CR' => $credentials['tipoCr'],'CRM' => $credentials['cr'],'uf_conselho' => $credentials['uf']])->get()->toArray();
 
                 if(sizeof($medico)){
-                    $id = strtoupper(md5($medico[0]['id_medico']));
+                    $id = strtoupper(md5($medico[0]['crm']));
 
                     $medicoAcesso = new MedicoAcesso();
                     $medicoAcesso = $medicoAcesso->where(['id' => $id])->get()->toArray();
+
+
+                    var_dump($medicoAcesso);
 
                     if(strtoupper($medicoAcesso[0]['pure']) == strtoupper($credentials['password'])){
                         $arrNome = explode(' ',$medico[0]['nome']);
