@@ -27,7 +27,11 @@ body.boxed-layout #wrapper {
 .menu-trigger{
   background-color: #E04F53;
   color: white;
+  border-color: #FD676B;
   }
+.menu-trigger:active{
+  border-color: #FD676B;
+}
 #side-menu li a {
   color: #ffffff;
   font-weight: 400;

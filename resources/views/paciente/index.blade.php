@@ -415,15 +415,17 @@
                     if(!verificaSaldoDevedor(saldo)){
                         $('input.checkAll').on('ifChecked ifUnchecked', function(event) {
                             if (event.type == 'ifChecked') {
-                                checkboxes.iCheck('check');                               
+                                checkboxes.iCheck('check');
+                                $('.btnPdf').show();
                             } else {
-                                checkboxes.iCheck('uncheck');                                
+                                checkboxes.iCheck('uncheck');
+                                $('.btnPdf').hide();
                             }
                         });
 
-                        // Faz o controle do botÃ£o de gerar PDF. (Se houver ao menos um selecionado, o botÃ£o Ã© habilitado.)
+                        // Faz o controle do botão de gerar PDF. (Se houver ao menos um selecionado, o botão é habilitado.)
                         $('input.check').on('ifChanged', function(event){
-                            if(checkboxes.filter(':checked').length == 0) {                             
+                            if(checkboxes.filter(':checked').length == 0) { 
                                 $('.btnPdf').hide();
                             }else{                               
                                 $('.btnPdf').show();

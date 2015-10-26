@@ -590,6 +590,8 @@ div.row.infoClienteMed{
 .menu-trigger{
 	display: none;	
 	font-size: 1.0em;
+	width: 100%;
+	border-color: #F17E81;
 }
 
 

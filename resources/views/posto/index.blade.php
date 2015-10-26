@@ -19,7 +19,7 @@
 @stop
 
 @section('content')
-    <span class="menu-trigger text-center"> <i class="fa fa-filter fa-2x"> </i> Filtrar Atendimentos </span>
+    <button class="menu-trigger text-center"> <i class="fa fa-filter fa-2x"> </i> Filtrar Atendimentos </button>
     <div class="col-md-12 corPadrao boxFiltroPosto">       
         <form id="formPosto">
             <input hidden type="text" value="0" name="posto">
