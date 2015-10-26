@@ -51,7 +51,7 @@
                        data-atendimento="{{$atendimento->atendimento}}"
                        data-solicitante="{{$atendimento->nome_solicitante}}"
                        data-convenio="{{$atendimento->nome_convenio}}"
-                       data-cpf="{}"
+                       data-mnemonicos="{{$atendimento->mnemonicos}}"
                        data-saldo="{{$atendimento->saldo_devedor}}">
                         <b class="dataMini">
                             <p class="text-center" style="margin:0px;line-height: 14px">{{ date('d/m',strtotime($atendimento->data_atd))}}<br>
@@ -170,6 +170,7 @@
             var atendimento;
             var nomeSolicitante;
             var nomeConvenio;
+            var mnemonicos;
 
             var form = $('#formSenha');
                 
@@ -192,12 +193,17 @@
                 },
             });
 
-            $('.btnAtendimento').click(function(e){
+            $('.btnAtendimento').click(function(e){                
                 posto = $(e.currentTarget).data('posto');
                 atendimento = $(e.currentTarget).data('atendimento');
                 nomeSolicitante = $(e.currentTarget).data('solicitante');
                 nomeConvenio = $(e.currentTarget).data('convenio');
-                saldo = $(e.currentTarget).data('saldo');               
+                saldo = $(e.currentTarget).data('saldo');       
+                mnemonicos = $(e.currentTarget).data('mnemonicos');         
+
+                if(mnemonicos == ""){                    
+                    swal("Não foram realizados exames para este atendimento.");
+                }
 
                 if(posto != null && atendimento != null){
                     getExames(posto,atendimento);
@@ -247,8 +253,8 @@
                 e.preventDefault();                
             });
 
-            $('.page-heading').slimScroll({
-                height: '71.1vh',
+            $('.ibox').slimScroll({
+                height: '68vh',
                 railOpacity: 0.4,
                 wheelStep: 10,
                 minwidth: '100%',
@@ -293,7 +299,7 @@
                     $('.listaExames').html('');
                     $('#boxRodape').html('');
 
-                    $.each( result.data, function( index, exame ){
+                    $.each( result.data, function( index, exame ){                        
                         var sizeBox = 'col-md-6';
                         var conteudo = '';
                         var msg = '';

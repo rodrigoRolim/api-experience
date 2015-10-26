@@ -41,6 +41,7 @@
                        data-convenio="{{$atendimento->nome_convenio}}"
                        data-saldo="{{$atendimento->saldo_devedor}}"
                        data-idade="{{$atendimento->data_nas}}"
+                       data-mnemonicos="{{$atendimento->mnemonicos}}"
                        data-nome="{{$atendimento->nome}}">                       
                         <b class="dataMini">
                             <p class="text-center" style="margin:0px;line-height: 14px">{{ date('d/m',strtotime($atendimento->data_atd))}}<br>
@@ -132,6 +133,7 @@
             var nomeSolicitante;
             var nomeConvenio;
             var nomePaciente;
+            var mnemonicos;
 
             var controle;
 
@@ -144,6 +146,7 @@
                 idade = $(e.currentTarget).data('idade');
                 sexo = $(e.currentTarget).data('sexo');
                 nomePaciente = $(e.currentTarget).data('nome');
+                mnemonicos = $(e.currentTarget).data('mnemonicos');         
 
                 $('.idadePaciente').html('');
                 $('.idadePaciente').append('<i class="'+((sexo == "M")?"fa fa-mars":"fa fa-venus")+'"></i> <span id="idade"></span>');
@@ -152,6 +155,10 @@
                 var idadeCliente = new moment().diff(idade, 'years');  
 
                 $('#idade').html(dataNascimento + ' - ' + idadeCliente + ' Anos');
+
+                if(mnemonicos == ""){
+                     swal("Não foram realizados exames para este atendimento.");
+                }
 
                 if(posto != null && atendimento != null){
                     getExames(posto,atendimento);

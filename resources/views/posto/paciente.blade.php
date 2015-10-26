@@ -7,9 +7,6 @@
 
 @section('infoHead')
     <div class="feed-element pull-right infoUser">
-        <a href="#" class="boxImgUser">
-          {!! Html::image('/assets/images/medico.png','logoUser',array('class' => 'img-circle pull-left')) !!}
-        </a>
         <div class="media-body">
            <button data-toggle="dropdown" class="btn btn-usuario dropdown-toggle">
                 <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span> <span class="caret"></span><br>               
@@ -41,6 +38,7 @@
                        data-saldo="{{$atendimento->saldo_devedor}}"
                        data-idade="{{$atendimento->idade}}"
                        data-sexo="{{$atendimento->sexo}}"
+                       data-mnemonicos="{{$atendimento->mnemonicos}}"
                        data-nome="{{$atendimento->nome}}"> 
                     </a>
                 </li>
@@ -124,6 +122,7 @@
             var nomeSolicitante;
             var nomeConvenio;
             var nomePaciente;
+            var mnemonicos;
 
             var controle;
 
@@ -136,9 +135,14 @@
                 nomePaciente = $(e.currentTarget).data('nome');
                 idade = $(e.currentTarget).data('idade');
                 sexo = $(e.currentTarget).data('sexo');
+                mnemonicos = $(e.currentTarget).data('mnemonicos'); 
 
                 $('.idadePaciente').append('<i class="'+((sexo == "M")?"fa fa-mars":"fa fa-venus")+'"></i> <span id="idade"></span>');
                 $('#idade').html(idade);
+
+                if(mnemonicos == ""){
+                     swal("Não foram realizados exames para este atendimento.");
+                }
 
                 if(posto != null && atendimento != null){
                     getExames(posto,atendimento);
@@ -151,8 +155,8 @@
             $('.btnAtendimento').trigger('click');         
             $('.navbar-static-side').remove();   
 
-            $('.page-heading').slimScroll({
-                height: '75.0vh',
+            $('.ibox').slimScroll({
+                height: '64.4vh',
                 railOpacity: 0.4,
                 wheelStep: 10,
                 minwidth: '100%',
@@ -177,7 +181,6 @@
                 if(saldo == null || saldo == 0){
                    return false;
                 }
-
                 return true;
             }
 
