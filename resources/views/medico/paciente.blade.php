@@ -246,7 +246,6 @@
                                     msg = '{!!config('system.messages.exame.tipoEntregaInvalido')!!}';
                                     exame.class = "success-elementNoHov";
                                     check = '';
-                                    $('.boxSelectAll').html('');
                                 }
                             }
                         }

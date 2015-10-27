@@ -39,6 +39,11 @@ ul{
 	font-size: 0.9em;
 }
 
+.txtRodapePostoPac{
+	font-size: 0.9em;
+	margin-left: 80px;
+}
+
 .statusAtendimentos{
 	margin-left: 60px;
 	font-size: 0.9em;
@@ -267,6 +272,8 @@ ul{
 	margin-top: -10px;
 	margin-left: 0px;
 	padding-left: 0px;
+	padding-right: 0px;
+	margin-right: 0px;
 }
 
 .infoAtendimento{	
@@ -296,6 +303,10 @@ ul{
 
 #boxRodape{
 	padding-right: 0px;
+}
+
+#boxRodapePostoPac{
+	margin-right: 70px;
 }
 
 .agile-list, li.warning-element, li.success-element, li.danger-element, li.aguardando-element, li.naoRealizado-element{
@@ -446,7 +457,7 @@ div.row.infoClienteMed{
 .descricaoExames{
 	font-family: "Lucida Console", Monaco, monospace;
 	font-size: 1.2em;
-	border-bottom: 1px dashed #e5e5e5;
+	border-bottom: 1px dashed #e5e5e5;	
 }
 
 .analitos{
@@ -470,6 +481,7 @@ div.row.infoClienteMed{
 	padding-left: 0px;
 	padding-top: 12px;
 	font-size: 1.2em;
+	margin-bottom: 15px;
 }
 
 .topoMenu{
@@ -511,7 +523,7 @@ div.row.infoClienteMed{
 	div.row.infoClienteMed{
 		margin-right: 0;
 		margin-left: 0;
-		height: 90px;
+		height: 110px;
 		font-size: 11px;
 	}
 
@@ -654,12 +666,6 @@ div.row.infoClienteMed{
 		width: 20%;
 	}
 	
-	.btnVoltar{
-		padding: 2px;
-		margin: 2px;
-		margin-left: 5px;
-	}
-
 	.infoAtendimentoMedico{	
 		float: left;	
 		margin-left: 5px;
@@ -668,9 +674,17 @@ div.row.infoClienteMed{
 	}
 
 	.btnVoltar{ /* View paciente/Medico */
+		padding: 2px;
+		margin: 2px;
+		margin-left: 80px;
+		margin-right: 0px;
 		min-width: 0px;
-		margin-right: 102px;
+		margin-right: 0px;
 		margin-top: 10px;
+	}
+
+	.areaBtnVoltar{
+		padding-left: 10px;
 	}
 
 	div.row.infoClientePaciente{
@@ -708,7 +722,7 @@ div.row.infoClienteMed{
 	div.row.infoClienteMed{
 		margin-right: 0;
 		margin-left: 0;
-		min-height: 1px;
+		min-height: 130px;
 		font-size: 10px;
 	}
 
@@ -765,12 +779,20 @@ div.row.infoClienteMed{
 		display: none;
 	}
 
+	.txtRodapePostoPac{
+		display: none;
+	}
+
 	.statusAtendimentos{
 		display: none;
 	}
 
 	.dataAtendimento{
 		display: block;
+	}
+
+	#boxRodapePostoPac{
+		margin-right: 0px;
 	}
 
 }

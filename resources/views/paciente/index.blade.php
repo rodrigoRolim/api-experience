@@ -199,7 +199,7 @@
                 nomeSolicitante = $(e.currentTarget).data('solicitante');
                 nomeConvenio = $(e.currentTarget).data('convenio');
                 saldo = $(e.currentTarget).data('saldo');       
-                mnemonicos = $(e.currentTarget).data('mnemonicos');         
+                mnemonicos = $(e.currentTarget).data('mnemonicos');  
 
                 if(mnemonicos == ""){                    
                     swal("Não foram realizados exames para este atendimento.");
@@ -295,11 +295,11 @@
                     $('#solicitante').html(nomeSolicitante);
                     $('#convenio').html(nomeConvenio);
                     $('#atendimento').html("00/00"+atendimento);
-
                     $('.listaExames').html('');
                     $('#boxRodape').html('');
 
-                    $.each( result.data, function( index, exame ){                        
+                    $.each( result.data, function( index, exame ){     
+                        console.log(exame);                   
                         var sizeBox = 'col-md-6';
                         var conteudo = '';
                         var msg = '';
@@ -319,8 +319,7 @@
                               }else{
                                 msg = '{!!config('system.messages.exame.tipoEntregaInvalido')!!}';
                                 exame.class = "success-elementNoHov";
-                                check = '';
-                                $('.boxSelectAll').html('');
+                                check = '';                                
                             }   
                           }
                         }
@@ -481,7 +480,7 @@
                         });   
 
                     }else{
-                        $('#boxRodape').html('<h3 class="text-danger msgCliente">{!!config('system.messages.paciente.saldoDevedor')!!}</h3>');
+                        $('#boxRodape').html('<h3 class="text-danger msgCliente">{!!config('system.messages.pacientes.saldoDevedor')!!}</h3>');
                     }
                 }, "json" );
             }

@@ -97,8 +97,8 @@
         </div>
           <div class="footer">
             <div class="row col-md-12">
-                <div class="col-md-4 pull-right" id="boxRodape">    </div>
-                <div class="col-md-8 txtRodape">    </div>  
+                <div class="col-md-4 pull-right" id="boxRodapePostoPac">    </div>
+                <div class="col-md-6 txtRodapePostoPac">    </div>  
             </div>  
         </div>
     </div>  
@@ -202,7 +202,7 @@
                     $('#atendimento').html("00/00"+atendimento);
 
                     $('.listaExames').html('');
-                    $('#boxRodape').html('');
+                    $('#boxRodapePostoPac').html('');
 
                     $.each( result.data, function( index, exame ){
                         var sizeBox = 'col-md-6';
@@ -226,7 +226,6 @@
                                     msg = '{!!config('system.messages.exame.tipoEntregaInvalido')!!}';
                                     exame.class = "success-elementNoHov";
                                     check = '';
-                                    $('.boxSelectAll').html('');
                                 }
                             }
                         }
@@ -313,7 +312,7 @@
                         });
                     }  
                       
-                    $('#boxRodape').html('<button type="button" class="btn btn-danger btnPdf">Gerar PDF</button>');  
+                    $('#boxRodapePostoPac').html('<button type="button" class="btn btn-danger btnPdf">Gerar PDF</button>');  
 
                     var checkAll = $('input.checkAll');
                     var checkboxes = $('input.check');
@@ -390,14 +389,15 @@
                         }); 
                        
                     }else{
-                        $('#boxRodape').html('<h3 class="text-danger">{!!config('system.messages.pacientes.saldoDevedor')!!}</h3>');
+                        $('#boxRodapePostoPac').html('<h3 class="text-danger">{!!config('system.messages.pacientes.saldoDevedor')!!}</h3>');
+                        $('#boxRodapePostoPac').css("margin-right", "0px");
                     }
                 }, "json" );
             }
         });
-            $(".txtRodape").append("<span class='statusAtendimentosViewPaciente'></span>");            
+            $(".txtRodapePostoPac").append("<span class='statusAtendimentosViewPaciente'></span>");            
             $(".statusAtendimentosViewPaciente").append(" <span class='statusFinalizados'></span>&nbsp; Finalizados &nbsp;&nbsp;<span class='statusAguardando'></span> Parc. Finalizado");
             $(".statusAtendimentosViewPaciente").append("&nbsp;&nbsp;<span class='statusEmAndamento'></span> Em Andamento &nbsp;&nbsp;<span class='statusPendencias'></span> Existem Pendências");
-            $(".txtRodape").append('<br><span class="devFooter">{!!config('system.loginText.footerText')!!}</span>');
+            $(".txtRodapePostoPac").append('<br><span class="devFooter">{!!config('system.loginText.footerText')!!}</span>');
     </script>
 @stop

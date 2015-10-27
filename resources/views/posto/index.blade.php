@@ -180,7 +180,7 @@
                         $('#listFilter li').click(function(e){
                             var key = $(e.currentTarget).data('key');
                             var atendimento = $(e.currentTarget).data('atendimento');
-                            location.replace("/posto/paciente/"+key+"/"+atendimento);
+                            window.open("/posto/paciente/"+key+"/"+atendimento);
                         });
                         
                         if(result.data.length == 0){
