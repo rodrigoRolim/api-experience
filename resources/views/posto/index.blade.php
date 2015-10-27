@@ -133,8 +133,7 @@
                         var dataAtendimento = [];
 
                         $.each( result.data, function( index ){
-                            var atendimento = result.data[index];
-                            console.log(result.data.length);
+                            var atendimento = result.data[index];                           
                             $('.contadorAtd').html('<h5 class="achouAtd">Foram encontrados ' + result.data.length + ' atendimentos para as datas selecionadas   .</h5>');
                        
                             atendimento.telefone = atendimento.telefone.replace(/ /g,""); //Remove espaços

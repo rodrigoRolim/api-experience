@@ -8,7 +8,7 @@
     <a href="#" class="boxImgUser">
        {!! Html::image('/assets/images/medico.png','logoUser',array('class' => 'img-circle pull-left')) !!}
     </a>
-     <div class="media-body">        
+     <div class="pull-right media-body">        
         <button data-toggle="dropdown" class="btn btn-usuario dropdown-toggle">
             <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span> <span class="caret"></span><br>
             {{date('d/m/y',strtotime(Auth::user()['data_nas']))}}&nbsp;
@@ -58,6 +58,8 @@
                 <div class="input-group m-b">
                     <span class="input-group-addon"><i class="fa fa-search"></i></span>
                     <input type="text" id="filtroPaciente" placeholder="Localizar paciente na relação abaixo" class="form-control">
+                </div>
+                <div class="contadorAtd">                    
                 </div>
                 <ul class="sortable-list connectList agile-list ui-sortable" id="listFilter"></ul>
             </div>
@@ -224,6 +226,8 @@
 
                         $.each( result.data, function( index ){
                             var cliente = result.data[index];
+                            $('.contadorAtd').html('<h5 class="achouAtd">Foram encontrados ' + result.data.length + ' atendimentos para as datas selecionadas   .</h5>');
+
                             var item =   '<li class="col-md-12 naoRealizado-element" data-key="'+cliente.key+'">'+
                                             '<div class="col-md-4 dadosPaciente text-left">'+
                                                 '<strong>'+cliente.nome+'</strong><br><i class="'+((cliente.sexo == "M")?"fa fa-mars":"fa fa-venus")+'"></i> &nbsp;'+cliente.idade+
@@ -255,6 +259,7 @@
                         
                         if(result.data.length == 0){
                             $('#listFilter').append('<h2 class="textoTamanho">Não foram encontrados atendimentos.</h2>');
+                            $('.contadorAtd').html('');
                         }
                     },
                     error: function(jqXHR, textStatus, errorThrown){

@@ -254,7 +254,7 @@
             });
 
             $('.ibox').slimScroll({
-                height: '68vh',
+                height: '63vh',
                 railOpacity: 0.4,
                 wheelStep: 10,
                 minwidth: '100%',
@@ -308,9 +308,9 @@
                         var visualizacao = 'OK';
                         
                         if(!verificaSaldoDevedor(saldo)){
-                            if(exame.class == 'success-element'){
-                                $('.boxSelectAll').html('<span>Selecionar Todos &nbsp;<input type="checkbox" class="checkAll"></span>');
+                            if(exame.class == 'success-element'){                                
                                  if(exame.tipo_entrega == '*'){
+                                    $('.boxSelectAll').html('<span>Selecionar Todos &nbsp;<input type="checkbox" class="checkAll"></span>');
                                     link = '<a id="btnViewExame" data-toggle="modal" data-target="#modalExames" "data-tipoEntrega="'+exame.tipo_entrega+'">';   
 
                                     visualizacao = "data-visualizacao='OK'"; 

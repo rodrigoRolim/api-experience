@@ -10,7 +10,7 @@
         <a href="#" class="boxImgUser">
           {!! Html::image('/assets/images/medico.png','logoUser',array('class' => 'img-circle pull-left')) !!}
         </a>
-        <div class="media-body">
+        <div class="pull-right media-body">
              <button data-toggle="dropdown" class="btn btn-usuario dropdown-toggle">
                 <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span> <span class="caret"></span><br>
                 {{date('d/m/y',strtotime(Auth::user()['data_nas']))}}&nbsp;
@@ -168,8 +168,8 @@
             });
 
            
-            $('.page-heading').slimScroll({
-                height: '67.5vh',
+            $('.ibox').slimScroll({
+                height: '63vh',
                 railOpacity: 0.4,
                 wheelStep: 10,
                 minwidth: '100%',
@@ -177,7 +177,7 @@
             });
 
             $('#side-menu').slimScroll({
-                height: '65vh',
+                height: '60vh',
                 railOpacity: 0.4,
                 wheelStep: 10,
                 minwidth: '100%',
@@ -234,9 +234,9 @@
                         var visualizacao = '';
 
                         if(!verificaSaldoDevedor(saldo)){
-                            if(exame.class == 'success-element'){
-                                $('.boxSelectAll').html('<span>Selecionar Todos &nbsp;<input type="checkbox" class="checkAll"></span>');
+                            if(exame.class == 'success-element'){                                
                                 if(exame.tipo_entrega == '*'){
+                                    $('.boxSelectAll').html('<span>Selecionar Todos &nbsp;<input type="checkbox" class="checkAll"></span>');
                                     link = '<a id="btnViewExame" data-toggle="modal" data-target="#modalExames" "data-tipoEntrega="'+exame.tipo_entrega+'">';
 
                                     visualizacao = "data-visualizacao='OK'";       
@@ -245,7 +245,7 @@
                                 }else{
                                     msg = '{!!config('system.messages.exame.tipoEntregaInvalido')!!}';
                                     exame.class = "success-elementNoHov";
-                                    check = '';
+                                    check = '';                                    
                                 }
                             }
                         }

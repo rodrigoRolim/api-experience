@@ -214,9 +214,9 @@
                         
 
                         if(!verificaSaldoDevedor(saldo)){
-                            if(exame.class == 'success-element'){
-                                $('.boxSelectAll').html('<span>Selecionar Todos &nbsp;<input type="checkbox" class="checkAll"></span>');
+                            if(exame.class == 'success-element'){                                
                                 if(exame.tipo_entrega == '*'){
+                                    $('.boxSelectAll').html('<span>Selecionar Todos &nbsp;<input type="checkbox" class="checkAll"></span>');
                                     link = '<a id="btnViewExame" data-target="#modalExames" "data-tipoEntrega="'+exame.tipo_entrega+'">'; 
 
                                     visualizacao = "data-visualizacao='OK'";                                        
