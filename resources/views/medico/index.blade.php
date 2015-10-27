@@ -156,7 +156,7 @@
             $('#dataFim').val(dataFim);
 
             $('#listFilter').slimScroll({
-                height: '60vh',
+                height: '61vh',
                 railOpacity: 0.4,
                 wheelStep: 10,
                 minwidth: '100%',
