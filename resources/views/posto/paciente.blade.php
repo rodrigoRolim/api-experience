@@ -115,8 +115,8 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $("body").tooltip({ selector: '[data-toggle=tooltip]' });
-
+            $("body").tooltip({ selector: '[data-toggle=tooltip]' });  
+            
             var posto;
             var atendimento;
             var nomeSolicitante;

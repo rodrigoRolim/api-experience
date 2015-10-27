@@ -76,7 +76,7 @@
 
     <script type="text/javascript">
         $(document).ready(function (){
-            $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+            $("body").tooltip({ selector: '[data-toggle=tooltip]' });            
 
             $(".menu-trigger").click(function() {
                 $(".boxFiltroPosto").slideToggle(400, function() {
@@ -104,7 +104,7 @@
             $('#dataFim').val(dataFim);
 
             $('#listFilter').slimScroll({
-                height: '63vh',
+                height: '61vh',
                 railOpacity: 0.4,
                 wheelStep: 10,
                 minwidth: '100%',
@@ -184,7 +184,7 @@
                         $('#listFilter li').click(function(e){
                             var key = $(e.currentTarget).data('key');
                             var atendimento = $(e.currentTarget).data('atendimento');
-                            window.open("/posto/paciente/"+key+"/"+atendimento);
+                            window.location.replace("/posto/paciente/"+key+"/"+atendimento);
                         });
                         
                         if(result.data.length == 0){
