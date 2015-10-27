@@ -30,6 +30,10 @@ ul{
 	margin-left: 6px;
 }
 
+.achouAtd{
+	color: green;
+}
+
 .btnPdf{
 	padding: 5px;
 	float: right;

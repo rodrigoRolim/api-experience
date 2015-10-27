@@ -25,7 +25,7 @@
             <input hidden type="text" value="0" name="posto">
             <div class="col-md-3">
                 <label class="textoBranco">Atendimentos por datas entre:</label>
-                <div class="input-daterange input-group" id="datepicker">
+                <div class="input-daterange input-group" id="datepicker" data-provide="datepicker" data-date-end-date="0d">
                     <input type="text" class="input-sm form-control" id="dataInicio" name="dataInicio">
                     <span class="input-group-addon">até</span>
                     <input type="text" class="input-sm form-control" id="dataFim" name="dataFim">                    
@@ -57,6 +57,8 @@
                 <div class="input-group m-b">
                     <span class="input-group-addon"><i class="fa fa-search"></i></span>
                     <input type="text" id="filtroPaciente" placeholder="Localizar Paciente" class="form-control">
+                </div>
+                <div class="contadorAtd">                    
                 </div>
                 <ul class="sortable-list connectList agile-list ui-sortable" id="listFilter"></ul>                
             </div>
@@ -132,7 +134,9 @@
 
                         $.each( result.data, function( index ){
                             var atendimento = result.data[index];
-                            console.log(atendimento);
+                            console.log(result.data.length);
+                            $('.contadorAtd').html('<h5 class="achouAtd">Foram encontrados ' + result.data.length + ' atendimentos para as datas selecionadas   .</h5>');
+                       
                             atendimento.telefone = atendimento.telefone.replace(/ /g,""); //Remove espaços
                             dataAtendimento = new moment(atendimento.data_atd);                            
                             dataAtendimento = dataAtendimento.format('DD/MM/YYYY');     
@@ -185,6 +189,7 @@
                         
                         if(result.data.length == 0){
                             $('#listFilter').append('<h2 class="textoTamanho">Não foram encontrados atendimentos.</h2>');
+                            $('.contadorAtd').html('');
                         }
                     },
                     error: function(jqXHR, textStatus, errorThrown){
