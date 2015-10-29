@@ -81,6 +81,7 @@
            </div>
          <ul class="sortable-list connectList agile-list ui-sortable listaExames">  </ul>
 
+         @include('medico.modalAlterarSenha')
 
             <!-- Modal -->
               <div class="modal fade" id="modalExames" role="dialog">
@@ -165,7 +166,7 @@
 
            
             $('.ibox').slimScroll({
-                height: '63vh',
+                height: '69.5vh',
                 railOpacity: 0.4,
                 wheelStep: 10,
                 minwidth: '100%',

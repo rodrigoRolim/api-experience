@@ -3,6 +3,8 @@ html, body{
 	padding: 0;
 	height: 100%;
 }
+/*@media (orientation: portrait) ou landscape*/
+
 .boxLogin{
 	background-color: black;
 }
@@ -412,6 +414,7 @@ div.row.infoClienteMed{
 
 .colunaInfoPaciente{
 	padding: 0px;
+	margin-bottom: 15px;
 }
 
 .msgCliente{
@@ -568,7 +571,7 @@ div.row.infoClienteMed{
 	}
 
 	.boxFiltro{
-		height: 300px;
+		height: auto;
 		display: none;
 	}
 
