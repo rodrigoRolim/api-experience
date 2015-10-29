@@ -560,6 +560,13 @@ div.row.infoClienteMed{
 
 }
 
+.menu-trigger{
+	display: none;	
+	font-size: 1.0em;
+	width: 100%;
+}
+
+
 @media (max-width: 800px){
 
 	div.row.infoClienteMed{
@@ -603,14 +610,21 @@ div.row.infoClienteMed{
 		margin-left: 0px;
 	}
 
-}
+	.menu-trigger{
+		display: block;
+	}
 
-.menu-trigger{
-	display: none;	
-	font-size: 1.0em;
-	width: 100%;
-}
+	.boxFiltro{
+		height: 300px;
+		display: none;
+	}
 
+	.boxFiltroPosto{
+		height: 300px;
+		display: none;
+	}
+
+}
 
 @media (max-width: 420px){
 

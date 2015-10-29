@@ -77,7 +77,7 @@
             $("body").tooltip({ selector: '[data-toggle=tooltip]' });            
 
             $(".menu-trigger").click(function() {
-                $(".boxFiltroPosto").slideToggle(400, function() {
+                $(".boxFiltroPosto").slideToggle(768, function() {
                     $(this).toggleClass("nav-expanded").css('display', '');
                 });
 
