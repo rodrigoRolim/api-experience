@@ -51,21 +51,21 @@
 <div id="page-wrapper-posto" class="gray-bg">
     <div class="row infoClienteMed">
         <div class="col-md-12 colunaInfoPaciente">
-            <div class="col-md-5">
+            <div class="col-xs-6">
                 <div class="infoPaciente">
                     <strong><span id="nome" class="nomePaciente"></span></strong> <br>
                     <div class="idadePaciente"></div>
                 </div>
             </div>
-            <div class="col-md-5">
+            <div class="col-xs-6">
                 <div class="infoAtendimentoMedico">
                     <i class="fa fa-heartbeat" data-toggle="tooltip" data-placement="bottom" title="Posto/Atendimento"></i>
                     <span id="atendimento"></span> <br>
                     <i class="fa fa-credit-card" data-toggle="tooltip" data-placement="bottom" title="Convênio"></i>
                     <span id="convenio"></span> <br>                          
                 </div>
+                <div class="pull-right areaBtnVoltar"></div>
             </div>
-            <div class="col-md-2 areaBtnVoltar"></div>
         </div>
     </div>
 

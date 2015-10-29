@@ -5,9 +5,6 @@
 @stop
 
 @section('infoHead')
-    <a href="#" class="boxImgUser">
-       {!! Html::image('/assets/images/medico.png','logoUser',array('class' => 'img-circle pull-left')) !!}
-    </a>
      <div class="pull-right media-body">        
         <button data-toggle="dropdown" class="btn btn-usuario dropdown-toggle boxLogin">
             <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span> <span class="caret"></span><br>
@@ -105,6 +102,7 @@
     <script src="{{ asset('/assets/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
     <script src="{{ asset('/assets/js/plugins/listJs/list.min.js') }}"></script>    
     <script src="{{ asset('/assets/js/plugins/validate/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/plugins/vanillamasker/vanilla-masker.min.js') }}"></script>
 
     <script type="text/javascript">
         $(document).ready(function (){
@@ -155,6 +153,9 @@
             $('#dataInicio').val(dataInicio);
             $('#dataFim').val(dataFim);
 
+            VMasker($("#dataInicio")).maskPattern('99/99/9999');
+            VMasker($("#dataFim")).maskPattern('99/99/9999');
+
             $('#listFilter').slimScroll({
                 height: '61vh',
                 railOpacity: 0.4,
@@ -163,6 +164,8 @@
                 touchScrollStep: 50,
                 alwaysVisible: true
             });
+
+
 
             $('#filtroPaciente').filterList();
 

@@ -8,13 +8,6 @@
 
 @section('infoHead')
     <div class="feed-element infoUser" style="margin-right: 10px">
-        <a href="#" class="boxImgUser">
-            @if(Auth::user()['sexo'] == 'M')
-                {!! Html::image('/assets/images/homem.png','logoUser',array('class' => 'img-circle pull-left')) !!}
-            @else
-                {!! Html::image('/assets/images/mulher.png','logoUser',array('class' => 'img-circle pull-left')) !!}
-            @endif
-        </a>
         <div class="pull-right media-body">
             <button data-toggle="dropdown" class="btn btn-usuario dropdown-toggle boxLogin">
                 <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span> <span class="caret"></span><br>

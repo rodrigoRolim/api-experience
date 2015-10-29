@@ -29,7 +29,7 @@
             <div id="header">
                 <nav class="navbar navbar-static-top headLogin headPadrao" role="navigation" style="margin-bottom: 0">
                     <div class="navbar-header logo">
-                        {!! Html::image('/assets/images/logo.png', 'logo_lab', array('title' => 'logo')) !!}
+                        {!! Html::image(config('system.clienteLogo'), 'logo_lab', array('title' => 'logo')) !!}
                     </div>
                     <div class="feed-element pull-right infoUser" style="margin-right: 10px">
                         @yield('infoHead')

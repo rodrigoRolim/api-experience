@@ -7,9 +7,6 @@
 @section('infoHead')
     <div class="media-body">        
         <button data-toggle="dropdown" class="btn btn-usuario dropdown-toggle boxLogin">
-            <!-- <a href="#" class="boxImgUser">
-               {!! Html::image('/assets/images/medico.png','logoUser',array('class' => 'img-circle pull-left')) !!}
-            </a> -->
             <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span> <span class="caret"></span><br>
         </button>         
         <ul class="dropdown-menu pull-right itensInfoUser">            
@@ -73,6 +70,7 @@
     <script src="{{ asset('/assets/js/plugins/datapicker/bootstrap-datepicker.js') }}"></script>
     <script src="{{ asset('/assets/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
     <script src="{{ asset('/assets/js/plugins/listJs/list.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/plugins/vanillamasker/vanilla-masker.min.js') }}"></script>
 
     <script type="text/javascript">
         $(document).ready(function (){
@@ -90,10 +88,10 @@
             var qtdDiasFiltro = {{config('system.posto.qtdDiasFiltro')}};
 
             $('.input-daterange').datepicker({
-                keyboardNavigation: true,
-                forceParse: false,
+                keyboardNavigation: true,                
                 autoclose: true,
-                format: "dd/mm/yyyy"
+                format: "dd/mm/yyyy",  
+                disableTouchKeyboard: true            
             });
 
             dataInicio = dataInicio.subtract(qtdDiasFiltro,'days');
@@ -102,6 +100,11 @@
 
             $('#dataInicio').val(dataInicio);
             $('#dataFim').val(dataFim);
+
+            VMasker($("#dataInicio")).maskPattern('99/99/9999');
+            VMasker($("#dataFim")).maskPattern('99/99/9999');
+
+            $(".input-daterange").attr("autocomplete", "off");
 
             $('#listFilter').slimScroll({
                 height: '58vh',
@@ -142,8 +145,6 @@
                             dataAtendimento = dataAtendimento.format('DD/MM/YYYY');     
                             dataNascimento = new moment(atendimento.data_nas);
                             dataNascimento = dataNascimento.format('DD/MM/YYYY');   
-
-                            console.log(atendimento.situacao_exames_experience);
 
                             switch(atendimento.situacao_exames_experience){
                                 case 'EA':
