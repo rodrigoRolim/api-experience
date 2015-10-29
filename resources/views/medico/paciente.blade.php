@@ -7,18 +7,14 @@
 
 @section('infoHead')
     <div class="feed-element pull-right infoUser">
-        <a href="#" class="boxImgUser">
-          {!! Html::image('/assets/images/medico.png','logoUser',array('class' => 'img-circle pull-left')) !!}
-        </a>
         <div class="pull-right media-body">
              <button data-toggle="dropdown" class="btn btn-usuario dropdown-toggle boxLogin">
                 <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span> <span class="caret"></span><br>
                 {{date('d/m/y',strtotime(Auth::user()['data_nas']))}}&nbsp;
             </button>   
             <ul class="dropdown-menu pull-right itensInfoUser">
-                <li class="item">
-                    <a href="/auth/logout">
-                        <i class="fa fa-sign-out"></i> Sair
+                <li class="item"><a class="btnShowModal"><i class="fa fa-user"></i> Alterar Senha</a></li>
+                <li class="item"><a href="/auth/logout"><i class="fa fa-sign-out"></i> Sair
                     </a>
                 </li>
             </ul>
@@ -185,7 +181,7 @@
             });          
 
             $('.modal-body').slimScroll({
-                height: '55.0vh',
+                height: '72.0vh',
                 railOpacity: 0.4,
                 wheelStep: 10,
                 minwidth: '100%',

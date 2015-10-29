@@ -156,7 +156,7 @@
             $('.navbar-static-side').remove();   
 
             $('.ibox').slimScroll({
-                height: '64.4vh',
+                height: '72vh',
                 railOpacity: 0.4,
                 wheelStep: 10,
                 minwidth: '100%',
