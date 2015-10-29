@@ -6,7 +6,7 @@
 
 @section('infoHead')
     <div class="media-body">        
-        <button data-toggle="dropdown" class="btn btn-usuario dropdown-toggle">
+        <button data-toggle="dropdown" class="btn btn-usuario dropdown-toggle boxLogin">
             <!-- <a href="#" class="boxImgUser">
                {!! Html::image('/assets/images/medico.png','logoUser',array('class' => 'img-circle pull-left')) !!}
             </a> -->
@@ -104,11 +104,12 @@
             $('#dataFim').val(dataFim);
 
             $('#listFilter').slimScroll({
-                height: '61vh',
+                height: '58vh',
                 railOpacity: 0.4,
                 wheelStep: 10,
                 minwidth: '100%',
                 touchScrollStep: 50,
+                alwaysVisible: true
             });
 
             $('#filtroPaciente').filterList();
@@ -142,6 +143,7 @@
                             dataNascimento = new moment(atendimento.data_nas);
                             dataNascimento = dataNascimento.format('DD/MM/YYYY');   
 
+                            console.log(atendimento.situacao_exames_experience);
 
                             switch(atendimento.situacao_exames_experience){
                                 case 'EA':
@@ -202,7 +204,7 @@
             $(".txtRodape").append("<i class='fa fa-heartbeat'></i> Posto/Atendimento &nbsp;|&nbsp; <i class='fa fa-calendar-check-o'></i> Data do Atendimento");
             $(".txtRodape").append("&nbsp;| &nbsp;<i class='fa fa-credit-card'></i> Convênio &nbsp |&nbsp; <i class='fa fa-flask'></i>  Mnemônicos");
             $(".txtRodape").append("<span class='statusAtendimentos'></span>");
-            $(".statusAtendimentos").append("<span class='statusFinalizados'></span> Finalizados &nbsp;&nbsp;<span class='statusAguardando'></span> Parc. Finalizado");
+            $(".statusAtendimentos").append("<span class='statusFinalizados'></span>&nbsp Finalizados &nbsp;&nbsp;<span class='statusAguardando'></span> Parc. Finalizado");
             $(".statusAtendimentos").append("&nbsp;&nbsp;<span class='statusEmAndamento'></span> Em Andamento &nbsp;&nbsp;<span class='statusPendencias'></span> Existem Pendências");
         });
     </script>

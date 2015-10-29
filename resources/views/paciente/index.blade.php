@@ -16,7 +16,7 @@
             @endif
         </a>
         <div class="pull-right media-body">
-            <button data-toggle="dropdown" class="btn btn-usuario dropdown-toggle">
+            <button data-toggle="dropdown" class="btn btn-usuario dropdown-toggle boxLogin">
                 <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span> <span class="caret"></span><br>
                 {{date('d/m/y',strtotime(Auth::user()['data_nas']))}}&nbsp;
             </button> 

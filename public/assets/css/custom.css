@@ -3,7 +3,9 @@ html, body{
 	padding: 0;
 	height: 100%;
 }
-
+.boxLogin{
+	background-color: black;
+}
 body,.text-center{
 	font-size: 10px;
 }

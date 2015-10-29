@@ -1,27 +1,27 @@
 .headLogin {
   background-color: #ffffff;
-  border-bottom: 1px solid #c52f33;
+  border-bottom: 1px solid #006532;
 }
 .text-navy {
-  color: #c52f33;
+  color: #006532;
 }
 .btn-primary,
 .btn-primary:focus {
-  background-color: #c52f33;
-  border-color: #c52f33;
+  background-color: #006532;
+  border-color: #006532;
 }
 .btn-primary:hover {
-  background-color: #ce5356;
-  border-color: #ce5356;
+  background-color: #1a835a;
+  border-color: #1a835a;
 }
 .form-control:focus {
-  border-color: #ce5356 !important;
+  border-color: #1a835a !important;
 }
 body.boxed-layout #wrapper {
-  background-color: #c52f33;
+  background-color: #006532;
 }
 .nav-header {
-  background: #d65357;
+  background: #35b584;
   color: #ffffff;
 }
 #side-menu li a {
@@ -30,22 +30,22 @@ body.boxed-layout #wrapper {
 }
 #side-menu li a:hover {
   background-color: #ffffff;
-  color: #c52f33;
+  color: #006532;
   font-weight: 800;
-  border-left: 4px solid #c52f33;
+  border-left: 4px solid #006532;
 }
 #side-menu .active {
   background-color: #ffffff;
-  border-left: 4px solid #c52f33 !important;
+  border-left: 4px solid #006532 !important;
 }
 #side-menu .active a:hover {
   border-left: none;
 }
 #side-menu .active a {
-  color: #c52f33;
+  color: #006532;
 }
 .corPadrao {
-  background-color: #c52f33;
+  background-color: #006532;
   color: #333333;
 }
 .textoBranco {
@@ -74,7 +74,7 @@ body.boxed-layout #wrapper {
   padding: 0px;
 }
 body.mini-navbar .nav-header {
-  background-color: #d65357;
+  background-color: #35b584;
 }
 .navbar-toggle:hover {
   background-color: #ffffff;
@@ -87,7 +87,7 @@ body.mini-navbar .nav-header {
   float: right;
   text-align: center;
   margin-right: 5px;
-  background-color: #d65357;
+  background-color: #35b584;
   color: #ffffff;
   border-radius: 0;
 }
@@ -123,9 +123,9 @@ li.notClicked {
 }
 #side-menu li a:active {
   background-color: #ffffff;
-  color: #c52f33;
+  color: #006532;
   font-weight: 800;
-  border-left: 4px solid #c52f33;
+  border-left: 4px solid #006532;
 }
 .msgCpfAcesso {
   color: red;
