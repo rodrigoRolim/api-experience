@@ -166,7 +166,7 @@
 
            
             $('.ibox').slimScroll({
-                height: '69.5vh',
+                height: '79vh',
                 railOpacity: 0.4,
                 wheelStep: 10,
                 minwidth: '100%',
