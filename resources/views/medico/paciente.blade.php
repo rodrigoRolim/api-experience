@@ -73,7 +73,6 @@
     </div>
 </div>
 
-
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="ibox">
             <div class="row">
@@ -167,7 +166,7 @@
 
            
             $('.ibox').slimScroll({
-                height: '71vh',
+                height: '70vh',
                 railOpacity: 0.4,
                 wheelStep: 10,
                 minwidth: '100%',
