@@ -9,7 +9,7 @@ class Cliente extends Model {
      *
      * @var string
      */
-    protected $table = 'CLIENTES';
+    protected $table = 'VW_CLIENTES';
 
     /**
      * The database primary key

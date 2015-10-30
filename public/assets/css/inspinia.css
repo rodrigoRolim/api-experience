@@ -3281,15 +3281,13 @@ video {
   background-color: #fff;
 }
 #page-wrapper {
-  padding: 0 15px;
-  min-height: 568px;
+  padding: 0 15px;  
   position: relative !important;
 }
 @media (min-width: 768px) {
   #page-wrapper {
     position: inherit;
     margin: 0 0 0 240px;
-    min-height: 1000px;
   }
 }
 .title-action {
@@ -6903,7 +6901,6 @@ body.rtls.top-navigation .footer.fixed {
   .body-small.rtls #page-wrapper {
     position: inherit;
     margin: 0 0 0 0px;
-    min-height: 1000px;
   }
   .body-small.rtls .navbar-static-side {
     display: none;
@@ -7383,7 +7380,6 @@ body.skin-3 {
   #page-wrapper {
     position: inherit;
     margin: 0 0 0 220px;
-    min-height: 1200px;
   }
   .navbar-static-side {
     z-index: 2001;
@@ -7400,7 +7396,6 @@ body.skin-3 {
   #page-wrapper {
     position: inherit;
     margin: 0 0 0 0px;
-    min-height: 1000px;
   }
   .body-small .navbar-static-side {
     display: none;

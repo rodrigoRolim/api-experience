@@ -60,7 +60,7 @@
 @stop
 
 @section('content')
-<div id="page-wrapper" class="gray-bg" style="min-height: 83.1vh;">
+<div id="page-wrapper" class="gray-bg">
     <div class="row infoCliente">
         <div class="col-xs-12 areaPaciente">
             <div class="col-xs-4">
@@ -247,7 +247,7 @@
             });
 
             $('.ibox').slimScroll({
-                height: '71vh',
+                height: '72vh',
                 railOpacity: 0.4,
                 wheelStep: 10,
                 minwidth: '100%',

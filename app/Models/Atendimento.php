@@ -8,7 +8,7 @@ class Atendimento extends Model {
      *
      * @var string
      */
-    protected $table = 'ATENDIMENTOS';
+    protected $table = 'VW_ATENDIMENTOS';
 
     /**
      * The database primary key

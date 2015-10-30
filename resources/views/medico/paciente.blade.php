@@ -53,26 +53,26 @@
 @stop
 
 @section('content')
-<div id="page-wrapper" class="gray-bg" style="min-height: 83vh;">
-    <div class="row infoClienteMed">
-        <div class="col-md-12 colunaInfoPaciente">
-            <div class="col-md-5">
-                <div class="infoPaciente">
-                    <strong><span id="nome" class="nomePaciente"></span></strong> <br>
-                    <div class="idadePaciente"></div>
-                </div>
+<div id="page-wrapper" class="gray-bg">
+    <div class="row col-md-12 colunaInfoPaciente">
+        <div class="col-md-5">
+            <div class="infoPaciente">
+                <strong><span id="nome" class="nomePaciente"></span></strong> <br>
+                <div class="idadePaciente"></div>
             </div>
-            <div class="col-md-5">
-                <div class="infoAtendimentoMedico">
-                    <i class="fa fa-heartbeat" data-toggle="tooltip" data-placement="right" title="Posto/Atendimento"></i>
-                    <span id="atendimento"></span> <br>
-                    <i class="fa fa-credit-card" data-toggle="tooltip" title="Convênio"></i>
-                    <span id="convenio"></span> <br>                           
-                </div>
-            </div>
-            <div class="col-md-2 areaBtnVoltar"></div>
         </div>
+        <div class="col-md-5">
+            <div class="infoAtendimentoMedico">
+                <i class="fa fa-heartbeat" data-toggle="tooltip" data-placement="right" title="Posto/Atendimento"></i>
+                <span id="atendimento"></span> <br>
+                <i class="fa fa-credit-card" data-toggle="tooltip" title="Convênio"></i>
+                <span id="convenio"></span> <br>                           
+            </div>
+        </div>
+        <div class="col-md-2 areaBtnVoltar">
     </div>
+</div>
+
 
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="ibox">
@@ -83,25 +83,6 @@
 
          @include('medico.modalAlterarSenha')
 
-            <!-- Modal -->
-              <div class="modal fade" id="modalExames" role="dialog">
-                <div class="modal-dialog">
-                
-                  <!-- Modal content-->
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h4 class="modal-title">Exames Descrição</h4>
-                    </div>
-                    <div class="modal-body">
-                      <p>Some text in the modal.</p>
-                    </div>
-                    <div class="modal-footer">                     
-                    </div>
-                  </div>
-                  
-                </div>
-              </div>
         </div>
     </div>
     <div class="footer">
@@ -111,6 +92,26 @@
         </div>  
     </div>
 </div>
+@stop
+    <!-- Modal -->
+      <div class="modal fade" id="modalExames" role="dialog">
+        <div class="modal-dialog">
+        
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Exames Descrição</h4>
+            </div>
+            <div class="modal-body">
+              <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">                     
+            </div>
+          </div>
+          
+        </div>
+      </div>
 @stop
 
 @section('script')
@@ -166,7 +167,7 @@
 
            
             $('.ibox').slimScroll({
-                height: '79vh',
+                height: '71vh',
                 railOpacity: 0.4,
                 wheelStep: 10,
                 minwidth: '100%',

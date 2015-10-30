@@ -6,7 +6,7 @@ html, body{
 /*@media (orientation: portrait) ou landscape*/
 
 .boxLogin{
-	background-color: black;
+	font-size: 1em;	
 }
 body,.text-center{
 	font-size: 10px;
@@ -108,7 +108,6 @@ ul{
 .modal-corpo {
   position: relative;
   padding: 15px;
-  height: 250px;
 }
 .modal-rodape {
   padding: 15px;
@@ -278,6 +277,7 @@ ul{
 	padding-left: 0px;
 	padding-right: 0px;
 	margin-right: 0px;
+	clear: both;
 }
 
 .infoAtendimento{	
@@ -333,7 +333,6 @@ li.success-elementNoHov:hover{
 div.row.infoClienteMed{
 	margin-right: 0;
 	margin-left: 0;
-	min-height: 70px;
 }
 
 
@@ -412,8 +411,7 @@ div.row.infoClienteMed{
 }
 
 .colunaInfoPaciente{
-	padding: 0px;
-	margin-bottom: 60px;
+	margin-bottom: 15px;
 }
 
 .msgCliente{
@@ -500,11 +498,6 @@ div.row.infoClienteMed{
 
 
 @media (max-width: 1280px){
-	div.row.infoClienteMed{
-		margin-right: 0;
-		margin-left: 0;		
-		font-size: 11px;
-	}
 
 	.boxFiltroPosto{
 		padding-bottom: 5px;
@@ -530,12 +523,6 @@ div.row.infoClienteMed{
 }
 
 @media (max-width: 1024px){
-	div.row.infoClienteMed{
-		margin-right: 0;
-		margin-left: 0;
-		/*height: 110px;*/
-		font-size: 11px;
-	}
 
 	.topoMenu{
 		height: 60px;
@@ -580,13 +567,6 @@ div.row.infoClienteMed{
 
 @media (max-width: 800px){
 
-	div.row.infoClienteMed{
-		margin-right: 0;
-		margin-left: 0;
-		/*height: 120px;*/
-		font-size: 11px;
-	}
-
 	.topoMenu{
 		padding-top: 30px;
 		font-size: 9px;
@@ -607,6 +587,10 @@ div.row.infoClienteMed{
 	.medicoSolicitante{
 		clear: both;
 		margin-left: 15px;
+	}
+
+	.ajusteFonte{
+	   font-size: 10px;
 	}
 
 	.convenioPaciente{
@@ -631,6 +615,10 @@ div.row.infoClienteMed{
 		float: left;			
 		padding-left: 5px;
 		margin: 0px;
+	}
+
+	.colunaInfoPaciente{
+		font-size: 0.8em;
 	}
 
 }
@@ -710,6 +698,10 @@ div.row.infoClienteMed{
 		height: 60px;
 	}
 
+	.infoClienteMed{
+		font-size: 0.8em;
+	}
+
 	.atendimento{
 		margin-right: 127px;
 	}
@@ -738,13 +730,6 @@ div.row.infoClienteMed{
 		margin-right: 0;
 		margin-left: 0;
 		/*min-height: 110px;*/
-	}
-
-	div.row.infoClienteMed{
-		margin-right: 0;
-		margin-left: 0;
-		min-height: 90px;
-		font-size: 10px;
 	}
 
 	#side-menu {

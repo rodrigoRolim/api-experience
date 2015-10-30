@@ -9,7 +9,7 @@ class Convenio extends Model {
      *
      * @var string
      */
-    protected $table = 'CONVENIOS';
+    protected $table = 'VW_CONVENIOS';
 
     /**
      * The database primary key

@@ -137,5 +137,5 @@ li.notClicked {
 .menu-trigger {
   background-color: #1a835a;
   color: #ffffff;
-  border: #1a835a;
+  border: 2px solid #35b584;
 }

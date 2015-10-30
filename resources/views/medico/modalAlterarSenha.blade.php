@@ -66,7 +66,8 @@
                 $('#confirmarSenha').val('');               
             });
 
-             $('#btnSalvarPerfil').click(function(e){                              
+             $('#btnSalvarPerfil').click(function(e){ 
+                $('.modal-rodape').css('border-top', '0px')                             
 
                 if(form.valid()){
                     //serializa dos dados do formulario
