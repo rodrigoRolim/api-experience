@@ -107,7 +107,7 @@
             $(".input-daterange").attr("autocomplete", "off");
 
             $('#listFilter').slimScroll({
-                height: '72vh',
+                height: '60vh',
                 railOpacity: 0.4,
                 wheelStep: 10,
                 minwidth: '100%',

@@ -247,7 +247,7 @@
             });
 
             $('.ibox').slimScroll({
-                height: '77vh',
+                height: '71vh',
                 railOpacity: 0.4,
                 wheelStep: 10,
                 minwidth: '100%',
