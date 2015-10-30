@@ -62,20 +62,20 @@
 @section('content')
 <div id="page-wrapper" class="gray-bg" style="min-height: 83.1vh;">
     <div class="row infoCliente">
-        <div class="col-md-12 areaPaciente">
-            <div class="col-md-4">
+        <div class="col-xs-12 areaPaciente">
+            <div class="col-xs-4">
                 <div class="infoAtendimento">
                     <i class="fa fa-heartbeat" data-toggle="tooltip" data-placement="bottom" title="Posto/Atendimento"> </i>
                     <span id="atendimento"></span>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-xs-4">
                 <div class="medicoSolicitante">             
                     <i class="fa fa-user-md" data-toggle="tooltip" data-placement="bottom" title="Médico Solicitante"> </i>
                     &nbsp;<span id="solicitante"></span>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-xs-4">
                 <div class="convenioPaciente">
                     <i class="fa fa-credit-card" data-toggle="tooltip" data-placement="bottom" title="Convênio"> </i>
                     <span id="convenio"></span> 
@@ -94,7 +94,7 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h2 class="modal-title">Exames DescriÃ§Ã£o</h2>
+                                <h2 class="modal-title">Exames Descriçãoo</h2>
                             </div>
                             <div class="modal-body"></div>
                             <div class="modal-footer"></div>
@@ -263,7 +263,7 @@
             }); 
 
             $('#side-menu').slimScroll({
-                height: '67.2vh',
+                height: '71.2vh',
                 railOpacity: 0.4,
                 wheelStep: 10,
                 minwidth: '100%',

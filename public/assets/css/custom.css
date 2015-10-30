@@ -220,7 +220,7 @@ ul{
 }
 
 .topoMenu{
-	height: 80px;
+	height: 60px;
 }
 
 .metismenu li{
@@ -282,7 +282,7 @@ ul{
 
 .infoAtendimento{	
 	float: left;	
-	margin-left: 25px;
+	margin-left: 20px;
 	font-size: 1.1em;
 	margin-top: 7px;
     margin-top: 0px;
@@ -361,8 +361,7 @@ div.row.infoClienteMed{
 .all{
 	float: right;
 	padding-top: 8px;	
-	margin-right: 40px;
-	padding-left: 40px;
+	margin-right: 45px;
 }
 
 .selectPosto{
@@ -491,11 +490,11 @@ div.row.infoClienteMed{
 
 .topoMenu{
 	background-color: rgba(255,255,255,0.3);
-	height: 70px;
+	height: 50px;
 	font-size: 15px;
 	color: #fff;
 	text-align: center;
-	padding-top: 22px;
+	padding-top: 15px;
 }
 
 
@@ -509,10 +508,6 @@ div.row.infoClienteMed{
 
 	.boxFiltroPosto{
 		padding-bottom: 5px;
-	}
-
-	.topoMenu{
-		height: 70px;
 	}
 
 	.btnPdf{
@@ -543,16 +538,16 @@ div.row.infoClienteMed{
 	}
 
 	.topoMenu{
-		height: 80px;
+		height: 60px;
 	}
 
 	.medicoSolicitante{
 		clear: both;
-		margin-left: 25px;
+		margin-left: 15px;
 	}
 
 	.convenioPaciente{
-		margin-left: 25px;
+		margin-left: 15px;
 	}
 
 	.infoAtendimentoMedico{	
@@ -593,8 +588,13 @@ div.row.infoClienteMed{
 	}
 
 	.topoMenu{
-		height: 90px;
+		padding-top: 30px;
 		font-size: 9px;
+		height: 80px;
+	}
+
+	#side-menu{
+		padding-top: 30px;
 	}
 
 	.infoAtendimentoMedico{	
@@ -606,11 +606,11 @@ div.row.infoClienteMed{
 
 	.medicoSolicitante{
 		clear: both;
-		margin-left: 25px;
+		margin-left: 15px;
 	}
 
 	.convenioPaciente{
-		margin-left: 25px;
+		margin-left: 20px;
 	}
 
 	.label, .labelAtendimentosClientes{
@@ -626,6 +626,13 @@ div.row.infoClienteMed{
 		margin-left: 0px;
 	}
 
+	.navbar-header.logo img{
+		height: 38px;
+		float: left;			
+		padding-left: 5px;
+		margin: 0px;
+	}
+
 }
 
 @media (max-width: 420px){
@@ -635,7 +642,7 @@ div.row.infoClienteMed{
 	}
 
 	.navbar-header.logo img{
-		height: 28px;
+		height: 18px;
 		float: left;			
 		padding-left: 5px;
 		margin: 0px;
@@ -652,22 +659,18 @@ div.row.infoClienteMed{
 		height: 60px;
 	}
 
-	.navbar-header.logo{
-		display: none;
-	}
-
 	.infoUser{		
 		text-align: center;		
 		margin-top: 5px;		
 	}
 
 	.infoAtendimento{			
-		margin-left: 21px;
+		margin-left: 0px;
 		margin-bottom: 0px;
 	}
 
 	.medicoSolicitante{
-		margin-right: 50px;
+		margin-right: 0px;
 	}
 
 	.listaExames li{
@@ -720,13 +723,15 @@ div.row.infoClienteMed{
 	}
 
 	.topoMenu{
-		height: 60px;
+		padding-top: 10px;
+		height: 50px;
 		font-size: 9px;
 	}
 
 	 .areaPaciente{
 		padding-left: 0px;
 		padding-top: 12px;
+		font-size: 9px;
 	}
   
 	div.row.infoCliente{
@@ -743,7 +748,7 @@ div.row.infoClienteMed{
 	}
 
 	#side-menu {
-		margin-top: 120px;	
+		margin-top: 30px;	
 	}
 
 	#wrapper{
