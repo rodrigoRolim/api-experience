@@ -2,6 +2,7 @@
 
 return [
     'key' => 'DHXR|e4H>Q38ZjERT"4L+7~|^P0W_j',
+    'userAgilDB' => 'lis',
     'skinPadrao'  => 'green.css', 
     'clienteNome' => 'Lab. Teste',
     'clienteLogo' => '/assets/images/logo_cedro.png',
@@ -10,6 +11,7 @@ return [
     'PDFUrlTemp'  => 'http://192.168.0.3:8083/TempPDF/',
     'clienteUF'   => 'MA',
     'clienteMsg'  => 'Fone: 98 9988 8798',
+
     'loginText'	  =>  [
     	'title' 		=> 'eXperience',
     	'subTitle' 		=> '<br><br>is provided with two main layouts <br>three skins and separate configure options.',

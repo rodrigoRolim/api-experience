@@ -308,10 +308,6 @@ ul{
 	padding-right: 0px;
 }
 
-#boxRodapePostoPac{
-	margin-right: 70px;
-}
-
 .agile-list, li.warning-element, li.success-element, li.danger-element, li.aguardando-element, li.naoRealizado-element{
 	margin-right: 10px;
 }
@@ -618,7 +614,6 @@ div.row.infoClienteMed{
 	.colunaInfoPaciente{
 		font-size: 0.8em;
 	}
-
 }
 
 @media (max-width: 420px){

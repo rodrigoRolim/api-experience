@@ -62,7 +62,7 @@ class ExamesRepository extends BaseRepository
     }
 
     public function getDetalheAtendimentoExameCorrel($posto,$atendimento,$correl){
-        $sql = "SELECT get_resultado_json(:posto,:atendimento,:correl) as resultado FROM DUAL";
+        $sql = 'SELECT '.config('system.userAgilDB').'get_resultado_json(:posto,:atendimento,:correl) as resultado FROM DUAL';
 
         $detalheExames[] = DB::select(DB::raw($sql),[
             'posto' => $posto,
