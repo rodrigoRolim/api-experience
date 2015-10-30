@@ -136,6 +136,7 @@
                         $('#listFilter').html('');
                         var dataAtendimento = [];
 
+ 
                         $.each( result.data, function( index ){
                             var atendimento = result.data[index];                           
                             $('.contadorAtd').html('<h5 class="achouAtd">Foram encontrados ' + result.data.length + ' atendimentos para as datas selecionadas   .</h5>');
@@ -144,7 +145,7 @@
                             dataAtendimento = new moment(atendimento.data_atd);                            
                             dataAtendimento = dataAtendimento.format('DD/MM/YYYY');     
                             dataNascimento = new moment(atendimento.data_nas);
-                            dataNascimento = dataNascimento.format('DD/MM/YYYY');   
+                            dataNascimento = dataNascimento.format('DD/MM/YYYY');  
 
                             switch(atendimento.situacao_exames_experience){
                                 case 'EA':

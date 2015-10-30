@@ -2,9 +2,9 @@
 
 return [
     'key' => 'DHXR|e4H>Q38ZjERT"4L+7~|^P0W_j',
-    'skinPadrao'  => 'green.css', 
+    'skinPadrao'  => 'red.css', 
     'clienteNome' => 'Lab. Teste',
-    'clienteLogo' => '/assets/images/logo_cedro.png',
+    'clienteLogo' => '/assets/images/logo.png',
     'clienteUrl'  => 'http://www.cliente.com',
     'PDFUrl'      => 'http://192.168.0.3:8084/datasnap/rest/TsmExperience/getLaudoPDF/',
     'PDFUrlTemp'  => 'http://192.168.0.3:8083/TempPDF/',
