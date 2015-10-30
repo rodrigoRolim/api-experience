@@ -4,14 +4,14 @@
         <label>Posto</label> 
          <div class="input-group">
 	        <span class="input-group-addon"><i class="fa fa-hospital-o"></i></span>
-			  <input type="text" class="form-control" name="posto" id="posto" placeholder="Posto" required="">
+			{!! Form::text('posto', Input::old('posto'), array('placeholder' => 'Posto', 'class'=>'form-control','id'=>'posto','placeholder'=>'Posto')) !!}
 	   </div>                
     </div>
     <div class="form-group">
         <label>Senha</label>
        <div class="input-group">
 	        <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-			<input type="password" name="password" class="form-control" placeholder="Senha" required="">
+            <input type="password" name="password" class="form-control" placeholder="Senha" required="">
 	   </div>            
     </div>
     <button type="submit" class="btn btn-primary block full-width m-b">Acessar</button>
@@ -20,11 +20,7 @@
 @section('script')
 <script src="{{ asset('/assets/js/plugins/vanillamasker/vanilla-masker.min.js') }}"></script>
     <script type="text/javascript">
-
-
-    VMasker(document.getElementById("posto")).maskPattern("{{config('system.postoMask')}}");    
-
-
+        VMasker(document.getElementById("posto")).maskPattern("{{config('system.postoMask')}}");    
     </script>
 
     @parent

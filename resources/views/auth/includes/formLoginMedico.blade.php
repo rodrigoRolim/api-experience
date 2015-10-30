@@ -56,7 +56,7 @@
         <label>Número do CR</label>
          <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-stethoscope"></i></span>
-                <input type="text" class="form-control" id="cr" name="cr" placeholder="CR" required="">
+            <input type="text" class="form-control" id="cr" name="cr" placeholder="CR" required="">
         </div>       
     </div>
     <div class="form-group">

@@ -32,9 +32,9 @@
                 @endif
                 <div class="tabs-container">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="#tabLoginPaciente" aria-expanded="true">Paciente</a></li>
-                        <li class=""><a data-toggle="tab" href="#tabLoginMedico" aria-expanded="false">Médico</a></li>
-                        <li class=""><a data-toggle="tab" href="#tabLoginPosto" aria-expanded="false">Posto</a></li>
+                        <li class="active"><a id="btnPaciente" data-toggle="tab" href="#tabLoginPaciente" aria-expanded="true">Paciente</a></li>
+                        <li class=""><a id="btnMedico" data-toggle="tab" href="#tabLoginMedico" aria-expanded="false">Médico</a></li>
+                        <li class=""><a id="btnPosto" data-toggle="tab" href="#tabLoginPosto" aria-expanded="false">Posto</a></li>
                     </ul>
                     <div class="tab-content">
                         <div id="tabLoginPaciente" class="tab-pane active">
@@ -62,23 +62,39 @@
 
 @section('script')
 <script type="text/javascript"> 
+    $(document).ready(function () {
+        $('li').on('click', function() {
+            $('.nav').on('shown.bs.tab', function (e) {
+                var tabAtiva = $(e.target).text();
 
-    $('li').on('click', function() {
-        $('.nav').on('shown.bs.tab', function (e) {
-            var tabAtiva = $(e.target).text();
-
-            switch(tabAtiva) {
-                case "Paciente":
-                    $('#atendimento').focus();
-                    break;
-                case "Médico":
-                    $('#cr').focus();
-                    break;
-                case "Posto":
-                    $('#posto').focus();
-                    break;
-            }        
+                switch(tabAtiva) {
+                    case "Paciente":
+                        $('#atendimento').focus();
+                        break;
+                    case "Médico":
+                        $('#cr').focus();
+                        break;
+                    case "Posto":
+                        $('#posto').focus();
+                        break;
+                }        
+            });
         });
+
+        var tipoAcesso = "{{Input::old('tipoAcesso')}}";
+        var tipoLoginPaciente = "{{Input::old('tipoLoginPaciente')}}";
+
+        switch(tipoAcesso){
+            case "PAC":
+                $('#btnPaciente').trigger('click');
+                break;
+            case "MED":
+                $('#btnMedico').trigger('click');
+                break;
+            case "POS":
+                $('#btnPosto').trigger('click');
+                break;
+        }        
     });
 </script>
 @stop

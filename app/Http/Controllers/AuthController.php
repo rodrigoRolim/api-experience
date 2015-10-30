@@ -143,7 +143,7 @@ class AuthController extends Controller
             return redirect()->intended('/auth/home');
         }
 
-        return redirect('/auth')->withErrors(config('system.messages.login.usuarioSenhaInvalidos'));
+        return redirect('/auth')->withInput()->withErrors(config('system.messages.login.usuarioSenhaInvalidos'));
     }
 
     /**
