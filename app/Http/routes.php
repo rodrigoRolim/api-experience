@@ -4,14 +4,11 @@ Route::controllers([
     'auth' => 'AuthController',
 ]);
 
-Route::get('/', function()
-{
-    return Redirect::to('auth/login');
+Route::get('/', function () {
+    return redirect('/auth');
 });
 
-// Route::get('/', function () {
-//     return redirect('/auth');
-// });
+Route::get('logout','AuthController@logout')->after('invalidate-browser-cache');
 
 Route::group(['prefix' => '/', 'middleware' => ['auth','ehPaciente']], function () {
     Route::controllers([

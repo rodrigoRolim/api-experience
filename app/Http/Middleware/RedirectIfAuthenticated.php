@@ -34,18 +34,21 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next)
     {
-        $tipoAcesso = $this->auth->user()['tipoAcesso'];
+        if ($this->auth->check())
+        {
+            $tipoAcesso = $this->auth->user()['tipoAcesso'];
 
-        if ($tipoAcesso == 'PAC'){
-            return redirect('/paciente');
-        }
+            if ($tipoAcesso == 'PAC'){
+                return redirect('/paciente');
+            }
 
-        if ($tipoAcesso == 'MED'){
-            return redirect('/medico');
-        }
+            if ($tipoAcesso == 'MED'){
+                return redirect('/medico');
+            }
 
-        if ($tipoAcesso == 'POS'){
-            return redirect('/posto');
+            if ($tipoAcesso == 'POS'){
+                return redirect('/posto');
+            }
         }
 
         return $next($request);
