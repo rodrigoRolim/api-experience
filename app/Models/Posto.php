@@ -1,15 +1,14 @@
 <?php namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Posto extends Model {
+class Posto extends BaseModel {
 
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'lis.VEX_POSTOS';
+
+    protected $table = 'VEX_POSTOS';
 
     /**
      * The database primary key
