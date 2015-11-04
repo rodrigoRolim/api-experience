@@ -1,15 +1,13 @@
 <?php namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Medico extends Model {
+class Posto extends BaseModel {
 
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'lis.VEX_MEDICOS';
+    protected $table = 'VEX_MEDICOS';
 
     /**
      * The database primary key

@@ -1,14 +1,12 @@
 <?php namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class AtendimentoAcesso extends Model {
+class Posto extends BaseModel {
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'lis.RESULTADOS_PASS';
+    protected $table = 'RESULTADOS_PASS';
 
     /**
      * The database primary key
