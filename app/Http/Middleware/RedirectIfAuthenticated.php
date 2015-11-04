@@ -5,6 +5,8 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
 
+use Redirect;
+
 class RedirectIfAuthenticated
 {
     /**
@@ -39,15 +41,18 @@ class RedirectIfAuthenticated
             $tipoAcesso = $this->auth->user()['tipoAcesso'];
 
             if ($tipoAcesso == 'PAC'){
-                return redirect('/paciente');
+                return Redirect::to('paciente');
+                // return redirect('/paciente');
             }
 
             if ($tipoAcesso == 'MED'){
-                return redirect('/medico');
+                return Redirect::to('medico');
+                // return redirect('/medico');
             }
 
             if ($tipoAcesso == 'POS'){
-                return redirect('/posto');
+                return Redirect::to('posto');
+                // return redirect('/posto');
             }
         }
 

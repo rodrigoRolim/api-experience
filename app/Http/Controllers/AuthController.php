@@ -9,6 +9,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 
+use Redirect;
+use Session;
+
 class AuthController extends Controller
 {
     /*
@@ -153,7 +156,8 @@ class AuthController extends Controller
      */
     public function getLogout()
     {
-        \Session::flush();
-        return redirect('/');
+        Session::flush();
+        Redirect::back();
+        return Redirect::to('/auth');
     }
 }

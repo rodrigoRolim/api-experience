@@ -3,6 +3,9 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta http-Equiv="Cache-Control" content="no-cache">
+	<meta http-Equiv="Pragma" content="no-cache">
+	<meta http-Equiv="Expires" content="0"> 
 	<title></title>
 
 	{!! Html::style('/assets/css/bootstrap.min.css') !!}

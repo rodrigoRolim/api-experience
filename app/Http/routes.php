@@ -8,9 +8,7 @@ Route::get('/', function () {
     return redirect('/auth');
 });
 
-Route::get('logout','AuthController@logout')->after('invalidate-browser-cache');
-
-Route::group(['prefix' => '/', 'middleware' => ['auth','ehPaciente']], function () {
+Route::group(['prefix' => '/','middleware' => ['auth','ehPaciente']], function () {
     Route::controllers([
         'paciente' => 'PacienteController',
     ]);
