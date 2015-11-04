@@ -22,11 +22,11 @@ class MedicoRepository extends BaseRepository
     public function getClientes($idMedico,$dataInicio,$dataFim,$posto=null, $convenio=null,$situacao=null)
     {
         $sql = "SELECT DISTINCT
-                  c.nome,c.data_nas,c.registro,c.sexo,c.telefone,c.telefone2,get_atendimentos_solicitante(c.registro,m.id_medico,:maskPosto,:maskAtendimento) as atendimentos
+                  c.nome,c.data_nas,c.registro,c.sexo,c.telefone,c.telefone2,".config('system.userAgilDB')."get_atendimentos_solicitante(c.registro,m.id_medico,:maskPosto,:maskAtendimento) as atendimentos
                 FROM
-                  VW_ATENDIMENTOS A
-                  INNER JOIN VW_MEDICOS M ON A.solicitante = m.crm
-                  INNER JOIN VW_CLIENTES C ON a.registro = c.registro
+                  ".config('system.userAgilDB')."VEX_ATENDIMENTOS A
+                  INNER JOIN ".config('system.userAgilDB')."VEX_MEDICOS M ON A.solicitante = m.crm
+                  INNER JOIN ".config('system.userAgilDB')."VEX_CLIENTES C ON a.registro = c.registro
                 WHERE M.ID_MEDICO = :idMedico
                     AND A.DATA_ATD >= TO_DATE(:dataInicio,'DD/MM/YYYY HH24:MI')
                     AND A.DATA_ATD <= TO_DATE(:dataFim,'DD/MM/YYYY HH24:MI')
@@ -68,10 +68,10 @@ class MedicoRepository extends BaseRepository
     }
 
     public function getAtendimentosPacienteByMedico($registro,$solicitante){
-        $sql = 'SELECT c.nome,c.data_nas,c.registro,c.sexo,c.telefone,c.telefone2,a.posto,a.atendimento,data_atd, INITCAP(a.nome_convenio) AS nome_convenio, INITCAP(a.nome_solicitante) AS nome_solicitante, (GET_MNEMONICOS(a.posto,a.atendimento)) mnemonicos,a.saldo_devedor
-                FROM vw_atendimentos a
-                  INNER JOIN VW_MEDICOS m ON a.solicitante = m.crm
-                  INNER JOIN VW_CLIENTES c ON a.registro = c.registro
+        $sql = 'SELECT c.nome,c.data_nas,c.registro,c.sexo,c.telefone,c.telefone2,a.posto,a.atendimento,data_atd, INITCAP(a.nome_convenio) AS nome_convenio, INITCAP(a.nome_solicitante) AS nome_solicitante, ('.config('system.userAgilDB').'GET_MNEMONICOS(a.posto,a.atendimento)) mnemonicos,a.saldo_devedor
+                FROM '.config('system.userAgilDB').'vex_atendimentos a
+                  INNER JOIN '.config('system.userAgilDB').'VEX_MEDICOS m ON a.solicitante = m.crm
+                  INNER JOIN '.config('system.userAgilDB').'VEX_CLIENTES c ON a.registro = c.registro
                 WHERE c.registro = :registro AND m.ID_MEDICO = :solicitante
                 ORDER BY data_atd DESC';
 
@@ -89,9 +89,9 @@ class MedicoRepository extends BaseRepository
     public function getPostoAtendimento($idMedico){
         $sql = 'SELECT p.posto, p.nome
                 FROM
-                  vw_medicos M
-                  INNER JOIN vw_atendimentos A ON M.crm = A.solicitante
-                  INNER JOIN vw_postos P ON A.posto = p.posto
+                  '.config('system.userAgilDB').'vex_medicos M
+                  INNER JOIN '.config('system.userAgilDB').'vex_atendimentos A ON M.crm = A.solicitante
+                  INNER JOIN '.config('system.userAgilDB').'vex_postos P ON A.posto = p.posto
                 WHERE
                   m.id_medico = :idMedico
                 GROUP BY p.posto,p.nome
@@ -118,9 +118,9 @@ class MedicoRepository extends BaseRepository
     {
         $sql = 'SELECT c.convenio,c.nome
                 FROM
-                  vw_medicos M
-                  INNER JOIN vw_atendimentos A ON M.crm = A.solicitante
-                  INNER JOIN vw_convenios C ON a.convenio = c.convenio
+                  '.config('system.userAgilDB').'vex_medicos M
+                  INNER JOIN '.config('system.userAgilDB').'vex_atendimentos A ON M.crm = A.solicitante
+                  INNER JOIN '.config('system.userAgilDB').'vex_convenios C ON a.convenio = c.convenio
                 WHERE
                   m.id_medico = :IdMedico
                 GROUP BY c.convenio,c.nome
@@ -140,8 +140,8 @@ class MedicoRepository extends BaseRepository
     }
 
     public function ehAtendimentoMedico($idMedico,$posto,$atendimento){
-        $sql = "SELECT * FROM vw_medicos M
-                  INNER JOIN vw_atendimentos A ON M.crm = A.solicitante
+        $sql = "SELECT * FROM ".config('system.userAgilDB')."vex_medicos M
+                  INNER JOIN ".config('system.userAgilDB')."vex_atendimentos A ON M.crm = A.solicitante
                 WHERE
                   m.id_medico = :idMedico
                   AND a.posto = :posto AND a.atendimento = :atendimento";

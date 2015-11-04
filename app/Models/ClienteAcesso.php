@@ -9,7 +9,7 @@ class ClienteAcesso extends Model {
      *
      * @var string
      */
-    protected $table = 'CLIENTES_PASS';
+    protected $table = 'lis.CLIENTES_PASS';
 
     /**
      * The database primary key

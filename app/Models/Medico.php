@@ -9,7 +9,7 @@ class Medico extends Model {
      *
      * @var string
      */
-    protected $table = 'VW_MEDICOS';
+    protected $table = 'lis.VEX_MEDICOS';
 
     /**
      * The database primary key

@@ -23,15 +23,15 @@ class AtendimentoRepository extends BaseRepository
         $data = explode("/",$data);
 
         if($user['tipoLoginPaciente'] == 'ID'){
-            $sql = 'SELECT posto,atendimento,data_atd, INITCAP(nome_convenio) AS nome_convenio, INITCAP(nome_solicitante) AS nome_solicitante, (GET_MNEMONICOS(posto,atendimento)) mnemonicos,saldo_devedor
-                    FROM '.config('system.userAgilDB').'.vex_atendimentos
+            $sql = 'SELECT posto,atendimento,data_atd, INITCAP(nome_convenio) AS nome_convenio, INITCAP(nome_solicitante) AS nome_solicitante, ('.config('system.userAgilDB').'GET_MNEMONICOS(posto,atendimento)) mnemonicos,saldo_devedor
+                    FROM '.config('system.userAgilDB').'vex_atendimentos
                     WHERE posto = :posto AND atendimento = :atendimento';
 
             $atendimento[] = current(DB::select(DB::raw($sql), ['posto' => $data[0],'atendimento' => $data[1]]));
         }
 
         if($user['tipoLoginPaciente'] == 'CPF'){
-            $sql = 'SELECT posto,atendimento,data_atd, INITCAP(nome_convenio) AS nome_convenio, INITCAP(nome_solicitante) AS nome_solicitante, (GET_MNEMONICOS(posto,atendimento)) mnemonicos,saldo_devedor
+            $sql = 'SELECT posto,atendimento,data_atd, INITCAP(nome_convenio) AS nome_convenio, INITCAP(nome_solicitante) AS nome_solicitante, ('.config('system.userAgilDB').'GET_MNEMONICOS(posto,atendimento)) mnemonicos,saldo_devedor
                     FROM '.config('system.userAgilDB').'.vex_atendimentos
                     WHERE registro = :registro
                     ORDER BY data_atd DESC';

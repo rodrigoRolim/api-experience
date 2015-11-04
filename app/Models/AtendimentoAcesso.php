@@ -8,7 +8,7 @@ class AtendimentoAcesso extends Model {
      *
      * @var string
      */
-    protected $table = 'RESULTADOS_PASS';
+    protected $table = 'lis.RESULTADOS_PASS';
 
     /**
      * The database primary key

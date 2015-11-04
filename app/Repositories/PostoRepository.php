@@ -22,11 +22,11 @@ class PostoRepository extends BaseRepository
     public function getAtendimentos($idPosto,$dataInicio,$dataFim, $convenio=null,$situacao=null,$postoRealizante=null)
     {
         $sql = "SELECT DISTINCT
-                   a.situacao_exames_experience, a.posto, a.atendimento,a.data_atd,a.nome_convenio, c.nome,c.data_nas,c.registro,c.sexo,c.telefone,c.telefone2, get_mnemonicos(a.posto, a.atendimento) as mnemonicos
+                   a.situacao_exames_experience, a.posto, a.atendimento,a.data_atd,a.nome_convenio, c.nome,c.data_nas,c.registro,c.sexo,c.telefone,c.telefone2, ".config('system.userAgilDB')."get_mnemonicos(a.posto, a.atendimento) as mnemonicos
                 FROM
-                  VW_ATENDIMENTOS A                  
-                  INNER JOIN VW_CLIENTES C ON a.registro = c.registro
-                  INNER JOIN VW_EXAMES E ON a.posto = e.posto AND a.atendimento = e.atendimento
+                  ".config('system.userAgilDB')."VEX_ATENDIMENTOS A                  
+                  INNER JOIN ".config('system.userAgilDB')."VEX_CLIENTES C ON a.registro = c.registro
+                  INNER JOIN ".config('system.userAgilDB')."VEX_EXAMES E ON a.posto = e.posto AND a.atendimento = e.atendimento
                 WHERE a.posto = :idPosto
                     AND A.DATA_ATD >= TO_DATE(:dataInicio,'DD/MM/YYYY HH24:MI')
                     AND A.DATA_ATD <= TO_DATE(:dataFim,'DD/MM/YYYY HH24:MI')                   
@@ -63,7 +63,8 @@ class PostoRepository extends BaseRepository
 
     public function getPostosRealizantes()
     {
-        $sql = 'SELECT posto,nome FROM POSTOS WHERE realiza_exames = :tipo order by nome';
+
+        $sql = 'SELECT posto,nome FROM '.config('system.userAgilDB').'VEX_POSTOS WHERE realiza_exames = :tipo order by nome';
         $data [] = DB::select(DB::raw($sql),[
             'tipo' => 'S'
         ]);
@@ -79,8 +80,8 @@ class PostoRepository extends BaseRepository
      public function getPostosRealizantesAtendimento($posto,$atendimento)
     {
         $sql = 'SELECT DISTINCT p.posto,p.nome 
-                FROM POSTOS p
-                  INNER JOIN VW_EXAMES e ON e.posto_realizante = p.posto
+                FROM '.config('system.userAgilDB').'VEX_POSTOS p
+                  INNER JOIN '.config('system.userAgilDB').'VEX_EXAMES e ON e.posto_realizante = p.posto
                 WHERE p.realiza_exames = :tipo AND e.posto = :posto AND e.atendimento = :atendimento
                 ORDER BY p.nome';
         
@@ -101,8 +102,7 @@ class PostoRepository extends BaseRepository
     {
         $sql = 'SELECT
 			     	DISTINCT convenio, nome_convenio
-			  	FROM
-			    	vw_atendimentos
+			  	FROM '.config('system.userAgilDB').'vex_atendimentos
 			  	WHERE
 			    	posto = :idPosto
 			    ORDER BY
@@ -123,9 +123,9 @@ class PostoRepository extends BaseRepository
 
     public function getAtendimentosPacienteByPosto($registro,$idPosto,$idAtendimento){
 
-        $sql = 'SELECT c.nome,c.data_nas,c.registro,c.sexo,c.telefone,c.telefone2,a.posto,a.atendimento,data_atd, INITCAP(a.nome_convenio) AS nome_convenio, INITCAP(a.nome_solicitante) AS nome_solicitante, (GET_MNEMONICOS(a.posto,a.atendimento)) mnemonicos,a.saldo_devedor
-            FROM vw_atendimentos a              
-              INNER JOIN VW_CLIENTES c ON a.registro = c.registro
+        $sql = 'SELECT c.nome,c.data_nas,c.registro,c.sexo,c.telefone,c.telefone2,a.posto,a.atendimento,data_atd, INITCAP(a.nome_convenio) AS nome_convenio, INITCAP(a.nome_solicitante) AS nome_solicitante, ('.config('system.userAgilDB').'GET_MNEMONICOS(a.posto,a.atendimento)) mnemonicos,a.saldo_devedor
+            FROM '.config('system.userAgilDB').'vex_atendimentos a              
+              INNER JOIN '.config('system.userAgilDB').'VEX_CLIENTES c ON a.registro = c.registro
             WHERE c.registro = :registro 
             AND posto = :idPosto 
             AND a.atendimento = :idAtendimento
@@ -139,10 +139,10 @@ class PostoRepository extends BaseRepository
     }
 
     public function ehAtendimentoPosto($idPosto,$atendimento){
-        $sql = "SELECT * FROM vw_atendimentos a                 
+        $sql = 'SELECT * FROM '.config('system.userAgilDB').'vex_atendimentos a                 
                 WHERE
                   posto = :idPosto
-                AND a.atendimento = :atendimento";
+                AND a.atendimento = :atendimento';
 
         $data = DB::select(DB::raw($sql),['idPosto'=>$idPosto,'atendimento'=>$atendimento]);
         return (bool) sizeof($data);

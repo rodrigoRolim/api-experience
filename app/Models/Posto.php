@@ -9,7 +9,7 @@ class Posto extends Model {
      *
      * @var string
      */
-    protected $table = 'VW_POSTOS';
+    protected $table = 'lis.VEX_POSTOS';
 
     /**
      * The database primary key
