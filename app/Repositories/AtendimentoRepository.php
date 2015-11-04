@@ -32,7 +32,7 @@ class AtendimentoRepository extends BaseRepository
 
         if($user['tipoLoginPaciente'] == 'CPF'){
             $sql = 'SELECT posto,atendimento,data_atd, INITCAP(nome_convenio) AS nome_convenio, INITCAP(nome_solicitante) AS nome_solicitante, ('.config('system.userAgilDB').'GET_MNEMONICOS(posto,atendimento)) mnemonicos,saldo_devedor
-                    FROM '.config('system.userAgilDB').'.vex_atendimentos
+                    FROM '.config('system.userAgilDB').'vex_atendimentos
                     WHERE registro = :registro
                     ORDER BY data_atd DESC';
 
@@ -49,7 +49,7 @@ class AtendimentoRepository extends BaseRepository
     }
 
     public function getSaldoDevedor($posto,$atendimento){
-        $sql = 'SELECT saldo_devedor FROM '.config('system.userAgilDB').'.vex_atendimentos WHERE posto = :posto AND atendimento = :atendimento';
+        $sql = 'SELECT saldo_devedor FROM '.config('system.userAgilDB').'vex_atendimentos WHERE posto = :posto AND atendimento = :atendimento';
 
         $atendimento = DB::select(DB::raw($sql), ['posto' => $posto,'atendimento' => $atendimento]);
         $saldo = $atendimento[0];

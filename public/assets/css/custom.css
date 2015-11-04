@@ -52,6 +52,11 @@ ul{
 	margin-left: 80px;
 }
 
+.erroDescricao{
+	margin-left: 20px;
+	padding: 0px;
+}
+
 .statusAtendimentos{
 	margin-left: 60px;
 	font-size: 0.9em;

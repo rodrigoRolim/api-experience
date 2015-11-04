@@ -94,7 +94,7 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h2 class="modal-title">Exames Descriçãoo</h2>
+                                <h2 class="modal-title">Exames Descrição</h2>
                             </div>
                             <div class="modal-body"></div>
                             <div class="modal-footer"></div>
@@ -291,8 +291,7 @@
                     $('.listaExames').html('');
                     $('#boxRodape').html('');
 
-                    $.each( result.data, function( index, exame ){     
-                        console.log(exame);                   
+                    $.each( result.data, function( index, exame ){                     
                         var sizeBox = 'col-md-6';
                         var conteudo = '';
                         var msg = '';
@@ -391,7 +390,7 @@
                             },
                             error: function(jqXHR, textStatus, errorThrown){
                                 $('.modal-body').html('');
-                                $('.modal-body').append('<div class="text-center alert alert-danger alert-dismissable animated fadeIn erro"><h2>Erro ao carregar DescriÃ§Ã£o do Exame!</h2></div>');
+                                $('.modal-body').append('<div class="text-center alert alert-danger animated fadeIn erroDescricao"><i class="fa fa-exclamation-circle fa-5x"><h2>Erro ao carregar Descrição do Exame.</h2></div>');
                             }
                         });
                     }

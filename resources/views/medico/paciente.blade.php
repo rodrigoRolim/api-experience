@@ -218,7 +218,6 @@
                     $('#solicitante').html(nomeSolicitante);
                     $('#convenio').html(nomeConvenio);
                     $('#atendimento').html("00/00"+atendimento);
-
                     $('.listaExames').html('');
                     $('#boxRodape').html('');
                     
@@ -228,7 +227,7 @@
                         var msg = '';
                         var check = '';
                         var link = '';
-                        var visualizacao = '';
+                        var visualizacao = 'OK';
 
                         if(!verificaSaldoDevedor(saldo)){
                             if(exame.class == 'success-element'){                                
@@ -253,7 +252,6 @@
                                             '<b>'+exame.mnemonico+'</b> | '+exame.nome_procedimento.trunc(31)+
                                             '<br>'+exame.msg+'<br><span class="msgExameTipoEntrega">'+msg+'</span></li></div>';
 
-                        conteudo += ((link != '') ? '</a>' : '');
                         $('.listaExames').append(conteudo);
                     });
 
@@ -324,7 +322,7 @@
                             },
                             error: function(jqXHR, textStatus, errorThrown){
                                 $('.modal-body').html('');
-                                $('.modal-body').append('<div class="text-center alert alert-danger alert-dismissable animated fadeIn erro"><h2>Erro ao carregar Descrição do Exame!</h2></div>');
+                                $('.modal-body').append('<div class="text-center alert alert-danger alert-dismissable animated fadeIn erroDescricao"><i class="fa fa-exclamation-circle fa-5x"></i><h2>Erro ao carregar Descrição do Exame!</h2></div>');
                             }
                         });
                     }
