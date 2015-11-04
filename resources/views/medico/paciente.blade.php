@@ -91,7 +91,7 @@
         </div>  
     </div>
 </div>
-@stop
+
     <!-- Modal -->
       <div class="modal fade" id="modalExames" role="dialog">
         <div class="modal-dialog">
@@ -132,7 +132,7 @@
             var nomePaciente;
             var mnemonicos;
 
-            var controle;
+
 
             $('.btnAtendimento').click(function(e){
                 posto = $(e.currentTarget).data('posto');
@@ -206,7 +206,6 @@
             }
 
             function getExames(posto,atendimento){
-                controle = false;
 
                 //Carregando
                 $('.listaExames').html('<br><br><br><br><h2 class="textoTamanho"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando registros.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>');
@@ -247,7 +246,7 @@
                         }
 
                        conteudo = link+'<div class="'+sizeBox+' boxExames "'+
-                                        'data-correl="'+exame.correl+'" data-atendimento="'+exame.atendimento+'" data-posto="'+exame.posto+'" '+visualizacao+' "><li class="'+exame.class+' animated fadeInDownBig">'+check+
+                                        'data-correl="'+exame.correl+'" data-atendimento="'+exame.atendimento+'" data-posto="'+exame.posto+'"" '+visualizacao+' "><li class="'+exame.class+' animated fadeInDownBig">'+check+
                                         '<div class="dadosExames">' +
                                             '<b>'+exame.mnemonico+'</b> | '+exame.nome_procedimento.trunc(31)+
                                             '<br>'+exame.msg+'<br><span class="msgExameTipoEntrega">'+msg+'</span></li></div>';

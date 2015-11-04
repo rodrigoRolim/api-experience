@@ -210,7 +210,8 @@
                 $('#msg').html(' ');
                 $('#senhaAtual').val('');
                 $('#novaSenha').val('');
-                $('#confirmarSenha').val('');               
+                $('#confirmarSenha').val('');       
+                $('.modal-rodape').css('border-top','solid 0px black');        
             });
 
             $('#btnSalvarPerfil').click(function(e){                

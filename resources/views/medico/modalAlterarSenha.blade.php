@@ -36,6 +36,7 @@
 
     <script type="text/javascript">
 
+        $('.modal-rodape').css('border-top', '0px');  
         var form = $('#formSenha');
                 
             form.validate({
@@ -66,8 +67,7 @@
                 $('#confirmarSenha').val('');               
             });
 
-             $('#btnSalvarPerfil').click(function(e){ 
-                $('.modal-rodape').css('border-top', '0px')                             
+             $('#btnSalvarPerfil').click(function(e){                                          
 
                 if(form.valid()){
                     //serializa dos dados do formulario
