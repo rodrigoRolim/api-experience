@@ -74,7 +74,7 @@
 
     <script type="text/javascript">
         $(document).ready(function (){
-            $("body").tooltip({ selector: '[data-toggle=tooltip]' });            
+            $("body").tooltip({ selector: '[data-toggle=tooltip]' });
 
             $(".menu-trigger").click(function() {
                 $(".boxFiltroPosto").slideToggle(768, function() {
@@ -187,7 +187,7 @@
                         $('#listFilter li').click(function(e){
                             var key = $(e.currentTarget).data('key');
                             var atendimento = $(e.currentTarget).data('atendimento');
-                            window.location.replace("/posto/paciente/"+key+"/"+atendimento);
+                            window.location.assign("/posto/paciente/"+key+"/"+atendimento);
                         });
                         
                         if(result.data.length == 0){

@@ -96,9 +96,9 @@
               </div>
         </div>
           <div class="footer">
-            <div class="row">
-                <div class="col-md-4 pull-right" id="boxRodapePostoPac">    </div>
-                <div class="col-md-4 txtRodapePostoPac">    </div>  
+            <div class="row">                
+                <div class="col-sm-4 txtRodapePostoPac">    </div>  
+                <div class="col-sm-6" id="boxRodapePostoPac">    </div>
             </div>  
         </div>
     </div>  

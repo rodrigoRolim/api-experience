@@ -49,7 +49,7 @@ ul{
 
 .txtRodapePostoPac{
 	font-size: 0.9em;
-	margin-left: 80px;
+	margin-left: 95px;
 }
 
 .erroDescricao{
@@ -618,6 +618,11 @@ div.row.infoClienteMed{
 
 	.colunaInfoPaciente{
 		font-size: 0.8em;
+	}
+
+	.txtRodapePostoPac{
+		margin-left: 20px; 
+		clear: both;
 	}
 }
 

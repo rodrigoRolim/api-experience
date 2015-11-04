@@ -11,6 +11,7 @@
     </style>
 @stop
 
+
 @section('content')
 <body class="animated fadeInDown gray-bg">
 	<div class="loginColumns animated fadeInDown">
