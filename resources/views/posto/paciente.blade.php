@@ -49,23 +49,19 @@
 
 @section('content')
 <div id="page-wrapper-posto" class="gray-bg">
-    <div class="row infoClienteMed">
-        <div class="col-md-12 colunaInfoPaciente">
-            <div class="col-xs-6">
-                <div class="infoPaciente">
-                    <strong><span id="nome" class="nomePaciente"></span></strong> <br>
-                    <div class="idadePaciente"></div>
-                </div>
-            </div>
-            <div class="col-xs-6">
-                <div class="infoAtendimentoMedico">
-                    <i class="fa fa-heartbeat" data-toggle="tooltip" data-placement="bottom" title="Posto/Atendimento"></i>
-                    <span id="atendimento"></span> <br>
-                    <i class="fa fa-credit-card" data-toggle="tooltip" data-placement="bottom" title="Convênio"></i>
-                    <span id="convenio"></span> <br>                          
-                </div>
-                <div class="pull-right areaBtnVoltar"></div>
-            </div>
+    <div class="row-fluid" style="padding-top:10px">
+        <div class="col-md-6 col-sm-6 col-xs-12" style="padding-bottom:10px;">
+            <div class="pull-left areaBtnVoltar" style="margin-right:10px;margin-top:5px;"></div><strong>
+            <span id="nome" class="nomePaciente"></span></strong><br>
+            <div class="idadePaciente"></div>
+        </div>
+        <div class="col-md-2 col-sm-2 col-xs-3">
+            <i class="fa fa-heartbeat" data-toggle="tooltip" data-placement="bottom" title="Posto/Atendimento"></i>
+            <span id="atendimento"></span>
+        </div>
+        <div class="col-md-2 col-sm-2 col-xs-3">
+            <i class="fa fa-credit-card" data-toggle="tooltip" data-placement="bottom" title="Convênio"></i>
+            <span id="convenio"></span>
         </div>
     </div>
 
@@ -75,22 +71,15 @@
                 <div class="i-checks all boxSelectAll"> </div>
             </div>        
             <ul class="sortable-list connectList agile-list ui-sortable listaExames">  </ul>
-            <!-- Modal -->
               <div class="modal fade" id="modalExames" role="dialog">
                 <div class="modal-dialog">
-                
-                  <!-- Modal content-->
                   <div class="modal-content">
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
                       <h2 class="modal-title">Exames Descrição</h2>
                     </div>
-                    <div class="modal-body">
-                  
-                    </div>
-                    <div class="modal-footer">
-                    
-                    </div>
+                    <div class="modal-body"></div>
+                    <div class="modal-footer"></div>
                   </div>                  
                 </div>
               </div>
@@ -171,7 +160,7 @@
                 touchScrollStep: 50,
             }); 
 
-            $('.areaBtnVoltar').append('<button type="button" class="btn btn-w-m btn-default btnVoltar pull-right"><i class="fa fa-arrow-circle-o-left"></i> Voltar</button>');
+            $('.areaBtnVoltar').append('<button type="button" class="btn btn-default btn-circle btn-md btnVoltar pull-left"><i class="fa fa-reply" style="font-size:18px"></i></button>');
 
             $('.btnVoltar').click(function(){
                 window.location.replace("/posto");

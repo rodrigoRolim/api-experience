@@ -48,9 +48,6 @@
         </div>
     </div>
 </body>
-
-
-
 @section('script')
     <script src="{{ asset('/assets/js/jquery-2.1.1.js') }}"></script>
     <script src="{{ asset('/assets/js/bootstrap.min.js') }}"></script>

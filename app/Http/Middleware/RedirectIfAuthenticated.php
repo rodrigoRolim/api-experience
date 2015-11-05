@@ -41,17 +41,17 @@ class RedirectIfAuthenticated
             $tipoAcesso = $this->auth->user()['tipoAcesso'];
 
             if ($tipoAcesso == 'PAC'){
-                return Redirect::to('paciente');
+                return Redirect::to('/paciente');
                 // return redirect('/paciente');
             }
 
             if ($tipoAcesso == 'MED'){
-                return Redirect::to('medico');
+                return Redirect::to('/medico');
                 // return redirect('/medico');
             }
 
             if ($tipoAcesso == 'POS'){
-                return Redirect::to('posto');
+                return Redirect::to('/posto');
                 // return redirect('/posto');
             }
         }
