@@ -51,7 +51,7 @@
 <div id="page-wrapper-posto" class="gray-bg">
     <div class="row-fluid">
         <div class="col-md-6 col-sm-6 col-xs-12">
-            <button type="button" class="btn btn-default btn-circle btn-md btnVoltar pull-left">
+            <button type="button" class="btn btn-default btn-circle btn-md btnVoltar pull-left" style="margin-right:10px;margin-top:5px">
                 <i class="fa fa-reply" style="font-size:18px"></i>
             </button>
             <strong><span id="nome" class="nomePaciente"></span></strong><br>
