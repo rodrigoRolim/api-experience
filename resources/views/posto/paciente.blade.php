@@ -49,9 +49,11 @@
 
 @section('content')
 <div id="page-wrapper-posto" class="gray-bg">
-    <div class="row-fluid" style="padding-top:10px">
-        <div class="col-md-6 col-sm-6 col-xs-12" style="padding-bottom:10px;">
-            <div class="pull-left areaBtnVoltar"></div>
+    <div class="row-fluid">
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <button type="button" class="btn btn-default btn-circle btn-md btnVoltar pull-left">
+                <i class="fa fa-reply" style="font-size:18px"></i>
+            </button>
             <strong><span id="nome" class="nomePaciente"></span></strong><br>
             <div class="idadePaciente"></div>
         </div>
@@ -160,8 +162,6 @@
                 touchScrollStep: 50,
             }); 
 
-            $('.areaBtnVoltar').append('<button type="button" class="btn btn-default btn-circle btn-md btnVoltar pull-left"><i class="fa fa-reply" style="font-size:18px"></i></button>');
-
             $('.btnVoltar').click(function(){
                 window.location.replace("/posto");
             });
@@ -172,7 +172,6 @@
                 }
                 return true;
             }
-
 
             $('.selectPosto').change(function(e) {
                alert( $('.search-choice').text() );
