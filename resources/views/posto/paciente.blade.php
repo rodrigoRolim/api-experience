@@ -51,8 +51,8 @@
 <div id="page-wrapper-posto" class="gray-bg">
     <div class="row-fluid" style="padding-top:10px">
         <div class="col-md-6 col-sm-6 col-xs-12" style="padding-bottom:10px;">
-            <div class="pull-left areaBtnVoltar" style="margin-right:10px;margin-top:5px;"></div><strong>
-            <span id="nome" class="nomePaciente"></span></strong><br>
+            <div class="pull-left areaBtnVoltar"></div>
+            <strong><span id="nome" class="nomePaciente"></span></strong><br>
             <div class="idadePaciente"></div>
         </div>
         <div class="col-md-2 col-sm-2 col-xs-3">
