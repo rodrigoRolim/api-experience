@@ -248,7 +248,7 @@
             });
 
             $('.ibox').slimScroll({
-                height: '70vh',
+                height: '69vh',              
                 railOpacity: 0.4,
                 wheelStep: 10,
                 minwidth: '100%',
@@ -318,10 +318,11 @@
                         }
 
                          conteudo = link+'<div class="'+sizeBox+' boxExames "'+
-                                        'data-correl="'+exame.correl+'" data-atendimento="'+exame.atendimento+'" data-posto="'+exame.posto+'"" '+visualizacao+' "><li class="'+exame.class+' animated fadeInDownBig">'+check+
-                                        '<div class="dadosExames">' +
+                                        'data-correl="'+exame.correl+'" data-atendimento="'+exame.atendimento+'" data-posto="'+exame.posto+'"" '+visualizacao+' "><li class="'+exame.class+' animated fadeInDownBig">'+check+                                        
+                                        '<div class="dadosExames">' +                                        
                                             '<b>'+exame.mnemonico+'</b> | '+exame.nome_procedimento.trunc(31)+
-                                            '<br>'+exame.msg+'<br><span class="msgExameTipoEntrega">'+msg+'</span></li></div>';
+                                            '<br>'+exame.msg+'<br><span class="msgExameTipoEntrega">'+msg+'</span>'+
+                                            '<div class="postoRealizante"><i class="fa fa-hospital-o data-toggle="tooltip" data-placement="top" title="Posto Realizante""></i> '+exame.nome_posto_realizante+'</div>'+'</li></div>';
 
                         $('.listaExames').append(conteudo);
                     });

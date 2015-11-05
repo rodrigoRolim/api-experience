@@ -57,11 +57,11 @@
             <strong><span id="nome" class="nomePaciente"></span></strong><br>
             <div class="idadePaciente"></div>
         </div>
-        <div class="col-md-2 col-sm-2 col-xs-3">
+        <div class="col-md-2 col-sm-2 col-xs-5" style="padding-left:55px;">
             <i class="fa fa-heartbeat" data-toggle="tooltip" data-placement="bottom" title="Posto/Atendimento"></i>
             <span id="atendimento"></span>
         </div>
-        <div class="col-md-2 col-sm-2 col-xs-3">
+        <div class="col-md-2 col-sm-2 col-xs-6"  style="padding-left:55px;">
             <i class="fa fa-credit-card" data-toggle="tooltip" data-placement="bottom" title="Convênio"></i>
             <span id="convenio"></span>
         </div>

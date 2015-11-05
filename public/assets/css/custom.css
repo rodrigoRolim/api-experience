@@ -683,20 +683,6 @@ div.row.infoClienteMed{
 		margin-top: 8px;
 	}
 
-	.btnVoltar{ /* View paciente/Medico */
-		padding: 2px;
-		margin: 2px;
-		margin-left: 80px;
-		margin-right: 0px;
-		min-width: 0px;
-		margin-right: 0px;
-		margin-top: 10px;
-	}
-
-	.areaBtnVoltar{
-		padding-left: 10px;
-	}
-
 	div.row.infoClientePaciente{
 		height: 60px;
 	}
