@@ -1,1 +1,1 @@
-layoutAlterarSenha.blade.php
+modalAlterarSenha.blade.php
