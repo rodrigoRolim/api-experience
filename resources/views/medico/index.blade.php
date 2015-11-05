@@ -165,7 +165,7 @@
 
                         $('#listFilter li').click(function(e){
                             var key = $(e.currentTarget).data('key');
-                            window.location.replace("/medico/paciente/"+key);
+                            window.open("/medico/paciente/"+key);
                         });
                         
                         if(result.data.length == 0){
