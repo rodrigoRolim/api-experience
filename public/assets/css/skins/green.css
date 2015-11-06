@@ -104,7 +104,7 @@ body.mini-navbar .nav-header {
   border: 1px solid #dadada !important;
 }
 #listFilter li:hover {
-  background-color: #f1dcdd !important;
+  background-color: #daeddd !important;
   cursor: pointer;
 }
 #listFilter li {

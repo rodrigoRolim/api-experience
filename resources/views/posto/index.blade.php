@@ -63,7 +63,6 @@
     </div>
 @stop
 
-
 @section('script')
     @parent
     <script src="{{ asset('/assets/js/plugins/moments/moments.js') }}"></script>
@@ -167,25 +166,24 @@
 
                             var item = '<li class="col-sm-12 boxatendimento '+atendimento.situacao_exames_experience+'"data-key="'+atendimento.key+'" data-atendimento="'+atendimento.atendimento+'">'+
                                             '<div class="row">'+
-                                                '<div class="col-md-8 col-sm-6 col-xs-12">'+
-                                                    '<strong>'+atendimento.nome+'</strong>'+
-                                                    '<div class="row">'+
-                                                        '<div class="col-md-4 col-sm-4 col-xs-4">'+
-                                                            '<i class="fa fa-heartbeat" data-toggle="tooltip" data-placement="right" title="Posto/Atendimento"></i><strong> '+atendimento.posto+'/'+atendimento.atendimento+'</span></strong>'+
-                                                        '</div>'+
-                                                        '<div class="col-md-4 col-sm-4 col-xs-4">'+
-                                                            '<i class="fa fa-calendar-check-o" data-toggle="tooltip" title="Data do Atendimento"></i> '+dataAtendimento+'</span>'+
-                                                        '</div>'+
-                                                        '<div class="col-md-4 col-sm-4 col-xs-4">'+
-                                                            '<i class="fa fa-credit-card" data-toggle="tooltip" title="Convênio"></i> '+atendimento.nome_convenio+'</span>'+  
-                                                        '</div>'+
-                                                    '</div>'+
-                                                '</div>'+
                                                 '<div class="col-md-4 col-sm-6 col-xs-12">'+
-                                                    '<i class="fa fa-flask" data-toggle="tooltip" title="Mnemônicos"></i> '+atendimento.mnemonicos+'</div></div></li>'+
+                                                    '<strong>'+atendimento.nome+'</strong>'+'<br>'+'<i class="'+((atendimento.sexo == "M")?"fa fa-mars":"fa fa-venus")+'"></i> '+atendimento.idade+
+                                                '</div>'+
+                                                '<div class="col-md-2 col-sm-6 col-xs-6">'+
+                                                    '<i class="fa fa-heartbeat" data-toggle="tooltip" data-placement="right" title="Posto/Atendimento"></i><strong> '+atendimento.posto+'/'+atendimento.atendimento+'</strong>'+                                                    
+                                                '</div>'+
+                                                '<div class="col-md-2 col-sm-6 col-xs-6">'+
+                                                    '<i class="fa fa-calendar-check-o" data-toggle="tooltip" title="Data do Atendimento"></i> '+dataAtendimento+
+                                                '</div>'+
+                                                '<div class="col-md-2 col-sm-6 col-xs-6">'+
+                                                    '<i class="fa fa-credit-card" data-toggle="tooltip" title="Convênio"></i> '+atendimento.nome_convenio+
+                                                '</div>'+
+                                                '<div class="col-md-2 col-sm-6 col-xs-6">'+
+                                                    '<i class="fa fa-flask" data-toggle="tooltip" title="Mnemônicos"></i> '+atendimento.mnemonicos+
                                                 '</div>'+
                                             '</div>'+
                                        '</li>';
+
 
                             $('#listFilter').append(item);
                         });

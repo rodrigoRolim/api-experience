@@ -57,6 +57,9 @@
     <div class="row col-md-12 colunaInfoPaciente">
         <div class="col-md-5">
             <div class="infoPaciente">
+                <button type="button" class="btn btn-default btn-circle btn-md btnVoltar pull-left">
+                    <i class="fa fa-reply" style="font-size:18px"></i>
+                 </button>
                 <strong><span id="nome" class="nomePaciente"></span></strong> <br>
                 <div class="idadePaciente"></div>
             </div>
@@ -166,7 +169,7 @@
 
            
             $('.ibox').slimScroll({
-                height: '70vh',
+                height: '67vh',
                 railOpacity: 0.4,
                 wheelStep: 10,
                 minwidth: '100%',
@@ -190,8 +193,6 @@
             }); 
 
             $('.active a').trigger('click');
-
-            $('.areaBtnVoltar').append('<button type="button" class="btn btn-w-m btn-default btnVoltar pull-right"><i class="fa fa-arrow-circle-o-left"></i> Voltar</button>');
 
             $('.btnVoltar').click(function(){
                 window.location.replace("/medico");
@@ -249,8 +250,8 @@
                                         'data-correl="'+exame.correl+'" data-atendimento="'+exame.atendimento+'" data-posto="'+exame.posto+'"" '+visualizacao+' "><li class="'+exame.class+' animated fadeInDownBig">'+check+
                                         '<div class="dadosExames">' +
                                             '<b>'+exame.mnemonico+'</b> | '+exame.nome_procedimento.trunc(31)+
-                                            '<br>'+exame.msg+'<br><span class="msgExameTipoEntrega">'+msg+'</span></li></div>';
-
+                                            '<br>'+exame.msg+'<br><span class="msgExameTipoEntrega">'+msg+'</span>'+
+                                            '<div class="postoRealizante"><i class="fa fa-hospital-o data-toggle="tooltip" data-placement="top" title="Posto Realizante""></i> '+exame.nome_posto_realizante+'</div></li></div>';
                         $('.listaExames').append(conteudo);
                     });
 

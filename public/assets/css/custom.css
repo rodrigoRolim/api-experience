@@ -129,8 +129,6 @@ ul{
 .modal-rodape .btn-block + .btn-block {
   margin-left: 0;
 }
-
-
 /* ========= header ======== */
 
 .headLogin{
@@ -270,12 +268,11 @@ ul{
 	padding-bottom: 10px;
 }
 
-
 /* ========= index.blade.php/paciente.blade.php - Paciente/Medico ==========*/
 
 .page-heading{
 	padding-top: 10px;
-	padding-bottom: 40px;
+	padding-bottom: 60px;
 	margin-top: -10px;
 	margin-left: 0px;
 	padding-left: 0px;
@@ -304,6 +301,11 @@ ul{
 	font-size: 1.3em;
 }
 
+.postoRealizante{		
+	padding-top: 5px;		
+	font-size: 0.7em;		
+}
+
 #boxRodape h3{
 	margin: 0px;
 	font-size: 1em;	
@@ -320,10 +322,6 @@ ul{
 li.success-elementNoHov{
 	border-left: 3px solid #1ab394;
 	margin-right: 10px;
-}
-
-li.success-elementNoHov:hover{
-	
 }
 
 .mnemonicos{
@@ -376,7 +374,7 @@ div.row.infoClienteMed{
 }
 
 .listaExames li{
-	min-height: 80px;
+	min-height: 85px;
 }
 
 
@@ -398,16 +396,6 @@ div.row.infoClienteMed{
 
 .listaPacientes{
 	padding-bottom: 55px;
-}
-
-.areaBtnVoltar{
-	/*padding-right: 20px;*/
-}
-
-.btnVoltar{ /* View paciente/Medico */
-	/*min-width: 0px;
-	margin-left: 20px;
-	margin-top: 10px;*/
 }
 
 .colunaInfoPaciente{
@@ -478,9 +466,14 @@ div.row.infoClienteMed{
 }
 
 .areaPaciente{
-	padding-left: 0px;
 	padding-top: 12px;
-	font-size: 1.2em;
+	font-size: 1em;
+	margin-bottom: 15px;
+}
+
+.areaPacientePos{
+	padding-top: 1px;
+	font-size: 1em;
 	margin-bottom: 15px;
 }
 
@@ -493,7 +486,18 @@ div.row.infoClienteMed{
 	padding-top: 15px;
 }
 
+.postoAtdPos{
+	margin-left: 40px;
+}
 
+.postoAtdPos{
+	margin-left: 40px;
+}
+
+.btnVoltar{
+	margin-right:10px;
+	margin-top:5px;
+}
 
 @media (max-width: 1280px){
 
@@ -566,6 +570,14 @@ div.row.infoClienteMed{
 
 @media (max-width: 800px){
 
+	.page-heading{
+		padding-bottom: 170px;
+	}
+
+	.ibox-content{
+		padding-bottom: 140px;
+	}
+
 	.topoMenu{
 		padding-top: 30px;
 		font-size: 9px;
@@ -620,6 +632,11 @@ div.row.infoClienteMed{
 		font-size: 0.8em;
 	}
 
+	.areaPaciente{
+		padding: 5px;
+		font-size: 0.9em;
+	}
+
 	.txtRodapePostoPac{
 		margin-left: 20px; 
 		clear: both;
@@ -630,6 +647,10 @@ div.row.infoClienteMed{
 
 	.menu-trigger{
 		display: block;
+	}
+
+	.page-heading{
+		padding-bottom: 70px;
 	}
 
 	.navbar-header.logo img{
@@ -713,6 +734,7 @@ div.row.infoClienteMed{
 		padding-left: 0px;
 		padding-top: 12px;
 		font-size: 9px;
+		margin-bottom: 5px;
 	}
   
 	div.row.infoCliente{

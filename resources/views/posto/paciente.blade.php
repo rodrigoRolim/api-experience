@@ -49,7 +49,7 @@
 
 @section('content')
 <div id="page-wrapper-posto" class="gray-bg">
-    <div class="row-fluid">
+    <div class="row-fluid areaPacientePos">
         <div class="col-md-6 col-sm-6 col-xs-12">
             <button type="button" class="btn btn-default btn-circle btn-md btnVoltar pull-left" style="margin-right:10px;margin-top:5px">
                 <i class="fa fa-reply" style="font-size:18px"></i>
@@ -57,11 +57,11 @@
             <strong><span id="nome" class="nomePaciente"></span></strong><br>
             <div class="idadePaciente"></div>
         </div>
-        <div class="col-md-2 col-sm-2 col-xs-5" style="padding-left:55px;">
+        <div class="col-md-2 col-sm-2 col-xs-5 postoAtdPos">
             <i class="fa fa-heartbeat" data-toggle="tooltip" data-placement="bottom" title="Posto/Atendimento"></i>
             <span id="atendimento"></span>
         </div>
-        <div class="col-md-2 col-sm-2 col-xs-6"  style="padding-left:55px;">
+        <div class="col-md-2 col-sm-2 col-xs-6 convAtdPos">
             <i class="fa fa-credit-card" data-toggle="tooltip" data-placement="bottom" title="Convênio"></i>
             <span id="convenio"></span>
         </div>
@@ -220,10 +220,10 @@
                         
                         conteudo = link+'<div class="'+sizeBox+' boxExames "'+
                                         'data-correl="'+exame.correl+'" data-atendimento="'+exame.atendimento+'" data-posto="'+exame.posto+' "'+visualizacao+'""><li class="'+exame.class+' animated fadeInDownBig">'+check+
-                                        '<div style="display:none">'+exame.nome_posto_realizante+'</div>'+
                                         '<div class="dadosExames">' +
                                             '<b>'+exame.mnemonico+'</b> | '+exame.nome_procedimento.trunc(31)+
-                                            '<br>'+exame.msg+'<br><span class="msgExameTipoEntrega">'+msg+'</span></li></div>';
+                                            '<br>'+exame.msg+'<br><span class="msgExameTipoEntrega">'+msg+'</span>'+
+                                            '<div class="postoRealizante"><i class="fa fa-hospital-o data-toggle="tooltip" data-placement="top" title="Posto Realizante""></i> '+exame.nome_posto_realizante+'</div></li></div>';
 
                         conteudo += ((link != '') ? '</a>' : '');
                         $('.listaExames').append(conteudo);
