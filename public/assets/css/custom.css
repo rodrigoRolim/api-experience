@@ -274,6 +274,10 @@ ul{
 	height: 54vh;
 }
 
+.ibox{
+	height: 54vh;
+}
+
 .page-heading{
 	padding-top: 10px;
 	padding-bottom: 60px;
@@ -511,11 +515,9 @@ div.row.infoClienteMed{
 		padding-bottom: 5px;
 	}
 
-	
 	.ibox-content{
 		padding-bottom: 50px;
 	}
-
 
 	.btnPdf{
 		margin-right: 20px;
@@ -589,7 +591,11 @@ div.row.infoClienteMed{
 @media (max-width: 800px){
 
 	#listFilter{
-		height: 74vh;
+		height: 69vh;
+	}
+
+	.ibox{
+		height: 72.5vh;
 	}
 
 	.ibox-content{

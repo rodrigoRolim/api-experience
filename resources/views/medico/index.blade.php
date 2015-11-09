@@ -115,7 +115,7 @@
             VMasker($("#dataFim")).maskPattern('99/99/9999');
 
             $('#listFilter').slimScroll({
-                height: '61vh',
+                height: 'auto',
                 railOpacity: 0.4,
                 wheelStep: 10,
                 minwidth: '100%',
