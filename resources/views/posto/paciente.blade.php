@@ -369,7 +369,7 @@
                                         paginaPdf.location = data;   
                                     }else{
                                         paginaPdf.close();
-                                        swal("Erro ao exportar resultados para PDF", "Tente novamente mais tarde.!", "error");
+                                        swal("Erro ao exportar resultados para PDF", "Tente novamente mais tarde!", "error");
                                     }             
                                }
 
