@@ -591,11 +591,11 @@ div.row.infoClienteMed{
 @media (max-width: 800px){
 
 	#listFilter{
-		height: 68vh;
+		height: 66vh;
 	}
 
 	.ibox{
-		height: 74vh;
+		height: 71vh;
 	}
 
 	.ibox-content{
