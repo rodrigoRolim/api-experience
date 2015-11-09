@@ -475,6 +475,7 @@ div.row.infoClienteMed{
 	padding-top: 1px;
 	font-size: 1em;
 	margin-bottom: 15px;
+	min-height: 45px;
 }
 
 .topoMenu{
@@ -488,10 +489,11 @@ div.row.infoClienteMed{
 
 .postoAtdPos{
 	margin-left: 40px;
+	padding-top: 10px;
 }
 
-.postoAtdPos{
-	margin-left: 40px;
+.convAtdPos{
+	padding-top: 10px;
 }
 
 .btnVoltar{

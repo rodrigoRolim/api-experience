@@ -70,10 +70,13 @@
     <script src="{{ asset('/assets/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
     <script src="{{ asset('/assets/js/plugins/listJs/list.min.js') }}"></script>
     <script src="{{ asset('/assets/js/plugins/vanillamasker/vanilla-masker.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/plugins/js-cookie/js.cookie.js') }}"></script>
 
     <script type="text/javascript">
         $(document).ready(function (){
             $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+
+            console.log(Cookies.get());
 
             $(".menu-trigger").click(function() {
                 $(".boxFiltroPosto").slideToggle(768, function() {
@@ -97,8 +100,16 @@
             dataInicio = dataInicio.format('DD/MM/YYYY');
             dataFim = dataFim.format('DD/MM/YYYY');
 
-            $('#dataInicio').val(dataInicio);
-            $('#dataFim').val(dataFim);
+            if(Cookies.get('dataInicio') != null){ // Se o filtro foi utilizado durante a sessao, filtro sera automaticamente preenchido. Se não, rececebe valores padrões.
+                $('#dataInicio').val(Cookies.get('dataInicio'));  
+                $('#dataFim').val(Cookies.get('dataFim'));
+                $('#convenio').val(Cookies.get('convenio'));     
+                $('#situacao').val(Cookies.get('situacao'));     
+                $('#postoRealizante').val(Cookies.get('postoRealizante'));     
+            }else{
+                $('#dataInicio').val(dataInicio);
+                $('#dataFim').val(dataFim);
+            }            
 
             VMasker($("#dataInicio")).maskPattern('99/99/9999');
             VMasker($("#dataFim")).maskPattern('99/99/9999');
@@ -117,8 +128,14 @@
             $('#filtroPaciente').filterList();
 
             $('#btnFiltrar').click(function(e){
+                Cookies.set('dataInicio', $('#dataInicio').val());
+                Cookies.set('dataFim', $('#dataFim').val());
+                Cookies.set('convenio', $('#convenio').val());
+                Cookies.set('situacao', $('#situacao').val());
+                Cookies.set('postoRealizante', $('#postoRealizante').val());
+
                 var formPosto = $('#formPosto');
-                var postData = formPosto.serializeArray();              
+                var postData = formPosto.serializeArray();   
 
                 getClientes(postData);
             });
@@ -191,7 +208,7 @@
                         $('#listFilter li').click(function(e){
                             var key = $(e.currentTarget).data('key');
                             var atendimento = $(e.currentTarget).data('atendimento');
-                            window.open("/posto/paciente/"+key+"/"+atendimento);
+                            window.location.replace("/posto/paciente/"+key+"/"+atendimento);
                         });
                         
                         if(result.data.length == 0){

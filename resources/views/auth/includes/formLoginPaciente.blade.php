@@ -22,7 +22,7 @@
 	        <label class="labelCpf">CPF</label>
 	        <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
-            	{!! Form::text('cpf', Input::old('cpf'), array('placeholder' => 'Cpf', 'class'=>'form-control','id'=>'cpf', 'required' => '')) !!}
+            	{!! Form::text('cpf', Input::old('cpf'), array('placeholder' => 'CPF', 'class'=>'form-control','id'=>'cpf', 'required' => '')) !!}
           	</div>
 		  	@if ($errors->has('cpf')) <p class="help-block">{{ $errors->first('cpf') }}</p> @endif
 	    </div>

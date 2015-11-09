@@ -156,6 +156,18 @@ class AuthController extends Controller
      */
     public function getLogout()
     {
+        unset($_COOKIE['dataInicio']);
+        unset($_COOKIE['dataFim']);
+        unset($_COOKIE['convenio']);
+        unset($_COOKIE['situacao']);
+        unset($_COOKIE['postoRealizante']);
+
+        setcookie('dataInicio', '', time() - 3600, '/'); // empty value and old timestamp
+        setcookie('dataFim', '', time() - 3600, '/'); // empty value and old timestamp
+        setcookie('convenio', '', time() - 3600, '/'); // empty value and old timestamp
+        setcookie('situacao', '', time() - 3600, '/'); // empty value and old timestamp
+        setcookie('postoRealizante', '', time() - 3600, '/'); // empty value and old timestamp
+
         Session::flush();
         Redirect::back();
         return Redirect::to('/auth');
