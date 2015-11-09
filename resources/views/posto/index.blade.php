@@ -50,15 +50,12 @@
 
     <div class="wrapper wrapper-content">
         <div class="ibox-content">
-            <div class="row">
-                <div class="input-group m-b">
-                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                    <input type="text" id="filtroPaciente" placeholder="Localizar Paciente" class="form-control">
-                </div>
-                <div class="contadorAtd">                    
-                </div>
-                <ul class="sortable-list connectList agile-list ui-sortable" id="listFilter"></ul>                
+            <div class="input-group m-b">
+                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                <input type="text" id="filtroPaciente" placeholder="Localizar Paciente" class="form-control">
             </div>
+            <div class="contadorAtd"></div>
+            <ul class="sortable-list connectList agile-list ui-sortable" id="listFilter"></ul>  
         </div>
     </div>
 @stop
@@ -117,7 +114,7 @@
             $(".input-daterange").attr("autocomplete", "off");
 
             $('#listFilter').slimScroll({
-                height: '60vh',
+                height: 'auto',
                 railOpacity: 0.4,
                 wheelStep: 10,
                 minwidth: '100%',

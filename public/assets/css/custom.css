@@ -270,6 +270,10 @@ ul{
 
 /* ========= index.blade.php/paciente.blade.php - Paciente/Medico ==========*/
 
+#listFilter{
+	height: 54vh;
+}
+
 .page-heading{
 	padding-top: 10px;
 	padding-bottom: 60px;
@@ -507,6 +511,12 @@ div.row.infoClienteMed{
 		padding-bottom: 5px;
 	}
 
+	
+	.ibox-content{
+		padding-bottom: 50px;
+	}
+
+
 	.btnPdf{
 		margin-right: 20px;
 	}
@@ -532,6 +542,12 @@ div.row.infoClienteMed{
 		padding-top: 40px;
 		height: 102px;
 	}
+
+
+	.ibox-content{
+		padding-bottom: 50px;
+	}
+
 
 	.medicoSolicitante{
 		clear: both;
@@ -572,8 +588,12 @@ div.row.infoClienteMed{
 
 @media (max-width: 800px){
 
-	.page-heading{
-		padding-bottom: 170px;
+	#listFilter{
+		height: 74vh;
+	}
+
+	.ibox-content{
+		padding-bottom: 50px;
 	}
 
 	.topoMenu{
