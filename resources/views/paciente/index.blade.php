@@ -138,8 +138,8 @@
     </div>
     <div class="footer">
         <div class="row">
-            <div class="col-md-4 pull-right" id="boxRodape"></div>
             <div class="col-md-8 txtRodape"></div>  
+            <div class="col-md-3 " id="boxRodape"></div>
         </div>  
     </div>
 </div>
