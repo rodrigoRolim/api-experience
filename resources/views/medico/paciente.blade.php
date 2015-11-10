@@ -395,7 +395,7 @@
                                     if(data != 'false'){
                                         paginaPdf.location = data; 
                                         if (screen.width <= 800) {
-                                             paginaPdf.close();
+                                             setTimeout(function () {paginaPdf.close();}, 10000);
                                         }  
                                     }else{
                                         paginaPdf.close();
