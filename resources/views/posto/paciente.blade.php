@@ -366,10 +366,7 @@
                              data: {"dados" : dadosExame},
                              success: function(data){   
                                     if(data != 'false'){
-                                        paginaPdf.location = data;   
-                                        if (screen.width <= 800) {
-                                             setTimeout(function () {paginaPdf.close();}, 10000);
-                                        }  
+                                        paginaPdf.location = data;     
                                     }else{
                                         paginaPdf.close();
                                         swal("Erro ao exportar resultados para PDF", "Tente novamente mais tarde!", "error");
