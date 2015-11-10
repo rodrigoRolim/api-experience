@@ -88,9 +88,9 @@
         </div>
     </div>
     <div class="footer">
-        <div class="row col-md-12">
-            <div class="col-md-4 pull-right" id="boxRodape">    </div>
-            <div class="col-md-8 txtRodape">    </div>  
+        <div class="row">
+            <div class="col-md-4 pull-right" id="boxRodape"></div>
+            <div class="col-md-8 txtRodape"></div>  
         </div>  
     </div>
 </div>
