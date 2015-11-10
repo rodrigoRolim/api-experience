@@ -157,11 +157,11 @@
                             $('.contadorAtd').html('<h5 class="achouAtd">Foram encontrados ' + result.data.length + ' atendimentos para as datas selecionadas   .</h5>');
 
                             var item =   '<li class="col-md-12 col-sm-12 col-xs-12 naoRealizado-element" data-key="'+cliente.key+'">'+
-                                            '<div class="col-md-4 col-sm-4 col-xs-12 dadosPaciente text-left">'+
+                                            '<div class="col-md-4 col-sm-6 col-xs-12 dadosPaciente text-left">'+
                                                 '<strong>'+cliente.nome+'</strong><br><i class="'+((cliente.sexo == "M")?"fa fa-mars":"fa fa-venus")+'"></i> &nbsp;'+cliente.idade+
                                             '</div>'+
-                                            '<div class="col-md-2 col-sm-3 col-xs-12 text-left"><span class="ajusteFonte"><i class="fa fa-phone"></i> '+cliente.telefone+' </span></div>'+
-                                            '<div class="col-md-6 col-sm-6 col-xs-12"><span class="ajusteFonte">Últ. Atendimentos: </span>';
+                                            '<div class="col-md-2 col-sm-6 col-xs-12 hidden-xs text-left"><span class="ajusteFonte"><i class="fa fa-phone"></i> '+cliente.telefone+' </span></div>'+
+                                            '<div class="col-md-6 col-sm-4 col-xs-12 hidden-xs"><span class="ajusteFonte">Últ. Atendimentos: </span>';
                             var count = 0;
                             
                             $.each( cliente.atendimentos, function( index ){
@@ -174,7 +174,7 @@
                                 }
                             });
 
-                            item += '</div></li>';
+                            item += '</div></div></li>';
 
                             $('#listFilter').append(item);
                            
