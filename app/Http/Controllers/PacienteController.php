@@ -1,4 +1,13 @@
-<?php namespace App\Http\Controllers;
+<?php
+
+/**
+ * Classe de Controle do Paciente
+ *
+ * @author Bruno Araújo <brunoluan@gmail.com> e Vitor Queiroz <vitorvqz@gmail.com>
+ * @version 1.0
+ */
+
+namespace App\Http\Controllers;
 
 use Illuminate\Contracts\Auth\Guard;
 
@@ -19,6 +28,15 @@ class PacienteController extends Controller {
     protected $dataSnap;
     protected $clienteAcesso;
 
+    /**
+     * Referencio os Repositorios/Controller a serem utilizados
+     *
+     * @param Guard $auth
+     * @param AtendimentoRepository $atendimento
+     * @param ExamesRepository $exames
+     * @param DataSnapService $dataSnap
+     * @param ClienteAcessoRepository $clienteAcesso
+     */
     public function __construct(Guard $auth, AtendimentoRepository $atendimento, ExamesRepository $exames, DataSnapService $dataSnap, ClienteAcessoRepository $clienteAcesso)
     {
         $this->auth = $auth;
@@ -28,21 +46,32 @@ class PacienteController extends Controller {
         $this->dataSnap = $dataSnap;
     }
 
+    /**
+     * @return \Illuminate\View\View
+     */
     public function getIndex()
     {
+        //Pego da sessao o tipo de acesso do paciente
         $tipoLoginPaciente = $this->auth->user()['tipoLoginPaciente'];
+        //Envio os dados de autenticação do usuario para carregar todos os atendimentos
         $atendimentos = $this->atendimento->atendimentos($this->auth->user());
-
         return view('paciente.index',compact('atendimentos','tipoLoginPaciente'));
     }
 
+    /**
+     * Reponsavel por listar toda os exames disponivel no atendimento
+     * @param $posto
+     * @param $atendimento
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getExamesatendimento($posto,$atendimento){
+        //Verifico se o atendmiento enviado é do paciente, enviado os dados de acesso, posto e atendmiento
         $ehCliente = $this->atendimento->ehCliente($this->auth,$posto,$atendimento);
 
         if(!$ehCliente){
             \App::abort(404);
         }
-
+        //Envio para a variavel todo os exames do atendimento
         $exames = $this->exames->getExames($posto, $atendimento);
 
         return response()->json(array(
@@ -51,8 +80,15 @@ class PacienteController extends Controller {
         ), 200);
     }
 
-    public function getDetalheatendimentoexamecorrel($posto,$atendimento,$correl){        
-
+    /**
+     * Responsavel por retornar os detalhes do atendmieto de acordo com o correlativo enviado
+     * @param $posto
+     * @param $atendimento
+     * @param $correl
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getDetalheatendimentoexamecorrel($posto,$atendimento,$correl){
+        //Verifica se o usuario tem saldo devedor
         $saldoDevedor = $this->atendimento->getSaldoDevedor($posto,$atendimento);
 
         if($saldoDevedor){
@@ -60,7 +96,7 @@ class PacienteController extends Controller {
                 'message' => 'Existe pendências'
             ), 203);
         }
-
+        //Carrega o resultado do exame solicitado
         $exames = $this->exames->getDetalheAtendimentoExameCorrel($posto, $atendimento,$correl);
 
         return response()->json(array(
@@ -69,52 +105,69 @@ class PacienteController extends Controller {
         ), 200);
     }
 
+    /**
+     * Responsavel por solicitar ao DATASNAP o PDF
+     * @return string
+     */
     public function postExportarpdf(){
+        //Pego os dados enviado pelo formulario
         $dados = Request::input('dados');
+        //Separo os item enviados
         $posto = $dados[0]['posto'];
         $atendimento = $dados[0]['atendimento'];
         $correlativos = $dados[0]['correlativos'];    
-        
+
+        //Completo com zero a esquerda o posto e atendimento de acordo com os padroes definidos no config
         $postoID = str_pad($posto,config('system.qtdCaracterPosto'),'0',STR_PAD_LEFT);
         $atendimentoID = str_pad($atendimento,config('system.qtdCaracterAtend'),'0',STR_PAD_LEFT);
 
+        //Crio o ID unido o POSTOID e ATENDIMENTOID
         $id = strtoupper(md5($postoID.$atendimentoID));
-
+        //Verifico se existe no banco de dados esse atendimento
         $atendimentoAcesso = new AtendimentoAcesso();
         $atendimentoAcesso = $atendimentoAcesso->where(['id' => $id])->get()->toArray();
 
+        //Pego a tenha do atendimento para verificação
         $pure = $atendimentoAcesso[0]['pure'];   
 
+        //Verifico se a tenha é do Cliente logado no sistema
         $ehCliente = $this->atendimento->ehCliente($this->auth,$posto,$atendimento);
 
         if(!$ehCliente){
             \App::abort(404);
         }         
-
+        //Solicita para o dataSnap gerar o PDF
         return $this->dataSnap->exportarPdf($posto,$atendimento,$pure,$correlativos);
     }
 
+    /**
+     * Responsavel por alterar a senha do usuario
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
     public function postAlterarsenha(){
         $tipoLoginPaciente = $this->auth->user()['tipoLoginPaciente'];
 
+        //Só libera a alteração de senha para o acesso do tipo CPF
         if($tipoLoginPaciente != 'CPF'){
             return response(['message'=>'Tipo de acesso não autorizado para alterar senha','data' => Request::all()],203);
         }
-
+        //Valida os dados enviado pelo formulario de alteração de senha
         $validator = Validator::make(Request::all(), $this->clienteAcesso->getValidator());
         
         if ($validator->fails()) {
             return response(['message'=>'Erro ao validar','data' => Request::all()],400);
         }
-
+        //Cria o MD% do registro
         $registro = strtoupper(md5($this->auth->user()['registro']));
 
+        //Verifica se a senha atual esta correta para liberar a alteração
         $verifyAcesso = $this->clienteAcesso->findWhere(['id' => $registro, 'pure' => strtoupper(Request::input('senhaAtual'))])->count();
 
         if(!$verifyAcesso){
             return response(['message'=>'Senha atual não confere','data' => Request::all()],203);
         }
 
+        //Altera a senha do usuario
         $acesso = $this->clienteAcesso->alterarSenha($registro,Request::input('novaSenha'));
         
         if(!$acesso){
