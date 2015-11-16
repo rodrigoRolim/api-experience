@@ -28,6 +28,7 @@ class AtendimentoRepository extends BaseRepository
                     WHERE posto = :posto AND atendimento = :atendimento';
 
             $atendimento[] = current(DB::select(DB::raw($sql), ['posto' => $data[0],'atendimento' => $data[1]]));
+
         }
 
         if($user['tipoLoginPaciente'] == 'CPF'){
