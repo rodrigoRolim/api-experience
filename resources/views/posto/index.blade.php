@@ -73,8 +73,6 @@
         $(document).ready(function (){
             $("body").tooltip({ selector: '[data-toggle=tooltip]' });
 
-            console.log(Cookies.get());
-
             $(".menu-trigger").click(function() {
                 $(".boxFiltroPosto").slideToggle(768, function() {
                     $(this).toggleClass("nav-expanded").css('display', '');
