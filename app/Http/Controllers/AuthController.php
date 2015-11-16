@@ -1,7 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+/**
+* Classe reponsável pelas operações de autenticação de usuários no sistema,
+* ela atende os acessos do Paciente, Posto e Médico
+*
+* @author Bruno Araújo <brunoluan@gmail.com> e Vitor Queiroz <vitorvqz@gmail.com>
+* @version 1.0
+*/
 
+namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Validator;
@@ -55,11 +62,27 @@ class AuthController extends Controller
      */
     public function postLogin(Request $request)
     {
+        /*
+        * Analisa o valor enviados pelo formuario "tipoAcesso" para validar cada tipo com suas regras
+        * Tipo de acesso pode ser do tipo 'PAC = Acesso do Paciente, MED = Acesso do Médico e POS = Acesso do Posto'
+        */
+
         switch($request->input('tipoAcesso')){
+            /*
+            * Caso o usuario seja do tipo PAC é verificado o tipo de 
+            * acesso através do valor do input tipoLoginPaciente 'ID = Acesso pelo cartão do atendimento, 
+            * CPF = Acesso via cadastro unico criado no laboratorio, dessa forma ele 
+            * consegue ver todo os atendimento já realizados no laboratorio.'
+            */
             case 'PAC':
                 if($request->input('tipoLoginPaciente') == 'ID'){
+                    /*
+                    * Verifica a quantidade de caracter estipulado no 
+                    * confige para atendimento e posto para criação do limite maximo de validação
+                    */
                     $qtdCaracter = config('system.qtdCaracterAtend')+config('system.qtdCaracterPosto')+1;
 
+                    //Cria uma array de validação 
                     $validate = [
                         'atendimento' => 'required|max:'.$qtdCaracter.'',
                         'password' => 'required',
@@ -67,8 +90,10 @@ class AuthController extends Controller
 
                     $this->validate($request,$validate);
 
+                    //Se validado separada o posto e atendimento enviado pelo formulario
                     $dadosAtend = explode('/',$request->input('atendimento'));
 
+                    //Cria array para verificação de autenticação com o banco de dados
                     $credentials = [
                         'tipoAcesso' => 'PAC',
                         'tipoLoginPaciente' => $request->input('tipoLoginPaciente'),
@@ -77,7 +102,9 @@ class AuthController extends Controller
                         'password' => $request->input('password'),
                     ];
                 }
-
+                /*
+                * Caso o acesso seja do tipo CPF
+                */
                 if($request->input('tipoLoginPaciente') == 'CPF'){
                     $validate = [
                         'cpf' => 'required',
@@ -86,7 +113,8 @@ class AuthController extends Controller
                     ];
 
                     $this->validate($request,$validate);
-
+                    
+                    //Cria array para verificação de autenticação com o banco de dados
                     $credentials = [
                         'tipoAcesso' => 'PAC',
                         'tipoLoginPaciente' => $request->input('tipoLoginPaciente'),
@@ -97,8 +125,9 @@ class AuthController extends Controller
                 }
 
                 break;
+            //Acesso do medico
             case 'MED':
-                //Acesso ao medico
+                //Cria uma array de validação 
                 $validate = [
                     'tipoCr' => 'required',
                     'cr' => 'required',
@@ -106,10 +135,9 @@ class AuthController extends Controller
                     'password' => 'required',
                 ];
 
-
                 $this->validate($request,$validate);
 
-
+                //Cria array para verificação de autenticação com o banco de dados
                 $credentials = [
                     'tipoAcesso' => 'MED',
                     'tipoCr' => $request->input('tipoCr'),
@@ -118,34 +146,37 @@ class AuthController extends Controller
                     'password' => $request->input('password'),
                 ];
 
-
                 break;
+            //Acesso ao posto
             case 'POS':
-                //Acesso ao posto
+                //Verifica no arquivo de configuração a quantidade de caracter do posto
                 $qtdCaracter = config('system.qtdCaracterPosto');
-
+                
+                //Cria array de validação
                 $validate = [
                     'posto' => 'required|max:'.$qtdCaracter.'',                  
                     'password' => 'required',
                 ]; 
-
                                
                 $this->validate($request,$validate);
-
+                
+                //Cria array para verificação de autenticação com o banco de dados
                 $credentials = [
                     'tipoAcesso' => 'POS',  
                     'posto' => $request->input('posto'),                  
                     'password' => $request->input('password'),
                 ];
-
-              
                 break;
         }
 
+        /*
+        * Enviada para o controller App\Auth\CustomUserProvider a array $credentials para validação do acesso
+        */
         if ($this->auth->attempt($credentials, $request->has('remember'))) {
             return redirect()->intended('/auth/home');
         }
 
+        //Caso o usuario/senha não forem satisfatorio, retorna o formulario de login com a mensagem de acesso negado
         return redirect('/auth')->withInput()->withErrors(config('system.messages.login.usuarioSenhaInvalidos'));
     }
 
@@ -156,6 +187,7 @@ class AuthController extends Controller
      */
     public function getLogout()
     {
+        //Limpa todos os cookie do fitro do médico
         unset($_COOKIE['dataInicio']);
         unset($_COOKIE['dataFim']);
         unset($_COOKIE['convenio']);
@@ -168,8 +200,10 @@ class AuthController extends Controller
         setcookie('situacao', '', time() - 3600, '/'); // empty value and old timestamp
         setcookie('postoRealizante', '', time() - 3600, '/'); // empty value and old timestamp
 
+        //Destroi toda a sessão do usuário logado
         Session::flush();
         Redirect::back();
+        //Retorna para a view de login
         return Redirect::to('/auth');
     }
 }
