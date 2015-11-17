@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Classe reponsável por manipular dados do banco de dados
+ *
+ * @author Bruno Araújo <brunoluan@gmail.com> e Vitor Queiroz <vitorvqz@gmail.com>
+ * @version 1.0
+ */
+
 namespace App\Repositories;
 
 use Carbon\Carbon;
@@ -19,6 +26,16 @@ class PostoRepository extends BaseRepository
         return 'App\Models\Posto';
     }
 
+    /**
+     * Função responsavel por listar todos os atendimentos do posto de acordo com o filtro
+     * @param $idPosto
+     * @param $dataInicio
+     * @param $dataFim
+     * @param null $convenio
+     * @param null $situacao
+     * @param null $postoRealizante
+     * @return array
+     */
     public function getAtendimentos($idPosto,$dataInicio,$dataFim, $convenio=null,$situacao=null,$postoRealizante=null)
     {
         $sql = "SELECT DISTINCT
@@ -59,11 +76,14 @@ class PostoRepository extends BaseRepository
 
         return $clientes;
     }
-   
 
+
+    /**
+     * Função responsavel por retornar todos os postos realizantes do posto logado
+     * @return mixed
+     */
     public function getPostosRealizantes()
     {
-
         $sql = 'SELECT posto,nome FROM '.config('system.userAgilDB').'VEX_POSTOS WHERE realiza_exames = :tipo order by nome';
         $data [] = DB::select(DB::raw($sql),[
             'tipo' => 'S'
@@ -77,7 +97,13 @@ class PostoRepository extends BaseRepository
         return $postos;
     }
 
-     public function getPostosRealizantesAtendimento($posto,$atendimento)
+    /**
+     * Retorna todo os postos realizante do atendimento
+     * @param $posto
+     * @param $atendimento
+     * @return mixed
+     */
+    public function getPostosRealizantesAtendimento($posto,$atendimento)
     {
         $sql = 'SELECT DISTINCT p.posto,p.nome 
                 FROM '.config('system.userAgilDB').'VEX_POSTOS p
@@ -98,6 +124,11 @@ class PostoRepository extends BaseRepository
         return $postos;
     }
 
+    /**
+     * Retorna todos os convenios para o posto
+     * @param $idPosto
+     * @return array
+     */
     public function getConveniosPosto($idPosto)
     {
         $sql = 'SELECT
@@ -121,6 +152,13 @@ class PostoRepository extends BaseRepository
         return $convenios;
     }
 
+    /**
+     * Função responsavel por retornar todos os atendimentos do paciente do posto
+     * @param $registro
+     * @param $idPosto
+     * @param $idAtendimento
+     * @return mixed
+     */
     public function getAtendimentosPacienteByPosto($registro,$idPosto,$idAtendimento){
 
         $sql = 'SELECT c.nome,c.data_nas,c.registro,c.sexo,c.telefone,c.telefone2,a.posto,a.atendimento,data_atd, INITCAP(a.nome_convenio) AS nome_convenio, INITCAP(a.nome_solicitante) AS nome_solicitante, ('.config('system.userAgilDB').'GET_MNEMONICOS(a.posto,a.atendimento)) mnemonicos,a.saldo_devedor
@@ -138,6 +176,12 @@ class PostoRepository extends BaseRepository
         return $atendimento[0];
     }
 
+    /**
+     * Verifica se o atendimento é do posto
+     * @param $idPosto
+     * @param $atendimento
+     * @return bool
+     */
     public function ehAtendimentoPosto($idPosto,$atendimento){
         $sql = 'SELECT * FROM '.config('system.userAgilDB').'vex_atendimentos a                 
                 WHERE

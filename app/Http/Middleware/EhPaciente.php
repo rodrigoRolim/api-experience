@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Middleware responsavel pela liberaçao das rotas de acordo com o tipo de acesso
+ *
+ * @author Bruno Araújo <brunoluan@gmail.com> e Vitor Queiroz <vitorvqz@gmail.com>
+ * @version 1.0
+ */
+
 namespace App\Http\Middleware;
 
 use Closure;

@@ -1,4 +1,10 @@
 <?php
+/**
+ * Classe reponsável por manipular dados do banco de dados
+ *
+ * @author Bruno Araújo <brunoluan@gmail.com> e Vitor Queiroz <vitorvqz@gmail.com>
+ * @version 1.0
+ */
 
 namespace App\Repositories;
 
@@ -19,6 +25,17 @@ class MedicoRepository extends BaseRepository
         return 'App\Models\Medico';
     }
 
+    /**
+     * Função responsavel em buscar todos os clientes que tenham
+     * algum atendimento com o médico solicitante dentro do filtro definido
+     * @param $idMedico
+     * @param $dataInicio
+     * @param $dataFim
+     * @param null $posto
+     * @param null $convenio
+     * @param null $situacao
+     * @return array
+     */
     public function getClientes($idMedico,$dataInicio,$dataFim,$posto=null, $convenio=null,$situacao=null)
     {
         $sql = "SELECT DISTINCT
@@ -67,6 +84,12 @@ class MedicoRepository extends BaseRepository
         return $clientes;
     }
 
+    /**
+     * Função retorna apenas os atendimentos que o médico solicitou do paciente
+     * @param $registro
+     * @param $solicitante
+     * @return mixed
+     */
     public function getAtendimentosPacienteByMedico($registro,$solicitante){
         $sql = 'SELECT c.nome,c.data_nas,c.registro,c.sexo,c.telefone,c.telefone2,a.posto,a.atendimento,data_atd, INITCAP(a.nome_convenio) AS nome_convenio, INITCAP(a.nome_solicitante) AS nome_solicitante, ('.config('system.userAgilDB').'GET_MNEMONICOS(a.posto,a.atendimento)) mnemonicos,a.saldo_devedor
                 FROM '.config('system.userAgilDB').'vex_atendimentos a
@@ -139,6 +162,13 @@ class MedicoRepository extends BaseRepository
         return $convenios;
     }
 
+    /**
+     * Verifica se o atendimento passado é do médico
+     * @param $idMedico
+     * @param $posto
+     * @param $atendimento
+     * @return bool
+     */
     public function ehAtendimentoMedico($idMedico,$posto,$atendimento){
         $sql = "SELECT * FROM ".config('system.userAgilDB')."vex_medicos M
                   INNER JOIN ".config('system.userAgilDB')."vex_atendimentos A ON M.crm = A.solicitante

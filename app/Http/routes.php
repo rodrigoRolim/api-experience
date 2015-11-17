@@ -1,5 +1,12 @@
 <?php
 
+/**
+* Classe reponsável pelo controle de rodas da aplicação
+*
+* @author Bruno Araújo <brunoluan@gmail.com> e Vitor Queiroz <vitorvqz@gmail.com>
+* @version 1.0
+*/
+
 Route::controllers([
     'auth' => 'AuthController',
 ]);

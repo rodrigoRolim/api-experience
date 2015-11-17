@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Classe reponsável por manipular dados do banco de dados
+ *
+ * @author Bruno Araújo <brunoluan@gmail.com> e Vitor Queiroz <vitorvqz@gmail.com>
+ * @version 1.0
+ */
+
 namespace App\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
@@ -17,6 +24,14 @@ class ExamesRepository extends BaseRepository
         return 'App\Models\Exame';
     }
 
+    /**
+     * Retorna todos os exames do atendimento, pode ser parametrizado com o postoRealizante a consulta,
+     * essa função já retorna com a situação de cada exame para apresentação na view
+     * @param $posto
+     * @param $atendimento
+     * @param null $postoRealizante
+     * @return mixed
+     */
     public function getExames($posto,$atendimento,$postoRealizante = null){
         if(!is_null($postoRealizante)){
             $exames = $this->findWhere(['posto' => $posto, 'atendimento' => $atendimento,'posto_rea' => $postoRealizante])->toArray();
@@ -61,6 +76,13 @@ class ExamesRepository extends BaseRepository
         return $exames;
     }
 
+    /**
+     * Função responsavel por buscar os resultados do exame (CORREL)
+     * @param $posto
+     * @param $atendimento
+     * @param $correl
+     * @return mixed
+     */
     public function getDetalheAtendimentoExameCorrel($posto,$atendimento,$correl){
         $sql = 'SELECT '.config('system.userAgilDB').'get_resultado_json(:posto,:atendimento,:correl) as resultado FROM DUAL';
 

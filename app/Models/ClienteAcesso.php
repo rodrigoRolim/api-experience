@@ -1,4 +1,13 @@
-<?php namespace App\Models;
+<?php
+
+/**
+ * Classe Model
+ *
+ * @author Bruno Araújo <brunoluan@gmail.com> e Vitor Queiroz <vitorvqz@gmail.com>
+ * @version 1.0
+ */
+
+namespace App\Models;
 
 class ClienteAcesso extends BaseModel {
 
@@ -20,6 +29,7 @@ class ClienteAcesso extends BaseModel {
 
     public $timestamps = false;
 
+    //Regras de validação
     public $rules = array(
         'novaSenha' => 'required|min:6|max:15',
     );
