@@ -43,6 +43,15 @@ ul{
 	float: right;
 }
 
+.logoRodape{
+	width: 80px;
+}
+
+.logoRodape img{
+	height: 25px;
+	float: right;
+}
+
 .txtRodape{
 	font-size: 0.9em;
 }
@@ -648,11 +657,17 @@ div.row.infoClienteMed{
 		margin-left: 0px;
 	}
 
+	.statusAtendimentosViewPaciente{
+		font-size: 1em;
+
+	}
+
 	.navbar-header.logo img{
 		height: 38px;
 		float: left;			
 		padding-left: 5px;
 		margin: 0px;
+
 	}
 
 	.colunaInfoPaciente{
@@ -664,9 +679,17 @@ div.row.infoClienteMed{
 		font-size: 0.9em;
 	}
 
+	.txtRodape{
+		font-size: 0.65em;
+	}
+
 	.txtRodapePostoPac{
 		margin-left: 20px; 
 		clear: both;
+	}
+
+	.logoRodape img{
+		display: none;
 	}
 }
 
@@ -813,18 +836,6 @@ div.row.infoClienteMed{
 
 	.boxFiltroPosto{
 		height: 300px;
-		display: none;
-	}
-
-	.txtRodape{
-		display: none;
-	}
-
-	.txtRodapePostoPac{
-		display: none;
-	}
-
-	.statusAtendimentos{
 		display: none;
 	}
 

@@ -130,7 +130,7 @@
                 Cookies.set('postoRealizante', $('#postoRealizante').val());
 
                 var formPosto = $('#formPosto');
-                var postData = formPosto.serializeArray();   
+                var postData = formPosto.serializeArray(); 
 
                 getClientes(postData);
             });

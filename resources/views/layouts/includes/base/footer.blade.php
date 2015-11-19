@@ -1,8 +1,8 @@
 <div class="footer">
-	<div class="row col-md-12">
-		<div class="col-md-10 text-center txtRodape"></div>
-		<div class="col-md-2">
-	    	{!! Html::image(config('system.experienceLogo'), 'logo_exp', array('title' => 'logo','style'=>'margin-left: 80px;height: 20px;')) !!}
+	<div class="row">
+		<div class="col-md-10 col-sm-10 text-center txtRodape"></div>
+		<div class="logoRodape col-md-2 col-sm-2 ">
+	    	{!! Html::image(config('system.experienceLogo'), 'logo_exp', array('title' => 'eXperience - codemed')) !!}
 		</div>
 	</div>
 </div>
