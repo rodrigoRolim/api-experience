@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Classe reponsável por manipular dados do banco de dados
+ *
+ * @author Bruno Araújo <brunoluan@gmail.com> e Vitor Queiroz <vitorvqz@gmail.com>
+ * @version 1.0
+ */
+
 namespace App\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
@@ -17,11 +24,21 @@ class MedicoAcessoRepository extends BaseRepository
     {
         return 'App\Models\MedicoAcesso';
     }
-    
+
+    /**
+     * Busca rules do model
+     * @return mixed
+     */
     public function getValidator(){
     	return $this->model->rules;
     }
 
+    /**
+     * Altera senha do médico
+     * @param $id
+     * @param $novaSenha
+     * @return bool
+     */
     public function alterarSenha($id,$novaSenha){
         try {
             DB::connection()->getPdo()->beginTransaction();

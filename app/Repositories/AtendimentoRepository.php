@@ -1,5 +1,12 @@
 <?php
 
+/**
+* Classe reponsável por manipular dados do banco de dados
+*
+* @author Bruno Araújo <brunoluan@gmail.com> e Vitor Queiroz <vitorvqz@gmail.com>
+* @version 1.0
+*/
+
 namespace App\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
@@ -17,6 +24,11 @@ class AtendimentoRepository extends BaseRepository
         return 'App\Models\Atendimento';
     }
 
+    /**
+     * Retorna os atendimentos do usuario paciente (ID ou CPF)
+     * @param $user
+     * @return array
+     */
     public function atendimentos($user)
     {
         $data = $user['username'];
@@ -44,11 +56,25 @@ class AtendimentoRepository extends BaseRepository
         return $atendimento;
     }
 
+    /**
+     * Verifica se o atendimento é do paciente, dessa forma só é liberado o acesso,
+     * se o atendimento for dele.
+     * @param $auth
+     * @param $posto
+     * @param $atendimento
+     * @return bool
+     */
     public function ehCliente($auth,$posto,$atendimento){
         $registro = $auth->user()['registro'];
         return (bool) $this->findWhere(['registro' => $registro, 'posto' => $posto, 'atendimento' => $atendimento])->count();
     }
 
+    /**
+     * Verifica se o paciente tem saldo devedor com o laboratorio
+     * @param $posto
+     * @param $atendimento
+     * @return bool
+     */
     public function getSaldoDevedor($posto,$atendimento){
         $sql = 'SELECT saldo_devedor FROM '.config('system.userAgilDB').'vex_atendimentos WHERE posto = :posto AND atendimento = :atendimento';
 

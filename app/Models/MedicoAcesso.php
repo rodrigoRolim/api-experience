@@ -1,4 +1,20 @@
-<?php namespace App\Models;
+<?php
+
+/**
+ * Classe Model
+ *
+ * @author Bruno Araújo <brunoluan@gmail.com> e Vitor Queiroz <vitorvqz@gmail.com>
+ * @version 1.0
+ */
+
+namespace App\Models;
+
+/**
+ * Classe reponsável por manipular dados do banco de dados
+ *
+ * @author Bruno Araújo <brunoluan@gmail.com> e Vitor Queiroz <vitorvqz@gmail.com>
+ * @version 1.0
+ */
 
 class MedicoAcesso extends BaseModel {
 

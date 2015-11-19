@@ -36,23 +36,21 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next)
     {
+        //Redireciona para a rota espeficida de acordo com o tipo de acesso do usuario
         if ($this->auth->check())
         {
             $tipoAcesso = $this->auth->user()['tipoAcesso'];
 
             if ($tipoAcesso == 'PAC'){
                 return Redirect::to('/paciente');
-                // return redirect('/paciente');
             }
 
             if ($tipoAcesso == 'MED'){
                 return Redirect::to('/medico');
-                // return redirect('/medico');
             }
 
             if ($tipoAcesso == 'POS'){
                 return Redirect::to('/posto');
-                // return redirect('/posto');
             }
         }
 

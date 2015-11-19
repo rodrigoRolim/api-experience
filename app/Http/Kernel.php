@@ -32,5 +32,6 @@ class Kernel extends HttpKernel
         'ehPaciente' => \App\Http\Middleware\EhPaciente::class,
         'ehMedico' => \App\Http\Middleware\EhMedico::class,
         'ehPosto' => \App\Http\Middleware\EhPosto::class,
+        'revalidate' => \App\Http\Middleware\RevalidateBackHistory::class,
     ];
 }
