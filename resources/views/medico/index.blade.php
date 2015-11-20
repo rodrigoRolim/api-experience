@@ -78,6 +78,8 @@
     <script type="text/javascript">
         $(document).ready(function (){
 
+            $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+
             $(".menu-trigger").click(function() {
                 $(".boxFiltro").slideToggle(400, function() {
                     $(this).toggleClass("nav-expanded").css('display', '');
@@ -161,13 +163,13 @@
                                                 '<strong>'+cliente.nome+'</strong><br><i class="'+((cliente.sexo == "M")?"fa fa-mars":"fa fa-venus")+'"></i> &nbsp;'+cliente.idade+
                                             '</div>'+
                                             '<div class="col-md-2 col-sm-6 col-xs-12 hidden-xs text-left"><span class="ajusteFonte"><i class="fa fa-phone"></i> '+cliente.telefone+' </span></div>'+
-                                            '<div class="col-md-6 col-sm-4 col-xs-12 hidden-xs"><span class="ajusteFonte">Últ. Atendimentos: </span>';
+                                            '<div class="col-md-6 col-sm-12 col-xs-12 hidden-xs data-toggle="tooltip" data-placement="right" title="Atendimento"><span class=" ajusteFonte"></span>';
                             var count = 0;
                             
                             $.each( cliente.atendimentos, function( index ){
                                 count++;
                                 var atendimento = cliente.atendimentos[index];
-                                item += '<span class="labelAtendimentosClientes"><i class="fa fa-calendar-check-o"></i> '+atendimento+"</span>";
+                                item += '<span class="labelAtendimentosClientes col-sm-3"><i class="fa fa-calendar-check-o" ></i> '+atendimento+"</span>";
 
                                 if(count == 3){
                                     return false;
