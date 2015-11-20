@@ -85,13 +85,13 @@
                   </div>                  
                 </div>
               </div>
-        </div>
-          <div class="footer">
-            <div class="row">                
-                <div class="col-sm-4 txtRodapePostoPac">    </div>  
-                <div class="col-sm-6" id="boxRodapePostoPac">    </div>
-            </div>  
-        </div>
+        </div>          
+    </div>  
+</div>
+<div class="footer">
+    <div class="col-md-12 col-sm-12">                
+        <div class="col-md-7 col-md-offset-1 col-sm-6 txtRodapePostoPac">    </div>  
+        <div class="col-md-4 col-sm-6" id="boxRodapePostoPac">    </div>
     </div>  
 </div>
 @stop
@@ -377,7 +377,7 @@
                         }); 
                        
                     }else{
-                        $('#boxRodapePostoPac').html('<h3 class="text-danger">{!!config('system.messages.pacientes.saldoDevedor')!!}</h3>');
+                        $('#boxRodapePostoPac').html('<h5 class="text-danger">{!!config('system.messages.pacientes.saldoDevedor')!!}</h3>');
                         $('#boxRodapePostoPac').css("margin-right", "0px");
                     }
                 }, "json" );

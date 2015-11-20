@@ -44,7 +44,7 @@ ul{
 }
 
 .logoRodape{
-	width: 80px;
+	width: 100px;
 }
 
 .logoRodape img{
@@ -58,7 +58,7 @@ ul{
 
 .txtRodapePostoPac{
 	font-size: 0.9em;
-	margin-left: 95px;
+	margin-left: 70px;
 }
 
 .erroDescricao{
@@ -67,7 +67,6 @@ ul{
 }
 
 .statusAtendimentos{
-	margin-left: 60px;
 	font-size: 0.9em;
 }
 
@@ -184,6 +183,10 @@ ul{
 
 .footer{
    padding-right: 0px;	
+}
+
+.text-danger{
+	margin-top: 0px;
 }
 
 
@@ -330,6 +333,11 @@ ul{
 
 #boxRodape{
 	padding-right: 0px;
+}
+
+#boxRodapePostoPac{
+	margin-right: 0px;
+	text-align: right;
 }
 
 .agile-list, li.warning-element, li.success-element, li.danger-element, li.aguardando-element, li.naoRealizado-element{
@@ -539,6 +547,10 @@ div.row.infoClienteMed{
 		margin-top: 8px;
 	}
 
+	.txtRodapePostoPac{
+		margin-left: 0px;
+	}
+
 }
 
 .menu-trigger{
@@ -577,6 +589,11 @@ div.row.infoClienteMed{
 
 	.statusAtendimentos{
 		display: block;
+	}
+
+	.txtRodapePostoPac{
+		font-size: 0.8em;
+		margin-left: 0px;
 	}
 
 	.menu-trigger{
@@ -655,6 +672,7 @@ div.row.infoClienteMed{
 	.statusAtendimentos{
 		display: block;
 		margin-left: 0px;
+		font-size: 0.8em;
 	}
 
 	.statusAtendimentosViewPaciente{
@@ -680,11 +698,17 @@ div.row.infoClienteMed{
 	}
 
 	.txtRodape{
-		font-size: 0.65em;
+		font-size: 0.8em;
+	}
+
+	#boxRodapePostoPac{
+		margin-right: 0px;
+		text-align: left;
 	}
 
 	.txtRodapePostoPac{
-		margin-left: 20px; 
+		font-size: 0.8em;
+		margin-left: 0px;
 		clear: both;
 	}
 
