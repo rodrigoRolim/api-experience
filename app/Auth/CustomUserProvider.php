@@ -178,7 +178,8 @@ class CustomUserProvider implements UserProvider {
                     $medicoAcesso = new MedicoAcesso();
                     $medicoAcesso = $medicoAcesso->where(['id' => $id])->get()->toArray();
 
-                    if(sizeof($medicoAcesso)){
+
+                    if(!sizeof($medicoAcesso)){
                         //Caso não encontre o medico pelo ID_MEDICO é verificado pelo CRM
                         $medicoAcesso = new MedicoAcesso();
                         $medicoAcesso = $medicoAcesso->where(['id' => $idAlt])->get()->toArray();    
