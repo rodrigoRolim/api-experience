@@ -190,7 +190,7 @@
                                                 '<div class="col-md-2 col-sm-6 col-xs-6 hidden-xs">'+
                                                     '<i class="fa fa-credit-card" data-toggle="tooltip" title="Convênio"></i> '+atendimento.nome_convenio+
                                                 '</div>'+
-                                                '<div class="col-md-2 col-sm-6 col-xs-12">'+
+                                                '<div class="col-md-12 col-sm-6 col-xs-12">'+
                                                     '<i class="fa fa-flask" data-toggle="tooltip" title="Mnemônicos"></i> '+atendimento.mnemonicos+
                                                 '</div>'+
                                             '</div>'+

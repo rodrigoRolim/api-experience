@@ -163,7 +163,7 @@
                                                 '<strong>'+cliente.nome+'</strong><br><i class="'+((cliente.sexo == "M")?"fa fa-mars":"fa fa-venus")+'"></i> &nbsp;'+cliente.idade+
                                             '</div>'+
                                             '<div class="col-md-2 col-sm-6 col-xs-12 hidden-xs text-left"><span class="ajusteFonte"><i class="fa fa-phone"></i> '+cliente.telefone+' </span></div>'+
-                                            '<div class="col-md-6 col-sm-12 col-xs-12 hidden-xs data-toggle="tooltip" data-placement="right" title="Atendimento"><span class=" ajusteFonte"></span>';
+                                            '<div class="col-md-6 col-sm-12 col-xs-12 hidden-xs data-toggle="tooltip" data-placement="right" title="span"><Atendimento class=" ajusteFonte"></span>';
                             var count = 0;
                             
                             $.each( cliente.atendimentos, function( index ){

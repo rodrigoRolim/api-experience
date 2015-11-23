@@ -613,6 +613,10 @@ div.row.infoClienteMed{
 		display: block !important;
 	}
 
+	.logoRodape img{
+		display: none;
+	}
+
 }
 
 
