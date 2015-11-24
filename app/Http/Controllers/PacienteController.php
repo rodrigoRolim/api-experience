@@ -157,7 +157,7 @@ class PacienteController extends Controller {
         if ($validator->fails()) {
             return response(['message'=>'Erro ao validar','data' => Request::all()],400);
         }
-        //Cria o MD% do registro
+        //Cria o MD5 do registro
         $registro = strtoupper(md5($this->auth->user()['registro']));
 
         //Verifica se a senha atual esta correta para liberar a alteração
