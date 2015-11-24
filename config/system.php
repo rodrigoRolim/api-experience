@@ -2,7 +2,7 @@
 
 return [
     'key' => 'DHXR|e4H>Q38ZjERT"4L+7~|^P0W_j',
-    'userAgilDB' => 'lis.',
+    'userAgilDB' => 'cedro.',
     'skinPadrao'  => 'green.css', 
     'clienteNome' => 'Lab. Teste',
     'clienteLogo' => '/assets/images/logo_cedro.png',
@@ -45,9 +45,9 @@ return [
         'EA' => 'Em Andamento',
     ],
     'medico' => [
-        'qtdDiasFiltro' => 7
+        'qtdDiasFiltro' => 1
     ],
     'posto' => [
-        'qtdDiasFiltro' => 60
+        'qtdDiasFiltro' => 1
     ]
 ];
