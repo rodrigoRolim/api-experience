@@ -2,7 +2,7 @@
 
 return [
     'key' => 'DHXR|e4H>Q38ZjERT"4L+7~|^P0W_j',
-    'userAgilDB' => 'cedro.',
+    'userAgilDB' => env('USER_AGIL_DB', 'lis'),
     'skinPadrao'  => 'green.css', 
     'clienteNome' => 'Lab. Teste',
     'clienteLogo' => '/assets/images/logo_cedro.png',
