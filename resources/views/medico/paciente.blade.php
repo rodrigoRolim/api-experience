@@ -14,7 +14,7 @@
             </button>   
             <ul class="dropdown-menu pull-right itensInfoUser">
                 <li class="item"><a class="btnShowModal"><i class="fa fa-user"></i> Alterar Senha</a></li>
-                <li class="item"><a href="/auth/logout"><i class="fa fa-sign-out"></i> Sair
+                <li class="item"><a href="{{url('/')}}/auth/logout"><i class="fa fa-sign-out"></i> Sair
                     </a>
                 </li>
             </ul>
@@ -82,9 +82,7 @@
                 <div class="i-checks all boxSelectAll"> </div>
            </div>
          <ul class="sortable-list connectList agile-list ui-sortable listaExames">  </ul>
-
-         @include('medico.modalAlterarSenha')
-
+             @include('medico.modalAlterarSenha')
         </div>
     </div>
     <div class="footer">
@@ -94,12 +92,8 @@
         </div>  
     </div>
 </div>
-
-    <!-- Modal -->
       <div class="modal fade" id="modalExames" role="dialog">
         <div class="modal-dialog">
-        
-          <!-- Modal content-->
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -111,7 +105,6 @@
             <div class="modal-footer">                     
             </div>
           </div>
-          
         </div>
       </div>
 @stop
@@ -134,8 +127,6 @@
             var nomeConvenio;
             var nomePaciente;
             var mnemonicos;
-
-
 
             $('.btnAtendimento').click(function(e){
                 posto = $(e.currentTarget).data('posto');
@@ -195,7 +186,7 @@
             $('.active a').trigger('click');
 
             $('.btnVoltar').click(function(){
-                window.location.replace("/medico");
+                window.location.replace("{{url('/')}}/medico");
             });
 
             function verificaSaldoDevedor(saldo){
@@ -212,7 +203,7 @@
                 $('.listaExames').html('<br><br><br><br><h2 class="textoTamanho"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando registros.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>');
 
                 //Pega os dados via get de exames do atendimento
-                $.get( "/medico/examesatendimento/"+posto+"/"+atendimento, function( result ) {
+                $.get( "{{url('/')}}/medico/examesatendimento/"+posto+"/"+atendimento, function( result ) {
                     //Carrega dados do atendimento
                     $('#nome').html(nomePaciente);
                     $('#solicitante').html(nomeSolicitante);
@@ -270,7 +261,7 @@
                         $('.modal-title').html('');
                         $('.modal-footer').html('');
                         $.ajax({
-                            url : '/medico/detalheatendimentoexamecorrel/'+dadosExames.posto+'/'+dadosExames.atendimento+'/'+dadosExames.correl+'',
+                            url : '{{url("/")}}/medico/detalheatendimentoexamecorrel/'+dadosExames.posto+'/'+dadosExames.atendimento+'/'+dadosExames.correl+'',
                             type: 'GET',                           
                             success:function(result){
                                 if(result.data == null){
@@ -385,10 +376,10 @@
 
                              var dadosExame = {};                           
                              dadosExame = [{'posto':posto,'atendimento':atendimento,'correlativos':correl}]; 
-                             var paginaPdf = window.open ('/impressao', '', '');              
+                             var paginaPdf = window.open ('{{url("/")}}/impressao', '', '');              
 
                             $.ajax({ // Faz verificação de dados do cliente dentro do formulario(modal) de cadastrar senha.
-                             url: '/medico/exportarpdf',
+                             url: '{{url("/")}}/medico/exportarpdf',
                              type: 'post',
                              data: {"dados" : dadosExame},
                              success: function(data){   

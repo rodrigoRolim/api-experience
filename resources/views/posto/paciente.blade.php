@@ -13,7 +13,7 @@
             </button>
             <ul class="dropdown-menu pull-right itensInfoUser">
                 <li class="item">
-                    <a href="/auth/logout">
+                    <a href="{{url('/')}}/auth/logout">
                         <i class="fa fa-sign-out"></i> Sair
                     </a>
                 </li>
@@ -21,8 +21,6 @@
         </div>
     </div>
 @stop
-
-<!-- nome_solicitante,saldo_devedor,sexo,mnemonicos -->
 
 @section('content')
 <div id="page-wrapper-posto" class="gray-bg">
@@ -119,7 +117,7 @@
             }); 
 
             $('.btnVoltar').click(function(){
-                window.location.replace("/posto");
+                window.location.replace("{{url('/')}}/posto");
             });
 
             function verificaSaldoDevedor(saldo){
