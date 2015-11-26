@@ -138,7 +138,7 @@
                 $('.listaExames').html('<br><br><br><br><h2 class="textoTamanho"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando registros.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>');
 
                 //Pega os dados via get de exames do atendimento
-                $.get( "/posto/examesatendimento/"+posto+"/"+atendimento, function( result ) {
+                $.get( "{{url('/')}}/posto/examesatendimento/"+posto+"/"+atendimento, function( result ) {
                     //Carrega dados do atendimento
                     
                     $('.listaExames').html('');
