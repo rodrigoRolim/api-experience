@@ -95,7 +95,7 @@
            
             getExames(posto,atendimento);
 
-            $('.idadePaciente').append('<i class="'+((sexo == "M")?"fa fa-mars":"fa fa-venus")+'"></i> <span id="idade"></span>');
+            $('.idadePaciente').append('<i class="pull-left '+((sexo == "M")?"fa fa-mars":"fa fa-venus")+'"></i> <span id="idade"></span>');
                 $('#idade').html(idade);
 
             $('.btnAtendimento').hide(); 
@@ -198,7 +198,7 @@
                         $('.modal-footer').html('');    
 
                         $.ajax({
-                            url : '/posto/detalheatendimentoexamecorrel/'+dadosExames.posto+'/'+dadosExames.atendimento+'/'+dadosExames.correl+'',
+                            url : '{{url("/")}}/posto/detalheatendimentoexamecorrel/'+dadosExames.posto+'/'+dadosExames.atendimento+'/'+dadosExames.correl+'',
                             type: 'GET',                           
                             success:function(result){                                
                                 if(result.data == null){
@@ -313,7 +313,7 @@
                              var paginaPdf = window.open ('/impressao', '', '');              
 
                             $.ajax({ // Faz verificação de dados do cliente dentro do formulario(modal) de cadastrar senha.
-                             url: '/posto/exportarpdf',
+                             url: '{{url("/")}}/posto/exportarpdf',
                              type: 'post',
                              data: {"dados" : dadosExame},
                              success: function(data){   
