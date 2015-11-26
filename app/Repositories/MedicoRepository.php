@@ -55,7 +55,7 @@ class MedicoRepository extends BaseRepository
         $mask = config('system.atendimentoMask');
         $mask = explode("/",$mask);
 
-        $clientes[] = DB::select(DB::raw($sql),[
+        $clientes[] = current(DB::select(DB::raw($sql),[
             'idMedico' => $idMedico,
             'dataInicio' => $dataInicio.' 00:00',
             'dataFim' => $dataFim.' 23:59',
@@ -64,9 +64,7 @@ class MedicoRepository extends BaseRepository
             'posto' => $posto,
             'convenio' => $convenio,
             'situacao' => $situacao,
-        ]);
-
-        $clientes = $clientes[0];
+        ]));
 
         for($i=0;$i<sizeof($clientes);$i++){
             $atd = explode(",",$clientes[$i]->atendimentos);
@@ -98,11 +96,11 @@ class MedicoRepository extends BaseRepository
                 WHERE c.registro = :registro AND m.ID_MEDICO = :solicitante
                 ORDER BY data_atd DESC';
 
-        $atendimento[] = DB::select(DB::raw($sql), ['registro' => $registro, 'solicitante' => $solicitante]);
+        $atendimento[] = current(DB::select(DB::raw($sql), ['registro' => $registro, 'solicitante' => $solicitante]));
+        $atendimento = current($atendimento);
 
-        $atendimento[0][0]->idade = DataNascimento::idade($atendimento[0][0]->data_nas);
-
-        return $atendimento[0];
+        $atendimento->idade = DataNascimento::idade($atendimento->data_nas);
+        return $atendimento;
     }
 
     /**
@@ -120,13 +118,13 @@ class MedicoRepository extends BaseRepository
                 GROUP BY p.posto,p.nome
                 ORDER BY p.nome';
 
-        $data[] = DB::select(DB::raw($sql),[
+        $data[] = current(DB::select(DB::raw($sql),[
             'idMedico' => $idMedico,
-        ]);
+        ]));
 
         $postos = array(''=>'Selecione');
 
-        foreach ($data[0] as $key => $value) {
+        foreach ($data as $key => $value) {
             $postos[$value->posto] = $value->nome;
         }
 
@@ -149,13 +147,13 @@ class MedicoRepository extends BaseRepository
                 GROUP BY c.convenio,c.nome
                 ORDER BY c.nome';
 
-        $data[] = DB::select(DB::raw($sql),[
+        $data[] = current(DB::select(DB::raw($sql),[
             'idMedico' => $idMedico,
-        ]);
+        ]));
 
         $convenios = array(''=>'Selecione ');
 
-        foreach ($data[0] as $key => $value) {
+        foreach ($data as $key => $value) {
             $convenios[$value->convenio] = $value->nome;
         }
 

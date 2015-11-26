@@ -49,8 +49,7 @@ class AtendimentoRepository extends BaseRepository
                     WHERE registro = :registro
                     ORDER BY data_atd DESC';
 
-            $atendimento[] = DB::select(DB::raw($sql), ['registro' => $user['registro']]);
-            $atendimento = $atendimento[0];
+            $atendimento[] = current(DB::select(DB::raw($sql), ['registro' => $user['registro']]));
         }
 
         return $atendimento;
@@ -78,9 +77,8 @@ class AtendimentoRepository extends BaseRepository
     public function getSaldoDevedor($posto,$atendimento){
         $sql = 'SELECT saldo_devedor FROM '.config('system.userAgilDB').'vex_atendimentos WHERE posto = :posto AND atendimento = :atendimento';
 
-        $atendimento = DB::select(DB::raw($sql), ['posto' => $posto,'atendimento' => $atendimento]);
-        $saldo = $atendimento[0];
-        $saldo = $saldo->saldo_devedor;
+        $atendimento = current(DB::select(DB::raw($sql), ['posto' => $posto,'atendimento' => $atendimento]));
+        $saldo = $atendimento->saldo_devedor;
         
         return (($saldo > 0) ? true : false);
     }

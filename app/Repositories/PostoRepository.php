@@ -52,16 +52,14 @@ class PostoRepository extends BaseRepository
                     AND (:postoRealizante IS NULL OR E.posto_realizante = :postoRealizante)
                 ORDER BY c.nome";       
 
-        $clientes[] = DB::select(DB::raw($sql),[
+        $clientes[] = current(DB::select(DB::raw($sql),[
             'idPosto' => $idPosto,
             'dataInicio' => $dataInicio.' 00:00',
             'dataFim' => $dataFim.' 23:59',            
             'convenio' => $convenio,
             'situacao' => $situacao,
             'postoRealizante' => $postoRealizante
-        ]);
-
-        $clientes = $clientes[0];
+        ]));
 
         $dtNow = Carbon::now();
 
@@ -85,13 +83,13 @@ class PostoRepository extends BaseRepository
     public function getPostosRealizantes()
     {
         $sql = 'SELECT posto,nome FROM '.config('system.userAgilDB').'VEX_POSTOS WHERE realiza_exames = :tipo order by nome';
-        $data [] = DB::select(DB::raw($sql),[
+        $data [] = current(DB::select(DB::raw($sql),[
             'tipo' => 'S'
-        ]);
+        ]));
 
         $postos[''] = 'Selecione';
 
-        foreach ($data[0] as $key => $value) {
+        foreach ($data as $key => $value) {
             $postos[$value->posto] = $value->nome;
         }
         return $postos;
@@ -111,13 +109,13 @@ class PostoRepository extends BaseRepository
                 WHERE p.realiza_exames = :tipo AND e.posto = :posto AND e.atendimento = :atendimento
                 ORDER BY p.nome';
         
-        $data [] = DB::select(DB::raw($sql),[
+        $data [] = current(DB::select(DB::raw($sql),[
             'tipo' => 'S',
             'posto' => $posto,
             'atendimento' => $atendimento
-        ]);
+        ]));
 
-        foreach ($data[0] as $key => $value) {
+        foreach ($data as $key => $value) {
             $postos[$value->posto] = $value->nome;
         }
 
@@ -139,13 +137,13 @@ class PostoRepository extends BaseRepository
 			    ORDER BY
 			    	nome_convenio';
 
-        $data[] = DB::select(DB::raw($sql),[
+        $data[] = current(DB::select(DB::raw($sql),[
             'idPosto' => $idPosto,
-        ]);
+        ]));
 
         $convenios = array(''=>'Selecione ');       
 
-	   foreach ($data[0] as $key => $value) {
+	   foreach ($data as $key => $value) {
             $convenios[$value->convenio] = $value->nome_convenio;
         }       
 
@@ -169,11 +167,12 @@ class PostoRepository extends BaseRepository
             AND a.atendimento = :idAtendimento
             ORDER BY data_atd DESC';
 
-        $atendimento[] = DB::select(DB::raw($sql), ['registro' => $registro, 'idPosto' => $idPosto, 'idAtendimento' => $idAtendimento]);
+        $atendimento[] = current(DB::select(DB::raw($sql), ['registro' => $registro, 'idPosto' => $idPosto, 'idAtendimento' => $idAtendimento]));
+        $atendimento = current($atendimento);
 
-        $atendimento[0][0]->idade = DataNascimento::idade($atendimento[0][0]->data_nas);
+        $atendimento->idade = DataNascimento::idade($atendimento->data_nas);
 
-        return $atendimento[0];
+        return $atendimento;
     }
 
     /**
