@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'key' => 'DHXR|e4H>Q38ZjERT"4L+7~|^P0W_jYd',
+    'key' => env('APP_KEY'),
     'userAgilDB' => env('USER_AGIL_DB', 'cedro.'),
     'skinPadrao'  => 'green.css', 
     'clienteNome' => 'Lab. Teste',
@@ -12,7 +12,6 @@ return [
     'PDFUrlTemp'  => 'http://192.168.0.3:8083/TempPDF/',
     'clienteUF'   => 'MA',
     'clienteMsg'  => 'Fone: 98 9988 8798',
-
     'loginText'	  =>  [
     	'title' 		=> 'eXperience',
     	'subTitle' 		=> '<br><br>is provided with two main layouts <br>three skins and separate configure options.',
