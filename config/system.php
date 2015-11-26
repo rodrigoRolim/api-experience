@@ -2,16 +2,16 @@
 
 return [
     'key' => env('APP_KEY'),
-    'userAgilDB' => env('USER_AGIL_DB', 'cedro.'),
-    'skinPadrao'  => 'green.css', 
-    'clienteNome' => 'Lab. Teste',
-    'clienteLogo' => '/assets/images/logo_cedro.png',
+    'userAgilDB' => env('USER_AGIL_DB', ''),
+    'skinPadrao'  => env('APP_SKIN'), 
+    'clienteNome' => env('APP_CLIENTE_NOME'),
+    'clienteLogo' => env('APP_LOGO'),
     'experienceLogo' => '/assets/images/icone_experience.png',
-    'clienteUrl'  => 'http://www.cliente.com',
-    'PDFUrl'      => 'http://192.168.0.3:8084/datasnap/rest/TsmExperience/getLaudoPDF/',
-    'PDFUrlTemp'  => 'http://192.168.0.3:8083/TempPDF/',
-    'clienteUF'   => 'MA',
-    'clienteMsg'  => 'Fone: 98 9988 8798',
+    'clienteUrl'  => env('APP_CLIENTE_URL'),
+    'PDFUrl'      => env('APP_PDF_URL'),
+    'PDFUrlTemp'  => env('APP_PDF_TEMP'),
+    'clienteUF'   => env('APP_CLIENTE_UF'),
+    'clienteMsg'  => env('APP_CLIENTE_FONE'),
     'loginText'	  =>  [
     	'title' 		=> 'eXperience',
     	'subTitle' 		=> '<br><br>is provided with two main layouts <br>three skins and separate configure options.',
@@ -32,10 +32,10 @@ return [
             'tipoEntregaInvalido' => 'Este exame só poderá ser impresso no laboratório.'
         ],
     ],
-    'qtdCaracterPosto' => 2,
-    'qtdCaracterAtend' => 6,
-    'atendimentoMask'  => '99/999999',
-    'postoMask'        => '99',
+    'qtdCaracterPosto' => env('APP_QTD_CHAR_POSTO'),
+    'qtdCaracterAtend' => env('APP_QTD_CHAR_ATD'),
+    'atendimentoMask'  => env('APP_ATD_MASK'),
+    'postoMask'        => env('APP_POSTO_MASK'),
     'selectFiltroSituacaoAtendimento' => [
         '' => 'Selecione',
         'TF' => 'Finalizados',
@@ -44,9 +44,9 @@ return [
         'EA' => 'Em Andamento',
     ],
     'medico' => [
-        'qtdDiasFiltro' => 1
+        'qtdDiasFiltro' => env('APP_MEDICO_QTD_DIAS')
     ],
     'posto' => [
-        'qtdDiasFiltro' => 1
+        'qtdDiasFiltro' => env('APP_POSTO_QTD_DIAS')
     ]
 ];
