@@ -52,14 +52,14 @@ class PostoRepository extends BaseRepository
                     AND (:postoRealizante IS NULL OR E.posto_realizante = :postoRealizante)
                 ORDER BY c.nome";       
 
-        $clientes[] = current(DB::select(DB::raw($sql),[
+        $clientes = DB::select(DB::raw($sql),[
             'idPosto' => $idPosto,
             'dataInicio' => $dataInicio.' 00:00',
             'dataFim' => $dataFim.' 23:59',            
             'convenio' => $convenio,
             'situacao' => $situacao,
             'postoRealizante' => $postoRealizante
-        ]));
+        ]);
 
         $dtNow = Carbon::now();
 
@@ -83,9 +83,9 @@ class PostoRepository extends BaseRepository
     public function getPostosRealizantes()
     {
         $sql = 'SELECT posto,nome FROM '.config('system.userAgilDB').'VEX_POSTOS WHERE realiza_exames = :tipo order by nome';
-        $data [] = current(DB::select(DB::raw($sql),[
+        $data = DB::select(DB::raw($sql),[
             'tipo' => 'S'
-        ]));
+        ]);
 
         $postos[''] = 'Selecione';
 
@@ -109,11 +109,11 @@ class PostoRepository extends BaseRepository
                 WHERE p.realiza_exames = :tipo AND e.posto = :posto AND e.atendimento = :atendimento
                 ORDER BY p.nome';
         
-        $data [] = current(DB::select(DB::raw($sql),[
+        $data = DB::select(DB::raw($sql),[
             'tipo' => 'S',
             'posto' => $posto,
             'atendimento' => $atendimento
-        ]));
+        ]);
 
         foreach ($data as $key => $value) {
             $postos[$value->posto] = $value->nome;
@@ -137,13 +137,13 @@ class PostoRepository extends BaseRepository
 			    ORDER BY
 			    	nome_convenio';
 
-        $data[] = current(DB::select(DB::raw($sql),[
+        $data = DB::select(DB::raw($sql),[
             'idPosto' => $idPosto,
-        ]));
+        ]);
 
         $convenios = array(''=>'Selecione ');       
 
-	   foreach ($data as $key => $value) {
+	   foreach($data as $key => $value) {
             $convenios[$value->convenio] = $value->nome_convenio;
         }       
 
@@ -158,7 +158,6 @@ class PostoRepository extends BaseRepository
      * @return mixed
      */
     public function getAtendimentosPacienteByPosto($registro,$idPosto,$idAtendimento){
-
         $sql = 'SELECT c.nome,c.data_nas,c.registro,c.sexo,c.telefone,c.telefone2,a.posto,a.atendimento,data_atd, INITCAP(a.nome_convenio) AS nome_convenio, INITCAP(a.nome_solicitante) AS nome_solicitante, ('.config('system.userAgilDB').'GET_MNEMONICOS(a.posto,a.atendimento)) mnemonicos,a.saldo_devedor
             FROM '.config('system.userAgilDB').'vex_atendimentos a              
               INNER JOIN '.config('system.userAgilDB').'VEX_CLIENTES c ON a.registro = c.registro
@@ -167,9 +166,9 @@ class PostoRepository extends BaseRepository
             AND a.atendimento = :idAtendimento
             ORDER BY data_atd DESC';
 
-        $atendimento[] = current(DB::select(DB::raw($sql), ['registro' => $registro, 'idPosto' => $idPosto, 'idAtendimento' => $idAtendimento]));
-        $atendimento = current($atendimento);
+        $atendimento = DB::select(DB::raw($sql), ['registro' => $registro, 'idPosto' => $idPosto, 'idAtendimento' => $idAtendimento]);
 
+        $atendimento = current($atendimento);
         $atendimento->idade = DataNascimento::idade($atendimento->data_nas);
 
         return $atendimento;

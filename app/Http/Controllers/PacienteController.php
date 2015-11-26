@@ -55,6 +55,7 @@ class PacienteController extends Controller {
         $tipoLoginPaciente = $this->auth->user()['tipoLoginPaciente'];
         //Envio os dados de autenticação do usuario para carregar todos os atendimentos
         $atendimentos = $this->atendimento->atendimentos($this->auth->user());
+
         return view('paciente.index',compact('atendimentos','tipoLoginPaciente'));
     }
 

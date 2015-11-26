@@ -55,7 +55,7 @@ class MedicoRepository extends BaseRepository
         $mask = config('system.atendimentoMask');
         $mask = explode("/",$mask);
 
-        $clientes[] = current(DB::select(DB::raw($sql),[
+        $clientes = DB::select(DB::raw($sql),[
             'idMedico' => $idMedico,
             'dataInicio' => $dataInicio.' 00:00',
             'dataFim' => $dataFim.' 23:59',
@@ -64,7 +64,7 @@ class MedicoRepository extends BaseRepository
             'posto' => $posto,
             'convenio' => $convenio,
             'situacao' => $situacao,
-        ]));
+        ]);
 
         for($i=0;$i<sizeof($clientes);$i++){
             $atd = explode(",",$clientes[$i]->atendimentos);
@@ -96,11 +96,13 @@ class MedicoRepository extends BaseRepository
                 WHERE c.registro = :registro AND m.ID_MEDICO = :solicitante
                 ORDER BY data_atd DESC';
 
-        $atendimento[] = current(DB::select(DB::raw($sql), ['registro' => $registro, 'solicitante' => $solicitante]));
-        $atendimento = current($atendimento);
+        $atendimentos = DB::select(DB::raw($sql), ['registro' => $registro, 'solicitante' => $solicitante]);
+        
+        for($i=0;$i<sizeof($atendimentos);$i++){
+            $atendimentos[$i]->idade = DataNascimento::idade($atendimentos[$i]->data_nas);
+        }
 
-        $atendimento->idade = DataNascimento::idade($atendimento->data_nas);
-        return $atendimento;
+        return $atendimentos;
     }
 
     /**
@@ -118,9 +120,9 @@ class MedicoRepository extends BaseRepository
                 GROUP BY p.posto,p.nome
                 ORDER BY p.nome';
 
-        $data[] = current(DB::select(DB::raw($sql),[
+        $data = DB::select(DB::raw($sql),[
             'idMedico' => $idMedico,
-        ]));
+        ]);
 
         $postos = array(''=>'Selecione');
 
@@ -147,9 +149,9 @@ class MedicoRepository extends BaseRepository
                 GROUP BY c.convenio,c.nome
                 ORDER BY c.nome';
 
-        $data[] = current(DB::select(DB::raw($sql),[
+        $data = DB::select(DB::raw($sql),[
             'idMedico' => $idMedico,
-        ]));
+        ]);
 
         $convenios = array(''=>'Selecione ');
 

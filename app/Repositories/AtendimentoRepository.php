@@ -39,8 +39,7 @@ class AtendimentoRepository extends BaseRepository
                     FROM '.config('system.userAgilDB').'vex_atendimentos
                     WHERE posto = :posto AND atendimento = :atendimento';
 
-            $atendimento[] = current(DB::select(DB::raw($sql), ['posto' => $data[0],'atendimento' => $data[1]]));
-
+            $atendimentos[] = current(DB::select(DB::raw($sql), ['posto' => $data[0],'atendimento' => $data[1]]));
         }
 
         if($user['tipoLoginPaciente'] == 'CPF'){
@@ -49,10 +48,10 @@ class AtendimentoRepository extends BaseRepository
                     WHERE registro = :registro
                     ORDER BY data_atd DESC';
 
-            $atendimento[] = current(DB::select(DB::raw($sql), ['registro' => $user['registro']]));
+            $atendimentos = DB::select(DB::raw($sql), ['registro' => $user['registro']]);
         }
 
-        return $atendimento;
+        return $atendimentos;
     }
 
     /**
@@ -79,7 +78,7 @@ class AtendimentoRepository extends BaseRepository
 
         $atendimento = current(DB::select(DB::raw($sql), ['posto' => $posto,'atendimento' => $atendimento]));
         $saldo = $atendimento->saldo_devedor;
-        
+
         return (($saldo > 0) ? true : false);
     }
 }
