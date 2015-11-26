@@ -90,6 +90,10 @@ class CustomUserProvider implements UserProvider {
                         $atendimentoAcesso = new AtendimentoAcesso();
                         $atendimentoAcesso = $atendimentoAcesso->where(['id' => $id])->get()->toArray();
 
+                        if(!sizeof($atendimentoAcesso)){
+                            return null;
+                        }
+
                         //Verifico se a senha eviada pelo formulario é igual a senha enviada pelo formulario
                         if(strtoupper($atendimentoAcesso[0]['pure']) == strtoupper($credentials['password'])){
                             //Caso seja igual preparo os valores para ser enviado para a sessao do usuario
@@ -135,6 +139,10 @@ class CustomUserProvider implements UserProvider {
                         //Pego o id gerado e faço a consulta na tablea clienteAcesso para pegar a senha guardada no banco de dados
                         $clienteAcesso = new ClienteAcesso();
                         $clienteAcesso = $clienteAcesso->where(['id' => $id])->get()->toArray();
+
+                        if(!sizeof($clienteAcesso)){
+                            return null;
+                        }
 
                         //Caso a senha esteja correta
                         if(strtoupper($clienteAcesso[0]['pure']) == strtoupper($credentials['password'])){
@@ -183,6 +191,10 @@ class CustomUserProvider implements UserProvider {
                         //Caso não encontre o medico pelo ID_MEDICO é verificado pelo CRM
                         $medicoAcesso = new MedicoAcesso();
                         $medicoAcesso = $medicoAcesso->where(['id' => $idAlt])->get()->toArray();    
+                    }
+
+                    if(!sizeof($medicoAcesso)){
+                        return null;
                     }
 
                     //Verifica se a senha informada é a mesma encontrada no banco de dados

@@ -23,9 +23,9 @@ class ClienteAcesso extends BaseModel {
      *
      * @var string
      */
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'ID';
 
-    protected $fillable = array('id','pure');
+    protected $fillable = array('ID','PURE');
 
     public $timestamps = false;
 
