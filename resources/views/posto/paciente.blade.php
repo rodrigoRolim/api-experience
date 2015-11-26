@@ -22,30 +22,7 @@
     </div>
 @stop
 
-@section('left')
-    <nav class="navbar-default navbar-static-side" role="navigation">
-        <div class="topoMenu">
-            <strong>Relação de Atendimentos</strong>
-        </div>
-        <ul class="nav metismenu" id="side-menu">
-            @foreach($atendimentos as $key => $atendimento)
-                <li class="{{ !$key ? 'active' : '' }}">
-                    <a href="#" class="btnAtendimento"
-                       data-posto="{{$atendimento->posto}}"
-                       data-atendimento="{{$atendimento->atendimento}}"
-                       data-solicitante="{{$atendimento->nome_solicitante}}"
-                       data-convenio="{{$atendimento->nome_convenio}}"
-                       data-saldo="{{$atendimento->saldo_devedor}}"
-                       data-idade="{{$atendimento->idade}}"
-                       data-sexo="{{$atendimento->sexo}}"
-                       data-mnemonicos="{{$atendimento->mnemonicos}}"
-                       data-nome="{{$atendimento->nome}}"> 
-                    </a>
-                </li>
-            @endforeach
-        </ul>
-    </nav>
-@stop
+<!-- nome_solicitante,saldo_devedor,sexo,mnemonicos -->
 
 @section('content')
 <div id="page-wrapper-posto" class="gray-bg">
@@ -54,16 +31,16 @@
             <button type="button" class="btn btn-default btn-circle btn-md btnVoltar pull-left" style="margin-right:10px;margin-top:5px">
                 <i class="fa fa-reply" style="font-size:18px"></i>
             </button>
-            <strong><span id="nome" class="nomePaciente"></span></strong><br>
-            <div class="idadePaciente"></div>
+            <strong><span id="nome" class="nomePaciente">{{$atendimento->nome}}</span></strong><br>
+            <div class="idadePaciente">{{$atendimento->idade}}</div>
         </div>
         <div class="col-md-2 col-sm-2 col-xs-5 postoAtdPos">
             <i class="fa fa-heartbeat" data-toggle="tooltip" data-placement="bottom" title="Posto/Atendimento"></i>
-            <span id="atendimento"></span>
+            <span id="atendimento">{{str_pad($atendimento->posto,config('system.qtdCaracterPosto'),'0',STR_PAD_LEFT)}}/{{str_pad($atendimento->atendimento,config('system.qtdCaracterAtend'),'0',STR_PAD_LEFT)}}</span>
         </div>
         <div class="col-md-2 col-sm-2 col-xs-6 convAtdPos">
             <i class="fa fa-credit-card" data-toggle="tooltip" data-placement="bottom" title="Convênio"></i>
-            <span id="convenio"></span>
+            <span id="convenio">{{$atendimento->nome_convenio}}</span>
         </div>
     </div>
 
@@ -108,39 +85,18 @@
         $(document).ready(function () {
             $("body").tooltip({ selector: '[data-toggle=tooltip]' });  
             
-            var posto;
-            var atendimento;
-            var nomeSolicitante;
-            var nomeConvenio;
-            var nomePaciente;
-            var mnemonicos;
+            var posto = {{$atendimento->posto}};
+            var atendimento = {{$atendimento->atendimento}};      
+            var saldo = '{{$atendimento->saldo_devedor}}'; 
+            var mnemonicos = '{{$atendimento->mnemonicos}}';
+            var sexo = '{{$atendimento->sexo}}';
 
-            var controle;
+            var controle;           
+           
+            getExames(posto,atendimento);
 
-            $('.btnAtendimento').click(function(e){
-                posto = $(e.currentTarget).data('posto');
-                atendimento = $(e.currentTarget).data('atendimento');
-                nomeSolicitante = $(e.currentTarget).data('solicitante');
-                nomeConvenio = $(e.currentTarget).data('convenio');
-                saldo = $(e.currentTarget).data('saldo');
-                nomePaciente = $(e.currentTarget).data('nome');
-                idade = $(e.currentTarget).data('idade');
-                sexo = $(e.currentTarget).data('sexo');
-                mnemonicos = $(e.currentTarget).data('mnemonicos'); 
-
-                $('.idadePaciente').append('<i class="'+((sexo == "M")?"fa fa-mars":"fa fa-venus")+'"></i> <span id="idade"></span>');
+            $('.idadePaciente').append('<i class="'+((sexo == "M")?"fa fa-mars":"fa fa-venus")+'"></i> <span id="idade"></span>');
                 $('#idade').html(idade);
-
-                if(mnemonicos == ""){
-                     swal("Não foram realizados exames para este atendimento.");
-                }
-
-                if(posto != null && atendimento != null){
-                    getExames(posto,atendimento);
-                }
-
-                $('.boxSelectAll').html('');
-            });
 
             $('.btnAtendimento').hide(); 
             $('.btnAtendimento').trigger('click');         
@@ -184,11 +140,7 @@
                 //Pega os dados via get de exames do atendimento
                 $.get( "/posto/examesatendimento/"+posto+"/"+atendimento, function( result ) {
                     //Carrega dados do atendimento
-                    $('#nome').html(nomePaciente);
-                    $('#solicitante').html(nomeSolicitante);
-                    $('#convenio').html(nomeConvenio);
-                    $('#atendimento').html("00/00"+atendimento);
-
+                    
                     $('.listaExames').html('');
                     $('#boxRodapePostoPac').html('');
 

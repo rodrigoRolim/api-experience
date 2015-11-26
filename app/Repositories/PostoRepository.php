@@ -115,6 +115,8 @@ class PostoRepository extends BaseRepository
             'atendimento' => $atendimento
         ]);
 
+        $postos = [];
+
         foreach ($data as $key => $value) {
             $postos[$value->posto] = $value->nome;
         }

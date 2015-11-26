@@ -122,15 +122,16 @@ class PostoController extends Controller {
         $idPosto = $this->auth->user()['posto'];
 
         //Lista todos os atendimento do paciente para aquele posto
-        $atendimentos = $this->posto->getAtendimentosPacienteByPosto($registro,$idPosto,$idAtendimento);
+        $atendimento = $this->posto->getAtendimentosPacienteByPosto($registro,$idPosto,$idAtendimento);
 
-        if(!sizeof($atendimentos)){
+        if(!sizeof($atendimento)){
             \App::abort(404);
         }
         //Lista todos os atendimento do posto realizante
         $postoRealizante = $this->posto->getPostosRealizantesAtendimento($idPosto,$idAtendimento);
 
-        return view('posto.paciente',compact('atendimentos','postoRealizante'));
+        
+        return view('posto.paciente',compact('atendimento','postoRealizante'));
     }
 
     /**
