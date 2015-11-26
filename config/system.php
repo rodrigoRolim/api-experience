@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'key' => 'DHXR|e4H>Q38ZjERT"4L+7~|^P0W_j',
+    'key' => 'DHXR|e4H>Q38ZjERT"4L+7~|^P0W_jY',
     'userAgilDB' => env('USER_AGIL_DB', 'cedro.'),
     'skinPadrao'  => 'green.css', 
     'clienteNome' => 'Lab. Teste',
