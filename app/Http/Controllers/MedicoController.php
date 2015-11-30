@@ -207,14 +207,20 @@ class MedicoController extends Controller {
      */
     public function postExportarpdf(){
         //Pega os dados enviados na requisição
-        $dados = Request::input('dados');
+        $dados = current(Request::input('dados'));
         //Separa os dados o posto, atendimento e correl
-        $posto = $dados[0]['posto'];
-        $atendimento = $dados[0]['atendimento'];
-        $correlativos = $dados[0]['correlativos'];    
+        $posto = $dados['posto'];
+        $atendimento = $dados['atendimento'];
+        $correlativos = $dados['correlativos'];    
+
+        $qtdCaracterPosto = config('system.qtdCaracterPosto');
+
+        if($posto < 100){
+            $qtdCaracterPosto = 2;
+        }
 
         //Completo com 0 a esquerda o posto e atendiemtno para que fique a mesma quantidade de caracter do config
-        $postoID = str_pad($posto,config('system.qtdCaracterPosto'),'0',STR_PAD_LEFT);
+        $postoID = str_pad($posto,$qtdCaracterPosto,'0',STR_PAD_LEFT);
         $atendimentoID = str_pad($atendimento,config('system.qtdCaracterAtend'),'0',STR_PAD_LEFT);
 
         //Crio o ID com um md5 de posto e atendimento
@@ -222,10 +228,10 @@ class MedicoController extends Controller {
 
         //Verifico no banco de dados se o ID exite
         $atendimentoAcesso = new AtendimentoAcesso();
-        $atendimentoAcesso = $atendimentoAcesso->where(['id' => $id])->get()->toArray();
+        $atendimentoAcesso = current($atendimentoAcesso->where(['id' => $id])->get()->toArray());
 
         //Pego a senha do atendimento
-        $pure = $atendimentoAcesso[0]['pure'];
+        $pure = $atendimentoAcesso['pure'];
 
         //Verifico se o medico foi o solicitante do atendimento
         $ehAtendimentoMedico = $this->medico->ehAtendimentoMedico($this->auth->user()['id_medico'],$posto,$atendimento);

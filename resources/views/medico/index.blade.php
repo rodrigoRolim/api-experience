@@ -158,7 +158,7 @@
                             var cliente = result.data[index];
                             $('.contadorAtd').html('<h5 class="achouAtd">Foram encontrados ' + result.data.length + ' atendimentos para as datas selecionadas   .</h5>');
 
-                            var item =   '<li class="col-md-12 col-sm-12 col-xs-12 naoRealizado-element" data-key="'+cliente.key+'">'+
+                            var item =   '<li class="col-md-12 col-sm-12 col-xs-12 " data-key="'+cliente.key+'">'+
                                             '<div class="col-md-4 col-sm-6 col-xs-12 dadosPaciente text-left">'+
                                                 '<strong>'+cliente.nome+'</strong><br><i class="'+((cliente.sexo == "M")?"fa fa-mars":"fa fa-venus")+'"></i> &nbsp;'+cliente.idade+
                                             '</div>'+

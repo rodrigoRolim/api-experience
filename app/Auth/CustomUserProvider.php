@@ -80,8 +80,14 @@ class CustomUserProvider implements UserProvider {
                         $cliente = $atendimento[0]->cliente->toArray();                     
                         $atendimento = $atendimento->toArray();
 
+                        $qtdCaracterPosto = config('system.qtdCaracterPosto');
+
+                        if($posto < 100){
+                            $qtdCaracterPosto = 2;
+                        }
+
                         //Completa do 0 a esquerda do posto e do atendimento de acordo com a configuraçao no config.system
-                        $posto = str_pad($atendimento[0]['posto'],config('system.qtdCaracterPosto'),'0',STR_PAD_LEFT);
+                        $posto = str_pad($atendimento[0]['posto'],$qtdCaracterPosto,'0',STR_PAD_LEFT);
                         $atend = str_pad($atendimento[0]['atendimento'],config('system.qtdCaracterAtend'),'0',STR_PAD_LEFT);
 
                         //Para verificação da senha do usuario é necessario criar o ID de verificação com um md5 de posto+atendimento,
