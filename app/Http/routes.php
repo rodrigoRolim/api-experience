@@ -15,6 +15,10 @@ Route::get('/', function () {
     return redirect('/auth');
 });
 
+Route::get('/sobre', function () {
+    return view('layouts.sobre');
+});
+
 Route::group(['prefix' => '/','middleware' => ['auth','ehPaciente','revalidate']], function () {
     Route::controllers([
         'paciente' => 'PacienteController',
