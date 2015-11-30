@@ -140,7 +140,7 @@
             function getClientes(postData){
                 $('#listFilter').html('<br><br><br><br><h2 class="textoTamanho"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando registros.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>');
                 $.ajax({
-                    url : 'posto/filteratendimentos',
+                    url : '{{url("/")}}/posto/filteratendimentos',
                     type: 'POST',
                     data : postData,
                     success:function(result){   

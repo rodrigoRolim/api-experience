@@ -1,1 +1,0 @@
-{{ Html::style('/css/bruno.txt') }}

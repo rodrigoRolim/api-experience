@@ -22,7 +22,7 @@
                     </li>
                 @endif
                 <li class="item">
-                    <a href="/auth/logout">
+                    <a href="{{url('/')}}/auth/logout">
                         <i class="fa fa-sign-out"></i> Sair
                     </a>
                 </li>                           
@@ -455,10 +455,10 @@
 
                              var dadosExame = {};                           
                              dadosExame = [{'posto':posto,'atendimento':atendimento,'correlativos':correl}];
-                             var paginaPdf = window.open ('/impressao', '', '');       
+                             var paginaPdf = window.open ('{{url("/")}}/impressao', '', '');       
 
-                             $.ajax({ // Faz verificaÃ§Ã£o de dados do cliente dentro do formulario(modal) de cadastrar senha.
-                                 url: '{{url("/"")}}paciente/exportarpdf',
+                             $.ajax({
+                                 url: '{{url("/")}}paciente/exportarpdf',
                                  type: 'post',
                                  data: {"dados" : dadosExame},
                                  success: function(data){   
