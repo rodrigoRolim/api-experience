@@ -185,6 +185,7 @@ class PostoController extends Controller {
         //Verifica os detalhes do resultado do exame
         $exames = $this->exames->getDetalheAtendimentoExameCorrel($posto, $atendimento,$correl);
 
+
         return response()->json(array(
             'message' => 'Recebido com sucesso.',
             'data' => json_decode($exames),
