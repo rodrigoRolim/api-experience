@@ -112,24 +112,30 @@ class PacienteController extends Controller {
      */
     public function postExportarpdf(){
         //Pego os dados enviado pelo formulario
-        $dados = Request::input('dados');
+        $dados = current(Request::input('dados'));
         //Separo os item enviados
-        $posto = $dados[0]['posto'];
-        $atendimento = $dados[0]['atendimento'];
-        $correlativos = $dados[0]['correlativos'];    
+        $posto = $dados['posto'];
+        $atendimento = $dados['atendimento'];
+        $correlativos = $dados['correlativos'];
+
+        $qtdCaracterPosto = config('system.qtdCaracterPosto');
+
+        if($posto < 100){
+            $qtdCaracterPosto = 2;
+        }
 
         //Completo com zero a esquerda o posto e atendimento de acordo com os padroes definidos no config
-        $postoID = str_pad($posto,config('system.qtdCaracterPosto'),'0',STR_PAD_LEFT);
+        $postoID = str_pad($posto,$qtdCaracterPosto,'0',STR_PAD_LEFT);
         $atendimentoID = str_pad($atendimento,config('system.qtdCaracterAtend'),'0',STR_PAD_LEFT);
 
         //Crio o ID unido o POSTOID e ATENDIMENTOID
         $id = strtoupper(md5($postoID.$atendimentoID));
         //Verifico se existe no banco de dados esse atendimento
         $atendimentoAcesso = new AtendimentoAcesso();
-        $atendimentoAcesso = $atendimentoAcesso->where(['id' => $id])->get()->toArray();
+        $atendimentoAcesso = current($atendimentoAcesso->where(['id' => $id])->get()->toArray());
 
         //Pego a tenha do atendimento para verificação
-        $pure = $atendimentoAcesso[0]['pure'];   
+        $pure = $atendimentoAcesso['pure'];
 
         //Verifico se a tenha é do Cliente logado no sistema
         $ehCliente = $this->atendimento->ehCliente($this->auth,$posto,$atendimento);

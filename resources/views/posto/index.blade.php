@@ -95,7 +95,7 @@
             dataInicio = dataInicio.format('DD/MM/YYYY');
             dataFim = dataFim.format('DD/MM/YYYY');
 
-            if(Cookies.get('dataInicio') != null){ // Se o filtro foi utilizado durante a sessao, filtro sera automaticamente preenchido. Se não, rececebe valores padrões.
+            if(Cookies.get('dataInicio') != null){
                 $('#dataInicio').val(Cookies.get('dataInicio'));  
                 $('#dataFim').val(Cookies.get('dataFim'));
                 $('#convenio').val(Cookies.get('convenio'));     
@@ -182,7 +182,7 @@
                                                     '<strong>'+atendimento.nome+'</strong>'+'<br>'+'<i class="'+((atendimento.sexo == "M")?"fa fa-mars":"fa fa-venus")+'"></i> '+atendimento.idade+
                                                 '</div>'+
                                                 '<div class="col-md-2 col-sm-6 col-xs-6">'+
-                                                    '<i class="fa fa-heartbeat" data-toggle="tooltip" data-placement="right" title="Posto/Atendimento"></i><strong> '+atendimento.posto+'/'+atendimento.atendimento+'</strong>'+                                                    
+                                                    '<i class="fa fa-heartbeat" data-toggle="tooltip" data-placement="right" title="Posto/Atendimento"></i><strong> '+atendimento.posto+'/'+atendimento.atendimento+'</strong>'+
                                                 '</div>'+
                                                 '<div class="col-md-2 col-sm-6 col-xs-6">'+
                                                     '<i class="fa fa-calendar-check-o" data-toggle="tooltip" title="Data do Atendimento"></i> '+dataAtendimento+

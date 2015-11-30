@@ -209,8 +209,14 @@ class PostoController extends Controller {
             \App::abort(404);
         }
 
+        $qtdCaracterPosto = config('system.qtdCaracterPosto');
+
+        if($posto < 100){
+            $qtdCaracterPosto = 2;
+        }
+
         //Prepara o posto e atendimento com zero a esquerda de acordo com a quantidade de caracter estipulado no confige
-        $postoID = str_pad($posto,config('system.qtdCaracterPosto'),'0',STR_PAD_LEFT);
+        $postoID = str_pad($posto,$qtdCaracterPosto,'0',STR_PAD_LEFT);
         $atendimentoID = str_pad($atendimento,config('system.qtdCaracterAtend'),'0',STR_PAD_LEFT);
 
         //Gera o ID do médico de acordo com POSTO e atendimento
@@ -218,9 +224,10 @@ class PostoController extends Controller {
 
         //Pega a senha do atendimento no banco de dados
         $atendimentoAcesso = new AtendimentoAcesso();
-        $atendimentoAcesso = $atendimentoAcesso->where(['id' => $id])->get()->toArray();
+        $atendimentoAcesso = current($atendimentoAcesso->where(['id' => $id])->get()->toArray());
 
-        $pure = $atendimentoAcesso[0]['pure'];
+        $pure = $atendimentoAcesso['pure'];
+
         //Envia para o servico do datasnap
         return $this->dataSnap->exportarPdf($posto,$atendimento,$pure,$correlativos);
     }
