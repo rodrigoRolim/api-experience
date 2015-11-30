@@ -73,6 +73,15 @@
         $(document).ready(function (){
             $("body").tooltip({ selector: '[data-toggle=tooltip]' });
 
+            $.strPad = function(i,l,s) {
+                var o = i.toString();
+                if (!s) { s = '0'; }
+                while (o.length < l) {
+                    o = s + o;
+                }
+                return o;
+            };
+
             $(".menu-trigger").click(function() {
                 $(".boxFiltroPosto").slideToggle(768, function() {
                     $(this).toggleClass("nav-expanded").css('display', '');
@@ -95,7 +104,7 @@
             dataInicio = dataInicio.format('DD/MM/YYYY');
             dataFim = dataFim.format('DD/MM/YYYY');
 
-            if(Cookies.get('dataInicio') != null){
+            if(Cookies.get('dataInicio') != null){ // Se o filtro foi utilizado durante a sessao, filtro sera automaticamente preenchido. Se não, rececebe valores padrões.
                 $('#dataInicio').val(Cookies.get('dataInicio'));  
                 $('#dataFim').val(Cookies.get('dataFim'));
                 $('#convenio').val(Cookies.get('convenio'));     
@@ -153,6 +162,8 @@
                             $('.contadorAtd').html('<h5 class="achouAtd">Foram encontrados ' + result.data.length + ' atendimentos para as datas selecionadas   .</h5>');
                        
                             atendimento.telefone = atendimento.telefone.replace(/ /g,""); //Remove espaços
+                            atendimento.posto = $.strPad(atendimento.posto, {{config('system.qtdCaracterPosto')}});
+                            atendimento.atendimento = $.strPad(atendimento.atendimento, {{config('system.qtdCaracterAtend')}});
                             dataAtendimento = new moment(atendimento.data_atd);                            
                             dataAtendimento = dataAtendimento.format('DD/MM/YYYY');     
                             dataNascimento = new moment(atendimento.data_nas);
@@ -182,7 +193,7 @@
                                                     '<strong>'+atendimento.nome+'</strong>'+'<br>'+'<i class="'+((atendimento.sexo == "M")?"fa fa-mars":"fa fa-venus")+'"></i> '+atendimento.idade+
                                                 '</div>'+
                                                 '<div class="col-md-2 col-sm-6 col-xs-6">'+
-                                                    '<i class="fa fa-heartbeat" data-toggle="tooltip" data-placement="right" title="Posto/Atendimento"></i><strong> '+atendimento.posto+'/'+atendimento.atendimento+'</strong>'+
+                                                    '<i class="fa fa-heartbeat" data-toggle="tooltip" data-placement="right" title="Posto/Atendimento"></i><strong> '+atendimento.posto+'/'+atendimento.atendimento+'</strong>'+                                                    
                                                 '</div>'+
                                                 '<div class="col-md-2 col-sm-6 col-xs-6">'+
                                                     '<i class="fa fa-calendar-check-o" data-toggle="tooltip" title="Data do Atendimento"></i> '+dataAtendimento+
