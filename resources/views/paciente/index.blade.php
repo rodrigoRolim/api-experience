@@ -467,7 +467,7 @@
                              var paginaPdf = window.open ('{{url("/")}}/impressao', '', '');       
 
                              $.ajax({
-                                 url: '{{url("/")}}paciente/exportarpdf',
+                                 url: '{{url("/")}}/paciente/exportarpdf',
                                  type: 'post',
                                  data: {"dados" : dadosExame},
                                  success: function(data){   
