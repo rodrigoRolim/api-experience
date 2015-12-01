@@ -82,7 +82,7 @@ class CustomUserProvider implements UserProvider {
 
                         $qtdCaracterPosto = config('system.qtdCaracterPosto');
 
-                        if($posto < 100){
+                        if($atendimento[0]['posto'] < 100){
                             $qtdCaracterPosto = 2;
                         }
 
