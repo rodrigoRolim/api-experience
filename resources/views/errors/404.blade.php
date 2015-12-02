@@ -42,7 +42,7 @@
     <body>
         <div class="container">
             <div class="content">
-            	{!! Html::image('/assets/images/logo_g.png', 'Codemed', array('title' => 'logo', 'style' => 'height:120px')) !!}
+                {!! Html::image(config('system.clienteLogo'), 'logo_lab', array('title' => 'logo')) !!}
                 <div class="title">Página não encontrada</div>
             </div>
         </div>
