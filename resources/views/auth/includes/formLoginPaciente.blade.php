@@ -30,7 +30,7 @@
 	        <label>Data de Nascimento</label>
 	        <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-            	<input type="text" id="nascimento" value="18/08/1934" name="nascimento" class="form-control" placeholder="Data de Nascimento" required="">
+            	<input type="text" id="nascimento" name="nascimento" class="form-control" placeholder="Data de Nascimento" required="">
             </div>
 			@if ($errors->has('nascimento')) <p class="help-block">{{ $errors->first('nascimento') }}</p> @endif
 		</div></div>
