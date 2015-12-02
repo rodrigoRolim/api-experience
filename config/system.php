@@ -16,8 +16,8 @@ return [
     'clienteMsg'  => env('APP_CLIENTE_FONE'),
     'loginText'	  =>  [
     	'title' 		=> 'eXperience',
-    	'subTitle' 		=> '<br><br>is provided with two main layouts <br>three skins and separate configure options.',
-    	'description' 	=> '<p>Perfectly designed and precisely prepared admin theme with over 50 pages with extra new web app views.</p><p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s.</p>',
+    	'subTitle' 		=> '<h2 style="color:#76C1CC">Ferramenta para visualização de resultados online</h2>',
+    	'description' 	=> '<p>Solução tecnológica desenvolvida por <a href="www.codemed.com.br" target="_new">Codemed</a></p>',
     	'footerText'	=> '<strong>Codemed</strong> ©2014-2015',
     ],
     'messages' => [
@@ -50,5 +50,8 @@ return [
     ],
     'posto' => [
         'qtdDiasFiltro' => env('APP_POSTO_QTD_DIAS')
+    ],
+    'experience' => [
+        'sobre' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
     ]
 ];
