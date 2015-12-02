@@ -31,13 +31,11 @@
 				{!! Html::image(config('system.eXperienceLogoHorizontal'), 'logo_exp', array('title' => 'eXperience - codemed',)) !!}			
 			</div>
 			<div class="text-center">
-				<h1 style="color:#76C1CC">Ferramenta para visualização de resultados online. </h1>
+				{!!config('system.loginText.subTitle')!!}
 			</div>
 			<div class="text-center">
 				<h3 class="lead" style="font-size:16px">
-					Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-					Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-					when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+					{!!config('system.experience.sobre')!!}
 				</h3>
 			</div>
 			<div class="text-center" style="padding-top:40px">
