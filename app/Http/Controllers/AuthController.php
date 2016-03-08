@@ -15,6 +15,7 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
+use BrowserDetect;
 
 use Redirect;
 use Session;
@@ -52,6 +53,14 @@ class AuthController extends Controller
      */
      public function getIndex()
      {
+
+/*        $result = BrowserDetect::isMobile();
+
+        if($result == true){
+            return view('mobile.auth.index');            
+        }*/
+
+
         return view('auth.index');
      }
 

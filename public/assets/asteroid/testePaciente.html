@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <title>
+      Paciente
+    </title>
+    <meta content="IE=edge" http-equiv="x-ua-compatible">
+    <meta content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href="css/materialdesignicons.min.css" media="all" rel="stylesheet" type="text/css">
+    <link href="css/keyframes.css" rel="stylesheet" type="text/css">
+    <link href="css/materialize.min.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+</head>
+  <body>
+    <div class="m-scene" id="main"> <!-- Page Container -->
+
+      <!-- Sidebars -->
+      <div class="snap-drawers">
+
+        <!-- Left Sidebar -->
+        <div class="snap-drawer snap-drawer-left">
+          <div class="drawer-inner">
+            <ul>
+              <li><a href="index.html"><i class="mdi mdi-home"></i> <span>Home</span></a></li>
+              <li><a href="profile.html"><i class="mdi mdi-account"></i> <span>Profile</span></a></li>
+              <li><a href="portfolio.html"><i class="mdi mdi-file-image-box"></i> <span>Portfolio</span></a></li>
+              <li><a href="blog.html"><i class="mdi mdi-book-multiple-variant"></i> <span>Blog <span class="badge white z-depth-1">4</span></span></a></li>
+              <li><a href="news.html"><i class="mdi mdi-rss"></i> <span>News</span></a></li>
+              <li><a href="contacts.html"><i class="mdi mdi-map-marker"></i> <span>Contacts</span></a></li>
+            </ul>
+            <ul class="exit">
+              <li><a href="login.html"><i class="mdi mdi-exit-to-app"></i> <span>Logout</span></a>
+              </li>
+            </ul>
+          </div>
+        </div> <!-- End of Left Sidebar -->
+
+        <!-- Right Sidebar -->
+        <div class="snap-drawer snap-drawer-right">
+          <div class="drawer-inner">
+            <ul>
+              <li><a href="timeline.html"><i class="mdi mdi-timelapse"></i> <span>Timeline</span></a></li>
+              <li><a href="messages.html"><i class="mdi mdi-bell"></i> <span>Messages <span class="badge white z-depth-1">2</span></span></a></li>
+              <li><a href="todo.html"><i class="mdi mdi-checkbox-marked-outline"></i> <span>ToDo</span></a></li>
+              <li><a href="login.html"><i class="mdi mdi-account-circle"></i> <span>Login</span></a></li>
+              <li><a href="signup.html"><i class="mdi mdi-account-plus"></i> <span>Account Creation</span></a></li>
+              <li class="have-child">
+                <ul class="collapsible" data-collapsible="accordion">
+                  <li>
+                    <div class="collapsible-header">
+                      <i class="mdi mdi-pine-tree"></i> Sub Tree <i class="mdi mdi-menu-down right"></i>
+                    </div>
+                    <div class="collapsible-body">
+                      <ul class="collapsible" data-collapsible="accordion">
+                        <li>
+                          <div class="collapsible-header">
+                            <i class="mdi mdi-numeric-1-box-outline"></i> First
+                          </div>
+                          <div class="collapsible-header">
+                            <i class="mdi mdi-numeric-2-box-outline"></i> Second
+                          </div>
+                          <div class="collapsible-header">
+                            <i class="mdi mdi-numeric-3-box-outline"></i> Third
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div> <!-- End of Right Sidebar -->
+      </div> <!-- End of Sidebars -->
+
+      <!-- Page Content -->
+      <div class="snap-content z-depth-5" id="content">
+
+        <!-- Toolbar -->
+        <div id="toolbar">
+          <div class="open-left" id="open-left">
+            <i class="mdi mdi-sort-variant"></i>
+          </div>
+          <span class="title">Exames</span>
+          <div class="open-right" id="open-right">
+            <i class="mdi mdi-dots-vertical"></i>
+          </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="scene_element scene_element--fadeinup">
+
+          <div class="page-header bg-14">
+            <div class="overlay-gradient">
+            </div>
+            <h2 class="white-text" style="font-size: 20px; margin-bottom:0px;  text-shadow: -0.2px 0 black, 0 0.2px black, 1px 0 black, 0 -0.2px black;">
+              Ailton Nunes de Morais Rego
+            </h2>
+            <ul class="tabs">
+              <li class="tab col s6">
+                <a class="active" style="font-size: 10px;">20/08/2015 | 00/052013 Unihosp</a>
+              </li>
+            </ul>
+          </div>
+                <div class="single-news">
+                    <div class="infoExame" style="color:black; font-size:0.6em;">
+                      <span class="statusFinalizados"></span>&nbsp;Finalizados 
+                      <span class="statusAguardando"></span>&nbsp;Em Andamento 
+                      <span class="statusEmAndamento"></span>&nbsp;Pendentes 
+                      <span class="statusPendencias"></span>&nbsp;Nao Realizados 
+                    </div>
+                </div>
+
+          <div class="col s12 todo" id="test1">
+            <p class="todo-element border-left-coral">
+              <input id="todo1" type="checkbox"> <label for="todo1">HBS | ANTIGENO AUSTRALIA (HBS AG)</label> <span>&nbsp;Nao Realizado &nbsp;|&nbsp;&nbsp;Centro</span>
+            </p>
+
+            <p class="todo-element border-left-sea">
+              <input checked id="todo2" type="checkbox"> <label for="todo2">APE | ANTIGENO PROSTATICO ESPECIFICO</label> <img alt=""> <span>&nbsp;Finalizado &nbsp;|&nbsp;&nbsp;Centro</span>
+            </p>
+
+            <p class="todo-element border-left-orange">
+              <input id="todo3" type="checkbox"> <label for="todo3">CRE | CREATININA</label> <span>9:45 AM</span> <img alt="" >
+            </p>
+
+            <p class="todo-element border-left-green">
+              <input id="todo4" type="checkbox"> <label for="todo4">VDRL | SOROLOGIA PARA LUES (VDRL)</label> <span>9:45 AM</span>
+            </p>
+
+            <p class="todo-element border-left-coral">
+              <input id="todo5" type="checkbox"> <label for="todo5">HC | HEMOGRAMA AUTOMATIZADO</label> <span>&nbsp;Nao Realizado &nbsp;|&nbsp;&nbsp;Centro/span> <img alt="">
+            </p>
+
+            <p class="todo-element border-left-sea">
+              <input checked id="todo6" type="checkbox"> <label for="todo6">GLI | GLICEMIA EM JEJUM</label> <span>&nbsp;Finalizado &nbsp;|&nbsp;&nbsp;Centro</span>
+            </p>
+
+            <p class="todo-element border-left-sea">
+              <input checked id="todo7" type="checkbox"> <label for="todo7">LIC | LIPIDOGRAMA COMPLETO</label> <img alt="" > <span>&nbsp;Finalizado &nbsp;|&nbsp;&nbsp;Centro</span>
+            </p>
+
+          </div>
+
+          <!-- Footer -->
+          <div class="scene_element scene_element--fadeinup footer-copyright secondary-color">
+            <div class="container">
+              Desendolvido por <a href="http://www.codemed.com.br">Codemed</a>
+            </div>
+          </div>
+
+        </div> <!-- End of Main Contents -->
+        <div id="blockui"></div>
+      </div> <!-- End of Page Content -->
+    </div> <!-- End of Page Container -->
+
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script> 
+    <script src="js/materialize.min.js"></script> 
+    <script src="js/snap.js"></script> 
+    <script src="js/jquery.smoothState.min.js"></script> 
+    <script src="js/sidebar.js"></script> 
+    <script src="js/functions.js"></script>
+  </body>
+</html>

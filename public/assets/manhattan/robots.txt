@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Splash Screen</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script type="text/javascript">
+     if(navigator.userAgent.match(/Mobi/) && self!=top){ top.location.href = 'http://manhattan.sensationthemes.com'; }
+  </script>
+  <script src="js/webfont.js"></script>
+  <script>
+    WebFont.load({
+      google: {
+        families: ["Montserrat:400,700"]
+      }
+    });
+  </script>
+  <link rel="shortcut icon" type="image/x-icon" href="images/logo.ico">
+  <link rel="apple-touch-icon" href="images/logo.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-69350835-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+</head>
+<body style="    text-align: center;
+    background-color: #181d27;
+    height: 871px;
+    background-size: 394px, 100px;
+    background-image: url(images/iphone.png), url(images/qrcode.jpg);
+    background-repeat: no-repeat;
+    background-position: center 40px, 20px 20px; background-attachment: local, fixed;">
+  <iframe src="splash.html" width="359" height="635" frameborder="0" style="border: none; margin: 0 auto; width: 359px; margin-top:112px;"></iframe>
+</body>
+</html>

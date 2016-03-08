@@ -10,7 +10,8 @@
         "yajra/laravel-oci8": "~2.0",
         "laravelcollective/html": "~5.0",
         "prettus/l5-repository": "^2.1",
-        "nesbot/carbon": "~1.14"
+        "nesbot/carbon": "~1.14",
+        "hisorange/browser-detect": "2.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

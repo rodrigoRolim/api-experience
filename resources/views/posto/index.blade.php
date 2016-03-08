@@ -145,17 +145,16 @@
             });
 
             $('#btnFiltrar').trigger('click');
-            
+
             function getClientes(postData){
                 $('#listFilter').html('<br><br><br><br><h2 class="textoTamanho"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando registros.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>');
                 $.ajax({
                     url : '{{url("/")}}/posto/filteratendimentos',
                     type: 'POST',
                     data : postData,
-                    success:function(result){   
+                    success:function(result){
                         $('#listFilter').html('');
                         var dataAtendimento = [];
-
  
                         $.each( result.data, function( index ){
                             var atendimento = result.data[index];                           
@@ -216,7 +215,7 @@
                             var atendimento = $(e.currentTarget).data('atendimento');
                             window.location.replace("{{url('/')}}/posto/paciente/"+key+"/"+atendimento);
                         });
-                        
+
                         if(result.data.length == 0){
                             $('#listFilter').append('<h2 class="textoTamanho">Não foram encontrados atendimentos.</h2>');
                             $('.contadorAtd').html('');

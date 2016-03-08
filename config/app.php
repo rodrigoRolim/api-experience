@@ -156,6 +156,11 @@ return [
          * ORA CONECT
          */
         yajra\Oci8\Oci8ServiceProvider::class,
+
+        /**
+         * Browser Detect
+         */
+        hisorange\BrowserDetect\Provider\BrowserDetectService::class,
     ],
 
     /*
@@ -204,5 +209,6 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
         'Form'      => Collective\Html\FormFacade::class,
         'Html'      => Collective\Html\HtmlFacade::class,
+        'BrowserDetect' => hisorange\BrowserDetect\Facade\Parser::class,
     ],
 ];

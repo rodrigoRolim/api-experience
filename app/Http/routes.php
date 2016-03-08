@@ -42,3 +42,7 @@ Route::group(['prefix' => '/', 'middleware' => ['auth']], function () {
         return view('layouts.exportacaoPdf');
     });
 });
+
+Route::get('test', function(){
+    dd(DB::connection()->getPdo());
+});

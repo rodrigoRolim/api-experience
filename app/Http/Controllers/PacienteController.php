@@ -16,6 +16,7 @@ use App\Models\AtendimentoAcesso;
 use App\Repositories\ExamesRepository;
 use App\Repositories\ClienteAcessoRepository;
 use App\Services\DataSnapService;
+use BrowserDetect;
 
 use Request;
 use Redirect;
@@ -51,10 +52,18 @@ class PacienteController extends Controller {
      */
     public function getIndex()
     {
+
+
         //Pego da sessao o tipo de acesso do paciente
         $tipoLoginPaciente = $this->auth->user()['tipoLoginPaciente'];
         //Envio os dados de autenticação do usuario para carregar todos os atendimentos
         $atendimentos = $this->atendimento->atendimentos($this->auth->user());
+
+        $result = BrowserDetect::isMobile();
+
+        if($result == true){
+            return view('mobile.paciente.index',compact('atendimentos','tipoLoginPaciente'));            
+        }
 
         return view('paciente.index',compact('atendimentos','tipoLoginPaciente'));
     }

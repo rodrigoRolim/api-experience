@@ -45,8 +45,8 @@ class PostoRepository extends BaseRepository
                   INNER JOIN ".config('system.userAgilDB')."VEX_CLIENTES C ON a.registro = c.registro
                   INNER JOIN ".config('system.userAgilDB')."VEX_EXAMES E ON a.posto = e.posto AND a.atendimento = e.atendimento
                 WHERE a.posto = :idPosto
-                    AND A.DATA_ATD >= TO_DATE(:dataInicio,'DD/MM/YYYY HH24:MI')
-                    AND A.DATA_ATD <= TO_DATE(:dataFim,'DD/MM/YYYY HH24:MI')                   
+                    AND A.DATA_ATD BETWEEN TO_DATE(:dataInicio,'DD/MM/YYYY HH24:MI')
+                    AND TO_DATE(:dataFim,'DD/MM/YYYY HH24:MI')                   
                     AND (:convenio IS NULL OR A.CONVENIO = :convenio)
                     AND (:situacao IS NULL OR A.SITUACAO_EXAMES_EXPERIENCE = :situacao)
                     AND (:postoRealizante IS NULL OR E.posto_realizante = :postoRealizante)
