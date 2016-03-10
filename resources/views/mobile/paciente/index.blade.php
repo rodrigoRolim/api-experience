@@ -19,7 +19,7 @@
     {!! Html::style('/assets/css/customMobile.css') !!}
 
 </head>
-     @include('mobile.paciente.includes.modalexame')
+     @include('mobile.paciente.includes.modInfo')
   <body>
     <div class="m-scene" id="main"> <!-- Page Container -->
 
@@ -32,10 +32,11 @@
           <div class="open-left" id="open-left">
             <i class="mdi mdi-sort-variant"></i>
           </div>          
-          <div class="row">
-            <span class="title nomePaciente">{{Auth::user()['nome']}} <br> </span>
+          <div class="row navbar-fixed">
+            <span class="title nomePaciente">{{Auth::user()['nome']}}
+                <i class="mdi-information-outline infoAdicionais"></i><br> </span>
              <span class="infoPaciente"> 
-             Data do Atendimento: {{ date('d/m/Y',strtotime($atendimentos[0]->data_atd))}} - Atendimento: {{$atendimentos[0]->atendimento}}
+             Data do Atendimento: {{ date('d/m/Y',strtotime($atendimentos[0]->data_atd))}} 
              </span>
            </div>
 <!--           <div class="open-right" id="open-right">
@@ -45,19 +46,7 @@
         
         <!-- Main Content --> 
         <div class="scene_element scene_element--fadeinup">
-<!-- 
-          <div>
-            <ul class="tabs">
-              <li class="tab col s6">
-              @foreach($atendimentos as $key => $atendimento)
-                <a class="active" style="font-size: 10px;"> {{ date('d/m/Y',strtotime($atendimento->data_atd))}} | Atendimento: {{$atendimento->atendimento}} {{$atendimento->nome_convenio}}</a>
-              @endforeach
-              </li>
-            </ul>
-          </div>
- -->
           <div class="col s12 todo" id="listaExames">
-
           </div>
 
           <!-- Footer -->
@@ -104,11 +93,20 @@ $(document).ready(function(){
 
     $('#btnAtendimento').click();
 
-    $(document).on('click', '#boxExame', function(){  //Evento de Click para Divs criadas Dinamicamente
+/*    $(document).on('click', '#boxExame', function(){  //Evento de Click para Divs criadas Dinamicamente
         visualizacao = $(this).data('visualizacao');
         if(visualizacao == 'OK')
           $('#modal').openModal();  
-    })
+    })*/
+
+     $('.infoAdicionais').click(function(e){
+        $('.modal-content').html(''); 
+        $('.modal-content').append('<h5 class="tituloModal">Detalhes Adicionais - Atendimento {{$atendimentos[0]->atendimento}} </h5>');
+        $('.modal-content').append('<br><p>ID: {{$atendimentos[0]->atendimento}} </p>');
+        $('.modal-content').append('<p>Convênio: {{$atendimentos[0]->nome_convenio}} </p>');
+        $('.modal-content').append('<p>Medico Solicitante: {{$atendimentos[0]->nome_solicitante}} </p>');
+        $('#modal').openModal();  
+     });
 
 });
           
