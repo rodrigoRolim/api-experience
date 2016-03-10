@@ -44,6 +44,7 @@ class ExamesRepository extends BaseRepository
                 case 'FINALIZADO':
                     //VERDE
                     $exames[$key]['class'] = 'success-element';
+                    $exames[$key]['corStatus'] = 'corStatusFinalizado';
                     $exames[$key]['msg'] = 'Finalizado';
                     $exames[$key]['view'] = true; //pode imprimir
                     break;
@@ -61,12 +62,14 @@ class ExamesRepository extends BaseRepository
                 case 'PENDENCIA':
                     //VERMELHO
                     $exames[$key]['class'] = 'danger-element';
+                    $exames[$key]['corStatus'] = 'corStatusPendencias';
                     $exames[$key]['msg'] = 'Existem Pendências';
                     $exames[$key]['view'] = false;
                     break;                
                 default:
                     //CINZA - NAO REALIZADO
                     $exames[$key]['class'] = 'naoRealizado-element';
+                    $exames[$key]['corStatus'] = 'corStatusNaoRealizado';
                     $exames[$key]['msg'] = 'Não Realizado';
                     $exames[$key]['view'] = false;
                     break;

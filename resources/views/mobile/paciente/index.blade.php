@@ -19,6 +19,7 @@
     {!! Html::style('/assets/css/customMobile.css') !!}
 
 </head>
+     @include('mobile.paciente.includes.modalexame')
   <body>
     <div class="m-scene" id="main"> <!-- Page Container -->
 
@@ -30,23 +31,22 @@
         <div id="toolbar">
           <div class="open-left" id="open-left">
             <i class="mdi mdi-sort-variant"></i>
-          </div>
-          <span class="title">Exames</span>
+          </div>          
+          <div class="row">
+            <span class="title nomePaciente">{{Auth::user()['nome']}} <br> </span>
+             <span class="infoPaciente"> 
+             Data do Atendimento: {{ date('d/m/Y',strtotime($atendimentos[0]->data_atd))}} - Atendimento: {{$atendimentos[0]->atendimento}}
+             </span>
+           </div>
 <!--           <div class="open-right" id="open-right">
             <i class="mdi mdi-dots-vertical"></i>
           </div> -->
         </div>
         
-        <!-- Main Content -->
+        <!-- Main Content --> 
         <div class="scene_element scene_element--fadeinup">
-
-          <div class="page-header bg-14">
-            <div class="overlay-gradient">
-            </div>
-            <h2 class="white-text" style="font-size: 20px; margin-bottom:0px;  text-shadow: -0.2px 0 black, 0 0.2px black, 1px 0 black, 0 -0.2px black;">
-              {{Auth::user()['nome']}}
-            </h2>
-
+<!-- 
+          <div>
             <ul class="tabs">
               <li class="tab col s6">
               @foreach($atendimentos as $key => $atendimento)
@@ -55,35 +55,8 @@
               </li>
             </ul>
           </div>
-                <div class="areaLegendaExames">
-                    <div class="infoExame" style="color:black; font-size:0.6em;">
-                      <span class="statusFinalizados"></span>&nbsp;Finalizados 
-                      <span class="statusAguardando"></span>&nbsp;Em Andamento 
-                      <span class="statusEmAndamento"></span>&nbsp;Pendentes 
-                      <span class="statusPendencias"></span>&nbsp;Nao Realizados 
-                    </div>
-                </div>
-
-          <div class="col s12 todo" id="test1">
-            <p class="todo-element border-left-coral">
-              <input id="todo1" type="checkbox"> <label for="todo1">HBS | ANTIGENO AUSTRALIA (HBS AG)</label> <span>&nbsp;Nao Realizado &nbsp;|&nbsp;&nbsp;Centro</span>
-            </p>
-
-            <p class="todo-element border-left-sea">
-              <input checked id="todo2" type="checkbox"> <label for="todo2">APE | ANTIGENO PROSTATICO ESPECIFICO</label> <img alt=""> <span>&nbsp;Finalizado &nbsp;|&nbsp;&nbsp;Centro</span>
-            </p>
-
-            <p class="todo-element border-left-coral">
-              <input id="todo5" type="checkbox"> <label for="todo5">HC | HEMOGRAMA AUTOMATIZADO</label> <span>&nbsp;Nao Realizado &nbsp;|&nbsp;&nbsp;Centro/span> <img alt="">
-            </p>
-
-            <p class="todo-element border-left-sea">
-              <input checked id="todo6" type="checkbox"> <label for="todo6">GLI | GLICEMIA EM JEJUM</label> <span>&nbsp;Finalizado &nbsp;|&nbsp;&nbsp;Centro</span>
-            </p>
-
-            <p class="todo-element border-left-sea">
-              <input checked id="todo7" type="checkbox"> <label for="todo7">LIC | LIPIDOGRAMA COMPLETO</label> <img alt="" > <span>&nbsp;Finalizado &nbsp;|&nbsp;&nbsp;Centro</span>
-            </p>
+ -->
+          <div class="col s12 todo" id="listaExames">
 
           </div>
 
@@ -99,13 +72,47 @@
       </div> <!-- End of Page Content -->
     </div> <!-- End of Page Container -->
 
-    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script> 
-    <script src="{{ asset('/assets/js/plugins/asteroid/materialize.min.js') }}"></script>
-	<script src="{{ asset('/assets/js/plugins/asteroid/snap.js') }}"></script> 
-	<script src="{{ asset('/assets/js/plugins/asteroid/jquery.smoothState.min.js') }}"></script>
-	<script src="{{ asset('/assets/js/plugins/asteroid/sidebar.js') }}"></script>
-	<script src="{{ asset('/assets/js/plugins/asteroid/functions.js') }}"></script>
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script> 
+  <script src="{{ asset('/assets/js/plugins/asteroid/materialize.min.js') }}"></script>
+  <script src="{{ asset('/assets/js/plugins/asteroid/snap.js') }}"></script> 
+  <script src="{{ asset('/assets/js/plugins/asteroid/jquery.smoothState.min.js') }}"></script>
+  <script src="{{ asset('/assets/js/plugins/asteroid/sidebar.js') }}"></script>
+  <script src="{{ asset('/assets/js/plugins/asteroid/functions.js') }}"></script>
+  <script src="{{ asset('/assets/js/experience/getExames.js') }}"></script>
 
   </body>
 </html>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+    $('#btnAtendimento').click(function(e){ 
+        posto = $(e.currentTarget).data('posto');
+        atendimento = $(e.currentTarget).data('atendimento');
+        mnemonicos = $(e.currentTarget).data('mnemonicos'); 
+
+        if(mnemonicos == ""){                    
+            swal("Não foram realizados exames para este atendimento.");
+        }
+
+        if(posto != null && atendimento != null){
+            getExames("{{url('/')}}",posto,atendimento);
+        }
+
+    });
+
+    $('#btnAtendimento').click();
+
+    $(document).on('click', '#boxExame', function(){  //Evento de Click para Divs criadas Dinamicamente
+        visualizacao = $(this).data('visualizacao');
+        if(visualizacao == 'OK')
+          $('#modal').openModal();  
+    })
+
+});
+          
+
+
+</script>
 

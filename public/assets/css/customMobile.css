@@ -2,5 +2,77 @@
 
 .areaLegendaExames{
 	padding: 5px;
-
 }
+
+.tipoEntregaImpressao{
+	color: red !important;
+	font-size: 0.5em !important;
+	margin-left: 0px !important;
+}
+
+.infoPaciente{
+	font-size: 10px;
+}
+
+.nomePaciente{
+	font-size: 18px !important;
+	line-height: 26px !important;
+	margin-left: 0px !important;
+}
+
+.todo .todo-element{
+	padding: 10px;
+}
+
+.nomeProcedimento{
+	color: #524C4C;
+}
+
+.subInfoExame{
+	font-size: 0.6em !important;
+	margin-left: 0px !important;
+}
+
+
+/*--Cores Status Exames--*/
+
+.warning-element, .success-element, .danger-element, .aguardando-element, .naoRealizado-element{
+	margin-right: 10px;
+}
+.success-element {
+  border-left: 10px solid #1ab394;
+}
+.naoRealizado-element {
+  border-left: 10px solid #BBBAB9;
+}
+.aguardando-element {
+  border-left: 10px solid #F7F01D;
+}
+.warning-element {
+  border-left: 10px solid #f8ac59;
+}
+.danger-element {
+  border-left: 10px solid #ed5565;
+}
+
+.corStatusFinalizado{
+	font-style: normal;
+	font-size: 1em !important;
+	margin-left: 0px !important;
+	color: #1ab394;
+}
+
+.corStatusPendencias{
+	font-style: normal;
+	font-size: 1em !important;
+	margin-left: 0px !important;
+	color: #ed5565;
+}
+
+.corStatusNaoRealizado{
+	font-style: normal;
+	font-size: 1em !important;
+	margin-left: 0px !important;
+	color: #BBBAB9;
+}
+

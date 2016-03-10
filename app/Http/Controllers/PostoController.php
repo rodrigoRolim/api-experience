@@ -118,7 +118,7 @@ class PostoController extends Controller {
         $registro = base64_decode(strtr($registro, '-_', '+/'));
         $registro = (int) trim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, config('system.key'),$registro, MCRYPT_MODE_ECB, mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB), MCRYPT_RAND)));
 
-        //Pega o Id do gosto na sessao
+        //Pega o Id do posto na sessao
         $idPosto = $this->auth->user()['posto'];
 
         //Lista todos os atendimento do paciente para aquele posto

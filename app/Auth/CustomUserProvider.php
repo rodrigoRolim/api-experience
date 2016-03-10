@@ -16,6 +16,7 @@ use App\Models\ClienteAcesso;
 use App\Models\Medico;
 use App\Models\MedicoAcesso;
 use App\Models\Posto;
+use Experience\Util\Formatar;
 use Illuminate\Auth\GenericUser;
 use Illuminate\Contracts\Auth\UserProvider;
 use Illuminate\Contracts\Auth\Authenticatable as UserContract;
@@ -103,9 +104,6 @@ class CustomUserProvider implements UserProvider {
                         //Verifico se a senha eviada pelo formulario é igual a senha enviada pelo formulario
                         if(strtoupper($atendimentoAcesso[0]['pure']) == strtoupper($credentials['password'])){
                             //Caso seja igual preparo os valores para ser enviado para a sessao do usuario
-                            $arrNome = explode(' ',$cliente['nome']);
-                            //Pego o primeiro e ultimo nome do usuario
-                            $nome = ucfirst(mb_strtolower($arrNome[0])).' '.ucfirst(mb_strtolower($arrNome[sizeof($arrNome)-1]));
 
                             //Valores que seram guardados em cache, caso necessite de algo a mais pode ser implementado nesse objeto
                             $atributes = array(
@@ -113,7 +111,7 @@ class CustomUserProvider implements UserProvider {
                                 'id' => array(
                                     'tipoAcesso' => 'PAC',
                                     'tipoLoginPaciente' => 'ID',
-                                    'nome' => $nome,
+                                    'nome' => Formatar::nomeCurto($cliente['nome']),
                                     'sexo' => $cliente['sexo'],
                                     'data_nas' => $cliente['data_nas'],
                                     'cpf' => $cliente['cpf'],
