@@ -86,9 +86,7 @@
                 });
 
             });            
-
-            console.log(Cookies.get());
-            
+           
             var dataInicio = new moment();
             var dataFim = new moment();
             var qtdDiasFiltro = {{config('system.medico.qtdDiasFiltro')}};    
@@ -139,6 +137,7 @@
 
                 var formMedico = $('#formMedico');
                 var postData = formMedico.serializeArray();
+                console.log(postData);
 
                 getClientes(postData);
             });

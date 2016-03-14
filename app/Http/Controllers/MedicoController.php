@@ -24,6 +24,7 @@ use Illuminate\Contracts\Auth\Guard;
 use Request;
 use Redirect;
 use Validator;
+use BrowserDetect;
 
 class MedicoController extends Controller {
     protected $auth;
@@ -80,6 +81,12 @@ class MedicoController extends Controller {
         //Pego atraves do repositorio todos os postos e convenios que tem algum atendimento do médico
         $postos = $this->medico->getPostoAtendimento($idMedico);
         $convenios = $this->medico->getConvenioAtendimento($idMedico);
+
+        $result = BrowserDetect::isMobile();
+
+        if($result == true){
+            return view('mobile.medico.index');            
+        }
 
         //Retorno para a view para alimentação do filtro inicial
         return view('medico.index')->with(

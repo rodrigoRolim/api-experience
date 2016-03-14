@@ -5,26 +5,6 @@
         <div class="snap-drawer snap-drawer-left">
           <div class="drawer-inner">
             <ul>
-                <li class="have-child">
-                <ul class="collapsible" data-collapsible="accordion">
-                  <li>
-                    <div class="collapsible-header">
-                      <i class="mdi mdi-needle"></i> Exames <i class="mdi mdi-menu-down right"></i>
-                    </div>
-                    <div class="collapsible-body">
-                      <ul class="collapsible" data-collapsible="accordion">
-                      @foreach($atendimentos as $key => $atendimento)
-                        <li id="btnAtendimento" data-posto="{{$atendimento->posto}}" data-atendimento="{{$atendimento->atendimento}}" data-mnemonicos="{{$atendimento->mnemonicos}}">
-                          <div class="collapsible-header">
-                            	<i class="mdi mdi-beaker-empty-outline"></i>{{$atendimento->posto}} | {{$atendimento->atendimento}}
-                          </div>
-                        </li>
-                      @endforeach
-                      </ul>
-                    </div>
-                  </li>
-                </ul>
-              </li>
               <li><a><i class="mdi mdi-account"></i> <span>Perfil</span></a></li>
             </ul>
             <ul class="exit">
@@ -35,7 +15,7 @@
         </div> <!-- End of Left Sidebar -->
 
         <!-- Right Sidebar -->
-        <div class="snap-drawer snap-drawer-right">
+        <!-- <div class="snap-drawer snap-drawer-right">
           <div class="drawer-inner">
             <div class="row">
               <div class="col s12 m6">
@@ -54,5 +34,5 @@
               </div>
             </div>            
           </div>
-        </div> <!-- End of Right Sidebar -->
+        </div> --> <!-- End of Right Sidebar -->
      </div>  <!-- End of Sidebars

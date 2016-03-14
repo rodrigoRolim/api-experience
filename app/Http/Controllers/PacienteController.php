@@ -52,8 +52,6 @@ class PacienteController extends Controller {
      */
     public function getIndex()
     {
-
-
         //Pego da sessao o tipo de acesso do paciente
         $tipoLoginPaciente = $this->auth->user()['tipoLoginPaciente'];
         //Envio os dados de autenticação do usuario para carregar todos os atendimentos
@@ -82,7 +80,7 @@ class PacienteController extends Controller {
             \App::abort(404);
         }
         //Envio para a variavel todo os exames do atendimento
-        $exames = $this->exames->getExames($posto, $atendimento);
+        $exames = $this->exames->getExames($posto, $atendimento);   
 
         return response()->json(array(
             'message' => 'Recebido com sucesso.',

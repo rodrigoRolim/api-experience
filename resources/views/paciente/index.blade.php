@@ -347,6 +347,7 @@
                     });     
 
                     function getDescricaoExame(dadosExames){ 
+                         console.log(dadosExames);
                          $('.modal-body').html('<br><br><br><br><h2 class="textoTamanho"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando registros.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>');   
                          $('.modal-title').html('');
                          $('.modal-footer').html('');

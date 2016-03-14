@@ -84,3 +84,14 @@
 	color: #BBBAB9;
 }
 
+#toolbar{
+	background-color: transparent;
+}
+
+.snap-drawer{
+	width: 306px;
+}
+
+.card-content{
+	padding: 10px !important;
+}

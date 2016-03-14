@@ -4,15 +4,13 @@ function getExames(url,posto,atendimento){
 	  $.each( result.data, function( index, exame ){
 	    conteudo = '';
 	    checkbox = '&nbsp;&nbsp;&nbsp;&nbsp;';
-	    visualizacao = '<div id="boxExame" data-visualizacao="N">';
+	    visualizacao = '<div id="boxExame" data-visualizacao="N" data-correl="'+exame.correl+'" data-atendimento="'+exame.atendimento+'" data-posto="'+exame.posto+'">';
 	    impressao = '';
 	    corStatus = '';
 
-	    console.log(exame);
-
 	    if(exame.class == 'success-element' && exame.tipo_entrega == '*'){
 	      checkbox = '<input checked id="todo'+index+'" type="checkbox">';
-	      visualizacao = '<div id="boxExame" data-visualizacao="OK">';
+	      visualizacao = '<div id="boxExame" data-visualizacao="OK" data-correl="'+exame.correl+'" data-atendimento="'+exame.atendimento+'" data-posto="'+exame.posto+'">';
 	    }
 
 	    if(exame.tipo_entrega != '*'){

@@ -2,7 +2,7 @@
 <html lang="en-US">
   <head>
     <title>
-      Paciente
+      Medico
     </title>
     <meta content="IE=edge" http-equiv="x-ua-compatible">
     <meta content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" name="viewport">
@@ -15,42 +15,45 @@
     {!! Html::style('/assets/css/plugins/asteroid/materialize.min.css') !!}
     {!! Html::style('/assets/css/plugins/asteroid/style.css') !!}
     {!! Html::style('/assets/css/customMobile.css') !!}
+    {!! Html::style('/assets/css/plugins/asteroid/jquery.mobile-1.4.5.min.css') !!}
 
 </head>
-     @include('mobile.paciente.includes.modInfo')
   <body>
     <div class="m-scene" id="main"> <!-- Page Container -->
 
-     @include('mobile.paciente.includes.menu')
+       @include('mobile.medico.includes.menu')
+
       <!-- Page Content -->
-      <div class="snap-content z-depth-5" id="content">
+      <div class="snap-content news z-depth-5" id="content">
 
         <!-- Toolbar -->
         <div id="toolbar">
           <div class="open-left" id="open-left">
             <i class="mdi mdi-sort-variant"></i>
-          </div>          
-          <div class="row navbar-fixed">
+          </div>
+            <div class="row navbar-fixed">
             <span class="title nomePaciente">{{Auth::user()['nome']}}
                 <i class="mdi-information-outline infoAdicionais"></i><br> </span>
              <span class="infoPaciente"> 
-             Data do Atendimento: {{ date('d/m/Y',strtotime($atendimentos[0]->data_atd))}} 
+                  {{Auth::user()['tipo_cr']}}-{{Auth::user()['uf_conselho']}}:{{Auth::user()['crm']}}
              </span>
            </div>
 <!--           <div class="open-right" id="open-right">
             <i class="mdi mdi-dots-vertical"></i>
           </div> -->
         </div>
-        
-        <!-- Main Content --> 
-        <div class="scene_element scene_element--fadeinup">
-          <div class="col s12 todo" id="listaExames">
-          </div>
 
+        <!-- Main Content -->
+        <div class="scene_element scene_element--fadeinup">
+
+        <ul id="listaPacientes" data-role="listview" data-filter="true" data-filter-placeholder="Buscar Paciente" data-filter-theme="a" data-inset="true">
+  
+        </ul>
+          
           <!-- Footer -->
           <div class="scene_element scene_element--fadeinup footer-copyright secondary-color">
             <div class="container">
-              Desendolvido por <a href="http://www.codemed.com.br">Codemed</a>
+              Desendolvido por <a style="color:white" href="http://www.codemed.com.br">Codemed</a>
             </div>
           </div>
 
@@ -65,61 +68,22 @@
   <script src="{{ asset('/assets/js/plugins/asteroid/jquery.smoothState.min.js') }}"></script>
   <script src="{{ asset('/assets/js/plugins/asteroid/sidebar.js') }}"></script>
   <script src="{{ asset('/assets/js/plugins/asteroid/functions.js') }}"></script>
-  <script src="{{ asset('/assets/js/experience/getExames.js') }}"></script>
-  <script src="{{ asset('/assets/js/experience/getDescricaoExames.js') }}"></script>
+  <script src="{{ asset('/assets/js/plugins/asteroid/jquery.mobile-1.4.5.min.js') }}"></script>
+  <script src="{{ asset('/assets/js/experience/getClientes.js') }}"></script>
 
   </body>
 </html>
 
 <script type="text/javascript">
 
-$(document).ready(function(){
+  $(document).ready(function(){
 
-    var snapper = new Snap({
-      element: document.getElementById('content'),
-      minPosition: -306, //Posicao da aba de resultados à direita.
-    });
+    postData = [{name:"dataInicio", value:"09/03/2015"},{name:"dataFim", value:"14/03/2016"},
+                {name:"posto", value:""},{name:"convenio", value:""},{name:"situacao", value:""}];
 
-    $('#btnAtendimento').click(function(e){ 
-        posto = $(e.currentTarget).data('posto');
-        atendimento = $(e.currentTarget).data('atendimento');
-        mnemonicos = $(e.currentTarget).data('mnemonicos'); 
+    url = "{{url('/')}}";            
+    getClientes(url,postData);
 
-        if(mnemonicos == ""){                    
-            swal("Não foram realizados exames para este atendimento.");
-        }
-
-        if(posto != null && atendimento != null){
-            getExames("{{url('/')}}",posto,atendimento);
-        }
-
-    });
-
-    $('#btnAtendimento').click();
-
-    $(document).on('click', '#boxExame', function(){  //Evento de Click para Divs criadas Dinamicamente
-          visualizacao = $(this).data('visualizacao');
-          url = "{{url('/')}}";
-          var dadosExames = $(this).data();
-
-        if(visualizacao == 'OK'){
-          getDescricaoExame(url,dadosExames);
-          snapper.open('right');
-        }
-    })
-
-     $('.infoAdicionais').click(function(e){
-        $('.modal-content').html(''); 
-        $('.modal-content').append('<h5 class="tituloModal">Detalhes Adicionais - Atendimento {{$atendimentos[0]->atendimento}} </h5>');
-        $('.modal-content').append('<br><p>ID: {{$atendimentos[0]->atendimento}} </p>');
-        $('.modal-content').append('<p>Convênio: {{$atendimentos[0]->nome_convenio}} </p>');
-        $('.modal-content').append('<p>Medico Solicitante: {{$atendimentos[0]->nome_solicitante}} </p>');
-        $('#modal').openModal();  
-     });
-
-});
-          
-
+  });
 
 </script>
-
