@@ -18,11 +18,12 @@
         <div class="snap-drawer snap-drawer-right">
           <div class="drawer-inner filtros">
             <div class="row">
-              <div class="col l12 s12 m12">
-                  <div style="margin-left: 60px"> Atendimentos entre</div>
-                  <input type="date" class="datepicker dataInicial">
-                  <div style="margin-left: 60px"> até</div>
-                  <input type="date" class="datepicker dataFinal">
+              <div class="col l5 s5 m5 dataInicial">
+                  <input type="date" class="datepicker">
+              </div>
+              <div class="col l1 s1 m1 midData"> Até</div> 
+              <div class="col l5 s5 m5 dataFinal">
+                  <input type="date" class="datepicker">
               </div>
             </div>  
             <div class="row">

@@ -89,7 +89,7 @@
 }
 
 .snap-drawer{
-	width: 306px;
+	width: 326px;
 }
 
 .card-content{
@@ -98,18 +98,16 @@
 
 /*-- Médico --*/
 
-.dataInicial,
-.dataFinal, 
-#convenio-button, 
-#posto-button, 
-#situacao-button,
-#btnFiltrar {
-	width: 70% !important;
-	margin-left: 60px !important;
+.midData{
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+	padding-top: 20px !important;
 }
 
 #btnFiltrar{
 	text-transform: none;
+	width: 90%;
+	margin-left: 10px;
 }
 
 .filtros{

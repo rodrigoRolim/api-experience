@@ -28,10 +28,10 @@
 
         <!-- Toolbar -->
         <div id="toolbar">
-          <div class="open-left" id="open-left">
-            <i class="mdi mdi-sort-variant"></i>
-          </div>
             <div class="row navbar-fixed">
+            <div class="open-left">
+              <i id="open-left" class="mdi mdi-sort-variant"></i>
+            </div>
             <span class="title nomePaciente">{{Auth::user()['nome']}}
                 <i id="open-right" class="mdi-filter-outline infoAdicionais"></i><br> </span>
              <span class="infoPaciente"> 
@@ -80,7 +80,6 @@
     $("#posto-button").removeClass();
     $("#situacao-button").removeClass();
     $("#btnFiltrar").removeClass("ui-btn");
-
 
     postData = [{name:"dataInicio", value:"09/03/2015"},{name:"dataFim", value:"14/03/2016"},
                 {name:"posto", value:""},{name:"convenio", value:""},{name:"situacao", value:""}];

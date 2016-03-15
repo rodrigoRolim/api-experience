@@ -24,7 +24,7 @@
             transitionSpeed: 0.3,
             easing: 'ease',
             maxPosition: 266,
-            minPosition: -266,
+            minPosition: -326,
             tapToClose: true,
             touchToDrag: true,
             slideIntent: 40, // degrees

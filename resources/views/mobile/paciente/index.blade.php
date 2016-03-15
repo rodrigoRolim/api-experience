@@ -27,10 +27,10 @@
 
         <!-- Toolbar -->
         <div id="toolbar">
-          <div class="open-left" id="open-left">
-            <i class="mdi mdi-sort-variant"></i>
-          </div>          
           <div class="row navbar-fixed">
+          <div class="open-left">
+            <i id="open-left" class="mdi mdi-sort-variant"></i>
+          </div>          
             <span class="title nomePaciente">{{Auth::user()['nome']}}
                 <i class="mdi-information-outline infoAdicionais"></i><br> </span>
              <span class="infoPaciente"> 
@@ -76,8 +76,7 @@
 $(document).ready(function(){
 
     var snapper = new Snap({
-      element: document.getElementById('content'),
-      minPosition: -306, //Posicao da aba de resultados à direita.
+      element: document.getElementById('content')
     });
 
     $('#btnAtendimento').click(function(e){ 
