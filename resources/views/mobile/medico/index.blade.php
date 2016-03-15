@@ -33,14 +33,11 @@
           </div>
             <div class="row navbar-fixed">
             <span class="title nomePaciente">{{Auth::user()['nome']}}
-                <i class="mdi-information-outline infoAdicionais"></i><br> </span>
+                <i id="open-right" class="mdi-filter-outline infoAdicionais"></i><br> </span>
              <span class="infoPaciente"> 
                   {{Auth::user()['tipo_cr']}}-{{Auth::user()['uf_conselho']}}:{{Auth::user()['crm']}}
              </span>
            </div>
-<!--           <div class="open-right" id="open-right">
-            <i class="mdi mdi-dots-vertical"></i>
-          </div> -->
         </div>
 
         <!-- Main Content -->
@@ -78,11 +75,19 @@
 
   $(document).ready(function(){
 
+    $('select').material_select();
+    $("#convenio-button").removeClass(); //Alternativa para delegação arbitraria de classes pelo tema jquery mobile..
+    $("#posto-button").removeClass();
+    $("#situacao-button").removeClass();
+    $("#btnFiltrar").removeClass("ui-btn");
+
+
     postData = [{name:"dataInicio", value:"09/03/2015"},{name:"dataFim", value:"14/03/2016"},
                 {name:"posto", value:""},{name:"convenio", value:""},{name:"situacao", value:""}];
 
     url = "{{url('/')}}";            
     getClientes(url,postData);
+
 
   });
 

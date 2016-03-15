@@ -15,24 +15,45 @@
         </div> <!-- End of Left Sidebar -->
 
         <!-- Right Sidebar -->
-        <!-- <div class="snap-drawer snap-drawer-right">
-          <div class="drawer-inner">
+        <div class="snap-drawer snap-drawer-right">
+          <div class="drawer-inner filtros">
             <div class="row">
-              <div class="col s12 m6">
-                <div class="card blue-grey darken-1">
-                  <div class="card-content white-text">
-                    <span class="card-title">Card Title</span>
-                    <div class="card-content">
-                      <p>I am a very simple card. I am good at containing small bits of information.
-                      I am convenient because I require little markup to use effectively.</p>
-                    </div>
-                  </div>
-                  <div class="card-action">
-                    <a href="#">This is a link</a>
-                  </div>
-                </div>
+              <div class="col l12 s12 m12">
+                  <div style="margin-left: 60px"> Atendimentos entre</div>
+                  <input type="date" class="datepicker dataInicial">
+                  <div style="margin-left: 60px"> até</div>
+                  <input type="date" class="datepicker dataFinal">
               </div>
-            </div>            
+            </div>  
+            <div class="row">
+                <div class="input-field col s12">
+                  <select id="convenio">
+                    <option value="" disabled selected>Convenios</option>
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
+                  </select>
+                </div>
+                  <div class="input-field col s12">
+                  <select id="posto">
+                    <option value="" disabled selected>Posto Realizante</option>
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
+                  </select>
+                </div>
+                  <div class="input-field col s12">
+                  <select id="situacao">
+                    <option value="" disabled selected>Situação</option>
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
+                  </select>
+                </div>
+            </div>
+            <div class="row">
+                <button id="btnFiltrar" class="btn waves-effect red lighten-1" type="submit" name="action">Filtrar</button>
+            </div>          
           </div>
-        </div> --> <!-- End of Right Sidebar -->
+        </div> <!-- End of Right Sidebar -->
      </div>  <!-- End of Sidebars
