@@ -98,6 +98,10 @@
 
 /*-- Médico --*/
 
+#filtroDatas{
+	margin-bottom: 0px;
+}
+
 .midData{
 	padding-left: 0 !important;
 	padding-right: 0 !important;

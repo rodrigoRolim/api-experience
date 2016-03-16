@@ -9,16 +9,14 @@ function getClientes(url,postData){
 
             $.each( result.data, function( index ){
                 var cliente = result.data[index];
-                console.log(cliente);
 /*                $('.contadorAtd').html('<h5 class="achouAtd">Foram encontrados ' + result.data.length + ' atendimentos para as datas selecionadas   .</h5>');*/
 
-                var item = '<li class="boxPaciente" style="border-bottom: 1px solid #e7e7e9;" data-key="'+cliente.key+'">'+
-				              '<i class="'+((cliente.sexo == "M")?"mdi-gender-male":"mdi-gender-female")+'"></i>'+ 
-				              	'<strong>'+cliente.nome+'</strong><br>'+
-				                '<span style="font-family: Century Gothic, sans-serif;">'+cliente.idade+''+
-				               '<i class="mdi-phone"></i> '+cliente.telefone+''+
-				                  '<div class="single-news-category">'+ 
-				                '<i class="mdi-calendar-check"></i>29/02/16 | <i class="mdi-beaker"></i>38 12936</div>'+ 
+                var item = '<li class="boxPaciente" style="border-bottom: 1px solid #e7e7e9;" data-key="'+cliente.key+'">'+				             
+				              	'<div class="truncate"><strong>'+cliente.nome+'</strong><br>'+
+				              	'<span style="font-family: Century Gothic, sans-serif;">'+
+				              	'<i class="'+((cliente.sexo == "M")?"mdi-gender-male":"mdi-gender-female")+'"></i>'+ 
+				                ''+cliente.idade+' <br> ' +
+				                ' Atendimento: 38 12936 <i class="mdi-beaker"></i> Em: 28/08/2015</div>'+ '</div>'+
 				             '</li>';
 
 /*              var count = 0;

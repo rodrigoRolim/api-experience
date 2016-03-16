@@ -85,7 +85,12 @@ class MedicoController extends Controller {
         $result = BrowserDetect::isMobile();
 
         if($result == true){
-            return view('mobile.medico.index');            
+            return view('mobile.medico.index')->with(
+                array(
+                    'postos' => $postos,
+                    'convenios' => $convenios,
+                    )
+                );            
         }
 
         //Retorno para a view para alimentação do filtro inicial

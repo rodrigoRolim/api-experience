@@ -17,15 +17,15 @@ class DataNascimento
         $resultData = '';
 
         if($ano > 0){
-            $resultData .= $ano.' ano'.($ano>1?'s':'').' ';
+            return $ano.' ano'.($ano>1?'s':'').' ';
         }
 
         if($mes > 0){
-            $resultData .= $mes.' mes'.($mes>1?'es':'').' ';
+            return $resultData .= $mes.' mes'.($mes>1?'es':'').' ';
         }
 
         if($dia > 0){
-            $resultData .= $dia.' dia'.($dia>1?'s':'').' ';
+            return $resultData .= $dia.' dia'.($dia>1?'s':'').' ';
         }
 
         return $resultData;

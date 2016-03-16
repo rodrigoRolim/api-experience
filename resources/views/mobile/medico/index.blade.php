@@ -66,6 +66,7 @@
   <script src="{{ asset('/assets/js/plugins/asteroid/sidebar.js') }}"></script>
   <script src="{{ asset('/assets/js/plugins/asteroid/functions.js') }}"></script>
   <script src="{{ asset('/assets/js/plugins/asteroid/jquery.mobile-1.4.5.min.js') }}"></script>
+  <script src="{{ asset('/assets/js/plugins/moments/moments.js') }}"></script>
   <script src="{{ asset('/assets/js/experience/getClientes.js') }}"></script>
 
   </body>
@@ -81,8 +82,51 @@
     $("#situacao-button").removeClass();
     $("#btnFiltrar").removeClass("ui-btn");
 
-    postData = [{name:"dataInicio", value:"09/03/2015"},{name:"dataFim", value:"14/03/2016"},
+    postData = [{name:"dataInicio", value:"09/10/2015"},{name:"dataFim", value:"14/03/2016"},
                 {name:"posto", value:""},{name:"convenio", value:""},{name:"situacao", value:""}];
+
+    var dataInicio = new moment();
+    var dataFim = new moment();
+    var qtdDiasFiltro = {{config('system.medico.qtdDiasFiltro')}}; 
+
+    dataInicio = dataInicio.subtract(qtdDiasFiltro,'days');
+    dataInicio = dataInicio.format('YYYY-MM-DD');
+    dataFim = dataFim.format('YYYY-MM-DD');   
+
+    $('#dataInicio').val(dataInicio);
+    $('#dataFim').val(dataFim);
+
+    $('#dataInicio').prop("max",dataFim);
+    $('#dataFim').prop("min",dataInicio);
+    $('#dataFim').prop("max",dataFim);
+
+    $('#comboPeriodos').change(function(){ 
+      var periodo = $('#comboPeriodos option:selected');
+      periodo = periodo.val();
+      console.log(periodo);
+      
+      var dataInicio = new moment();
+    
+      switch (periodo) {
+        case 'Ontem':
+            dataInicio = dataInicio.subtract(1,'days');
+            dataInicio = dataInicio.format('YYYY-MM-DD');
+          break;
+        case 'Ultimos 10 dias':
+            dataInicio = dataInicio.subtract(10,'days');
+            dataInicio = dataInicio.format('YYYY-MM-DD');
+          break;
+        case 'Ultimo Mês':
+            dataInicio = dataInicio.subtract(30,'days');
+            dataInicio = dataInicio.format('YYYY-MM-DD');
+          break;         
+      }
+
+      $('#dataInicio').val(dataInicio);
+      $('#dataFim').val(dataFim);
+
+    });
+
 
     url = "{{url('/')}}";            
     getClientes(url,postData);
