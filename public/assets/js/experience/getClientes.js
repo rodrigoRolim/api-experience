@@ -16,7 +16,7 @@ function getClientes(url,postData){
 				              	'<span style="font-family: Century Gothic, sans-serif;">'+
 				              	'<i class="'+((cliente.sexo == "M")?"mdi-gender-male":"mdi-gender-female")+'"></i>'+ 
 				                ''+cliente.idade+' <br> ' +
-				                ' Atendimento: 38 12936 <i class="mdi-beaker"></i> Em: 28/08/2015</div>'+ '</div>'+
+				                ' Atendimento: 38 12936 Em: 28/08/2015</div>'+ '</div>'+
 				             '</li>';
 
 /*              var count = 0;
@@ -42,7 +42,7 @@ function getClientes(url,postData){
             });
             
             if(result.data.length == 0){
-                $('#listaPacientes').append('<h2>Não foram encontrados atendimentos.</h2>');
+                $('#listaPacientes').append('<blockquote><h5 class="center-align"> Não foram encontrados atendimentos para este periodo. </h5></blockquote>');
 /*                $('.contadorAtd').html('');*/
             }
         },

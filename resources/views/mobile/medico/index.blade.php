@@ -82,8 +82,11 @@
     $("#situacao-button").removeClass();
     $("#btnFiltrar").removeClass("ui-btn");
 
-    postData = [{name:"dataInicio", value:"09/10/2015"},{name:"dataFim", value:"14/03/2016"},
-                {name:"posto", value:""},{name:"convenio", value:""},{name:"situacao", value:""}];
+     var snapper = new Snap({
+      element: document.getElementById('content')
+    });
+
+     snapper.open('right');
 
     var dataInicio = new moment();
     var dataFim = new moment();
@@ -103,10 +106,9 @@
     $('#comboPeriodos').change(function(){ 
       var periodo = $('#comboPeriodos option:selected');
       periodo = periodo.val();
-      console.log(periodo);
       
       var dataInicio = new moment();
-    
+
       switch (periodo) {
         case 'Ontem':
             dataInicio = dataInicio.subtract(1,'days');
@@ -123,13 +125,34 @@
       }
 
       $('#dataInicio').val(dataInicio);
-      $('#dataFim').val(dataFim);
-
     });
 
+    $('#btnFiltrar').click(function(e){    
 
-    url = "{{url('/')}}";            
-    getClientes(url,postData);
+        $('#listaPacientes').html('');     
+
+        $('#listaPacientes').html('');              
+
+        var formMedico = $('#formMedico :input');
+        var formData = formMedico.serializeArray();
+
+        dataInicio = new moment(formData[0].value);
+        dataFim = new moment(formData[1].value);
+        dataInicio = dataInicio.format('DD/MM/YYYY');
+        dataFim = dataFim.format('DD/MM/YYYY');
+
+        formData[0].value = dataInicio;
+        formData[1].value = dataFim;
+
+        formData.push({name: 'posto', value: ''});
+        formData.push({name: 'convenio', value: ''});
+        formData.push({name: 'situacao', value: ''});
+
+        url = "{{url('/')}}";            
+        getClientes(url,formData);
+        snapper.close();
+
+    });
 
 
   });
