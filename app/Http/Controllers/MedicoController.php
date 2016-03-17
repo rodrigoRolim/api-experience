@@ -93,6 +93,7 @@ class MedicoController extends Controller {
                 );            
         }
 
+
         //Retorno para a view para alimentação do filtro inicial
         return view('medico.index')->with(
             array(
@@ -150,6 +151,13 @@ class MedicoController extends Controller {
         if(!sizeof($atendimentos)){
             \App::abort(404);
         }
+
+        $result = BrowserDetect::isMobile();
+
+        if($result == true){
+            return view('mobile.paciente.index',compact('atendimentos'));
+        }
+
         //Envia para a vio os atendimentos
         return view('medico.paciente',compact('atendimentos'));
     }

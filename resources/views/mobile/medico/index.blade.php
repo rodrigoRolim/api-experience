@@ -25,7 +25,6 @@
 
       <!-- Page Content -->
       <div class="snap-content news z-depth-5" id="content">
-
         <!-- Toolbar -->
         <div id="toolbar">
             <div class="row navbar-fixed">

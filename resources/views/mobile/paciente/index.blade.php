@@ -14,6 +14,7 @@
     {!! Html::style('/assets/css/plugins/asteroid/keyframes.css') !!}  
     {!! Html::style('/assets/css/plugins/asteroid/materialize.min.css') !!}
     {!! Html::style('/assets/css/plugins/asteroid/style.css') !!}
+    {!! Html::style('/assets/css/plugins/sweetalert/sweetalert.css') !!}
     {!! Html::style('/assets/css/customMobile.css') !!}
 
 </head>
@@ -24,7 +25,6 @@
      @include('mobile.paciente.includes.menu')
       <!-- Page Content -->
       <div class="snap-content z-depth-5" id="content">
-
         <!-- Toolbar -->
         <div id="toolbar">
           <div class="row navbar-fixed">
@@ -65,6 +65,7 @@
   <script src="{{ asset('/assets/js/plugins/asteroid/jquery.smoothState.min.js') }}"></script>
   <script src="{{ asset('/assets/js/plugins/asteroid/sidebar.js') }}"></script>
   <script src="{{ asset('/assets/js/plugins/asteroid/functions.js') }}"></script>
+  <script src="{{ asset('/assets/js/plugins/sweetalert/sweetalert.min.js') }}"></script>
   <script src="{{ asset('/assets/js/experience/getExames.js') }}"></script>
   <script src="{{ asset('/assets/js/experience/getDescricaoExames.js') }}"></script>
 
@@ -79,22 +80,39 @@ $(document).ready(function(){
       element: document.getElementById('content')
     });
 
-    $('#btnAtendimento').click(function(e){ 
+    var selector = '#listaAtendimentos .btnAtendimento';
+    $('.btnAtendimento').first().addClass('active');
+
+    $(selector).on('click', function(){
+        $(selector).removeClass('active');
+        $(this).addClass('active');
+    });
+
+    $('.btnAtendimento').click(function(e){ 
         posto = $(e.currentTarget).data('posto');
         atendimento = $(e.currentTarget).data('atendimento');
-        mnemonicos = $(e.currentTarget).data('mnemonicos'); 
+        mnemonicos = $(e.currentTarget).data('mnemonicos');
+        tipoAcesso = $(e.currentTarget).data('acesso');
+
+        if(tipoAcesso == 'MED')
+          tipoAcesso = 'medico';
+        else
+          tipoAcesso = 'paciente';
 
         if(mnemonicos == ""){                    
             swal("Não foram realizados exames para este atendimento.");
         }
 
         if(posto != null && atendimento != null){
-            getExames("{{url('/')}}",posto,atendimento);
+            $('#listaExames').html('');
+            getExames("{{url('/')}}",tipoAcesso,posto,atendimento);
         }
+
+        snapper.close();
 
     });
 
-    $('#btnAtendimento').click();
+    $('.btnAtendimento').first().click();
 
     $(document).on('click', '#boxExame', function(){  //Evento de Click para Divs criadas Dinamicamente
           visualizacao = $(this).data('visualizacao');

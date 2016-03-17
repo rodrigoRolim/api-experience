@@ -9,12 +9,12 @@
                 <ul class="collapsible" data-collapsible="accordion">
                   <li>
                     <div class="collapsible-header">
-                      <i class="mdi mdi-needle"></i> Exames <i class="mdi mdi-menu-down right"></i>
+                      <i class="mdi mdi-needle"></i> Atendimentos <i class="mdi mdi-menu-down right"></i>
                     </div>
                     <div class="collapsible-body">
-                      <ul class="collapsible" data-collapsible="accordion">
+                      <ul class="collapsible" li="listaAtendimentos" data-collapsible="accordion">
                       @foreach($atendimentos as $key => $atendimento)
-                        <li id="btnAtendimento" data-posto="{{$atendimento->posto}}" data-atendimento="{{$atendimento->atendimento}}" data-mnemonicos="{{$atendimento->mnemonicos}}">
+                        <li class="btnAtendimento" data-posto="{{$atendimento->posto}}" data-atendimento="{{$atendimento->atendimento}}" data-mnemonicos="{{$atendimento->mnemonicos}}" data-acesso="{{Auth::user()['tipoAcesso']}}">
                           <div class="collapsible-header">
                             	<i class="mdi mdi-beaker-empty-outline"></i>{{$atendimento->posto}} | {{$atendimento->atendimento}}
                           </div>
@@ -26,10 +26,7 @@
                 </ul>
               </li>
               <li><a><i class="mdi mdi-account"></i> <span>Perfil</span></a></li>
-            </ul>
-            <ul class="exit">
-              <li><a  href="{{url('/')}}/auth/logout"><i class="mdi mdi-exit-to-app"></i> <span>Logout</span></a>
-              </li>
+              <li><a href='/auth/logout'><i class="mdi mdi-exit-to-app"></i> <span>Logout</span></a>
             </ul>
           </div>
         </div> <!-- End of Left Sidebar -->

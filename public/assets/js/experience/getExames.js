@@ -1,5 +1,6 @@
-function getExames(url,posto,atendimento){
-	$.get(url+"/paciente/examesatendimento/"+posto+"/"+atendimento, function( result ) {
+function getExames(url,tipoAcesso,posto,atendimento){
+
+	$.get(url+'/'+tipoAcesso+'/examesatendimento/'+posto+'/'+atendimento, function( result ) {
 
 	  $.each( result.data, function( index, exame ){
 	    conteudo = '';
