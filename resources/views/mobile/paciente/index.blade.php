@@ -32,7 +32,7 @@
             <i id="open-left" class="mdi mdi-sort-variant"></i>
           </div>          
             <span class="title nomePaciente">{{Auth::user()['nome']}}
-                <i class="mdi-information-outline infoAdicionais"></i><br> </span>
+                <i id='close-right' class="mdi-information-outline"></i><br> </span>
              <span class="infoPaciente"> 
              Data do Atendimento: {{ date('d/m/Y',strtotime($atendimentos[0]->data_atd))}} 
              </span>
@@ -43,18 +43,18 @@
         </div>
         
         <!-- Main Content --> 
-        <div class="scene_element scene_element--fadeinup">
+        <div id="contentPrincipal" class="scene_element scene_element--fadeinup">
           <div class="col s12 todo" id="listaExames">
           </div>
+        </div> <!-- End of Main Contents -->
 
           <!-- Footer -->
-          <div class="scene_element scene_element--fadeinup footer-copyright secondary-color">
+<!--           <footer class="scene_element scene_element--fadeinup footer-copyright secondary-color">
             <div class="container">
               Desendolvido por <a href="http://www.codemed.com.br">Codemed</a>
             </div>
-          </div>
+          </footer> -->
 
-        </div> <!-- End of Main Contents -->
         <div id="blockui"></div>
       </div> <!-- End of Page Content -->
     </div> <!-- End of Page Container -->
@@ -88,6 +88,15 @@ $(document).ready(function(){
         $(this).addClass('active');
     });
 
+    $('#open-left').click(function(e){ 
+        if(snapper.state().state == 'left')
+          $('.snap-drawer-left').hide();
+        else
+          $('.snap-drawer-left').show();
+    });
+
+    $('.snap-drawer-right').hide();
+
     $('.btnAtendimento').click(function(e){ 
         posto = $(e.currentTarget).data('posto');
         atendimento = $(e.currentTarget).data('atendimento');
@@ -109,6 +118,7 @@ $(document).ready(function(){
         }
 
         snapper.close();
+        $('.snap-drawer-left').hide();
 
     });
 
@@ -119,20 +129,34 @@ $(document).ready(function(){
           url = "{{url('/')}}";
           var dadosExames = $(this).data();
 
+
         if(visualizacao == 'OK'){
+          $('#close-right').toggleClass("mdi-information-outline mdi-chevron-left ");
           getDescricaoExame(url,dadosExames);
+          $('html, body').animate({ scrollTop: 0 }, 'slow'); //Ir para o topo da pagina
+          $('.snap-drawer-right').show();
           snapper.open('right');
         }
     })
 
-     $('.infoAdicionais').click(function(e){
+     $('.mdi-information-outline').click(function(e){
         $('.modal-content').html(''); 
         $('.modal-content').append('<h5 class="tituloModal">Detalhes Adicionais - Atendimento {{$atendimentos[0]->atendimento}} </h5>');
         $('.modal-content').append('<br><p>ID: {{$atendimentos[0]->atendimento}} </p>');
         $('.modal-content').append('<p>Convênio: {{$atendimentos[0]->nome_convenio}} </p>');
         $('.modal-content').append('<p>Medico Solicitante: {{$atendimentos[0]->nome_solicitante}} </p>');
-        $('#modal').openModal();  
+        if(e.target.className == 'mdi-information-outline'){
+            $('#modal').openModal();
+        }else{
+          $('.snap-drawer-right').hide();
+          snapper.close();
+          $('#close-right').toggleClass("mdi-chevron-left mdi-information-outline");
+        }
      });
+
+     $('.mdi-chevron-left').click(function(e){ 
+       console.log('certo');
+    });
 
 });
           

@@ -1,9 +1,18 @@
+  body {
+    display: flex !important;
+    min-height: 100vh !important;
+    flex-direction: column !important;
+  }
+
+  main {
+    flex: 1 0 auto !important;
+  }
+
 /*--Paciente--*/
 
 .areaLegendaExames{
 	padding: 5px;
 }
-
 
 .btnAtendimento.active{
 	background-color: #E0E0E0 !important;
@@ -25,7 +34,8 @@
 	margin-left: 0px !important;
 }
 
-.infoAdicionais{
+.mdi-information-outline,
+.mdi-chevron-left{
 	float: right;
 	margin-right: 5px;
 }
@@ -89,16 +99,30 @@
 	color: #BBBAB9;
 }
 
-#toolbar{
-	background-color: transparent;
-}
-
 .snap-drawer{
 	width: 326px;
 }
 
+.card-title{
+	font-size: 1em !important;
+	color: #9E9E9E !important;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
 .card-content{
 	padding: 10px !important;
+	color: black;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+.descricaoExames{
+	border-bottom: 1px dashed #E5E5E5;
+}
+
+.card-footer{
+	font-size: 0.5em;
+	color: #9E9E9E;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 
 /*-- Médico --*/
