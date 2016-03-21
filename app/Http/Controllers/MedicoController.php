@@ -14,6 +14,7 @@ use App\Repositories\ExamesRepository;
 use App\Repositories\MedicoRepository;
 use App\Repositories\AtendimentoRepository;
 use App\Models\AtendimentoAcesso;
+use Experience\Util\Formatar;
 use App\Repositories\MedicoAcessoRepository;
 use App\Repositories\PostoRepository;
 
@@ -147,6 +148,7 @@ class MedicoController extends Controller {
 
         //Pego os atendimentos do paciente solicitado pelo medigo no repositorio
         $atendimentos = $this->medico->getAtendimentosPacienteByMedico($registro,$idMedico);
+
         //Caso nao exista registro o sistema libera um erro 404
         if(!sizeof($atendimentos)){
             \App::abort(404);

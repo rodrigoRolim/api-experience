@@ -14,9 +14,10 @@
                     <div class="collapsible-body">
                       <ul class="collapsible" li="listaAtendimentos" data-collapsible="accordion">
                       @foreach($atendimentos as $key => $atendimento)
-                        <li class="btnAtendimento" data-posto="{{$atendimento->posto}}" data-atendimento="{{$atendimento->atendimento}}" data-mnemonicos="{{$atendimento->mnemonicos}}" data-acesso="{{Auth::user()['tipoAcesso']}}">
+                        <li class="btnAtendimento"  data-convenio="{{$atendimento->nome_convenio}}" data-solicitante="{{$atendimento->nome_solicitante}}" data-dtatendimento="{{ date('d/m/20y',strtotime($atendimento->data_atd))}}" data-posto="{{$atendimento->posto}}" data-atendimento="{{$atendimento->atendimento}}" data-mnemonicos="{{$atendimento->mnemonicos}}" data-acesso="{{Auth::user()['tipoAcesso']}}">
                           <div class="collapsible-header">
-                            	<i class="mdi mdi-beaker-empty-outline"></i>{{$atendimento->posto}} | {{$atendimento->atendimento}}
+                            	<i class="mdi mdi-beaker-empty-outline"></i><span id="dataAtendimento">{{ date('d/m/20y',strtotime($atendimento->data_atd))}}</span> - {{$atendimento->posto}} | {{$atendimento->atendimento}}<br>
+                              <span class='truncate mnemonicoAtd'>{{$atendimento->mnemonicos}}</span>
                           </div>
                         </li>
                       @endforeach

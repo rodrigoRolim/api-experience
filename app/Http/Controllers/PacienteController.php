@@ -16,6 +16,7 @@ use App\Models\AtendimentoAcesso;
 use App\Repositories\ExamesRepository;
 use App\Repositories\ClienteAcessoRepository;
 use App\Services\DataSnapService;
+use Experience\Util\Formatar;
 use BrowserDetect;
 
 use Request;

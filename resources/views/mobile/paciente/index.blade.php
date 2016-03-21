@@ -30,11 +30,11 @@
           <div class="row navbar-fixed">
           <div class="open-left">
             <i id="open-left" class="mdi mdi-sort-variant"></i>
-          </div>          
-            <span class="title nomePaciente">{{Auth::user()['nome']}}
+          </div>         
+            <span class="title nomePaciente">{{$atendimentos[0]->nome}}
                 <i id='close-right' class="mdi-information-outline"></i><br> </span>
              <span class="infoPaciente"> 
-             Data do Atendimento: {{ date('d/m/Y',strtotime($atendimentos[0]->data_atd))}} 
+             Data do Atendimento: <span id="dataAtendimentoPaciente">{{ date('d/m/Y',strtotime($atendimentos[0]->data_atd))}} </span>
              </span>
            </div>
 <!--           <div class="open-right" id="open-right">
@@ -47,6 +47,8 @@
           <div class="col s12 todo" id="listaExames">
           </div>
         </div> <!-- End of Main Contents -->
+
+        <div id="semExames"></div>
 
           <!-- Footer -->
 <!--           <footer class="scene_element scene_element--fadeinup footer-copyright secondary-color">
@@ -102,18 +104,37 @@ $(document).ready(function(){
         atendimento = $(e.currentTarget).data('atendimento');
         mnemonicos = $(e.currentTarget).data('mnemonicos');
         tipoAcesso = $(e.currentTarget).data('acesso');
+        dataAtendimento = $(e.currentTarget).data('dtatendimento');
+        indice = $(e.currentTarget).data('indice');
+        solicitante = $(e.currentTarget).data('solicitante');
+        convenio = $(e.currentTarget).data('convenio');
 
         if(tipoAcesso == 'MED')
           tipoAcesso = 'medico';
         else
           tipoAcesso = 'paciente';
 
-        if(mnemonicos == ""){                    
-            swal("Não foram realizados exames para este atendimento.");
+        $('.modal-content').html(''); 
+        $('.modal-content').append('<h5 class="tituloModal">Detalhes Adicionais - Atendimento '+atendimento+' </h5>');
+        $('.modal-content').append('<br><p>ID: '+atendimento+' </p>');
+        $('.modal-content').append('<p>Convênio: '+convenio+' </p>');
+        $('.modal-content').append('<p>Medico Solicitante: '+solicitante+' </p>');
+
+        if(mnemonicos == ""){  
+            $('#listaExames').html('');  
+            $('#dataAtendimentoPaciente').text(dataAtendimento);                 
+            $('#semExames').append('<p class="todo-element border-left-coral">'+
+              '<label class="semExames">Não foram realizados exames para este atendimento.</label>'+
+            '</p>');
+            snapper.close();
+            $('.snap-drawer-left').hide();
+            return false;
         }
 
         if(posto != null && atendimento != null){
             $('#listaExames').html('');
+            $('#semExames').html('');
+            $('#dataAtendimentoPaciente').text(dataAtendimento); 
             getExames("{{url('/')}}",tipoAcesso,posto,atendimento);
         }
 
@@ -140,11 +161,7 @@ $(document).ready(function(){
     })
 
      $('.mdi-information-outline').click(function(e){
-        $('.modal-content').html(''); 
-        $('.modal-content').append('<h5 class="tituloModal">Detalhes Adicionais - Atendimento {{$atendimentos[0]->atendimento}} </h5>');
-        $('.modal-content').append('<br><p>ID: {{$atendimentos[0]->atendimento}} </p>');
-        $('.modal-content').append('<p>Convênio: {{$atendimentos[0]->nome_convenio}} </p>');
-        $('.modal-content').append('<p>Medico Solicitante: {{$atendimentos[0]->nome_solicitante}} </p>');
+
         if(e.target.className == 'mdi-information-outline'){
             $('#modal').openModal();
         }else{
@@ -153,10 +170,6 @@ $(document).ready(function(){
           $('#close-right').toggleClass("mdi-chevron-left mdi-information-outline");
         }
      });
-
-     $('.mdi-chevron-left').click(function(e){ 
-       console.log('certo');
-    });
 
 });
           

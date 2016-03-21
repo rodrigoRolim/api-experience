@@ -35,8 +35,9 @@ class AtendimentoRepository extends BaseRepository
         $data = explode("/",$data);
 
         if($user['tipoLoginPaciente'] == 'ID'){
-            $sql = 'SELECT posto,atendimento,data_atd, INITCAP(nome_convenio) AS nome_convenio, INITCAP(nome_solicitante) AS nome_solicitante, ('.config('system.userAgilDB').'GET_MNEMONICOS(posto,atendimento)) mnemonicos,saldo_devedor
-                    FROM '.config('system.userAgilDB').'vex_atendimentos
+            $sql = 'SELECT c.nome,posto,atendimento,data_atd, INITCAP(nome_convenio) AS nome_convenio, INITCAP(nome_solicitante) AS nome_solicitante, ('.config('system.userAgilDB').'GET_MNEMONICOS(posto,atendimento)) mnemonicos,saldo_devedor
+                    FROM '.config('system.userAgilDB').'vex_atendimentos A
+                    INNER JOIN '.config('system.userAgilDB').'VEX_CLIENTES C ON a.registro = c.registro
                     WHERE posto = :posto AND atendimento = :atendimento';
 
             $atendimentos[] = current(DB::select(DB::raw($sql), ['posto' => $data[0],'atendimento' => $data[1]]));

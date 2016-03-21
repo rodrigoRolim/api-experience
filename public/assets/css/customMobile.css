@@ -1,13 +1,3 @@
-  body {
-    display: flex !important;
-    min-height: 100vh !important;
-    flex-direction: column !important;
-  }
-
-  main {
-    flex: 1 0 auto !important;
-  }
-
 /*--Paciente--*/
 
 .areaLegendaExames{
@@ -35,7 +25,13 @@
 }
 
 .mdi-information-outline,
-.mdi-chevron-left{
+.mdi-chevron-left,
+.mdi-filter-outline{
+	float: right;
+	margin-right: 5px;
+}
+
+.infoAdicional{
 	float: right;
 	margin-right: 5px;
 }
@@ -55,6 +51,23 @@
 
 .tituloModal{
 	font-size: 1.3em;
+}
+
+.semExames{
+	font-size: 1.2em;
+	padding: 20px;
+}
+
+.collapsible-header{
+	line-height: 2rem;
+}
+
+.collapsible-header i{
+	line-height: 2rem;
+}
+
+.mnemonicoAtd{
+	color: #8E8E8E !important;
 }
 
 /*--Cores Status Exames--*/

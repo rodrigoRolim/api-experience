@@ -32,7 +32,7 @@
               <i id="open-left" class="mdi mdi-sort-variant"></i>
             </div>
             <span class="title nomePaciente">{{Auth::user()['nome']}}
-                <i id="open-right" class="mdi-filter-outline infoAdicionais"></i><br> </span>
+                <i id="open-right" class="mdi-filter-outline"></i><br> </span>
              <span class="infoPaciente"> 
                   {{Auth::user()['tipo_cr']}}-{{Auth::user()['uf_conselho']}}:{{Auth::user()['crm']}}
              </span>
@@ -85,7 +85,21 @@
       element: document.getElementById('content')
     });
 
-     snapper.open('right');
+    snapper.open('right');
+
+    $('#open-left').click(function(e){ 
+        if(snapper.state().state == 'left')
+          $('.snap-drawer-left').hide();
+        else
+          $('.snap-drawer-left').show();
+    });
+
+    $('#open-right').click(function(e){ 
+        if(snapper.state().state == 'right')
+          $('.snap-drawer-right').hide();
+        else
+          $('.snap-drawer-right').show();
+    });
 
     var dataInicio = new moment();
     var dataFim = new moment();
