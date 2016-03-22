@@ -128,16 +128,16 @@
       var dataInicio = new moment();
 
       switch (periodo) {
-        case 'Ontem':
-            dataInicio = dataInicio.subtract(1,'days');
+        case 'Ultimos 3 dias':
+            dataInicio = dataInicio.subtract(3,'days');
             dataInicio = dataInicio.format('YYYY-MM-DD');
           break;
-        case 'Ultimos 10 dias':
-            dataInicio = dataInicio.subtract(10,'days');
+        case 'Ultimos 5 dias':
+            dataInicio = dataInicio.subtract(5,'days');
             dataInicio = dataInicio.format('YYYY-MM-DD');
           break;
-        case 'Ultimo Mês':
-            dataInicio = dataInicio.subtract(30,'days');
+        case 'Ultimos 15 dias':
+            dataInicio = dataInicio.subtract(15,'days');
             dataInicio = dataInicio.format('YYYY-MM-DD');
           break;         
       }

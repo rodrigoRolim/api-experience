@@ -268,7 +268,7 @@ class MedicoController extends Controller {
     }
 
     public function getPerfil(){
-         return view('mobile.medico.includes.perfil');
+         return view('mobile.includes.perfil');
     }
 
     /**
@@ -281,7 +281,7 @@ class MedicoController extends Controller {
 
         //Caso não seja valido os dados
         if ($validator->fails()) {
-            return response(['message'=>'Erro ao validar','data' => Request::all()],400);
+            return response(['message'=>'Erro - Senhas devem ter entre 6 e 15 caracteres.','data' => Request::all()],400);
         }
 
         //Gero o ID do medico com um md5 do ID_MEDICO

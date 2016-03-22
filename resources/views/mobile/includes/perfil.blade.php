@@ -2,7 +2,7 @@
 <html lang="en-US">
   <head>
     <title>
-      Medico
+      Alterar Senha
     </title>
     <meta content="IE=edge" http-equiv="x-ua-compatible">
     <meta content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" name="viewport">
@@ -20,9 +20,11 @@
 </head>
   <body>
     <div class="m-scene" id="main"> <!-- Page Container -->
-
+    @if(Auth::user()['tipoAcesso'] == 'MED')
        @include('mobile.medico.includes.menu')
-
+    @else
+       @include('mobile.paciente.includes.left')
+    @endif
       <!-- Page Content -->
       <div class="snap-content news z-depth-5" id="content">
         <!-- Toolbar -->
@@ -33,9 +35,12 @@
             </div>
             <span class="title nomePaciente">{{Auth::user()['nome']}}
                 <i id="open-right" class="mdi-filter-outline"></i><br> </span>
+            @if(Auth::user()['tipoAcesso'] == 'MED')
+            <input id="acesso" type="hidden" value="MED">
              <span class="infoPaciente"> 
                   {{Auth::user()['tipo_cr']}}-{{Auth::user()['uf_conselho']}}:{{Auth::user()['crm']}}
              </span>
+            @endif
            </div>
         </div>
 
@@ -101,7 +106,7 @@
 
 <script type="text/javascript">
 
-	$('.snap-drawer-right').hide();
+
 	$('.mdi-filter-outline').hide();
 
 	$(document).ready(function(){
@@ -127,6 +132,14 @@
                 },
             });
 
+            urlPerfil = '{{url()}}/paciente/alterarsenha';
+
+            tipoAcesso = $('#acesso').val();
+
+            if(tipoAcesso == 'MED'){
+              urlPerfil = '{{url()}}/medico/alterarsenha';
+            }
+
              $('#btnSalvarPerfil').click(function(e){                                          
 
                 if(form.valid()){
@@ -134,7 +147,7 @@
                     var postData = form.serializeArray();
                     console.log(postData);
                     $.ajax({
-                        url : '{{url()}}/medico/alterarsenha',
+                        url : urlPerfil,
                         type: 'POST',
                         data : postData,
                         success:function(data, textStatus, jqXHR) 
@@ -142,8 +155,12 @@
                             var msg = jqXHR.responseText;
                             msg = JSON.parse(msg);
                             var style = (jqXHR['status'] == 200 ? 'success':'danger');
-
-                            swal("", msg.message , "success");    
+                            if(msg.message == 'Senha atual não confere'){
+                            	swal("", msg.message , "error");  
+                            }
+                            else{
+                            	swal("", msg.message , "success");  
+                            }
                         },
                         error: function(jqXHR, textStatus, errorThrown) 
                         {

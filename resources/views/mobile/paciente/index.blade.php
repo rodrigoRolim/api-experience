@@ -31,8 +31,11 @@
           <div class="open-left">
             <i id="open-left" class="mdi mdi-sort-variant"></i>
           </div>         
-          
+            @if(Auth::user()['tipoAcesso'] == 'MED')
             <span class="title nomePaciente">{{$atendimentos[0]->nome}}
+            @else
+            <span class="title nomePaciente">{{Auth::user()['nome']}}
+            @endif
                 <i id='close-right' class="mdi-information-outline"></i><br> </span>
              <span class="infoPaciente"> 
              Data do Atendimento: <span id="dataAtendimentoPaciente">{{ date('d/m/Y',strtotime($atendimentos[0]->data_atd))}} </span>

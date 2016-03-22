@@ -5,8 +5,9 @@
         <div class="snap-drawer snap-drawer-left">
           <div class="drawer-inner">
             <ul>
-              <li><a><i class="mdi mdi-account"></i> <span>Alterar Senha</span></a></li>
-              <li><a  href="{{url('/')}}/auth/logout"><i class="mdi mdi-exit-to-app"></i> <span>Logout</span></a>
+              <li><a href="{{url('/')}}/medico"><i class="mdi-heart-outline" style="line-height: 1.5rem;"></i> <span>Pacientes</span></a></li>
+              <li><a href="{{url('/')}}/medico/perfil"><i class="mdi mdi-account"></i> <span>Alterar Senha</span></a></li>
+              <li><a href="{{url('/')}}/auth/logout"><i class="mdi mdi-exit-to-app"></i> <span>Logout</span></a>
             </ul>
           </div>
         </div> <!-- End of Left Sidebar -->
@@ -21,9 +22,9 @@
                       <label>Periodos</label><br><br>
                       <select id="comboPeriodos">
                         <option value="" disabled selected>Selecione</option>
-                        <option id="ontem" name="ontem"> Ontem </option>
-                        <option id="ultimos10" name="ultimos10"> Ultimos 10 dias </option>
-                        <option id="ultimoMes" name="ultimoMes"> Ultimo Mês </option>
+                        <option id="ontem" name="ontem"> Ultimos 3 dias </option>
+                        <option id="ultimos10" name="ultimos10"> Ultimos 5 dias </option>
+                        <option id="ultimoMes" name="ultimoMes"> Ultimos 15 dias </option>
                       </select>
                   </div>
               </div>

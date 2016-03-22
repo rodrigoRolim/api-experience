@@ -57,7 +57,7 @@ class PacienteController extends Controller {
         $tipoLoginPaciente = $this->auth->user()['tipoLoginPaciente'];
         //Envio os dados de autenticação do usuario para carregar todos os atendimentos
         $atendimentos = $this->atendimento->atendimentos($this->auth->user());
-
+        
         $result = BrowserDetect::isMobile() || BrowserDetect::isTablet();
 
         if($result == true){
@@ -155,6 +155,10 @@ class PacienteController extends Controller {
         return $this->dataSnap->exportarPdf($posto,$atendimento,$pure,$correlativos);
     }
 
+    public function getPerfil(){
+         return view('mobile.includes.perfil');
+    }
+
     /**
      * Responsavel por alterar a senha do usuario
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
@@ -170,7 +174,7 @@ class PacienteController extends Controller {
         $validator = Validator::make(Request::all(), $this->clienteAcesso->getValidator());
         
         if ($validator->fails()) {
-            return response(['message'=>'Erro ao validar','data' => Request::all()],400);
+            return response(['message'=>'Erro - Senhas devem ter entre 6 e 15 caracteres.','data' => Request::all()],400);
         }
         //Cria o MD5 do registro
         $registro = strtoupper(md5($this->auth->user()['registro']));
