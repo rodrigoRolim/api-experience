@@ -5,7 +5,7 @@
         <div class="snap-drawer snap-drawer-left">
           <div class="drawer-inner">
             <ul>
-              <li><a><i class="mdi mdi-account"></i> <span>Perfil</span></a></li>
+              <li><a><i class="mdi mdi-account"></i> <span>Alterar Senha</span></a></li>
               <li><a  href="{{url('/')}}/auth/logout"><i class="mdi mdi-exit-to-app"></i> <span>Logout</span></a>
             </ul>
           </div>

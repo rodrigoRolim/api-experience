@@ -31,6 +31,7 @@
           <div class="open-left">
             <i id="open-left" class="mdi mdi-sort-variant"></i>
           </div>         
+          
             <span class="title nomePaciente">{{$atendimentos[0]->nome}}
                 <i id='close-right' class="mdi-information-outline"></i><br> </span>
              <span class="infoPaciente"> 

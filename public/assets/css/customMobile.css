@@ -1,77 +1,60 @@
 /*--Paciente--*/
-
 .areaLegendaExames{
 	padding: 5px;
 }
-
 .btnAtendimento.active{
 	background-color: #E0E0E0 !important;
 }
-
 .tipoEntregaImpressao{
 	color: red !important;
 	font-size: 0.5em !important;
 	margin-left: 0px !important;
 }
-
 .infoPaciente{
 	font-size: 0.8em;
 }
-
 .nomePaciente{
 	font-size: 18px !important;
 	line-height: 26px !important;
 	margin-left: 0px !important;
 }
-
 .mdi-information-outline,
 .mdi-chevron-left,
 .mdi-filter-outline{
 	float: right;
 	margin-right: 5px;
 }
-
 .infoAdicional{
 	float: right;
 	margin-right: 5px;
 }
-
 .todo .todo-element{
 	padding: 10px;
 }
-
 .nomeProcedimento{
 	color: #524C4C;
 }
-
 .subInfoExame{
 	font-size: 0.6em !important;
 	margin-left: 0px !important;
 }
-
 .tituloModal{
 	font-size: 1.3em;
 }
-
 .semExames{
 	font-size: 1.2em;
 	padding: 20px;
 }
-
 .collapsible-header{
 	line-height: 2rem;
 }
-
 .collapsible-header i{
 	line-height: 2rem;
 }
-
 .mnemonicoAtd{
 	color: #8E8E8E !important;
 }
-
 /*--Cores Status Exames--*/
-
 .warning-element, .success-element, .danger-element, .aguardando-element, .naoRealizado-element{
 	margin-right: 10px;
 }
@@ -90,73 +73,64 @@
 .danger-element {
   border-left: 7px solid #ed5565;
 }
-
 .corStatusFinalizado{
 	font-style: normal;
 	font-size: 1em !important;
 	margin-left: 0px !important;
 	color: #1ab394;
 }
-
 .corStatusPendencias{
 	font-style: normal;
 	font-size: 1em !important;
 	margin-left: 0px !important;
 	color: #ed5565;
 }
-
 .corStatusNaoRealizado{
 	font-style: normal;
 	font-size: 1em !important;
 	margin-left: 0px !important;
 	color: #BBBAB9;
 }
-
 .snap-drawer{
-	width: 326px;
+	width: 300px;
 }
-
 .card-title{
 	font-size: 1em !important;
 	color: #9E9E9E !important;
 	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
-
 .card-content{
 	padding: 10px !important;
 	color: black;
 	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
-
 .descricaoExames{
 	border-bottom: 1px dashed #E5E5E5;
 }
-
 .card-footer{
 	font-size: 0.5em;
 	color: #9E9E9E;
 	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
-
 /*-- Médico --*/
-
 #filtroDatas{
 	margin-bottom: 0px;
 }
-
 .midData{
 	padding-left: 0 !important;
 	padding-right: 0 !important;
 	padding-top: 20px !important;
 }
-
 #btnFiltrar{
 	text-transform: none;
 	width: 90%;
 	margin-left: 10px;
 }
-
 .filtros{
 	margin-top: 70px !important;
+}
+#alterarSenha{
+	padding-left: 30px;
+	padding-right: 30px;
 }
 

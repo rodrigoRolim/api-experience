@@ -86,6 +86,7 @@
     });
 
     snapper.open('right');
+    $('#open-right').toggleClass("mdi-filter-outline mdi-chevron-left ");
 
     $('#open-left').click(function(e){ 
         if(snapper.state().state == 'left')
@@ -95,10 +96,14 @@
     });
 
     $('#open-right').click(function(e){ 
-        if(snapper.state().state == 'right')
+        if(snapper.state().state == 'right'){
+          $('#open-right').toggleClass("mdi-chevron-left mdi-filter-outline");
           $('.snap-drawer-right').hide();
-        else
+        }
+        else{
+          $('#open-right').toggleClass("mdi-filter-outline mdi-chevron-left ");
           $('.snap-drawer-right').show();
+        }
     });
 
     var dataInicio = new moment();
@@ -164,6 +169,8 @@
         url = "{{url('/')}}";            
         getClientes(url,formData);
         snapper.close();
+        $('.snap-drawer-right').hide();
+        $('#open-right').toggleClass("mdi-chevron-left mdi-filter-outline");
 
     });
 

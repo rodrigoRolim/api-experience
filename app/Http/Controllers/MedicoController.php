@@ -83,7 +83,7 @@ class MedicoController extends Controller {
         $postos = $this->medico->getPostoAtendimento($idMedico);
         $convenios = $this->medico->getConvenioAtendimento($idMedico);
 
-        $result = BrowserDetect::isMobile();
+        $result = BrowserDetect::isMobile() || BrowserDetect::isTablet();
 
         if($result == true){
             return view('mobile.medico.index')->with(
@@ -154,7 +154,9 @@ class MedicoController extends Controller {
             \App::abort(404);
         }
 
-        $result = BrowserDetect::isMobile();
+        $atendimentos[0]->nome = Formatar::nomeCurto($atendimentos[0]->nome);
+
+        $result = BrowserDetect::isMobile() || BrowserDetect::isTablet();
 
         if($result == true){
             return view('mobile.paciente.index',compact('atendimentos'));
@@ -263,6 +265,10 @@ class MedicoController extends Controller {
         }
         //Solicito para o dataSnap a geração do PDF
         return $this->dataSnap->exportarPdf($posto,$atendimento,$pure,$correlativos);
+    }
+
+    public function getPerfil(){
+         return view('mobile.medico.includes.perfil');
     }
 
     /**

@@ -53,14 +53,6 @@ class AuthController extends Controller
      */
      public function getIndex()
      {
-
-/*        $result = BrowserDetect::isMobile();
-
-        if($result == true){
-            return view('mobile.auth.index');            
-        }*/
-
-
         return view('auth.index');
      }
 
@@ -213,6 +205,6 @@ class AuthController extends Controller
         Session::flush();
         Redirect::back();
         //Retorna para a view de login
-        return Redirect::to('/auth');
+        return Redirect::to('/');
     }
 }
