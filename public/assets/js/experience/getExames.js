@@ -10,7 +10,7 @@ function getExames(url,tipoAcesso,posto,atendimento){
 	    corStatus = '';
 
 	    if(exame.class == 'success-element' && exame.tipo_entrega == '*'){
-	      checkbox = '<input checked id="todo'+index+'" type="checkbox">';
+	      checkbox = '<input id="todo'+index+'" type="checkbox" data-correl="'+exame.correl+'">';
 	      visualizacao = '<div id="boxExame" data-visualizacao="OK" data-correl="'+exame.correl+'" data-atendimento="'+exame.atendimento+'" data-posto="'+exame.posto+'">';
 	    }
 
@@ -20,8 +20,8 @@ function getExames(url,tipoAcesso,posto,atendimento){
 	    }
 
 	    conteudo = '<div class="row todo-element '+exame.class+'">'+
-	                  '<div class="col s2">'+
-	                      /*checkbox+*/
+	                  '<div class="col s2 checkResults hide">'+
+	                      checkbox+
 	                    '<label for="todo'+index+'"></label>'+ 
 	                  '</div>'+
 	                  '<div class="col s10">'+

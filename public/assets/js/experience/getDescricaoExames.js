@@ -3,8 +3,9 @@ function getDescricaoExame(url,dadosExames){
         url : url+'/paciente/detalheatendimentoexamecorrel/'+dadosExames.posto+'/'+dadosExames.atendimento+'/'+dadosExames.correl+'',
         type: 'GET',                            
         success:function(result){
-            if(result.data == null){
-                swal("Erro ao carregar descrição do exame..", "Não há resultados disponíveis para visualização.", "error");                                    
+            if(result.data == null){  
+            $('.modal-conteudo').html('');
+            $('.modal-conteudo').append('<h5 class="center-align erroDescricao">Erro ao carregar Descrição do Exame.</h5>');                                  
                 return false;
             }      
             var descricao = result.data;  

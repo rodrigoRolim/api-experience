@@ -29,6 +29,7 @@
               @if(Auth::user()['tipoLoginPaciente'] == 'CPF')
                 <li><a href='/paciente/perfil'><i class="mdi mdi-account"></i> <span>Alterar Senha</span></a></li>
               @endif
+              <li id="gerarPdfMenu"><span style="font-size:22px"><i class="mdi-comment-text"></i> <span> &nbsp;&nbsp;&nbsp;Gerar PDF com Resultados</span></span></li>
               <li><a href='/auth/logout'><i class="mdi mdi-exit-to-app"></i> <span>Logout</span></a>
             </ul>
           </div>

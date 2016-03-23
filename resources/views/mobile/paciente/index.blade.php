@@ -49,10 +49,14 @@
 
         <!-- Main Content --> 
         <div id="contentPrincipal" class="scene_element scene_element--fadeinup">
-          <div class="col s12 todo" id="listaExames"></div>
+          <div class="col s12 todo" id="listaExames" style="position: relative;"></div>
+          <div id="containerBtnResultados" class="center-align hide">
+           <button id="pdfResultados" class="btn-floating btn-large waves-effect waves-light red"><i class="mdi-download"></i></button>            
+          </div>
         </div> <!-- End of Main Contents -->
 
         <div id="semExames"></div>
+
 
           <!-- Footer -->
 <!--           <footer class="scene_element scene_element--fadeinup footer-copyright secondary-color">
@@ -100,6 +104,7 @@ $(document).ready(function(){
         else
           $('.snap-drawer-left').show();
     });
+
 
 
     $('.btnAtendimento').click(function(e){ 
@@ -170,8 +175,26 @@ $(document).ready(function(){
           $('#modalDetalhamento').closeModal();
      });
 
+     $('#gerarPdfMenu').click(function(e){
+          $('#open-left').trigger('click');
+          $('.checkResults').toggleClass("hide");
+          $('#containerBtnResultados').toggleClass("hide");
+     });
+
+     $('#pdfResultados').click(function(e){
+        var checkboxes = $('input:checked');       
+            var correl = [];
+               checkboxes.each(function () {
+                      correl.push($(this).data('correl'));
+                  });   
+            console.log(correl); 
+            if(correl.length == 0){
+              swal('','Selecione ao menos um Exame para exportação para o arquivo PDF.','error');
+            } 
+     });
+
 });
-          
+        
 
 
 </script>
