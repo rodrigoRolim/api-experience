@@ -30,6 +30,8 @@
 }
 #modalDetalhamento{
 	max-height: 100%;
+	width: 90%;
+	top: 3% !important;
 }
 .erroDescricao{
 	color: red;
@@ -116,11 +118,13 @@
 }
 .descricaoExames{
 	border-bottom: 1px dashed #E5E5E5;
+	margin-bottom: 10px;
 }
 .modal-rodape{
-	font-size: 0.8em;
+	font-size: 0.7em;
 	color: #9E9E9E;
 	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	margin-bottom: 10px;
 }
 /*-- Médico --*/
 #filtroDatas{

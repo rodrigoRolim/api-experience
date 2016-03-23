@@ -34,9 +34,9 @@ function getDescricaoExame(url,dadosExames){
                 }
 
                 conteudo = '<div class ="row descricaoExames">'+
-                             '<div class="col s8 m8 l8 analitos">'+
+                             '<div class="col s7 m7 l7 analitos">'+
                                 ''+analitos[index].ANALITO+'</div>'+
-                             '<div class="col s4 m4 l4 valoresAnalitos">'+
+                             '<div class="col s5 m5 l5 valoresAnalitos">'+
                                 '<strong>'+valorAnalito+' '+analitos[index].UNIDADE+'</strong></div>'+
                              '</div>';
 
