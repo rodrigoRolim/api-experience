@@ -35,7 +35,7 @@
         </div> <!-- End of Left Sidebar -->
 
         <!-- Right Sidebar -->
-        <div class="snap-drawer snap-drawer-right">
+<!--         <div class="snap-drawer snap-drawer-right">
           <div class="drawer-inner">
             <div class="row">
               <div class="col s12 m6">
@@ -53,5 +53,5 @@
               </div>
             </div>            
           </div>
-        </div> <!-- End of Right Sidebar -->
+        </div> <!-- End of Right Sidebar --> 
      </div>  <!-- End of Sidebars

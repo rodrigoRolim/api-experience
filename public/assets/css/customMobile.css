@@ -28,6 +28,16 @@
 	float: right;
 	margin-right: 5px;
 }
+#modalDetalhamento{
+	max-height: 100%;
+}
+.erroDescricao{
+	color: red;
+	padding-top: 200px;
+}
+.btnFecharDetalhamento{
+	float: right;
+}
 .todo .todo-element{
 	padding: 10px;
 }
@@ -94,12 +104,12 @@
 .snap-drawer{
 	width: 300px;
 }
-.card-title{
+.modal-titulo{
 	font-size: 1em !important;
 	color: #9E9E9E !important;
 	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
-.card-content{
+.modal-conteudo{
 	padding: 10px !important;
 	color: black;
 	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
@@ -107,8 +117,8 @@
 .descricaoExames{
 	border-bottom: 1px dashed #E5E5E5;
 }
-.card-footer{
-	font-size: 0.5em;
+.modal-rodape{
+	font-size: 0.8em;
 	color: #9E9E9E;
 	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }

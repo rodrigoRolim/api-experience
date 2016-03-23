@@ -1,5 +1,4 @@
 function getDescricaoExame(url,dadosExames){ 
-
     $.ajax({
         url : url+'/paciente/detalheatendimentoexamecorrel/'+dadosExames.posto+'/'+dadosExames.atendimento+'/'+dadosExames.correl+'',
         type: 'GET',                            
@@ -12,11 +11,11 @@ function getDescricaoExame(url,dadosExames){
             var analitos = result.data.ANALITOS;
             var conteudo = '';
 
-            $('.card-title').html('');
-            $('.card-title').append('&nbsp;&nbsp;'+descricao.PROCEDIMENTO); 
-            $('.card-content').html('');
-            $('.card-footer').html('');
-            $('.card-footer').append('Liberado em '+descricao.DATA_REALIZANTE+' por '+descricao.REALIZANTE.NOME+' <br> '+
+            $('.modal-titulo').html('');
+            $('.modal-titulo').append('&nbsp;&nbsp;'+descricao.PROCEDIMENTO); 
+            $('.modal-conteudo').html('');
+            $('.modal-rodape').html('');
+            $('.modal-rodape').append('Liberado em '+descricao.DATA_REALIZANTE+' por '+descricao.REALIZANTE.NOME+
                 descricao.REALIZANTE.TIPO_CR+' '+descricao.REALIZANTE.UF_CONSELHO+' : '+descricao.REALIZANTE.CRM+' Data e Hora da Coleta: '+descricao.DATA_COLETA);
 
 
@@ -34,24 +33,24 @@ function getDescricaoExame(url,dadosExames){
                     valorAnalito = valorAnalito.toFixed(analitos[index].DECIMAIS);
                 }
 
-                conteudo = '<div class ="col s12 m12 l12 descricaoExames">'+
-                             '<div class="col s8 m8 l7 analitos">'+
+                conteudo = '<div class ="row descricaoExames">'+
+                             '<div class="col s8 m8 l8 analitos">'+
                                 ''+analitos[index].ANALITO+'</div>'+
-                             '<div class="col s4 m4 l5 valoresAnalitos">'+
+                             '<div class="col s4 m4 l4 valoresAnalitos">'+
                                 '<strong>'+valorAnalito+' '+analitos[index].UNIDADE+'</strong></div>'+
                              '</div>';
 
-                $('.card-content').append(conteudo);
+                $('.modal-conteudo').append(conteudo);
 
             });             
        
             if(result.data.length == 0){
-                $('.card-content').append('<h2 class="textoTamanho">Não foram encontrados atendimentos.</h2>');
+                $('.modal-conteudo').append('<h2 class="textoTamanho">Não foram encontrados atendimentos.</h2>');
             }
         },
         error: function(jqXHR, textStatus, errorThrown){
-            $('.card-content').html('');
-            $('.card-content').append('<h5>Erro ao carregar Descrição do Exame.</h5>');
+            $('.modal-conteudo').html('');
+            $('.modal-conteudo').append('<h5 class="center-align erroDescricao">Erro ao carregar Descrição do Exame.</h5>');
         }
     });
 }

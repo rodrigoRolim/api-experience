@@ -16,6 +16,7 @@ function getExames(url,tipoAcesso,posto,atendimento){
 
 	    if(exame.tipo_entrega != '*'){
 	      impressao = '<span class="tipoEntregaImpressao">Este exame só poderá ser impresso no laboratorio</span>';
+	      visualizacao = '<div id="boxExame" data-visualizacao="P" data-correl="'+exame.correl+'" data-atendimento="'+exame.atendimento+'" data-posto="'+exame.posto+'">';
 	    }
 
 	    conteudo = '<div class="row todo-element '+exame.class+'">'+

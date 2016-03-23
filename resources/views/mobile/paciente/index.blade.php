@@ -19,6 +19,7 @@
 
 </head>
      @include('mobile.paciente.includes.modInfo')
+     @include('mobile.paciente.includes.modDetalhes')
   <body>
     <div class="m-scene" id="main"> <!-- Page Container -->
 
@@ -45,11 +46,10 @@
             <i class="mdi mdi-dots-vertical"></i>
           </div> -->
         </div>
-        
+
         <!-- Main Content --> 
         <div id="contentPrincipal" class="scene_element scene_element--fadeinup">
-          <div class="col s12 todo" id="listaExames">
-          </div>
+          <div class="col s12 todo" id="listaExames"></div>
         </div> <!-- End of Main Contents -->
 
         <div id="semExames"></div>
@@ -101,7 +101,6 @@ $(document).ready(function(){
           $('.snap-drawer-left').show();
     });
 
-    $('.snap-drawer-right').hide();
 
     $('.btnAtendimento').click(function(e){ 
         posto = $(e.currentTarget).data('posto');
@@ -154,25 +153,21 @@ $(document).ready(function(){
           url = "{{url('/')}}";
           var dadosExames = $(this).data();
 
-
-        if(visualizacao == 'OK'){
-          $('#close-right').toggleClass("mdi-information-outline mdi-chevron-left ");
+        if(visualizacao == 'OK'){   
           getDescricaoExame(url,dadosExames);
-          $('html, body').animate({ scrollTop: 0 }, 'slow'); //Ir para o topo da pagina
-          $('.snap-drawer-right').show();
-          snapper.open('right');
+          $('#modalDetalhamento').openModal();
+
+        }else if(visualizacao == 'P'){
+          swal("Erro", "Este exame só poderá ser impresso no laboratório", "error");
         }
     })
 
      $('.mdi-information-outline').click(function(e){
+          $('#modal').openModal();
+     });
 
-        if(e.target.className == 'mdi-information-outline'){
-            $('#modal').openModal();
-        }else{
-          $('.snap-drawer-right').hide();
-          snapper.close();
-          $('#close-right').toggleClass("mdi-chevron-left mdi-information-outline");
-        }
+     $('.btnFecharDetalhamento').click(function(e){
+          $('#modalDetalhamento').closeModal();
      });
 
 });
