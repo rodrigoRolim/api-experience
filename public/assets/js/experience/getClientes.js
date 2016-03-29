@@ -1,5 +1,6 @@
 function getClientes(url,postData){
 /*    $('#listFilter').html('<br><br><br><br><h2 class="textoTamanho"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando registros.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>');*/
+    $('.ui-filterable').show();
     $.ajax({
         url : url+'/medico/filterclientes',
         type: 'POST',
@@ -42,6 +43,7 @@ function getClientes(url,postData){
             });
             
             if(result.data.length == 0){
+                $('.ui-filterable').hide(); 
                 $('#listaPacientes').append('<blockquote><h5 class="center-align"> Não foram encontrados atendimentos para este periodo. </h5></blockquote>');
 /*                $('.contadorAtd').html('');*/
             }

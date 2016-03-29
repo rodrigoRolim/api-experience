@@ -25,9 +25,8 @@
 @section('content')
 <div id="page-wrapper-posto" class="gray-bg">
     <div class="row-fluid areaPacientePos">
-        <div class="col-md-6 col-sm-6 col-xs-12">
-            <button type="button" class="btn btn-default btn-circle btn-md btnVoltar pull-left" style="margin-right:10px;margin-top:5px">
-                <i class="fa fa-reply" style="font-size:18px"></i>
+        <div class="col-md-6 col-sm-6 col-xs-12">            
+            <button type="button" class="btn btn-lg btnVoltar pull-left"><i class="fa fa-arrow-left" style="font-size: 24px;"></i></button>
             </button>
             <strong><span id="nome" class="nomePaciente">{{$atendimento->nome}}</span></strong><br>
             <div class="idadePaciente">{{$atendimento->idade}}</div>
@@ -37,8 +36,12 @@
             <span id="atendimento">{{str_pad($atendimento->posto,config('system.qtdCaracterPosto'),'0',STR_PAD_LEFT)}}/{{str_pad($atendimento->atendimento,config('system.qtdCaracterAtend'),'0',STR_PAD_LEFT)}}</span>
         </div>
         <div class="col-md-2 col-sm-2 col-xs-6 convAtdPos">
-            <i class="fa fa-credit-card" data-toggle="tooltip" data-placement="bottom" title="Convênio"></i>
-            <span id="convenio">{{$atendimento->nome_convenio}}</span>
+            <i class="fa fa-hospital-o" data-toggle="tooltip" data-placement="bottom" title="Acomodação"></i>
+            <span id="convenio">{{$atendimento->acomodacao}}</span>
+        </div>
+        <div class="col-md-2 col-sm-2 col-xs-6 convAtdPos">
+            <i class="fa fa-user-md" data-toggle="tooltip" data-placement="bottom" title="Médico Solicitante"></i>
+            <span id="soliciante">{{$atendimento->nome_solicitante}}</span>
         </div>
     </div>
 
@@ -46,7 +49,8 @@
         <div class="ibox">
             <div class="row">
                 <div class="i-checks all boxSelectAll"> </div>
-            </div>        
+            </div>       
+            <span id="msgPendencias"></span> 
             <ul class="sortable-list connectList agile-list ui-sortable listaExames">  </ul>
               <div class="modal fade" id="modalExames" role="dialog">
                 <div class="modal-dialog">
@@ -55,7 +59,9 @@
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
                       <h2 class="modal-title">Exames Descrição</h2>
                     </div>
-                    <div class="modal-body"></div>
+                      <div class="modal-body">   
+                        <table id="tabelaDetalhes" class="table table-striped"></table>                   
+                      </div>
                     <div class="modal-footer"></div>
                   </div>                  
                 </div>
@@ -64,9 +70,11 @@
     </div>  
 </div>
 <div class="footer">
-    <div class="col-md-12 col-sm-12">                
-        <div class="col-md-7 col-md-offset-1 col-sm-6 txtRodapePostoPac">    </div>  
-        <div class="col-md-4 col-sm-6" id="boxRodapePostoPac">    </div>
+    <div class='container'>
+        <div class="col-md-12 col-sm-12" style="padding-left:0px;">                
+            <div class="col-md-8 col-sm-6 txtRodapePostoPac">    </div>  
+            <div class="col-md-4 col-sm-6" id="boxRodapePostoPac">    </div>
+        </div>
     </div>  
 </div>
 @stop
@@ -103,18 +111,30 @@
             $('.ibox').slimScroll({
                 height: 'auto',
                 railOpacity: 0.4,
+                railVisible: true,
                 wheelStep: 10,
                 minwidth: '100%',
                 touchScrollStep: 50,
+                alwaysVisible: true
             });   
 
             $('.modal-body').slimScroll({
                 height: '55.0vh',
                 railOpacity: 0.4,
+                railVisible: true,
                 wheelStep: 10,
                 minwidth: '100%',
                 touchScrollStep: 50,
+                alwaysVisible: true
             }); 
+
+            $('#modalExames').modal('hide');
+
+            $(document).keyup(function(e) {
+                 if (e.keyCode == 27) { //ESC
+                    $('#modalExames').modal('hide');
+                }
+            });
 
             $('.btnVoltar').click(function(){
                 window.location.replace("{{url('/')}}/posto");
@@ -192,7 +212,7 @@
                     function getDescricaoExame(dadosExames){                        
                         $('#modalExames').modal('show');
                         $('.modal-title').html('');   
-                        $('.modal-body').html('<br><br><br><br><h2 class="textoTamanho"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando registros.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>');   
+                        $('#tabelaDetalhes').html('<br><br><br><br><h2 class="textoTamanho"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando registros.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>');   
                         $('.modal-footer').html('');    
 
                         $.ajax({
@@ -209,10 +229,11 @@
                                 var conteudo = '';                                                          
                                 
                                 $('.modal-title').append(descricao.PROCEDIMENTO);
-                                $('.modal-body').html(''); 
+                                $('#tabelaDetalhes').html(''); 
 
                                 $('.modal-footer').append('Liberado em '+descricao.DATA_REALIZANTE+' por '+descricao.REALIZANTE.NOME+' - '+
                                     descricao.REALIZANTE.TIPO_CR+' '+descricao.REALIZANTE.UF_CONSELHO+' : '+descricao.REALIZANTE.CRM+' Data e Hora da Coleta: '+descricao.DATA_COLETA);
+     
 
                                 $.each( analitos, function( index ){
 
@@ -228,17 +249,18 @@
                                         valorAnalito = valorAnalito.toFixed(analitos[index].DECIMAIS);
                                     }
 
-                                    conteudo = '<div class ="col-md-12 descricaoExames">'+
-                                                 '<div class="col-md-8 analitos">'+
+                                   conteudo =   '<tr>'+
+                                                    '<td class =descricaoExames">'+
+                                                 '<td class=" analitos">'+
                                                     ''+analitos[index].ANALITO+'</div>'+
-                                                 '<div class="col-md-4 valoresAnalitos">'+
-                                                    '<strong>'+valorAnalito+' '+analitos[index].UNIDADE+'</strong></div>'+
-                                                 '</div>';
+                                                 '<td class="valoresAnalitos">'+
+                                                    '<strong>'+valorAnalito+' '+analitos[index].UNIDADE+'</strong>'+
+                                                 '</tr>';
 
-                                    $('.modal-body').append(conteudo);
+                                    $('#tabelaDetalhes').append(conteudo);
 
-                                });             
-                           
+                                });    
+
                                 if(result.data.length == 0){
                                     $('.modal-body').append('<h2 class="textoTamanho">Não foram encontrados atendimentos.</h2>');
                                 }
@@ -327,7 +349,7 @@
                         }); 
                        
                     }else{
-                        $('#boxRodapePostoPac').html('<h5 class="text-danger">{!!config('system.messages.pacientes.saldoDevedor')!!}</h3>');
+                        $('#msgPendencias').html('<h5 class="text-danger">{!!config('system.messages.pacientes.saldoDevedor')!!}</h3>');
                         $('#boxRodapePostoPac').css("margin-right", "0px");
                     }
                 }, "json" );
@@ -336,5 +358,7 @@
             $(".txtRodapePostoPac").append("<span class='statusAtendimentosViewPaciente'></span>");            
             $(".statusAtendimentosViewPaciente").append(" <span class='statusFinalizados'></span>&nbsp; Finalizados &nbsp;&nbsp;<span class='statusAguardando'></span> Parc. Finalizado");
             $(".statusAtendimentosViewPaciente").append("&nbsp;&nbsp;<span class='statusEmAndamento'></span> Em Andamento &nbsp;&nbsp;<span class='statusPendencias'></span> Existem Pendências");
+            $(".txtRodapePostoPac").append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fa fa-heartbeat'></i> Posto/Atendimento &nbsp;");
+            $(".txtRodapePostoPac").append("&nbsp;| &nbsp;<i class='fa fa-credit-card'></i> Convênio &nbsp");
     </script>
 @stop

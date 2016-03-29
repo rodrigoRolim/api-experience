@@ -121,7 +121,7 @@ class PostoController extends Controller {
         //Pega o Id do posto na sessao
         $idPosto = $this->auth->user()['posto'];
 
-        //Lista todos os atendimento do paciente para aquele posto
+        //Lista todos os atendimentos do paciente para aquele posto
         $atendimento = $this->posto->getAtendimentosPacienteByPosto($registro,$idPosto,$idAtendimento);
 
         if(!sizeof($atendimento)){

@@ -90,6 +90,8 @@ $(document).ready(function(){
       element: document.getElementById('content')
     });
 
+    $('#gerarPdfMenu').hide();
+
     var selector = '#listaAtendimentos .btnAtendimento';
     $('.btnAtendimento').first().addClass('active');
 
@@ -104,9 +106,7 @@ $(document).ready(function(){
         else
           $('.snap-drawer-left').show();
     });
-
-
-
+    
     $('.btnAtendimento').click(function(e){ 
         posto = $(e.currentTarget).data('posto');
         atendimento = $(e.currentTarget).data('atendimento');
@@ -116,6 +116,7 @@ $(document).ready(function(){
         indice = $(e.currentTarget).data('indice');
         solicitante = $(e.currentTarget).data('solicitante');
         convenio = $(e.currentTarget).data('convenio');
+        saldo = $(e.currentTarget).data('saldo');   
 
         if(tipoAcesso == 'MED')
           tipoAcesso = 'medico';

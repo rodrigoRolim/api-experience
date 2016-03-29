@@ -122,9 +122,14 @@
 
             $('#listFilter').slimScroll({
                 height: 'auto',
+                size: '12px',
+                railVisible: true,
+                color: 'green',
+                background: '#ADADA',
                 railOpacity: 0.4,
                 wheelStep: 10,
                 minwidth: '100%',
+                allowPageScroll: true,
                 touchScrollStep: 50,
                 alwaysVisible: true
             });
@@ -229,11 +234,11 @@
                 });
             }
             //Area de texto do Footer
-            $(".txtRodape").append("<i class='fa fa-heartbeat'></i> Posto/Atendimento &nbsp;|&nbsp; <i class='fa fa-calendar-check-o'></i> Data do Atendimento");
-            $(".txtRodape").append("&nbsp;| &nbsp;<i class='fa fa-credit-card'></i> Convênio &nbsp |&nbsp; <i class='fa fa-flask'></i>  Mnemônicos");
             $(".areaStatusAtendimentos").append("<span class='statusAtendimentos'></span>");
             $(".statusAtendimentos").append(" <span class='statusFinalizados'></span>&nbsp; Finalizados &nbsp;&nbsp;<span class='statusAguardando'></span> Parc. Finalizado");
             $(".statusAtendimentos").append("&nbsp;&nbsp;<span class='statusEmAndamento'></span> Em Andamento &nbsp;&nbsp;<span class='statusPendencias'></span> Existem Pendências");
+            $(".txtRodape").append("<i class='fa fa-heartbeat'></i> Posto/Atendimento &nbsp;|&nbsp; <i class='fa fa-calendar-check-o'></i> Data do Atendimento");
+            $(".txtRodape").append("&nbsp;| &nbsp;<i class='fa fa-credit-card'></i> Convênio &nbsp |&nbsp; <i class='fa fa-flask'></i>  Mnemônicos");
         });
     </script>
 @stop

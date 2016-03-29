@@ -1,3 +1,10 @@
+function verificaSaldoDevedor(saldo){
+    if(saldo == null || saldo == 0){
+       return false;
+    }
+      return true;
+} 
+
 function getExames(url,tipoAcesso,posto,atendimento){
 
 	$.get(url+'/'+tipoAcesso+'/examesatendimento/'+posto+'/'+atendimento, function( result ) {
@@ -9,10 +16,12 @@ function getExames(url,tipoAcesso,posto,atendimento){
 	    impressao = '';
 	    corStatus = '';
 
-	    if(exame.class == 'success-element' && exame.tipo_entrega == '*'){
-	      checkbox = '<input id="todo'+index+'" type="checkbox" data-correl="'+exame.correl+'">';
-	      visualizacao = '<div id="boxExame" data-visualizacao="OK" data-correl="'+exame.correl+'" data-atendimento="'+exame.atendimento+'" data-posto="'+exame.posto+'">';
-	    }
+	    if(!verificaSaldoDevedor(saldo)){
+		    if(exame.class == 'success-element' && exame.tipo_entrega == '*'){
+		      checkbox = '<input id="todo'+index+'" type="checkbox" data-correl="'+exame.correl+'">';
+		      visualizacao = '<div id="boxExame" data-visualizacao="OK" data-correl="'+exame.correl+'" data-atendimento="'+exame.atendimento+'" data-posto="'+exame.posto+'">';
+		    }
+		}
 
 	    if(exame.tipo_entrega != '*'){
 	      impressao = '<span class="tipoEntregaImpressao">Este exame só poderá ser impresso no laboratorio</span>';

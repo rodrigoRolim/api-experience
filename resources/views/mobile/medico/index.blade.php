@@ -32,7 +32,7 @@
               <i id="open-left" class="mdi mdi-sort-variant"></i>
             </div>
             <span class="title nomePaciente">{{Auth::user()['nome']}}
-                <i id="open-right" class="mdi-filter-outline"></i><br> </span>
+                <i id="filtroUp" class="mdi-filter-outline"></i><br> </span>
              <span class="infoPaciente"> 
                   {{Auth::user()['tipo_cr']}}-{{Auth::user()['uf_conselho']}}:{{Auth::user()['crm']}}
              </span>
@@ -42,8 +42,8 @@
         <!-- Main Content -->
         <div class="scene_element scene_element--fadeinup">
 
+            @include('mobile.medico.includes.filtro')
         <ul id="listaPacientes" data-role="listview" data-filter="true" data-filter-placeholder="Buscar Paciente" data-filter-theme="a" data-inset="true">
-  
         </ul>
           
           <!-- Footer -->
@@ -80,30 +80,24 @@
     $("#posto-button").removeClass();
     $("#situacao-button").removeClass();
     $("#btnFiltrar").removeClass("ui-btn");
+    $('.snap-drawer-left').hide();
 
      var snapper = new Snap({
       element: document.getElementById('content')
     });
 
-    snapper.open('right');
-    $('#open-right').toggleClass("mdi-filter-outline mdi-chevron-left ");
+    $('#filtroUp').trigger('click');
+     $('.ui-filterable').hide(); 
+
+    $('#filtroUp').click(function () {
+         $('.filtros').slideToggle(300);
+     });
 
     $('#open-left').click(function(e){ 
         if(snapper.state().state == 'left')
           $('.snap-drawer-left').hide();
         else
           $('.snap-drawer-left').show();
-    });
-
-    $('#open-right').click(function(e){ 
-        if(snapper.state().state == 'right'){
-          $('#open-right').toggleClass("mdi-chevron-left mdi-filter-outline");
-          $('.snap-drawer-right').hide();
-        }
-        else{
-          $('#open-right').toggleClass("mdi-filter-outline mdi-chevron-left ");
-          $('.snap-drawer-right').show();
-        }
     });
 
     var dataInicio = new moment();
@@ -146,10 +140,9 @@
     });
 
     $('#btnFiltrar').click(function(e){    
-
-        $('#listaPacientes').html('');     
-
-        $('#listaPacientes').html('');              
+        $('.filtros').slideToggle(300);
+        $('#listaPacientes').html('');   
+        $('.ui-filterable').show();              
 
         var formMedico = $('#formMedico :input');
         var formData = formMedico.serializeArray();
@@ -168,9 +161,6 @@
 
         url = "{{url('/')}}";            
         getClientes(url,formData);
-        snapper.close();
-        $('.snap-drawer-right').hide();
-        $('#open-right').toggleClass("mdi-chevron-left mdi-filter-outline");
 
     });
 

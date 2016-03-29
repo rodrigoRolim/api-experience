@@ -14,9 +14,17 @@
                     <div class="collapsible-body">
                       <ul class="collapsible" li="listaAtendimentos" data-collapsible="accordion">
                       @foreach($atendimentos as $key => $atendimento)
-                        <li class="btnAtendimento"  data-convenio="{{$atendimento->nome_convenio}}" data-solicitante="{{$atendimento->nome_solicitante}}" data-dtatendimento="{{ date('d/m/20y',strtotime($atendimento->data_atd))}}" data-posto="{{$atendimento->posto}}" data-atendimento="{{$atendimento->atendimento}}" data-mnemonicos="{{$atendimento->mnemonicos}}" data-acesso="{{Auth::user()['tipoAcesso']}}">
+                        <li class="btnAtendimento"  
+                        data-convenio="{{$atendimento->nome_convenio}}" 
+                        data-solicitante="{{$atendimento->nome_solicitante}}" 
+                        data-dtatendimento="{{ date('d/m/20y',strtotime($atendimento->data_atd))}}" 
+                        data-posto="{{$atendimento->posto}}"
+                        data-atendimento="{{$atendimento->atendimento}}" 
+                        data-mnemonicos="{{$atendimento->mnemonicos}}" 
+                        data-acesso="{{Auth::user()['tipoAcesso']}}" 
+                        data-saldo="{{$atendimento->saldo_devedor}}">
                           <div class="collapsible-header">
-                            	<i class="mdi mdi-beaker-empty-outline"></i><span id="dataAtendimento">{{ date('d/m/20y',strtotime($atendimento->data_atd))}}</span> - {{$atendimento->posto}} | {{$atendimento->atendimento}}<br>
+                            	<span id="dataAtendimento">{{ date('d/m/20y',strtotime($atendimento->data_atd))}}</span> - {{$atendimento->posto}} | {{$atendimento->atendimento}}<br>
                               <span class='truncate mnemonicoAtd'>{{$atendimento->mnemonicos}}</span>
                           </div>
                         </li>
@@ -26,10 +34,13 @@
                   </li>
                 </ul>
               </li>
-              @if(Auth::user()['tipoLoginPaciente'] == 'CPF')
+              @if(Auth::user()['tipoAcesso'] == 'PAC' && Auth::user()['tipoLoginPaciente'] == 'CPF')
                 <li><a href='/paciente/perfil'><i class="mdi mdi-account"></i> <span>Alterar Senha</span></a></li>
               @endif
-              <li id="gerarPdfMenu"><span style="font-size:22px"><i class="mdi-comment-text"></i> <span> &nbsp;&nbsp;&nbsp;Gerar PDF com Resultados</span></span></li>
+              @if(Auth::user()['tipoAcesso'] == 'MED')
+              <li><a href="{{url('/')}}/medico/"><i style="line-height: 1rem;" class="mdi-heart-outline"></i> <span>Pacientes</span></a></li>
+              @endif
+              <li id="gerarPdfMenu"><span style="font-size:22px"><i class="mdi-comment-text"></i> <span> &nbsp;&nbsp;&nbsp;Resultados em PDF</span></span></li>
               <li><a href='/auth/logout'><i class="mdi mdi-exit-to-app"></i> <span>Logout</span></a>
             </ul>
           </div>

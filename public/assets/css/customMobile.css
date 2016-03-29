@@ -1,3 +1,7 @@
+#toolbar{
+	
+}
+
 /*--Paciente--*/
 .areaLegendaExames{
 	padding: 5px;
@@ -126,9 +130,6 @@
 	margin-bottom: 10px;
 }
 /*-- Médico --*/
-#filtroDatas{
-	margin-bottom: 0px;
-}
 .midData{
 	padding-left: 0 !important;
 	padding-right: 0 !important;
@@ -136,11 +137,10 @@
 }
 #btnFiltrar{
 	text-transform: none;
-	width: 90%;
-	margin-left: 10px;
+	width: 100%;
 }
 .filtros{
-	margin-top: 70px !important;
+	
 }
 #alterarSenha{
 	padding-left: 30px;

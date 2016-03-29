@@ -160,7 +160,7 @@ class PostoRepository extends BaseRepository
      * @return mixed
      */
     public function getAtendimentosPacienteByPosto($registro,$idPosto,$idAtendimento){
-        $sql = 'SELECT c.nome,c.data_nas,c.registro,c.sexo,c.telefone,c.telefone2,a.posto,a.atendimento,data_atd, INITCAP(a.nome_convenio) AS nome_convenio, INITCAP(a.nome_solicitante) AS nome_solicitante, ('.config('system.userAgilDB').'GET_MNEMONICOS(a.posto,a.atendimento)) mnemonicos,a.saldo_devedor
+        $sql = 'SELECT c.nome,c.data_nas,c.registro,c.sexo,c.telefone,c.telefone2,a.posto,a.atendimento,a.acomodacao,data_atd, INITCAP(a.nome_convenio) AS nome_convenio, INITCAP(a.nome_solicitante) AS nome_solicitante, ('.config('system.userAgilDB').'GET_MNEMONICOS(a.posto,a.atendimento)) mnemonicos,a.saldo_devedor
             FROM '.config('system.userAgilDB').'vex_atendimentos a              
               INNER JOIN '.config('system.userAgilDB').'VEX_CLIENTES c ON a.registro = c.registro
             WHERE c.registro = :registro 
