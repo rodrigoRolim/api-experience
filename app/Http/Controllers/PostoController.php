@@ -14,6 +14,7 @@ use App\Repositories\ExamesRepository;
 use App\Repositories\PostoRepository;
 use App\Repositories\AtendimentoRepository;
 use App\Models\AtendimentoAcesso;
+use Carbon\Carbon;
 
 use App\Services\DataSnapService;
 
@@ -66,14 +67,21 @@ class PostoController extends Controller {
         //Pega o id do posto na sessão
         $idPosto = $this->auth->user()['posto'];
 
+        $dtNow = Carbon::now()->format('j/m/Y'); 
+
+        $dtYe = Carbon::now()->subDays(env('APP_POSTO_QTD_DIAS'))->format('j/m/Y');
+
+        $dataInicio = '29/03/2016';
+        $dataFim = '31/03/2016';
+
         //Pega os dados de Posto Realizante e Convenios para alimentar select na view
         $postoRealizante = $this->posto->getPostosRealizantes();
-        $convenios = $this->posto->getConveniosPosto($idPosto);
+        $acomodacoes = $this->posto->getAcomodacoesPosto($idPosto,$dataInicio,$dataFim);
 
         return view('posto.index')->with(
             array(
                 'postoRealizante' => $postoRealizante,
-                'convenios' => $convenios,   
+                'acomodacoes' => $acomodacoes,   
             )
         );
     }
@@ -86,16 +94,16 @@ class PostoController extends Controller {
         //Pega os dados enviados do formulario do filtro
         $requestData = Request::all();
         //Pega o ID do posto na sessão
-        $idPosto = $this->auth->user()['posto']; 
+        $idPosto = $this->auth->user()['posto'];
 
-        //Verifica se dataInicio e dataFIm seja diferente de nulo
+        //Verifica se dataInicio e dataFim seja diferente de nulo
         if($requestData['dataInicio'] != null && $requestData['dataFim'] != null){
             //Envia os valores para o repository filtrar
             $result = $this->posto->getAtendimentos(
                 $idPosto,
                 $requestData['dataInicio'],
                 $requestData['dataFim'],              
-                $requestData['convenio'],
+                $requestData['acomodacao'],
                 $requestData['situacao'],
                 $requestData['postoRealizante']
             );

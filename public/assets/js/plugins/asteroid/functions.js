@@ -77,7 +77,6 @@ $(function(){
       duration: duration_CONSTANT,
       render: function ($container) {
         $container.addClass('is-exiting');
-        smoothState.restartCSSAnimations();
         setTimeout(function () {
           if(initSidebar instanceof Function) {
             initSidebar();
@@ -109,8 +108,7 @@ $(function(){
     }
     
   };
-  
-  var smoothState = $('#main').smoothState(options).data('smoothState');
+
 
 });
 

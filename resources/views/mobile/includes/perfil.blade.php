@@ -112,6 +112,7 @@
 	$(document).ready(function(){
 
 		var form = $('#formSenha');
+    $('#open-right').hide();
                 
             form.validate({
                 rules: {

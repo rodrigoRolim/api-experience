@@ -7,7 +7,7 @@
             <ul>
               <li><a href="{{url('/')}}/medico"><i class="mdi-heart-outline" style="line-height: 1.5rem;"></i> <span>Pacientes</span></a></li>
               <li><a href="{{url('/')}}/medico/perfil"><i class="mdi mdi-account"></i> <span>Alterar Senha</span></a></li>
-              <li><a href="{{url('/')}}/auth/logout"><i class="mdi mdi-exit-to-app"></i> <span>Logout</span></a>
+              <li><a id="logout" href="{{url('/')}}/auth/logout"><i class="mdi mdi-exit-to-app"></i> <span>Logout</span></a>
             </ul>
           </div>
         </div> <!-- End of Left Sidebar -->

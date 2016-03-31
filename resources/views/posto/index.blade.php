@@ -21,22 +21,22 @@
         <form id="formPosto">
             <input hidden type="text" value="0" name="posto">
             <div class="col-md-3">
-                <label class="textoBranco">Atendimentos por datas entre:</label>
+                <label class="textoBranco">Periodo:</label>
                 <div class="input-daterange input-group" id="datepicker" data-provide="datepicker" data-date-end-date="0d">
                     <input type="text" class="input-sm form-control" id="dataInicio" name="dataInicio">
                     <span class="input-group-addon">até</span>
                     <input type="text" class="input-sm form-control" id="dataFim" name="dataFim">                    
                 </div>
-            </div>            
-            <div class="col-md-3">
-                <label class="textoBranco" name="convenio">Convênios</label>
-                {!! Form::select('convenio', $convenios, '', array('class' => 'form-control m-b', 'id'=>'convenio')) !!}
+            </div>       
+            <div class="col-md-2">
+                <label class="textoBranco" name="acomodacao">Acomodação</label>
+                {!! Form::select('acomodacao', $acomodacoes, '', array('class' => 'form-control m-b', 'id'=>'acomodacao')) !!}
             </div>
             <div class="col-md-2">
                 <label class="textoBranco" name="situacao">Situação</label>
                 {!! Form::select('situacao', config('system.selectFiltroSituacaoAtendimento'), '', array('class' => 'form-control m-b', 'id'=>'situacao')) !!}
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <label class="textoBranco" name="situacao">Posto Realizante</label>
                 {!! Form::select('postoRealizante', $postoRealizante, '', array('class' => 'form-control m-b', 'id'=>'postoRealizante')) !!}
             </div>
@@ -82,6 +82,22 @@
                 return o;
             };
 
+            $('#filtroPaciente').focus();
+
+            $("#acomodacao, #situacao, #postoRealizante").change(function(e) {
+                select = e.target.id;
+                stringSelect = '#'+select+' option:selected';  
+                txt = $( stringSelect ).text();
+                selecthashtag = '#'+select;
+
+                if(txt == 'Todos'){
+                     $(selecthashtag).css('background-color','white');
+                }else{
+                     $(selecthashtag).css('background-color','#E2EAE2');                    
+                }
+
+            });
+
             $(".menu-trigger").click(function() {
                 $(".boxFiltroPosto").slideToggle(768, function() {
                     $(this).toggleClass("nav-expanded").css('display', '');
@@ -107,7 +123,7 @@
             if(Cookies.get('dataInicio') != null){ // Se o filtro foi utilizado durante a sessao, filtro sera automaticamente preenchido. Se não, rececebe valores padrões.
                 $('#dataInicio').val(Cookies.get('dataInicio'));  
                 $('#dataFim').val(Cookies.get('dataFim'));
-                $('#convenio').val(Cookies.get('convenio'));     
+                $('#acomodacao').val(Cookies.get('acomodacao'));     
                 $('#situacao').val(Cookies.get('situacao'));     
                 $('#postoRealizante').val(Cookies.get('postoRealizante'));     
             }else{
@@ -124,7 +140,6 @@
                 height: 'auto',
                 size: '12px',
                 railVisible: true,
-                color: 'green',
                 background: '#ADADA',
                 railOpacity: 0.4,
                 wheelStep: 10,
@@ -139,7 +154,7 @@
             $('#btnFiltrar').click(function(e){
                 Cookies.set('dataInicio', $('#dataInicio').val());
                 Cookies.set('dataFim', $('#dataFim').val());
-                Cookies.set('convenio', $('#convenio').val());
+                Cookies.set('acomodacao', $('#acomodacao').val());
                 Cookies.set('situacao', $('#situacao').val());
                 Cookies.set('postoRealizante', $('#postoRealizante').val());
 

@@ -62,7 +62,12 @@
                       <div class="modal-body">   
                         <table id="tabelaDetalhes" class="table table-striped"></table>                   
                       </div>
-                    <div class="modal-footer"></div>
+                    <div class="modal-footer">
+                        <div class="row">
+                            <div id="rodapeDetalhe" class="col-lg-10 col-md-10 col-sm-10"></div>
+                            <div id="dvPdfDetalhe" class="col-lg-2 col-md-2 col-sm-2"></div>
+                        </div>
+                    </div>
                   </div>                  
                 </div>
               </div>
@@ -213,7 +218,7 @@
                         $('#modalExames').modal('show');
                         $('.modal-title').html('');   
                         $('#tabelaDetalhes').html('<br><br><br><br><h2 class="textoTamanho"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando registros.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>');   
-                        $('.modal-footer').html('');    
+                        $('#rodapeDetalhe').html('');    
 
                         $.ajax({
                             url : '{{url("/")}}/posto/detalheatendimentoexamecorrel/'+dadosExames.posto+'/'+dadosExames.atendimento+'/'+dadosExames.correl+'',
@@ -230,10 +235,9 @@
                                 
                                 $('.modal-title').append(descricao.PROCEDIMENTO);
                                 $('#tabelaDetalhes').html(''); 
-
-                                $('.modal-footer').append('Liberado em '+descricao.DATA_REALIZANTE+' por '+descricao.REALIZANTE.NOME+' - '+
+                                $('#rodapeDetalhe').append('Liberado em '+descricao.DATA_REALIZANTE+' por '+descricao.REALIZANTE.NOME+' - '+
                                     descricao.REALIZANTE.TIPO_CR+' '+descricao.REALIZANTE.UF_CONSELHO+' : '+descricao.REALIZANTE.CRM+' Data e Hora da Coleta: '+descricao.DATA_COLETA);
-     
+                                $('#dvPdfDetalhe').html('<a href="#" id="btnPdfDetalhe" data-correl="'+dadosExames.correl+'" data-posto="'+dadosExames.posto+'" data-atendimento="'+dadosExames.atendimento+'" class="btn btn-danger btnPdf">Gerar PDF</a>');  
 
                                 $.each( analitos, function( index ){
 
@@ -259,6 +263,33 @@
 
                                     $('#tabelaDetalhes').append(conteudo);
 
+                                }); 
+
+
+                                $('#btnPdfDetalhe').click(function(e){
+                                    posto = $(e.currentTarget).data('posto');
+                                    atendimento = $(e.currentTarget).data('atendimento');
+                                    correl = $(e.currentTarget).data('correl');
+
+                                    var dadosExame = {};                           
+                                    dadosExame = [{'posto':posto,'atendimento':atendimento,'correlativos':correl}]; 
+                                    var paginaPdf = window.open ('/impressao', '', '');              
+
+                                    $.ajax({ 
+                                     url: '{{url("/")}}/posto/exportarpdf',
+                                     type: 'post',
+                                     data: {"dados" : dadosExame},
+                                     success: function(data){   
+                                            if(data != 'false'){
+                                                paginaPdf.location = data;     
+                                            }else{
+                                                paginaPdf.close();
+                                                swal("Erro ao exportar resultados para PDF", "Tente novamente mais tarde!", "error");
+                                            }             
+                                       }
+                            });    
+
+
                                 });    
 
                                 if(result.data.length == 0){
@@ -272,8 +303,6 @@
                         });
                     }  
                       
-                    $('#boxRodapePostoPac').html('<button type="button" class="btn btn-danger btnPdf">Gerar PDF</button>');  
-
                     var checkAll = $('input.checkAll');
                     var checkboxes = $('input.check');
 
@@ -346,8 +375,8 @@
                                }
 
                             });          
-                        }); 
-                       
+                        });  
+
                     }else{
                         $('#msgPendencias').html('<h5 class="text-danger">{!!config('system.messages.pacientes.saldoDevedor')!!}</h3>');
                         $('#boxRodapePostoPac').css("margin-right", "0px");

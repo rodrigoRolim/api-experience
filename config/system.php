@@ -39,7 +39,7 @@ return [
     'atendimentoMask'  => env('APP_ATD_MASK'),
     'postoMask'        => env('APP_POSTO_MASK'),
     'selectFiltroSituacaoAtendimento' => [
-        '' => 'Selecione',
+        '' => 'Todos',
         'TF' => 'Finalizados',
         'PF' => 'Parcialmente Finalizado',
         'EP' => 'Existêm pendências',

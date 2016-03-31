@@ -191,13 +191,13 @@ class AuthController extends Controller
         //Limpa todos os cookie do fitro do médico
         unset($_COOKIE['dataInicio']);
         unset($_COOKIE['dataFim']);
-        unset($_COOKIE['convenio']);
+        unset($_COOKIE['acomodacao']);
         unset($_COOKIE['situacao']);
         unset($_COOKIE['postoRealizante']);
 
         setcookie('dataInicio', '', time() - 3600, '/'); // empty value and old timestamp
         setcookie('dataFim', '', time() - 3600, '/'); // empty value and old timestamp
-        setcookie('convenio', '', time() - 3600, '/'); // empty value and old timestamp
+        setcookie('acomodacao', '', time() - 3600, '/'); // empty value and old timestamp
         setcookie('situacao', '', time() - 3600, '/'); // empty value and old timestamp
         setcookie('postoRealizante', '', time() - 3600, '/'); // empty value and old timestamp
 

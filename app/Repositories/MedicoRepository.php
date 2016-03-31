@@ -124,7 +124,7 @@ class MedicoRepository extends BaseRepository
             'idMedico' => $idMedico,
         ]);
 
-        $postos = array(''=>'Selecione');
+        $postos = array(''=>'Todos');
 
         foreach ($data as $key => $value) {
             $postos[$value->posto] = $value->nome;

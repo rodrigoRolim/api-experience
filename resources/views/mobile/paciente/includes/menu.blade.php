@@ -41,7 +41,7 @@
               <li><a href="{{url('/')}}/medico/"><i style="line-height: 1rem;" class="mdi-heart-outline"></i> <span>Pacientes</span></a></li>
               @endif
               <li id="gerarPdfMenu"><span style="font-size:22px"><i class="mdi-comment-text"></i> <span> &nbsp;&nbsp;&nbsp;Resultados em PDF</span></span></li>
-              <li><a href='/auth/logout'><i class="mdi mdi-exit-to-app"></i> <span>Logout</span></a>
+              <li><a id="logout" href='/auth/logout'><i class="mdi mdi-exit-to-app"></i> <span>Logout</span></a>
             </ul>
           </div>
         </div> <!-- End of Left Sidebar -->

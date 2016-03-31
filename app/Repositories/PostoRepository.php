@@ -36,7 +36,7 @@ class PostoRepository extends BaseRepository
      * @param null $postoRealizante
      * @return array
      */
-    public function getAtendimentos($idPosto,$dataInicio,$dataFim, $convenio=null,$situacao=null,$postoRealizante=null)
+    public function getAtendimentos($idPosto,$dataInicio,$dataFim, $acomodacao=null,$situacao=null,$postoRealizante=null)
     {
         $sql = "SELECT DISTINCT
                    a.situacao_exames_experience, a.posto, a.atendimento,a.data_atd,a.nome_convenio, c.nome,c.data_nas,c.registro,c.sexo,c.telefone,c.telefone2, ".config('system.userAgilDB')."get_mnemonicos(a.posto, a.atendimento) as mnemonicos
@@ -47,7 +47,7 @@ class PostoRepository extends BaseRepository
                 WHERE a.posto = :idPosto
                     AND A.DATA_ATD BETWEEN TO_DATE(:dataInicio,'DD/MM/YYYY HH24:MI')
                     AND TO_DATE(:dataFim,'DD/MM/YYYY HH24:MI')                   
-                    AND (:convenio IS NULL OR A.CONVENIO = :convenio)
+                    AND (:acomodacao IS NULL OR A.ACOMODACAO = :acomodacao)
                     AND (:situacao IS NULL OR A.SITUACAO_EXAMES_EXPERIENCE = :situacao)
                     AND (:postoRealizante IS NULL OR E.posto_realizante = :postoRealizante)
                 ORDER BY c.nome";       
@@ -56,7 +56,7 @@ class PostoRepository extends BaseRepository
             'idPosto' => $idPosto,
             'dataInicio' => $dataInicio.' 00:00',
             'dataFim' => $dataFim.' 23:59',            
-            'convenio' => $convenio,
+            'acomodacao' => $acomodacao,
             'situacao' => $situacao,
             'postoRealizante' => $postoRealizante
         ]);
@@ -87,7 +87,7 @@ class PostoRepository extends BaseRepository
             'tipo' => 'S'
         ]);
 
-        $postos[''] = 'Selecione';
+        $postos[''] = 'Todos';
 
         foreach ($data as $key => $value) {
             $postos[$value->posto] = $value->nome;
@@ -143,13 +143,44 @@ class PostoRepository extends BaseRepository
             'idPosto' => $idPosto,
         ]);
 
-        $convenios = array(''=>'Selecione ');       
+        $convenios = array(''=>'Todos');       
 
 	   foreach($data as $key => $value) {
             $convenios[$value->convenio] = $value->nome_convenio;
         }       
 
         return $convenios;
+    }
+
+    public function getAcomodacoesPosto($idPosto,$dataInicio,$dataFim)
+    {
+        $sql =  "SELECT
+                    DISTINCT acomodacao
+                FROM ".config('system.userAgilDB')."vex_atendimentos A 
+                WHERE
+                    posto = :idPosto
+                    AND A.DATA_ATD BETWEEN TO_DATE(:dataInicio,'DD/MM/YYYY HH24:MI')
+                    AND TO_DATE(:dataFim,'DD/MM/YYYY HH24:MI')                   
+                ORDER BY
+                    acomodacao";
+
+
+        $data = DB::select(DB::raw($sql),[
+            'idPosto' => $idPosto,
+            'dataInicio' => $dataInicio.' 00:00',
+            'dataFim' => $dataFim.' 23:59',   
+        ]);
+
+
+        foreach ($data as $key => $value) {
+            $acomodacoes[$value->acomodacao] = $value->acomodacao;
+        }      
+
+        $acomodacoes = array(''=>'Todos') + $acomodacoes;
+        $acomodacoes = array_filter($acomodacoes);//Remover valores nulos
+
+
+        return $acomodacoes;
     }
 
     /**
