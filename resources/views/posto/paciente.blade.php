@@ -36,10 +36,15 @@
             <span id="atendimento">{{str_pad($atendimento->posto,config('system.qtdCaracterPosto'),'0',STR_PAD_LEFT)}}/{{str_pad($atendimento->atendimento,config('system.qtdCaracterAtend'),'0',STR_PAD_LEFT)}}</span>
         </div>
         @if($atendimento->acomodacao != '')
-        <div class="col-md-2 col-sm-2 col-xs-6 convAtdPos">
-            <i class="fa fa-hospital-o" data-toggle="tooltip" data-placement="bottom" title="Acomodação"></i>
-            <span id="convenio">{{$atendimento->acomodacao}}</span>
-        </div>
+            <div class="col-md-2 col-sm-2 col-xs-6 convAtdPos">
+                <i class="fa fa-hospital-o" data-toggle="tooltip" data-placement="bottom" title="Acomodação"></i>
+                <span id="convenio">{{$atendimento->acomodacao}}</span>
+            </div>
+        @else
+            <div class="col-md-2 col-sm-2 col-xs-6 convAtdPos">
+                <i class="fa fa-hospital-o" data-toggle="tooltip" data-placement="bottom" title="Acomodação"></i>
+                <span id="convenio">Não Informado</span>
+            </div>
         @endif
         <div class="col-md-2 col-sm-2 col-xs-6 convAtdPos">
             <i class="fa fa-user-md" data-toggle="tooltip" data-placement="bottom" title="Médico Solicitante"></i>
