@@ -88,7 +88,7 @@ class ExamesRepository extends BaseRepository
      */
     public function getDetalheAtendimentoExameCorrel($posto,$atendimento,$correl){
         $sql = "SELECT P.NOME PROCEDIMENTO, 'C' TIPO_LAUDO, TO_CHAR(E.DATA_COLE,'DD/MM/YY HH24:MI') DATA_COLE, TO_CHAR(E.DATA_REA1,'DD/MM/YY HH24:MI') DATA_REA1, NVL(M.TIPO_CR,'NULL') TIPO_CR, NVL(M.UF_CONSELHO,'NULL') UF_CONSELHO, NVL(M.CRM,'NULL') CRM, NVL(M.NOME,'NULL') NOME, V.NOME ANALITO, NVL(V.UNIDADE,'NULL') UNIDADE, V.DECIMAIS, R.VALOR 
-                FROM ".config('system.userAgilDB')."EXAMES E, ".config('system.userAgilDB')."PROCEDIMENTOS P, ".config('system.userAgilDB')."MEDICOS M, ".config('system.userAgilDB')."RESULTADOS R, ".config('system.userAgilDB')."VARIAVEIS V 
+                FROM ".config('system.userAgilDB')."VEX_EXAMES E, ".config('system.userAgilDB')."VEX_PROCEDIMENTOS P, ".config('system.userAgilDB')."VEX_MEDICOS M, ".config('system.userAgilDB')."VEX_RESULTADOS R, ".config('system.userAgilDB')."VEX_VARIAVEIS V 
                WHERE E.POSTO = :posto AND E.ATENDIMENTO = :atendimento AND E.CORREL = :correl
                  AND R.POSTO = E.POSTO AND R.ATENDIMENTO = E.ATENDIMENTO AND R.CORREL = E.CORREL
                  AND E.MED_REA1 = M.CRM(+)
