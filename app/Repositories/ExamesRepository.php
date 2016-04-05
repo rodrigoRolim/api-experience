@@ -65,7 +65,7 @@ class ExamesRepository extends BaseRepository
                     $exames[$key]['corStatus'] = 'corStatusPendencias';
                     $exames[$key]['msg'] = 'Existem Pendências';
                     $exames[$key]['view'] = false;
-                    break;                
+                    break;
                 default:
                     //CINZA - NAO REALIZADO
                     $exames[$key]['class'] = 'naoRealizado-element';
@@ -87,14 +87,32 @@ class ExamesRepository extends BaseRepository
      * @return mixed
      */
     public function getDetalheAtendimentoExameCorrel($posto,$atendimento,$correl){
-        $sql = 'SELECT '.config('system.userAgilDB').'get_resultado_json(:posto,:atendimento,:correl) as resultado FROM DUAL';
+        $sql = "SELECT P.NOME PROCEDIMENTO, 'C' TIPO_LAUDO, TO_CHAR(E.DATA_COLE,'DD/MM/YY HH24:MI') DATA_COLE, TO_CHAR(E.DATA_REA1,'DD/MM/YY HH24:MI') DATA_REA1, NVL(M.TIPO_CR,'NULL') TIPO_CR, NVL(M.UF_CONSELHO,'NULL') UF_CONSELHO, NVL(M.CRM,'NULL') CRM, NVL(M.NOME,'NULL') NOME, V.NOME ANALITO, NVL(V.UNIDADE,'NULL') UNIDADE, V.DECIMAIS, R.VALOR 
+                FROM EXAMES E, PROCEDIMENTOS P, MEDICOS M, RESULTADOS R, VARIAVEIS V 
+               WHERE E.POSTO = :posto AND E.ATENDIMENTO = :atendimento AND E.CORREL = :correl
+                 AND R.POSTO = E.POSTO AND R.ATENDIMENTO = E.ATENDIMENTO AND R.CORREL = E.CORREL
+                 AND E.MED_REA1 = M.CRM(+)
+                 AND P.MNEMONICO = E.MNEMONICO
+                 AND V.VARIAVEL = R.VARIAVEL
+              ORDER BY V.ORDEM_VISUALIZACAO";
 
-        $detalheExames = current(DB::select(DB::raw($sql),[
+        $dataResult = DB::select(DB::raw($sql),[
             'posto' => $posto,
             'atendimento' => $atendimento,
             'correl' => $correl,
-        ]));
+        ]);
 
-        return $detalheExames->resultado;
+        $resul = [];
+        foreach ($dataResult as $key => $data) {
+            $result['PROCEDIMENTO'] = $data->procedimento;
+            $result['TIPO_LAUDO']   = $data->tipo_laudo;
+            $result['REALIZANTE']   = array('NOME' => $data->nome,'TIPO_CR' => $data->tipo_cr,'UF_CONSELHO' => $data->uf_conselho, 'CRM' => $data->crm);
+            $result['DATA_REALIZANTE'] = $data->data_rea1;
+            $result['DATA_COLETA'] = $data->data_cole;
+
+            $result['ANALITOS'][] = array('ANALITO'=>$data->analito,'VALOR'=>$data->valor,'UNIDADE'=>$data->unidade,'DECIMAIS' => $data->decimais,'VALOR_REFERENCIA'=>NULL);
+        }
+
+        return json_encode($result);
     }
 }
