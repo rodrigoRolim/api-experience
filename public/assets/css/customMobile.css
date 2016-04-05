@@ -76,6 +76,12 @@
 .waves-effect{
 	display: inherit;
 }
+#rodapeDetalhe{
+	margin-left: 5px;
+}
+#dvPdfDetalhe{
+	margin-right: 5px;
+}
 /*--Cores Status Exames--*/
 .warning-element, .success-element, .danger-element, .aguardando-element, .naoRealizado-element{
 	margin-right: 10px;

@@ -33,7 +33,7 @@
                 @endif
                 <div class="tabs-container">
                     <ul class="nav nav-tabs">
-                        <!-- <li class="active"><a id="btnPaciente" data-toggle="tab" href="#tabLoginPaciente" aria-expanded="true">Paciente</a></li>
+                       <!--  <li class="active"><a id="btnPaciente" data-toggle="tab" href="#tabLoginPaciente" aria-expanded="true">Paciente</a></li>
                         <li class=""><a id="btnMedico" data-toggle="tab" href="#tabLoginMedico" aria-expanded="false">Médico</a></li> -->
                         <li class="active"><a id="btnPosto" data-toggle="tab" href="#tabLoginPosto" aria-expanded="false">Posto</a></li>
                     </ul>

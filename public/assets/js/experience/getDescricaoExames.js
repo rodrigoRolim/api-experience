@@ -4,8 +4,8 @@ function getDescricaoExame(url,dadosExames){
         type: 'GET',                            
         success:function(result){
             if(result.data == null){  
-            $('.modal-conteudo').html('');
-            $('.modal-conteudo').append('<h5 class="center-align erroDescricao">Erro ao carregar Descrição do Exame.</h5>');                                  
+           $('#modalExames').modal('hide');
+                swal("Erro ao carregar descrição do exame..", "Não há resultados disponíveis para visualização.", "error");                                    
                 return false;
             }      
             var descricao = result.data;  
@@ -14,10 +14,10 @@ function getDescricaoExame(url,dadosExames){
 
             $('.modal-titulo').html('');
             $('.modal-titulo').append('&nbsp;&nbsp;'+descricao.PROCEDIMENTO); 
-            $('.modal-conteudo').html('');
-            $('.modal-rodape').html('');
-            $('.modal-rodape').append(' Liberado em '+descricao.DATA_REALIZANTE+' por '+descricao.REALIZANTE.NOME+ ' ' +
+            
+            $('#rodapeDetalhe').append('Liberado em '+descricao.DATA_REALIZANTE+' por '+descricao.REALIZANTE.NOME+' - '+
                 descricao.REALIZANTE.TIPO_CR+' '+descricao.REALIZANTE.UF_CONSELHO+' : '+descricao.REALIZANTE.CRM+' Coletado em: '+descricao.DATA_COLETA);
+            $('#dvPdfDetalhe').html('<a href="#" id="btnPdfDetalhe" data-correl="'+dadosExames.correl+'" data-posto="'+dadosExames.posto+'" data-atendimento="'+dadosExames.atendimento+'" class="btn btn-danger btnPdf">Gerar PDF</a>');  
 
 
             $.each( analitos, function( index ){
@@ -34,14 +34,15 @@ function getDescricaoExame(url,dadosExames){
                     valorAnalito = valorAnalito.toFixed(analitos[index].DECIMAIS);
                 }
 
-                conteudo = '<div class ="row descricaoExames">'+
-                             '<div class="col s7 m7 l7 analitos">'+
+                 conteudo =  '<tr>'+
+                                '<td class =descricaoExames">'+
+                             '<td class=" analitos">'+
                                 ''+analitos[index].ANALITO+'</div>'+
-                             '<div class="col s5 m5 l5 valoresAnalitos">'+
-                                '<strong>'+valorAnalito+' '+analitos[index].UNIDADE+'</strong></div>'+
-                             '</div>';
+                             '<td class="valoresAnalitos">'+
+                                '<strong>'+valorAnalito+' '+analitos[index].UNIDADE+'</strong>'+
+                             '</tr>';
 
-                $('.modal-conteudo').append(conteudo);
+                $('#tabelaDetalhes').append(conteudo);
 
             });             
        
@@ -50,8 +51,8 @@ function getDescricaoExame(url,dadosExames){
             }
         },
         error: function(jqXHR, textStatus, errorThrown){
-            $('.modal-conteudo').html('');
-            $('.modal-conteudo').append('<h5 class="center-align erroDescricao">Erro ao carregar Descrição do Exame.</h5>');
+            $('#tabelaDetalhes').html('');
+            $('#tabelaDetalhes').append('<h5 class="center-align erroDescricao">Erro ao carregar Descrição do Exame.</h5>');
         }
     });
 }

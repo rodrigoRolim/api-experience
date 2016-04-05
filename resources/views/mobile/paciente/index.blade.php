@@ -198,7 +198,8 @@ $(document).ready(function(){
      $('.btnFecharDetalhamento').click(function(e){
           $('#modalDetalhamento').closeModal();
           $('.modal-titulo').html('');
-          $('.modal-conteudo').html('');
+          $('#rodapeDetalhe').html('');
+          $('#dvPdfDetalhe').html('');
      });
 
      $('#gerarPdfMenu').click(function(e){
