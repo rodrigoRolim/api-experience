@@ -50,12 +50,13 @@
         <!-- Main Content --> 
         <div id="contentPrincipal" class="scene_element scene_element--fadeinup">
           <div class="col s12 todo" id="listaExames" style="position: relative;"></div>
-          <div id="containerBtnResultados" class="center-align hide">
+          <div id="containerBtnResultados" class="hide">
            <button id="pdfResultados" class="btn-floating btn-large waves-effect waves-light red"><i class="mdi-download"></i></button>            
           </div>
         </div> <!-- End of Main Contents -->
 
         <div id="semExames"></div>
+        <div id="existemPendencias"></div>
 
 
           <!-- Footer -->
@@ -72,7 +73,6 @@
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script> 
   <script src="{{ asset('/assets/js/plugins/asteroid/materialize.min.js') }}"></script>
   <script src="{{ asset('/assets/js/plugins/asteroid/snap.js') }}"></script> 
-  <script src="{{ asset('/assets/js/plugins/asteroid/jquery.smoothState.min.js') }}"></script>
   <script src="{{ asset('/assets/js/plugins/asteroid/sidebar.js') }}"></script>
   <script src="{{ asset('/assets/js/plugins/asteroid/functions.js') }}"></script>
   <script src="{{ asset('/assets/js/plugins/sweetalert/sweetalert.min.js') }}"></script>
@@ -92,13 +92,16 @@ $(document).ready(function(){
 
     $('#gerarPdfMenu').hide();
 
-    var selector = '#listaAtendimentos .btnAtendimento';
     $('.btnAtendimento').first().addClass('active');
 
-    $(selector).on('click', function(){
+    $('#listaAtendimentos .btnAtendimento').on('click', function(){
         $(selector).removeClass('active');
         $(this).addClass('active');
     });
+
+    $('#gerarPdfMenu').on('click', function(){
+        $('#gerarPdfMenu').toggleClass('active');
+    })
 
     $('#open-left').click(function(e){ 
         if(snapper.state().state == 'left')
@@ -123,6 +126,11 @@ $(document).ready(function(){
         else
           tipoAcesso = 'paciente';
 
+        if($('#gerarPdfMenu').attr('class') == 'active'){
+          $('#containerBtnResultados').toggleClass("hide");
+          $('#gerarPdfMenu').toggleClass('active');
+        }
+
         $('.modal-content').html(''); 
         $('.modal-content').append('<h5 class="tituloModal">Detalhes Adicionais - Atendimento '+atendimento+' </h5>');
         $('.modal-content').append('<br><p>ID: '+atendimento+' </p>');
@@ -143,6 +151,12 @@ $(document).ready(function(){
         if(posto != null && atendimento != null){
             $('#listaExames').html('');
             $('#semExames').html('');
+            $('#existemPendencias').html('');
+            if(saldo != 0){
+             $('#existemPendencias').append('<p class="todo-element center-align ">'+
+              '<label class="pendencias">Existem Pendências.</label>'+
+            '</p>');            
+            }
             $('#dataAtendimentoPaciente').text(dataAtendimento); 
             getExames("{{url('/')}}",tipoAcesso,posto,atendimento);
         }
@@ -159,13 +173,22 @@ $(document).ready(function(){
           url = "{{url('/')}}";
           var dadosExames = $(this).data();
 
-        if(visualizacao == 'OK'){   
-          getDescricaoExame(url,dadosExames);
-          $('#modalDetalhamento').openModal();
-
-        }else if(visualizacao == 'P'){
-          swal("Erro", "Este exame só poderá ser impresso no laboratório", "error");
+        switch(visualizacao) {
+          case 'OK':
+              getDescricaoExame(url,dadosExames);
+              $('#modalDetalhamento').openModal();
+              break;
+          case 'P': //Tipo entrega diferente de *
+               swal("Atenção", "Este exame só poderá ser impresso no laboratório", "error");
+               break;
+          case 'S': // Saldo Devedor
+               swal("Atenção", "Existêm Pendências", "warning");
+               break;
+          case 'N':
+               swal("Atenção", "Exame Não Realizado", "warning");    
+               break;      
         }
+
     })
 
      $('.mdi-information-outline').click(function(e){
@@ -174,6 +197,8 @@ $(document).ready(function(){
 
      $('.btnFecharDetalhamento').click(function(e){
           $('#modalDetalhamento').closeModal();
+          $('.modal-titulo').html('');
+          $('.modal-conteudo').html('');
      });
 
      $('#gerarPdfMenu').click(function(e){
@@ -194,9 +219,7 @@ $(document).ready(function(){
             } 
      });
 
-});
-        
-
+});  
 
 </script>
 

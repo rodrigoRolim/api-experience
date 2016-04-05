@@ -16,8 +16,8 @@ function getDescricaoExame(url,dadosExames){
             $('.modal-titulo').append('&nbsp;&nbsp;'+descricao.PROCEDIMENTO); 
             $('.modal-conteudo').html('');
             $('.modal-rodape').html('');
-            $('.modal-rodape').append('Liberado em '+descricao.DATA_REALIZANTE+' por '+descricao.REALIZANTE.NOME+
-                descricao.REALIZANTE.TIPO_CR+' '+descricao.REALIZANTE.UF_CONSELHO+' : '+descricao.REALIZANTE.CRM+' Data e Hora da Coleta: '+descricao.DATA_COLETA);
+            $('.modal-rodape').append(' Liberado em '+descricao.DATA_REALIZANTE+' por '+descricao.REALIZANTE.NOME+ ' ' +
+                descricao.REALIZANTE.TIPO_CR+' '+descricao.REALIZANTE.UF_CONSELHO+' : '+descricao.REALIZANTE.CRM+' Coletado em: '+descricao.DATA_COLETA);
 
 
             $.each( analitos, function( index ){

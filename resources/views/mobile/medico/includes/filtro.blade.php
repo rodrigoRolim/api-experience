@@ -13,7 +13,7 @@
               </select>
           </div>
       </div>
-      <label class="center-align"> Ou </label><br>
+      <div class="center-align"> Ou </div><br>
       <label>&nbsp;&nbsp; Atendimentos por datas entre:</label>
       <div id="filtroDatas" class="row">
         <div class="col l5 s5 m5 dataInicial">

@@ -17,12 +17,15 @@
     {!! Html::style('/assets/css/customMobile.css') !!}
     {!! Html::style('/assets/css/plugins/asteroid/jquery.mobile-1.4.5.min.css') !!}
 
+<!--     <script type="text/javascript">
+      function silentErrorHandler() {return true;}
+      window.onerror=silentErrorHandler;
+      </script>  SURPRESS ERRORS--> 
+
 </head>
   <body>
     <div class="m-scene" id="main"> <!-- Page Container -->
-
        @include('mobile.medico.includes.menu')
-
       <!-- Page Content -->
       <div class="snap-content news z-depth-5" id="content">
         <!-- Toolbar -->
@@ -74,7 +77,7 @@
 <script type="text/javascript">
 
   $(document).ready(function(){
-
+    
     $('select').material_select();
     $("#convenio-button").removeClass(); //Alternativa para delegação arbitraria de classes pelo tema jquery mobile..
     $("#posto-button").removeClass();

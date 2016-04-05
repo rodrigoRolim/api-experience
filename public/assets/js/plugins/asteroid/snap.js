@@ -23,8 +23,8 @@
             flickThreshold: 50,
             transitionSpeed: 0.3,
             easing: 'ease',
-            maxPosition: 266,
-            minPosition: -300,
+            maxPosition: 275, //default 266
+            minPosition: -266,
             tapToClose: false,
             touchToDrag: false,
             slideIntent: 40, // degrees
