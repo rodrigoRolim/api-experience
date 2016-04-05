@@ -35,10 +35,12 @@
             <i class="fa fa-heartbeat" data-toggle="tooltip" data-placement="bottom" title="Posto/Atendimento"></i>
             <span id="atendimento">{{str_pad($atendimento->posto,config('system.qtdCaracterPosto'),'0',STR_PAD_LEFT)}}/{{str_pad($atendimento->atendimento,config('system.qtdCaracterAtend'),'0',STR_PAD_LEFT)}}</span>
         </div>
+        @if($atendimento->acomodacao != '')
         <div class="col-md-2 col-sm-2 col-xs-6 convAtdPos">
             <i class="fa fa-hospital-o" data-toggle="tooltip" data-placement="bottom" title="Acomodação"></i>
             <span id="convenio">{{$atendimento->acomodacao}}</span>
         </div>
+        @endif
         <div class="col-md-2 col-sm-2 col-xs-6 convAtdPos">
             <i class="fa fa-user-md" data-toggle="tooltip" data-placement="bottom" title="Médico Solicitante"></i>
             <span id="soliciante">{{$atendimento->nome_solicitante}}</span>
@@ -301,7 +303,9 @@
                                 $('.modal-body').append('<div class="text-center alert alert-danger animated fadeIn erroDescricao"><i class="fa fa-exclamation-circle fa-5x"></i><h2>Erro ao carregar Descrição do Exame.</h2></div>');
                             }
                         });
-                    }  
+                    } 
+
+                    $('#boxRodapePostoPac').html('<button type="button" class="btn btn-danger btnPdf">Gerar PDF</button>');   
                       
                     var checkAll = $('input.checkAll');
                     var checkboxes = $('input.check');
