@@ -91,7 +91,7 @@ class ExamesRepository extends BaseRepository
                 FROM ".config('system.userAgilDB')."VEX_EXAMES E, ".config('system.userAgilDB')."VEX_PROCEDIMENTOS P, ".config('system.userAgilDB')."VEX_MEDICOS M, ".config('system.userAgilDB')."VEX_RESULTADOS R, ".config('system.userAgilDB')."VEX_VARIAVEIS V 
                WHERE E.POSTO = :posto AND E.ATENDIMENTO = :atendimento AND E.CORREL = :correl
                  AND R.POSTO = E.POSTO AND R.ATENDIMENTO = E.ATENDIMENTO AND R.CORREL = E.CORREL
-                 AND E.MED_REA1 = M.CRM(+)
+                 AND E.REALIZANTE1 = M.CRM(+)
                  AND P.MNEMONICO = E.MNEMONICO
                  AND V.VARIAVEL = R.VARIAVEL
               ORDER BY V.ORDEM_VISUALIZACAO";
