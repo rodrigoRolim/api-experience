@@ -60,6 +60,11 @@
     </div>
 @stop
 
+@section('statusFooter')
+    <span class='statusFinalizados'></span> Finalizados <span class='statusAguardando'></span> Parc. Finalizado
+    <span class='statusEmAndamento'></span> Em Andamento <span class='statusPendencias'></span> Existem Pendências
+@stop
+
 @section('script')
     @parent
     <script src="{{ asset('/assets/js/plugins/moments/moments.js') }}"></script>
@@ -69,75 +74,50 @@
     <script src="{{ asset('/assets/js/plugins/vanillamasker/vanilla-masker.min.js') }}"></script>
     <script src="{{ asset('/assets/js/plugins/js-cookie/js.cookie.js') }}"></script>
 
+    <script src="{{ asset('/assets/js/experience/async.js') }}"></script>
+
     <script type="text/javascript">
         $(document).ready(function (){
+            //Inicia o tooltip
             $("body").tooltip({ selector: '[data-toggle=tooltip]' });
 
-            $.strPad = function(i,l,s) {
-                var o = i.toString();
-                if (!s) { s = '0'; }
-                while (o.length < l) {
-                    o = s + o;
-                }
-                return o;
-            };
-
-            $('#filtroPaciente').focus();
-
-            $("#acomodacao, #situacao, #postoRealizante").change(function(e) {
-                select = e.target.id;
-                stringSelect = '#'+select+' option:selected';  
-                txt = $( stringSelect ).text();
-                selecthashtag = '#'+select;
-
-                if(txt == 'Todos'){
-                     $(selecthashtag).css('background-color','white');
-                }else{
-                     $(selecthashtag).css('background-color','#E2EAE2');                    
-                }
-
-            });
-
-            $(".menu-trigger").click(function() {
-                $(".boxFiltroPosto").slideToggle(768, function() {
-                    $(this).toggleClass("nav-expanded").css('display', '');
-                });
-
-            });            
-            
-            var dataInicio = new moment();
-            var dataFim = new moment();
-            var qtdDiasFiltro = {{config('system.posto.qtdDiasFiltro')}};
-
+            //Configura o dataPicker
             $('.input-daterange').datepicker({
-                keyboardNavigation: true,                
+                keyboardNavigation: true,
                 autoclose: true,
                 format: "dd/mm/yyyy",  
                 disableTouchKeyboard: true            
             });
 
+            $(".input-daterange").attr("autocomplete", "off");
+
+            //Prepara a data do filtro de acordo com a configuração no arquivo .env
+            var dataInicio = new moment();
+            var dataFim = new moment();
+            var qtdDiasFiltro = {{config('system.posto.qtdDiasFiltro')}};
+
             dataInicio = dataInicio.subtract(qtdDiasFiltro,'days');
             dataInicio = dataInicio.format('DD/MM/YYYY');
             dataFim = dataFim.format('DD/MM/YYYY');
 
-            if(Cookies.get('dataInicio') != null){ // Se o filtro foi utilizado durante a sessao, filtro sera automaticamente preenchido. Se não, rececebe valores padrões.
+            //Verifica no cache se já houve uma pesquisa no filtro
+            if(Cookies.get('dataInicio') != null){
+                //Alimenta o filtro do os dados guardados em cache
                 $('#dataInicio').val(Cookies.get('dataInicio'));  
                 $('#dataFim').val(Cookies.get('dataFim'));
                 $('#acomodacao').val(Cookies.get('acomodacao'));     
                 $('#situacao').val(Cookies.get('situacao'));     
                 $('#postoRealizante').val(Cookies.get('postoRealizante'));     
             }else{
+                //Alimenta o filtro com a data pre definida
                 $('#dataInicio').val(dataInicio);
                 $('#dataFim').val(dataFim);
-            }            
+            }
 
-            VMasker($("#dataInicio")).maskPattern('99/99/9999');
-            VMasker($("#dataFim")).maskPattern('99/99/9999');
-
-            $(".input-daterange").attr("autocomplete", "off");
-
+            //Configura o componente de lista
             $('#listFilter').slimScroll({
-                height: 'auto',
+                height: '65vh',
+                width:'98%',
                 size: '12px',
                 railVisible: true,
                 background: '#ADADA',
@@ -149,8 +129,7 @@
                 alwaysVisible: true
             });
 
-            $('#filtroPaciente').filterList();
-
+            //Evento do disparo do botão de filtro
             $('#btnFiltrar').click(function(e){
                 Cookies.set('dataInicio', $('#dataInicio').val());
                 Cookies.set('dataFim', $('#dataFim').val());
@@ -161,99 +140,70 @@
                 var formPosto = $('#formPosto');
                 var postData = formPosto.serializeArray(); 
 
-                getClientes(postData);
+                //Instancia a class Posto
+                var async = new AsyncClass();
+
+                //Busca os dados do atendimento do posto
+                var dataResult = async.run('{{url("/")}}/posto/filteratendimentos',postData);
+
+                dataResult.then(function(result){
+                    //Caso houver erro para a execução e imprime no alert
+                    if(!result.status){
+                        $('#msgPrograma').html('<div class="alert alert-danger alert-dismissable animated fadeIn">'+result.msgError+'</div>');
+                    }
+
+                    //Caso não retorne atendimento imprime a mensagem
+                    if(!result.data.length){
+                        $('#listFilter').append('<h2 class="textoTamanho">Não foram encontrados atendimentos.</h2>');
+                        $('.contadorAtd').html('');
+                    }
+
+                    //Limpa a div de filter
+                    $('#listFilter').html('');
+
+                    //Prepara HTML para impressao no listFilter
+                    $.each( result.data, function( index ){
+                        var atendimento = result.data[index];
+                        //Impressao da quantidade de atendimentos localizados
+                        $('.contadorAtd').html('<h5 class="achouAtd">Foram encontrados '+result.data.length+' atendimentos para as datas selecionadas.</h5>');
+                        //Prepara htmk do LI
+                        var item = '<li class="col-sm-12 boxatendimento '+atendimento.situacaoAtendimento+'"data-key="'+atendimento.key+'" data-atendimento="'+atendimento.atendimento+'">'+
+                            '<div class="row">'+
+                                '<div class="col-md-4 col-sm-6 col-xs-12">'+
+                                    '<strong>'+atendimento.nome+'</strong>'+'<br>'+'<i class="'+((atendimento.sexo == "M")?"fa fa-mars":"fa fa-venus")+'"></i> '+atendimento.idade+
+                                '</div>'+
+                                '<div class="col-md-2 col-sm-6 col-xs-6">'+
+                                    '<i class="fa fa-heartbeat" data-toggle="tooltip" data-placement="right" title="Posto/Atendimento"></i><strong> '+atendimento.posto+'/'+atendimento.atendimento+'</strong>'+                                                    
+                                '</div>'+
+                                '<div class="col-md-2 col-sm-6 col-xs-6">'+
+                                    '<i class="fa fa-calendar-check-o" data-toggle="tooltip" title="Data do Atendimento"></i> '+atendimento.data_atd+
+                                '</div>'+
+                                '<div class="col-md-2 col-sm-6 col-xs-6 hidden-xs">'+
+                                    '<i class="fa fa-credit-card" data-toggle="tooltip" title="Convênio"></i> '+atendimento.nome_convenio+
+                                '</div>'+
+                                '<div class="col-md-12 col-sm-6 col-xs-12">'+
+                                    '<i class="fa fa-flask" data-toggle="tooltip" title="Mnemônicos"></i> '+atendimento.mnemonicos+
+                                '</div>'+
+                            '</div>'+
+                       '</li>';
+                       //Adiciona o item na lista
+                       $('#listFilter').append(item);
+                    });
+
+                    $('#listFilter li').click(function(e){
+                        var key = $(e.currentTarget).data('key');
+                        var atendimento = $(e.currentTarget).data('atendimento');
+
+                        $(window.document.location).attr('href',"{{url('/')}}/posto/paciente/"+key+"/"+atendimento);
+                    });
+
+                    //Habilita a busca
+                    $('#filtroPaciente').filterList();                    
+                });                
             });
 
+            //Dispara o evento do botao click para iniciar a busca inicial            
             $('#btnFiltrar').trigger('click');
-
-            function getClientes(postData){
-                $('#listFilter').html('<br><br><br><br><h2 class="textoTamanho"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando registros.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>');
-                $.ajax({
-                    url : '{{url("/")}}/posto/filteratendimentos',
-                    type: 'POST',
-                    data : postData,
-                    success:function(result){
-                        $('#listFilter').html('');
-                        var dataAtendimento = [];
- 
-                        $.each( result.data, function( index ){
-                            var atendimento = result.data[index];                           
-                            $('.contadorAtd').html('<h5 class="achouAtd">Foram encontrados ' + result.data.length + ' atendimentos para as datas selecionadas   .</h5>');
-                       
-                            atendimento.telefone = atendimento.telefone.replace(/ /g,""); //Remove espaços
-                            atendimento.posto = $.strPad(atendimento.posto, {{config('system.qtdCaracterPosto')}});
-                            atendimento.atendimento = $.strPad(atendimento.atendimento, {{config('system.qtdCaracterAtend')}});
-                            dataAtendimento = new moment(atendimento.data_atd);                            
-                            dataAtendimento = dataAtendimento.format('DD/MM/YYYY');     
-                            dataNascimento = new moment(atendimento.data_nas);
-                            dataNascimento = dataNascimento.format('DD/MM/YYYY');  
-
-                            switch(atendimento.situacao_exames_experience){
-                                case 'EA':
-                                    atendimento.situacao_exames_experience = 'warning-element'
-                                    break;
-                                case 'TF':
-                                    atendimento.situacao_exames_experience = 'success-element'
-                                    break;
-                                case 'PF':
-                                    atendimento.situacao_exames_experience = 'aguardando-element'
-                                    break;
-                                case 'EP':
-                                    atendimento.situacao_exames_experience = 'danger-element'
-                                    break;
-                                default:
-                                    atendimento.situacao_exames_experience = 'naoRealizado-element'
-                                    break;
-                            }                       
-
-                            var item = '<li class="col-sm-12 boxatendimento '+atendimento.situacao_exames_experience+'"data-key="'+atendimento.key+'" data-atendimento="'+atendimento.atendimento+'">'+
-                                            '<div class="row">'+
-                                                '<div class="col-md-4 col-sm-6 col-xs-12">'+
-                                                    '<strong>'+atendimento.nome+'</strong>'+'<br>'+'<i class="'+((atendimento.sexo == "M")?"fa fa-mars":"fa fa-venus")+'"></i> '+atendimento.idade+
-                                                '</div>'+
-                                                '<div class="col-md-2 col-sm-6 col-xs-6">'+
-                                                    '<i class="fa fa-heartbeat" data-toggle="tooltip" data-placement="right" title="Posto/Atendimento"></i><strong> '+atendimento.posto+'/'+atendimento.atendimento+'</strong>'+                                                    
-                                                '</div>'+
-                                                '<div class="col-md-2 col-sm-6 col-xs-6">'+
-                                                    '<i class="fa fa-calendar-check-o" data-toggle="tooltip" title="Data do Atendimento"></i> '+dataAtendimento+
-                                                '</div>'+
-                                                '<div class="col-md-2 col-sm-6 col-xs-6 hidden-xs">'+
-                                                    '<i class="fa fa-credit-card" data-toggle="tooltip" title="Convênio"></i> '+atendimento.nome_convenio+
-                                                '</div>'+
-                                                '<div class="col-md-12 col-sm-6 col-xs-12">'+
-                                                    '<i class="fa fa-flask" data-toggle="tooltip" title="Mnemônicos"></i> '+atendimento.mnemonicos+
-                                                '</div>'+
-                                            '</div>'+
-                                       '</li>';
-
-
-                            $('#listFilter').append(item);
-                        });
-
-                        $('#listFilter li').click(function(e){
-                            var key = $(e.currentTarget).data('key');
-                            var atendimento = $(e.currentTarget).data('atendimento');
-                            window.location.replace("{{url('/')}}/posto/paciente/"+key+"/"+atendimento);
-                        });
-
-                        if(result.data.length == 0){
-                            $('#listFilter').append('<h2 class="textoTamanho">Não foram encontrados atendimentos.</h2>');
-                            $('.contadorAtd').html('');
-                        }
-                    },
-                    error: function(jqXHR, textStatus, errorThrown){
-                        var msg = jqXHR.responseText;
-                        msg = JSON.parse(msg);
-                        $('#msgPrograma').html('<div class="alert alert-danger alert-dismissable animated fadeIn">'+msg.message+'</div>');
-                    }
-                });
-            }
-            //Area de texto do Footer
-            $(".areaStatusAtendimentos").append("<span class='statusAtendimentos'></span>");
-            $(".statusAtendimentos").append(" <span class='statusFinalizados'></span>&nbsp; Finalizados &nbsp;&nbsp;<span class='statusAguardando'></span> Parc. Finalizado");
-            $(".statusAtendimentos").append("&nbsp;&nbsp;<span class='statusEmAndamento'></span> Em Andamento &nbsp;&nbsp;<span class='statusPendencias'></span> Existem Pendências");
-            $(".txtRodape").append("<i class='fa fa-heartbeat'></i> Posto/Atendimento &nbsp;|&nbsp; <i class='fa fa-calendar-check-o'></i> Data do Atendimento");
-            $(".txtRodape").append("&nbsp;| &nbsp;<i class='fa fa-credit-card'></i> Convênio &nbsp |&nbsp; <i class='fa fa-flask'></i>  Mnemônicos");
         });
     </script>
 @stop

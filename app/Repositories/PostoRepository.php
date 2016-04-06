@@ -12,6 +12,7 @@ namespace App\Repositories;
 use Carbon\Carbon;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Experience\Util\DataNascimento;
+use Experience\Util\Formatar;
 use DB;
 
 class PostoRepository extends BaseRepository
@@ -38,19 +39,22 @@ class PostoRepository extends BaseRepository
      */
     public function getAtendimentos($idPosto,$dataInicio,$dataFim, $acomodacao=null,$situacao=null,$postoRealizante=null)
     {
+        if($postoRealizante == null){
+          $postoRealizante = '-1';
+        }
+
         $sql = "SELECT DISTINCT
-                   a.situacao_exames_experience, a.posto, a.atendimento,a.data_atd,a.nome_convenio, c.nome,c.data_nas,c.registro,c.sexo,c.telefone,c.telefone2, ".config('system.userAgilDB')."get_mnemonicos(a.posto, a.atendimento) as mnemonicos
+                   a.situacao_exames_experience, a.posto, a.atendimento,a.data_atd,a.nome_convenio, c.nome,c.data_nas,c.registro,c.sexo,c.telefone,c.telefone2, ".config('system.userAgilDB')."get_mnemonicos(a.posto, a.atendimento,:postoRealizante) as mnemonicos
                 FROM
                   ".config('system.userAgilDB')."VEX_ATENDIMENTOS A                  
                   INNER JOIN ".config('system.userAgilDB')."VEX_CLIENTES C ON a.registro = c.registro
-                  INNER JOIN ".config('system.userAgilDB')."VEX_EXAMES E ON a.posto = e.posto AND a.atendimento = e.atendimento
                 WHERE a.posto = :idPosto
                     AND A.DATA_ATD BETWEEN TO_DATE(:dataInicio,'DD/MM/YYYY HH24:MI')
                     AND TO_DATE(:dataFim,'DD/MM/YYYY HH24:MI')                   
                     AND (:acomodacao IS NULL OR A.ACOMODACAO = :acomodacao)
                     AND (:situacao IS NULL OR A.SITUACAO_EXAMES_EXPERIENCE = :situacao)
-                    AND (:postoRealizante IS NULL OR E.posto_realizante = :postoRealizante)
-                ORDER BY c.nome";       
+                    AND ".config('system.userAgilDB')."get_mnemonicos(a.posto,a.atendimento,:postoRealizante) is not null
+                ORDER BY c.nome";
 
         $clientes = DB::select(DB::raw($sql),[
             'idPosto' => $idPosto,
@@ -70,6 +74,30 @@ class PostoRepository extends BaseRepository
             $id = strtr(rtrim(base64_encode($key), '='), '+/', '-_');
 
             $clientes[$i]->key = $id;
+
+            switch ($clientes[$i]->situacao_exames_experience){
+                case 'EA':
+                    $clientes[$i]->situacaoAtendimento = 'warning-element';
+                    break;
+                case 'TF':
+                    $clientes[$i]->situacaoAtendimento = 'success-element';
+                    break;
+                case 'PF':
+                    $clientes[$i]->situacaoAtendimento = 'aguardando-element';
+                    break;
+                case 'EP':
+                    $clientes[$i]->situacaoAtendimento = 'danger-element';
+                    break;
+                default:
+                    $clientes[$i]->situacaoAtendimento = 'naoRealizado-element';
+                    break;
+            }
+
+            $clientes[$i]->posto = str_pad($clientes[$i]->posto,config('system.qtdCaracterPosto'),'0',STR_PAD_LEFT);
+            $clientes[$i]->atendimento = str_pad($clientes[$i]->atendimento,config('system.qtdCaracterAtend'),'0',STR_PAD_LEFT);
+
+            $clientes[$i]->data_atd = Formatar::data($clientes[$i]->data_atd,'Y-m-d H:i:s','d/m/Y');
+            $clientes[$i]->data_nas = Formatar::data($clientes[$i]->data_nas,'Y-m-d H:i:s','d/m/Y');
         }
 
         return $clientes;
@@ -154,6 +182,8 @@ class PostoRepository extends BaseRepository
 
     public function getAcomodacoesPosto($idPosto,$dataInicio,$dataFim)
     {
+        $acomodacoes = [];
+
         $sql =  "SELECT
                     DISTINCT acomodacao
                 FROM ".config('system.userAgilDB')."vex_atendimentos A 
@@ -171,13 +201,11 @@ class PostoRepository extends BaseRepository
             'dataFim' => $dataFim.' 23:59',   
         ]);
 
-
         foreach ($data as $key => $value) {
             $acomodacoes[$value->acomodacao] = $value->acomodacao;
         }      
 
         $acomodacoes = array(''=>'Todos') + $acomodacoes;
-        $acomodacoes = array_filter($acomodacoes);//Remover valores nulos
 
 
         return $acomodacoes;

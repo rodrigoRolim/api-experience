@@ -67,16 +67,12 @@ class PostoController extends Controller {
         //Pega o id do posto na sessão
         $idPosto = $this->auth->user()['posto'];
 
-        $dtNow = Carbon::now()->format('j/m/Y'); 
-
+        $dtNow = Carbon::now()->format('j/m/Y');
         $dtYe = Carbon::now()->subDays(env('APP_POSTO_QTD_DIAS'))->format('j/m/Y');
-
-        $dataInicio = '29/03/2016';
-        $dataFim = '31/03/2016';
 
         //Pega os dados de Posto Realizante e Convenios para alimentar select na view
         $postoRealizante = $this->posto->getPostosRealizantes();
-        $acomodacoes = $this->posto->getAcomodacoesPosto($idPosto,$dataInicio,$dataFim);
+        $acomodacoes = $this->posto->getAcomodacoesPosto($idPosto,$dtYe,$dtNow);
 
         return view('posto.index')->with(
             array(
