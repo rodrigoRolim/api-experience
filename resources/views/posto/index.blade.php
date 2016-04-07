@@ -66,7 +66,8 @@
     <span class="pull-right">
         <span class="pull-left">
             <i class='fa fa-heartbeat'></i> Posto/Atendimento &nbsp;|&nbsp; <i class='fa fa-calendar-check-o'></i> Data do Atendimento |
-            <i class='fa fa-credit-card'></i> Convênio &nbsp |&nbsp; <i class='fa fa-flask'></i>  Mnemônicos
+            <i class='fa fa-credit-card'></i> Convênio &nbsp |&nbsp; <i class='fa fa-flask'></i>  Mnemônicos |
+            <i class='fa fa-clock-o'></i> Previsão
         </span>
         <a href="{{url()}}/sobre" target="_blank">
             {!! Html::image(config('system.experienceLogo'), 'logo_exp', array('title' => 'eXperience - codemed','id'=>'logoRodape')) !!}
@@ -193,6 +194,7 @@
                 $('#listFilter').html('<br><br><br><br><h2 class="textoTamanho"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando registros.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>');                
                 
                 dataResult.then(function(result){
+                    console.log(result);
                     //Limpa a div de filter
                     $('#listFilter').html('');
                     //Prepara HTML para impressao no listFilter
@@ -215,8 +217,15 @@
                                 '</div>'+
                                 '<div class="col-md-2 col-sm-6 col-xs-6 hidden-xs">'+
                                     '<i class="fa fa-credit-card" data-toggle="tooltip" title="Convênio"></i> '+atendimento.nome_convenio+
-                                '</div>'+
-                                '<div class="col-md-12 col-sm-6 col-xs-12">'+
+                                '</div>';
+
+                        if(atendimento.situacao_exames_experience != 'TF'){
+                           item += '<div class="col-md-2 col-sm-6 col-xs-12">'+
+                                    '<i class="fa fa-clock-o" data-toggle="tooltip" title="Previsão de entrega"></i> '+atendimento.data_entrega+
+                            '</div>';
+                        }
+                        
+                        item += '<div class="col-md-12 col-sm-6 col-xs-12">'+
                                     '<i class="fa fa-flask" data-toggle="tooltip" title="Mnemônicos"></i> '+atendimento.mnemonicos+
                                 '</div>'+
                             '</div>'+

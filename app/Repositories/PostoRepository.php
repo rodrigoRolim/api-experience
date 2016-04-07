@@ -40,7 +40,7 @@ class PostoRepository extends BaseRepository
     public function getAtendimentos($idPosto,$dataInicio,$dataFim, $acomodacao=null,$situacao=null,$postoRealizante=null)
     {
         $sql = "SELECT DISTINCT
-                   a.situacao_exames_experience, a.posto, a.atendimento,a.data_atd,a.nome_convenio, c.nome,c.data_nas,c.registro,c.sexo,c.telefone,c.telefone2, ".config('system.userAgilDB')."get_mnemonicos(a.posto, a.atendimento,:postoRealizante) as mnemonicos
+                   a.situacao_exames_experience, a.posto, a.atendimento,a.data_atd,a.nome_convenio, c.nome,c.data_nas,c.registro,c.sexo,c.telefone,c.telefone2, ".config('system.userAgilDB')."get_mnemonicos(a.posto, a.atendimento,:postoRealizante) as mnemonicos,a.data_entrega
                 FROM
                   ".config('system.userAgilDB')."VEX_ATENDIMENTOS A                  
                   INNER JOIN ".config('system.userAgilDB')."VEX_CLIENTES C ON a.registro = c.registro
@@ -94,6 +94,8 @@ class PostoRepository extends BaseRepository
 
             $clientes[$i]->data_atd = Formatar::data($clientes[$i]->data_atd,'Y-m-d H:i:s','d/m/Y');
             $clientes[$i]->data_nas = Formatar::data($clientes[$i]->data_nas,'Y-m-d H:i:s','d/m/Y');
+
+            $clientes[$i]->data_entrega = Formatar::data($clientes[$i]->data_entrega,'Y-m-d H:i:s','d/m/Y');
         }
 
         return $clientes;
