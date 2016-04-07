@@ -67,19 +67,28 @@ class PostoController extends Controller {
         //Pega o id do posto na sessão
         $idPosto = $this->auth->user()['posto'];
 
-        $dtNow = Carbon::now()->format('j/m/Y');
-        $dtYe = Carbon::now()->subDays(env('APP_POSTO_QTD_DIAS'))->format('j/m/Y');
-
         //Pega os dados de Posto Realizante e Convenios para alimentar select na view
         $postoRealizante = $this->posto->getPostosRealizantes();
-        $acomodacoes = $this->posto->getAcomodacoesPosto($idPosto,$dtYe,$dtNow);
 
         return view('posto.index')->with(
             array(
-                'postoRealizante' => $postoRealizante,
-                'acomodacoes' => $acomodacoes,   
+                'postoRealizante' => $postoRealizante
             )
         );
+    }
+
+    /**
+    * Carrega acomodacao de acordo com o periodo do filtro
+    *
+    */
+    public function postSelectacomodacao(){
+        $idPosto = $this->auth->user()['posto'];
+        $acomodacoes = $this->posto->getAcomodacoesPosto($idPosto,Request::get('dataInicio'),Request::get('dataFim'));
+    
+        return response()->json(array(
+            'message' => 'Recebido com sucesso.',
+            'data' => $acomodacoes,
+        ), 200);
     }
 
     /**

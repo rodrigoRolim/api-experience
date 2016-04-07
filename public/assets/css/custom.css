@@ -47,7 +47,8 @@ ul{
 	width: 100px;
 }
 
-.logoRodape img{
+#logoRodape{
+	float: right;
 	height: 25px;
 	float: left;
 	margin-left: 15px;
@@ -67,6 +68,10 @@ ul{
 	padding: 0px;
 }
 
+.areaStatusAtendimentos{
+	padding-left: 0px;
+}
+
 .statusAtendimentos{
 	font-size: 0.9em;
 }
@@ -76,20 +81,26 @@ ul{
 	font-size: 0.9em;
 }
 
+.statusFinalizados,.statusAguardando,.statusEmAndamento,.statusPendencias{
+	border-left: solid 3px;
+	padding-right: 5px;
+	margin-left: 5px;
+}
+
 .statusFinalizados{
-	border-left: 3px solid #1ab394;
+	border-color: #1ab394;
 }
 
 .statusAguardando{
-	border-left: 3px solid #F7F01D;
+	border-color: #F7F01D;
 }
 
 .statusEmAndamento{
-	border-left: 3px solid #f8ac59;
+	border-color: #f8ac59;
 }
 
 .statusPendencias{
-	border-left: 3px solid #ed5565;;
+	border-color: #ed5565;
 }
 
 .modal-conteudo {
@@ -290,6 +301,7 @@ ul{
 
 #listFilter{
 	height: 54vh;
+	width: 98% !important;
 }
 
 .ibox{

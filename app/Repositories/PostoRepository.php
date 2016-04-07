@@ -39,10 +39,6 @@ class PostoRepository extends BaseRepository
      */
     public function getAtendimentos($idPosto,$dataInicio,$dataFim, $acomodacao=null,$situacao=null,$postoRealizante=null)
     {
-        if($postoRealizante == null){
-          $postoRealizante = '-1';
-        }
-
         $sql = "SELECT DISTINCT
                    a.situacao_exames_experience, a.posto, a.atendimento,a.data_atd,a.nome_convenio, c.nome,c.data_nas,c.registro,c.sexo,c.telefone,c.telefone2, ".config('system.userAgilDB')."get_mnemonicos(a.posto, a.atendimento,:postoRealizante) as mnemonicos
                 FROM

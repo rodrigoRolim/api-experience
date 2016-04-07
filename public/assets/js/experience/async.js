@@ -1,11 +1,11 @@
 function AsyncClass(){}
 
-AsyncClass.prototype.run = function(url,postData){
+AsyncClass.prototype.run = function(url,postData,type){
   var objResult = Object();
 
   return $.ajax({
     url : url,
-    type: 'POST',
+    type: type,
     data : postData,
     success:function(result){
         objResult.status = true;

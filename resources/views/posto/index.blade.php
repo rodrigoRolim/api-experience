@@ -30,7 +30,7 @@
             </div>       
             <div class="col-md-2">
                 <label class="textoBranco" name="acomodacao">Acomodação</label>
-                {!! Form::select('acomodacao', $acomodacoes, '', array('class' => 'form-control m-b', 'id'=>'acomodacao')) !!}
+                {!! Form::select('acomodacao', [], '', array('class' => 'form-control m-b', 'id'=>'acomodacao')) !!}
             </div>
             <div class="col-md-2">
                 <label class="textoBranco" name="situacao">Situação</label>
@@ -63,6 +63,15 @@
 @section('statusFooter')
     <span class='statusFinalizados'></span> Finalizados <span class='statusAguardando'></span> Parc. Finalizado
     <span class='statusEmAndamento'></span> Em Andamento <span class='statusPendencias'></span> Existem Pendências
+    <span class="pull-right">
+        <span class="pull-left">
+            <i class='fa fa-heartbeat'></i> Posto/Atendimento &nbsp;|&nbsp; <i class='fa fa-calendar-check-o'></i> Data do Atendimento |
+            <i class='fa fa-credit-card'></i> Convênio &nbsp |&nbsp; <i class='fa fa-flask'></i>  Mnemônicos
+        </span>
+        <a href="{{url()}}/sobre" target="_blank">
+            {!! Html::image(config('system.experienceLogo'), 'logo_exp', array('title' => 'eXperience - codemed','id'=>'logoRodape')) !!}
+        </a>
+    </span>
 @stop
 
 @section('script')
@@ -86,7 +95,11 @@
                 keyboardNavigation: true,
                 autoclose: true,
                 format: "dd/mm/yyyy",  
-                disableTouchKeyboard: true            
+                disableTouchKeyboard: true
+            });
+
+            $("#dataInicio,#dataFim").on("changeDate",function (){ 
+                getAcomodacao();
             });
 
             $(".input-daterange").attr("autocomplete", "off");
@@ -105,9 +118,9 @@
                 //Alimenta o filtro do os dados guardados em cache
                 $('#dataInicio').val(Cookies.get('dataInicio'));  
                 $('#dataFim').val(Cookies.get('dataFim'));
-                $('#acomodacao').val(Cookies.get('acomodacao'));     
                 $('#situacao').val(Cookies.get('situacao'));     
-                $('#postoRealizante').val(Cookies.get('postoRealizante'));     
+                $('#postoRealizante').val(Cookies.get('postoRealizante'));
+
             }else{
                 //Alimenta o filtro com a data pre definida
                 $('#dataInicio').val(dataInicio);
@@ -117,7 +130,7 @@
             //Configura o componente de lista
             $('#listFilter').slimScroll({
                 height: '65vh',
-                width:'98%',
+                width:'100%',
                 size: '12px',
                 railVisible: true,
                 background: '#ADADA',
@@ -129,6 +142,38 @@
                 alwaysVisible: true
             });
 
+            //Carrega acomodacao via ajax
+            function getAcomodacao(){
+                var postAcomodacao = [
+                    {name:'dataInicio', 'value' : $('#dataInicio').val()},
+                    {name:'dataFim', 'value' : $('#dataFim').val()}
+                ];
+
+                //Instancia a class Async
+                var async = new AsyncClass();
+                var dataResult = async.run('{{url("/")}}/posto/selectacomodacao',postAcomodacao,'POST');
+
+                dataResult.then(function(result){
+                    var selectAcomodacao = $('#acomodacao');
+                    selectAcomodacao.empty();
+
+                    $.each(result.data,function(key,value){
+                        selectAcomodacao.append($("<option/>").val(key).text(value));
+                    });
+                    
+                    $('#acomodacao').val(Cookies.get('acomodacao'));
+                    //Dispara o evento do botao click para iniciar a busca inicial            
+                    $('#btnFiltrar').trigger('click');
+                });
+            }
+
+            //Abre filtro quando ta reduzido
+            $(".menu-trigger").click(function() {
+               $(".boxFiltroPosto").slideToggle(768, function() {
+                   $(this).toggleClass("nav-expanded").css('display', '');
+               });
+           });  
+
             //Evento do disparo do botão de filtro
             $('#btnFiltrar').click(function(e){
                 Cookies.set('dataInicio', $('#dataInicio').val());
@@ -138,34 +183,24 @@
                 Cookies.set('postoRealizante', $('#postoRealizante').val());
 
                 var formPosto = $('#formPosto');
-                var postData = formPosto.serializeArray(); 
+                var postData = formPosto.serializeArray();
 
-                //Instancia a class Posto
+                //Instancia a class Async
                 var async = new AsyncClass();
 
                 //Busca os dados do atendimento do posto
-                var dataResult = async.run('{{url("/")}}/posto/filteratendimentos',postData);
-
+                var dataResult = async.run('{{url("/")}}/posto/filteratendimentos',postData,'POST');
+                $('#listFilter').html('<br><br><br><br><h2 class="textoTamanho"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando registros.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>');                
+                
                 dataResult.then(function(result){
-                    //Caso houver erro para a execução e imprime no alert
-                    if(!result.status){
-                        $('#msgPrograma').html('<div class="alert alert-danger alert-dismissable animated fadeIn">'+result.msgError+'</div>');
-                    }
-
-                    //Caso não retorne atendimento imprime a mensagem
-                    if(!result.data.length){
-                        $('#listFilter').append('<h2 class="textoTamanho">Não foram encontrados atendimentos.</h2>');
-                        $('.contadorAtd').html('');
-                    }
-
                     //Limpa a div de filter
                     $('#listFilter').html('');
-
                     //Prepara HTML para impressao no listFilter
                     $.each( result.data, function( index ){
                         var atendimento = result.data[index];
+
                         //Impressao da quantidade de atendimentos localizados
-                        $('.contadorAtd').html('<h5 class="achouAtd">Foram encontrados '+result.data.length+' atendimentos para as datas selecionadas.</h5>');
+                        $('.contadorAtd').html('<h5 class="achouAtd">Foram encontrados '+result.data.length+' atendimentos para o filtro selecionado.</h5>');
                         //Prepara htmk do LI
                         var item = '<li class="col-sm-12 boxatendimento '+atendimento.situacaoAtendimento+'"data-key="'+atendimento.key+'" data-atendimento="'+atendimento.atendimento+'">'+
                             '<div class="row">'+
@@ -197,13 +232,23 @@
                         $(window.document.location).attr('href',"{{url('/')}}/posto/paciente/"+key+"/"+atendimento);
                     });
 
+                    //Caso houver erro para a execução e imprime no alert
+                    if(!result.status){
+                        $('#msgPrograma').html('<div style="margin-top:20vh" class="alert alert-danger alert-dismissable animated fadeIn">'+result.msgError+'</div>');
+                    }
+
+                    //Caso não retorne atendimento imprime a mensagem
+                    if(!result.data.length){
+                        $('#listFilter').append('<h2 class="textoTamanho" style="padding-top:24vh">Não foram encontrados atendimentos para esse filtro.</h2>');
+                        $('.contadorAtd').html('');
+                    }
+
                     //Habilita a busca
                     $('#filtroPaciente').filterList();                    
                 });                
             });
-
-            //Dispara o evento do botao click para iniciar a busca inicial            
-            $('#btnFiltrar').trigger('click');
+            
+            getAcomodacao();
         });
     </script>
 @stop

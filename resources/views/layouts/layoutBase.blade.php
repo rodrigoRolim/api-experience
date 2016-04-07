@@ -43,9 +43,9 @@
                 @yield('content')
             </div>
         </div>
-            <div id="footer">
-                @include('layouts.includes.base.footer')
-            </div>
+        <div id="footer">
+            @include('layouts.includes.base.footer')
+        </div>
     </div>
 </body>
 @section('script')
