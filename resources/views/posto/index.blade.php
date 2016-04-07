@@ -58,6 +58,8 @@
             <ul class="sortable-list connectList agile-list ui-sortable" id="listFilter"></ul>  
         </div>
     </div>
+
+    @include('layouts.includes.base.modalSeachAtendimento');
 @stop
 
 @section('statusFooter')
@@ -194,7 +196,6 @@
                 $('#listFilter').html('<br><br><br><br><h2 class="textoTamanho"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando registros.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>');                
                 
                 dataResult.then(function(result){
-                    console.log(result);
                     //Limpa a div de filter
                     $('#listFilter').html('');
                     //Prepara HTML para impressao no listFilter
