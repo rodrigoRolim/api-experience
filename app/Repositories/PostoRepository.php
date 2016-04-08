@@ -28,6 +28,30 @@ class PostoRepository extends BaseRepository
     }
 
     /**
+     * Função responsavel por buscar os dados de um atendimento especifico
+     * @param $posto
+     * @param $atendimento
+     * @return array
+     */
+    public function getAtendimento($posto,$atendimento){
+      $sql = "SELECT DISTINCT
+                 a.situacao_exames_experience, a.posto, a.atendimento,a.data_atd,a.nome_convenio, c.nome,c.data_nas,c.registro,c.sexo,c.telefone,c.telefone2, ".config('system.userAgilDB')."get_mnemonicos(a.posto, a.atendimento,null) as mnemonicos,a.data_entrega
+              FROM
+                ".config('system.userAgilDB')."VEX_ATENDIMENTOS A                  
+                INNER JOIN ".config('system.userAgilDB')."VEX_CLIENTES C ON a.registro = c.registro
+              WHERE a.posto = :posto AND a.atendimento = :atendimento
+                  AND ".config('system.userAgilDB')."get_mnemonicos(a.posto,a.atendimento,null) is not null
+              ORDER BY c.nome";
+
+        $clientes = DB::select(DB::raw($sql),[
+          'posto' => $posto,
+          'atendimento' => $atendimento
+        ]);
+
+        return $this->renderCliente($clientes);
+    }
+
+    /**
      * Função responsavel por listar todos os atendimentos do posto de acordo com o filtro
      * @param $idPosto
      * @param $dataInicio
@@ -61,46 +85,55 @@ class PostoRepository extends BaseRepository
             'postoRealizante' => $postoRealizante
         ]);
 
-        $dtNow = Carbon::now();
-
-        for($i=0;$i<sizeof($clientes);$i++){
-            $clientes[$i]->idade = DataNascimento::idade($clientes[$i]->data_nas);
-
-            $key = mcrypt_encrypt(MCRYPT_RIJNDAEL_256, config('system.key'), $clientes[$i]->registro, MCRYPT_MODE_ECB, mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB), MCRYPT_RAND));
-            $id = strtr(rtrim(base64_encode($key), '='), '+/', '-_');
-
-            $clientes[$i]->key = $id;
-
-            switch ($clientes[$i]->situacao_exames_experience){
-                case 'EA':
-                    $clientes[$i]->situacaoAtendimento = 'warning-element';
-                    break;
-                case 'TF':
-                    $clientes[$i]->situacaoAtendimento = 'success-element';
-                    break;
-                case 'PF':
-                    $clientes[$i]->situacaoAtendimento = 'aguardando-element';
-                    break;
-                case 'EP':
-                    $clientes[$i]->situacaoAtendimento = 'danger-element';
-                    break;
-                default:
-                    $clientes[$i]->situacaoAtendimento = 'naoRealizado-element';
-                    break;
-            }
-
-            $clientes[$i]->posto = str_pad($clientes[$i]->posto,config('system.qtdCaracterPosto'),'0',STR_PAD_LEFT);
-            $clientes[$i]->atendimento = str_pad($clientes[$i]->atendimento,config('system.qtdCaracterAtend'),'0',STR_PAD_LEFT);
-
-            $clientes[$i]->data_atd = Formatar::data($clientes[$i]->data_atd,'Y-m-d H:i:s','d/m/Y');
-            $clientes[$i]->data_nas = Formatar::data($clientes[$i]->data_nas,'Y-m-d H:i:s','d/m/Y');
-
-            $clientes[$i]->data_entrega = Formatar::data($clientes[$i]->data_entrega,'Y-m-d H:i:s','d/m/Y');
-        }
-
-        return $clientes;
+        return $this->renderCliente($clientes);
+        
     }
 
+    /**
+     * Função responsavel por renderizar os dados de cliente
+     * @param Array $clientes
+     * @return array
+     */    
+    private function renderCliente($clientes){
+      $dtNow = Carbon::now();
+
+      for($i=0;$i<sizeof($clientes);$i++){
+          $clientes[$i]->idade = DataNascimento::idade($clientes[$i]->data_nas);
+
+          $key = mcrypt_encrypt(MCRYPT_RIJNDAEL_256, config('system.key'), $clientes[$i]->registro, MCRYPT_MODE_ECB, mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB), MCRYPT_RAND));
+          $id = strtr(rtrim(base64_encode($key), '='), '+/', '-_');
+
+          $clientes[$i]->key = $id;
+
+          switch ($clientes[$i]->situacao_exames_experience){
+              case 'EA':
+                  $clientes[$i]->situacaoAtendimento = 'warning-element';
+                  break;
+              case 'TF':
+                  $clientes[$i]->situacaoAtendimento = 'success-element';
+                  break;
+              case 'PF':
+                  $clientes[$i]->situacaoAtendimento = 'aguardando-element';
+                  break;
+              case 'EP':
+                  $clientes[$i]->situacaoAtendimento = 'danger-element';
+                  break;
+              default:
+                  $clientes[$i]->situacaoAtendimento = 'naoRealizado-element';
+                  break;
+          }
+
+          $clientes[$i]->posto = str_pad($clientes[$i]->posto,config('system.qtdCaracterPosto'),'0',STR_PAD_LEFT);
+          $clientes[$i]->atendimento = str_pad($clientes[$i]->atendimento,config('system.qtdCaracterAtend'),'0',STR_PAD_LEFT);
+
+          $clientes[$i]->data_atd = Formatar::data($clientes[$i]->data_atd,'Y-m-d H:i:s','d/m/Y');
+          $clientes[$i]->data_nas = Formatar::data($clientes[$i]->data_nas,'Y-m-d H:i:s','d/m/Y');
+
+          $clientes[$i]->data_entrega = Formatar::data($clientes[$i]->data_entrega,'Y-m-d H:i:s','d/m/Y');
+      }
+
+      return $clientes;
+    }
 
     /**
      * Função responsavel por retornar todos os postos realizantes do posto logado

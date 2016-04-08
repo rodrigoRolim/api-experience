@@ -77,6 +77,23 @@ class PostoController extends Controller {
         );
     }
 
+   /**
+     * Responsavel por localizar atendimento no posto dependente do filtro buscando pelo numero do atendimento
+     * @return string
+     */
+    public function postLocalizaatendimento(){
+        $dadosAtend = explode('/',Request::input('atendimento'));
+        $posto = $dadosAtend[0];
+        $atendimento = $dadosAtend[1];
+
+        $result = $this->posto->getAtendimento($posto,$atendimento);
+
+        return response()->json(array(
+            'message' => 'Recebido com sucesso.',
+            'data' => json_encode($result),
+        ), 200);        
+    }    
+
     /**
     * Carrega acomodacao de acordo com o periodo do filtro
     *
@@ -123,28 +140,23 @@ class PostoController extends Controller {
     /**
      * Reponsavel por listar dos os atendimetos do paciente feitos no seu posto
      * @param $registro
-     * @param $idAtendimento
+     * @param $posto
+     * @param $atendimento
      * @return \Illuminate\View\View
      */
-    public function getPaciente($registro,$idAtendimento){
+    public function getPaciente($registro,$posto,$atendimento){
         //Faz a descriptografia do token enviado via get
         $registro = base64_decode(strtr($registro, '-_', '+/'));
         $registro = (int) trim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, config('system.key'),$registro, MCRYPT_MODE_ECB, mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB), MCRYPT_RAND)));
 
-        //Pega o Id do posto na sessao
-        $idPosto = $this->auth->user()['posto'];
-
         //Lista todos os atendimentos do paciente para aquele posto
-        $atendimento = $this->posto->getAtendimentosPacienteByPosto($registro,$idPosto,$idAtendimento);
+        $atendimento = $this->posto->getAtendimentosPacienteByPosto($registro,$posto,$atendimento);
 
         if(!sizeof($atendimento)){
             \App::abort(404);
         }
-        //Lista todos os atendimento do posto realizante
-        $postoRealizante = $this->posto->getPostosRealizantesAtendimento($idPosto,$idAtendimento);
 
-        
-        return view('posto.paciente',compact('atendimento','postoRealizante'));
+        return view('posto.paciente',compact('atendimento'));
     }
 
     /**
@@ -155,12 +167,13 @@ class PostoController extends Controller {
      * @return \Illuminate\Http\JsonResponse
      */
     public function getExamesatendimento($posto,$atendimento,$postoRealizante = null){
-        //Verifica se o atendmiento é do posto
-        $ehAtendimentoPosto = $this->posto->ehAtendimentoPosto($this->auth->user()['posto'],$atendimento);
+        // //Verifica se o atendmiento é do posto
+        // $ehAtendimentoPosto = $this->posto->ehAtendimentoPosto($this->auth->user()['posto'],$atendimento);
 
-        if(!$ehAtendimentoPosto){
-            \App::abort(404);
-        }
+        // if(!$ehAtendimentoPosto){
+        //     \App::abort(404);
+        // }
+        
         //Lista os exames do atendimento
         $exames = $this->exames->getExames($posto, $atendimento,$postoRealizante);
      
@@ -197,7 +210,6 @@ class PostoController extends Controller {
 
         //Verifica os detalhes do resultado do exame
         $exames = $this->exames->getDetalheAtendimentoExameCorrel($posto, $atendimento,$correl);
-
 
         return response()->json(array(
             'message' => 'Recebido com sucesso.',

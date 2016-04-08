@@ -65,6 +65,7 @@
 @section('statusFooter')
     <span class='statusFinalizados'></span> Finalizados <span class='statusAguardando'></span> Parc. Finalizado
     <span class='statusEmAndamento'></span> Em Andamento <span class='statusPendencias'></span> Existem Pendências
+
     <span class="pull-right">
         <span class="pull-left">
             <i class='fa fa-heartbeat'></i> Posto/Atendimento &nbsp;|&nbsp; <i class='fa fa-calendar-check-o'></i> Data do Atendimento |
@@ -72,9 +73,11 @@
             <i class='fa fa-clock-o'></i> Previsão
         </span>
         <a href="{{url()}}/sobre" target="_blank">
-            {!! Html::image(config('system.experienceLogo'), 'logo_exp', array('title' => 'eXperience - codemed','id'=>'logoRodape')) !!}
+            {!! Html::image(config('system.experienceLogo'), 'logo_exp', array('title' => 'eXperience - codemed','id'=>'logoRodape','style'=>'margin-right:8px')) !!}
         </a>
     </span>
+    <br>
+    &nbsp;<i class='fa fa-keyboard-o'></i> <b>SHIFT+Z: </b> Localizar Atendimento
 @stop
 
 @section('script')
@@ -205,7 +208,7 @@
                         //Impressao da quantidade de atendimentos localizados
                         $('.contadorAtd').html('<h5 class="achouAtd">Foram encontrados '+result.data.length+' atendimentos para o filtro selecionado.</h5>');
                         //Prepara htmk do LI
-                        var item = '<li class="col-sm-12 boxatendimento '+atendimento.situacaoAtendimento+'"data-key="'+atendimento.key+'" data-atendimento="'+atendimento.atendimento+'">'+
+                        var item = '<li class="col-sm-12 boxatendimento '+atendimento.situacaoAtendimento+'"data-key="'+atendimento.key+'" data-atendimento="'+atendimento.atendimento+'" data-posto="'+atendimento.posto+'">'+
                             '<div class="row">'+
                                 '<div class="col-md-4 col-sm-6 col-xs-12">'+
                                     '<strong>'+atendimento.nome+'</strong>'+'<br>'+'<i class="'+((atendimento.sexo == "M")?"fa fa-mars":"fa fa-venus")+'"></i> '+atendimento.idade+
@@ -237,9 +240,10 @@
 
                     $('#listFilter li').click(function(e){
                         var key = $(e.currentTarget).data('key');
+                        var posto = $(e.currentTarget).data('posto');
                         var atendimento = $(e.currentTarget).data('atendimento');
 
-                        $(window.document.location).attr('href',"{{url('/')}}/posto/paciente/"+key+"/"+atendimento);
+                        $(window.document.location).attr('href',"{{url('/')}}/posto/paciente/"+key+"/"+posto+"/"+atendimento);
                     });
 
                     //Caso houver erro para a execução e imprime no alert
