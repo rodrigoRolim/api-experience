@@ -26,6 +26,7 @@ use Request;
 use Redirect;
 use Validator;
 use BrowserDetect;
+use Auth;
 
 class MedicoController extends Controller {
     protected $auth;
@@ -158,12 +159,14 @@ class MedicoController extends Controller {
 
         $result = BrowserDetect::isMobile() || BrowserDetect::isTablet();
 
+        $user = Auth::user(['tipoAcesso']);
+
         if($result == true){
             return view('mobile.paciente.index',compact('atendimentos'));
         }
 
-        //Envia para a vio os atendimentos
-        return view('medico.paciente',compact('atendimentos'));
+        //Envia para a view os atendimentos
+        return view('paciente.index',compact('atendimentos','user'));
     }
 
     /**

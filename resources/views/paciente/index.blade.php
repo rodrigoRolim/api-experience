@@ -11,16 +11,18 @@
         <div class="pull-right media-body">
             <button data-toggle="dropdown" class="btn btn-usuario dropdown-toggle boxLogin">
                 <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span> <span class="caret"></span><br>
+            @if(Auth::user(['tipoAcesso']) != 'POS')
                 {{date('d/m/y',strtotime(Auth::user()['data_nas']))}}&nbsp;
+            @endif
             </button> 
-            <ul class="dropdown-menu pull-right itensInfoUser">             
-                @if(Auth::user()['tipoLoginPaciente'] == 'CPF')
+            <ul class="dropdown-menu pull-right itensInfoUser"> 
+            @if(($user['tipoAcesso'] == 'MED') || ($user['tipoLoginPaciente'] != 'ID'))          
                     <li class="item">
                         <a class="btnShowModal">
                             <i class="fa fa-user"></i> Alterar Senha
                         </a>
                     </li>
-                @endif
+            @endif
                 <li class="item">
                     <a href="{{url('/')}}/auth/logout">
                         <i class="fa fa-sign-out"></i> Sair
@@ -30,34 +32,36 @@
         </div>
     </div>
 @stop
-
-@section('left')
-    <nav class="navbar-default navbar-static-side" role="navigation">
-        <div class="topoMenu">
-            <strong>Relação de Atendimentos</strong>
-        </div>
-        <ul class="nav metismenu" id="side-menu">
-            @foreach($atendimentos as $key => $atendimento)
-                <li class="leftMenu {{ !$key ? 'active' : '' }}">
-                    <a href="#" class="btnAtendimento"
-                       data-posto="{{$atendimento->posto}}"
-                       data-atendimento="{{$atendimento->atendimento}}"
-                       data-solicitante="{{$atendimento->nome_solicitante}}"
-                       data-convenio="{{$atendimento->nome_convenio}}"
-                       data-mnemonicos="{{$atendimento->mnemonicos}}"
-                       data-saldo="{{$atendimento->saldo_devedor}}">
-                        <b class="dataMini">
-                            <p class="text-center" style="margin:0px;line-height: 14px">{{ date('d/m',strtotime($atendimento->data_atd))}}<br>
-                                {{ date('Y',strtotime($atendimento->data_atd))}}</p>
-                        </b>
-                        <span class="nav-label mnemonicos"><strong>{{ date('d/m/y',strtotime($atendimento->data_atd))}}</strong><br>
-                            {{str_limit($atendimento->mnemonicos,56)}}</span>
-                    </a>
-                </li>
-            @endforeach
-        </ul>
-    </nav>
-@stop
+@if(Auth::user(['tipoAcesso']) != 'POS')
+    @section('left')
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="topoMenu">
+                <strong>Relação de Atendimentos</strong>
+            </div>
+            <ul class="nav metismenu" id="side-menu">
+                @foreach($atendimentos as $key => $atendimento)
+                    <li class="leftMenu {{ !$key ? 'active' : '' }}">
+                        <a href="#" class="btnAtendimento"
+                           data-posto="{{$atendimento->posto}}"
+                           data-atendimento="{{$atendimento->atendimento}}"
+                           data-solicitante="{{$atendimento->nome_solicitante}}"
+                           data-convenio="{{$atendimento->nome_convenio}}"
+                           data-mnemonicos="{{$atendimento->mnemonicos}}"
+                           data-saldo="{{$atendimento->saldo_devedor}}"
+                           data-acesso="{{$user['tipoAcesso']}}">
+                            <b class="dataMini">
+                                <p class="text-center" style="margin:0px;line-height: 14px">{{ date('d/m',strtotime($atendimento->data_atd))}}<br>
+                                    {{ date('Y',strtotime($atendimento->data_atd))}}</p>
+                            </b>
+                            <span class="nav-label mnemonicos"><strong>{{ date('d/m/y',strtotime($atendimento->data_atd))}}</strong><br>
+                                {{str_limit($atendimento->mnemonicos,56)}}</span>
+                        </a>
+                    </li>
+                @endforeach
+            </ul>
+        </nav>
+    @stop
+@endif
 
 @section('content')
 <div id="page-wrapper" class="gray-bg">
@@ -89,49 +93,9 @@
                 <div class="i-checks all boxSelectAll"> </div>
             </div>
             <ul class="sortable-list connectList agile-list ui-sortable listaExames"></ul>
-                <div class="modal fade" id="modalExames" role="dialog">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h2 class="modal-title">Exames Descrição</h2>
-                            </div>
-                            <div class="modal-body"></div>
-                            <div class="modal-footer"></div>
-                        </div>
-                    </div>
-                </div>
-                @if(Auth::user()['tipoLoginPaciente'] == 'CPF')
-                    <div class="modal fade" id="modalAlterarSenha" role="dialog">
-                        <div class="modal-dialog">                
-                            <div class="modal-conteudo">
-                                <div class="modal-topo">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h2 class="modal-titulo">Alterar senha de acesso</h2>
-                                </div>
-                                {!! Form::open(array('id' => 'formSenha')) !!}
-                                    <div class="modal-corpo">
-                                        <div id="msg"></div>
-                                        <div class="col-md-12">
-                                            {!! Form::label('SenhaAtual', 'Senha Atual') !!}
-                                            {!! Form::password('senhaAtual',array('class' => 'form-control', 'id' =>'senhaAtual', 'placeholder' => 'Senha Atual' )) !!}                                 
-                                        </div>
-                                        <div class="col-md-12">
-                                            {!! Form::label('novaSenha', 'Nova Senha') !!}
-                                            {!! Form::password('novaSenha',array('class' => 'form-control', 'id' =>'novaSenha', 'placeholder' => 'Nova Senha' )) !!}                                
-                                        </div>
-                                        <div class="col-md-12">
-                                            {!! Form::label('confirmarSenha', 'Confirmar Nova Senha') !!}
-                                            {!! Form::password('confirmarSenha',array('class' => 'form-control', 'id' =>'confirmarSenha', 'placeholder' => 'Confirmar Nova Senha' )) !!}             
-                                        </div>
-                                    </div>
-                                    <div class="modal-rodape">
-                                        <a class="btn btn-success" id="btnSalvarPerfil">Salvar</a>
-                                    </div>
-                                {!! Form::close() !!}
-                            </div>
-                        </div>
-                    </div>
+                @include('layouts.includes.base.modalDetalhamentoExames')
+                @if(($user['tipoAcesso'] == 'MED') || ($user['tipoLoginPaciente'] != 'ID'))   
+                       @include('layouts.includes.base.modalAlterarSenha')
                 @endif
             </ul>
         </div>
@@ -202,13 +166,28 @@
                 nomeConvenio = $(e.currentTarget).data('convenio');
                 saldo = $(e.currentTarget).data('saldo');       
                 mnemonicos = $(e.currentTarget).data('mnemonicos');  
+                tipoAcesso = $(e.currentTarget).data('acesso');  
+
+                switch(tipoAcesso){
+                    case 'MED':
+                        tipoAcesso = 'medico';
+                        break;
+                    case 'PAC':
+                        tipoAcesso = 'paciente';
+                        break;
+                    case 'POS':
+                        tipoAcesso = 'posto';
+                        break;
+                }
+
+                window.tipoAcesso = tipoAcesso; //Variavel Global.. Gambi - Para usar no Detalhamento.
 
                 if(mnemonicos == ""){                    
                     swal("Não foram realizados exames para este atendimento.");
                 }
 
                 if(posto != null && atendimento != null){
-                    getExames(posto,atendimento);
+                    getExames(posto,atendimento,tipoAcesso);
                 }
 
                 $('.boxSelectAll').html('');
@@ -289,11 +268,11 @@
                 return true;
             }
 
-            function getExames(posto,atendimento){
+            function getExames(posto,atendimento,tipoAcesso){
                 //Carregando
                 $('.listaExames').html('<br><br><br><br><h2 class="textoTamanho"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando registros.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>');
                 //Pega os dados via get de exames do atendimento
-                $.get( "{{url('/')}}/paciente/examesatendimento/"+posto+"/"+atendimento, function( result ) {
+                $.get( "{{url('/')}}/"+tipoAcesso+"/examesatendimento/"+posto+"/"+atendimento, function( result ) {
                     //Carrega dados do atendimento
                     $('#solicitante').html(nomeSolicitante);
                     $('#convenio').html(nomeConvenio);
@@ -338,21 +317,21 @@
 
                      $('.boxExames').click(function(e){ 
                             if($(e.currentTarget).data('visualizacao') == 'OK'){
-                                var dadosExames = $(e.currentTarget).data();                                               
-                                getDescricaoExame(dadosExames);                 
+                                var dadosExames = $(e.currentTarget).data();                                              
+                                getDescricaoExame(dadosExames,window.tipoAcesso);                 
                             }
                             else{
                                 return false;
                             }
                     });     
 
-                    function getDescricaoExame(dadosExames){ 
+                    function getDescricaoExame(dadosExames,tipoAcesso){ 
                          console.log(dadosExames);
                          $('.modal-body').html('<br><br><br><br><h2 class="textoTamanho"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando registros.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>');   
                          $('.modal-title').html('');
                          $('.modal-footer').html('');
                         $.ajax({
-                            url : '{{url("/")}}/paciente/detalheatendimentoexamecorrel/'+dadosExames.posto+'/'+dadosExames.atendimento+'/'+dadosExames.correl+'',
+                            url : '{{url("/")}}/'+tipoAcesso+'/detalheatendimentoexamecorrel/'+dadosExames.posto+'/'+dadosExames.atendimento+'/'+dadosExames.correl+'',
                             type: 'GET',                            
                             success:function(result){
                                 if(result.data == null){

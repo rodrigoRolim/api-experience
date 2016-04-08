@@ -14,6 +14,9 @@ return [
     'PDFUrlTemp'  => env('APP_PDF_TEMP'),
     'clienteUF'   => env('APP_CLIENTE_UF'),
     'clienteMsg'  => env('APP_CLIENTE_FONE'),
+    'acessoMedico' => env('APP_ACESSO_MEDICO'),
+    'acessoPosto' => env('APP_ACESSO_POSTO'),
+    'acessoPaciente' => env('APP_ACESSO_PACIENTE'),
     'loginText'	  =>  [
     	'title' 		=> 'eXperience',
     	'subTitle' 		=> '<h2 style="color:#76C1CC">Aplicação para visualização de resultados</h2>',

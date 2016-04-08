@@ -22,6 +22,7 @@ use BrowserDetect;
 use Request;
 use Redirect;
 use Validator;
+use Auth;
 
 class PacienteController extends Controller {
     protected $auth;
@@ -60,11 +61,13 @@ class PacienteController extends Controller {
         
         $result = BrowserDetect::isMobile() || BrowserDetect::isTablet();
 
+        $user = Auth::user(['tipoLoginPaciente']);
+
         if($result == true){
             return view('mobile.paciente.index',compact('atendimentos','tipoLoginPaciente'));            
         }
 
-        return view('paciente.index',compact('atendimentos','tipoLoginPaciente'));
+        return view('paciente.index',compact('atendimentos','tipoLoginPaciente','user'));
     }
 
     /**

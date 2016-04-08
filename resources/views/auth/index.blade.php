@@ -33,26 +33,38 @@
                 @endif
                 <div class="tabs-container">
                     <ul class="nav nav-tabs">
-                       <!--  <li class="active"><a id="btnPaciente" data-toggle="tab" href="#tabLoginPaciente" aria-expanded="true">Paciente</a></li>
-                        <li class=""><a id="btnMedico" data-toggle="tab" href="#tabLoginMedico" aria-expanded="false">Médico</a></li> -->
-                        <li class="active"><a id="btnPosto" data-toggle="tab" href="#tabLoginPosto" aria-expanded="false">Posto</a></li>
+                    @if(config('system.acessoPaciente'))
+                        <li class=""><a id="btnPaciente" data-toggle="tab" href="#tabLoginPaciente" aria-expanded="true">Paciente</a></li>
+                    @endif
+                    @if(config('system.acessoMedico'))
+                        <li class=""><a id="btnMedico" data-toggle="tab" href="#tabLoginMedico" aria-expanded="false">Médico</a></li>
+                    @endif
+                    @if(config('system.acessoPosto'))
+                        <li class=""><a id="btnPosto" data-toggle="tab" href="#tabLoginPosto" aria-expanded="false">Posto</a></li>
+                    @endif                   
                     </ul>
                     <div class="tab-content">
-<!--                         <div id="tabLoginPaciente" class="tab-pane active">
+                    @if(config('system.acessoPaciente'))
+                        <div id="tabLoginPaciente" class="tab-pane ">
                             <div class="panel-body">
                                @include('auth.includes.formLoginPaciente')
                             </div>
                         </div>
-                        <div id="tabLoginMedico" class="tab-pane">
+                    @endif
+                    @if(config('system.acessoMedico'))
+                        <div id="tabLoginMedico" class="tab-pane ">
                             <div class="panel-body">
                                 @include('auth.includes.formLoginMedico')
                             </div>
-                        </div> -->
-                        <div id="tabLoginPosto" class="tab-pane active">
+                        </div>
+                    @endif
+                    @if(config('system.acessoPosto'))
+                        <div id="tabLoginPosto" class="tab-pane ">
                             <div class="panel-body">
                                 @include('auth.includes.formLoginPosto')
                             </div>
                         </div>
+                    @endif
                     </div>
                 </div>
             </div>
@@ -81,6 +93,9 @@
                 }        
             });
         });
+
+        $('.nav-tabs li:first').addClass('active');
+        $('.tab-content > div:first-child').addClass('active');
 
         var tipoAcesso = "{{Input::old('tipoAcesso')}}";
         var tipoLoginPaciente = "{{Input::old('tipoLoginPaciente')}}";

@@ -28,6 +28,7 @@
         </div>
     </div>
 </div>
+
 @section('scripts')
     @parent
     <script src="{{ asset('/assets/js/jquery-2.1.1.js') }}"></script>

@@ -63,7 +63,7 @@
         </div>
     </div>
 
-    @include('medico.modalAlterarSenha')
+    @include('layouts.includes.base.modalAlterarSenha')
 @stop
 
 @section('script')
