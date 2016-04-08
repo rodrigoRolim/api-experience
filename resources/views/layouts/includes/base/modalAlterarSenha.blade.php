@@ -36,6 +36,20 @@
     <script src="{{ asset('/assets/js/plugins/validate/jquery.validate.min.js') }}"></script>
 
     <script type="text/javascript">
+     var tipoAcesso = "<?php echo Auth::user()['tipoAcesso'] ?>"; //Gambi - Pegand Tipo Acesso
+
+     switch(tipoAcesso)
+     {
+        case 'MED':
+            tipoAcesso = 'medico';
+            break;
+        case 'PAC':
+            tipoAcesso = 'paciente';
+            break;
+        case 'POS':
+            tipoAcesso = 'posto';
+            break;
+    }
 
         $('.modal-rodape').css('border-top', '0px');  
         var form = $('#formSenha');
@@ -75,7 +89,7 @@
                     var postData = form.serializeArray();
 
                     $.ajax({
-                        url : '{{url()}}/medico/alterarsenha',
+                        url : '{{url()}}/'+tipoAcesso+'/alterarsenha',
                         type: 'POST',
                         data : postData,
                         success:function(data, textStatus, jqXHR) 
@@ -97,7 +111,6 @@
                 }else{
                     $('#msg').html('<div class="alert alert-danger alert-dismissable animated fadeIn">Preencha os dados corretamente</div>');
                 }
-
                 e.preventDefault();                
             });
     </script>

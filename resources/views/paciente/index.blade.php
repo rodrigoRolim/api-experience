@@ -193,48 +193,6 @@
                 $('.boxSelectAll').html('');
             });
 
-            $('.btnShowModal').click(function(e){
-                $('#modalAlterarSenha').modal('show');
-                $('#msg').html(' ');
-                $('#senhaAtual').val('');
-                $('#novaSenha').val('');
-                $('#confirmarSenha').val('');       
-                $('.modal-rodape').css('border-top','solid 0px black');        
-            });
-
-            $('#btnSalvarPerfil').click(function(e){                
-
-                if(form.valid()){
-                    //serializa dos dados do formulario
-                    var postData = form.serializeArray();
-
-                    $.ajax({
-                        url : '{{url()}}/paciente/alterarsenha',
-                        type: 'POST',
-                        data : postData,
-                        success:function(data, textStatus, jqXHR) 
-                        {
-                            var msg = jqXHR.responseText;
-                            msg = JSON.parse(msg);
-                            var style = (jqXHR['status'] == 200 ? 'success':'danger');
-
-                            $('#msg').html('<div class="alert alert-'+style+' alert-dismissable animated fadeIn">'+msg.message+'</div>');    
-                        },
-                        error: function(jqXHR, textStatus, errorThrown) 
-                        {
-                            var msg = jqXHR.responseText;
-                            msg = JSON.parse(msg);
-
-                            $('#msg').html('<div class="alert alert-danger alert-dismissable animated fadeIn">'+msg.message+'</div>');
-                        }
-                    });
-                }else{
-                    $('#msg').html('<div class="alert alert-danger alert-dismissable animated fadeIn">Preencha os dados corretamente</div>');
-                }
-
-                e.preventDefault();                
-            });
-
             $('.ibox').slimScroll({
                 height: 'auto',              
                 railOpacity: 0.4,
