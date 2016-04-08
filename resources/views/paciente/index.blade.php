@@ -11,17 +11,19 @@
         <div class="pull-right media-body">
             <button data-toggle="dropdown" class="btn btn-usuario dropdown-toggle boxLogin">
                 <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span> <span class="caret"></span><br>
-            @if(Auth::user(['tipoAcesso']) != 'POS')
+            @if($user['tipoAcesso'] != 'POS')
                 {{date('d/m/y',strtotime(Auth::user()['data_nas']))}}&nbsp;
             @endif
             </button> 
             <ul class="dropdown-menu pull-right itensInfoUser"> 
-            @if(($user['tipoAcesso'] == 'MED') || ($user['tipoLoginPaciente'] != 'ID'))          
-                    <li class="item">
-                        <a class="btnShowModal">
-                            <i class="fa fa-user"></i> Alterar Senha
-                        </a>
-                    </li>
+            @if($user['tipoAcesso'] != 'POS')
+                @if(($user['tipoAcesso'] == 'MED') || ($user['tipoLoginPaciente'] != 'ID'))          
+                        <li class="item">
+                            <a class="btnShowModal">
+                                <i class="fa fa-user"></i> Alterar Senha
+                            </a>
+                        </li>
+                @endif
             @endif
                 <li class="item">
                     <a href="{{url('/')}}/auth/logout">
@@ -32,7 +34,7 @@
         </div>
     </div>
 @stop
-@if(Auth::user(['tipoAcesso']) != 'POS')
+@if($user['tipoAcesso'] != 'POS')
     @section('left')
         <nav class="navbar-default navbar-static-side" role="navigation">
             <div class="topoMenu">
@@ -64,29 +66,70 @@
 @endif
 
 @section('content')
+@if($user['tipoAcesso'] == 'POS')
+<div id="page-wrapper-posto" class="gray-bg">
+@else
 <div id="page-wrapper" class="gray-bg">
-    <div class="row infoCliente">
-        <div class="col-xs-12 areaPaciente">
-            <div class="col-xs-4">
-                <div class="infoAtendimento">
-                    <i class="fa fa-heartbeat" data-toggle="tooltip" data-placement="bottom" title="Posto/Atendimento"> </i>
-                    <span id="atendimento"></span>
-                </div>
+@endif
+        @if($user['tipoAcesso'] == 'POS')         
+    <div class="row-fluid areaPacientePos">
+        <div class="col-md-6 col-sm-6 col-xs-12">  
+            <button type="button" class="btn btn-lg btnVoltar pull-left"><i class="fa fa-arrow-left" style="font-size: 24px;"></i></button>      
+            <strong><span id="nome" class="nomePaciente">{{$atendimento->nome}}</span></strong><br>
+            <div class="idadePaciente">{{$atendimento->idade}}</div>
+        @endif
+        @if($user['tipoAcesso'] == 'POS')    
+        </div>
+            <div class="col-md-2 col-sm-2 col-xs-5 postoAtdPos">
+                <i class="fa fa-heartbeat" data-toggle="tooltip" data-placement="bottom" title="Posto/Atendimento"></i>
+                <span id="atendimento">{{str_pad($atendimento->posto,config('system.qtdCaracterPosto'),'0',STR_PAD_LEFT)}}/{{str_pad($atendimento->atendimento,config('system.qtdCaracterAtend'),'0',STR_PAD_LEFT)}}</span>
             </div>
-            <div class="col-xs-4">
-                <div class="medicoSolicitante">             
-                    <i class="fa fa-user-md" data-toggle="tooltip" data-placement="bottom" title="Médico Solicitante"> </i>
-                    &nbsp;<span id="solicitante"></span>
-                </div>
+        @if($atendimento->acomodacao != '')
+            <div class="col-md-2 col-sm-2 col-xs-6 convAtdPos">
+                <i class="fa fa-hospital-o" data-toggle="tooltip" data-placement="bottom" title="Acomodação"></i>
+                <span id="convenio">{{$atendimento->acomodacao}}</span>
             </div>
-            <div class="col-xs-4">
-                <div class="convenioPaciente">
-                    <i class="fa fa-credit-card" data-toggle="tooltip" data-placement="bottom" title="Convênio"> </i>
-                    <span id="convenio"></span> 
-                </div>                   
+        @else
+            <div class="col-md-2 col-sm-2 col-xs-6 convAtdPos">
+                <i class="fa fa-hospital-o" data-toggle="tooltip" data-placement="bottom" title="Acomodação"></i>
+                <span id="convenio">Não Informado</span>
             </div>
+        @endif
+        <div class="col-md-2 col-sm-2 col-xs-6 convAtdPos">
+            <i class="fa fa-user-md" data-toggle="tooltip" data-placement="bottom" title="Médico Solicitante"></i>
+            <span id="soliciante">{{$atendimento->nome_solicitante}}</span>
         </div>
     </div>
+    @endif
+    @if($user['tipoAcesso'] != 'POS')    
+     <div class="row-fluid infoCliente">
+         <div class="col-xs-12 areaPaciente">
+             <div class="col-xs-4">
+                 <div class="infoAtendimento">
+                     <i class="fa fa-heartbeat" data-toggle="tooltip" data-placement="bottom" title="Posto/Atendimento"> </i>
+                     <span id="atendimento"></span>
+                 </div>
+             </div>
+             <div class="col-xs-4">
+                 <div class="medicoSolicitante">             
+                     <i class="fa fa-user-md" data-toggle="tooltip" data-placement="bottom" title="Médico Solicitante"> </i>
+                     &nbsp;<span id="solicitante"></span>
+                 </div>
+             </div>
+             @if($atendimento->acomodacao != '')
+                <div class="col-xs-4">
+                    <i class="fa fa-hospital-o" data-toggle="tooltip" data-placement="bottom" title="Acomodação"></i>
+                    <span id="convenio">{{$atendimento->acomodacao}}</span>
+                </div>
+            @else
+                <div class="col-xs-4">
+                    <i class="fa fa-hospital-o" data-toggle="tooltip" data-placement="bottom" title="Acomodação"></i>
+                    <span id="convenio">Não Informado</span>
+                </div>
+            @endif
+     </div> <!-- fim da div page-wrapper -->
+    @endif
+
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="ibox">
             <div class="row">
@@ -94,8 +137,10 @@
             </div>
             <ul class="sortable-list connectList agile-list ui-sortable listaExames"></ul>
                 @include('layouts.includes.base.modalDetalhamentoExames')
-                @if(($user['tipoAcesso'] == 'MED') || ($user['tipoLoginPaciente'] != 'ID'))   
-                       @include('layouts.includes.base.modalAlterarSenha')
+                @if($user['tipoAcesso'] != 'POS')
+                    @if(($user['tipoAcesso'] == 'MED') || ($user['tipoLoginPaciente'] != 'ID'))   
+                           @include('layouts.includes.base.modalAlterarSenha')
+                    @endif
                 @endif
             </ul>
         </div>
@@ -137,6 +182,29 @@
             var nomeSolicitante;
             var nomeConvenio;
             var mnemonicos;
+
+            var tipoAcesso = "<?php echo Auth::user()['tipoAcesso'] ?>";
+            if(tipoAcesso == 'POS'){
+                tipoAcesso = 'posto';
+                window.tipoAcesso = 'posto';
+            }
+
+            if(tipoAcesso == 'posto'){
+                var posto = {{$atendimento->posto}};
+                var atendimento = {{$atendimento->atendimento}};      
+                var saldo = '{{$atendimento->saldo_devedor}}'; 
+                var mnemonicos = '{{$atendimento->mnemonicos}}';
+                var sexo = '{{$atendimento->sexo}}';
+
+                var controle;           
+               
+                getExames(posto,atendimento,tipoAcesso);
+
+                $('.btnVoltar').click(function(){
+                    window.location.replace("{{url('/')}}/posto");
+                 });
+
+            }
 
             var form = $('#formSenha');
                 
@@ -275,7 +343,7 @@
 
                      $('.boxExames').click(function(e){ 
                             if($(e.currentTarget).data('visualizacao') == 'OK'){
-                                var dadosExames = $(e.currentTarget).data();                                              
+                                var dadosExames = $(e.currentTarget).data();                                             
                                 getDescricaoExame(dadosExames,window.tipoAcesso);                 
                             }
                             else{

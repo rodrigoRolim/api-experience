@@ -35,7 +35,7 @@ class AtendimentoRepository extends BaseRepository
         $data = explode("/",$data);
 
         if($user['tipoLoginPaciente'] == 'ID'){
-            $sql = 'SELECT c.nome,posto,atendimento,data_atd, INITCAP(nome_convenio) AS nome_convenio, INITCAP(nome_solicitante) AS nome_solicitante, ('.config('system.userAgilDB').'GET_MNEMONICOS(posto,atendimento)) mnemonicos,saldo_devedor
+            $sql = 'SELECT c.nome,posto,atendimento,data_atd,acomodacao, INITCAP(nome_convenio) AS nome_convenio, INITCAP(nome_solicitante) AS nome_solicitante, ('.config('system.userAgilDB').'GET_MNEMONICOS(posto,atendimento)) mnemonicos,saldo_devedor
                     FROM '.config('system.userAgilDB').'vex_atendimentos A
                     INNER JOIN '.config('system.userAgilDB').'VEX_CLIENTES C ON a.registro = c.registro
                     WHERE posto = :posto AND atendimento = :atendimento';
@@ -44,7 +44,7 @@ class AtendimentoRepository extends BaseRepository
         }
 
         if($user['tipoLoginPaciente'] == 'CPF'){
-            $sql = 'SELECT posto,atendimento,data_atd, INITCAP(nome_convenio) AS nome_convenio, INITCAP(nome_solicitante) AS nome_solicitante, ('.config('system.userAgilDB').'GET_MNEMONICOS(posto,atendimento)) mnemonicos,saldo_devedor
+            $sql = 'SELECT posto,atendimento,data_atd,acomodacao, INITCAP(nome_convenio) AS nome_convenio, INITCAP(nome_solicitante) AS nome_solicitante, ('.config('system.userAgilDB').'GET_MNEMONICOS(posto,atendimento)) mnemonicos,saldo_devedor
                     FROM '.config('system.userAgilDB').'vex_atendimentos
                     WHERE registro = :registro
                     ORDER BY data_atd DESC';

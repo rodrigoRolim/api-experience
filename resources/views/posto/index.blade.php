@@ -50,7 +50,8 @@
 
     <div class="wrapper wrapper-content">
         <div class="ibox-content">
-            <div class="input-group m-b">
+            <div style="margin-bottom: 5px;"><i class='fa fa-keyboard-o'></i> <b>SHIFT+Z: </b> Localizar Atendimento</div>
+            <div class="input-group m-b inputBuscaPaciente">
                 <span class="input-group-addon"><i class="fa fa-search"></i></span>
                 <input type="text" id="filtroPaciente" placeholder="Localizar Paciente" class="form-control">
             </div>
@@ -77,7 +78,6 @@
         </a>
     </span>
     <br>
-    &nbsp;<i class='fa fa-keyboard-o'></i> <b>SHIFT+Z: </b> Localizar Atendimento
 @stop
 
 @section('script')
@@ -135,7 +135,7 @@
 
             //Configura o componente de lista
             $('#listFilter').slimScroll({
-                height: '65vh',
+                height: '58vh',
                 width:'100%',
                 size: '12px',
                 railVisible: true,
@@ -206,7 +206,7 @@
                         var atendimento = result.data[index];
 
                         //Impressao da quantidade de atendimentos localizados
-                        $('.contadorAtd').html('<h5 class="achouAtd">Foram encontrados '+result.data.length+' atendimentos para o filtro selecionado.</h5>');
+                        $('.contadorAtd').html('<h5 styçe="margin-bottom: 0px;" class="achouAtd">Foram encontrados '+result.data.length+' atendimentos para o filtro selecionado.</h5>');
                         //Prepara htmk do LI
                         var item = '<li class="col-sm-12 boxatendimento '+atendimento.situacaoAtendimento+'"data-key="'+atendimento.key+'" data-atendimento="'+atendimento.atendimento+'" data-posto="'+atendimento.posto+'">'+
                             '<div class="row">'+

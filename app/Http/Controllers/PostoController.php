@@ -21,6 +21,7 @@ use App\Services\DataSnapService;
 use Illuminate\Contracts\Auth\Guard;
 
 use Request;
+use Auth;
 
 class PostoController extends Controller {
 
@@ -156,7 +157,9 @@ class PostoController extends Controller {
             \App::abort(404);
         }
 
-        return view('posto.paciente',compact('atendimento'));
+        $user = Auth::user();
+
+        return view('paciente.index',compact('atendimento','user'));
     }
 
     /**

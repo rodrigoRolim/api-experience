@@ -517,6 +517,10 @@ div.row.infoClienteMed{
 	border-radius: none;
 }
 
+.inputBuscaPaciente{
+	margin-bottom: 2px;
+}
+
 .msgCpfAcesso{	
 	font-style: italic;
 	font-size: 0.8em;
