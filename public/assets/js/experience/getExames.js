@@ -9,13 +9,13 @@ function getExames(url,tipoAcesso,posto,atendimento){
 
 	$.get(url+'/'+tipoAcesso+'/examesatendimento/'+posto+'/'+atendimento, function( result ) {
 
+	    contOK = 0; //REFATORAR, Contador, guarda o numero de exames que podem sem impressos/visualizados.
 	  $.each( result.data, function( index, exame ){
 	    conteudo = '';
 	    checkbox = '&nbsp;&nbsp;&nbsp;&nbsp;';
 	    visualizacao = '<div id="boxExame" data-visualizacao="N" data-correl="'+exame.correl+'" data-atendimento="'+exame.atendimento+'" data-posto="'+exame.posto+'">';
 	    impressao = '';
 	    corStatus = '';
-	    contOK = 0; //REFATORAR, Contador, guarda o numero de exames que podem sem impressos/visualizados.
 
 	    if(!verificaSaldoDevedor(saldo)){
 		    if(exame.class == 'success-element' && exame.tipo_entrega == '*'){
@@ -50,7 +50,6 @@ function getExames(url,tipoAcesso,posto,atendimento){
 	                '</div>';
 
 	    $('#listaExames').append(conteudo);
-
 	    if(contOK != 0){ // Refatorar!! Este controle, esconde a opção gerar resultados do menu lateral esquerdo,
 	    	$('#gerarPdfMenu').show();	// caso o atendimento não possua nenhum atendimento disponivel para visualização.
 	    }else{

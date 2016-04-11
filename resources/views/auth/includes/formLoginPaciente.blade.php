@@ -38,7 +38,7 @@
 	        <label>Senha</label>
 	        <div class="input-group">
 	            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-				<input type="password" value="L1UKHL" class="form-control" placeholder="Senha" required="" name="password">
+				<input type="password" class="form-control" placeholder="Senha" required="" name="password">
 	        </div>
 			@if ($errors->has('password')) <p class="help-block">{{ $errors->first('password') }}</p> @endif
 	    </div>

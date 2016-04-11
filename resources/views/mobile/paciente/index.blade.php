@@ -49,14 +49,14 @@
 
         <!-- Main Content --> 
         <div id="contentPrincipal" class="scene_element scene_element--fadeinup">
+
+        <div id="semExames"></div>
+        <div id="existemPendencias"></div>
           <div class="col s12 todo" id="listaExames" style="position: relative;"></div>
           <div id="containerBtnResultados" class="hide">
            <button id="pdfResultados" class="btn-floating btn-large waves-effect waves-light red"><i class="mdi-download"></i></button>            
           </div>
         </div> <!-- End of Main Contents -->
-
-        <div id="semExames"></div>
-        <div id="existemPendencias"></div>
 
 
           <!-- Footer -->
@@ -137,8 +137,11 @@ $(document).ready(function(){
         $('.modal-content').append('<p>Convênio: '+convenio+' </p>');
         $('.modal-content').append('<p>Medico Solicitante: '+solicitante+' </p>');
 
-        if(mnemonicos == ""){  
+        if(mnemonicos == ""){ 
+            $('#gerarPdfMenu').hide(); 
             $('#listaExames').html('');  
+            $('#semExames').html('');
+            $('#existemPendencias').html('');
             $('#dataAtendimentoPaciente').text(dataAtendimento);                 
             $('#semExames').append('<p class="todo-element border-left-coral">'+
               '<label class="semExames">Não foram realizados exames para este atendimento.</label>'+
