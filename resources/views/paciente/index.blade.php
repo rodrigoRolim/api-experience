@@ -87,12 +87,12 @@
         @if($atendimento->acomodacao != '')
             <div class="col-md-2 col-sm-2 col-xs-6 convAtdPos">
                 <i class="fa fa-hospital-o" data-toggle="tooltip" data-placement="bottom" title="Acomodação"></i>
-                <span id="convenio">{{$atendimento->acomodacao}}</span>
+                <span id="acomodacao">{{$atendimento->acomodacao}}</span>
             </div>
         @else
             <div class="col-md-2 col-sm-2 col-xs-6 convAtdPos">
                 <i class="fa fa-hospital-o" data-toggle="tooltip" data-placement="bottom" title="Acomodação"></i>
-                <span id="convenio">Não Informado</span>
+                <span id="acomodacao">Não Informado</span>
             </div>
         @endif
         <div class="col-md-2 col-sm-2 col-xs-6 convAtdPos">
@@ -119,12 +119,12 @@
              @if($atendimento->acomodacao != '')
                 <div class="col-xs-4">
                     <i class="fa fa-hospital-o" data-toggle="tooltip" data-placement="bottom" title="Acomodação"></i>
-                    <span id="convenio">{{$atendimento->acomodacao}}</span>
+                    <span id="acomodacao">{{$atendimento->acomodacao}}</span>
                 </div>
             @else
                 <div class="col-xs-4">
                     <i class="fa fa-hospital-o" data-toggle="tooltip" data-placement="bottom" title="Acomodação"></i>
-                    <span id="convenio">Não Informado</span>
+                    <span id="acomodacao">Não Informado</span>
                 </div>
             @endif
      </div> <!-- fim da div page-wrapper -->
@@ -135,6 +135,7 @@
             <div class="row">
                 <div class="i-checks all boxSelectAll"> </div>
             </div>
+            <span id="msgPendencias"></span> 
             <ul class="sortable-list connectList agile-list ui-sortable listaExames"></ul>
                 @include('layouts.includes.base.modalDetalhamentoExames')
                 @if($user['tipoAcesso'] != 'POS')
@@ -146,10 +147,17 @@
         </div>
     </div>
     <div class="footer">
-        <div class="row">
-            <div class="col-md-8 txtRodape"></div>  
-            <div class="col-md-3 " id="boxRodape"></div>
-        </div>  
+        <div class="container">
+            <div class="row">
+             @if($user['tipoAcesso'] != 'POS')
+                <div class="col-md-6 txtRodape"></div>  
+                <div class="col-md-3 " id="boxRodape"></div>
+             @else
+                <div class="col-md-8 txtRodape"></div>  
+                <div class="col-md-4 " id="boxRodape"></div>
+             @endif
+            </div>  
+        </div>
     </div>
 </div>
 @stop
@@ -190,11 +198,10 @@
             }
 
             if(tipoAcesso == 'posto'){
-                var posto = {{$atendimento->posto}};
-                var atendimento = {{$atendimento->atendimento}};      
+                var posto = '{{$atendimento->posto}}';
+                var atendimento = '{{$atendimento->atendimento}}';      
                 var saldo = '{{$atendimento->saldo_devedor}}'; 
                 var mnemonicos = '{{$atendimento->mnemonicos}}';
-                var sexo = '{{$atendimento->sexo}}';
 
                 var controle;           
                
@@ -262,9 +269,12 @@
             });
 
             $('.ibox').slimScroll({
-                height: 'auto',              
+                height: '69vh',              
                 railOpacity: 0.4,
                 wheelStep: 10,
+                size: '12px',
+                alwaysVisible: true,
+                railVisible: true,
                 minwidth: '100%',
                 touchScrollStep: 50,
             });
@@ -278,12 +288,18 @@
             }); 
 
             $('#side-menu').slimScroll({
-                height: '71.2vh',
+                height: '60vh',
                 railOpacity: 0.4,
                 wheelStep: 10,
                 minwidth: '100%',
                 touchScrollStep: 50,
-            });         
+            });    
+
+            $(document).keyup(function(e) {
+                 if (e.keyCode == 27) { //ESC
+                    $('#modalExames').modal('hide');
+                }
+            });     
 
             $('.leftMenu.active a').trigger('click');
 
@@ -351,30 +367,30 @@
                             }
                     });     
 
-                    function getDescricaoExame(dadosExames,tipoAcesso){ 
-                         console.log(dadosExames);
-                         $('.modal-body').html('<br><br><br><br><h2 class="textoTamanho"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando registros.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>');   
-                         $('.modal-title').html('');
-                         $('.modal-footer').html('');
+                    function getDescricaoExame(dadosExames){                       
+                        
+                        $('.modal-title').html('');   
+                        $('#tabelaDetalhes').html('<br><br><br><br><h2 class="textoTamanho"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando registros.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>');   
+                        $('#rodapeDetalhe').html('');    
+
                         $.ajax({
                             url : '{{url("/")}}/'+tipoAcesso+'/detalheatendimentoexamecorrel/'+dadosExames.posto+'/'+dadosExames.atendimento+'/'+dadosExames.correl+'',
-                            type: 'GET',                            
-                            success:function(result){
+                            type: 'GET',                           
+                            success:function(result){                                
                                 if(result.data == null){
                                     $('#modalExames').modal('hide');
                                     swal("Erro ao carregar descrição do exame..", "Não há resultados disponíveis para visualização.", "error");                                    
                                     return false;
-                                }      
-                                var descricao = result.data;  
+                                }
+                                var descricao = result.data;
                                 var analitos = result.data.ANALITOS;
-                                var conteudo = '';
-
-                                $('#modalExames').modal('show');  
-                                $('.modal-title').append(descricao.PROCEDIMENTO); 
-                                $('.modal-body').html('');
-                                $('.modal-footer').append('Liberado em '+descricao.DATA_REALIZANTE+' por '+descricao.REALIZANTE.NOME+' - '+
+                                var conteudo = '';                                                          
+                                
+                                $('.modal-title').append(descricao.PROCEDIMENTO);
+                                $('#tabelaDetalhes').html(''); 
+                                $('#rodapeDetalhe').append('Liberado em '+descricao.DATA_REALIZANTE+' por '+descricao.REALIZANTE.NOME+' - '+
                                     descricao.REALIZANTE.TIPO_CR+' '+descricao.REALIZANTE.UF_CONSELHO+' : '+descricao.REALIZANTE.CRM+' Data e Hora da Coleta: '+descricao.DATA_COLETA);
-
+                                $('#dvPdfDetalhe').html('<a href="#" id="btnPdfDetalhe" data-correl="'+dadosExames.correl+'" data-posto="'+dadosExames.posto+'" data-atendimento="'+dadosExames.atendimento+'" class="btn btn-danger btnPdf">Gerar PDF</a>');  
 
                                 $.each( analitos, function( index ){
 
@@ -390,27 +406,55 @@
                                         valorAnalito = valorAnalito.toFixed(analitos[index].DECIMAIS);
                                     }
 
-                                    conteudo = '<div class ="col-md-12 descricaoExames">'+
-                                                 '<div class="col-md-8 analitos">'+
+                                   conteudo =   '<tr>'+
+                                                    '<td class =descricaoExames">'+
+                                                 '<td class=" analitos">'+
                                                     ''+analitos[index].ANALITO+'</div>'+
-                                                 '<div class="col-md-4 valoresAnalitos">'+
-                                                    '<strong>'+valorAnalito+' '+analitos[index].UNIDADE+'</strong></div>'+
-                                                 '</div>';
+                                                 '<td class="valoresAnalitos">'+
+                                                    '<strong>'+valorAnalito+' '+analitos[index].UNIDADE+'</strong>'+
+                                                 '</tr>';
 
-                                    $('.modal-body').append(conteudo);
+                                    $('#tabelaDetalhes').append(conteudo);
 
-                                });             
-                           
+                                }); 
+
+
+                                $('#btnPdfDetalhe').click(function(e){
+                                    posto = $(e.currentTarget).data('posto');
+                                    atendimento = $(e.currentTarget).data('atendimento');
+                                    correl = $(e.currentTarget).data('correl');
+
+                                    var dadosExportacao = {};                           
+                                    dadosExportacao = [{'posto':posto,'atendimento':atendimento,'correlativos': {correl}}]; 
+                                    var paginaPdf = window.open ('/impressao', '', '');              
+
+                                    $.ajax({ 
+                                     url: '{{url("/")}}/'+tipoAcesso+'/exportarpdf',
+                                     type: 'post',
+                                     data: {"dados" : dadosExportacao},
+                                     success: function(data){   
+                                            if(data != 'false'){
+                                                paginaPdf.location = data;     
+                                            }else{
+                                                paginaPdf.close();
+                                                swal("Erro ao exportar resultados para PDF", "Tente novamente mais tarde!", "error");
+                                            }             
+                                       }
+                            });    
+
+
+                                });    
+
                                 if(result.data.length == 0){
-                                    $('.modal-body').append('<h2 class="textoTamanho">NÃ£o foram encontrados atendimentos.</h2>');
+                                    $('.modal-body').append('<h2 class="textoTamanho">Não foram encontrados atendimentos.</h2>');
                                 }
                             },
                             error: function(jqXHR, textStatus, errorThrown){
                                 $('.modal-body').html('');
-                                $('.modal-body').append('<div class="text-center alert alert-danger animated fadeIn erroDescricao"><i class="fa fa-exclamation-circle fa-5x"><h2>Erro ao carregar Descrição do Exame.</h2></div>');
+                                $('.modal-body').append('<div class="text-center alert alert-danger animated fadeIn erroDescricao"><i class="fa fa-exclamation-circle fa-5x"></i><h2>Erro ao carregar Descrição do Exame.</h2></div>');
                             }
                         });
-                    }
+                    } 
 
                     $('#boxRodape').html('<button type="button" class="btn btn-danger btnPdf">Gerar PDF</button>');             
 
@@ -427,6 +471,7 @@
 
                     //verifica se o usuario tem saldo devedor
                     if(!verificaSaldoDevedor(saldo)){
+                        $('#msgPendencias').html('');
                         $('input.checkAll').on('ifChecked ifUnchecked', function(event) {
                             if (event.type == 'ifChecked') {
                                 checkboxes.iCheck('check');
@@ -489,13 +534,19 @@
                         });   
 
                     }else{
-                        $('#boxRodape').html('<h3 class="text-danger msgCliente">{!!config('system.messages.pacientes.saldoDevedor')!!}</h3>');
+                        $('#msgPendencias').html('<h5 class="text-danger">{!!config('system.messages.pacientes.saldoDevedor')!!}</h3>');
                     }
                 }, "json" );
             }
         });         
             $(".txtRodape").append("<span class='statusAtendimentosViewPaciente'></span>");            
-            $(".statusAtendimentosViewPaciente").append(" <span class='statusFinalizados'></span>&nbsp; Finalizados &nbsp;&nbsp;<span class='statusAguardando'></span> Parc. Finalizado");
-            $(".statusAtendimentosViewPaciente").append("&nbsp;&nbsp;<span class='statusEmAndamento'></span> Em Andamento &nbsp;&nbsp;<span class='statusPendencias'></span> Existem Pendências");
+            $(".statusAtendimentosViewPaciente").append(" <span class='statusFinalizados'></span>Finalizados <span class='statusAguardando'></span>Parc. Finalizado");
+            $(".statusAtendimentosViewPaciente").append("<span class='statusEmAndamento'></span>Em Andamento <span class='statusPendencias'></span>Existem Pendências");
+            if(window.tipoAcesso == 'posto'){
+                $(".statusAtendimentosViewPaciente").append("<div id='legendasRodape'><i class='fa fa-heartbeat'></i> Posto/Atendimento &nbsp;|&nbsp;");
+                $(".statusAtendimentosViewPaciente").append("<i class='fa fa-credit-card'></i> Acomodacao | ");
+                $(".statusAtendimentosViewPaciente").append("<i class='fa fa-user-md'></i> Solicitante</div>");                
+            }
+
     </script>
 @stop

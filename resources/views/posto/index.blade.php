@@ -223,7 +223,7 @@
                                     '<i class="fa fa-credit-card" data-toggle="tooltip" title="Convênio"></i> '+atendimento.nome_convenio+
                                 '</div>';
 
-                        if(atendimento.situacao_exames_experience != 'TF'){
+                        if(atendimento.situacao_exames_experience != 'TF' && atendimento.data_entrega != false && atendimento.data_entrega != null){
                            item += '<div class="col-md-2 col-sm-6 col-xs-12">'+
                                     '<i class="fa fa-clock-o" data-toggle="tooltip" title="Previsão de entrega"></i> '+atendimento.data_entrega+
                             '</div>';

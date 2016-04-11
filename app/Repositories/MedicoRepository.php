@@ -36,10 +36,10 @@ class MedicoRepository extends BaseRepository
      * @param null $situacao
      * @return array
      */
-    public function getClientes($idMedico,$dataInicio,$dataFim,$posto=null, $convenio=null,$situacao=null)
+    public function getClientes($idMedico,$dataInicio,$dataFim,$posto=null, $acomodacao=null, $convenio=null,$situacao=null)
     {
         $sql = "SELECT DISTINCT
-                  c.nome,c.data_nas,c.registro,c.sexo,c.telefone,c.telefone2,".config('system.userAgilDB')."get_atendimentos_solicitante(c.registro,m.id_medico,:maskPosto,:maskAtendimento) as atendimentos
+                  c.nome,c.data_nas,c.registro,c.sexo,c.telefone,c.telefone2,a.acomodacao,".config('system.userAgilDB')."get_atendimentos_solicitante(c.registro,m.id_medico,:maskPosto,:maskAtendimento) as atendimentos
                 FROM
                   ".config('system.userAgilDB')."VEX_ATENDIMENTOS A
                   INNER JOIN ".config('system.userAgilDB')."VEX_MEDICOS M ON A.solicitante = m.crm
@@ -48,6 +48,7 @@ class MedicoRepository extends BaseRepository
                     AND A.DATA_ATD >= TO_DATE(:dataInicio,'DD/MM/YYYY HH24:MI')
                     AND A.DATA_ATD <= TO_DATE(:dataFim,'DD/MM/YYYY HH24:MI')
                     AND (:posto IS NULL OR A.POSTO = :posto)
+                    AND (:acomodacao IS NULL OR A.ACOMODACAO = :acomodacao)
                     AND (:convenio IS NULL OR A.CONVENIO = :convenio)
                     AND (:situacao IS NULL OR A.SITUACAO_EXAMES_EXPERIENCE = :situacao)
                 ORDER BY c.nome";
@@ -63,6 +64,7 @@ class MedicoRepository extends BaseRepository
             'maskAtendimento' => $mask[1],
             'posto' => $posto,
             'convenio' => $convenio,
+            'acomodacao' => $acomodacao,
             'situacao' => $situacao,
         ]);
 
@@ -89,7 +91,7 @@ class MedicoRepository extends BaseRepository
      * @return mixed
      */
     public function getAtendimentosPacienteByMedico($registro,$solicitante){
-        $sql = 'SELECT c.nome,c.data_nas,c.registro,c.sexo,c.telefone,c.telefone2,a.posto,a.atendimento,data_atd, INITCAP(a.nome_convenio) AS nome_convenio, INITCAP(a.nome_solicitante) AS nome_solicitante, ('.config('system.userAgilDB').'GET_MNEMONICOS(a.posto,a.atendimento)) mnemonicos,a.saldo_devedor
+        $sql = 'SELECT c.nome,c.data_nas,c.registro,c.sexo,c.telefone,c.telefone2,a.acomodacao,a.posto,a.atendimento,data_atd, INITCAP(a.nome_convenio) AS nome_convenio, INITCAP(a.nome_solicitante) AS nome_solicitante, ('.config('system.userAgilDB').'GET_MNEMONICOS(a.posto,a.atendimento)) mnemonicos,a.saldo_devedor
                 FROM '.config('system.userAgilDB').'vex_atendimentos a
                   INNER JOIN '.config('system.userAgilDB').'VEX_MEDICOS m ON a.solicitante = m.crm
                   INNER JOIN '.config('system.userAgilDB').'VEX_CLIENTES c ON a.registro = c.registro

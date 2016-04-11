@@ -55,6 +55,7 @@ ul{
 }
 
 .txtRodape{
+	padding-left: 0px;
 	font-size: 0.9em;
 }
 
@@ -305,7 +306,7 @@ ul{
 }
 
 .ibox{
-	height: 64vh;
+	height: 67vh;
 }
 
 .page-heading{
@@ -349,13 +350,9 @@ ul{
 	font-size: 1em;	
 }
 
-#boxRodape{
-	padding-right: 0px;
-}
-
-#boxRodapePostoPac{
-	margin-right: 0px;
-	text-align: right;
+#legendasRodape{
+	margin-left:80px;
+	display:inline;
 }
 
 .agile-list, li.warning-element, li.success-element, li.danger-element, li.aguardando-element, li.naoRealizado-element{
