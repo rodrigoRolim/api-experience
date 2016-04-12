@@ -230,10 +230,10 @@
                                     '<i class="fa fa-heartbeat" data-toggle="tooltip" data-placement="right" title="Posto/Atendimento"></i><strong> '+atendimento.posto+'/'+atendimento.atendimento+'</strong>'+                                                    
                                 '</div>'+
                                 '<div class="col-md-2 col-sm-6 col-xs-6">'+
-                                    '<i class="fa fa-calendar-check-o" data-toggle="tooltip" title="Data do Atendimento"></i> '+atendimento.data_atd+
+                                    '<i class="fa fa-credit-card" data-toggle="tooltip" title="Convênio"></i> '+atendimento.nome_convenio+
                                 '</div>'+
                                 '<div class="col-md-2 col-sm-6 col-xs-6 hidden-xs">'+
-                                    '<i class="fa fa-credit-card" data-toggle="tooltip" title="Convênio"></i> '+atendimento.nome_convenio+
+                                    '<i class="fa fa-calendar-check-o" data-toggle="tooltip" title="Data do Atendimento"></i> '+atendimento.data_atd+
                                 '</div>';
 
                         if(atendimento.situacao_exames_experience != 'TF' && atendimento.data_entrega != false && atendimento.data_entrega != null){

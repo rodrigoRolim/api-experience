@@ -283,6 +283,7 @@
                 height: '55.0vh',
                 railOpacity: 0.4,
                 wheelStep: 10,
+                alwaysVisible: true,
                 minwidth: '100%',
                 touchScrollStep: 50,
             }); 
@@ -291,6 +292,7 @@
                 height: '60vh',
                 railOpacity: 0.4,
                 wheelStep: 10,
+                alwaysVisible: true,
                 minwidth: '100%',
                 touchScrollStep: 50,
             });    
