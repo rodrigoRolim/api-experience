@@ -94,7 +94,9 @@
                     <span id="acomodacao">{{$atendimento->acomodacao}}</span>
             </div>
         @else
-            <div class="col-md-3 col-sm-3 col-xs-6 convAtdPos">
+            <div style="margin-top: 5px;" class="col-md-3 col-sm-3 col-xs-6 convAtdPos">
+                <i id="iconeSolic" class="fa fa-user-md" data-toggle="tooltip" data-placement="bottom" title="Médico Solicitante"></i>
+                    <span id="soliciante">{{$atendimento->nome_solicitante}}</span><br>
                 <i class="fa fa-bed" data-toggle="tooltip" data-placement="bottom" title="Acomodação"></i>
                 <span id="acomodacao">Não Informado</span>
             </div>
