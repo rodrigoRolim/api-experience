@@ -73,32 +73,33 @@
 @endif
         @if($user['tipoAcesso'] == 'POS')         
     <div class="row-fluid areaPacientePos">
-        <div class="col-md-6 col-sm-6 col-xs-12">  
+        <div style="padding-left:0px;" class="col-md-6 col-sm-6 col-xs-12">  
             <button type="button" class="btn btn-lg btnVoltar pull-left"><i class="fa fa-arrow-left" style="font-size: 24px;"></i></button>      
             <strong><span id="nome" class="nomePaciente">{{$atendimento->nome}}</span></strong><br>
-            <div class="idadePaciente">{{$atendimento->idade}}</div>
-        @endif
-        @if($user['tipoAcesso'] == 'POS')    
-        </div>
-            <div class="col-md-2 col-sm-2 col-xs-5 postoAtdPos">
-                <i class="fa fa-heartbeat" data-toggle="tooltip" data-placement="bottom" title="Posto/Atendimento"></i>
-                <span id="atendimento">{{str_pad($atendimento->posto,config('system.qtdCaracterPosto'),'0',STR_PAD_LEFT)}}/{{str_pad($atendimento->atendimento,config('system.qtdCaracterAtend'),'0',STR_PAD_LEFT)}}</span>
+            <div class="row">
+                <div style="padding-left:0px" class="col-md-3 col-sm-3">
+                    <i class="fa fa-birthday-cake" aria-hidden="true"></i> <span class="idadePaciente">{{$atendimento->idade}}</span>
+                </div>
+                <div class="col-md-3 col-sm-3">
+                    <i id="iconeAtd" class="fa fa-heartbeat" data-toggle="tooltip" data-placement="bottom" title="Posto/Atendimento"></i>
+                    <span id="atendimento">{{str_pad($atendimento->posto,config('system.qtdCaracterPosto'),'0',STR_PAD_LEFT)}}/{{str_pad($atendimento->atendimento,config('system.qtdCaracterAtend'),'0',STR_PAD_LEFT)}}</span>
+                </div>
             </div>
+        </div>
         @if($atendimento->acomodacao != '')
-            <div class="col-md-2 col-sm-2 col-xs-6 convAtdPos">
-                <i class="fa fa-hospital-o" data-toggle="tooltip" data-placement="bottom" title="Acomodação"></i>
-                <span id="acomodacao">{{$atendimento->acomodacao}}</span>
+            <div style="margin-top: 5px;" class="col-md-3 col-sm-3 col-xs-6 convAtdPos">
+                <i id="iconeSolic" class="fa fa-user-md" data-toggle="tooltip" data-placement="bottom" title="Médico Solicitante"></i>
+                    <span id="soliciante">{{$atendimento->nome_solicitante}}</span><br>
+                <i class="fa fa-bed" data-toggle="tooltip" data-placement="bottom" title="Acomodação"></i>
+                    <span id="acomodacao">{{$atendimento->acomodacao}}</span>
             </div>
         @else
-            <div class="col-md-2 col-sm-2 col-xs-6 convAtdPos">
-                <i class="fa fa-hospital-o" data-toggle="tooltip" data-placement="bottom" title="Acomodação"></i>
+            <div class="col-md-3 col-sm-3 col-xs-6 convAtdPos">
+                <i class="fa fa-bed" data-toggle="tooltip" data-placement="bottom" title="Acomodação"></i>
                 <span id="acomodacao">Não Informado</span>
             </div>
         @endif
-        <div class="col-md-2 col-sm-2 col-xs-6 convAtdPos">
-            <i class="fa fa-user-md" data-toggle="tooltip" data-placement="bottom" title="Médico Solicitante"></i>
-            <span id="soliciante">{{$atendimento->nome_solicitante}}</span>
-        </div>
+            <div class="i-checks all boxSelectAll"> </div>
     </div>
     @endif
     @if($user['tipoAcesso'] != 'POS')    
@@ -132,9 +133,6 @@
 
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="ibox">
-            <div class="row">
-                <div class="i-checks all boxSelectAll"> </div>
-            </div>
             <span id="msgPendencias"></span> 
             <ul class="sortable-list connectList agile-list ui-sortable listaExames"></ul>
                 @include('layouts.includes.base.modalDetalhamentoExames')

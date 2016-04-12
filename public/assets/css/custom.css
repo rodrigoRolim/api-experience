@@ -385,6 +385,12 @@ div.row.infoClienteMed{
 	margin-right: 10px;
 }
 
+#iconeAtd,
+#iconeSolic,
+#iconeAcom{
+
+}
+
 .boxExames{
 	padding-right: 0px;
 	padding-left: 0px;
@@ -398,7 +404,7 @@ div.row.infoClienteMed{
 .all{
 	float: right;
 	padding-top: 8px;	
-	margin-right: 45px;
+	margin-right: 30px;
 }
 
 .selectPosto{
@@ -551,7 +557,7 @@ div.row.infoClienteMed{
 }
 
 .convAtdPos{
-	padding-top: 10px;
+	/*padding-top: 10px;*/
 }
 
 .btnVoltar{
