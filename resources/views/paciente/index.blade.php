@@ -388,8 +388,7 @@
                                 
                                 $('.modal-title').append(descricao.PROCEDIMENTO);
                                 $('#tabelaDetalhes').html(''); 
-                                $('#rodapeDetalhe').append('Liberado em '+descricao.DATA_REALIZANTE+' por '+descricao.REALIZANTE.NOME+' - '+
-                                    descricao.REALIZANTE.TIPO_CR+' '+descricao.REALIZANTE.UF_CONSELHO+' : '+descricao.REALIZANTE.CRM+' Data e Hora da Coleta: '+descricao.DATA_COLETA);
+                               
                                 $('#dvPdfDetalhe').html('<a href="#" id="btnPdfDetalhe" data-correl="'+dadosExames.correl+'" data-posto="'+dadosExames.posto+'" data-atendimento="'+dadosExames.atendimento+'" class="btn btn-danger btnPdf">Gerar PDF</a>');  
 
                                 $.each( analitos, function( index ){
@@ -409,14 +408,17 @@
                                    conteudo =   '<tr>'+
                                                     '<td class =descricaoExames">'+
                                                  '<td class=" analitos">'+
-                                                    ''+analitos[index].ANALITO+'</div>'+
+                                                    ''+analitos[index].ANALITO+'</td></div>'+
                                                  '<td class="valoresAnalitos">'+
                                                     '<strong>'+valorAnalito+' '+analitos[index].UNIDADE+'</strong>'+
-                                                 '</tr>';
+                                                 '</td></tr>';
 
                                     $('#tabelaDetalhes').append(conteudo);
 
                                 }); 
+
+                                    $('#tabelaDetalhes').append('<tr><td id="finalDetalhamento" colspan="3"> Liberado em '+descricao.DATA_REALIZANTE+' por '+descricao.REALIZANTE.NOME+' - '+
+                                    descricao.REALIZANTE.TIPO_CR+' '+descricao.REALIZANTE.UF_CONSELHO+' : '+descricao.REALIZANTE.CRM+' Data e Hora da Coleta: '+descricao.DATA_COLETA+'</td></tr>')
 
 
                                 $('#btnPdfDetalhe').click(function(e){

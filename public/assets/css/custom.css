@@ -345,6 +345,10 @@ ul{
 	font-size: 0.7em;		
 }
 
+#boxRodape{
+	padding-right:30px;
+}
+
 #boxRodape h3{
 	margin: 0px;
 	font-size: 1em;	
@@ -493,6 +497,12 @@ div.row.infoClienteMed{
 	text-align: left;
 	font-weight: bold;
 	border-top: 0px solid #e5e5e5;
+}
+
+#finalDetalhamento{
+	font-size: 0.7em;
+	font-weight: bold;
+	padding-left: 20px;
 }
 
 #rodapeDetalhe{
