@@ -50,7 +50,6 @@
 
     <div class="wrapper wrapper-content">
         <div class="ibox-content">
-            <div style="margin-bottom: 5px;"><i class='fa fa-keyboard-o'></i> <b>SHIFT+Z: </b> Localizar Atendimento</div>
             <div class="input-group m-b inputBuscaPaciente">
                 <span class="input-group-addon"><i class="fa fa-search"></i></span>
                 <input type="text" id="filtroPaciente" placeholder="Localizar Paciente" class="form-control">
@@ -77,7 +76,7 @@
             {!! Html::image(config('system.experienceLogo'), 'logo_exp', array('title' => 'eXperience - codemed','id'=>'logoRodape','style'=>'margin-right:8px')) !!}
         </a>
     </span>
-    <br>
+    <div style="padding-left: 5px;"><i class='fa fa-keyboard-o'></i> <b>SHIFT+Z: </b> Localizar Atendimento</div>
 @stop
 
 @section('script')
@@ -146,6 +145,20 @@
                 allowPageScroll: true,
                 touchScrollStep: 50,
                 alwaysVisible: true
+            });
+
+            $("#acomodacao, #situacao, #postoRealizante").change(function(e) {
+                select = e.target.id;
+                stringSelect = '#'+select+' option:selected';  
+                txt = $( stringSelect ).text();
+                selecthashtag = '#'+select;
+
+                if(txt == 'Todos'){
+                     $(selecthashtag).css('background-color','white');
+                }else{
+                     $(selecthashtag).css('background-color','#E2EAE2');                    
+                }
+
             });
 
             //Carrega acomodacao via ajax
