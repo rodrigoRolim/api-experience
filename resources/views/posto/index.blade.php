@@ -42,7 +42,7 @@
             </div>
             <div class="col-md-2">
                 <div class="input-group m-b filtrar col-md-12" style="margin-bottom:0px;padding-top:17px;">
-                    <a class="btn btn-warning btn-outline col-md-12" id="btnFiltrar"><i class="fa fa-filter fa-2"> </i> Filtrar</a>
+                    <a class="btn btn-warning btn-outline col-md-12 not-active" id="btnFiltrar"><i class="fa fa-filter fa-2"> </i> Filtrar</a>
                 </div>
             </div>
         </form>
@@ -54,7 +54,23 @@
                 <span class="input-group-addon"><i class="fa fa-search"></i></span>
                 <input type="text" id="filtroPaciente" placeholder="Localizar Paciente" class="form-control">
             </div>
-            <div class="contadorAtd"></div>
+            <div style="padding-left: 0px;" class="col-sm-12">
+                <div class="col-md-4">
+                    <div class="contadorAtd"></div>
+                </div>
+                    <div class="col-md-2 centralizar">
+                        <i class='fa fa-heartbeat'></i> ID Atendimento 
+                    </div>
+                    <div class="col-md-2 centralizar">
+                        <i class='fa fa-credit-card'></i> Convênio 
+                    </div>
+                    <div class="col-md-2 centralizar">
+                        <i class='fa fa-calendar-check-o'></i> Data Atendimento 
+                    </div>
+                    <div class="col-md-2 centralizar">
+                        <i class='fa fa-clock-o'></i> Previsão Entrega
+                    </div>
+            </div>
             <ul class="sortable-list connectList agile-list ui-sortable" id="listFilter"></ul>  
         </div>
     </div>
@@ -65,18 +81,16 @@
 @section('statusFooter')
     <span class='statusFinalizados'></span> Finalizados <span class='statusAguardando'></span> Parc. Finalizado
     <span class='statusEmAndamento'></span> Em Andamento <span class='statusPendencias'></span> Existem Pendências
+    <span class='statusNaoRealizado'></span>Não Realizado
 
     <span class="pull-right">
         <span class="pull-left">
-            <i class='fa fa-heartbeat'></i> Posto/Atendimento &nbsp;|&nbsp; <i class='fa fa-calendar-check-o'></i> Data do Atendimento |
-            <i class='fa fa-credit-card'></i> Convênio &nbsp |&nbsp; <i class='fa fa-flask'></i>  Mnemônicos |
-            <i class='fa fa-clock-o'></i> Previsão
         </span>
         <a href="{{url()}}/sobre" target="_blank">
             {!! Html::image(config('system.experienceLogo'), 'logo_exp', array('title' => 'eXperience - codemed','id'=>'logoRodape','style'=>'margin-right:8px')) !!}
         </a>
     </span>
-    <div style="padding-left: 5px;"><i class='fa fa-keyboard-o'></i> <b>SHIFT+Z: </b> Localizar Atendimento</div>
+    <span class="pull-right"><i class='fa fa-keyboard-o'></i> <b>SHIFT+Z: </b> Localizar Atendimento</span>
 @stop
 
 @section('script')
@@ -105,6 +119,7 @@
 
             $("#dataInicio,#dataFim").on("changeDate",function (){ 
                 getAcomodacao();
+                $('#btnFiltrar').removeClass('not-active');
             });
 
             $(".input-daterange").attr("autocomplete", "off");
@@ -152,11 +167,12 @@
                 stringSelect = '#'+select+' option:selected';  
                 txt = $( stringSelect ).text();
                 selecthashtag = '#'+select;
+                $('#btnFiltrar').removeClass('not-active');
 
                 if(txt == 'Todos'){
                      $(selecthashtag).css('background-color','white');
                 }else{
-                     $(selecthashtag).css('background-color','#E2EAE2');                    
+                     $(selecthashtag).css('background-color','#CFECCF');                    
                 }
 
             });
@@ -218,32 +234,34 @@
                     $.each( result.data, function( index ){
                         var atendimento = result.data[index];
 
+                        console.log(atendimento);
+
                         //Impressao da quantidade de atendimentos localizados
-                        $('.contadorAtd').html('<h5 styçe="margin-bottom: 0px;" class="achouAtd">Foram encontrados '+result.data.length+' atendimentos para o filtro selecionado.</h5>');
+                        $('.contadorAtd').html('<h5 styçe="margin-bottom: 0px;" class="achouAtd">'+result.data.length+' ocorrências para o filtro selecionado.</h5>');
                         //Prepara htmk do LI
                         var item = '<li class="col-sm-12 boxatendimento '+atendimento.situacaoAtendimento+'"data-key="'+atendimento.key+'" data-atendimento="'+atendimento.atendimento+'" data-posto="'+atendimento.posto+'">'+
                             '<div class="row">'+
                                 '<div class="col-md-4 col-sm-6 col-xs-12">'+
                                     '<strong>'+atendimento.nome+'</strong>'+'<br>'+'<i class="'+((atendimento.sexo == "M")?"fa fa-mars":"fa fa-venus")+'"></i> '+atendimento.idade+
                                 '</div>'+
-                                '<div class="col-md-2 col-sm-6 col-xs-6">'+
-                                    '<span data-toggle="tooltip" title="Posto/Atendimento"><i class="fa fa-heartbeat"></i><strong> '+atendimento.posto+'/'+atendimento.atendimento+'</strong></span>'+                                                    
+                                '<div class="centralizar col-md-2 col-sm-6 col-xs-6">'+
+                                    '<span data-toggle="tooltip" title="Posto/Atendimento"><strong> '+atendimento.posto+'/'+atendimento.atendimento+'</strong></span>'+                                                    
                                 '</div>'+
-                                '<div class="col-md-2 col-sm-6 col-xs-6">'+
-                                    '<span data-toggle="tooltip" title="Convênio"><i class="fa fa-credit-card"></i> '+atendimento.nome_convenio+
+                                '<div class="centralizar col-md-2 col-sm-6 col-xs-6">'+
+                                    '<span data-toggle="tooltip" title="Convênio"> '+atendimento.nome_convenio+
                                 '</span></div>'+
-                                '<div class="col-md-2 col-sm-6 col-xs-6 hidden-xs">'+
-                                    '<span data-toggle="tooltip" title="Data do Atendimento"><i class="fa fa-calendar-check-o"></i> '+atendimento.data_atd+
+                                '<div class="centralizar col-md-2 col-sm-6 col-xs-6 hidden-xs">'+
+                                    '<span data-toggle="tooltip" title="Data do Atendimento"> '+atendimento.data_atd+
                                 '</span></div>';
 
                         if(atendimento.situacao_exames_experience != 'TF' && atendimento.data_entrega != false && atendimento.data_entrega != null){
-                           item += '<div class="col-md-2 col-sm-6 col-xs-12">'+
-                                    '<span data-toggle="tooltip" title="Previsão de entrega"><i class="fa fa-clock-o"></i> '+atendimento.data_entrega+
+                           item += '<div class="centralizar col-md-2 col-sm-6 col-xs-12">'+
+                                    '<span data-toggle="tooltip" title="Previsão de entrega"> '+atendimento.data_entrega+
                             '</span></div>';
                         }
                         
                         item += '<div class="col-md-12 col-sm-6 col-xs-12">'+
-                                    '<span data-toggle="tooltip" title="Mnemônicos"><i class="fa fa-flask"></i> '+atendimento.mnemonicos+
+                                    '<span data-toggle="tooltip" title="Exames"><i class="fa fa-flask"></i> '+atendimento.mnemonicos+
                                 '</span></div>'+
                             '</div>'+
                        '</li>';

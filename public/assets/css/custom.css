@@ -12,6 +12,16 @@ body,.text-center{
 	font-size: 10px;
 }
 
+.exemploBusca{
+	margin-bottom: 10px;
+	margin-left:10px; 
+	color: #B5B3B3;
+}
+
+.centralizar{
+	text-align: center;
+}
+
 .nav-expanded{
 	display: block !important;
 }
@@ -284,6 +294,12 @@ ul{
 	padding-top: 1px;
 	padding-bottom: 1px;
 	min-height: 100%;
+}
+
+.not-active{
+   pointer-events: none;
+   cursor: default;
+   color: gray !important;
 }
 
 .postoAtendimento{	
