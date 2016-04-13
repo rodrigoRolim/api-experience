@@ -81,17 +81,17 @@
                     <i class="fa fa-birthday-cake" aria-hidden="true"></i> <span class="idadePaciente">{{$atendimento->idade}}</span>
                 </div>
                 <div class="col-md-3 col-sm-3">
-                    <i id="iconeAtd" class="fa fa-heartbeat" data-toggle="tooltip" data-placement="bottom" title="Posto/Atendimento"></i>
-                    <span id="atendimento">{{str_pad($atendimento->posto,config('system.qtdCaracterPosto'),'0',STR_PAD_LEFT)}}/{{str_pad($atendimento->atendimento,config('system.qtdCaracterAtend'),'0',STR_PAD_LEFT)}}</span>
+                    <span  data-toggle="tooltip" data-placement="bottom" title="Posto/Atendimento"><i id="iconeAtd" class="fa fa-heartbeat"></i>
+                    <span id="atendimento">{{str_pad($atendimento->posto,config('system.qtdCaracterPosto'),'0',STR_PAD_LEFT)}}/{{str_pad($atendimento->atendimento,config('system.qtdCaracterAtend'),'0',STR_PAD_LEFT)}}</span></span>
                 </div>
             </div>
         </div>
         @if($atendimento->acomodacao != '')
             <div style="margin-top: 5px;" class="col-md-3 col-sm-3 col-xs-6 convAtdPos">
-                <i id="iconeSolic" class="fa fa-user-md" data-toggle="tooltip" data-placement="bottom" title="Médico Solicitante"></i>
-                    <span id="soliciante">{{$atendimento->nome_solicitante}}</span><br>
-                <i class="fa fa-bed" data-toggle="tooltip" data-placement="bottom" title="Acomodação"></i>
-                    <span id="acomodacao">{{$atendimento->acomodacao}}</span>
+                <span data-toggle="tooltip" data-placement="bottom" title="Médico Solicitante"><i id="iconeSolic" class="fa fa-user-md"></i>
+                    <span id="soliciante">{{$atendimento->nome_solicitante}}</span></span><br>
+                <span  data-toggle="tooltip" data-placement="bottom" title="Acomodação"><i class="fa fa-bed" data-toggle="tooltip" data-placement="bottom" title="Acomodação"></i>
+                    <span id="acomodacao">{{$atendimento->acomodacao}}</span></span>
             </div>
         @else
             <div style="margin-top: 5px;" class="col-md-3 col-sm-3 col-xs-6 convAtdPos">
