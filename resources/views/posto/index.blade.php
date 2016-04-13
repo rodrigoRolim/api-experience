@@ -227,24 +227,24 @@
                                     '<strong>'+atendimento.nome+'</strong>'+'<br>'+'<i class="'+((atendimento.sexo == "M")?"fa fa-mars":"fa fa-venus")+'"></i> '+atendimento.idade+
                                 '</div>'+
                                 '<div class="col-md-2 col-sm-6 col-xs-6">'+
-                                    '<i class="fa fa-heartbeat" data-toggle="tooltip" data-placement="right" title="Posto/Atendimento"></i><strong> '+atendimento.posto+'/'+atendimento.atendimento+'</strong>'+                                                    
+                                    '<span data-toggle="tooltip" title="Posto/Atendimento"><i class="fa fa-heartbeat"></i><strong> '+atendimento.posto+'/'+atendimento.atendimento+'</strong></span>'+                                                    
                                 '</div>'+
                                 '<div class="col-md-2 col-sm-6 col-xs-6">'+
-                                    '<i class="fa fa-credit-card" data-toggle="tooltip" title="Convênio"></i> '+atendimento.nome_convenio+
-                                '</div>'+
+                                    '<span data-toggle="tooltip" title="Convênio"><i class="fa fa-credit-card"></i> '+atendimento.nome_convenio+
+                                '</span></div>'+
                                 '<div class="col-md-2 col-sm-6 col-xs-6 hidden-xs">'+
-                                    '<i class="fa fa-calendar-check-o" data-toggle="tooltip" title="Data do Atendimento"></i> '+atendimento.data_atd+
-                                '</div>';
+                                    '<span data-toggle="tooltip" title="Data do Atendimento"><i class="fa fa-calendar-check-o"></i> '+atendimento.data_atd+
+                                '</span></div>';
 
                         if(atendimento.situacao_exames_experience != 'TF' && atendimento.data_entrega != false && atendimento.data_entrega != null){
                            item += '<div class="col-md-2 col-sm-6 col-xs-12">'+
-                                    '<i class="fa fa-clock-o" data-toggle="tooltip" title="Previsão de entrega"></i> '+atendimento.data_entrega+
-                            '</div>';
+                                    '<span data-toggle="tooltip" title="Previsão de entrega"><i class="fa fa-clock-o"></i> '+atendimento.data_entrega+
+                            '</span></div>';
                         }
                         
                         item += '<div class="col-md-12 col-sm-6 col-xs-12">'+
-                                    '<i class="fa fa-flask" data-toggle="tooltip" title="Mnemônicos"></i> '+atendimento.mnemonicos+
-                                '</div>'+
+                                    '<span data-toggle="tooltip" title="Mnemônicos"><i class="fa fa-flask"></i> '+atendimento.mnemonicos+
+                                '</span></div>'+
                             '</div>'+
                        '</li>';
                        //Adiciona o item na lista

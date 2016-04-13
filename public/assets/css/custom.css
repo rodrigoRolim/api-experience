@@ -82,7 +82,7 @@ ul{
 	font-size: 0.9em;
 }
 
-.statusFinalizados,.statusAguardando,.statusEmAndamento,.statusPendencias{
+.statusFinalizados,.statusAguardando,.statusEmAndamento,.statusPendencias,.statusNaoRealizado{
 	border-left: solid 3px;
 	padding-right: 5px;
 	margin-left: 5px;
@@ -102,6 +102,10 @@ ul{
 
 .statusPendencias{
 	border-color: #ed5565;
+}
+
+.statusNaoRealizado{
+	border-color: #BBBAB9;
 }
 
 .modal-conteudo {

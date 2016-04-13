@@ -331,7 +331,13 @@
                         var check = '';
                         var link = '';
                         var visualizacao = 'OK';
-                        
+
+                        if(exame.tipo_posto_realizante == 'A'){
+                            exame.tipo_posto_realizante = '(Lab.Apoio)';
+                        }else{
+                            exame.tipo_posto_realizante = '';
+                        }
+                     
                         if(!verificaSaldoDevedor(saldo)){
                             if(exame.class == 'success-element'){                                
                                  if(exame.tipo_entrega == '*'){
@@ -354,7 +360,7 @@
                                         '<div class="dadosExames">' +                                        
                                             '<b>'+exame.mnemonico+'</b> | '+exame.nome_procedimento.trunc(31)+
                                             '<br>'+exame.msg+'<br><span class="msgExameTipoEntrega">'+msg+'</span>'+
-                                            '<div class="postoRealizante"><i class="fa fa-hospital-o data-toggle="tooltip" data-placement="top" title="Posto Realizante""></i> '+exame.nome_posto_realizante+'</div>'+'</li></div>';
+                                            '<div class="postoRealizante"><i class="fa fa-hospital-o data-toggle="tooltip" data-placement="top" title="Posto Realizante""></i> '+exame.nome_posto_realizante+' '+exame.tipo_posto_realizante+' </div></li></div>';
 
                         $('.listaExames').append(conteudo);
                     });
@@ -546,6 +552,7 @@
             $(".txtRodape").append("<span class='statusAtendimentosViewPaciente'></span>");            
             $(".statusAtendimentosViewPaciente").append(" <span class='statusFinalizados'></span>Finalizados <span class='statusAguardando'></span>Parc. Finalizado");
             $(".statusAtendimentosViewPaciente").append("<span class='statusEmAndamento'></span>Em Andamento <span class='statusPendencias'></span>Existem Pendências");
+            $(".statusAtendimentosViewPaciente").append("<span class='statusNaoRealizado'></span>Não Realizado");
             if(window.tipoAcesso == 'posto'){
                 $(".statusAtendimentosViewPaciente").append("<div id='legendasRodape'><i class='fa fa-heartbeat'></i> Posto/Atendimento &nbsp;|&nbsp;");
                 $(".statusAtendimentosViewPaciente").append("<i class='fa fa-credit-card'></i> Acomodacao | ");
