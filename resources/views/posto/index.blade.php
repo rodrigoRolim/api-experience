@@ -74,8 +74,7 @@
             <ul class="sortable-list connectList agile-list ui-sortable" id="listFilter"></ul>  
         </div>
     </div>
-
-    @include('layouts.includes.base.modalSeachAtendimento');
+    @include('layouts.includes.base.modalSeachAtendimento')
 @stop
 
 @section('statusFooter')
@@ -149,7 +148,7 @@
 
             //Configura o componente de lista
             $('#listFilter').slimScroll({
-                height: '58vh',
+                height: '63vh',
                 width:'100%',
                 size: '12px',
                 railVisible: true,
@@ -233,8 +232,6 @@
                     //Prepara HTML para impressao no listFilter
                     $.each( result.data, function( index ){
                         var atendimento = result.data[index];
-
-                        console.log(atendimento);
 
                         //Impressao da quantidade de atendimentos localizados
                         $('.contadorAtd').html('<h5 styçe="margin-bottom: 0px;" class="achouAtd">'+result.data.length+' ocorrências para o filtro selecionado.</h5>');

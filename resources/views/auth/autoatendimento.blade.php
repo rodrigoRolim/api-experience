@@ -1,1 +1,0 @@
-autoatendimento.blade.php

@@ -250,7 +250,7 @@ class PostoRepository extends BaseRepository
      * @return mixed
      */
     public function getAtendimentosPacienteByPosto($registro,$idPosto,$idAtendimento){
-        $sql = 'SELECT c.nome,c.data_nas,c.registro,c.sexo,c.telefone,c.telefone2,a.posto,a.atendimento,a.acomodacao,data_atd, INITCAP(a.nome_convenio) AS nome_convenio, INITCAP(a.nome_solicitante) AS nome_solicitante, ('.config('system.userAgilDB').'GET_MNEMONICOS(a.posto,a.atendimento)) mnemonicos,a.saldo_devedor
+        $sql = 'SELECT c.nome,c.data_nas,c.registro,c.sexo,c.telefone,c.telefone2,a.posto,a.atendimento,a.acomodacao,data_atd, INITCAP(a.nome_convenio) AS nome_convenio, INITCAP(a.nome_solicitante) AS nome_solicitante, ('.config('system.userAgilDB').'GET_MNEMONICOS(a.posto,a.atendimento)) mnemonicos,a.data_entrega,a.saldo_devedor
             FROM '.config('system.userAgilDB').'vex_atendimentos a              
               INNER JOIN '.config('system.userAgilDB').'VEX_CLIENTES c ON a.registro = c.registro
             WHERE c.registro = :registro 
@@ -262,6 +262,8 @@ class PostoRepository extends BaseRepository
 
         $atendimento = current($atendimento);
         $atendimento->idade = DataNascimento::idade($atendimento->data_nas);
+        $atendimento->data_atd = Formatar::data($atendimento->data_atd,'Y-m-d H:i:s','d/m/Y');
+        $atendimento->data_entrega = Formatar::data($atendimento->data_entrega,'Y-m-d H:i:s','d/m/Y');
 
         return $atendimento;
     }

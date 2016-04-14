@@ -78,27 +78,39 @@
             <strong><span id="nome" class="nomePaciente">{{$atendimento->nome}}</span></strong><br>
             <div class="row">
                 <div style="padding-left:0px" class="col-md-3 col-sm-3">
-                    <i class="fa fa-birthday-cake" aria-hidden="true"></i> <span class="idadePaciente">{{$atendimento->idade}}</span>
+                    <span data-toggle="tooltip" data-placement="bottom" title="Idade"><i class="fa fa-birthday-cake" aria-hidden="true"></i> <span class="idadePaciente">{{$atendimento->idade}}</span></span>
                 </div>
                 <div class="col-md-3 col-sm-3">
-                    <span  data-toggle="tooltip" data-placement="bottom" title="Posto/Atendimento"><i id="iconeAtd" class="fa fa-heartbeat"></i>
-                    <span id="atendimento">{{str_pad($atendimento->posto,config('system.qtdCaracterPosto'),'0',STR_PAD_LEFT)}}/{{str_pad($atendimento->atendimento,config('system.qtdCaracterAtend'),'0',STR_PAD_LEFT)}}</span></span>
+                    <span  data-toggle="tooltip" data-placement="bottom" title="Data do Atendimento"><i id="iconeAtd" class="fa fa-calendar-check-o"></i>
+                    <span id="dataAtendimento">{{$atendimento->data_atd}}</span></span>
+                </div>
+                <div class="col-md-3 col-sm-3">
+                    <span  data-toggle="tooltip" data-placement="bottom" title="Previsão de Entrega"><i id="iconeAtd" class="fa fa-clock-o"></i>
+                    <span id="dataEntrega">{{$atendimento->data_entrega}}</span></span>
                 </div>
             </div>
         </div>
         @if($atendimento->acomodacao != '')
-            <div style="margin-top: 5px;" class="col-md-3 col-sm-3 col-xs-6 convAtdPos">
-                <span data-toggle="tooltip" data-placement="bottom" title="Médico Solicitante"><i id="iconeSolic" class="fa fa-user-md"></i>
-                    <span id="soliciante">{{$atendimento->nome_solicitante}}</span></span><br>
-                <span  data-toggle="tooltip" data-placement="bottom" title="Acomodação"><i class="fa fa-bed" data-toggle="tooltip" data-placement="bottom" title="Acomodação"></i>
+            <div style="margin-top: 5px;" class="col-md-2 col-sm-2 col-xs-6 convAtdPos">
+                <span  data-toggle="tooltip" data-placement="bottom" title="ID Atendimento"><i id="iconeAtd" class="fa fa-heartbeat"></i>
+                    <span id="atendimento">{{str_pad($atendimento->posto,config('system.qtdCaracterPosto'),'0',STR_PAD_LEFT)}}/{{str_pad($atendimento->atendimento,config('system.qtdCaracterAtend'),'0',STR_PAD_LEFT)}}</span></span><br>
+                <span  data-toggle="tooltip" data-placement="bottom" title="Acomodação"><i class="fa fa-bed"></i>
                     <span id="acomodacao">{{$atendimento->acomodacao}}</span></span>
             </div>
+            <div style="margin-top: 5px;" class="col-md-3 col-sm-3">
+                <br><i id="iconeSolic" class="fa fa-user-md" data-toggle="tooltip" data-placement="bottom" title="Médico Solicitante"></i>
+                <span id="soliciante">{{$atendimento->nome_solicitante}}</span>
+            </div>
         @else
-            <div style="margin-top: 5px;" class="col-md-3 col-sm-3 col-xs-6 convAtdPos">
-                <i id="iconeSolic" class="fa fa-user-md" data-toggle="tooltip" data-placement="bottom" title="Médico Solicitante"></i>
-                    <span id="soliciante">{{$atendimento->nome_solicitante}}</span><br>
+            <div style="margin-top: 5px;" class="col-md-2 col-sm-2 col-xs-6 convAtdPos">
+                <span  data-toggle="tooltip" data-placement="bottom" title="ID Atendimento"><i id="iconeAtd" class="fa fa-heartbeat"></i>
+                    <span id="atendimento">{{str_pad($atendimento->posto,config('system.qtdCaracterPosto'),'0',STR_PAD_LEFT)}}/{{str_pad($atendimento->atendimento,config('system.qtdCaracterAtend'),'0',STR_PAD_LEFT)}}</span></span><br>
                 <i class="fa fa-bed" data-toggle="tooltip" data-placement="bottom" title="Acomodação"></i>
-                <span id="acomodacao">Não Informado</span>
+                    <span id="acomodacao">Não Informado</span>
+            </div>
+            <div style="margin-top: 5px;" class="col-md-3 col-sm-3">
+                <br><i id="iconeSolic" class="fa fa-user-md" data-toggle="tooltip" data-placement="bottom" title="Médico Solicitante"></i>
+                <span id="soliciante">{{$atendimento->nome_solicitante}}</span>
             </div>
         @endif
             <div class="i-checks all boxSelectAll"> </div>
@@ -107,30 +119,31 @@
     @if($user['tipoAcesso'] != 'POS')    
      <div class="row-fluid infoCliente">
          <div class="col-xs-12 areaPaciente">
-             <div class="col-xs-4">
+             <div class="col-xs-3">
                  <div class="infoAtendimento">
                      <i class="fa fa-heartbeat" data-toggle="tooltip" data-placement="bottom" title="Posto/Atendimento"> </i>
                      <span id="atendimento"></span>
                  </div>
              </div>
-             <div class="col-xs-4">
+             <div class="col-xs-3">
                  <div class="medicoSolicitante">             
                      <i class="fa fa-user-md" data-toggle="tooltip" data-placement="bottom" title="Médico Solicitante"> </i>
                      &nbsp;<span id="solicitante"></span>
                  </div>
              </div>
              @if($atendimento->acomodacao != '')
-                <div class="col-xs-4">
+                <div class="col-xs-3">
                     <i class="fa fa-hospital-o" data-toggle="tooltip" data-placement="bottom" title="Acomodação"></i>
                     <span id="acomodacao">{{$atendimento->acomodacao}}</span>
                 </div>
             @else
-                <div class="col-xs-4">
+                <div class="col-xs-3">
                     <i class="fa fa-hospital-o" data-toggle="tooltip" data-placement="bottom" title="Acomodação"></i>
                     <span id="acomodacao">Não Informado</span>
                 </div>
             @endif
-     </div> <!-- fim da div page-wrapper -->
+        <div class="i-checks allPac boxSelectAll"> </div>
+        </div> <!-- fim da div page-wrapper -->
     @endif
 
     <div class="row wrapper border-bottom white-bg page-heading">
@@ -341,7 +354,7 @@
                         if(!verificaSaldoDevedor(saldo)){
                             if(exame.class == 'success-element'){                                
                                  if(exame.tipo_entrega == '*'){
-                                    $('.boxSelectAll').html('<span>Selecionar Todos &nbsp;<input type="checkbox" class="checkAll"></span>');
+                                    $('.boxSelectAll').html('<span><input type="checkbox" class="checkAll"></span>');
                                     link = '<a id="btnViewExame" data-toggle="modal" data-target="#modalExames" "data-tipoEntrega="'+exame.tipo_entrega+'">';   
 
                                     visualizacao = "data-visualizacao='OK'"; 
