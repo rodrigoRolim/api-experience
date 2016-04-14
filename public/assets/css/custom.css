@@ -431,14 +431,19 @@ div.row.infoClienteMed{
 	margin-right: 30px;
 }
 
+.allPac{
+	float: right;
+	margin-right: 15px;
+}
+
 .selectPosto{
 	margin-left: 20px;
 }
 
-.wrapper-content{
+/*.wrapper-content{
 	margin-bottom: 40px;
 }
-
+*/
 .listaExames{
 	padding-left: 10px;
 }
@@ -571,6 +576,10 @@ div.row.infoClienteMed{
 	font-size: 1em;
 	margin-bottom: 15px;
 	min-height: 45px;
+}
+
+#atendimento{
+	font-weight: bold;
 }
 
 .topoMenu{
