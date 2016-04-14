@@ -76,9 +76,9 @@ class AuthController extends Controller
         $id = base64_decode($request->input('id'),true);
         //Passa o json para Array
         $acesso = json_decode($id,true);
-        
+
         //Verifica se todo os parametros estao sendo enviados
-        if(!sizeof($acesso)){
+        if(!(isset($acesso['posto']) && isset($acesso['atendimento']) && isset($acesso['senha']))){
             return 'error ao validar qrcode';
         }
 
