@@ -37,6 +37,12 @@ Route::group(['prefix' => '/','middleware' => ['auth','ehPosto','revalidate']], 
     ]);
 });
 
+Route::group(['prefix' => '/','middleware' => ['auth','ehAutoAtendimento','revalidate']], function () {    
+    Route::controllers([
+        'autoatendimento' => 'AutoAtendimentoController',
+    ]);
+});
+
 Route::group(['prefix' => '/', 'middleware' => ['auth']], function () {
     Route::get('/impressao', function () {
         return view('layouts.exportacaoPdf');

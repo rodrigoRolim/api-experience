@@ -56,6 +56,51 @@ class AuthController extends Controller
         return view('auth.index');
      }
 
+    /**
+    * Show the application login autoatendimento.
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function getAutoatendimento()
+    {
+        return view('auth.autoatendimento');
+    }
+
+    /**
+    * @param Request $request
+    * @return $this|\Illuminate\Http\RedirectResponse
+    */
+    public function postAutoatendimento(Request $request)
+    {
+        //Pega o Id que ta em base64 e convert em json
+        $id = base64_decode($request->input('id'),true);
+        //Passa o json para Array
+        $acesso = json_decode($id,true);
+        
+        //Verifica se todo os parametros estao sendo enviados
+        if(!sizeof($acesso)){
+            return 'error ao validar qrcode';
+        }
+
+        //Cria array para verificação de autenticação com o banco de dados
+        $credentials = [
+            'tipoAcesso' => 'AUTO',
+            'tipoLoginPaciente' => 'ID',
+            'posto' => $acesso['posto'],
+            'atendimento' => $acesso['atendimento'],
+            'password' => $acesso['senha'],
+        ];
+
+        /*
+        * Enviada para o controller App\Auth\CustomUserProvider a array $credentials para validação do acesso
+        */
+        if ($this->auth->attempt($credentials, false)) {
+            return redirect()->intended('/auth/home');
+        }
+
+        //Caso o usuario/senha não forem satisfatorio, retorna o formulario de login com a mensagem de acesso negado
+        return redirect('/auth/autoatendimento')->withInput()->withErrors(config('system.messages.login.usuarioQrInvalido'));
+    }
 
     /**
      * @param Request $request

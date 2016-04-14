@@ -26,6 +26,7 @@ return [
     'messages' => [
         'login' => [
             'usuarioSenhaInvalidos'   => 'Credenciais de acesso não confere',
+            'usuarioQrInvalido' => 'Dados do qrcode não localizados em nossa base de dados'
         ],
         'pacientes' => [
             'saldoDevedor' => 'Existe pendência, diriga-se ao laboratório',

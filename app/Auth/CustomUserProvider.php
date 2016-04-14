@@ -67,9 +67,11 @@ class CustomUserProvider implements UserProvider {
         * De acordo com os tipos de acesso 'PAC = Acesso paciente,MED = Acesso Médico',POS = Acesso posto', 
         * faço as devidas verificação de acordo com suas particularidades
         */
+
         switch($credentials['tipoAcesso']){
             //Acesso do paciente
             case 'PAC':
+            case 'AUTO':
                 //Caso o acesso do paciente seja do tipo ID = 'Acesso via cartao do atendimento'
                 if($credentials['tipoLoginPaciente'] == 'ID'){
                     $atendimento = new Atendimento();
