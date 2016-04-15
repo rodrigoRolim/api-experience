@@ -52,6 +52,10 @@ class RedirectIfAuthenticated
             if ($tipoAcesso == 'POS'){
                 return Redirect::to('/posto');
             }
+
+            if ($tipoAcesso == 'AUTO'){
+                return Redirect::to('/paciente');
+            }
         }
 
         return $next($request);

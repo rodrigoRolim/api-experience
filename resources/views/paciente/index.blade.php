@@ -7,36 +7,40 @@
 @stop
 
 @section('infoHead')
-    <div class="feed-element infoUser" style="margin-right: 10px">
-        <div class="pull-right media-body">
-            <button data-toggle="dropdown" class="btn btn-usuario dropdown-toggle boxLogin">
-                <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span> <span class="caret"></span><br>
-            @if($user['tipoAcesso'] != 'POS')
-                {{date('d/m/y',strtotime(Auth::user()['data_nas']))}}&nbsp;
-            @endif
-            </button> 
-            <ul class="dropdown-menu pull-right itensInfoUser"> 
-            @if($user['tipoAcesso'] != 'POS')
-                @if(($user['tipoAcesso'] == 'MED') || ($user['tipoLoginPaciente'] != 'ID'))          
-                        <li class="item">
-                            <a class="btnShowModal">
-                                <i class="fa fa-user"></i> Alterar Senha
-                            </a>
-                        </li>
+    @if($user['autoAtendimento'] != 'true')
+        <div class="feed-element infoUser" style="margin-right: 10px">
+            <div class="pull-right media-body">
+                <button data-toggle="dropdown" class="btn btn-usuario dropdown-toggle boxLogin">
+                    <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span> <span class="caret"></span><br>
+                @if($user['tipoAcesso'] != 'POS')
+                    {{date('d/m/y',strtotime(Auth::user()['data_nas']))}}&nbsp;
                 @endif
-            @endif
-                <li class="item">
-                    <a href="{{url('/')}}/auth/logout">
-                        <i class="fa fa-sign-out"></i> Sair
-                    </a>
-                </li>                           
-            </ul>
+                </button> 
+                <ul class="dropdown-menu pull-right itensInfoUser"> 
+                @if($user['tipoAcesso'] != 'POS')
+                    @if(($user['tipoAcesso'] == 'MED') || ($user['tipoLoginPaciente'] != 'ID'))          
+                            <li class="item">
+                                <a class="btnShowModal">
+                                    <i class="fa fa-user"></i> Alterar Senha
+                                </a>
+                            </li>
+                    @endif
+                @endif
+                    <li class="item">
+                        <a href="{{url('/')}}/auth/logout">
+                            <i class="fa fa-sign-out"></i> Sair
+                        </a>
+                    </li>                           
+                </ul>
+            </div>
         </div>
-    </div>
+    @else
+        <button href="{{url('/')}}/auth/logout" type="button" class="btn btn-w-m btn-default"><i class="fa fa-sign-out"></i> Sair</button>          
+    @endif
 @stop
 @if($user['tipoAcesso'] != 'POS')
     @section('left')
-        <nav class="navbar-default navbar-static-side" role="navigation">
+        <nav id="menuAtendimentos" class="navbar-default navbar-static-side" role="navigation">
             <div class="topoMenu">
                 <strong>Relação de Atendimentos</strong>
             </div>
@@ -66,12 +70,12 @@
 @endif
 
 @section('content')
-@if($user['tipoAcesso'] == 'POS')
+@if($user['tipoAcesso'] == 'POS' || $user['autoAtendimento'] == 'true')
 <div id="page-wrapper-posto" class="gray-bg">
 @else
 <div id="page-wrapper" class="gray-bg">
 @endif
-        @if($user['tipoAcesso'] == 'POS')         
+        @if($user['tipoAcesso'] == 'POS' || $user['autoAtendimento'] == 'true')         
     <div class="row-fluid areaPacientePos">
         <div style="padding-left:0px;" class="col-md-6 col-sm-6 col-xs-12">  
             <button type="button" class="btn btn-lg btnVoltar pull-left"><i class="fa fa-arrow-left" style="font-size: 24px;"></i></button>      
@@ -116,7 +120,7 @@
             <div class="i-checks all boxSelectAll"> </div>
     </div>
     @endif
-    @if($user['tipoAcesso'] != 'POS')    
+    @if($user['tipoAcesso'] != 'POS' && $user['autoAtendimento'] != 'true')    
      <div class="row-fluid infoCliente">
          <div class="col-xs-12 areaPaciente">
              <div class="col-xs-3">
@@ -162,7 +166,7 @@
     <div class="footer">
         <div class="container">
             <div class="row">
-             @if($user['tipoAcesso'] != 'POS')
+             @if($user['tipoAcesso'] != 'POS'  && $user['autoAtendimento'] != 'true')
                 <div class="col-md-6 txtRodape"></div>  
                 <div class="col-md-3 " id="boxRodape"></div>
              @else
@@ -205,9 +209,14 @@
             var mnemonicos;
 
             var tipoAcesso = "<?php echo Auth::user()['tipoAcesso'] ?>";
+            var autoAtendimento = "<?php echo Auth::user()['autoAtendimento'] ?>";
             if(tipoAcesso == 'POS'){
                 tipoAcesso = 'posto';
                 window.tipoAcesso = 'posto';
+            }
+
+            if(autoAtendimento){
+                $('#menuAtendimentos').addClass('hidden');
             }
 
             if(tipoAcesso == 'posto'){

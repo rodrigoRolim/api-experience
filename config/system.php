@@ -16,7 +16,9 @@ return [
     'clienteMsg'  => env('APP_CLIENTE_FONE'),
     'acessoMedico' => env('APP_ACESSO_MEDICO'),
     'acessoPosto' => env('APP_ACESSO_POSTO'),
+    'AutoAtendimento' => 'Acesso QR CODE',
     'acessoPaciente' => env('APP_ACESSO_PACIENTE'),
+    'HOSTNAME_AUTOATENDIMENTO' => env('HOSTNAME_AUTOATENDIMENTO'),
     'loginText'	  =>  [
     	'title' 		=> 'eXperience',
     	'subTitle' 		=> '<h2 style="color:#76C1CC">Aplicação para visualização de resultados</h2>',

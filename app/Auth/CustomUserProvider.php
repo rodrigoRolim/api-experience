@@ -108,11 +108,15 @@ class CustomUserProvider implements UserProvider {
                             //Caso seja igual preparo os valores para ser enviado para a sessao do usuario
 
                             //Valores que seram guardados em cache, caso necessite de algo a mais pode ser implementado nesse objeto
+
+                            $autoAtendimento = ($credentials['tipoAcesso'] == 'AUTO'?true:false);
+
                             $atributes = array(
                                 'remember_token' => str_random(60),
                                 'id' => array(
                                     'tipoAcesso' => 'PAC',
                                     'tipoLoginPaciente' => 'ID',
+                                    'autoAtendimento' => $autoAtendimento,
                                     'nome' => Formatar::nomeCurto($cliente['nome']),
                                     'sexo' => $cliente['sexo'],
                                     'data_nas' => $cliente['data_nas'],
@@ -167,6 +171,7 @@ class CustomUserProvider implements UserProvider {
                                     'data_nas' => $cliente['data_nas'],
                                     'registro' => $cliente['registro'],
                                     'username' => $cliente['cpf'],
+                                    'autoAtendimento' => false,
                                 ),
                             );
                             //Cria a sessao do usuarios
@@ -220,6 +225,7 @@ class CustomUserProvider implements UserProvider {
                                 'crm' => $medico[0]['crm'],
                                 'id_medico' => $medico[0]['id_medico'],
                                 'username' => $medico[0]['cpf'],
+                                'autoAtendimento' => false,
                             ),
                         );
                         //Cria a sessao do usuario
@@ -243,6 +249,7 @@ class CustomUserProvider implements UserProvider {
                                 'tipoAcesso' => 'POS',
                                 'nome' => $posto[0]['nome'],
                                 'posto' => $posto[0]['posto'],
+                                'autoAtendimento' => false,
                             ),
                         );
                         //Cria a sessao do usuario

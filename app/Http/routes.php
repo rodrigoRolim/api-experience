@@ -31,15 +31,9 @@ Route::group(['prefix' => '/', 'middleware' => ['auth','ehMedico','revalidate']]
     ]);
 });
 
-Route::group(['prefix' => '/','middleware' => ['auth','ehPosto','revalidate']], function () {    
+Route::group(['prefix' => '/','middleware' => ['ehPosto','revalidate']], function () {    
     Route::controllers([
         'posto' => 'PostoController',
-    ]);
-});
-
-Route::group(['prefix' => '/','middleware' => ['auth','ehAutoAtendimento','revalidate']], function () {    
-    Route::controllers([
-        'autoatendimento' => 'AutoAtendimentoController',
     ]);
 });
 

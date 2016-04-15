@@ -58,7 +58,7 @@ class PacienteController extends Controller {
         $tipoLoginPaciente = $this->auth->user()['tipoLoginPaciente'];
         //Envio os dados de autenticação do usuario para carregar todos os atendimentos
         $atendimentos = $this->atendimento->atendimentos($this->auth->user());
-        
+       
         $result = BrowserDetect::isMobile() || BrowserDetect::isTablet();
 
         $user = Auth::user(['tipoLoginPaciente']);

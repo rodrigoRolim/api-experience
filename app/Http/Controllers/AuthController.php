@@ -53,6 +53,10 @@ class AuthController extends Controller
      */
      public function getIndex()
      {
+        if(gethostname() == config('system.HOSTNAME_AUTOATENDIMENTO')){
+            return redirect('/auth/autoatendimento');
+        }
+
         return view('auth.index');
      }
 

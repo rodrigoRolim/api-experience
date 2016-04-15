@@ -39,7 +39,7 @@ function read(text)
 
 function setwebcam()
 {
-    document.getElementById("result").innerHTML="- scanning -";
+    document.getElementById("result").innerHTML=" Lendo QR Code <span>.</span><span>.</span><span>.</span> ";
     if(stype==1)
     {
         setTimeout(captureToCanvas, 500);    
@@ -84,12 +84,10 @@ function captureToCanvas() {
                 qrcode.decode();
             }
             catch(e){       
-                console.log(e);
                 setTimeout(captureToCanvas, 500);
             };
         }
         catch(e){       
-                console.log(e);
                 setTimeout(captureToCanvas, 500);
         };
     }
