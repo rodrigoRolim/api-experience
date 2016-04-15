@@ -2,7 +2,6 @@ html, body{
 	margin: 0;
 	padding: 0;
 	height: 100%;
-	background-color: #DCDEDE !important;
 }
 /*@media (orientation: portrait) ou landscape*/
 
@@ -301,6 +300,10 @@ ul{
    pointer-events: none;
    cursor: default;
    color: gray !important;
+}
+
+.gray-bg{
+	background-color: #F3F3F4 !important;
 }
 
 .postoAtendimento{	
