@@ -35,7 +35,7 @@
             </div>
         </div>
     @else
-        <button href="{{url('/')}}/auth/logout" type="button" class="btn btn-w-m btn-default"><i class="fa fa-sign-out"></i> Sair</button>          
+        <a href="{{url('/')}}/auth/logout"><button type="button" class="btn btn-w-m btn-default"><i class="fa fa-sign-out"></i> Sair</button></a>          
     @endif
 @stop
 @if($user['tipoAcesso'] != 'POS')
