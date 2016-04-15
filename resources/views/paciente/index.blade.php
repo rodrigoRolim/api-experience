@@ -460,7 +460,7 @@
                                                 paginaPdf.location = data;     
                                             }else{
                                                 paginaPdf.close();
-                                                swal("Erro ao exportar resultados para PDF", "Tente novamente mais tarde!", "error");
+                                                swal("{!!config('system.messages.dataSnap.ErroExportar')!!}", "Tente novamente mais tarde!", "error");
                                             }             
                                        }
                             });    
@@ -541,15 +541,16 @@
                              var paginaPdf = window.open ('{{url("/")}}/impressao', '', '');       
 
                              $.ajax({
-                                 url: '{{url("/")}}/paciente/exportarpdf',
+                                 url: '{{url("/")}}/'+tipoAcesso+'/exportarpdf',
                                  type: 'post',
                                  data: {"dados" : dadosExame},
                                  success: function(data){   
-                                     if(data != 'false'){                                        
+                                     console.log(data);
+                                     if(data != 'false'){                                  
                                         paginaPdf.location = data;    
                                     }else{
                                         paginaPdf.close();
-                                        swal("Erro ao exportar resultados para PDF", "Tente novamente mais tarde.!", "error");
+                                        swal("{!!config('system.messages.dataSnap.ErroExportar')!!}", "Tente novamente mais tarde.!", "error");
                                     }                      
                                  }
 

@@ -31,6 +31,9 @@ return [
         'pacientes' => [
             'saldoDevedor' => 'Existe pendência, diriga-se ao laboratório',
         ],
+        'dataSnap' => [
+            'ErroExportar' => 'Serviço Datasnap Indisponivel.',
+        ],
         'paciente' => [
             'msgCpfAcesso' => 'Solicite sua senha de acesso no laboratório',
         ],
