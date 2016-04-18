@@ -99,22 +99,29 @@
                 <span  data-toggle="tooltip" data-placement="bottom" title="ID Atendimento"><i id="iconeAtd" class="fa fa-heartbeat"></i>
                     <span id="atendimento">{{str_pad($atendimento->posto,config('system.qtdCaracterPosto'),'0',STR_PAD_LEFT)}}/{{str_pad($atendimento->atendimento,config('system.qtdCaracterAtend'),'0',STR_PAD_LEFT)}}</span></span><br>
                 <span  data-toggle="tooltip" data-placement="bottom" title="Acomodação"><i class="fa fa-bed"></i>
-                    <span id="acomodacao">{{$atendimento->acomodacao}}</span></span>
+                    <span id="acomodacao"> {{$atendimento->acomodacao}}</span></span>
             </div>
             <div style="margin-top: 5px;" class="col-md-3 col-sm-3">
-                <br><i id="iconeSolic" class="fa fa-user-md" data-toggle="tooltip" data-placement="bottom" title="Médico Solicitante"></i>
-                <span id="soliciante">{{$atendimento->nome_solicitante}}</span>
+                <br>
+                <span data-toggle="tooltip" data-placement="bottom" title="Médico Solicitante"> 
+                    <i id="iconeSolic" class="fa fa-user-md"></i>
+                    <span id="soliciante">&nbsp;{{$atendimento->nome_solicitante}}</span>
+                </span>
             </div>
         @else
             <div style="margin-top: 5px;" class="col-md-2 col-sm-2 col-xs-6 convAtdPos">
                 <span  data-toggle="tooltip" data-placement="bottom" title="ID Atendimento"><i id="iconeAtd" class="fa fa-heartbeat"></i>
                     <span id="atendimento">{{str_pad($atendimento->posto,config('system.qtdCaracterPosto'),'0',STR_PAD_LEFT)}}/{{str_pad($atendimento->atendimento,config('system.qtdCaracterAtend'),'0',STR_PAD_LEFT)}}</span></span><br>
-                <i class="fa fa-bed" data-toggle="tooltip" data-placement="bottom" title="Acomodação"></i>
-                    <span id="acomodacao">Não Informado</span>
+                <span  data-toggle="tooltip" data-placement="bottom" title="Acomodação">
+                    <i class="fa fa-bed"></i>
+                <span id="acomodacao">Não Informado</span></span>
             </div>
             <div style="margin-top: 5px;" class="col-md-3 col-sm-3">
-                <br><i id="iconeSolic" class="fa fa-user-md" data-toggle="tooltip" data-placement="bottom" title="Médico Solicitante"></i>
-                <span id="soliciante">{{$atendimento->nome_solicitante}}</span>
+                <br>
+                <span data-toggle="tooltip" data-placement="bottom" title="Médico Solicitante" >
+                    <i id="iconeSolic" class="fa fa-user-md"></i>
+                        <span id="soliciante">&nbsp;{{$atendimento->nome_solicitante}}</span>
+                </span>
             </div>
         @endif
             <div class="i-checks all boxSelectAll"> </div>
@@ -382,7 +389,7 @@
                                         '<div class="dadosExames">' +                                        
                                             '<b>'+exame.mnemonico+'</b> | '+exame.nome_procedimento.trunc(31)+
                                             '<br>'+exame.msg+'<br><span class="msgExameTipoEntrega">'+msg+'</span>'+
-                                            '<div class="postoRealizante"><i class="fa fa-hospital-o data-toggle="tooltip" data-placement="top" title="Posto Realizante""></i> '+exame.nome_posto_realizante+' '+exame.tipo_posto_realizante+' </div></li></div>';
+                                            '<div class="postoRealizante"><span data-toggle="tooltip" data-placement="right" title="Posto Realizante"><i class="fa fa-hospital-o"></i> '+exame.nome_posto_realizante+' '+exame.tipo_posto_realizante+' </span></div></li></div>';
 
                         $('.listaExames').append(conteudo);
                     });

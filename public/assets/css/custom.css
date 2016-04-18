@@ -165,6 +165,12 @@ ul{
   margin-left: 0;
 }
 
+.close{
+	font-size: 3em;
+	color: #055405;
+	opacity: .5;
+}
+
 #tabelaDetalhes{
 	font-size: 1em;
 }
@@ -253,6 +259,7 @@ ul{
 #page-wrapper-posto{
 	padding: 0px;
 	margin-left: 0px;
+	border: 1px solid #E2E2E2;
 }
 
 .side-menu{
@@ -572,7 +579,7 @@ div.row.infoClienteMed{
 .areaPaciente{
 	padding-top: 12px;
 	font-size: 1em;
-	margin-bottom: 15px;
+	border: 1px solid #E2E2E2;
 }
 
 .areaPacientePos{

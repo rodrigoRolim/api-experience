@@ -1,6 +1,7 @@
 @extends('layouts.layoutBase')
 
 @section('stylesheets')
+    {!! Html::style('/assets/css/plugins/sweetalert/sweetalert.css') !!}
     @parent
 @stop
 
@@ -22,10 +23,10 @@
             <input hidden type="text" value="0" name="posto">
             <div class="col-md-3">
                 <label class="textoBranco">Periodo:</label>
-                <div class="input-daterange input-group" id="datepicker" data-provide="datepicker" data-date-end-date="0d">
-                    <input type="text" class="input-sm form-control" id="dataInicio" name="dataInicio">
+                <div class="input-daterange input-group">
+                    <input type="text" class="input-sm form-control datepicker" id="dataInicio" name="dataInicio">
                     <span class="input-group-addon">até</span>
-                    <input type="text" class="input-sm form-control" id="dataFim" name="dataFim">                    
+                    <input type="text" class="input-sm form-control datepicker" id="dataFim" name="dataFim">                    
                 </div>
             </div>       
             <div class="col-md-2">
@@ -99,6 +100,8 @@
     <script src="{{ asset('/assets/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
     <script src="{{ asset('/assets/js/plugins/listJs/list.min.js') }}"></script>
     <script src="{{ asset('/assets/js/plugins/vanillamasker/vanilla-masker.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/plugins/pikaday/pikaday.js') }}"></script>
+    <script src="{{ asset('/assets/js/plugins/sweetalert/sweetalert.min.js') }}"></script>
     <script src="{{ asset('/assets/js/plugins/js-cookie/js.cookie.js') }}"></script>
 
     <script src="{{ asset('/assets/js/experience/async.js') }}"></script>
@@ -108,20 +111,25 @@
             //Inicia o tooltip
             $("body").tooltip({ selector: '[data-toggle=tooltip]' });
 
-            //Configura o dataPicker
-            $('.input-daterange').datepicker({
-                keyboardNavigation: true,
-                autoclose: true,
-                format: "dd/mm/yyyy",  
-                disableTouchKeyboard: true
+            var picker = new Pikaday({ 
+                field: $('.datepicker')[0],
+                format: 'DD/MM/YYYY', 
+                maxDate: moment().toDate(), 
+            });
+            var picker2 = new Pikaday({ 
+                field: $('.datepicker')[1],
+                format: 'DD/MM/YYYY', 
+                maxDate: moment().toDate(), 
             });
 
-            $("#dataInicio,#dataFim").on("changeDate",function (){ 
-                getAcomodacao();
+
+            $("#dataInicio,#dataFim").on("change",function (){ 
+                getAcomodacao(); /*Pode ocausionar problema, caso o usuario limpe o seletor, buscará desde o inicio.*/
                 $('#btnFiltrar').removeClass('not-active');
             });
 
-            $(".input-daterange").attr("autocomplete", "off");
+            VMasker($("#dataInicio")).maskPattern('99/99/9999');
+            VMasker($("#dataFim")).maskPattern('99/99/9999');
 
             //Prepara a data do filtro de acordo com a configuração no arquivo .env
             var dataInicio = new moment();
@@ -216,6 +224,11 @@
                 Cookies.set('situacao', $('#situacao').val());
                 Cookies.set('postoRealizante', $('#postoRealizante').val());
 
+                if($('#dataInicio').val() == '' || $('#dataFim').val() == ''){
+                    swal("Datas Não Preenchidas..", "Atençao, preencha os campos de Data(Inicial e Final), Para selecionar um periodo de tempo para qual deseja visualizar os atendimentos.", "warning"); 
+                    return false;
+                }
+
                 var formPosto = $('#formPosto');
                 var postData = formPosto.serializeArray();
 
@@ -242,23 +255,23 @@
                                     '<strong>'+atendimento.nome+'</strong>'+'<br>'+'<i class="'+((atendimento.sexo == "M")?"fa fa-mars":"fa fa-venus")+'"></i> '+atendimento.idade+
                                 '</div>'+
                                 '<div class="centralizar col-md-2 col-sm-6 col-xs-6">'+
-                                    '<span data-toggle="tooltip" title="Posto/Atendimento"><strong> '+atendimento.posto+'/'+atendimento.atendimento+'</strong></span>'+                                                    
+                                    '<span data-toggle="tooltip" data-placement="bottom" title="Posto/Atendimento"><strong> '+atendimento.posto+'/'+atendimento.atendimento+'</strong></span>'+                                                    
                                 '</div>'+
                                 '<div class="centralizar col-md-2 col-sm-6 col-xs-6">'+
-                                    '<span data-toggle="tooltip" title="Convênio"> '+atendimento.nome_convenio+
+                                    '<span data-toggle="tooltip" data-placement="bottom" title="Convênio"> '+atendimento.nome_convenio+
                                 '</span></div>'+
                                 '<div class="centralizar col-md-2 col-sm-6 col-xs-6 hidden-xs">'+
-                                    '<span data-toggle="tooltip" title="Data do Atendimento"> '+atendimento.data_atd+
+                                    '<span data-toggle="tooltip" data-placement="bottom" title="Data do Atendimento"> '+atendimento.data_atd+
                                 '</span></div>';
 
                         if(atendimento.situacao_exames_experience != 'TF' && atendimento.data_entrega != false && atendimento.data_entrega != null){
                            item += '<div class="centralizar col-md-2 col-sm-6 col-xs-12">'+
-                                    '<span data-toggle="tooltip" title="Previsão de entrega"> '+atendimento.data_entrega+
+                                    '<span data-toggle="tooltip" data-placement="bottom" title="Previsão de entrega"> '+atendimento.data_entrega+
                             '</span></div>';
                         }
                         
                         item += '<div class="col-md-12 col-sm-6 col-xs-12">'+
-                                    '<span data-toggle="tooltip" title="Exames"><i class="fa fa-flask"></i> '+atendimento.mnemonicos+
+                                    '<span data-toggle="tooltip" data-placement="bottom" title="Exames"><i class="fa fa-flask"></i> '+atendimento.mnemonicos+
                                 '</span></div>'+
                             '</div>'+
                        '</li>';

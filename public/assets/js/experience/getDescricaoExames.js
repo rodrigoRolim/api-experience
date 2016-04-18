@@ -13,6 +13,7 @@ function getDescricaoExame(url,dadosExames){
             var conteudo = '';
 
             $('.modal-titulo').html('');
+            $('#tabelaDetalhes').html('');
             $('.modal-titulo').append('&nbsp;&nbsp;'+descricao.PROCEDIMENTO); 
             
             $('#rodapeDetalhe').append('Liberado em '+descricao.DATA_REALIZANTE+' por '+descricao.REALIZANTE.NOME+' - '+
@@ -35,10 +36,10 @@ function getDescricaoExame(url,dadosExames){
                 }
 
                  conteudo =  '<tr>'+
-                                '<td class =descricaoExames">'+
-                             '<td class=" analitos">'+
+                                '<td class = "descricaoExames">'+
+                             '<td class = "analitos">'+
                                 ''+analitos[index].ANALITO+'</div>'+
-                             '<td class="valoresAnalitos">'+
+                             '<td class = "valoresAnalitos">'+
                                 '<strong>'+valorAnalito+' '+analitos[index].UNIDADE+'</strong>'+
                              '</tr>';
 

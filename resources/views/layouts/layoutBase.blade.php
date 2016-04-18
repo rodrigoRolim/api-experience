@@ -20,6 +20,7 @@
 
     @section('stylesheets')
         {!! Html::style('/assets/css/plugins/datapicker/datepicker.css') !!}
+        {!! Html::style('/assets/css/plugins/pikaday/pikaday.css') !!}
         @parent
     @show
 </head>

@@ -1,6 +1,7 @@
 @extends('layouts.layoutBase')
 
 @section('stylesheets')
+{!! Html::style('/assets/css/plugins/sweetalert/sweetalert.css') !!}
     @parent
 @stop
 
@@ -24,9 +25,9 @@
             <div class="col-md-3">
                 <label class="textoBranco">Atendimentos por datas entre:</label>
                 <div class="input-daterange input-group" id="datepicker">
-                    <input type="text" class="input-sm form-control" id="dataInicio" name="dataInicio">
+                    <input type="text" class="input-sm form-control datepicker" id="dataInicio" name="dataInicio">
                     <span class="input-group-addon">até</span>
-                    <input type="text" class="input-sm form-control" id="dataFim" name="dataFim">
+                    <input type="text" class="input-sm form-control datepicker" id="dataFim" name="dataFim">
                 </div>
             </div>
             <div class="col-md-2">
@@ -73,12 +74,25 @@
     <script src="{{ asset('/assets/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
     <script src="{{ asset('/assets/js/plugins/listJs/list.min.js') }}"></script>    
     <script src="{{ asset('/assets/js/plugins/vanillamasker/vanilla-masker.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/plugins/pikaday/pikaday.js') }}"></script>
+    <script src="{{ asset('/assets/js/plugins/sweetalert/sweetalert.min.js') }}"></script>
     <script src="{{ asset('/assets/js/plugins/js-cookie/js.cookie.js') }}"></script>
 
     <script type="text/javascript">
         $(document).ready(function (){
 
             $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+
+            var picker = new Pikaday({ 
+                field: $('.datepicker')[0],
+                format: 'DD/MM/YYYY', 
+                maxDate: moment().toDate(), 
+            });
+            var picker2 = new Pikaday({ 
+                field: $('.datepicker')[1],
+                format: 'DD/MM/YYYY', 
+                maxDate: moment().toDate(), 
+            });
 
             $(".menu-trigger").click(function() {
                 $(".boxFiltro").slideToggle(400, function() {
@@ -90,13 +104,6 @@
             var dataInicio = new moment();
             var dataFim = new moment();
             var qtdDiasFiltro = {{config('system.medico.qtdDiasFiltro')}};    
-
-            $('.input-daterange').datepicker({
-                keyboardNavigation: true,
-                forceParse: false,
-                autoclose: true,
-                format: "dd/mm/yyyy"
-            });
 
             dataInicio = dataInicio.subtract(qtdDiasFiltro,'days');
             dataInicio = dataInicio.format('DD/MM/YYYY');
@@ -134,6 +141,11 @@
                 Cookies.set('convenio', $('#convenio').val());
                 Cookies.set('situacao', $('#situacao').val());
                 Cookies.set('postoRealizante', $('#postoRealizante').val());
+
+                if($('#dataInicio').val() == '' || $('#dataFim').val() == ''){
+                    swal("Datas Não Preenchidas..", "Atençao, preencha os campos de Data(Inicial e Final), Para selecionar um periodo de tempo para qual deseja visualizar os atendimentos.", "warning"); 
+                    return false;
+                }
 
                 var formMedico = $('#formMedico');
                 var postData = formMedico.serializeArray();
