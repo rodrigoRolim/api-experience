@@ -7,7 +7,7 @@
             </div>
             <div class="modal-body">
                 <div class="content"> 
-                    <div class="exemploBusca"> Ex: 00/001927</div>
+                    <div class="exemploBusca"> Ex: {{config('system.atendimentoMask')}}</div>
                     <div class="row-fluid">
                         <div style="padding-left:10px;padding-right:10px">
                             {!! Form::text('atendimento','', array('placeholder' => 'Digite o número do atendimento e pressione ENTER','class'=>'form-control input-lg','id'=>'atendimento')) !!}
