@@ -222,6 +222,12 @@ class MedicoController extends Controller {
         //Retorna para a view os dados do resultado para exibição
         $exames = $this->exames->getDetalheAtendimentoExameCorrel($posto, $atendimento,$correl);
 
+        if(!$exames){
+            return response()->json(array(
+                'message' => 'Você não tem permissão para acessar esse exame'
+            ), 203);
+        }
+
         return response()->json(array(
             'message' => 'Recebido com sucesso.',
             'data' => json_decode($exames),

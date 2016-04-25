@@ -88,6 +88,10 @@ class AtendimentoRepository extends BaseRepository
         $atendimento = current(DB::select(DB::raw($sql), ['posto' => $posto,'atendimento' => $atendimento]));
         $saldo = $atendimento->saldo_devedor;
 
-        return (($saldo > 0) ? true : false);
+        if($saldo != null || $saldo > 0){
+            return true;
+        }
+
+        return false;
     }
 }

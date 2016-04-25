@@ -159,7 +159,7 @@ class PostoController extends Controller {
 
         $user = Auth::user();
 
-        return view('paciente.index',compact('atendimento','user'));
+        return view('paciente.posto',compact('atendimento','user'));
     }
 
     /**
@@ -170,7 +170,7 @@ class PostoController extends Controller {
      * @return \Illuminate\Http\JsonResponse
      */
     public function getExamesatendimento($posto,$atendimento,$postoRealizante = null){
-        // //Verifica se o atendmiento é do posto
+        //Verifica se o atendmiento é do posto
         // $ehAtendimentoPosto = $this->posto->ehAtendimentoPosto($this->auth->user()['posto'],$atendimento);
 
         // if(!$ehAtendimentoPosto){
@@ -197,11 +197,11 @@ class PostoController extends Controller {
         //Verifica se o atendimento é do posto
         $ehAtendimentoPosto = $this->posto->ehAtendimentoPosto($posto,$atendimento);
 
-        if(!$ehAtendimentoPosto){
-            return response()->json(array(
-                'message' => 'Atendimento não é do posto'
-            ), 203);
-        }
+        // if(!$ehAtendimentoPosto){
+        //     return response()->json(array(
+        //         'message' => 'Atendimento não é do posto'
+        //     ), 203);
+        // }
         //Verifica saldo devedor do atendimento
         $saldoDevedor = $this->atendimento->getSaldoDevedor($posto,$atendimento);
 
@@ -213,6 +213,12 @@ class PostoController extends Controller {
 
         //Verifica os detalhes do resultado do exame
         $exames = $this->exames->getDetalheAtendimentoExameCorrel($posto, $atendimento,$correl);
+
+        if(!$exames){
+            return response()->json(array(
+                'message' => 'Você não tem permissão para acessar esse exame'
+            ), 203);
+        }
 
         return response()->json(array(
             'message' => 'Recebido com sucesso.',
