@@ -19,13 +19,16 @@ return [
     'AutoAtendimento' => 'Acesso QR CODE',
     'acessoPaciente' => env('APP_ACESSO_PACIENTE'),
     'HOSTNAME_AUTOATENDIMENTO' => env('HOSTNAME_AUTOATENDIMENTO'),
-    'loginText'	  =>  [
-    	'title' 		=> 'eXperience',
-    	'subTitle' 		=> '<h2 style="color:#76C1CC">Aplicação para visualização de resultados</h2>',
-    	'description' 	=> '<p>Solução tecnológica desenvolvida por <a href="www.codemed.com.br" target="_new">Codemed</a></p>',
-    	'footerText'	=> '<strong>Codemed</strong> ©2014-2015',
+    'loginText'   =>  [
+        'title'         => 'eXperience',
+        'subTitle'      => '<h2 style="color:#76C1CC">Aplicação para visualização de resultados</h2>',
+        'description'   => '<p>Solução tecnológica desenvolvida por <a href="www.codemed.com.br" target="_new">Codemed</a></p>',
+        'footerText'    => '<strong>Codemed</strong> ©2014-2015',
     ],
     'messages' => [
+        'loading' => '<h2 class="textoTamanho" style="padding-top:23vh"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando registros.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>',
+        'loadingExame' => '<h2 class="textoTamanho" style="padding-top:16vh"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando registros.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>',
+        'loadingExportPdf' => '<h2 style="margin:0px;margin-top:10px;font-size:18px"><b><span class="fa fa-refresh iconLoad"></b>&nbsp;&nbsp;Exportando Laudo, Aguarde...</h2>',
         'login' => [
             'usuarioSenhaInvalidos'   => 'Credenciais de acesso não confere',
             'usuarioQrInvalido' => 'Dados do qrcode não localizados em nossa base de dados'
@@ -34,7 +37,7 @@ return [
             'saldoDevedor' => 'Existe pendência, diriga-se ao laboratório',
         ],
         'dataSnap' => [
-            'ErroExportar' => 'Serviço Datasnap Indisponivel.',
+            'ErroExportar' => '<h2 style="margin:0px;margin-top:8px;font-size:16px;color:#ED5565;font-weight:400">Problemas ao exportar o seus resultados, tente mais tarde.</h2>',
         ],
         'paciente' => [
             'msgCpfAcesso' => 'Solicite sua senha de acesso no laboratório',

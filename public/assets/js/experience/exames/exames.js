@@ -44,41 +44,27 @@ ExamesClass.prototype.detalheExame = function(url,tipoAcesso,posto,atendimento,c
 }
 
 ExamesClass.prototype.renderDetalheExame = function(exame){
-    var html = '';
+    var result = [];
 
-    html =  '<div class="modal fade" id="modalExames" role="dialog">';
-    html +=     '<div class="modal-dialog">';
-    html +=         '<div class="modal-content">';
-    html +=             '<div class="modal-header">';
-    html +=                 '<button type="button" class="close" data-dismiss="modal">&times;</button>';
-    html +=                 '<h2 class="modal-title">'+exame.PROCEDIMENTO+'</h2>';
-    html +=             '</div>';
-    html +=             '<div class="modal-body" style="padding-left:10px;padding-right:10px;">';
-    html +=                 '<table id="tabelaDetalhes" class="table table-striped">';
-                                $.each( exame.ANALITOS, function(index,analito){
-                                    var valorAnalito = analito.VALOR;
+    result['title'] = exame.PROCEDIMENTO;
+    result['table'] = '<table id="tabelaDetalhes" class="table table-striped">';
+                            $.each( exame.ANALITOS, function(index,analito){
+                                var valorAnalito = analito.VALOR;
 
-                                    if(!isNaN(valorAnalito)){
-                                        var valorAnalito = Math.round(analito.VALOR);
-                                        valorAnalito = valorAnalito.toFixed(analito.DECIMAIS);
-                                    }
+                                if(!isNaN(valorAnalito)){
+                                    var valorAnalito = Math.round(analito.VALOR);
+                                    valorAnalito = valorAnalito.toFixed(analito.DECIMAIS);
+                                }
 
-                                    html += '<tr>';
-                                    html +=     '<td class=" analitos">'+analito.ANALITO+'</td>';
-                                    html +=     '<td class="valoresAnalitos">';
-                                    html +=         '<strong>'+valorAnalito+' '+(analito.UNIDADE == 'NULL'?'':analito.UNIDADE)+'</strong>';
-                                    html +=     '</td>';
-                                    html +=  '</tr>';
-                                });
-    html +=                 '</table>';
-    html +=             '</div>';
-    html +=             '<div class="modal-footer">';
-    html +=                 '<div id="rodapeDetalhe" class="col-lg-10 col-md-10 col-sm-10"></div>';
-    html +=                 '<div id="dvPdfDetalhe" class="col-lg-2 col-md-2 col-sm-2"></div>';
-    html +=             '</div>';
-    html +=         '</div>';
-    html +=     '</div>';
-    html += '</div>';
-
-    return html;
+                                result['table'] += '<tr>';
+                                result['table'] +=     '<td class=" analitos">'+analito.ANALITO+'</td>';
+                                result['table'] +=     '<td class="valoresAnalitos">';
+                                result['table'] +=         '<strong>'+valorAnalito+' '+(analito.UNIDADE == 'NULL'?'':analito.UNIDADE)+'</strong>';
+                                result['table'] +=     '</td>';
+                                result['table'] +=  '</tr>';
+                            });
+                            
+                            result['table'] += '<tr><td id="finalDetalhamento" colspan="2">Liberado em '+exame.DATA_REALIZANTE+' por '+exame.REALIZANTE.NOME+' - '+ exame.REALIZANTE.TIPO_CR+' '+exame.REALIZANTE.UF_CONSELHO+' : '+exame.REALIZANTE.CRM+' Data e Hora da Coleta: '+exame.DATA_COLETA+'</td></tr>';
+    result['table'] += '</table>';
+    return result;
 }

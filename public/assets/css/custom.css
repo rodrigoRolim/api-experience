@@ -349,6 +349,7 @@ ul{
 	padding-right: 0px;
 	margin-right: 0px;
 	clear: both;
+	min-height: 80vh;
 }
 
 .infoAtendimento{	
@@ -523,9 +524,9 @@ div.row.infoClienteMed{
 
 .modal-body{	
 	padding-bottom: 0px;
-	padding-right: 0px;
+	padding-right: 10px;
 	padding-top: 20px;
-	padding-left: 0px;
+	padding-left: 10px;
 }
 
 .modal-footer{
@@ -538,7 +539,7 @@ div.row.infoClienteMed{
 #finalDetalhamento{
 	font-size: 0.7em;
 	font-weight: bold;
-	padding-left: 20px;
+	/*padding-left: 20px;*/
 }
 
 #rodapeDetalhe{

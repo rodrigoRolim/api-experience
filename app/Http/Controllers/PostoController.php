@@ -237,11 +237,11 @@ class PostoController extends Controller {
         $atendimento = $dados[0]['atendimento'];
         $correlativos = $dados[0]['correlativos'];
 
-        $ehAtendimentoPosto = $this->posto->ehAtendimentoPosto($posto,$atendimento);
+        // $ehAtendimentoPosto = $this->posto->ehAtendimentoPosto($posto,$atendimento);
 
-        if(!$ehAtendimentoPosto){
-            \App::abort(404);
-        }
+        // if(!$ehAtendimentoPosto){
+        //     \App::abort(404);
+        // }
 
         $qtdCaracterPosto = config('system.qtdCaracterPosto');
 
