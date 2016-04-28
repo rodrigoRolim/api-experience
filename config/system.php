@@ -37,7 +37,7 @@ return [
             'saldoDevedor' => 'Existe pendência, diriga-se ao laboratório',
         ],
         'dataSnap' => [
-            'ErroExportar' => '<h2 style="margin:0px;margin-top:8px;font-size:16px;color:#ED5565;font-weight:400">Problemas ao exportar o seus resultados, tente mais tarde.</h2>',
+            'ErroExportar' => 'Problemas ao exportar o seus resultados, tente mais tarde.',
         ],
         'paciente' => [
             'msgCpfAcesso' => 'Solicite sua senha de acesso no laboratório',

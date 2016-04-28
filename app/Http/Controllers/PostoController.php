@@ -152,7 +152,7 @@ class PostoController extends Controller {
 
         //Lista todos os atendimentos do paciente para aquele posto
         $atendimento = $this->posto->getAtendimentosPacienteByPosto($registro,$posto,$atendimento);
-
+        
         if(!sizeof($atendimento)){
             \App::abort(404);
         }

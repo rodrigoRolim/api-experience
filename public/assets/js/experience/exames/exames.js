@@ -7,7 +7,7 @@ ExamesClass.prototype.get = function(url,tipoAcesso,posto,atendimento){
     return async.run(url+"/"+tipoAcesso+"/examesatendimento/"+posto+"/"+atendimento);
 }
 
-ExamesClass.prototype.render = function(result,saldo,dataMsg){
+ExamesClass.prototype.render = function(result,saldoDevedor,dataMsg){
     var html = '';
     
     $.each( result.data, function(index,exame){
@@ -16,15 +16,20 @@ ExamesClass.prototype.render = function(result,saldo,dataMsg){
         var opacity = '';
         var visualiza = false;
 
-        if(exame.tipo_entrega == "*" && exame.class == "success-element" && (saldo == '' && saldo == 0)){
-            visualiza = true;
+        if(exame.tipo_entrega == "*" && exame.class == "success-element" && !saldoDevedor){
+            $('.boxSelectAll').html('<span><input type="checkbox" class="checkAll"></span>');
             check = "<div class='i-checks checkExames' data-posto='"+exame.posto+"' data-atendimento='"+exame.atendimento+"'><input type='checkbox' class='check' value='"+exame.correl+"'></div>";
+            visualiza = true;
         }
 
         if(exame.tipo_entrega != "*"){
             msg = dataMsg['tipoEntregaInvalido'];
             exame.class = 'success-elementNoHov';
             opacity = 'opacity:0.6';
+        }
+
+        if(saldoDevedor){
+            exame.class = 'success-elementNoHov';
         }
         
         html += "<div class='col-md-6 boxExames' style='"+opacity+"' data-visu='"+visualiza+"' data-correl='"+exame.correl+"' data-atendimento='"+exame.atendimento+"' data-posto='"+exame.posto+"'>";

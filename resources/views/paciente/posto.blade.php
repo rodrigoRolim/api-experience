@@ -17,7 +17,7 @@
                     <a href="{{url('/')}}/auth/logout">
                         <i class="fa fa-sign-out"></i> Sair
                     </a>
-                </li>                           
+                </li>
             </ul>
         </div>
     </div>
@@ -28,7 +28,7 @@
         <div class="row-fluid areaPacientePos">
             <div style="padding-left:0px;" class="col-md-6 col-sm-6 col-xs-12">  
                 <a href="{{url('')}}/posto" class="btn btn-lg btnVoltar pull-left"><i class="fa fa-arrow-left" style="font-size: 24px;"></i></a>      
-                <strong><span id="nome" class="nomePaciente">{{$atendimento->nome}}</span></strong><br>
+                <strong><span id="nome" class="nomePaciente">{{mb_strimwidth($atendimento->nome,0,46,'...')}}</span></strong><br>
                 <div class="row">
                     <div style="padding-left:0px" class="col-md-3 col-sm-3">
                         <span data-toggle="tooltip" data-placement="bottom" title="Idade"><i class="fa fa-birthday-cake" aria-hidden="true"></i> <span class="idadePaciente">{{$atendimento->idade}}</span></span>
@@ -37,10 +37,12 @@
                         <span  data-toggle="tooltip" data-placement="bottom" title="Data do Atendimento"><i id="iconeAtd" class="fa fa-calendar-check-o"></i>
                         <span id="dataAtendimento">{{$atendimento->data_atd}}</span></span>
                     </div>
-                    <div class="col-md-3 col-sm-3">
-                        <span  data-toggle="tooltip" data-placement="bottom" title="Previsão de Entrega"><i id="iconeAtd" class="fa fa-clock-o"></i>
-                        <span id="dataEntrega">{{$atendimento->data_entrega}}</span></span>
-                    </div>
+                    @if($atendimento->data_entrega != '')
+                        <div class="col-md-3 col-sm-3">
+                            <span  data-toggle="tooltip" data-placement="bottom" title="Previsão de Entrega"><i id="iconeAtd" class="fa fa-clock-o"></i>
+                            <span id="dataEntrega">{{$atendimento->data_entrega}}</span></span>
+                        </div>
+                    @endif
                 </div>
             </div>
             <div style="margin-top: 5px;" class="col-md-2 col-sm-2 col-xs-6 convAtdPos">
@@ -61,11 +63,14 @@
                     <span id="soliciante">&nbsp;{{$atendimento->nome_solicitante}}</span>
                 </span>
             </div>
+            <div class="col-md-1 col-sm-1">
+                <div style="margin-right:13px;" id="checkAll" class="i-checks all boxSelectAll"> </div>
+            </div>
         </div>
     </div> 
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="ibox">
-            <span id="msgPendencias"></span> 
+            <span id="msgPendencias" class="col-md-12"></span> 
             <ul class="sortable-list connectList agile-list ui-sortable listaExames"></ul>
                 
             </ul>
@@ -75,21 +80,26 @@
     @include('layouts.includes.base.modalDetalhamentoExames')
 
     @section('statusFooter')
+    <div style='padding-left:0px;' class='col-md-6 col-sm-6'>
         <span class='statusAtendimentosViewPaciente'></span>
         <span class='statusFinalizados'></span>Finalizados 
         <span class='statusAguardando'></span>Parc. Finalizado
         <span class='statusEmAndamento'></span>Em Andamento 
         <span class='statusPendencias'></span>Existem Pendências
         <span class='statusNaoRealizado'></span>Não Realizado
+    </div>
+    <div id='btnPdfPrincipal' class='col-md-6 col-sm-6'>
+        <button type='button' class='btn btn-danger pull-right'>Gerar PDF</button>
+    </div>
     @stop
 @stop
-
 @section('script')
     @parent
     <script src="{{ asset('/assets/js/plugins/iCheck/icheck.min.js') }}"></script>
     <script src="{{ asset('/assets/js/plugins/truncateString/truncate.js') }}"></script>
     <script src="{{ asset('/assets/js/experience/async.js') }}"></script>
     <script src="{{ asset('/assets/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/plugins/sweetalert/sweetalert.min.js') }}"></script>
     <script src="{{ asset('/assets/js/experience/exames/exames.js') }}"></script>
 
     <script type="text/javascript">
@@ -98,9 +108,21 @@
 
             var exames = new ExamesClass();
             var dataResult = exames.get("{{url('/')}}","posto","{{$atendimento->posto}}","{{$atendimento->atendimento}}");
-            
+            var saldo = '{{$atendimento->saldo_devedor}}';
+            var saldoDevedor = false;
+
+            $('#btnPdfPrincipal').hide();
+
+            //Verifica saldo devedor do atendimento            
+            if(saldo > 0){
+                saldoDevedor = true;
+                $('#msgPendencias').html('{{config("system.messages.pacientes.saldoDevedor")}}');
+            }
+
+            //Adiciona o loading
             $('.listaExames').html('{!!config("system.messages.loading")!!}');
 
+            //Adiciona o slimScroll na lista de exames
             $('.ibox').slimScroll({
                 height: '76vh',
                 railOpacity: 0.4,
@@ -118,53 +140,99 @@
 
                 $('.listaExames').html('');
                 
-                $('.listaExames').append(exames.render(result,'{{$atendimento->saldo_devedor}}',dataMsg));
+                $('.listaExames').append(exames.render(result,saldoDevedor,dataMsg));
                 
-                $(".boxExames").click(function(e){
-                    var visu = $(e.currentTarget).data('visu');
-                    var correl = $(e.currentTarget).data('correl');
-                    var posto = $(e.currentTarget).data('posto');
-                    var atendimento = $(e.currentTarget).data('atendimento');
+                if(!saldoDevedor){
+                    $(".boxExames").click(function(e){
+                        var visu = $(e.currentTarget).data('visu');
+                        var correl = $(e.currentTarget).data('correl');
+                        var posto = $(e.currentTarget).data('posto');
+                        var atendimento = $(e.currentTarget).data('atendimento');
 
-                    var dataExameResult = exames.detalheExame("{{url('/')}}","posto",posto,atendimento,correl);
+                        var dataExameResult = exames.detalheExame("{{url('/')}}","posto",posto,atendimento,correl);
 
-                    $('#modalTitleExames').html('Exames Descrição');
-                    $('#modalFooterExames #btn').html('');
-                    $('#modalFooterExames #info').html('');
+                        $('#modalTitleExames').html('Exames Descrição');
+                        $('#modalFooterExames #btn').html('');
+                        $('#modalFooterExames #info').html('');
 
-                    $('#modalBodyExames').html('{!!config("system.messages.loadingExame")!!}');
-                    $('#modalExames').modal('show');
-                    
-                    $('.modal-body').slimScroll({
-                        height: '55.0vh',
-                        railOpacity: 0.4,
-                        wheelStep: 10,
-                        alwaysVisible: true,
-                        minwidth: '100%',
-                        touchScrollStep: 50,
-                    }); 
+                        $('#modalBodyExames').html('{!!config("system.messages.loadingExame")!!}');
 
-                    dataExameResult.then(function(exame){
-                        if(exame.data != 'undefined'){
-                            render = exames.renderDetalheExame(exame.data);
-                            
-                            $('#modalTitleExames').html(render.title);
-                            $('#modalBodyExames').html(render.table);
-                            $('#modalFooterExames #btn').html('<a href="#" id="btnPdfDetalhe" data-correl="'+correl+'" data-posto="'+posto+'" data-atendimento="'+atendimento+'" class="btn btn-danger btnPdf">Gerar PDF</a>');
+                        if(visu){
+                            $('#modalExames').modal('show');                        
                         }
+                        
+                        $('.modal-body').slimScroll({
+                            height: '55.0vh',
+                            railOpacity: 0.4,
+                            wheelStep: 10,
+                            alwaysVisible: true,
+                            minwidth: '100%',
+                            touchScrollStep: 50,
+                        }); 
 
-                        $('#btnPdfDetalhe').click(function(e){
-                            exportPdf(posto,atendimento,correl);
+                        dataExameResult.then(function(exame){
+                            if(exame.data != 'undefined'){
+                                render = exames.renderDetalheExame(exame.data,saldo);
+                                
+                                $('#modalTitleExames').html(render.title);
+                                $('#modalBodyExames').html(render.table);
+                                $('#modalFooterExames #btn').html('<a href="#" id="btnPdfDetalhe" data-correl="'+correl+'" data-posto="'+posto+'" data-atendimento="'+atendimento+'" class="btn btn-danger btnPdf">Gerar PDF</a>');
+                            }
+
+                            $('#btnPdfDetalhe').click(function(e){
+                                exportPdf(posto,atendimento,correl,'M');
+                            });
                         });
                     });
-                });
+                }
                 
                 $('input').iCheck({
                     checkboxClass: 'icheckbox_square-grey',
                 });
-            });
 
-            function exportPdf(posto,atendimento,correl){
+                if(!saldoDevedor){
+                    $('input.checkAll').on('ifChecked ifUnchecked', function(event){
+                        //Habilitar o checkbox de seleção de exames para impressao
+                        var checkAll = $('input.checkAll');
+                        var checkboxes = $('input.check');
+
+                        if (event.type == 'ifChecked'){
+                           checkboxes.iCheck('check');
+                           $('#btnPdfPrincipal').show();
+                        }else{
+                           checkboxes.iCheck('uncheck');
+                           $('#btnPdfPrincipal').hide();
+                        }
+                    });
+
+                    $('input.check').on('ifChanged',function(event){
+                        var checkboxes = $('input.check');
+                        $('#btnPdfPrincipal').hide();
+
+                        if(checkboxes.filter(':checked').length != 0){
+                            $('#btnPdfPrincipal').show();
+                        }
+                    });
+
+                    $('input.check').trigger('ifChecked');
+                }
+
+                $('#btnPdfPrincipal').click(function(e){                    
+                    var checkboxes = $('input.check:checked');
+                    var posto = $('.checkExames').data('posto');
+                    var atendimento = $('.checkExames').data('atendimento');
+
+                    var correl = [];
+
+                    checkboxes.each(function(){
+                        correl.push($(this).val());
+                    });
+
+                    exportPdf(posto,atendimento,correl,'G');
+                });
+            });
+ 
+            function exportPdf(posto,atendimento,correl,tipo){
                 $('#modalFooterExames #info').html('{!!config("system.messages.loadingExportPdf")!!}');
 
                 var dadosExportacao = {};
@@ -174,44 +242,25 @@
                 var asyncExport = async.run("{{url('/')}}/posto/exportarpdf",{"dados" : dadosExportacao},'POST');
 
                 asyncExport.then(function(pdf){
-                    $('#modalFooterExames #info').html('');
+                    if(tipo == 'M'){
+                        $('#modalFooterExames #info').html('');
 
-                    if(pdf == 'false'){
-                        $('#modalFooterExames #info').html('{!!config("system.messages.dataSnap.ErroExportar")!!}');
+                        if(pdf == 'false'){
+                            $('#modalFooterExames #info').html('<h2 style="margin:0px;margin-top:8px;font-size:16px;color:#ED5565;font-weight:400">{!!config("system.messages.dataSnap.ErroExportar")!!}</h2>');
+                        }else{
+                            $('#linkPdf').attr('href','http://www.google.com.br');
+                        }
                     }
 
-                    $('#linkPdf').attr('href','http://www.google.com.br');
-
-      
-                    // console.log(pdf);
+                    if(tipo == 'G'){
+                        if(pdf == 'false'){
+                            swal('{!!config("system.messages.dataSnap.ErroExportar")!!}','','error');
+                        }else{
+                            console.log(pdf);
+                        }
+                    }
                 });
-
-               // var paginaPdf = window.open ('/impressao', '', '');
-
             }
-
-// $('#btnPdfDetalhe').click(function(e){
-//                                    posto = $(e.currentTarget).data('posto');
-//                                    atendimento = $(e.currentTarget).data('atendimento');
-//                                    correl = $(e.currentTarget).data('correl');
-
-//                                    var dadosExportacao = {};                           
-//                                    dadosExportacao = [{'posto':posto,'atendimento':atendimento,'correlativos': {correl}}]; 
-//                                    var paginaPdf = window.open ('/impressao', '', '');              
-
-//                                    $.ajax({
-//                                     url: '{{url("/")}}/'+tipoAcesso+'/exportarpdf',
-//                                     type: 'post',
-//                                     data: {"dados" : dadosExportacao},
-//                                     success: function(data){   
-//                                            if(data != 'false'){
-//                                                paginaPdf.location = data;     
-//                                            }else{
-//                                                paginaPdf.close();
-//                                                swal("{!!config('system.messages.dataSnap.ErroExportar')!!}", "Tente novamente mais tarde!", "error");
-//                                            }             
-//                                       }
-//                                    }); 
         });
     </script>
 @stop
