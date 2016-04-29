@@ -43,6 +43,7 @@ ExamesClass.prototype.render = function(result,saldoDevedor,dataMsg){
     return html;
 }
 
+
 ExamesClass.prototype.detalheExame = function(url,tipoAcesso,posto,atendimento,corel){
     var async = new AsyncClass();
     return async.run(url+"/"+tipoAcesso+"/detalheatendimentoexamecorrel/"+posto+"/"+atendimento+"/"+corel);

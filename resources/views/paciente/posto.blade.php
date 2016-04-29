@@ -191,14 +191,13 @@
                 });
 
                 if(!saldoDevedor){
+                    var checkAll = $('input.checkAll');
+                    var checkboxes = $('input.check');
                     $('input.checkAll').on('ifChecked ifUnchecked', function(event){
                         //Habilitar o checkbox de seleção de exames para impressao
-                        var checkAll = $('input.checkAll');
-                        var checkboxes = $('input.check');
-
                         if (event.type == 'ifChecked'){
                            checkboxes.iCheck('check');
-                           $('#btnPdfPrincipal').show();
+                           $('#btnPdfPrincipal').show();                          
                         }else{
                            checkboxes.iCheck('uncheck');
                            $('#btnPdfPrincipal').hide();
@@ -211,11 +210,22 @@
 
                         if(checkboxes.filter(':checked').length != 0){
                             $('#btnPdfPrincipal').show();
+                            checkAll.iCheck('update');
                         }
                     });
 
-                    $('input.check').trigger('ifChecked');
+
+                    $('input.check').on('ifChanged', function(event){
+                       if(checkboxes.filter(':checked').length == checkboxes.length) {
+                           checkAll.prop('checked', 'checked');
+                       } else {
+                           checkAll.removeProp('checked');
+                       }
+                       checkAll.iCheck('update');
+                   });
                 }
+
+                $('.checkAll').trigger('ifChecked');
 
                 $('#btnPdfPrincipal').click(function(e){                    
                     var checkboxes = $('input.check:checked');
@@ -231,6 +241,7 @@
                     exportPdf(posto,atendimento,correl,'G');
                 });
             });
+
  
             function exportPdf(posto,atendimento,correl,tipo){
                 $('#modalFooterExames #info').html('{!!config("system.messages.loadingExportPdf")!!}');
@@ -248,6 +259,7 @@
                         if(pdf == 'false'){
                             $('#modalFooterExames #info').html('<h2 style="margin:0px;margin-top:8px;font-size:16px;color:#ED5565;font-weight:400">{!!config("system.messages.dataSnap.ErroExportar")!!}</h2>');
                         }else{
+                            //VERIFICAR COMO ABRIR EM OUTRA PAGINA SEM POPUP
                             $('#linkPdf').attr('href','http://www.google.com.br');
                         }
                     }
