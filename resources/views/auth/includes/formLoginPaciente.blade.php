@@ -99,7 +99,7 @@
 
 
        		if(autoAtendimento){
-        		$('.loginColumns').css('max-width', '100%');
+        		$('.loginColumns').css('max-width', '90%');
         		$('#areaTeclado').toggleClass('col-md-6 col-md-7');
         		$('#areaLogin').toggleClass('col-md-6 col-md-5');
         		$('#infoExperience').css('margin-left', '50px');  

@@ -14,6 +14,8 @@ ExamesClass.prototype.render = function(result,saldoDevedor,dataMsg){
         var check = '';        
         var msg = '';
         var opacity = '';
+        $('#solicitante').html(nomeSolicitante);
+        $('#atendimento').html(strPad(exame.posto + '/' + exame.atendimento));
         var visualiza = false;
 
         if(exame.tipo_entrega == "*" && exame.class == "success-element" && !saldoDevedor){
