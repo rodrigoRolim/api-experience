@@ -18,6 +18,7 @@ return [
     'acessoPosto' => env('APP_ACESSO_POSTO'),
     'AutoAtendimento' => 'Acesso QR CODE',
     'acessoPaciente' => env('APP_ACESSO_PACIENTE'),
+    'acessoAutoAtendimentoTeclado' => env('APP_ACESSO_AUTOATENDIMENTO_TECLADO'),
     'HOSTNAME_AUTOATENDIMENTO' => env('HOSTNAME_AUTOATENDIMENTO'),
     'loginText'   =>  [
         'title'         => 'eXperience',

@@ -1,10 +1,13 @@
 {!! Form::open(array('url'=>'/auth/login','id'=> 'formPaciente', 'role'=> 'form', 'novalidate')) !!}
-	<label>Acessar como?</label>
-	<input name="tipoAcesso" type="hidden" id="tipoAcesso" value="PAC">
-	<input name="tipoLoginPaciente" type="hidden" id="tipoLoginPaciente">
-	<div class="i-checks">
-		<label><input id="rdId" type="radio" value="ID" name="tipoLoginPaciente" checked> ID </label>&nbsp;&nbsp;&nbsp;
-		<label><input id="rfCpf" type="radio" value="CPF"  name="tipoLoginPaciente"> CPF </label>
+
+	<div id="radioAcessoPac">
+		<label>Acessar como?</label>
+		<input name="tipoAcesso" type="hidden" id="tipoAcesso" value="PAC">
+		<input name="tipoLoginPaciente" type="hidden" id="tipoLoginPaciente">
+		<div class="i-checks">
+			<label><input id="rdId" type="radio" value="ID" name="tipoLoginPaciente" checked> ID </label>&nbsp;&nbsp;&nbsp;
+			<label><input id="rfCpf" type="radio" value="CPF"  name="tipoLoginPaciente"> CPF </label>
+		</div>
 	</div>	
 	<div id="itemAtendimento">
 	    <div class="form-group @if ($errors->has('atendimento')) has-error @endif">
@@ -38,7 +41,7 @@
 	        <label>Senha</label>
 	        <div class="input-group">
 	            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-				<input type="password" class="form-control" placeholder="Senha" required="" name="password">
+				<input type="password" id="senha" class="form-control" placeholder="Senha" required="" name="password">
 	        </div>
 			@if ($errors->has('password')) <p class="help-block">{{ $errors->first('password') }}</p> @endif
 	    </div>
@@ -90,6 +93,46 @@
 
 	        });
 	     });
+
+
+	        var autoAtendimento = '{{config('system.acessoAutoAtendimentoTeclado')}}';
+
+
+       		if(autoAtendimento){
+        		$('.loginColumns').css('max-width', '100%');
+        		$('#areaTeclado').toggleClass('col-md-6 col-md-7');
+        		$('#areaLogin').toggleClass('col-md-6 col-md-5');
+        		$('#infoExperience').css('margin-left', '50px');  
+        		$('#infoExperience').css('margin-top', '30px');  
+        		$('#radioAcessoPac').hide();       			
+       		}
+
+			//Funções Teclado Numerico
+       		var elementoFocado = 'atendimento'; //default preenche atendimento
+
+       		$('#atendimento, #senha').focus(function() {
+       		 	elementoFocado = document.activeElement.id;
+       		});
+	
+	        $('.btnSetNumero').on('click', function() {
+	        	document.getElementById(elementoFocado).value += this.value;
+	            VMasker($('#atendimento')).maskPattern("{{config('system.atendimentoMask')}}");
+	        });
+
+	        $('#upperTeclado').on('click', function() {
+	        	$('.btnSetNumero').toggleClass('upper lower');
+	        });
+
+	        $('#btnLimpar').on('click', function() {
+	        	apagar =  $('#atendimento').val().slice(0, -1);
+	            document.getElementById("atendimento").value = apagar;
+	            VMasker($('#atendimento')).maskPattern("{{config('system.atendimentoMask')}}");
+	        });
+
+	        $('#btnLimparTudo').on('click', function() {
+	            document.getElementById("atendimento").value = '';
+	        });
+
 	</script>
 
 	@parent
