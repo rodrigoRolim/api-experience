@@ -81,11 +81,6 @@ class AuthController extends Controller
         //Passa o json para Array
         $acesso = json_decode($id,true);
 
-        //Verifica se todo os parametros estao sendo enviados
-        if(!(isset($acesso['posto']) && isset($acesso['atendimento']) && isset($acesso['senha']))){
-            return 'error ao validar qrcode';
-        }
-
         //Cria array para verificação de autenticação com o banco de dados
         $credentials = [
             'tipoAcesso' => 'AUTO',
@@ -103,7 +98,8 @@ class AuthController extends Controller
         }
 
         //Caso o usuario/senha não forem satisfatorio, retorna o formulario de login com a mensagem de acesso negado
-        return redirect('/auth/autoatendimento')->withInput()->withErrors(config('system.messages.login.usuarioQrInvalido'));
+        // return redirect('/auth/autoatendimento')->withInput()->withErrors(config('system.messages.login.usuarioQrInvalido'));
+        return redirect()->back()->withInput()->withErrors(config('system.messages.login.usuarioQrInvalido'));
     }
 
     /**
@@ -227,7 +223,8 @@ class AuthController extends Controller
         }
 
         //Caso o usuario/senha não forem satisfatorio, retorna o formulario de login com a mensagem de acesso negado
-        return redirect('/auth')->withInput()->withErrors(config('system.messages.login.usuarioSenhaInvalidos'));
+        // return redirect('/auth')->withInput()->withErrors(config('system.messages.login.usuarioSenhaInvalidos'));
+        return redirect()->back()->withInput()->withErrors(config('system.messages.login.usuarioSenhaInvalidos'));
     }
 
     /**
@@ -254,6 +251,8 @@ class AuthController extends Controller
         Session::flush();
         Redirect::back();
         //Retorna para a view de login
+
+
         return Redirect::to('/');
     }
 }

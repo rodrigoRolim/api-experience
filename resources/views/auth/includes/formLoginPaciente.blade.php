@@ -6,7 +6,7 @@
 		<input name="tipoLoginPaciente" type="hidden" id="tipoLoginPaciente">
 		<div class="i-checks">
 			<label><input id="rdId" type="radio" value="ID" name="tipoLoginPaciente" checked> ID </label>&nbsp;&nbsp;&nbsp;
-			<label><input id="rfCpf" type="radio" value="CPF"  name="tipoLoginPaciente"> CPF </label>
+			<span id="radioCpf"><label><input id="rfCpf" type="radio" value="CPF"  name="tipoLoginPaciente"> CPF </label></span>
 		</div>
 	</div>	
 	<div id="itemAtendimento">
@@ -45,7 +45,8 @@
 	        </div>
 			@if ($errors->has('password')) <p class="help-block">{{ $errors->first('password') }}</p> @endif
 	    </div>
-    <button type="submit" class="btn btn-primary block full-width m-b">Acessar</button>
+    	<button type="submit" class="btn btn-primary block full-width m-b">Acessar</button>
+    </div>
 {!! Form::close() !!}
 
 @section('script')
@@ -92,44 +93,7 @@
 				}
 
 	        });
-	     });
-
-        var autoAtendimento = '{{config('system.acessoAutoAtendimentoTeclado')}}';
-
-   		if(autoAtendimento){
-    		$('.loginColumns').css('max-width', '90%');
-    		$('#areaTeclado').toggleClass('col-md-6 col-md-7');
-    		$('#areaLogin').toggleClass('col-md-6 col-md-5');
-    		$('#infoExperience').css('margin-left', '50px');  
-    		$('#infoExperience').css('margin-top', '30px');  
-    		$('#radioAcessoPac').hide();       			
-   		}
-
-		//Funções Teclado Numerico
-   		var elementoFocado = 'atendimento'; //default preenche atendimento
-
-   		$('#atendimento, #senha').focus(function() {
-   		 	elementoFocado = document.activeElement.id;
-   		});
-
-        $('.btnSetNumero').on('click', function() {
-        	document.getElementById(elementoFocado).value += this.value;
-            VMasker($('#atendimento')).maskPattern("{{config('system.atendimentoMask')}}");
-        });
-
-        $('#upperTeclado').on('click', function() {
-        	$('.btnSetNumero').toggleClass('upper lower');
-        });
-
-        $('#btnLimpar').on('click', function() {
-        	apagar =  $('#atendimento').val().slice(0, -1);
-            document.getElementById("atendimento").value = apagar;
-            VMasker($('#atendimento')).maskPattern("{{config('system.atendimentoMask')}}");
-        });
-
-        $('#btnLimparTudo').on('click', function() {
-            document.getElementById("atendimento").value = '';
-        });
+	    });
 	</script>
 
 	@parent
