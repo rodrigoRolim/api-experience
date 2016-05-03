@@ -14,18 +14,16 @@
 
 @section('content')
 <body class="animated fadeInDown gray-bg">
-	<div class="loginColumns animated fadeInDown">
+    <div class="loginColumns animated fadeInDown">
         <div class="row">
-            <div id="areaTeclado" style="margin-top:30px;" class="col-md-6 hidden-xs">
-                <div id="infoExperience">
-                    <h2>
-                        <span class="text-navy">{!! Html::image(config('system.eXperienceLogoHorizontal'), 'logo_exp', array('title' => 'eXperience - codemed', 'style'=>'height: 80px;')) !!}</span>
-                    	{!!config('system.loginText.subTitle')!!}
-                    </h2>
-                    {!!config('system.loginText.description')!!}
-                </div>
+            <div class="col-md-6 hidden-xs">
+                <h2>
+                    <span class="text-navy">{!! Html::image(config('system.eXperienceLogoHorizontal'), 'logo_exp', array('title' => 'eXperience - codemed', 'style'=>'height: 80px;')) !!}</span>
+                    {!!config('system.loginText.subTitle')!!}
+                </h2>
+                {!!config('system.loginText.description')!!}
             </div>
-            <div id="areaLogin" class="col-md-6">
+            <div class="col-md-6">
                 @if (count($errors) == 1)
                     <div class="alert alert-danger alert-dismissable">
                         @foreach ($errors->all() as $error)
@@ -36,7 +34,7 @@
                 <div class="tabs-container">
                     <ul class="nav nav-tabs">
                     @if(config('system.acessoPaciente'))
-                        <li class=""><a id="btnPaciente" data-toggle="tab" href="#tabLoginPaciente" aria-expanded="true">Paciente</a></li>
+                        <li class=""><a id="btnPaciente" data-toggle="tab" href="#tabLoginPaciente" aria-expanded="false">Paciente</a></li>
                     @endif
                     @if(config('system.acessoMedico'))
                         <li class=""><a id="btnMedico" data-toggle="tab" href="#tabLoginMedico" aria-expanded="false">Médico</a></li>
@@ -47,21 +45,21 @@
                     </ul>
                     <div class="tab-content">
                     @if(config('system.acessoPaciente'))
-                        <div id="tabLoginPaciente" class="tab-pane ">
+                        <div id="tabLoginPaciente" class="tab-pane hidden">
                             <div class="panel-body">
                                @include('auth.includes.formLoginPaciente')
                             </div>
                         </div>
                     @endif
                     @if(config('system.acessoMedico'))
-                        <div id="tabLoginMedico" class="tab-pane ">
+                        <div id="tabLoginMedico" class="tab-pane hidden">
                             <div class="panel-body">
                                 @include('auth.includes.formLoginMedico')
                             </div>
                         </div>
                     @endif
                     @if(config('system.acessoPosto'))
-                        <div id="tabLoginPosto" class="tab-pane ">
+                        <div id="tabLoginPosto" class="tab-pane hidden">
                             <div class="panel-body">
                                 @include('auth.includes.formLoginPosto')
                             </div>
@@ -81,16 +79,24 @@
         $('li').on('click', function() {
             $('.nav').on('shown.bs.tab', function (e) {
                 var tabAtiva = $(e.target).text();
-
                 switch(tabAtiva) {
                     case "Paciente":
                         $('#atendimento').focus();
+                        $('#tabLoginPaciente').removeClass('hidden');
+                        $('#tabLoginPosto').addClass('hidden');
+                        $('#tabLoginMedico').addClass('hidden');
                         break;
                     case "Médico":
                         $('#cr').focus();
+                        $('#tabLoginMedico').removeClass('hidden');
+                        $('#tabLoginPosto').addClass('hidden');
+                        $('#tabLoginPaciente').addClass('hidden');
                         break;
                     case "Posto":
                         $('#posto').focus();
+                        $('#tabLoginPosto').removeClass('hidden');
+                        $('#tabLoginPaciente').addClass('hidden');
+                        $('#tabLoginMedico').addClass('hidden');
                         break;
                 }        
             });
@@ -98,6 +104,7 @@
 
         $('.nav-tabs li:first').addClass('active');
         $('.tab-content > div:first-child').addClass('active');
+        $('.tab-content > div:first-child').removeClass('hidden');
 
         var tipoAcesso = "{{Input::old('tipoAcesso')}}";
         var tipoLoginPaciente = "{{Input::old('tipoLoginPaciente')}}";
@@ -112,8 +119,7 @@
             case "POS":
                 $('#btnPosto').trigger('click');
                 break;
-        }  
-
+        }        
     });
 </script>
 @stop

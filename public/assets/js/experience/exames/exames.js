@@ -8,14 +8,15 @@ ExamesClass.prototype.get = function(url,tipoAcesso,posto,atendimento){
 }
 
 ExamesClass.prototype.render = function(result,saldoDevedor,dataMsg){
+
     var html = '';
     
     $.each( result.data, function(index,exame){
         var check = '';        
         var msg = '';
         var opacity = '';
-        $('#solicitante').html(nomeSolicitante);
-        $('#atendimento').html(strPad(exame.posto + '/' + exame.atendimento));
+
+        $('#atendimento').html(exame.posto + '/' + exame.atendimento);
         var visualiza = false;
 
         if(exame.tipo_entrega == "*" && exame.class == "success-element" && !saldoDevedor){

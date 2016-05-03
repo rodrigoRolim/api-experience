@@ -13,11 +13,10 @@
                 <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span> <span class="caret"></span><br>
             </button> 
             <ul class="dropdown-menu pull-right itensInfoUser"> 
-                <li class="item">
-                    <a href="{{url('/')}}/auth/logout">
-                        <i class="fa fa-sign-out"></i> Sair
-                    </a>
-                </li>
+                    @if(Auth::user()['tipoLoginPaciente'] == 'CPF')
+                     <li class="item"><a class="btnShowModal"><i class="fa fa-user"></i> Alterar Senha</a></li>
+                    @endif
+                    <li class="item"><a href="{{url('/')}}/auth/logout"><i class="fa fa-sign-out"></i> Sair</a></li>
             </ul>
         </div>
     </div>
@@ -127,11 +126,6 @@
             saldoDevedor = true;
             $('#msgPendencias').html('{{config("system.messages.pacientes.saldoDevedor")}}');
         }
-
-        var autoAtendimento = "<?php echo Auth::user()['autoAtendimento'] ?>";
-         if(autoAtendimento){
-                $('#menuAtendimentos').addClass('hidden');
-            }
 
             $('.btnAtendimento').click(function(e){                
                 posto = $(e.currentTarget).data('posto');

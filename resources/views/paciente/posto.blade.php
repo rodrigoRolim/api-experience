@@ -60,7 +60,7 @@
                 <br>
                 <span data-toggle="tooltip" data-placement="bottom" title="Médico Solicitante"> 
                     <i id="iconeSolic" class="fa fa-user-md"></i>
-                    <span id="soliciante">&nbsp;{{$atendimento->nome_solicitante}}</span>
+                    <span id="solicitante">&nbsp;{{$atendimento->nome_solicitante}}</span>
                 </span>
             </div>
             <div class="col-md-1 col-sm-1">

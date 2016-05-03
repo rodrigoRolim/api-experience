@@ -518,6 +518,7 @@ div.row.infoClienteMed{
 .msgExameTipoEntrega{
 	font-style: italic;
 	font-size: 0.90em;
+	color: red;
 }
 
 .modal-title{
