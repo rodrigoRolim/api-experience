@@ -65,9 +65,9 @@ class AuthController extends Controller
     *
     * @return \Illuminate\Http\Response
     */
-    public function getAutoatendimento()
+    public function getAutoatendimento($keyboard = 0)
     {
-        return view('auth.autoatendimento');
+        return view('auth.autoatendimento',compact(['keyboard']));
     }
 
     /**

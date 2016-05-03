@@ -17,10 +17,6 @@
 	<div class="loginColumns animated fadeInDown">
         <div class="row">
             <div id="areaTeclado" style="margin-top:30px;" class="col-md-6 hidden-xs">
-
-            @if(config('system.acessoAutoAtendimentoTeclado') == TRUE)
-                @include('auth.includes.tecladoAutoAtendimento')
-            @endif
                 <div id="infoExperience">
                     <h2>
                         <span class="text-navy">{!! Html::image(config('system.eXperienceLogoHorizontal'), 'logo_exp', array('title' => 'eXperience - codemed', 'style'=>'height: 80px;')) !!}</span>

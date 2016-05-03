@@ -94,45 +94,42 @@
 	        });
 	     });
 
+        var autoAtendimento = '{{config('system.acessoAutoAtendimentoTeclado')}}';
 
-	        var autoAtendimento = '{{config('system.acessoAutoAtendimentoTeclado')}}';
+   		if(autoAtendimento){
+    		$('.loginColumns').css('max-width', '90%');
+    		$('#areaTeclado').toggleClass('col-md-6 col-md-7');
+    		$('#areaLogin').toggleClass('col-md-6 col-md-5');
+    		$('#infoExperience').css('margin-left', '50px');  
+    		$('#infoExperience').css('margin-top', '30px');  
+    		$('#radioAcessoPac').hide();       			
+   		}
 
+		//Funções Teclado Numerico
+   		var elementoFocado = 'atendimento'; //default preenche atendimento
 
-       		if(autoAtendimento){
-        		$('.loginColumns').css('max-width', '90%');
-        		$('#areaTeclado').toggleClass('col-md-6 col-md-7');
-        		$('#areaLogin').toggleClass('col-md-6 col-md-5');
-        		$('#infoExperience').css('margin-left', '50px');  
-        		$('#infoExperience').css('margin-top', '30px');  
-        		$('#radioAcessoPac').hide();       			
-       		}
+   		$('#atendimento, #senha').focus(function() {
+   		 	elementoFocado = document.activeElement.id;
+   		});
 
-			//Funções Teclado Numerico
-       		var elementoFocado = 'atendimento'; //default preenche atendimento
+        $('.btnSetNumero').on('click', function() {
+        	document.getElementById(elementoFocado).value += this.value;
+            VMasker($('#atendimento')).maskPattern("{{config('system.atendimentoMask')}}");
+        });
 
-       		$('#atendimento, #senha').focus(function() {
-       		 	elementoFocado = document.activeElement.id;
-       		});
-	
-	        $('.btnSetNumero').on('click', function() {
-	        	document.getElementById(elementoFocado).value += this.value;
-	            VMasker($('#atendimento')).maskPattern("{{config('system.atendimentoMask')}}");
-	        });
+        $('#upperTeclado').on('click', function() {
+        	$('.btnSetNumero').toggleClass('upper lower');
+        });
 
-	        $('#upperTeclado').on('click', function() {
-	        	$('.btnSetNumero').toggleClass('upper lower');
-	        });
+        $('#btnLimpar').on('click', function() {
+        	apagar =  $('#atendimento').val().slice(0, -1);
+            document.getElementById("atendimento").value = apagar;
+            VMasker($('#atendimento')).maskPattern("{{config('system.atendimentoMask')}}");
+        });
 
-	        $('#btnLimpar').on('click', function() {
-	        	apagar =  $('#atendimento').val().slice(0, -1);
-	            document.getElementById("atendimento").value = apagar;
-	            VMasker($('#atendimento')).maskPattern("{{config('system.atendimentoMask')}}");
-	        });
-
-	        $('#btnLimparTudo').on('click', function() {
-	            document.getElementById("atendimento").value = '';
-	        });
-
+        $('#btnLimparTudo').on('click', function() {
+            document.getElementById("atendimento").value = '';
+        });
 	</script>
 
 	@parent
