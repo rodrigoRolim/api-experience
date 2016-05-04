@@ -116,8 +116,7 @@
 
     $(document).ready(function () {
     	$("body").tooltip({ selector: '[data-toggle=tooltip]' });
-        $("body").css("overflow", "hidden");
-
+      
         var tipoAcesso = '{{Auth::user()['tipoAcesso']}}';
         
         if(tipoAcesso == 'MED'){

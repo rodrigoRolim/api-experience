@@ -22,9 +22,8 @@ ExamesClass.prototype.render = function(result,saldoDevedor,dataMsg){
         var msg = '';
         var opacity = '';
 
-
-        $('#atendimento').html(exame.posto + '/' + exame.atendimento);
-        var visualiza = false;
+/*        strPad(exame.posto, {{config('system.qtdCaracterPosto')}}) + '/' + strPad(exame.atendimento, {{config('system.qtdCaracterAtend')}});
+*/        var visualiza = false;
 
         if(exame.tipo_entrega == "*" && exame.class == "success-element" && !saldoDevedor){
             $('.boxSelectAll').html('<span><input type="checkbox" class="checkAll"></span>');
