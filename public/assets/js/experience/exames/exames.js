@@ -22,7 +22,8 @@ ExamesClass.prototype.render = function(result,saldoDevedor,dataMsg){
         var msg = '';
         var opacity = '';
 
-        strPad(exame.posto, {{config('system.qtdCaracterPosto')}}) + '/' + strPad(exame.atendimento, {{config('system.qtdCaracterAtend')}});
+        $('#atendimento').html(exame.posto +'/'+ exame.atendimento);
+
         var visualiza = false;
 
         if(exame.tipo_entrega == "*" && exame.class == "success-element" && !saldoDevedor){
@@ -37,9 +38,9 @@ ExamesClass.prototype.render = function(result,saldoDevedor,dataMsg){
             opacity = 'opacity:0.6';
         }
 
-        if(saldoDevedor){
+/*        if(saldoDevedor){
             exame.class = 'success-elementNoHov';
-        }
+        }*/
         
         html += "<div class='col-md-6 boxExames' style='"+opacity+"' data-visu='"+visualiza+"' data-correl='"+exame.correl+"' data-atendimento='"+exame.atendimento+"' data-posto='"+exame.posto+"'>";
         html += "<li class='"+exame.class+" animated fadeInDownBig'>"+check;

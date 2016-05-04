@@ -40,6 +40,9 @@ class ExamesRepository extends BaseRepository
         }
 
         foreach($exames as $key => $exame){
+            $exames[$key]['posto'] = str_pad($exames[$key]['posto'],config('system.qtdCaracterPosto'),'0',STR_PAD_LEFT);
+            $exames[$key]['atendimento'] = str_pad($exames[$key]['atendimento'],config('system.qtdCaracterAtend'),'0',STR_PAD_LEFT);
+
             switch($exame['situacao_experience']){
                 case 'FINALIZADO':
                     //VERDE
@@ -59,6 +62,7 @@ class ExamesRepository extends BaseRepository
                     $exames[$key]['class'] = 'warning-element';
                     $exames[$key]['msg'] = 'Em Andamento';
                     $exames[$key]['view'] = false;
+                    break;
                 case 'PENDENCIA':
                     //VERMELHO
                     $exames[$key]['class'] = 'danger-element';

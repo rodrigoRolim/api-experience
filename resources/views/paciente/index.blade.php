@@ -109,197 +109,195 @@
     <script src="{{ asset('/assets/js/plugins/datapicker/bootstrap-datepicker.js') }}"></script>   
     <script src="{{ asset('/assets/js/plugins/validate/jquery.validate.min.js') }}"></script>
     <script src="{{ asset('/assets/js/plugins/sweetalert/sweetalert.min.js') }}"></script>
-    <script src="{{ asset('/assets/js/experience/utils/strPad.js') }}"></script>
     <script src="{{ asset('/assets/js/experience/async.js') }}"></script>
     <script src="{{ asset('/assets/js/experience/exames/exames.js') }}"></script>
+
     <script type="text/javascript">
-
-    $(document).ready(function () {
-    	$("body").tooltip({ selector: '[data-toggle=tooltip]' });
-      
-        var tipoAcesso = '{{Auth::user()['tipoAcesso']}}';
-        
-        if(tipoAcesso == 'MED'){
-            tipoAcesso = 'medico';
-        }
-
-        if(tipoAcesso == 'PAC'){
-            tipoAcesso = 'paciente';
-        }
-
-
-        $('.ibox').slimScroll({
-            height: '69vh',
-            railOpacity: 0.4,
-            wheelStep: 10,
-            size: '12px',
-            alwaysVisible: true,
-            railVisible: true,
-            minwidth: '100%',
-            touchScrollStep: 50,
-        });
-
-        $('.modal-body').slimScroll({
-            height: '55.0vh',
-            railOpacity: 0.4,
-            wheelStep: 10,
-            alwaysVisible: true,
-            minwidth: '100%',
-            touchScrollStep: 50,
-        }); 
-
-        $('#side-menu').slimScroll({
-            height: '75vh',
-            railOpacity: 0.4,
-            wheelStep: 10,
-            alwaysVisible: true,
-            minwidth: '100%',
-            touchScrollStep: 50,
-        });
-
-
-        $('.btnAtendimento').click(function(e){
-            $('#msgPendencias').html('');
-            $('#solicitante').html('');
+        $(document).ready(function () {
+        	$("body").tooltip({ selector: '[data-toggle=tooltip]' });
+          
+            var tipoAcesso = '{{Auth::user()['tipoAcesso']}}';
             
-            
-            //Adiciona o loading
-            $('.listaExames').html('{!!config("system.messages.loading")!!}');
-
-            var posto = $(e.currentTarget).data('posto');
-            var atendimento = $(e.currentTarget).data('atendimento');
-            var nomeSolicitante = $(e.currentTarget).data('solicitante');
-            $('#solicitante').append(nomeSolicitante);
-            saldo = $(e.currentTarget).data('saldo');
-            
-            var exames = new ExamesClass();
-            var dataResult = exames.get("{{url('/')}}",tipoAcesso,posto,atendimento);
-            var saldoDevedor = false;
-            
-            //Verifica saldo devedor do atendimento            
-            if(saldo > 0){
-                saldoDevedor = true;
-                $('#msgPendencias').html('{{config("system.messages.pacientes.saldoDevedor")}}');
+            if(tipoAcesso == 'MED'){
+                tipoAcesso = 'medico';
             }
-            
-            $(document).keyup(function(e) {
-                 if (e.keyCode == 27) { //ESC
-                    $('#modalExames').modal('hide');
-                }
-            $('.boxSelectAll').html('');
+
+            if(tipoAcesso == 'PAC'){
+                tipoAcesso = 'paciente';
+            }
+
+
+            $('.ibox').slimScroll({
+                height: '69vh',
+                railOpacity: 0.4,
+                wheelStep: 10,
+                size: '12px',
+                alwaysVisible: true,
+                railVisible: true,
+                minwidth: '100%',
+                touchScrollStep: 50,
             });
 
-            dataResult.then(function(result){
-                var dataMsg = [];
-                dataMsg['tipoEntregaInvalido'] = "{!!config('system.messages.exame.tipoEntregaInvalido')!!}";
+            $('.modal-body').slimScroll({
+                height: '55.0vh',
+                railOpacity: 0.4,
+                wheelStep: 10,
+                alwaysVisible: true,
+                minwidth: '100%',
+                touchScrollStep: 50,
+            }); 
 
-                $('.listaExames').html('');
+            $('#side-menu').slimScroll({
+                height: '75vh',
+                railOpacity: 0.4,
+                wheelStep: 10,
+                alwaysVisible: true,
+                minwidth: '100%',
+                touchScrollStep: 50,
+            });
+
+
+            $('.btnAtendimento').click(function(e){
+                $('#msgPendencias').html('');
+                $('#solicitante').html('');
                 
-                $('.listaExames').append(exames.render(result,saldoDevedor,dataMsg));
                 
-                if(!saldoDevedor){
-                    $(".boxExames").click(function(e){
-                        var visu = $(e.currentTarget).data('visu');
-                        var correl = $(e.currentTarget).data('correl');
-                        var posto = $(e.currentTarget).data('posto');
-                        var atendimento = $(e.currentTarget).data('atendimento');
+                //Adiciona o loading
+                $('.listaExames').html('{!!config("system.messages.loading")!!}');
 
-                        var dataExameResult = exames.detalheExame("{{url('/')}}","paciente",posto,atendimento,correl);
+                var posto = $(e.currentTarget).data('posto');
+                var atendimento = $(e.currentTarget).data('atendimento');
+                var nomeSolicitante = $(e.currentTarget).data('solicitante');
+                $('#solicitante').append(nomeSolicitante);
+                saldo = $(e.currentTarget).data('saldo');
+                
+                var exames = new ExamesClass();
+                var dataResult = exames.get("{{url('/')}}",tipoAcesso,posto,atendimento);
+                var saldoDevedor = false;
+                
+                //Verifica saldo devedor do atendimento            
+                if(saldo > 0){
+                    saldoDevedor = true;
+                    $('#msgPendencias').html('{{config("system.messages.pacientes.saldoDevedor")}}');
+                }
+                
+                $(document).keyup(function(e) {
+                     if (e.keyCode == 27) { //ESC
+                        $('#modalExames').modal('hide');
+                    }
+                $('.boxSelectAll').html('');
+                });
 
-                        $('#modalTitleExames').html('Exames Descrição');
-                        $('#modalFooterExames #btn').html('');
-                        $('#modalFooterExames #info').html('');
+                dataResult.then(function(result){
+                    var dataMsg = [];
+                    dataMsg['tipoEntregaInvalido'] = "{!!config('system.messages.exame.tipoEntregaInvalido')!!}";
 
-                        $('#modalBodyExames').html('{!!config("system.messages.loadingExame")!!}');
+                    $('.listaExames').html('');
+                    
+                    $('.listaExames').append(exames.render(result,saldoDevedor,dataMsg));
+                    
+                    if(!saldoDevedor){
+                        $(".boxExames").click(function(e){
+                            var visu = $(e.currentTarget).data('visu');
+                            var correl = $(e.currentTarget).data('correl');
+                            var posto = $(e.currentTarget).data('posto');
+                            var atendimento = $(e.currentTarget).data('atendimento');
 
-                        if(visu){
-                            $('#modalExames').modal('show');                        
-                        }
-                        
-                        $('.modal-body').slimScroll({
-                            height: '55.0vh',
-                            railOpacity: 0.4,
-                            wheelStep: 10,
-                            alwaysVisible: true,
-                            minwidth: '100%',
-                            touchScrollStep: 50,
-                        }); 
+                            var dataExameResult = exames.detalheExame("{{url('/')}}","paciente",posto,atendimento,correl);
 
-                        dataExameResult.then(function(exame){
-                            if(exame.data != 'undefined'){
-                                render = exames.renderDetalheExame(exame.data,saldo);
-                                
-                                $('#modalTitleExames').html(render.title);
-                                $('#modalBodyExames').html(render.table);
-                                $('#modalFooterExames #btn').html('<a href="#" id="btnPdfDetalhe" data-correl="'+correl+'" data-posto="'+posto+'" data-atendimento="'+atendimento+'" class="btn btn-danger btnPdf">Gerar PDF</a>');
+                            $('#modalTitleExames').html('Exames Descrição');
+                            $('#modalFooterExames #btn').html('');
+                            $('#modalFooterExames #info').html('');
+
+                            $('#modalBodyExames').html('{!!config("system.messages.loadingExame")!!}');
+
+                            if(visu){
+                                $('#modalExames').modal('show');                        
                             }
+                            
+                            $('.modal-body').slimScroll({
+                                height: '55.0vh',
+                                railOpacity: 0.4,
+                                wheelStep: 10,
+                                alwaysVisible: true,
+                                minwidth: '100%',
+                                touchScrollStep: 50,
+                            }); 
 
-                            $('#btnPdfDetalhe').click(function(e){
-                                exportPdf(posto,atendimento,correl,'M');
+                            dataExameResult.then(function(exame){
+                                if(exame.data != 'undefined'){
+                                    render = exames.renderDetalheExame(exame.data,saldo);
+                                    
+                                    $('#modalTitleExames').html(render.title);
+                                    $('#modalBodyExames').html(render.table);
+                                    $('#modalFooterExames #btn').html('<a href="#" id="btnPdfDetalhe" data-correl="'+correl+'" data-posto="'+posto+'" data-atendimento="'+atendimento+'" class="btn btn-danger btnPdf">Gerar PDF</a>');
+                                }
+
+                                $('#btnPdfDetalhe').click(function(e){
+                                    exportPdf(posto,atendimento,correl,'M');
+                                });
                             });
                         });
-                    });
-                }
-                
-                $('input').iCheck({
-                    checkboxClass: 'icheckbox_square-grey',
-                });
-
-                if(!saldoDevedor){
-                    var checkAll = $('input.checkAll');
-                    var checkboxes = $('input.check');
-                    $('input.checkAll').on('ifChecked ifUnchecked', function(event){
-                        //Habilitar o checkbox de seleção de exames para impressao
-                        if (event.type == 'ifChecked'){
-                           checkboxes.iCheck('check');
-                           $('#btnPdfPrincipal').show();                          
-                        }else{
-                           checkboxes.iCheck('uncheck');
-                           $('#btnPdfPrincipal').hide();
-                        }
+                    }
+                    
+                    $('input').iCheck({
+                        checkboxClass: 'icheckbox_square-grey',
                     });
 
-                    $('input.check').on('ifChanged',function(event){
+                    if(!saldoDevedor){
+                        var checkAll = $('input.checkAll');
                         var checkboxes = $('input.check');
-                        $('#btnPdfPrincipal').hide();
+                        $('input.checkAll').on('ifChecked ifUnchecked', function(event){
+                            //Habilitar o checkbox de seleção de exames para impressao
+                            if (event.type == 'ifChecked'){
+                               checkboxes.iCheck('check');
+                               $('#btnPdfPrincipal').show();                          
+                            }else{
+                               checkboxes.iCheck('uncheck');
+                               $('#btnPdfPrincipal').hide();
+                            }
+                        });
 
-                        if(checkboxes.filter(':checked').length != 0){
-                            $('#btnPdfPrincipal').show();
-                            checkAll.iCheck('update');
-                        }
+                        $('input.check').on('ifChanged',function(event){
+                            var checkboxes = $('input.check');
+                            $('#btnPdfPrincipal').hide();
+
+                            if(checkboxes.filter(':checked').length != 0){
+                                $('#btnPdfPrincipal').show();
+                                checkAll.iCheck('update');
+                            }
+                        });
+
+
+                        $('input.check').on('ifChanged', function(event){
+                           if(checkboxes.filter(':checked').length == checkboxes.length) {
+                               checkAll.prop('checked', 'checked');
+                           } else {
+                               checkAll.removeProp('checked');
+                           }
+                           checkAll.iCheck('update');
+                       });
+                    }
+
+                    $('.checkAll').trigger('ifChecked');
+
+                    $('#btnPdfPrincipal').click(function(e){                    
+                        var checkboxes = $('input.check:checked');
+                        var posto = $('.checkExames').data('posto');
+                        var atendimento = $('.checkExames').data('atendimento');
+
+                        var correl = [];
+
+                        checkboxes.each(function(){
+                            correl.push($(this).val());
+                        });
+
+                        exportPdf(posto,atendimento,correl,'G');
                     });
-
-
-                    $('input.check').on('ifChanged', function(event){
-                       if(checkboxes.filter(':checked').length == checkboxes.length) {
-                           checkAll.prop('checked', 'checked');
-                       } else {
-                           checkAll.removeProp('checked');
-                       }
-                       checkAll.iCheck('update');
-                   });
-                }
-
-                $('.checkAll').trigger('ifChecked');
-
-                $('#btnPdfPrincipal').click(function(e){                    
-                    var checkboxes = $('input.check:checked');
-                    var posto = $('.checkExames').data('posto');
-                    var atendimento = $('.checkExames').data('atendimento');
-
-                    var correl = [];
-
-                    checkboxes.each(function(){
-                        correl.push($(this).val());
-                    });
-
-                    exportPdf(posto,atendimento,correl,'G');
-                });
-            }); 
+                }); 
+            });
+    
+            $('.leftMenu.active a').trigger('click');
         });
-
-        $('.leftMenu.active a').trigger('click');
-
-    });
-</script>
+    </script>
 @stop
