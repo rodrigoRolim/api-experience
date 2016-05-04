@@ -187,6 +187,7 @@
                  if (e.keyCode == 27) { //ESC
                     $('#modalExames').modal('hide');
                 }
+            $('.boxSelectAll').html('');
             });
 
             dataResult.then(function(result){

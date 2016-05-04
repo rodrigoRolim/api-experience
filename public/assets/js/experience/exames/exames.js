@@ -10,11 +10,18 @@ ExamesClass.prototype.get = function(url,tipoAcesso,posto,atendimento){
 ExamesClass.prototype.render = function(result,saldoDevedor,dataMsg){
     var html = '';
     $('.listaExames').html('');
+    $('.boxSelectAll').html('');
+
+    if(result.data == ''){
+        html = '<div style="text-align:center;"><h2>Não foram realizados exames para este atendimento</h2></div>';
+        return html;
+    }
     
     $.each( result.data, function(index,exame){
         var check = '';        
         var msg = '';
         var opacity = '';
+
 
         $('#atendimento').html(exame.posto + '/' + exame.atendimento);
         var visualiza = false;
