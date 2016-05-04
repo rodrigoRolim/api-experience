@@ -124,7 +124,7 @@
 
             //Adiciona o slimScroll na lista de exames
             $('.ibox').slimScroll({
-                height: '76vh',
+                height: '71vh',
                 railOpacity: 0.4,
                 wheelStep: 10,
                 size: '12px',
