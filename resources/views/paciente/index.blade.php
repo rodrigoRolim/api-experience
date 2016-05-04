@@ -13,7 +13,7 @@
                 <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span> <span class="caret"></span><br>
             </button> 
             <ul class="dropdown-menu pull-right itensInfoUser"> 
-                    @if(Auth::user()['tipoLoginPaciente'] == 'CPF')
+                    @if(Auth::user()['tipoAcesso'] == 'MED' || (Auth::user()['tipoAcesso'] == 'PAC' && Auth::user()['tipoLoginPaciente'] == 'CPF'))
                      <li class="item"><a class="btnShowModal"><i class="fa fa-user"></i> Alterar Senha</a></li>
                     @endif
                     <li class="item"><a href="{{url('/')}}/auth/logout"><i class="fa fa-sign-out"></i> Sair</a></li>
@@ -76,10 +76,10 @@
 
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="ibox">
-            <span id="msgPendencias"></span> 
+            <div id="msgPendencias"></div> 
 	            <ul class="sortable-list connectList agile-list ui-sortable listaExames"></ul>
                 @include('layouts.includes.base.modalDetalhamentoExames')
-                    @if($user['tipoLoginPaciente'] == 'CPF')   
+                    @if(Auth::user()['tipoAcesso'] == 'MED' || (Auth::user()['tipoAcesso'] == 'PAC' && Auth::user()['tipoLoginPaciente'] == 'CPF'))
                            @include('layouts.includes.base.modalAlterarSenha')
                     @endif
         </div>
@@ -118,6 +118,17 @@
     	$("body").tooltip({ selector: '[data-toggle=tooltip]' });
         $("body").css("overflow", "hidden");
 
+        var tipoAcesso = '{{Auth::user()['tipoAcesso']}}';
+        
+        if(tipoAcesso == 'MED'){
+            tipoAcesso = 'medico';
+        }
+
+        if(tipoAcesso == 'PAC'){
+            tipoAcesso = 'paciente';
+        }
+
+
         $('.ibox').slimScroll({
             height: '69vh',
             railOpacity: 0.4,
@@ -148,20 +159,22 @@
         });
 
 
-        $('.metismenu .active a').trigger('click');
-
         $('.btnAtendimento').click(function(e){
             $('#msgPendencias').html('');
+            $('#solicitante').html('');
+            
             
             //Adiciona o loading
             $('.listaExames').html('{!!config("system.messages.loading")!!}');
 
             var posto = $(e.currentTarget).data('posto');
             var atendimento = $(e.currentTarget).data('atendimento');
+            var nomeSolicitante = $(e.currentTarget).data('solicitante');
+            $('#solicitante').append(nomeSolicitante);
             saldo = $(e.currentTarget).data('saldo');
             
             var exames = new ExamesClass();
-            var dataResult = exames.get("{{url('/')}}","paciente",posto,atendimento);
+            var dataResult = exames.get("{{url('/')}}",tipoAcesso,posto,atendimento);
             var saldoDevedor = false;
             
             //Verifica saldo devedor do atendimento            
@@ -285,7 +298,7 @@
             }); 
         });
 
-        // $('.leftMenu.active a').trigger('click');
+        $('.leftMenu.active a').trigger('click');
 
     });
 </script>

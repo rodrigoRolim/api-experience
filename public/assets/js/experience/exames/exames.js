@@ -8,8 +8,8 @@ ExamesClass.prototype.get = function(url,tipoAcesso,posto,atendimento){
 }
 
 ExamesClass.prototype.render = function(result,saldoDevedor,dataMsg){
-
     var html = '';
+    $('.listaExames').html('');
     
     $.each( result.data, function(index,exame){
         var check = '';        
