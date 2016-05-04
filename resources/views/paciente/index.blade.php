@@ -115,70 +115,61 @@
     <script type="text/javascript">
 
     $(document).ready(function () {
-
     	$("body").tooltip({ selector: '[data-toggle=tooltip]' });
-    	var exames = new ExamesClass();
-		var dataResult = exames.get("{{url('/')}}","paciente","{{$atendimento->posto}}","{{$atendimento->atendimento}}");
-        var saldo = '{{$atendimento->saldo_devedor}}';
-        var saldoDevedor = false;
-        //Verifica saldo devedor do atendimento            
-        if(saldo > 0){
-            saldoDevedor = true;
-            $('#msgPendencias').html('{{config("system.messages.pacientes.saldoDevedor")}}');
-        }
+        $("body").css("overflow", "hidden");
 
-            $('.btnAtendimento').click(function(e){                
-                posto = $(e.currentTarget).data('posto');
-                atendimento = $(e.currentTarget).data('atendimento');
-                nomeSolicitante = $(e.currentTarget).data('solicitante');
-                nomeConvenio = $(e.currentTarget).data('convenio');
-                saldo = $(e.currentTarget).data('saldo');       
-                mnemonicos = $(e.currentTarget).data('mnemonicos');  
-                tipoAcesso = $(e.currentTarget).data('acesso');  
+        $('.ibox').slimScroll({
+            height: '69vh',
+            railOpacity: 0.4,
+            wheelStep: 10,
+            size: '12px',
+            alwaysVisible: true,
+            railVisible: true,
+            minwidth: '100%',
+            touchScrollStep: 50,
+        });
 
-                if(mnemonicos == ""){                    
-                    swal("Não foram realizados exames para este atendimento.");
-                }
+        $('.modal-body').slimScroll({
+            height: '55.0vh',
+            railOpacity: 0.4,
+            wheelStep: 10,
+            alwaysVisible: true,
+            minwidth: '100%',
+            touchScrollStep: 50,
+        }); 
 
-                if(posto != null && atendimento != null){
-                    var exames = new ExamesClass();
-        			var dataResult = exames.get("{{url('/')}}","paciente",posto,atendimento);
-                }	
+        $('#side-menu').slimScroll({
+            height: '75vh',
+            railOpacity: 0.4,
+            wheelStep: 10,
+            alwaysVisible: true,
+            minwidth: '100%',
+            touchScrollStep: 50,
+        });
 
-                $('.boxSelectAll').html('');
-            });
 
-            $('.leftMenu.active a').trigger('click');
+        $('.metismenu .active a').trigger('click');
 
-            $('.ibox').slimScroll({
-                height: '69vh',              
-                railOpacity: 0.4,
-                wheelStep: 10,
-                size: '12px',
-                alwaysVisible: true,
-                railVisible: true,
-                minwidth: '100%',
-                touchScrollStep: 50,
-            });
+        $('.btnAtendimento').click(function(e){
+            $('#msgPendencias').html('');
+            
+            //Adiciona o loading
+            $('.listaExames').html('{!!config("system.messages.loading")!!}');
 
-            $('.modal-body').slimScroll({
-                height: '55.0vh',
-                railOpacity: 0.4,
-                wheelStep: 10,
-                alwaysVisible: true,
-                minwidth: '100%',
-                touchScrollStep: 50,
-            }); 
-
-            $('#side-menu').slimScroll({
-                height: '55	vh',
-                railOpacity: 0.4,
-                wheelStep: 10,
-                alwaysVisible: true,
-                minwidth: '100%',
-                touchScrollStep: 50,
-            });    
-
+            var posto = $(e.currentTarget).data('posto');
+            var atendimento = $(e.currentTarget).data('atendimento');
+            saldo = $(e.currentTarget).data('saldo');
+            
+            var exames = new ExamesClass();
+            var dataResult = exames.get("{{url('/')}}","paciente",posto,atendimento);
+            var saldoDevedor = false;
+            
+            //Verifica saldo devedor do atendimento            
+            if(saldo > 0){
+                saldoDevedor = true;
+                $('#msgPendencias').html('{{config("system.messages.pacientes.saldoDevedor")}}');
+            }
+            
             $(document).keyup(function(e) {
                  if (e.keyCode == 27) { //ESC
                     $('#modalExames').modal('hide');
@@ -292,11 +283,10 @@
                     exportPdf(posto,atendimento,correl,'G');
                 });
             }); 
+        });
 
-
+        // $('.leftMenu.active a').trigger('click');
 
     });
-
-    </script>
-
+</script>
 @stop
