@@ -240,39 +240,9 @@
 
                     exportPdf(posto,atendimento,correl,'G');
                 });
-            });
+           });
 
- 
-            function exportPdf(posto,atendimento,correl,tipo){
-                $('#modalFooterExames #info').html('{!!config("system.messages.loadingExportPdf")!!}');
 
-                var dadosExportacao = {};
-                dadosExportacao = [{'posto':posto,'atendimento':atendimento,'correlativos': {correl}}];
-
-                var async = new AsyncClass();
-                var asyncExport = async.run("{{url('/')}}/posto/exportarpdf",{"dados" : dadosExportacao},'POST');
-
-                asyncExport.then(function(pdf){
-                    if(tipo == 'M'){
-                        $('#modalFooterExames #info').html('');
-
-                        if(pdf == 'false'){
-                            $('#modalFooterExames #info').html('<h2 style="margin:0px;margin-top:8px;font-size:16px;color:#ED5565;font-weight:400">{!!config("system.messages.dataSnap.ErroExportar")!!}</h2>');
-                        }else{
-                            //VERIFICAR COMO ABRIR EM OUTRA PAGINA SEM POPUP
-                            $('#linkPdf').attr('href','http://www.google.com.br');
-                        }
-                    }
-
-                    if(tipo == 'G'){
-                        if(pdf == 'false'){
-                            swal('{!!config("system.messages.dataSnap.ErroExportar")!!}','','error');
-                        }else{
-                            console.log(pdf);
-                        }
-                    }
-                });
-            }
         });
     </script>
 @stop

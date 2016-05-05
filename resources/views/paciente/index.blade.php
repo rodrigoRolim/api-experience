@@ -111,13 +111,14 @@
     <script src="{{ asset('/assets/js/plugins/sweetalert/sweetalert.min.js') }}"></script>
     <script src="{{ asset('/assets/js/experience/async.js') }}"></script>
     <script src="{{ asset('/assets/js/experience/exames/exames.js') }}"></script>
+    <script src="{{ asset('/assets/js/experience/exportarPdf.js') }}"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {
         	$("body").tooltip({ selector: '[data-toggle=tooltip]' });
           
             var tipoAcesso = '{{Auth::user()['tipoAcesso']}}';
-            
+            var url = '{{url('/')}}';
             if(tipoAcesso == 'MED'){
                 tipoAcesso = 'medico';
             }
@@ -125,7 +126,6 @@
             if(tipoAcesso == 'PAC'){
                 tipoAcesso = 'paciente';
             }
-
 
             $('.ibox').slimScroll({
                 height: '69vh',
@@ -234,7 +234,7 @@
                                 }
 
                                 $('#btnPdfDetalhe').click(function(e){
-                                    exportPdf(posto,atendimento,correl,'M');
+                                    exportPdf(url,tipoAcesso,posto,atendimento,correl,'M');
                                 });
                             });
                         });
@@ -291,8 +291,7 @@
                         checkboxes.each(function(){
                             correl.push($(this).val());
                         });
-
-                        exportPdf(posto,atendimento,correl,'G');
+                        exportPdf(url,tipoAcesso,posto,atendimento,correl,'G');
                     });
                 }); 
             });

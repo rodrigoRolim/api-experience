@@ -76,6 +76,7 @@
 @section('script')
 <script type="text/javascript"> 
     $(document).ready(function () {
+        $('.footer').hide();
         $('li').on('click', function() {
             $('.nav').on('shown.bs.tab', function (e) {
                 var tabAtiva = $(e.target).text();
