@@ -57,6 +57,7 @@ return [
         'PF' => 'Parcialmente Finalizado',
         'EP' => 'Existêm pendências',
         'EA' => 'Em Andamento',
+        'NR' => 'Não Realizados'
     ],
     'medico' => [
         'qtdDiasFiltro' => env('APP_MEDICO_QTD_DIAS')
