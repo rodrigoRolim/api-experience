@@ -19,7 +19,7 @@ function getExames(url,tipoAcesso,posto,atendimento){
 
 	    if(!verificaSaldoDevedor(saldo)){
 		    if(exame.class == 'success-element' && exame.tipo_entrega == '*'){
-		      checkbox = '<input id="todo'+index+'" type="checkbox" data-correl="'+exame.correl+'">';
+		      checkbox = '<input id="todo'+index+'" type="checkbox" data-correl="'+exame.correl+'" checked>';
 		      visualizacao = '<div id="boxExame" data-visualizacao="OK" data-correl="'+exame.correl+'" data-atendimento="'+exame.atendimento+'" data-posto="'+exame.posto+'">';
 		      contOK += 1;
 		    }

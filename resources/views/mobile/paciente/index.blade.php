@@ -22,7 +22,6 @@
      @include('mobile.paciente.includes.modDetalhes')
   <body>
     <div class="m-scene" id="main"> <!-- Page Container -->
-
      @include('mobile.paciente.includes.menu')
       <!-- Page Content -->
       <div class="snap-content z-depth-5" id="content">
@@ -78,6 +77,7 @@
   <script src="{{ asset('/assets/js/plugins/sweetalert/sweetalert.min.js') }}"></script>
   <script src="{{ asset('/assets/js/experience/getExames.js') }}"></script>
   <script src="{{ asset('/assets/js/experience/getDescricaoExames.js') }}"></script>
+  <script src="{{ asset('/assets/js/experience/eventoBotaoSairNavegador.js') }}"></script>
 
   </body>
 </html>
@@ -85,6 +85,8 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
+
+    var exportandoPdf = false;
 
     var snapper = new Snap({
       element: document.getElementById('content')
@@ -116,6 +118,7 @@ $(document).ready(function(){
         mnemonicos = $(e.currentTarget).data('mnemonicos');
         tipoAcesso = $(e.currentTarget).data('acesso');
         dataAtendimento = $(e.currentTarget).data('dtatendimento');
+        dataEntrega = $(e.currentTarget).data('entrega');
         indice = $(e.currentTarget).data('indice');
         solicitante = $(e.currentTarget).data('solicitante');
         convenio = $(e.currentTarget).data('convenio');
@@ -132,10 +135,13 @@ $(document).ready(function(){
         }
 
         $('.modal-content').html(''); 
-        $('.modal-content').append('<h5 class="tituloModal">Detalhes Adicionais - Atendimento '+atendimento+' </h5>');
-        $('.modal-content').append('<br><p>ID: '+atendimento+' </p>');
-        $('.modal-content').append('<p>Convênio: '+convenio+' </p>');
-        $('.modal-content').append('<p>Medico Solicitante: '+solicitante+' </p>');
+        $('.modal-content').append('<h5 class="tituloModal">Informações Adicionais</h5>');
+        $('.modal-content').append('<br><p>ID: 0'+posto+'/'+atendimento+' </p>'); 
+        $('.modal-content').append('<p>Data do Atendimento: '+dataAtendimento+' </p>');
+        $('.modal-content').append('<p>Previsão de Entrega: '+dataEntrega+' </p>');  
+        $('.modal-content').append('<p>Convênio:<br> '+convenio+' </p>'); 
+        $('.modal-content').append('<p>Medico Solicitante:<br> '+solicitante+' </p>'); 
+
 
         if(mnemonicos == ""){ 
             $('#gerarPdfMenu').hide(); 
@@ -178,8 +184,15 @@ $(document).ready(function(){
 
         switch(visualizacao) {
           case 'OK':
-              getDescricaoExame(url,dadosExames);
-              $('#modalDetalhamento').openModal();
+              if(!exportandoPdf){
+                $('#tabelaDetalhes').html('<div class="loader">Loading...</div>{!!config("system.messages.loadingExameMobile")!!}');
+                getDescricaoExame(url,dadosExames);
+                $('#modalDetalhamento').openModal({
+                    dismissible: false, // Modal can be dismissed by clicking outside of the modal
+                    in_duration: 300, // Transition in duration
+                    out_duration: 200, // Transition out duration
+                  });                
+              }
               break;
           case 'P': //Tipo entrega diferente de *
                swal("Atenção", "Este exame só poderá ser impresso no laboratório", "error");
@@ -209,15 +222,16 @@ $(document).ready(function(){
           $('#open-left').trigger('click');
           $('.checkResults').toggleClass("hide");
           $('#containerBtnResultados').toggleClass("hide");
+          exportandoPdf ^= true; //Funciona como um toggle, que alterna a variavel entre TRUE e FALSE
      });
 
      $('#pdfResultados').click(function(e){
         var checkboxes = $('input:checked');       
             var correl = [];
                checkboxes.each(function () {
-                      correl.push($(this).data('correl'));
+                    correl.push($(this).data('correl'));
                   });   
-            console.log(correl); 
+               console.log(correl);
             if(correl.length == 0){
               swal('','Selecione ao menos um Exame para exportação para o arquivo PDF.','error');
             } 

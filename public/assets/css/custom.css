@@ -353,7 +353,7 @@ ul{
 	padding-right: 0px;
 	margin-right: 0px;
 	clear: both;
-	min-height: 83vh;
+	min-height: 83vh; /*Altura pagina paciente*/
 }
 
 .infoAtendimento{	

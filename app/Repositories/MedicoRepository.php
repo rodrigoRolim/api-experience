@@ -91,7 +91,7 @@ class MedicoRepository extends BaseRepository
      * @return mixed
      */
     public function getAtendimentosPacienteByMedico($registro,$solicitante){
-        $sql = 'SELECT c.nome,c.data_nas,c.registro,c.sexo,c.telefone,c.telefone2,a.acomodacao,a.posto,a.atendimento,data_atd, INITCAP(a.nome_convenio) AS nome_convenio, INITCAP(a.nome_solicitante) AS nome_solicitante, ('.config('system.userAgilDB').'GET_MNEMONICOS(a.posto,a.atendimento)) mnemonicos,a.saldo_devedor
+        $sql = 'SELECT c.nome,c.data_nas,c.registro,c.sexo,c.telefone,c.telefone2,a.acomodacao,a.posto,a.atendimento,a.data_entrega,a.data_atd, INITCAP(a.nome_convenio) AS nome_convenio, INITCAP(a.nome_solicitante) AS nome_solicitante, ('.config('system.userAgilDB').'GET_MNEMONICOS(a.posto,a.atendimento)) mnemonicos,a.saldo_devedor
                 FROM '.config('system.userAgilDB').'vex_atendimentos a
                   INNER JOIN '.config('system.userAgilDB').'VEX_MEDICOS m ON a.solicitante = m.crm
                   INNER JOIN '.config('system.userAgilDB').'VEX_CLIENTES c ON a.registro = c.registro

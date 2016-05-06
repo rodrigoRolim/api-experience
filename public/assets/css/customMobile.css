@@ -39,6 +39,9 @@
 .btnFecharDetalhamento{
 	float: right;
 }
+.mdi-close{
+	background-color: gray;
+}
 .todo .todo-element{
 	padding: 10px;
 }
@@ -144,6 +147,7 @@
 }
 #gerarPdfMenu{
 	cursor: pointer;
+	margin-top: 5px;
 }
 #gerarPdfMenu.active{
 	cursor: pointer;

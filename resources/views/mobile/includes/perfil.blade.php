@@ -99,6 +99,7 @@
   <script src="{{ asset('/assets/js/plugins/validate/jquery.validate.min.js') }}"></script>
   <script src="{{ asset('/assets/js/plugins/sweetalert/sweetalert.min.js') }}"></script>
   <script src="{{ asset('/assets/js/experience/getClientes.js') }}"></script>
+  <script src="{{ asset('/assets/js/experience/eventoBotaoSairNavegador.js') }}"></script>
 
   </body>
 </html>

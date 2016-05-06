@@ -1,6 +1,5 @@
       <!-- Sidebars -->
       <div class="snap-drawers">
-
         <!-- Left Sidebar -->
         <div class="snap-drawer snap-drawer-left">
           <div class="drawer-inner">
@@ -17,7 +16,8 @@
                         <li class="btnAtendimento"  
                         data-convenio="{{$atendimento->nome_convenio}}" 
                         data-solicitante="{{$atendimento->nome_solicitante}}" 
-                        data-dtatendimento="{{ date('d/m/20y',strtotime($atendimento->data_atd))}}" 
+                        data-dtatendimento="{{ date('d/m/20y',strtotime($atendimento->data_atd))}}"
+                        data-entrega="{{ date('d/m/20y',strtotime($atendimento->data_entrega))}}"  
                         data-posto="{{$atendimento->posto}}"
                         data-atendimento="{{$atendimento->atendimento}}" 
                         data-mnemonicos="{{$atendimento->mnemonicos}}" 

@@ -120,7 +120,15 @@
             case "POS":
                 $('#btnPosto').trigger('click');
                 break;
-        }        
+        } 
+
+        $(document).keypress(function(e) {
+            if(e.which == 13) { // enter
+                event.preventDefault();
+                $('#senha').focus();
+            }
+        });
+
     });
 </script>
 @stop

@@ -15,6 +15,7 @@
     {!! Html::style('/assets/css/plugins/asteroid/materialize.min.css') !!}
     {!! Html::style('/assets/css/plugins/asteroid/style.css') !!}
     {!! Html::style('/assets/css/customMobile.css') !!}
+    {!! Html::style('/assets/css/plugins/sweetalert/sweetalert.css') !!}
     {!! Html::style('/assets/css/plugins/asteroid/jquery.mobile-1.4.5.min.css') !!}
 
 <!--     <script type="text/javascript">
@@ -69,7 +70,9 @@
   <script src="{{ asset('/assets/js/plugins/asteroid/functions.js') }}"></script>
   <script src="{{ asset('/assets/js/plugins/asteroid/jquery.mobile-1.4.5.min.js') }}"></script>
   <script src="{{ asset('/assets/js/plugins/moments/moments.js') }}"></script>
+  <script src="{{ asset('/assets/js/plugins/sweetalert/sweetalert.min.js') }}"></script>
   <script src="{{ asset('/assets/js/experience/getClientes.js') }}"></script>
+  <script src="{{ asset('/assets/js/experience/eventoBotaoSairNavegador.js') }}"></script>
 
   </body>
 </html>
@@ -168,6 +171,6 @@
     });
 
 
-  });
+});
 
 </script>
