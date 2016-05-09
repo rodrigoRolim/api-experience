@@ -78,6 +78,7 @@
   <script src="{{ asset('/assets/js/experience/getExames.js') }}"></script>
   <script src="{{ asset('/assets/js/experience/getDescricaoExames.js') }}"></script>
   <script src="{{ asset('/assets/js/experience/eventoBotaoSairNavegador.js') }}"></script>
+  <script src="{{ asset('/assets/js/experience/exportarPdf.js') }}"></script>
 
   </body>
 </html>
@@ -85,6 +86,18 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
+
+    var tipoAcesso = '{{Auth::user()['tipoAcesso']}}';
+    var url = '{{url('/')}}';
+
+    if(tipoAcesso == 'PAC'){
+        tipoAcesso = 'paciente';
+    }
+
+    if(tipoAcesso == 'MED'){
+        tipoAcesso = 'medico';
+    }
+
 
     var exportandoPdf = false;
 
@@ -234,7 +247,9 @@ $(document).ready(function(){
                console.log(correl);
             if(correl.length == 0){
               swal('','Selecione ao menos um Exame para exportação para o arquivo PDF.','error');
-            } 
+            }
+            var cabecalho = true; 
+             exportPdf(url,tipoAcesso,posto,atendimento,correl,'G',cabecalho);
      });
 
 });  
