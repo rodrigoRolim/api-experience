@@ -236,6 +236,8 @@ class PostoController extends Controller {
         $posto = $dados[0]['posto'];
         $atendimento = $dados[0]['atendimento'];
         $correlativos = $dados[0]['correlativos'];
+        $cabecalho = $dados[0]['cabecalho'];
+
 
         // $ehAtendimentoPosto = $this->posto->ehAtendimentoPosto($posto,$atendimento);
 
@@ -263,6 +265,6 @@ class PostoController extends Controller {
         $pure = $atendimentoAcesso['pure'];
 
         //Envia para o servico do datasnap
-        return $this->dataSnap->exportarPdf($posto,$atendimento,$pure,$correlativos);
+        return $this->dataSnap->exportarPdf($posto,$atendimento,$pure,$correlativos,$cabecalho);
     }
 }

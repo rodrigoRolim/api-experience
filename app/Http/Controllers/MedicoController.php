@@ -245,6 +245,8 @@ class MedicoController extends Controller {
         $posto = $dados['posto'];
         $atendimento = $dados['atendimento'];
         $correlativos = $dados['correlativos'];    
+        $cabecalho = $dados['cabecalho'];
+
 
         $qtdCaracterPosto = config('system.qtdCaracterPosto');
 
@@ -273,7 +275,7 @@ class MedicoController extends Controller {
             \App::abort(404);
         }
         //Solicito para o dataSnap a geração do PDF
-        return $this->dataSnap->exportarPdf($posto,$atendimento,$pure,$correlativos);
+        return $this->dataSnap->exportarPdf($posto,$atendimento,$pure,$correlativos,$cabecalho);
     }
 
     public function getPerfil(){

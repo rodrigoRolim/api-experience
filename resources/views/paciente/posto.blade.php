@@ -107,6 +107,13 @@
         $(document).ready(function () {
             $("body").tooltip({ selector: '[data-toggle=tooltip]' });
 
+            var tipoAcesso = '{{Auth::user()['tipoAcesso']}}';
+            var url = '{{url('/')}}';
+
+            if(tipoAcesso == 'POS'){
+                tipoAcesso = 'posto';
+            }
+
             var exames = new ExamesClass();
             var dataResult = exames.get("{{url('/')}}","posto","{{$atendimento->posto}}","{{$atendimento->atendimento}}");
             var saldo = '{{$atendimento->saldo_devedor}}';
@@ -182,7 +189,7 @@
 
                             $('#btnPdfDetalhe').click(function(e){
                                 var cabecalho = true;
-                                exportPdf(posto,atendimento,correl,'M',cabecalho);
+                                exportPdf(url,tipoAcesso,posto,atendimento,correl,'M',cabecalho);
                             });
                         });
                     });
@@ -240,7 +247,7 @@
                         correl.push($(this).val());
                     });
                     var cabecalho = true;
-                    exportPdf(posto,atendimento,correl,'G',cabecalho);
+                    exportPdf(url,tipoAcesso,posto,atendimento,correl,'G',cabecalho);
                 });
            });
 
