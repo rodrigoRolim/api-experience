@@ -19,8 +19,15 @@ class DataSnapService
 	 * @param array $correls
 	 * @return string
      */
-	public static function exportarPdf($posto,$atendimento,$pure,Array $correls){
-        $result = @file_get_contents(config('system.PDFUrl').$posto.'/'.$atendimento.'/'.$pure.'/'.implode(",",$correls));
+	public static function exportarPdf($posto,$atendimento,$pure,Array $correls,$cabecalho){
+
+		if(sizeof($correls['correl']) == 1){
+			$correlativos = $correls['correl'][0];
+		}else{
+			$correlativos = implode(",", $correls['correl']);			
+		}
+
+        $result = @file_get_contents(config('system.PDFUrl').$posto.'/'.$atendimento.'/'.$pure.'/'.$correlativos.'/'.$cabecalho);
 		
 		if(!$result){
 			return 'false';

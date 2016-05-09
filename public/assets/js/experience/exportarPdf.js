@@ -1,6 +1,6 @@
-function exportPdf(url,tipoAcesso,posto,atendimento,correl,tipo){
+function exportPdf(url,tipoAcesso,posto,atendimento,correl,tipo,cabecalho){
     var dadosExportacao = {};                           
-    dadosExportacao = [{'posto':posto,'atendimento':atendimento,'correlativos': {correl}}]; 
+    dadosExportacao = [{'posto':posto,'atendimento':atendimento,'correlativos': {correl},'cabecalho':cabecalho}]; 
     var paginaPdf = window.open ('/impressao', '', '');              
 
     $.ajax({ 

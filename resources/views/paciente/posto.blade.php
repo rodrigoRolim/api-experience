@@ -180,7 +180,8 @@
                             }
 
                             $('#btnPdfDetalhe').click(function(e){
-                                exportPdf(posto,atendimento,correl,'M');
+                                var cabecalho = true;
+                                exportPdf(posto,atendimento,correl,'M',cabecalho);
                             });
                         });
                     });
@@ -237,8 +238,8 @@
                     checkboxes.each(function(){
                         correl.push($(this).val());
                     });
-
-                    exportPdf(posto,atendimento,correl,'G');
+                    var cabecalho = true;
+                    exportPdf(posto,atendimento,correl,'G',cabecalho);
                 });
            });
 

@@ -116,8 +116,8 @@
     <script type="text/javascript">
         $(document).ready(function () {
         	$("body").tooltip({ selector: '[data-toggle=tooltip]' });
-          
             var tipoAcesso = '{{Auth::user()['tipoAcesso']}}';
+            var auto = '{{Auth::user()['autoAtendimento']}}';
             var url = '{{url('/')}}';
             if(tipoAcesso == 'MED'){
                 tipoAcesso = 'medico';
@@ -234,7 +234,11 @@
                                 }
 
                                 $('#btnPdfDetalhe').click(function(e){
-                                    exportPdf(url,tipoAcesso,posto,atendimento,correl,'M');
+                                    var cabecalho = true;
+                                    if(auto){
+                                        cabecalho = 0;                            
+                                    }
+                                    exportPdf(url,tipoAcesso,posto,atendimento,correl,'M',cabecalho);
                                 });
                             });
                         });
@@ -285,13 +289,18 @@
                         var checkboxes = $('input.check:checked');
                         var posto = $('.checkExames').data('posto');
                         var atendimento = $('.checkExames').data('atendimento');
+                        var cabecalho = true;
+
+                        if(auto){
+                            cabecalho = 0;                            
+                        }
 
                         var correl = [];
 
                         checkboxes.each(function(){
                             correl.push($(this).val());
                         });
-                        exportPdf(url,tipoAcesso,posto,atendimento,correl,'G');
+                        exportPdf(url,tipoAcesso,posto,atendimento,correl,'G',cabecalho);
                     });
                 }); 
             });
