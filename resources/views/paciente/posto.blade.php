@@ -101,6 +101,7 @@
     <script src="{{ asset('/assets/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
     <script src="{{ asset('/assets/js/plugins/sweetalert/sweetalert.min.js') }}"></script>
     <script src="{{ asset('/assets/js/experience/exames/exames.js') }}"></script>
+    <script src="{{ asset('/assets/js/experience/exportarPdf.js') }}"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {
