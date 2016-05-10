@@ -6,7 +6,7 @@ return [
     'skinPadrao'  => env('APP_SKIN'), 
     'clienteNome' => env('APP_CLIENTE_NOME'),
     'clienteLogo' => env('APP_LOGO'),
-    'devLogo'     => '/assets/images/logo.png',
+    'devLogo'     => '/assets/images/logo_cod.png',
     'experienceLogo' => '/assets/images/icone_experience.png',
     'eXperienceLogoHorizontal' => '/assets/images/eXperience-Laranja.png',
     'clienteUrl'  => env('APP_CLIENTE_URL'),

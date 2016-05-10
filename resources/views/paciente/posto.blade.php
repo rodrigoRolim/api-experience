@@ -153,7 +153,7 @@
                 if(!saldoDevedor){
                     $(".boxExames").click(function(e){
                         var visu = $(e.currentTarget).data('visu');
-                        var correl = $(e.currentTarget).data('correl');
+                        var correl = [$(e.currentTarget).data('correl')];
                         var posto = $(e.currentTarget).data('posto');
                         var atendimento = $(e.currentTarget).data('atendimento');
 
