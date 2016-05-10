@@ -287,27 +287,27 @@
                     }
 
                     $('.checkAll').trigger('ifChecked');
-
-                    $('#btnExportar').click(function(e){   
-                        e.preventDefault();
-                        var checkboxes = $('input.check:checked');
-                        var posto = $('.checkExames').data('posto');
-                        var atendimento = $('.checkExames').data('atendimento');
-                        var cabecalho = true;
-
-                        if(auto){
-                            cabecalho = 0;                            
-                        }
-
-                        var correl = [];
-
-                        checkboxes.each(function(){
-                            correl.push($(this).val());
-                        });
-                        var paginaPdf = window.open('/impressao', '', ''); 
-                        exportPdf(url,tipoAcesso,posto,atendimento,correl,'G',cabecalho,paginaPdf);
-                    });
                 }); 
+            });
+
+            $('#btnExportar').click(function(e){
+                e.preventDefault();
+                var checkboxes = $('input.check:checked');
+                var posto = $('.checkExames').data('posto');
+                var atendimento = $('.checkExames').data('atendimento');
+                var cabecalho = true;
+
+                if(auto){
+                    cabecalho = 0;                            
+                }
+
+                var correl = [];
+
+                checkboxes.each(function(){
+                    correl.push($(this).val());
+                });
+                var paginaPdf = window.open('/impressao', '', ''); 
+                exportPdf(url,tipoAcesso,posto,atendimento,correl,'G',cabecalho,paginaPdf);
             });
     
             $('.leftMenu.active a').trigger('click');
