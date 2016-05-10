@@ -56,14 +56,14 @@
         <label>Número do CR</label>
          <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-stethoscope"></i></span>
-            <input type="number" class="form-control" id="cr" name="cr" placeholder="CR" required="">
+            <input type="number" class="form-control" id="cr" name="cr" placeholder="CR" autocomplete="off" required="">
         </div>       
     </div>
     <div class="form-group">
         <label>Senha</label>
         <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-            <input type="password" class="form-control" id="password" placeholder="Senha" name="password" required="">
+            <input type="password" class="form-control" id="password" placeholder="Senha" name="password" autocomplete="off" required="">
         </div>
     </div>
     <button type="submit" class="btn btn-primary block full-width m-b">Acessar</button>

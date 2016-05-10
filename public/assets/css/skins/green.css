@@ -1,8 +1,8 @@
 a {
-  color: #387C86;
+  color: #006532;
 }
 a:hover {
-  color: #76C1CC;
+  color: #1a835a;
 }
 .headLogin {
   background-color: #ffffff;
@@ -103,12 +103,7 @@ body.mini-navbar .nav-header {
   color: #333333;
 }
 .labelAtendimentosClientes {
-  text-align: center;
-  margin-right: 5px;
-  margin-top: 5px;
-  padding: 4px;
   background-color: #ffffff;
-  font-size: 11px;
   border: 1px solid #dadada !important;
 }
 #listFilter li:hover {

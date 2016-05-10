@@ -1,8 +1,8 @@
 a {
-  color: #387C86;
+  color: #f5791f;
 }
 a:hover {
-  color: #76C1CC;
+  color: #f99e5c;
 }
 .headLogin {
   background-color: #ffffff;
@@ -27,7 +27,7 @@ body.boxed-layout #wrapper {
   background-color: #f5791f;
 }
 .nav-header {
-  background: #ffb47f;
+  background: #f9cfb1;
   color: #ffffff;
 }
 #side-menu li a {
@@ -80,7 +80,7 @@ body.boxed-layout #wrapper {
   padding: 0px;
 }
 body.mini-navbar .nav-header {
-  background-color: #ffb47f;
+  background-color: #f9cfb1;
 }
 .navbar-toggle:hover {
   background-color: #ffffff;
@@ -93,7 +93,7 @@ body.mini-navbar .nav-header {
   float: right;
   text-align: center;
   margin-right: 5px;
-  background-color: #ffb47f;
+  background-color: #f9cfb1;
   color: #ffffff;
   border-radius: 0;
 }
@@ -103,16 +103,11 @@ body.mini-navbar .nav-header {
   color: #333333;
 }
 .labelAtendimentosClientes {
-  text-align: center;
-  margin-right: 5px;
-  margin-top: 5px;
-  padding: 4px;
   background-color: #ffffff;
-  font-size: 11px;
   border: 1px solid #dadada !important;
 }
 #listFilter li:hover {
-  background-color: #daeddd !important;
+  background-color: #f9cfb1 !important;
   cursor: pointer;
 }
 #listFilter li {
@@ -144,7 +139,7 @@ li.notClicked {
 .menu-trigger {
   background-color: #f99e5c;
   color: #ffffff;
-  border: 2px solid #ffb47f;
+  border: 2px solid #f9cfb1;
 }
 .msgExameTipoEntrega {
   color: red;
@@ -153,7 +148,7 @@ li.notClicked {
   color: black;
 }
 .btnVoltar {
-  color: #ffb47f;
+  color: #f9cfb1;
 }
 .corTituloExperienceAuth {
   color: #f5791f;

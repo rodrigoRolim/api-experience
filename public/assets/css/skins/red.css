@@ -1,3 +1,9 @@
+a {
+  color: #c52f33;
+}
+a:hover {
+  color: #ce5356;
+}
 .headLogin {
   background-color: #ffffff;
   border-bottom: 1px solid #c52f33;

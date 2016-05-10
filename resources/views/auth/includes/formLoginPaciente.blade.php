@@ -14,7 +14,7 @@
 	        <label>Atendimento</label>
 	          <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
-            	{!! Form::text('atendimento', Input::old('atendimento'), array('placeholder' => 'Atendimento', 'class'=>'form-control','id'=>'atendimento')) !!}
+            	{!! Form::text('atendimento', Input::old('atendimento'), array('placeholder' => 'Atendimento', 'autocomplete'=>'off' , 'class'=>'form-control','id'=>'atendimento')) !!}
 			  </div>
 			  @if ($errors->has('atendimento')) <p class="help-block">{{ $errors->first('atendimento') }}</p> @endif
 		</div>
@@ -25,7 +25,7 @@
 	        <label class="labelCpf">CPF</label>
 	        <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
-            	{!! Form::text('cpf', Input::old('cpf'), array('placeholder' => 'CPF', 'class'=>'form-control','id'=>'cpf', 'required' => '')) !!}
+            	{!! Form::text('cpf', Input::old('cpf'), array('placeholder' => 'CPF', 'autocomplete'=>'off', 'class'=>'form-control','id'=>'cpf', 'required' => '')) !!}
           	</div>
 		  	@if ($errors->has('cpf')) <p class="help-block">{{ $errors->first('cpf') }}</p> @endif
 	    </div>
@@ -33,7 +33,7 @@
 	        <label>Data de Nascimento</label>
 	        <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-            	<input type="text" id="nascimento" name="nascimento" class="form-control" placeholder="Data de Nascimento" required="">
+            	<input type="text" id="nascimento" name="nascimento" class="form-control" placeholder="Data de Nascimento" autocomplete="off" required="">
             </div>
 			@if ($errors->has('nascimento')) <p class="help-block">{{ $errors->first('nascimento') }}</p> @endif
 		</div></div>
@@ -41,7 +41,7 @@
 	        <label>Senha</label>
 	        <div class="input-group">
 	            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-				<input type="password" id="senha" class="form-control" placeholder="Senha" required="" name="password">
+				<input type="password" id="senha" class="form-control" placeholder="Senha" required="" name="password" autocomplete="off">
 	        </div>
 			@if ($errors->has('password')) <p class="help-block">{{ $errors->first('password') }}</p> @endif
 	    </div>

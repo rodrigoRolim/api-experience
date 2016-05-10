@@ -18,8 +18,10 @@
         <div class="row">
             <div class="col-md-6 hidden-xs">
                 <h2>
-                    <span class="text-navy">{!! Html::image(config('system.eXperienceLogoHorizontal'), 'logo_exp', array('title' => 'eXperience - codemed', 'style'=>'height: 80px;')) !!}</span>
-                    {!!config('system.loginText.subTitle')!!}
+                    <a href="{{url('/')}}/sobre">
+                        <span class="text-navy">{!! Html::image(config('system.eXperienceLogoHorizontal'), 'logo_exp', array('title' => 'eXperience - codemed', 'src'=>'experience/sobre', 'style'=>'height: 80px;')) !!}</span>
+                        {!!config('system.loginText.subTitle')!!}
+                    </a>
                 </h2>
                 {!!config('system.loginText.description')!!}
             </div>

@@ -55,6 +55,11 @@
 <div id="page-wrapper" class="gray-bg">
      <div class="row-fluid infoCliente">
          <div class="col-xs-12 areaPaciente">
+            @if(Auth::user()['tipoAcesso'] == 'MED')
+            <div class="col-xs-1">
+                <a href="{{url('/')}}/medico" class="btn btn-lg btnVoltarMedico pull-left"><i class="fa fa-arrow-left" style="font-size: 24px;"></i></a>                
+            </div>
+            @endif
              <div class="col-xs-3">
                  <div class="infoAtendimento">
                      <i class="fa fa-heartbeat" data-toggle="tooltip" data-placement="bottom" title="Posto/Atendimento"> </i>
@@ -204,7 +209,7 @@
                             var posto = $(e.currentTarget).data('posto');
                             var atendimento = $(e.currentTarget).data('atendimento');
 
-                            var dataExameResult = exames.detalheExame("{{url('/')}}","paciente",posto,atendimento,correl);
+                            var dataExameResult = exames.detalheExame("{{url('/')}}",tipoAcesso,posto,atendimento,correl);
 
                             $('#modalTitleExames').html('Exames Descrição');
                             $('#modalFooterExames #btn').html('');

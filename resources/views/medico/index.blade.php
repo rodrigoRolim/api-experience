@@ -44,7 +44,7 @@
             </div>
             <div class="col-md-2">
                 <div class="input-group m-b filtrar col-md-12" style="margin-bottom:0px;padding-top:17px;">
-                    <a class="btn btn-warning btn-outline col-md-12" id="btnFiltrar"><i class="fa fa-filter fa-2"> </i> Filtrar</a>
+                    <a class="btn btn-warning btn-outline col-md-12 not-active" id="btnFiltrar"><i class="fa fa-filter fa-2"> </i> Filtrar</a>
                 </div>
             </div>
         </form>
@@ -94,6 +94,25 @@
                 maxDate: moment().toDate(), 
             });
 
+            $("#dataInicio,#dataFim").on("change",function (){ 
+                $('#btnFiltrar').removeClass('not-active');
+            });
+
+            $("#convenio, #situacao, #posto").change(function(e) {
+                select = e.target.id;
+                stringSelect = '#'+select+' option:selected';  
+                txt = $( stringSelect ).text();
+                selecthashtag = '#'+select;
+                $('#btnFiltrar').removeClass('not-active');
+
+                if(txt == 'Todos'){
+                     $(selecthashtag).css('background-color','white');
+                }else{
+                     $(selecthashtag).css('background-color','#CFECCF');                    
+                }
+
+            });
+
             $(".menu-trigger").click(function() {
                 $(".boxFiltro").slideToggle(400, function() {
                     $(this).toggleClass("nav-expanded").css('display', '');
@@ -124,10 +143,15 @@
             VMasker($("#dataFim")).maskPattern('99/99/9999');
 
             $('#listFilter').slimScroll({
-                height: 'auto',
+                height: '63vh',
+                width:'100%',
+                size: '12px',
+                railVisible: true,
+                background: '#ADADA',
                 railOpacity: 0.4,
                 wheelStep: 10,
                 minwidth: '100%',
+                allowPageScroll: true,
                 touchScrollStep: 50,
                 alwaysVisible: true
             });
@@ -149,7 +173,6 @@
 
                 var formMedico = $('#formMedico');
                 var postData = formMedico.serializeArray();
-                console.log(postData);
 
                 getClientes(postData);
             });
@@ -169,11 +192,17 @@
                             var cliente = result.data[index];
                             $('.contadorAtd').html('<h5 class="achouAtd">Foram encontrados ' + result.data.length + ' atendimentos para as datas selecionadas   .</h5>');
 
+                            if(cliente.telefone != null){
+                                cliente.telefone = '<span class="ajusteFonte"><i class="fa fa-phone"></i> '+cliente.telefone+' </span>'
+                            }else{
+                                cliente.telefone = '';
+                            }
+
                             var item =   '<li class="col-md-12 col-sm-12 col-xs-12 " data-key="'+cliente.key+'">'+
                                             '<div class="col-md-4 col-sm-6 col-xs-12 dadosPaciente text-left">'+
                                                 '<strong>'+cliente.nome+'</strong><br><i class="'+((cliente.sexo == "M")?"fa fa-mars":"fa fa-venus")+'"></i> &nbsp;'+cliente.idade+
                                             '</div>'+
-                                            '<div class="col-md-2 col-sm-6 col-xs-12 hidden-xs text-left"><span class="ajusteFonte"><i class="fa fa-phone"></i> '+cliente.telefone+' </span></div>'+
+                                            '<div class="col-md-2 col-sm-6 col-xs-12 hidden-xs text-left">'+cliente.telefone+'</div>'+
                                             '<div class="col-md-6 col-sm-12 col-xs-12 hidden-xs data-toggle="tooltip" data-placement="right" title="span"><Atendimento class=" ajusteFonte"></span>';
                             var count = 0;
                             

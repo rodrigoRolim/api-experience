@@ -8,7 +8,7 @@
 	        <label>Atendimento</label>
 	          <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
-            	{!! Form::text('atendimento', Input::old('atendimento'), array('placeholder' => 'Atendimento', 'class'=>'form-control','id'=>'atendimento')) !!}
+            	{!! Form::text('atendimento', Input::old('atendimento'), array('placeholder' => 'Atendimento', 'autocomplete'=>'off', 'class'=>'form-control','id'=>'atendimento')) !!}
 			  </div>
 			  @if ($errors->has('atendimento')) <p class="help-block">{{ $errors->first('atendimento') }}</p> @endif
 		</div>
@@ -16,7 +16,7 @@
 	        <label>Senha</label>
 	        <div class="input-group">
 	            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-				<input type="password" id="senha" class="form-control" placeholder="Senha" required="" name="password">
+				<input type="password" id="senha" class="form-control" placeholder="Senha" required="" name="password" autocomplete="off">
 	        </div>
 			@if ($errors->has('password')) <p class="help-block">{{ $errors->first('password') }}</p> @endif
 	    </div>

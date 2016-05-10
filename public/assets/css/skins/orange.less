@@ -1,19 +1,19 @@
 @corPrimaria:  #F5791F;
 @corSecundaria: #F99E5C;
-@corAlternativa: #FFB47F;
+@corAlternativa: #F9CFB1;
 
-@corFocus : #daeddd;
+@corFocus : @corAlternativa;
 
 @padraoCinza: #DADADA;
 @corFonte: #333;
 @branco: #FFF;
 
 a{
-  color:#387C86;
+  color: @corPrimaria;
 }
 
 a:hover{
- color:#76C1CC;
+ color: @corSecundaria;
 }
 
 .headLogin{
@@ -139,12 +139,7 @@ body.mini-navbar .nav-header{
 }
 
 .labelAtendimentosClientes{
-	text-align: center;
-	margin-right: 5px;
-	margin-top: 5px;
-	padding: 4px;
 	background-color: @branco;
-	font-size: 11px;
 	border: 1px solid @padraoCinza !important;
 }
 
