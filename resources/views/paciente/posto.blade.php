@@ -189,7 +189,8 @@
 
                             $('#btnPdfDetalhe').click(function(e){
                                 var cabecalho = true;
-                                exportPdf(url,tipoAcesso,posto,atendimento,correl,'M',cabecalho);
+                                var paginaPdf = window.open ('/impressao', '', ''); 
+                                exportPdf(url,tipoAcesso,posto,atendimento,correl,'M',cabecalho,paginaPdf);
                             });
                         });
                     });
@@ -247,7 +248,8 @@
                         correl.push($(this).val());
                     });
                     var cabecalho = true;
-                    exportPdf(url,tipoAcesso,posto,atendimento,correl,'G',cabecalho);
+                    var paginaPdf = window.open ('/impressao', '', ''); 
+                    exportPdf(url,tipoAcesso,posto,atendimento,correl,'G',cabecalho,paginaPdf);
                 });
            });
 

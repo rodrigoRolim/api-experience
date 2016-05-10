@@ -94,7 +94,7 @@
 		        <span class='statusNaoRealizado'></span>Não Realizado
             </div>  
             <div id='btnPdfPrincipal' class='col-md-4 col-sm-4'>
-        		<button type='button' class='btn btn-danger pull-right'>Gerar PDF</button>
+        		<button id="btnExportar" type='button' class='btn btn-danger pull-right'>Gerar PDF</button>
     		</div>
         </div>
     </div>
@@ -239,7 +239,9 @@
                                     if(auto){
                                         cabecalho = 0;                            
                                     }
-                                    exportPdf(url,tipoAcesso,posto,atendimento,correl,'M',cabecalho);
+                                    var paginaPdf = window.open ('/impressao', '', ''); 
+                                    console.log(correl);
+                                    exportPdf(url,tipoAcesso,posto,atendimento,correl,'M',cabecalho,paginaPdf);
                                 });
                             });
                         });
@@ -286,7 +288,8 @@
 
                     $('.checkAll').trigger('ifChecked');
 
-                    $('#btnPdfPrincipal').click(function(e){                    
+                    $('#btnExportar').click(function(e){   
+                        e.preventDefault();
                         var checkboxes = $('input.check:checked');
                         var posto = $('.checkExames').data('posto');
                         var atendimento = $('.checkExames').data('atendimento');
@@ -301,7 +304,8 @@
                         checkboxes.each(function(){
                             correl.push($(this).val());
                         });
-                        exportPdf(url,tipoAcesso,posto,atendimento,correl,'G',cabecalho);
+                        var paginaPdf = window.open('/impressao', '', ''); 
+                        exportPdf(url,tipoAcesso,posto,atendimento,correl,'G',cabecalho,paginaPdf);
                     });
                 }); 
             });

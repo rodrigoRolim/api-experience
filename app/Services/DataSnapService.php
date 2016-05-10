@@ -22,7 +22,7 @@ class DataSnapService
 	public static function exportarPdf($posto,$atendimento,$pure,Array $correls,$cabecalho){
 
 		if(sizeof($correls['correl']) == 1){
-			$correlativos = $correls['correl'][0];
+			$correlativos = $correls['correl'];
 		}else{
 			$correlativos = implode(",", $correls['correl']);			
 		}
