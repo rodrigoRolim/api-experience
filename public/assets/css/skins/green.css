@@ -1,11 +1,9 @@
-a{
-  color:#387C86;
+a {
+  color: #387C86;
 }
-
-a:hover{
- color:#76C1CC;
+a:hover {
+  color: #76C1CC;
 }
-
 .headLogin {
   background-color: #ffffff;
   border-bottom: 1px solid #006532;
@@ -122,6 +120,7 @@ body.mini-navbar .nav-header {
 }
 .boxCenter {
   background-color: #ffffff;
+  min-height: 58vh;
 }
 li.clicked {
   background-color: #ffffff;
@@ -152,4 +151,10 @@ li.notClicked {
 }
 .postoRealizante {
   color: black;
+}
+.btnVoltar {
+  color: #35b584;
+}
+.corTituloExperienceAuth {
+  color: #006532;
 }

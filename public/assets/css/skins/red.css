@@ -92,6 +92,7 @@ body.mini-navbar .nav-header {
   border-radius: 0;
 }
 .dadosExames {
+  margin-top: 10px;
   width: 80%;
   height: 10px;
   color: #333333;
@@ -132,4 +133,15 @@ li.notClicked {
 .boxLogin {
   background-color: #FFFDFD;
   border: 1px solid #C7C7C7;
+}
+.menu-trigger {
+  background-color: #ce5356;
+  color: #ffffff;
+  border: #ce5356;
+}
+.btnVoltar {
+  color: #d65357;
+}
+.corTituloExperienceAuth {
+  color: #c52f33;
 }

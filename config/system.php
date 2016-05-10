@@ -8,7 +8,7 @@ return [
     'clienteLogo' => env('APP_LOGO'),
     'devLogo'     => '/assets/images/logo.png',
     'experienceLogo' => '/assets/images/icone_experience.png',
-    'eXperienceLogoHorizontal' => '/assets/images/logo_experience.png',
+    'eXperienceLogoHorizontal' => '/assets/images/eXperience-Laranja.png',
     'clienteUrl'  => env('APP_CLIENTE_URL'),
     'PDFUrl'      => env('APP_PDF_URL'),
     'PDFUrlTemp'  => env('APP_PDF_TEMP'),
@@ -22,7 +22,7 @@ return [
     'HOSTNAME_AUTOATENDIMENTO' => env('HOSTNAME_AUTOATENDIMENTO'),
     'loginText'   =>  [
         'title'         => 'eXperience',
-        'subTitle'      => '<h2 style="color:#76C1CC">Aplicação para visualização de resultados</h2>',
+        'subTitle'      => '<h2 class="corTituloExperienceAuth">Aplicação para visualização de resultados</h2>',
         'description'   => '<p>Solução tecnológica desenvolvida por <a href="www.codemed.com.br" target="_new">Codemed</a></p>',
         'footerText'    => '<strong>Codemed</strong> ©2014-2015',
     ],

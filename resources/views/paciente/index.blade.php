@@ -119,6 +119,7 @@
             var tipoAcesso = '{{Auth::user()['tipoAcesso']}}';
             var auto = '{{Auth::user()['autoAtendimento']}}';
             var url = '{{url('/')}}';
+
             if(tipoAcesso == 'MED'){
                 tipoAcesso = 'medico';
             }
@@ -193,7 +194,7 @@
                     dataMsg['tipoEntregaInvalido'] = "{!!config('system.messages.exame.tipoEntregaInvalido')!!}";
 
                     $('.listaExames').html('');
-                    
+                    $('#btnPdfPrincipal').hide();
                     $('.listaExames').append(exames.render(result,saldoDevedor,dataMsg));
                     
                     if(!saldoDevedor){

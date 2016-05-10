@@ -1,12 +1,20 @@
-@corPrimaria:  #2795BA;
-@corSecundaria: #84AFBD;
-@corAlternativa: #B6CED6;
+@corPrimaria:  #F5791F;
+@corSecundaria: #F99E5C;
+@corAlternativa: #FFB47F;
 
-@corFocus : #B8DAE6;
+@corFocus : #daeddd;
 
 @padraoCinza: #DADADA;
 @corFonte: #333;
 @branco: #FFF;
+
+a{
+  color:#387C86;
+}
+
+a:hover{
+ color:#76C1CC;
+}
 
 .headLogin{
 	background-color: @branco;
@@ -125,15 +133,16 @@ body.mini-navbar .nav-header{
 }
 
 .dadosExames{
-	margin-top: 10px;
 	width: 80%;
 	height: 10px;
 	color: @corFonte;
 }
 
 .labelAtendimentosClientes{
+	text-align: center;
 	margin-right: 5px;
 	margin-top: 5px;
+	padding: 4px;
 	background-color: @branco;
 	font-size: 11px;
 	border: 1px solid @padraoCinza !important;
@@ -142,6 +151,11 @@ body.mini-navbar .nav-header{
 
 #listFilter li:hover{
 	background-color: @corFocus !important;
+	cursor: pointer;
+}
+
+#listFilter li{
+	transition: background-color 0.5s ease;
 }
 
 .boxCenter{
@@ -163,6 +177,29 @@ li.notClicked{
     color: @corPrimaria;
     font-weight: 800;
     border-left: 4px solid @corPrimaria;
+}
+
+.msgCpfAcesso{
+	color: red;
+}
+
+.boxLogin{
+	background-color: #FFFDFD;
+	border: 1px solid #C7C7C7;
+}
+
+.menu-trigger{
+	background-color: @corSecundaria;
+	color: @branco;
+	border: 2px solid @corAlternativa;
+}
+
+.msgExameTipoEntrega{
+	color: red;
+}
+
+.postoRealizante{
+	color: black;
 }
 
 .btnVoltar{

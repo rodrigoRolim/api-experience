@@ -1,27 +1,33 @@
+a {
+  color: #387C86;
+}
+a:hover {
+  color: #76C1CC;
+}
 .headLogin {
   background-color: #ffffff;
-  border-bottom: 1px solid #2795ba;
+  border-bottom: 1px solid #f5791f;
 }
 .text-navy {
-  color: #2795ba;
+  color: #f5791f;
 }
 .btn-primary,
 .btn-primary:focus {
-  background-color: #2795ba;
-  border-color: #2795ba;
+  background-color: #f5791f;
+  border-color: #f5791f;
 }
 .btn-primary:hover {
-  background-color: #84afbd;
-  border-color: #84afbd;
+  background-color: #f99e5c;
+  border-color: #f99e5c;
 }
 .form-control:focus {
-  border-color: #84afbd !important;
+  border-color: #f99e5c !important;
 }
 body.boxed-layout #wrapper {
-  background-color: #2795ba;
+  background-color: #f5791f;
 }
 .nav-header {
-  background: #b6ced6;
+  background: #ffb47f;
   color: #ffffff;
 }
 #side-menu li a {
@@ -30,22 +36,22 @@ body.boxed-layout #wrapper {
 }
 #side-menu li a:hover {
   background-color: #ffffff;
-  color: #2795ba;
+  color: #f5791f;
   font-weight: 800;
-  border-left: 4px solid #2795ba;
+  border-left: 4px solid #f5791f;
 }
 #side-menu .active {
   background-color: #ffffff;
-  border-left: 4px solid #2795ba !important;
+  border-left: 4px solid #f5791f !important;
 }
 #side-menu .active a:hover {
   border-left: none;
 }
 #side-menu .active a {
-  color: #2795ba;
+  color: #f5791f;
 }
 .corPadrao {
-  background-color: #2795ba;
+  background-color: #f5791f;
   color: #333333;
 }
 .textoBranco {
@@ -74,7 +80,7 @@ body.boxed-layout #wrapper {
   padding: 0px;
 }
 body.mini-navbar .nav-header {
-  background-color: #b6ced6;
+  background-color: #ffb47f;
 }
 .navbar-toggle:hover {
   background-color: #ffffff;
@@ -87,25 +93,30 @@ body.mini-navbar .nav-header {
   float: right;
   text-align: center;
   margin-right: 5px;
-  background-color: #b6ced6;
+  background-color: #ffb47f;
   color: #ffffff;
   border-radius: 0;
 }
 .dadosExames {
-  margin-top: 10px;
   width: 80%;
   height: 10px;
   color: #333333;
 }
 .labelAtendimentosClientes {
+  text-align: center;
   margin-right: 5px;
   margin-top: 5px;
+  padding: 4px;
   background-color: #ffffff;
   font-size: 11px;
   border: 1px solid #dadada !important;
 }
 #listFilter li:hover {
-  background-color: #b8dae6 !important;
+  background-color: #daeddd !important;
+  cursor: pointer;
+}
+#listFilter li {
+  transition: background-color 0.5s ease;
 }
 .boxCenter {
   background-color: #ffffff;
@@ -119,13 +130,31 @@ li.notClicked {
 }
 #side-menu li a:active {
   background-color: #ffffff;
-  color: #2795ba;
+  color: #f5791f;
   font-weight: 800;
-  border-left: 4px solid #2795ba;
+  border-left: 4px solid #f5791f;
+}
+.msgCpfAcesso {
+  color: red;
+}
+.boxLogin {
+  background-color: #FFFDFD;
+  border: 1px solid #C7C7C7;
+}
+.menu-trigger {
+  background-color: #f99e5c;
+  color: #ffffff;
+  border: 2px solid #ffb47f;
+}
+.msgExameTipoEntrega {
+  color: red;
+}
+.postoRealizante {
+  color: black;
 }
 .btnVoltar {
-  color: #b6ced6;
+  color: #ffb47f;
 }
 .corTituloExperienceAuth {
-  color: #2795ba;
+  color: #f5791f;
 }
