@@ -67,7 +67,11 @@ class AuthController extends Controller
     */
     public function getAutoatendimento($keyboard = 0)
     {
-        return view('auth.autoatendimento',compact(['keyboard']));
+        if(env('APP_ACESSO_AUTOATENDIMENTO')){
+            return view('auth.autoatendimento',compact(['keyboard']));
+        }
+
+        \App::abort(404);
     }
 
     /**
