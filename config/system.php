@@ -52,6 +52,8 @@ return [
     'qtdCaracterAtend' => env('APP_QTD_CHAR_ATD'),
     'atendimentoMask'  => env('APP_ATD_MASK'),
     'postoMask'        => env('APP_POSTO_MASK'),
+    'atdMaskZeros'     => env('APP_QTD_ZEROS_ATD'),
+    'postoMaskZeros'   => env('APP_QTD_ZEROS_POSTO'),
     'selectFiltroSituacaoAtendimento' => [
         '' => 'Todos',
         'TF' => 'Finalizados',

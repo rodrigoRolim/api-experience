@@ -94,6 +94,9 @@
                 maxDate: moment().toDate(), 
             });
 
+            var padAtd = '{{config('system.atdMaskZeros')}}';
+            var padPos = '{{config('system.postoMaskZeros')}}';
+
             $("#dataInicio,#dataFim").on("change",function (){ 
                 $('#btnFiltrar').removeClass('not-active');
             });
@@ -156,7 +159,6 @@
                 alwaysVisible: true
             });
 
-
             $('#filtroPaciente').filterList();             
 
             $('#btnFiltrar').click(function(e){                
@@ -209,14 +211,24 @@
                             $.each( cliente.atendimentos, function( index ){
                                 count++;
                                 var atendimento = cliente.atendimentos[index];
-                                item += '<span class="labelAtendimentosClientes col-sm-3"><i class="fa fa-calendar-check-o" ></i> '+atendimento+"</span>";
+
+                                var medAtd = atendimento.split("|");//separa data do atendimento de posto/atendimento
+                                var dataAtd = medAtd[0];
+                                var postoAtd = medAtd[1].split(" "); //separa posto e atendimento
+                                postoAtd = postoAtd.filter(function(e){return e}); //remove espaços em branco
+
+                                //Mascara em posto e atendimento
+                                postoAtd[1] = padAtd.substring(0, padAtd.length - postoAtd[1].length) + postoAtd[1];
+                                postoAtd[0] = padPos.substring(0, padPos.length - postoAtd[0].length) + postoAtd[0];
+
+                                item += '<span class="labelAtendimentosClientes col-sm-3" data-toggle="tooltip" data-placement="bottom" title="Posto/Atendimento"><i class="fa fa-calendar-check-o" ></i> '+dataAtd+' <br> '+ postoAtd[0]+'/'+postoAtd[1]+"</span>";
 
                                 if(count == 3){
                                     return false;
                                 }
                             });
 
-                            item += '</div></div></li>';
+                            item += '</div></li>';
 
                             $('#listFilter').append(item);
                            
