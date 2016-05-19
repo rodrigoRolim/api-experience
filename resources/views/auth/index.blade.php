@@ -73,6 +73,13 @@
         </div>
     </div>
 </body>
+<footer id="footer-login" class="hidden-lg hidden-md" style="background-color: white">
+    <div class="pull-right">
+        <a href="{{url()}}/sobre" target="_blank">
+            {!! Html::image(config('system.experienceLogo'), 'logo_exp', array('title' => 'eXperience - codemed','id'=>'logoRodape','style'=>'margin-right:20px;margin-top:4px;')) !!}
+        </a>
+    </div>
+</footer>
 @stop
 
 @section('script')

@@ -39,9 +39,6 @@
 				</div>
 			</div>
 		</div>
-		<div id="footer">
-			@include('layouts.includes.base.footer')
-		</div>
 
 		<script src="{{ asset('/assets/js/jquery-2.1.1.js') }}"></script>
 		<script src="{{ asset('/assets/js/bootstrap.min.js') }}"></script>
