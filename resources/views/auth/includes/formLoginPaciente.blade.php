@@ -83,7 +83,7 @@
 					$('#itemCliente').show();
 					$('#itemAtendimento').hide();
 					$('#tipoLoginPaciente').val('CPF');	
-					$('.labelCpf').append(" <span class='msgCpfAcesso'>({{config('system.messages.paciente.msgCpfAcesso')}})")
+					$('.labelCpf').html(" <span class='msgCpfAcesso'>({{config('system.messages.paciente.msgCpfAcesso')}})")
 					document.getElementById("cpf").focus();
 				}else{
 					$('#itemCliente').hide();
