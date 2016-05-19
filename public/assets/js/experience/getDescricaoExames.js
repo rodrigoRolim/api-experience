@@ -1,6 +1,6 @@
-function getDescricaoExame(url,dadosExames){ 
+function getDescricaoExame(url,dadosExames,tipoAcesso){ 
     $.ajax({
-        url : url+'/paciente/detalheatendimentoexamecorrel/'+dadosExames.posto+'/'+dadosExames.atendimento+'/'+dadosExames.correl+'',
+        url : url+'/'+tipoAcesso+'/detalheatendimentoexamecorrel/'+dadosExames.posto+'/'+dadosExames.atendimento+'/'+dadosExames.correl+'',
         type: 'GET',                            
         success:function(result){
             if(result.data == null){  

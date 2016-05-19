@@ -199,7 +199,7 @@ $(document).ready(function(){
           case 'OK':
               if(!exportandoPdf){
                 $('#tabelaDetalhes').html('<div class="loader">Loading...</div>{!!config("system.messages.loadingExameMobile")!!}');
-                getDescricaoExame(url,dadosExames);
+                getDescricaoExame(url,dadosExames,tipoAcesso);
                 $('#modalDetalhamento').openModal({
                     dismissible: false, // Modal can be dismissed by clicking outside of the modal
                     in_duration: 300, // Transition in duration
