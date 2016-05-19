@@ -73,6 +73,7 @@
   <script src="{{ asset('/assets/js/plugins/sweetalert/sweetalert.min.js') }}"></script>
   <script src="{{ asset('/assets/js/experience/getClientes.js') }}"></script>
   <script src="{{ asset('/assets/js/experience/eventoBotaoSairNavegador.js') }}"></script>
+  <script src="{{ asset('/assets/js/plugins/js-cookie/js.cookie.js') }}"></script>
 
   </body>
 </html>
@@ -80,7 +81,8 @@
 <script type="text/javascript">
 
   $(document).ready(function(){
-    
+
+     
     $('select').material_select();
     $("#convenio-button").removeClass(); //Alternativa para delegação arbitraria de classes pelo tema jquery mobile..
     $("#posto-button").removeClass();
@@ -158,6 +160,11 @@
         dataInicio = dataInicio.format('DD/MM/YYYY');
         dataFim = dataFim.format('DD/MM/YYYY');
 
+        dataInicioCookie = new moment(formData[0].value); 
+        dataFimCookie = new moment(formData[1].value); 
+        dataInicioCookie = dataInicioCookie.format('YYYY-MM-DD');
+        dataFimCookie = dataFimCookie.format('YYYY-MM-DD');
+
         formData[0].value = dataInicio;
         formData[1].value = dataFim;
 
@@ -167,8 +174,21 @@
 
         url = "{{url('/')}}";            
         getClientes(url,formData);
+        Cookies.set('dataInicio', dataInicioCookie);
+        Cookies.set('dataFim', dataFimCookie);
 
     });
+
+   if(Cookies.get('dataInicio') != null){
+          //Alimenta o filtro do os dados guardados em cache
+          $('#dataInicio').val(Cookies.get('dataInicio'));  
+          $('#dataFim').val(Cookies.get('dataFim'));
+          $('#btnFiltrar').click();
+      }else{
+          //Alimenta o filtro com a data pre definida
+          $('#dataInicio').val(dataInicio);
+          $('#dataFim').val(dataFim);
+      }
 
 
 });

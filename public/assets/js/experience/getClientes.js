@@ -9,7 +9,7 @@ function getClientes(url,postData){
             $.each( result.data, function( index ){
                 var cliente = result.data[index];
 
-                var item = '<li class="waves-effect boxPaciente" style="border-bottom: 1px solid #e7e7e9;" data-key="'+cliente.key+'">'+				             
+                var item = '<li class="boxPaciente" style="border-bottom: 1px solid #e7e7e9;" data-key="'+cliente.key+'">'+				             
 				              	'<div class="truncate"><strong>'+cliente.nome+'</strong><br>'+
 				              	'<span style="font-family: Century Gothic, sans-serif;">'+
 				              	'<i class="'+((cliente.sexo == "M")?"mdi-gender-male":"mdi-gender-female")+'"></i>'+ 

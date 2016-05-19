@@ -34,7 +34,7 @@ function getExames(url,tipoAcesso,posto,atendimento){
 	      visualizacao = '<div id="boxExame" data-visualizacao="P" data-correl="'+exame.correl+'" data-atendimento="'+exame.atendimento+'" data-posto="'+exame.posto+'">';
 	    }
 
-	    conteudo = '<div class="waves-effect row todo-element '+exame.class+'">'+
+	    conteudo = '<div class="row todo-element '+exame.class+'">'+
 	                  '<div class="col s2 checkResults hide">'+
 	                      checkbox+
 	                    '<label for="todo'+index+'"></label>'+ 

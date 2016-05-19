@@ -80,6 +80,7 @@
   <script src="{{ asset('/assets/js/experience/eventoBotaoSairNavegador.js') }}"></script>
   <script src="{{ asset('/assets/js/experience/exportarPdf.js') }}"></script>
 
+
   </body>
 </html>
 
@@ -148,7 +149,6 @@ $(document).ready(function(){
         }
 
         $('.modal-content').html(''); 
-        $('.modal-content').append('<h5 class="tituloModal">Informações Adicionais</h5>');
         $('.modal-content').append('<br><p>ID: 0'+posto+'/'+atendimento+' </p>'); 
         $('.modal-content').append('<p>Data do Atendimento: '+dataAtendimento+' </p>');
         $('.modal-content').append('<p>Previsão de Entrega: '+dataEntrega+' </p>');  
