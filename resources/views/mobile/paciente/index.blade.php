@@ -30,20 +30,19 @@
           <div class="row navbar-fixed">
           <div class="open-left">
             <i id="open-left" class="mdi mdi-sort-variant"></i>
-          </div>         
-            @if(Auth::user()['tipoAcesso'] == 'MED')
-            <span class="title nomePaciente">{{$atendimentos[0]->nome}}
-            @else
-            <span class="title nomePaciente">{{Auth::user()['nome']}}
-            @endif
-                <i id='close-right' class="mdi-information-outline"></i><br> </span>
-             <span class="infoPaciente"> 
-             Data do Atendimento: <span id="dataAtendimentoPaciente">{{ date('d/m/Y',strtotime($atendimentos[0]->data_atd))}} </span>
-             </span>
+          </div>
+            <div id="areaInformacoesPaciente">         
+              @if(Auth::user()['tipoAcesso'] == 'MED')
+              <span class="title nomePaciente">{{$atendimentos[0]->nome}}
+              @else
+              <span class="title nomePaciente">{{Auth::user()['nome']}}
+              @endif
+                  <i id='close-right' class="mdi-information-outline"></i><br> </span>
+               <span class="infoPaciente"> 
+               Data do Atendimento: <span id="dataAtendimentoPaciente">{{ date('d/m/Y',strtotime($atendimentos[0]->data_atd))}} </span>
+               </span>
+             </div>
            </div>
-<!--           <div class="open-right" id="open-right">
-            <i class="mdi mdi-dots-vertical"></i>
-          </div> -->
         </div>
 
         <!-- Main Content --> 
@@ -148,12 +147,23 @@ $(document).ready(function(){
           $('#gerarPdfMenu').toggleClass('active');
         }
 
+        var listaInfo = '<ul class="collection">'+
+                          '<li id="idAtendimento" class="collection-item center-align"></li>'+
+                          '&nbsp;Previsão de Entrega:<br><li id="previsaoAtd" class="collection-item left-align bkfInfo"></li>'+
+                          '&nbsp;Convênio:<br><li id="convenioAtd" class="collection-item left-align bkfInfo"></li>'+
+                          '&nbsp;Médico Solicitante:<br><li id="solicitanteAtd" class="collection-item left-align bkfInfo"></li>'+
+                        '</ul>';
+
+
+
         $('.modal-content').html(''); 
-        $('.modal-content').append('<br><p>ID: 0'+posto+'/'+atendimento+' </p>'); 
-        $('.modal-content').append('<p>Data do Atendimento: '+dataAtendimento+' </p>');
-        $('.modal-content').append('<p>Previsão de Entrega: '+dataEntrega+' </p>');  
-        $('.modal-content').append('<p>Convênio:<br> '+convenio+' </p>'); 
-        $('.modal-content').append('<p>Medico Solicitante:<br> '+solicitante+' </p>'); 
+        $('.modal-content').append(listaInfo);
+        $('#idAtendimento').append('<strong>ID:</strong> <span>0'+posto+'/'+atendimento+' </span><br>'); 
+        $('#idAtendimento').append('<strong> </strong><span>'+dataAtendimento+' </span>');
+        $('#previsaoAtd').append('<span> '+dataEntrega+' </span>'); 
+        $('#convenioAtd').append('<span> '+convenio+' </span>'); 
+        $('#solicitanteAtd').append('<span>'+solicitante+'</span>'); 
+
 
 
         if(mnemonicos == ""){ 
@@ -194,7 +204,6 @@ $(document).ready(function(){
           visualizacao = $(this).data('visualizacao');
           url = "{{url('/')}}";
           var dadosExames = $(this).data();
-
         switch(visualizacao) {
           case 'OK':
               if(!exportandoPdf){
@@ -220,7 +229,7 @@ $(document).ready(function(){
 
     })
 
-     $('.mdi-information-outline').click(function(e){
+     $('#areaInformacoesPaciente').click(function(e){
           $('#modal').openModal();
      });
 
@@ -253,6 +262,7 @@ $(document).ready(function(){
      });
 
 });  
+
 
 </script>
 

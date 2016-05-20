@@ -10,6 +10,27 @@
 	font-size: 0.5em !important;
 	margin-left: 0px !important;
 }
+.modal .modal-content{
+	padding: 2px;
+	font-size: 0.8em;
+	background-color: white;
+}
+.collection{
+	border: none;
+}
+.collection-item{
+    margin: 5px !important;
+	font-size: 0.8em !important;
+	padding-left: 0px !important;
+	padding-top: 0px !important;
+	padding-bottom: 0px !important;
+	line-height: 18px !important;
+	background-color: #efefef !important;
+}
+.bkfInfo{
+	background-color: white !important;
+	border-bottom: 1px solid #e0e0e0 !important;
+}
 .infoPaciente{
 	font-size: 0.8em;
 }
