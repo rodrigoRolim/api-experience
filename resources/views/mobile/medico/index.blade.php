@@ -31,7 +31,7 @@
       <div class="snap-content news z-depth-5" id="content">
         <!-- Toolbar -->
         <div id="toolbar">
-            <div class="row navbar-fixed">
+            <div class="row navbar">
             <div class="open-left">
               <i id="open-left" class="mdi mdi-sort-variant"></i>
             </div>
@@ -81,7 +81,6 @@
 <script type="text/javascript">
 
   $(document).ready(function(){
-
      
     $('select').material_select();
     $("#convenio-button").removeClass(); //Alternativa para delegação arbitraria de classes pelo tema jquery mobile..

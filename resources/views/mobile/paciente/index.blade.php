@@ -21,13 +21,33 @@
      @include('mobile.paciente.includes.modInfo')
      @include('mobile.paciente.includes.modDetalhes')
   <body>
+
+    <div class="navbar-fixed">
+      <nav>
+          <div class="open-left-alt openAlt">
+            <i id="open-left-alt" class="mdi mdi-sort-variant"></i>
+          </div>
+            <div id="areaInformacoesPaciente-alt">         
+              @if(Auth::user()['tipoAcesso'] == 'MED')
+              <span class="title nomePaciente">{{$atendimentos[0]->nome}}
+              @else
+              <span class="title nomePaciente">{{Auth::user()['nome']}}
+              @endif
+                  <i id='close-right-alt' class="mdi-information-outline infoAlt"></i><br> </span>
+               <span class="infoPaciente"> 
+               Data do Atendimento: <span id="dataAtendimentoPaciente">{{ date('d/m/Y',strtotime($atendimentos[0]->data_atd))}} </span>
+               </span>
+             </div>
+      </nav>
+    </div>
+
     <div class="m-scene" id="main"> <!-- Page Container -->
      @include('mobile.paciente.includes.menu')
       <!-- Page Content -->
       <div class="snap-content z-depth-5" id="content">
         <!-- Toolbar -->
         <div id="toolbar">
-          <div class="row navbar-fixed">
+          <div class="row navbar">
           <div class="open-left">
             <i id="open-left" class="mdi mdi-sort-variant"></i>
           </div>
@@ -85,7 +105,23 @@
 
 <script type="text/javascript">
 
+$(window).scroll(function() {
+
+    if ($(this).scrollTop()>0)
+     {
+        $('.navbar-fixed').fadeIn();
+        $('.navbar').fadeOut();
+     }
+    else
+     {
+      $('.navbar-fixed').fadeOut();
+      $('.navbar').fadeIn();
+     }
+
+ });
+
 $(document).ready(function(){
+    $('.navbar-fixed').fadeOut();
 
     var tipoAcesso = '{{Auth::user()['tipoAcesso']}}';
     var url = '{{url('/')}}';
@@ -123,6 +159,10 @@ $(document).ready(function(){
           $('.snap-drawer-left').hide();
         else
           $('.snap-drawer-left').show();
+    });
+
+    $('#open-left-alt').click(function(e){ 
+       $('#open-left').click();
     });
     
     $('.btnAtendimento').click(function(e){ 
@@ -229,7 +269,7 @@ $(document).ready(function(){
 
     })
 
-     $('#areaInformacoesPaciente').click(function(e){
+     $('#areaInformacoesPaciente, #areaInformacoesPaciente-alt').click(function(e){
           $('#modal').openModal();
      });
 

@@ -1,4 +1,7 @@
 /*--Paciente--*/
+#toolbar{
+	border-bottom: 1px solid #e7e7e9;
+}
 .areaLegendaExames{
 	padding: 5px;
 }
@@ -33,6 +36,7 @@
 }
 .infoPaciente{
 	font-size: 0.8em;
+  	color: #9e9e9e;
 }
 .nomePaciente{
 	font-size: 18px !important;
@@ -48,6 +52,14 @@
 .infoAdicional{
 	float: right;
 	margin-right: 5px;
+}
+.openAlt{
+	font-size: 1.5em;
+	margin-top: 1px;
+}
+.infoAlt{
+    font-size: 1.3em;
+    margin-top: 20px;
 }
 #modalDetalhamento{
 	max-height: 95%;

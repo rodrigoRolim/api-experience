@@ -3,11 +3,12 @@ function getDescricaoExame(url,dadosExames,tipoAcesso){
         url : url+'/'+tipoAcesso+'/detalheatendimentoexamecorrel/'+dadosExames.posto+'/'+dadosExames.atendimento+'/'+dadosExames.correl+'',
         type: 'GET',                            
         success:function(result){
-            if(result.data == null){  
-           $('#modalExames').modal('hide');
-                swal("Erro ao carregar descrição do exame..", "Não há resultados disponíveis para visualização.", "error");                                    
-                return false;
-            }      
+            console.log(result.data);
+            if(result.data == '' || result.data == null){  
+               $('.mdi-close').click();
+                    swal("Erro ao carregar descrição do exame..", "Não há resultados disponíveis para visualização.", "error");                                    
+                    return false;
+                }      
             var descricao = result.data;  
             var analitos = result.data.ANALITOS;
             var conteudo = '';

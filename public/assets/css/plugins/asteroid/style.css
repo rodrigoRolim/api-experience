@@ -168,7 +168,6 @@ p {
   margin: 0 0 11px;
 }
 span {
-  color: #9e9e9e;
   font-size: 14px;
 }
 a {
@@ -505,6 +504,14 @@ textarea.materialize-textarea:focus:not([readonly])+label {
   text-align: center;
   position: relative;
 }
+.open-left-alt {
+  float: left;
+  height: 56px;
+  line-height: 56px;
+  width: 56px;
+  text-align: center;
+  position: relative;
+}
 .open-right {
   float: right;
   height: 56px;
@@ -573,7 +580,6 @@ textarea.materialize-textarea:focus:not([readonly])+label {
   left: 0;
   width: auto;
   height: auto;
-  background: url(../img/background.jpg) no-repeat top right / cover;
 }
 .snap-drawer {
   position: absolute;
