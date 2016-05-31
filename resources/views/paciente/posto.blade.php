@@ -111,10 +111,9 @@
 
             var tipoAcesso = '{{Auth::user()['tipoAcesso']}}';
             var url = '{{url('/')}}';
-            var cabecalho = '{{config("system.impressaoTimbrado")}}';
-            Cookies.set('cabecalho',cabecalho);
-
-            $('#checkTimbrado').iCheck('check');
+            if(Cookies.get('cabecalho') == 'true'){
+                $('#checkTimbrado').iCheck('check');                
+            }
 
             $('#checkTimbrado').on('ifChecked', function (event){
                 Cookies.set('cabecalho',true);  

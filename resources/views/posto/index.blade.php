@@ -118,10 +118,14 @@
                 checkboxClass: 'icheckbox_square-grey',
             });
 
-            var cabecalho = '{{config("system.impressaoTimbrado")}}';
-            Cookies.set('cabecalho',cabecalho);
+            if(Cookies.get('cabecalho') == null){
+                var cabecalho = '{{config("system.impressaoTimbrado")}}';
+                Cookies.set('cabecalho',cabecalho);
+            }
 
-            $('#checkTimbrado').iCheck('check');
+            if(Cookies.get('cabecalho') == 'true'){
+                $('#checkTimbrado').iCheck('check');                
+            }
 
             $('#checkTimbrado').on('ifChecked', function (event){
                 Cookies.set('cabecalho',true);  
