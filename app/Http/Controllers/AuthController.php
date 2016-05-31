@@ -244,12 +244,14 @@ class AuthController extends Controller
         unset($_COOKIE['acomodacao']);
         unset($_COOKIE['situacao']);
         unset($_COOKIE['postoRealizante']);
+        unset($_COOKIE['cabecalho']);
 
         setcookie('dataInicio', '', time() - 3600, '/'); // empty value and old timestamp
         setcookie('dataFim', '', time() - 3600, '/'); // empty value and old timestamp
         setcookie('acomodacao', '', time() - 3600, '/'); // empty value and old timestamp
         setcookie('situacao', '', time() - 3600, '/'); // empty value and old timestamp
         setcookie('postoRealizante', '', time() - 3600, '/'); // empty value and old timestamp
+        setcookie('cabecalho', '', time() - 3600, '/'); // empty value and old timestamp
 
         //Destroi toda a sessão do usuário logado
         Session::flush();

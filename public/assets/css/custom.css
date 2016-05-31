@@ -16,6 +16,12 @@ body,.text-center{
 	font-size: 10px;
 }
 
+.imprimirTimbrado{
+	margin-top: 5px;
+	margin-left: 10px; 
+	font-weight: bold;
+}
+
 .exemploBusca{
 	margin-bottom: 10px;
 	margin-left:10px; 

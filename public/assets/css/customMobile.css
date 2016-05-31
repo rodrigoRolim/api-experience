@@ -61,6 +61,26 @@
     font-size: 1.3em;
     margin-top: 20px;
 }
+#modal{
+	width: 95%;
+}
+#idAtendimento{
+	background-color: #fff !important;
+	font-size: 1em !important;
+    color: #9E9E9E !important;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+#solicitanteAtd,#previsaoAtd{
+	background-color: #efefef !important;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-size: 1.2em !important;
+}
+#convenioAtd{
+	background-color: #fff !important;
+	border-bottom: 0px !important;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-size: 1.2em !important; 
+}
 #modalDetalhamento{
 	max-height: 95%;
 	width: 95%;

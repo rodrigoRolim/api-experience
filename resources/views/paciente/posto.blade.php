@@ -13,6 +13,7 @@
                 <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span> <span class="caret"></span><br>
             </button> 
             <ul class="dropdown-menu pull-right itensInfoUser"> 
+            <li class="item imprimirTimbrado"><input id="checkTimbrado" type="checkbox"></i>&nbsp; Imprimir Timbrado</li> 
                 <li class="item">
                     <a href="{{url('/')}}/auth/logout">
                         <i class="fa fa-sign-out"></i> Sair
@@ -102,6 +103,7 @@
     <script src="{{ asset('/assets/js/plugins/sweetalert/sweetalert.min.js') }}"></script>
     <script src="{{ asset('/assets/js/experience/exames/exames.js') }}"></script>
     <script src="{{ asset('/assets/js/experience/exportarPdf.js') }}"></script>
+    <script src="{{ asset('/assets/js/plugins/js-cookie/js.cookie.js') }}"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -109,6 +111,18 @@
 
             var tipoAcesso = '{{Auth::user()['tipoAcesso']}}';
             var url = '{{url('/')}}';
+            var cabecalho = '{{config("system.impressaoTimbrado")}}';
+            Cookies.set('cabecalho',cabecalho);
+
+            $('#checkTimbrado').iCheck('check');
+
+            $('#checkTimbrado').on('ifChecked', function (event){
+                Cookies.set('cabecalho',true);  
+            });
+
+            $('#checkTimbrado').on('ifUnchecked', function (event){
+                Cookies.set('cabecalho',false);    
+            });
 
             if(tipoAcesso == 'POS'){
                 tipoAcesso = 'posto';
@@ -187,10 +201,9 @@
                                 $('#modalFooterExames #btn').html('<a href="#" id="btnPdfDetalhe" data-correl="'+correl+'" data-posto="'+posto+'" data-atendimento="'+atendimento+'" class="btn btn-danger btnPdf">Gerar PDF</a>');
                             }
 
-                            $('#btnPdfDetalhe').click(function(e){
-                                var cabecalho = true;
+                            $('#btnPdfDetalhe').click(function(e){                               
                                 var paginaPdf = window.open ('/impressao', '', ''); 
-                                exportPdf(url,tipoAcesso,posto,atendimento,correl,'M',cabecalho,paginaPdf);
+                                exportPdf(url,tipoAcesso,posto,atendimento,correl,'M',Cookies.get('cabecalho'),paginaPdf);
                             });
                         });
                     });
@@ -247,9 +260,8 @@
                     checkboxes.each(function(){
                         correl.push($(this).val());
                     });
-                    var cabecalho = true;
                     var paginaPdf = window.open ('/impressao', '', ''); 
-                    exportPdf(url,tipoAcesso,posto,atendimento,correl,'G',cabecalho,paginaPdf);
+                    exportPdf(url,tipoAcesso,posto,atendimento,correl,'G',Cookies.get('cabecalho'),paginaPdf);
                 });
            });
 

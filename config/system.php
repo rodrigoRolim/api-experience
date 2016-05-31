@@ -20,6 +20,7 @@ return [
     'acessoPaciente' => env('APP_ACESSO_PACIENTE'),
     'acessoAutoAtendimentoTeclado' => env('APP_ACESSO_AUTOATENDIMENTO_TECLADO'),
     'HOSTNAME_AUTOATENDIMENTO' => env('HOSTNAME_AUTOATENDIMENTO'),
+    'impressaoTimbrado' => env('CABECALHO'),
     'loginText'   =>  [
         'title'         => 'eXperience',
         'subTitle'      => '<h2 class="corTituloExperienceAuth">Aplicação para visualização de resultados</h2>',

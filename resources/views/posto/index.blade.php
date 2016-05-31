@@ -1,6 +1,7 @@
 @extends('layouts.layoutBase')
 
 @section('stylesheets')
+    {!! Html::style('/assets/css/plugins/iCheck/custom.css') !!}
     {!! Html::style('/assets/css/plugins/sweetalert/sweetalert.css') !!}
     @parent
 @stop
@@ -10,7 +11,8 @@
         <button data-toggle="dropdown" class="btn btn-usuario dropdown-toggle boxLogin">
             <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span> <span class="caret"></span><br>
         </button>         
-        <ul class="dropdown-menu pull-right itensInfoUser">            
+        <ul class="dropdown-menu pull-right itensInfoUser">
+            <li class="item imprimirTimbrado"><input id="checkTimbrado" type="checkbox"></i>&nbsp; Imprimir Timbrado</li>          
             <li class="item"><a href="{{url()}}/auth/logout"><i class="fa fa-sign-out"></i> Sair</a></li>
         </ul>
     </div>    
@@ -95,6 +97,7 @@
 
 @section('script')
     @parent
+    <script src="{{ asset('/assets/js/plugins/iCheck/icheck.min.js') }}"></script>
     <script src="{{ asset('/assets/js/plugins/moments/moments.js') }}"></script>
     <script src="{{ asset('/assets/js/plugins/datapicker/bootstrap-datepicker.js') }}"></script>
     <script src="{{ asset('/assets/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
@@ -110,6 +113,24 @@
         $(document).ready(function (){
             //Inicia o tooltip
             $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-grey',
+            });
+
+            var cabecalho = '{{config("system.impressaoTimbrado")}}';
+            Cookies.set('cabecalho',cabecalho);
+
+            $('#checkTimbrado').iCheck('check');
+
+            $('#checkTimbrado').on('ifChecked', function (event){
+                Cookies.set('cabecalho',true);  
+            });
+
+            $('#checkTimbrado').on('ifUnchecked', function (event){
+                Cookies.set('cabecalho',false);    
+            });
+
 
             var picker = new Pikaday({ 
                 field: $('.datepicker')[0],
