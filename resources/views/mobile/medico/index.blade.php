@@ -25,6 +25,23 @@
 
 </head>
   <body>
+
+    <div class="navbar-fixed">
+      <nav>
+          <div class="row">
+            <div class="open-left openAlt">
+              <i id="open-left-alt" class="mdi mdi-sort-variant"></i>
+            </div>
+            <span class="title nomePaciente">{{Auth::user()['nome']}} 
+                <i id="filtroUp-alt" class="mdi-filter-outline"></i><br> </span>
+             <span class="infoPaciente"> 
+                  {{Auth::user()['tipo_cr']}}-{{Auth::user()['uf_conselho']}}:{{Auth::user()['crm']}}
+             </span>
+           </div>
+      </nav>
+    </div>
+
+
     <div class="m-scene" id="main"> <!-- Page Container -->
        @include('mobile.medico.includes.menu')
       <!-- Page Content -->
@@ -32,15 +49,15 @@
         <!-- Toolbar -->
         <div id="toolbar">
             <div class="row navbar">
-            <div class="open-left">
-              <i id="open-left" class="mdi mdi-sort-variant"></i>
-            </div>
-            <span class="title nomePaciente">{{Auth::user()['nome']}}
-                <i id="filtroUp" class="mdi-filter-outline"></i><br> </span>
-             <span class="infoPaciente"> 
-                  {{Auth::user()['tipo_cr']}}-{{Auth::user()['uf_conselho']}}:{{Auth::user()['crm']}}
-             </span>
-           </div>
+              <div class="open-left">
+                <i id="open-left" class="mdi mdi-sort-variant"></i>
+              </div>
+              <span class="title nomePaciente">{{Auth::user()['nome']}}
+                  <i id="filtroUp" class="mdi-filter-outline"></i><br> </span>
+               <span class="infoPaciente"> 
+                    {{Auth::user()['tipo_cr']}}-{{Auth::user()['uf_conselho']}}:{{Auth::user()['crm']}}
+               </span>
+             </div>
         </div>
 
         <!-- Main Content -->
@@ -80,8 +97,25 @@
 
 <script type="text/javascript">
 
+
+  $(window).scroll(function() {
+
+      if ($(this).scrollTop()>0)
+       {
+          $('.navbar-fixed').fadeIn();
+          $('.navbar').fadeOut();
+       }
+      else
+       {
+        $('.navbar-fixed').fadeOut();
+        $('.navbar').fadeIn();
+       }
+
+   });
+
   $(document).ready(function(){
-     
+    $('.navbar-fixed').fadeOut(); 
+    
     $('select').material_select();
     $("#convenio-button").removeClass(); //Alternativa para delegação arbitraria de classes pelo tema jquery mobile..
     $("#posto-button").removeClass();
@@ -94,17 +128,26 @@
     });
 
     $('#filtroUp').trigger('click');
-     $('.ui-filterable').hide(); 
+        $('.ui-filterable').hide(); 
 
     $('#filtroUp').click(function () {
-         $('.filtros').slideToggle(300);
+        $('.filtros').slideToggle(300);
      });
+
+    $('#filtroUp-alt').click(function (){
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+        $('#filtroUp').click();
+    });
 
     $('#open-left').click(function(e){ 
         if(snapper.state().state == 'left')
           $('.snap-drawer-left').hide();
         else
           $('.snap-drawer-left').show();
+    });
+
+    $('#open-left-alt').click(function(e){ 
+      $('#open-left').click();
     });
 
     var dataInicio = new moment();
