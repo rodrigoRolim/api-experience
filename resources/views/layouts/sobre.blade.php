@@ -30,6 +30,9 @@
 			<div class="text-center" style="margin-top: 25vh;">				
 				{!! Html::image(config('system.eXperienceLogoHorizontal'), 'logo_exp', array('title' => 'eXperience - codemed',)) !!}			
 			</div>
+            <div class="text-center">
+                {!!config('system.versao')!!}
+            </div>
 			<div class="text-center">
 				{!!config('system.loginText.subTitle')!!}
 			</div>
