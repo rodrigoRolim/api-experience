@@ -8,7 +8,7 @@ return [
     'clienteLogo' => env('APP_LOGO'),
     'devLogo'     => '/assets/images/logo_cod.png',
     'experienceLogo' => '/assets/images/icone_experience.png',
-    'eXperienceLogoHorizontal' =>  env('APP_LOGO_EXPERIENCE'),,
+    'eXperienceLogoHorizontal' =>  env('APP_LOGO_EXPERIENCE'),
     'clienteUrl'  => env('APP_CLIENTE_URL'),
     'PDFUrl'      => env('APP_PDF_URL'),
     'PDFUrlTemp'  => env('APP_PDF_TEMP'),
