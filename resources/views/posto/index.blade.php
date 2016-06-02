@@ -161,8 +161,6 @@
             var dataFim = new moment();
             var qtdDiasFiltro = {{config('system.posto.qtdDiasFiltro')}};
 
-            console.log(qtdDiasFiltro);
-
             dataInicio = dataInicio.subtract(qtdDiasFiltro,'days');
             dataInicio = dataInicio.format('DD/MM/YYYY');
             dataFim = dataFim.format('DD/MM/YYYY');
