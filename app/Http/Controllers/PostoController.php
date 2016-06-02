@@ -121,22 +121,7 @@ class PostoController extends Controller {
 
         //Verifica se dataInicio e dataFim seja diferente de nulo
         if($requestData['dataInicio'] != null && $requestData['dataFim'] != null){
-            //Para o cache funcionar e caso o modo de cache seja redis, executar na raiz: composer require predis/predis
-            if(!\Cache::has('atendimentos')){
-                    \Cache::put('atendimentos',  $result = $this->posto->getAtendimentos(
-                    $idPosto,
-                    $requestData['dataInicio'],
-                    $requestData['dataFim'],              
-                    $requestData['acomodacao'],
-                    $requestData['situacao'],
-                    $requestData['postoRealizante']
-                ),1);
-            }
-
-            $result = \Cache::get('atendimentos');
-
-
-/*            //Envia os valores para o repository filtrar
+            //Envia os valores para o repository filtrar
             $result = $this->posto->getAtendimentos(
                 $idPosto,
                 $requestData['dataInicio'],
@@ -144,7 +129,7 @@ class PostoController extends Controller {
                 $requestData['acomodacao'],
                 $requestData['situacao'],
                 $requestData['postoRealizante']
-            );*/
+            );
             //Retorna em Json
             return response()->json(array(
                 'message' => 'Recebido com sucesso.',
