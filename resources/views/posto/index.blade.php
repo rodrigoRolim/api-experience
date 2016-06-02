@@ -149,7 +149,7 @@
 
 
             $("#dataInicio,#dataFim").on("change",function (){ 
-                getAcomodacao(); /*Pode ocausionar problema, caso o usuario limpe o seletor, buscará desde o inicio.*/
+                getAcomodacao(); /*Pode ocausionar problema, caso limpe o seletor, buscará desde o inicio.*/
                 $('#btnFiltrar').removeClass('not-active');
             });
 
@@ -256,6 +256,8 @@
 
                 var formPosto = $('#formPosto');
                 var postData = formPosto.serializeArray();
+
+                console.log(postData);
 
                 //Instancia a class Async
                 var async = new AsyncClass();
