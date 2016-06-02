@@ -146,7 +146,6 @@
                 if(form.valid()){
                     //serializa dos dados do formulario
                     var postData = form.serializeArray();
-                    console.log(postData);
                     $.ajax({
                         url : urlPerfil,
                         type: 'POST',

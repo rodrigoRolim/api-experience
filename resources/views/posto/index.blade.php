@@ -257,8 +257,6 @@
                 var formPosto = $('#formPosto');
                 var postData = formPosto.serializeArray();
 
-                console.log(postData);
-
                 //Instancia a class Async
                 var async = new AsyncClass();
 

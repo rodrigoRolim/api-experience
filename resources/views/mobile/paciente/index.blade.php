@@ -293,7 +293,6 @@ $(document).ready(function(){
                checkboxes.each(function () {
                     correl.push($(this).data('correl'));
                   });   
-               console.log(correl);
             if(correl.length == 0){
               swal('','Selecione ao menos um Exame para exportação para o arquivo PDF.','error');
             }

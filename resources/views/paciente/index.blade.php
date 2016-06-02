@@ -245,7 +245,6 @@
                                         cabecalho = 0;                            
                                     }
                                     var paginaPdf = window.open ('/impressao', '', ''); 
-                                    console.log(correl);
                                     exportPdf(url,tipoAcesso,posto,atendimento,correl,'M',cabecalho,paginaPdf);
                                 });
                             });

@@ -3,7 +3,6 @@ function getDescricaoExame(url,dadosExames,tipoAcesso){
         url : url+'/'+tipoAcesso+'/detalheatendimentoexamecorrel/'+dadosExames.posto+'/'+dadosExames.atendimento+'/'+dadosExames.correl+'',
         type: 'GET',                            
         success:function(result){
-            console.log(result.data);
             if(result.data == '' || result.data == null){  
                $('.mdi-close').click();
                     swal("Erro ao carregar descrição do exame..", "Não há resultados disponíveis para visualização.", "error");                                    
