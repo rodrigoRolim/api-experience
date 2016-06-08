@@ -297,7 +297,8 @@ $(document).ready(function(){
               swal('','Selecione ao menos um Exame para exportação para o arquivo PDF.','error');
             }
             var cabecalho = true; 
-             exportPdf(url,tipoAcesso,posto,atendimento,correl,'G',cabecalho);
+            var paginaPdf = window.open('/impressao', '', ''); 
+             exportPdf(url,tipoAcesso,posto,atendimento,correl,'G',cabecalho,paginaPdf);
      });
 
 });  
