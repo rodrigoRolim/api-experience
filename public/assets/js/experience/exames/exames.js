@@ -38,6 +38,12 @@ ExamesClass.prototype.render = function(result,saldoDevedor,dataMsg){
             opacity = 'opacity:0.6';
         }
 
+        if(saldoDevedor && exame.tipo_entrega == "*"){
+            exame.class = 'success-elementNoHov';
+            opacity = 'opacity:0.6';
+            visualiza = false;
+        }
+
 /*        if(saldoDevedor){
             exame.class = 'success-elementNoHov';
         }*/
