@@ -9,12 +9,14 @@ function getClientes(url,postData){
             $.each( result.data, function( index ){
                 var cliente = result.data[index];
 
+                console.log(cliente);
+
                 var item = '<li class="boxPaciente" style="border-bottom: 1px solid #e7e7e9;" data-key="'+cliente.key+'">'+				             
 				              	'<div class="truncate"><strong>'+cliente.nome+'</strong><br>'+
 				              	'<span style="font-family: Century Gothic, sans-serif;">'+
 				              	'<i class="'+((cliente.sexo == "M")?"mdi-gender-male":"mdi-gender-female")+'"></i>'+ 
 				                ''+cliente.idade+' <br> ' +
-				                ' Atendimento: 38 12936 Em: 28/08/2015</div>'+ '</div>'+
+				                ' Ultimo atendimento em: '+cliente.atendimentos.slice(-1).pop()+'</div>'+ '</div>'+
 				             '</li>';
 
                 $('#listaPacientes').append(item);

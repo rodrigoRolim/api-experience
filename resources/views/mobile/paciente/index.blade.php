@@ -189,9 +189,9 @@ $(document).ready(function(){
 
         var listaInfo = '<ul class="collection">'+
                           '<li id="idAtendimento" class="collection-item center-align"></li>'+
-                          '<li id="previsaoAtd" class="collection-item left-align bkfInfo">PREVISÃO DE ENTREGA:<br></li>'+
-                          '<div id="convenioAtd" class="collection-item left-align bkfInfo">CONVÊNIO:<br></div>'+
-                          '<li id="solicitanteAtd" class="collection-item left-align bkfInfo">MÉDICO SOLICITANTE:<br></li>'+
+                          '<li id="previsaoAtd" class="collection-item left-align bkfInfo"><b>PREVISÃO DE ENTREGA:</b><br></li>'+
+                          '<div id="convenioAtd" class="collection-item left-align bkfInfo"><b>CONVÊNIO:</b><br></div>'+
+                          '<li id="solicitanteAtd" class="collection-item left-align bkfInfo"><b>MÉDICO SOLICITANTE:</b><br></li>'+
                         '</ul>';
 
 
