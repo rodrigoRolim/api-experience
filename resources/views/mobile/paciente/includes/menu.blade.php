@@ -16,7 +16,7 @@
                         <li class="btnAtendimento"  
                         data-convenio="{{$atendimento->nome_convenio}}" 
                         data-solicitante="{{$atendimento->nome_solicitante}}" 
-                        data-dtatendimento="{{ date('d/m/20y',strtotime($atendimento->data_atd))}}"
+                        data-dtatendimento="{{ $atendimento->data_atd }}"
                         data-entrega="{{ date('d/m/20y',strtotime($atendimento->data_entrega))}}"  
                         data-posto="{{$atendimento->posto}}"
                         data-atendimento="{{$atendimento->atendimento}}" 
@@ -24,7 +24,7 @@
                         data-acesso="{{Auth::user()['tipoAcesso']}}" 
                         data-saldo="{{$atendimento->saldo_devedor}}">
                           <div class="collapsible-header">
-                            	<span id="dataAtendimento">{{ date('d/m/20y',strtotime($atendimento->data_atd))}}</span> - {{$atendimento->posto}} | {{$atendimento->atendimento}}<br>
+                            	<span id="dataAtendimento">{{$atendimentos[0]->data_atd}}</span> - {{$atendimento->posto}} | {{$atendimento->atendimento}}<br>
                               <span class='truncate mnemonicoAtd'>{{$atendimento->mnemonicos}}</span>
                           </div>
                         </li>

@@ -82,12 +82,16 @@
 	background-color: #efefef !important;
 	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	font-size: 1.2em !important;
+	padding: 10px !important;
+	line-height: 25px !important;
 }
 #convenioAtd{
 	background-color: #fff !important;
 	border-bottom: 0px !important;
 	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	font-size: 1.2em !important; 
+	padding: 10px !important;
+	line-height: 25px !important;
 }
 #modalDetalhamento{
 	max-height: 95%;

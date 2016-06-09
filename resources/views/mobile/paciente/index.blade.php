@@ -35,7 +35,7 @@
               @endif
                   <i id='close-right-alt' class="mdi-information-outline infoAlt"></i><br> </span>
                <span class="infoPaciente"> 
-               Data do Atendimento: <span id="dataAtendimentoPaciente">{{ date('d/m/Y',strtotime($atendimentos[0]->data_atd))}} </span>
+               Data do Atendimento: <span id="dataAtendimentoPacienteAlt">{{$atendimentos[0]->data_atd}} </span>
                </span>
              </div>
       </nav>
@@ -59,7 +59,7 @@
               @endif
                   <i id='close-right' class="mdi-information-outline"></i><br> </span>
                <span class="infoPaciente"> 
-               Data do Atendimento: <span id="dataAtendimentoPaciente">{{ date('d/m/Y',strtotime($atendimentos[0]->data_atd))}} </span>
+               Data do Atendimento: <span id="dataAtendimentoPaciente">{{$atendimentos[0]->data_atd}} </span>
                </span>
              </div>
            </div>
@@ -211,7 +211,8 @@ $(document).ready(function(){
             $('#listaExames').html('');  
             $('#semExames').html('');
             $('#existemPendencias').html('');
-            $('#dataAtendimentoPaciente').text(dataAtendimento);                 
+            $('#dataAtendimentoPaciente').text(dataAtendimento);
+            $('#dataAtendimentoPacienteAlt').text(dataAtendimento);                   
             $('#semExames').append('<p class="todo-element border-left-coral">'+
               '<label class="semExames">Não foram realizados exames para este atendimento.</label>'+
             '</p>');
@@ -230,6 +231,7 @@ $(document).ready(function(){
             '</p>');            
             }
             $('#dataAtendimentoPaciente').text(dataAtendimento); 
+            $('#dataAtendimentoPacienteAlt').text(dataAtendimento);  
             getExames("{{url('/')}}",tipoAcesso,posto,atendimento);
         }
 
