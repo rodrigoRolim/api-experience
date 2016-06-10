@@ -9,6 +9,7 @@
 
 Route::controllers([
     'auth' => 'AuthController',
+    'manuais' => 'ManuaisController',
 ]);
 
 Route::get('/', function () {

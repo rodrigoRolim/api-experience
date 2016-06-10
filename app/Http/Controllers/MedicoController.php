@@ -92,7 +92,7 @@ class MedicoController extends Controller {
                     'postos' => $postos,
                     'convenios' => $convenios,
                     )
-                );            
+                );
         }
 
 
