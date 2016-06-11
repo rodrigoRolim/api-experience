@@ -14,29 +14,39 @@ use DB;
 
 class ManuaisRepository extends BaseRepository
 {
-    /**
-     * Specify Model class name.
-     *
-     * @return string
-     */
-    public function model()
-    {
-        return 'App\Models\Manuais';
-    }
+  /**
+   * Specify Model class name.
+   *
+   * @return string
+   */
+  public function model()
+  {
+      return 'App\Models\Manuais';
+  }
 
-    public function getProcedimentos($input){
+  public function getProcedimentos($descricao){
+    $sql = "SELECT DISTINCT MNEMONICO as mnemonico, NOME as procedimento, SETOR as nome_setor, tipo_coleta, NOME_SETOR as material
+            FROM ".config('system.userAgilDB')."VEX_PROCEDIMENTOS
+            WHERE MNEMONICO LIKE(:input) OR NOME LIKE(:input)";
 
-      $sql = "SELECT P.MNEMONICO,p.nome as procedimento,s.nome as nome_setor
-              FROM ".config('system.userAgilDB')."PROCEDIMENTOS P                  
-              INNER JOIN ".config('system.userAgilDB')."SETORES S ON P.SETOR = S.SETOR
-              WHERE P.MNEMONICO LIKE(:input) OR p.nome LIKE(:input)";
+    $procedimentos = DB::select(DB::raw($sql),[
+      'input' => $descricao
+    ]);
 
-        $procedimentos = DB::select(DB::raw($sql),[
-          'input' => $input
-        ]);
+    return $procedimentos;
+  }
 
-        return $procedimentos;
-    }
+  public function getPreparo($mnemonico){
+    $mnemonico = mb_strtoupper($mnemonico);
 
-   
+    $sql = "SELECT DISTINCT *
+            FROM ".config('system.userAgilDB')."PREPAROS
+            WHERE MNEMONICO = :mnemonico";
+
+    $preparo = DB::select(DB::raw($sql),[
+      'mnemonico' => $mnemonico
+    ]);
+
+    return current($preparo);
+  }
 }

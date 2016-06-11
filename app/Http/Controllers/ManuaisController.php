@@ -14,7 +14,7 @@ use Request;
 
 class ManuaisController extends Controller{
 
-	    protected $procedimentos;    
+	protected $procedimentos;    
 
     /**
      * Referenciada os repositorio/model utilizados no controlelr
@@ -37,21 +37,37 @@ class ManuaisController extends Controller{
 		return view('manuais.index');
 	}
 
-	public function getConvertrtf(){
+	public function getProcedimentos($descricao){
+        $descricao = '%'.$descricao.'%';
 
-	}
-
-	public function postProcedimentos(){
-
-		$request = Request::all();
-		$input = $request['input'];
-		$procedimentos = $this->procedimentos->getProcedimentos($input);
+        $procedimentos = $this->procedimentos->getProcedimentos($descricao);
 
         return response()->json(array(
             'message' => 'Recebido com sucesso.',
             'data' => $procedimentos,
         ), 200);
-
 	}
 
+    public function getPreparo($mnemonico){
+        $preparo = $this->procedimentos->getPreparo($mnemonico);
+
+        if($preparo){
+            $rtf = rtrim($preparo->preparo);
+
+            $reader = new \App\Services\RtfReader();
+            $result = $reader->Parse($rtf);
+
+            $formatter = new \App\Services\RtfHtml();
+            
+            return response()->json(array(
+                'message' => 'Recebido com sucesso',
+                'data' => $formatter->Format($reader->root),
+            ), 200);
+        }
+
+        return response()->json(array(
+            'message' => 'Exame sem preparo',
+            'data' => ''
+        ), 200);
+    }
 }
