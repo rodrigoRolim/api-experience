@@ -40,7 +40,7 @@ class ManuaisRepository extends BaseRepository
     $mnemonico = mb_strtoupper($mnemonico);
 
     $sql = "SELECT DISTINCT *
-            FROM ".config('system.userAgilDB')."PREPAROS
+            FROM ".config('system.userAgilDB')."VEX_PREPAROS
             WHERE MNEMONICO = :mnemonico";
 
     $preparo = DB::select(DB::raw($sql),[
