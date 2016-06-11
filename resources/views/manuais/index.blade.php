@@ -140,6 +140,15 @@
                                         body = '<h2 class="textoTamanho" style="padding-top:20px;padding-bottom:30px">Exame sem preparo definido pelo laboratório</h2>';
                                     }else{
                                         body = result.data;
+                                        
+                                        $('#modalBody').slimScroll({
+                                            height: '70.0vh',
+                                            railOpacity: 0.4,
+                                            wheelStep: 10,
+                                            alwaysVisible: true,
+                                            minwidth: '90vh',
+                                            touchScrollStep: 50,
+                                        });
                                     }
 
                                     $('#modalTitle').html(exame);
@@ -147,14 +156,6 @@
 
                                     $('#modalManual').modal('show');
 
-                                    $('#modalBody').slimScroll({
-                                        height: '70.0vh',
-                                        railOpacity: 0.4,
-                                        wheelStep: 10,
-                                        alwaysVisible: true,
-                                        minwidth: '90vh',
-                                        touchScrollStep: 50,
-                                    });
                                 },
                             });
                         });
