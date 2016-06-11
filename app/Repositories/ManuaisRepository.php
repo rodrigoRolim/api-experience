@@ -25,7 +25,7 @@ class ManuaisRepository extends BaseRepository
   }
 
   public function getProcedimentos($descricao){
-    $sql = "SELECT DISTINCT MNEMONICO as mnemonico, NOME as procedimento, NOME_SETOR as nome_setor, tipo_coleta, NOME_SETOR as material
+    $sql = "SELECT DISTINCT MNEMONICO as mnemonico, NOME as procedimento, NOME_SETOR as nome_setor, tipo_coleta, NOME_MATERIAL as material
             FROM ".config('system.userAgilDB')."VEX_PROCEDIMENTOS
             WHERE MNEMONICO LIKE(:input) OR NOME LIKE(:input)";
 
