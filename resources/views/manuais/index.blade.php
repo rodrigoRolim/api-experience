@@ -23,12 +23,10 @@
                 <div id="dvFiltro">
                     <h2 class="centralizar" id="infoFiltro" style="padding-top:5px;margin-bottom:15px">Manual do procedimento/exame</h2>
                     <div class="col-md-12 corPadrao animated fadeInUp">
-                        <form id="formPosto">                           
-                            <div class="input-group m-b inputBuscaPaciente">
-                                <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                                <input type="text" id="buscaProcedimento" placeholder="Digite o nome do exame, Ex. Gli ou Glicemia" class="form-control">
-                            </div> 
-                        </form>
+                        <div class="input-group m-b inputBuscaPaciente">
+                            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                            <input type="text" id="buscaProcedimento" placeholder="Digite o nome do exame, Ex. Gli ou Glicemia" class="form-control">
+                        </div> 
                     </div>
                 </div>
                 <div id="manual">
@@ -69,95 +67,105 @@
         $('.boxCenter').attr('style','min-height:90vh');
 
         $('#buscaProcedimento').keyup(function(e){
+            if(e.which != 13){
+                if($('#buscaProcedimento').val() != ''){
+                    $('.corPadrao').addClass('animated fadeInUp');
 
-            if($('#buscaProcedimento').val() != ''){
-                $('.corPadrao').addClass('animated fadeInUp');
+                    var data = $(this).val();
+                    data = data.toUpperCase();
 
-                var data = $(this).val();
-                data = data.toUpperCase();
+                    $('#manualProc').html('<h2 class="textoTamanho" style="margin-top:25vh"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando registros.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>');
 
-                $('#manualProc').html('<h2 class="textoTamanho" style="margin-top:25vh"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando registros.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>');
+                    $.get("{{url('/')}}/manuais/procedimentos/"+data,function(result){
+                        $('#manualProc').html('');
+            
+                        procedimentos = result.data;
 
-                $.get("{{url('/')}}/manuais/procedimentos/"+data,function(result){
-                    $('#manualProc').html('');
-        
-                    procedimentos = result.data;
+                        var html = '';
 
-                    var html = '';
+                        for(var i=0;i<procedimentos.length;i++){
+                            var tipoColeta = '';
 
-                    for(var i=0;i<procedimentos.length;i++){
-                        var tipoColeta = '';
+                            if(procedimentos[i].tipo_coleta == 'CR'){
+                                tipoColeta = 'Esse exame deve ser coletado no laboratório';
+                            }
 
-                        if(procedimentos[i].tipo_coleta == 'CR'){
-                            tipoColeta = 'Esse exame deve ser coletado no laboratório';
+                            html += '<li data-exame="'+procedimentos[i].procedimento+'" data-mnemonico="'+procedimentos[i].mnemonico+'" class="col-sm-12 boxManuais success-element">';
+                            html += '<div class="no-padding col-md-12 col-sm-6 col-xs-12">';
+                            html +=     '<div class="no-padding col-md-5">';
+                            html +=         '<strong>'+procedimentos[i].procedimento+'</strong>';
+                            html +=     '</div>';
+                            html +=     '<div class="no-padding col-md-3">';
+                            html +=         '<span data-toggle="tooltip" data-placement="bottom" title="Mnemonico"><i class="fa fa-flask"></i> '+procedimentos[i].mnemonico+'</span>'
+                            html +=     '</div>';
+                            html +=     '<div class="no-padding col-md-4">';
+                            html +=         '<span data-toggle="tooltip" data-placement="bottom" title="Setor"><i class="fa fa-home"></i> '+procedimentos[i].nome_setor+'</span>'
+                            html +=     '</div>';
+                            html += '</div>';
+                            html += '<div class="no-padding col-md-12 col-sm-6 col-xs-12">';
+                            html +=     '<div class="no-padding col-md-3">';
+                            html +=         '<span data-toggle="tooltip" data-placement="bottom" title="Matérial"> Matérial: </span>'+procedimentos[i].material
+                            html +=     '</div>';
+                            html +=     '<div class="no-padding col-md-5">';
+                            html +=         '<span data-toggle="tooltip" data-placement="bottom" title="Observação"><i class="fa fa-info-cicle"></i> '+tipoColeta+'</span>';
+                            html +=     '</div>';
+
+                            if(procedimentos[i].hora_coleta != null){
+                                html +=     '<div class="no-padding col-md-4">';
+                                html +=         '<span style="color:#FF0000" data-toggle="tooltip" data-placement="bottom" title="Hora da coleta/recebimento"><i class="fa fa-clocl-o"></i>  Exame pode ser coletado/recebido até as '+procedimentos[i].hora_coleta+'</span>';
+                                html +=     '</div>';
+                            }
+
+                            html += '</div>';
+                            html += '</li>';
                         }
 
-                        html += '<li data-exame="'+procedimentos[i].procedimento+'" data-mnemonico="'+procedimentos[i].mnemonico+'" class="col-sm-12 boxManuais success-element">';
-                        html += '<div class="no-padding col-md-12 col-sm-6 col-xs-12">';
-                        html +=     '<div class="no-padding col-md-5">';
-                        html +=         '<strong>'+procedimentos[i].procedimento+'</strong>';
-                        html +=     '</div>';
-                        html +=     '<div class="no-padding col-md-3">';
-                        html +=         '<span data-toggle="tooltip" data-placement="bottom" title="Mnemonico"><i class="fa fa-flask"></i> '+procedimentos[i].mnemonico+'</span>'
-                        html +=     '</div>';
-                        html +=     '<div class="no-padding col-md-4">';
-                        html +=         '<span data-toggle="tooltip" data-placement="bottom" title="Setor"><i class="fa fa-home"></i> '+procedimentos[i].nome_setor+'</span>'
-                        html +=     '</div>';
-                        html += '</div>';
-                        html += '<div class="no-padding col-md-12 col-sm-6 col-xs-12">';
-                        html +=     '<div class="no-padding col-md-3">';
-                        html +=         '<span data-toggle="tooltip" data-placement="bottom" title="Matérial"> Matérial: </span>'+procedimentos[i].material
-                        html +=     '</div>';
-                        html +=     '<div class="no-padding col-md-9">';
-                        html +=         '<span data-toggle="tooltip" data-placement="bottom" title="Observação"><i class="fa fa-info-cicle"></i> '+tipoColeta+'</span>';
-                        html +=     '</div>';
-                        html += '</div>';
-                        html += '</li>';
-                    }
+                        if(procedimentos.length == 0){
+                            html = '<h2 class="textoTamanho">Não foram encontrados atendimentos.</h2>';
+                        }
+                        
+                        $('#manualProc').html(html);
 
-                    if(procedimentos.length == 0){
-                        html = '<h2 class="textoTamanho">Não foram encontrados atendimentos.</h2>';
-                    }
-                    
-                    $('#manualProc').html(html);
+                        $(".boxManuais").click(function(e){
+                            var mnemonico = $(e.currentTarget).data('mnemonico');
+                            var exame = $(e.currentTarget).data('exame');
 
-                    $(".boxManuais").click(function(e){
-                        var mnemonico = $(e.currentTarget).data('mnemonico');
-                        var exame = $(e.currentTarget).data('exame');
+                            $.ajax({
+                                url : "{{url('/')}}/manuais/preparo/"+mnemonico,
+                                type: 'GET',
+                                success:function(result){
+                                    var body = '';
 
-                        $.ajax({
-                            url : "{{url('/')}}/manuais/preparo/"+mnemonico,
-                            type: 'GET',
-                            success:function(result){
-                                var body = '';
+                                    if(result.data == ''){
+                                        body = '<h2 class="textoTamanho" style="padding-top:20px;padding-bottom:30px">Exame sem preparo definido pelo laboratório</h2>';
+                                    }else{
+                                        body = result.data;
+                                    }
 
-                                if(result.data == ''){
-                                    body = '<h2 class="textoTamanho" style="padding-top:20px;padding-bottom:30px">Exame sem preparo definido pelo laboratório</h2>';
-                                }else{
-                                    body = result.data;
-                                }
+                                    $('#modalTitle').html(exame);
+                                    $('#modalBody').html(body);
 
-                                $('#modalTitle').html(exame);
-                                $('#modalBody').html(body);
+                                    $('#modalManual').modal('show');
 
-                                $('#modalManual').modal('show');
-
-                                $('#modalBody').slimScroll({
-                                    height: '70.0vh',
-                                    railOpacity: 0.4,
-                                    wheelStep: 10,
-                                    alwaysVisible: true,
-                                    minwidth: '90vh',
-                                    touchScrollStep: 50,
-                                });
-                            },
+                                    $('#modalBody').slimScroll({
+                                        height: '70.0vh',
+                                        railOpacity: 0.4,
+                                        wheelStep: 10,
+                                        alwaysVisible: true,
+                                        minwidth: '90vh',
+                                        touchScrollStep: 50,
+                                    });
+                                },
+                            });
                         });
                     });
-                });
 
-                $('#infoFiltro').remove();
-                $('#dvFiltro').attr('style','min-height:0px');
+                    $('#infoFiltro').remove();
+                    $('#dvFiltro').attr('style','min-height:0px');
+                }
+
             }
+
         });
 
         $('#manual').slimScroll({
