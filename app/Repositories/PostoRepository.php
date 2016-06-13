@@ -123,7 +123,11 @@ class PostoRepository extends BaseRepository
                   break;
           }
 
-          $clientes[$i]->posto = str_pad($clientes[$i]->posto,config('system.qtdCaracterPosto'),'0',STR_PAD_LEFT);
+            if($clientes[$i]->posto > 100){
+                $clientes[$i]->posto = str_pad($clientes[$i]->posto,config('system.qtdCaracterPosto'),'0',STR_PAD_LEFT);
+            }
+          
+          // $clientes[$i]->posto = str_pad($clientes[$i]->posto,config('system.qtdCaracterPosto'),'0',STR_PAD_LEFT);
           $clientes[$i]->atendimento = str_pad($clientes[$i]->atendimento,config('system.qtdCaracterAtend'),'0',STR_PAD_LEFT);
 
           $clientes[$i]->data_atd = Formatar::data($clientes[$i]->data_atd,'Y-m-d H:i:s','d/m/Y');

@@ -40,7 +40,10 @@ class ExamesRepository extends BaseRepository
         }
 
         foreach($exames as $key => $exame){
-            $exames[$key]['posto'] = str_pad($exames[$key]['posto'],config('system.qtdCaracterPosto'),'0',STR_PAD_LEFT);
+            if($exames[$key]['posto'] > 100){
+                $exames[$key]['posto'] = str_pad($exames[$key]['posto'],config('system.qtdCaracterPosto'),'0',STR_PAD_LEFT);
+            }
+            
             $exames[$key]['atendimento'] = str_pad($exames[$key]['atendimento'],config('system.qtdCaracterAtend'),'0',STR_PAD_LEFT);
 
             switch($exame['situacao_experience']){

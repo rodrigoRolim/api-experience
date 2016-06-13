@@ -24,5 +24,5 @@ class AtendimentoAcesso extends BaseModel {
      */
     protected $primaryKey = array('ID');
 
-    protected $fillable = array('id','pure');
+    protected $fillable = array('ID','PURE');
 }
