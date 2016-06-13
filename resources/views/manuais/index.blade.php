@@ -61,17 +61,23 @@
     $(document).ready(function(){
         $('#body').attr('style','padding-top:0px');
         $('.corPadrao').attr('style','padding:10px');
-
         
         $('#dvFiltro').attr('style','padding-top:26vh');
         $('.boxCenter').attr('style','min-height:90vh');
 
-        $('#buscaProcedimento').keyup(function(e){
-            if(e.which != 13){
+
+        if($(window).width() <= 768){
+            $('#content').attr('class','');
+            $('.container').attr('class','');
+            $('#dvFiltro').attr('style','padding-top:1vh');
+        }
+
+    function buscaProcedimentos(input){
+            if(input.which != 13){
                 if($('#buscaProcedimento').val() != ''){
                     $('.corPadrao').addClass('animated fadeInUp');
 
-                    var data = $(this).val();
+                    var data = input;
                     data = data.toUpperCase();
 
                     $('#manualProc').html('<h2 class="textoTamanho" style="margin-top:25vh"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando registros.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>');
@@ -92,27 +98,24 @@
 
                             html += '<li data-exame="'+procedimentos[i].procedimento+'" data-mnemonico="'+procedimentos[i].mnemonico+'" class="col-sm-12 boxManuais success-element listManuaisMobile">';
                             html += '<div class="no-padding col-md-12 col-sm-6 col-xs-12">';
-                            html +=     '<div class="no-padding col-md-5">';
-                            html +=         '<strong>'+procedimentos[i].procedimento+'</strong>';
-                            html +=     '</div>';
-                            html +=     '<div class="no-padding col-md-3">';
-                            html +=         '<span data-toggle="tooltip" data-placement="bottom" title="Mnemonico"><i class="fa fa-flask"></i> '+procedimentos[i].mnemonico+'</span>'
+                            html +=     '<div class="no-padding col-md-8">';
+                            html +=         '<strong>'+procedimentos[i].mnemonico+' - '+procedimentos[i].procedimento+'</strong>';
                             html +=     '</div>';
                             html +=     '<div class="no-padding col-md-4">';
                             html +=         '<span data-toggle="tooltip" data-placement="bottom" title="Setor"><i class="fa fa-home"></i> '+procedimentos[i].nome_setor+'</span>'
                             html +=     '</div>';
                             html += '</div>';
                             html += '<div class="no-padding col-md-12 col-sm-6 col-xs-12">';
-                            html +=     '<div class="no-padding col-md-3">';
+                            html +=     '<div class="no-padding col-md-8">';
                             html +=         '<span data-toggle="tooltip" data-placement="bottom" title="Matérial"> Matérial: </span>'+procedimentos[i].material
                             html +=     '</div>';
-                            html +=     '<div class="no-padding col-md-5">';
+/*                            html +=     '<div class="no-padding col-md-5">';
                             html +=         '<span data-toggle="tooltip" data-placement="bottom" title="Observação"><i class="fa fa-info-cicle"></i> '+tipoColeta+'</span>';
                             html +=     '</div>';
-
+*/
                             if(procedimentos[i].hora_coleta != null){
                                 html +=     '<div class="no-padding col-md-4">';
-                                html +=         '<span style="color:#FF0000" data-toggle="tooltip" data-placement="bottom" title="Hora da coleta/recebimento"><i class="fa fa-clocl-o"></i>  Exame pode ser coletado/recebido até as '+procedimentos[i].hora_coleta+'</span>';
+                                html +=         '<span style="color:#FF0000;font-size:0.9em" data-toggle="tooltip" data-placement="bottom" title="Hora da coleta/recebimento"><i class="fa fa-clocl-o"></i>  Exame pode ser coletado/recebido até as '+procedimentos[i].hora_coleta+'</span>';
                                 html +=     '</div>';
                             }
 
@@ -121,11 +124,10 @@
                         }
 
                         if(procedimentos.length == 0){
-                            html = '<h2 class="textoTamanho">Não foram encontrados atendimentos.</h2>';
+                            html = '<h2 class="textoTamanho">Não foram encontrados procedimentos.</h2>';
                         }
                         
                         $('#manualProc').html(html);
-
                         $(".boxManuais").click(function(e){
                             var mnemonico = $(e.currentTarget).data('mnemonico');
                             var exame = $(e.currentTarget).data('exame');
@@ -164,10 +166,24 @@
                     $('#infoFiltro').remove();
                     $('#dvFiltro').attr('style','min-height:0px');
                 }
-
             }
+        }
 
-        });
+if($(window).width() >= 768){
+
+    $('#buscaProcedimento').keyup(function(e){
+        var input = $(this).val();
+        buscaProcedimentos(input);     
+    });      
+   
+}else{
+   $('#buscaProcedimento').bind('keyup', function(e) {
+        if ( e.keyCode === 13 ) { // 13 is enter key
+            var input = $(this).val();
+            buscaProcedimentos(input);
+        }
+    }); 
+}
 
         $('#manual').slimScroll({
             height: '80vh',
