@@ -63,7 +63,10 @@ class ManuaisController extends Controller{
             $unoconv = \Unoconv\Unoconv::create();
             $unoconv->transcode($path.$file,'html',$path.$fileConvert);
 
-            $html = file_get_contents($path.$file);
+            $html = file_get_contents($path.$fileConvert);
+            
+            unlink($path.$file);
+            unlink($path.$fileConvert);
             
             return response()->json(array(
                 'message' => 'Recebido com sucesso',
