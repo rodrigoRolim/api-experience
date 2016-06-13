@@ -52,16 +52,22 @@ class ManuaisController extends Controller{
         $preparo = $this->procedimentos->getPreparo($mnemonico);
 
         if($preparo){
-            $rtf = rtrim($preparo->preparo);
+            $path = public_path().'/assets/temp/';
+            $file = 'pre.rtf';
+            $fileConvert = 'pre.html';
 
-            $reader = new \App\Services\RtfReader();
-            $result = $reader->Parse($rtf);
+            $fp = fopen($path.'/'.$file, "a");
+            $escreve = fwrite($fp, $preparo->preparo);
+            fclose($fp);
 
-            $formatter = new \App\Services\RtfHtml();
+            $unoconv = \Unoconv\Unoconv::create();
+            $unoconv->transcode($path.$file,'html',$path.$fileConvert);
+
+            $html = file_get_contents($path.$file);
             
             return response()->json(array(
                 'message' => 'Recebido com sucesso',
-                'data' => $formatter->Format($reader->root),
+                'data' => $html,
             ), 200);
         }
 
