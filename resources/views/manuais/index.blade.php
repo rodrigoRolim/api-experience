@@ -21,7 +21,7 @@
         <div class="container">
             <div class="boxCenter">
                 <div id="dvFiltro">
-                    <h2 class="centralizar" id="infoFiltro" style="padding-top:5px;margin-bottom:15px">Manual do procedimento/exame</h2>
+                    <h2 class="centralizar" id="infoFiltro" style="padding-top:5px;margin-bottom:15px">Manual de procedimentos/exames</h2>
                     <div class="col-md-12 corPadrao animated fadeInUp">
                         <div class="input-group m-b inputBuscaPaciente">
                             <span class="input-group-addon"><i class="fa fa-search"></i></span>
@@ -90,7 +90,7 @@
                                 tipoColeta = 'Esse exame deve ser coletado no laboratório';
                             }
 
-                            html += '<li data-exame="'+procedimentos[i].procedimento+'" data-mnemonico="'+procedimentos[i].mnemonico+'" class="col-sm-12 boxManuais success-element">';
+                            html += '<li data-exame="'+procedimentos[i].procedimento+'" data-mnemonico="'+procedimentos[i].mnemonico+'" class="col-sm-12 boxManuais success-element listManuaisMobile">';
                             html += '<div class="no-padding col-md-12 col-sm-6 col-xs-12">';
                             html +=     '<div class="no-padding col-md-5">';
                             html +=         '<strong>'+procedimentos[i].procedimento+'</strong>';
