@@ -49,45 +49,48 @@ class ManuaisController extends Controller{
 	}
 
     public function getPreparo($mnemonico){
-        $preparo = $this->procedimentos->getPreparo($mnemonico);
-
-        if($preparo){
-            $rtf = rtrim($preparo->preparo);
-
-            $reader = new \App\Services\RtfReader();
-            $result = $reader->Parse($rtf);
-
-            $formatter = new \App\Services\RtfHtml();
-            
-            return response()->json(array(
-                'message' => 'Recebido com sucesso',
-                'data' => $formatter->Format($reader->root),
-            ), 200);
-        }
         // $preparo = $this->procedimentos->getPreparo($mnemonico);
 
         // if($preparo){
-        //     $path = public_path().'/assets/temp/';
-        //     $file = 'pre.rtf';
-        //     $fileConvert = 'pre.html';
+        //     $rtf = rtrim($preparo->preparo);
 
-        //     $fp = fopen($path.'/'.$file, "a");
-        //     $escreve = fwrite($fp, $preparo->preparo);
-        //     fclose($fp);
+        //     $reader = new \App\Services\RtfReader();
+        //     $result = $reader->Parse($rtf);
 
-        //     $unoconv = \Unoconv\Unoconv::create();
-        //     $unoconv->transcode($path.$file,'html',$path.$fileConvert);
-
-        //     $html = file_get_contents($path.$fileConvert);
-            
-        //     unlink($path.$file);
-        //     unlink($path.$fileConvert);
+        //     $formatter = new \App\Services\RtfHtml();
             
         //     return response()->json(array(
         //         'message' => 'Recebido com sucesso',
-        //         'data' => $html,
+        //         'data' => $formatter->Format($reader->root),
         //     ), 200);
         // }
+
+        $preparo = $this->procedimentos->getPreparo($mnemonico);
+
+        if($preparo){
+            $name = uniqid(rand(),true);
+
+            $path = public_path().'/assets/temp/';
+            $file = $name.'.rtf';            
+            $fileConvert = $name.'.html';
+
+            $fp = fopen($path.'/'.$file, "a");
+            $escreve = fwrite($fp, $preparo->preparo);
+            fclose($fp);
+
+            $unoconv = \Unoconv\Unoconv::create();
+            $unoconv->transcode($path.$file,'html',$path.$fileConvert);
+
+            $html = file_get_contents($path.$fileConvert);
+            
+            unlink($path.$file);
+            unlink($path.$fileConvert);
+            
+            return response()->json(array(
+                'message' => 'Recebido com sucesso',
+                'data' => $html,
+            ), 200);
+        }
 
         return response()->json(array(
             'message' => 'Exame sem preparo',
