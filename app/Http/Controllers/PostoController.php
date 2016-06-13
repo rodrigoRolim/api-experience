@@ -238,7 +238,6 @@ class PostoController extends Controller {
         $correlativos = $dados[0]['correlativos'];
         $cabecalho = $dados[0]['cabecalho'];
 
-
         // $ehAtendimentoPosto = $this->posto->ehAtendimentoPosto($posto,$atendimento);
 
         // if(!$ehAtendimentoPosto){
