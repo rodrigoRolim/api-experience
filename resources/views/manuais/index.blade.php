@@ -46,9 +46,17 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h2 class="modal-title" id="modalTitle"></h2>
+                    <h3 class="modal-title">Instrução de Exame</h2>
                 </div>
                 <div class="modal-body" id="modalBody">
-                    
+                      <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#instPac" aria-controls="instPac" role="tab" data-toggle="tab">Paciente</a></li>
+                        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Tecnico</a></li>
+                      </ul>
+                      <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="instPac">...</div>
+                        <div role="tabpanel" class="tab-pane" id="profile">...</div>
+                      </div>
                 </div>
             </div>
         </div>
@@ -113,11 +121,11 @@
                             html +=         '<span data-toggle="tooltip" data-placement="bottom" title="Observação"><i class="fa fa-info-cicle"></i> '+tipoColeta+'</span>';
                             html +=     '</div>';
 */
-                            if(procedimentos[i].hora_coleta != null){
+/*                            if(procedimentos[i].hora_coleta != null){
                                 html +=     '<div class="no-padding col-md-4">';
                                 html +=         '<span style="color:#FF0000;font-size:0.9em" data-toggle="tooltip" data-placement="bottom" title="Hora da coleta/recebimento"><i class="fa fa-clocl-o"></i>  Exame pode ser coletado/recebido até as '+procedimentos[i].hora_coleta+'</span>';
                                 html +=     '</div>';
-                            }
+                            }*/
 
                             html += '</div>';
                             html += '</li>';
@@ -154,7 +162,7 @@
                                     }
 
                                     $('#modalTitle').html(exame);
-                                    $('#modalBody').html(body);
+                                    $('#instPac').html(body);
 
                                     $('#modalManual').modal('show');
 

@@ -39,10 +39,10 @@
                        data-saldo="{{$atendimento->saldo_devedor}}"
                        data-acesso="{{$user['tipoAcesso']}}">
                         <b class="dataMini">
-                            <p class="text-center" style="margin:0px;line-height: 14px">{{ date('d/m',strtotime($atendimento->data_atd))}}<br>
-                                {{ date('Y',strtotime($atendimento->data_atd))}}</p>
+                            <p class="text-center" style="margin:0px;line-height: 14px">{{$atendimento->data_atd}}<br>
+                                {{ $atendimento->data_atd}}</p>
                         </b>
-                        <span class="nav-label mnemonicos"><strong>{{ date('d/m/y',strtotime($atendimento->data_atd))}}</strong><br>
+                        <span class="nav-label mnemonicos"><strong>{{ $atendimento->data_atd}}</strong><br>
                             {{str_limit($atendimento->mnemonicos,56)}}</span>
                     </a>
                 </li>
