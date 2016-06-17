@@ -14,6 +14,7 @@
             </button> 
             <ul class="dropdown-menu pull-right itensInfoUser"> 
             <li class="item imprimirTimbrado"><input id="checkTimbrado" type="checkbox"></i>&nbsp; Imprimir Timbrado</li> 
+            <li style="border-bottom:1px solid #efefef; margin-top:8px"></li>    
                 <li class="item">
                     <a href="{{url('/')}}/auth/logout">
                         <i class="fa fa-sign-out"></i> Sair
@@ -84,10 +85,9 @@
     <div style='padding-left:0px;' class='col-md-6 col-sm-6'>
         <span class='statusAtendimentosViewPaciente'></span>
         <span class='statusFinalizados'></span>Finalizados 
-        <span class='statusAguardando'></span>Parc. Finalizado
-        <span class='statusEmAndamento'></span>Em Andamento 
+        <span class='statusEmAndamento'></span>Em Processo
         <span class='statusPendencias'></span>Existem Pendências
-        <span class='statusNaoRealizado'></span>Não Realizado
+        <span class='statusNaoRealizado'></span>Em Andamento
     </div>
     <div id='btnPdfPrincipal' class='col-md-6 col-sm-6'>
         <button type='button' class='btn btn-danger pull-right'>Gerar PDF</button>

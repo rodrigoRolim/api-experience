@@ -250,7 +250,7 @@ class PostoController extends Controller {
             $qtdCaracterPosto = 2;
         }
 
-        //Prepara o posto e atendimento com zero a esquerda de acordo com a quantidade de caracter estipulado no confige
+        //Prepara o posto e atendimento com zero a esquerda de acordo com a quantidade de caracter estipulado no config
         $postoID = str_pad($posto,$qtdCaracterPosto,'0',STR_PAD_LEFT);
         $atendimentoID = str_pad($atendimento,config('system.qtdCaracterAtend'),'0',STR_PAD_LEFT);
 

@@ -23,10 +23,15 @@
                 <div id="dvFiltro">
                     <h2 class="centralizar" id="infoFiltro" style="padding-top:5px;margin-bottom:15px">Manual de procedimentos/exames</h2>
                     <div class="col-md-12 corPadrao animated fadeInUp">
-                        <div class="input-group m-b inputBuscaPaciente">
-                            <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                            <input type="text" id="buscaProcedimento" placeholder="Digite o nome do exame, Ex. Gli ou Glicemia" class="form-control">
-                        </div> 
+                        <div class="col-md-10">
+                            <div class="input-group m-b inputBuscaPaciente">
+                                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                                <input type="text" id="buscaProcedimento" placeholder="Digite o nome do exame, Ex. Gli ou Glicemia" class="form-control">
+                            </div>                             
+                        </div>
+                        <div class="col-md-2">
+                            <button id="btnLocalizaManual" class="btn btn-block"><i class="fa fa-search" aria-hidden="true"></i> Localizar</button>
+                        </div>
                     </div>
                 </div>
                 <div id="manual">
@@ -177,21 +182,20 @@
             }
         }
 
-if($(window).width() >= 768){
 
-    $('#buscaProcedimento').keyup(function(e){
-        var input = $(this).val();
+    $('#btnLocalizaManual').click(function(e){
+        var input = $('#buscaProcedimento').val();
         buscaProcedimentos(input);     
     });      
    
-}else{
+
    $('#buscaProcedimento').bind('keyup', function(e) {
         if ( e.keyCode === 13 ) { // 13 is enter key
-            var input = $(this).val();
+            var input = $('#buscaProcedimento').val();
             buscaProcedimentos(input);
         }
     }); 
-}
+
 
         $('#manual').slimScroll({
             height: '80vh',

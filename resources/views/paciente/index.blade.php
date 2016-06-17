@@ -93,10 +93,9 @@
             <div class="col-md-8 col-sm-8" style="padding-left:0px">
 		 		<span class='statusAtendimentosViewPaciente'></span>
 		        <span class='statusFinalizados'></span>Finalizados 
-		        <span class='statusAguardando'></span>Parc. Finalizado
-		        <span class='statusEmAndamento'></span>Em Andamento 
+		        <span class='statusEmAndamento'></span>Em Processo
 		        <span class='statusPendencias'></span>Existem Pendências
-		        <span class='statusNaoRealizado'></span>Não Realizado
+		        <span class='statusNaoRealizado'></span>Em Andamento
             </div>  
             <div id='btnPdfPrincipal' class='col-md-4 col-sm-4'>
         		<button id="btnExportar" type='button' class='btn btn-danger pull-right'>Gerar PDF</button>

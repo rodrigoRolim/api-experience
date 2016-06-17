@@ -46,6 +46,11 @@ body,.text-center{
 	color: #B5B3B3;
 }
 
+#btnLocalizaManual{
+	margin-top: 5px;
+	background-color: #fff;
+}
+
 .centralizar{
 	text-align: center;
 }
@@ -143,7 +148,7 @@ ul{
 }
 
 .statusNaoRealizado{
-	border-color: #BBBAB9;
+	border-color: #5D88FF;
 }
 
 .modal-conteudo {

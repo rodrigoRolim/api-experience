@@ -27,7 +27,7 @@
 <body style="background-color:#FFF">	
     <div id="wraper">
         <div class="container">
-			<div class="text-center" style="margin-top: 25vh;">				
+			<div class="text-center" style="margin-top: 20vh;">				
 				{!! Html::image(config('system.eXperienceLogoHorizontal'), 'logo_exp', array('title' => 'eXperience - codemed',)) !!}			
 			</div>
             <div class="text-center">
@@ -44,7 +44,7 @@
 			<div class="text-center" style="padding-top:40px">
 				Desenvolvido por:<br>
 				<a href="http://www.codemed.com.br" target="_new">
-					{!! Html::image(config('system.devLogo'), 'logo_exp', array('title' => 'Codemed', 'height' => 45)) !!}
+					{!! Html::image(config('system.devLogo'), 'logo_exp', array('title' => 'Codemed')) !!}
 				</a>
 			</div>
 		</div>

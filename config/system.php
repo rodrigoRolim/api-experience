@@ -71,6 +71,6 @@ return [
         'qtdDiasFiltro' => env('APP_POSTO_QTD_DIAS')
     ],
     'experience' => [
-        'sobre' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
+        'sobre' => '<p> O <b>eXperience</b> é uma ferramenta que fornece a você, de forma objetiva e bastante simples, a possibilidade de verificar os resultados dos exames de seus clientes em qualquer lugar, a qualquer hora, acompanhando o andamento de suas análises.</p><p>Evite custos desnecessários. Esta é a mais nova proposta que temos para você</p>'
     ]
 ];

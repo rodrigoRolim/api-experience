@@ -67,6 +67,7 @@ ExamesClass.prototype.detalheExame = function(url,tipoAcesso,posto,atendimento,c
 
 ExamesClass.prototype.renderDetalheExame = function(exame){
     var result = [];
+    console.log(exame);
 
     result['title'] = exame.PROCEDIMENTO;
     result['table'] = '<table id="tabelaDetalhes" class="table table-striped">';
