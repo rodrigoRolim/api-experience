@@ -129,11 +129,11 @@
             }
 
             $('#checkTimbrado').on('ifChecked', function (event){
-                Cookies.set('cabecalho',true);  
+                Cookies.set('cabecalho',1);  
             });
 
             $('#checkTimbrado').on('ifUnchecked', function (event){
-                Cookies.set('cabecalho',false);    
+                Cookies.set('cabecalho',0);    
             });
 
 

@@ -111,16 +111,16 @@
 
             var tipoAcesso = '{{Auth::user()['tipoAcesso']}}';
             var url = '{{url('/')}}';
-            if(Cookies.get('cabecalho') == 'true'){
+            if(Cookies.get('cabecalho') == 1){
                 $('#checkTimbrado').iCheck('check');                
             }
 
             $('#checkTimbrado').on('ifChecked', function (event){
-                Cookies.set('cabecalho',true);  
+                Cookies.set('cabecalho',1);  
             });
 
             $('#checkTimbrado').on('ifUnchecked', function (event){
-                Cookies.set('cabecalho',false);    
+                Cookies.set('cabecalho',0);    
             });
 
             if(tipoAcesso == 'POS'){
