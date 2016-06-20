@@ -124,7 +124,7 @@
                 Cookies.set('cabecalho',cabecalho);
             }
 
-            if(Cookies.get('cabecalho') == 'true'){
+            if(Cookies.get('cabecalho') == 1){
                 $('#checkTimbrado').iCheck('check');                
             }
 

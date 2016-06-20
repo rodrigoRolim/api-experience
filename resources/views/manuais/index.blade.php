@@ -22,14 +22,14 @@
             <div class="boxCenter">
                 <div id="dvFiltro">
                     <h2 class="centralizar" id="infoFiltro" style="padding-top:5px;margin-bottom:15px">Manual de procedimentos/exames</h2>
-                    <div class="col-md-12 corPadrao animated fadeInUp">
-                        <div class="col-md-10">
+                    <div class="col-md-12 col-xs-12 corPadrao animated fadeInUp">
+                        <div class="col-md-10 col-xs-8">
                             <div class="input-group m-b inputBuscaPaciente">
                                 <span class="input-group-addon"><i class="fa fa-search"></i></span>
                                 <input type="text" id="buscaProcedimento" placeholder="Digite o nome do exame, Ex. Gli ou Glicemia" class="form-control">
                             </div>                             
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2 col-xs-4">
                             <button id="btnLocalizaManual" class="btn btn-block"><i class="fa fa-search" aria-hidden="true"></i> Localizar</button>
                         </div>
                     </div>
