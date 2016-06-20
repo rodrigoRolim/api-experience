@@ -57,13 +57,13 @@ class ExamesRepository extends BaseRepository
                 case 'AGUARDANDO':
                     //AMARELO
                     $exames[$key]['class'] = 'aguardando-element';
-                    $exames[$key]['msg'] = 'Aguardando Liberação';
+                    $exames[$key]['msg'] = 'Parc. Finalizado';
                     $exames[$key]['view'] = false;
                     break;
                 case 'ANDAMENTO':
                      //LARANJA
                     $exames[$key]['class'] = 'warning-element';
-                    $exames[$key]['msg'] = 'Em Andamento';
+                    $exames[$key]['msg'] = 'Em Processo';
                     $exames[$key]['view'] = false;
                     break;
                 case 'PENDENCIA':
@@ -77,7 +77,7 @@ class ExamesRepository extends BaseRepository
                     //CINZA - NAO REALIZADO
                     $exames[$key]['class'] = 'naoRealizado-element';
                     $exames[$key]['corStatus'] = 'corStatusNaoRealizado';
-                    $exames[$key]['msg'] = 'Não Realizado';
+                    $exames[$key]['msg'] = 'Em Andamento';
                     $exames[$key]['view'] = false;
                     break;
             }
