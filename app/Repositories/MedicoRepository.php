@@ -10,6 +10,7 @@ namespace App\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Experience\Util\DataNascimento;
+use Experience\Util\Formatar;
 
 use DB;
 
@@ -102,6 +103,7 @@ class MedicoRepository extends BaseRepository
         
         for($i=0;$i<sizeof($atendimentos);$i++){
             $atendimentos[$i]->idade = DataNascimento::idade($atendimentos[$i]->data_nas);
+            $atendimentos[$i]->data_atd = Formatar::data($atendimentos[$i]->data_atd,'Y-m-d H:i:s','d/m/Y');
         }
 
         return $atendimentos;

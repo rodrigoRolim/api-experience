@@ -68,14 +68,7 @@ class PostoController extends Controller {
         //Pega o id do posto na sessão
         $idPosto = $this->auth->user()['posto'];
 
-        //Pega os dados de Posto Realizante e Convenios para alimentar select na view
-        $postoRealizante = $this->posto->getPostosRealizantes();
-
-        return view('posto.index')->with(
-            array(
-                'postoRealizante' => $postoRealizante
-            )
-        );
+        return view('posto.index');
     }
 
    /**
@@ -106,6 +99,20 @@ class PostoController extends Controller {
         return response()->json(array(
             'message' => 'Recebido com sucesso.',
             'data' => $acomodacoes,
+        ), 200);
+    }
+
+    /**
+    * Carrega postos realizantes a partir do filtro.
+    *
+    */
+    public function postSelectpostorealizante(){
+        $idPosto = $this->auth->user()['posto'];
+        $postoRealizantes = $this->posto->getPostosRealizantes($idPosto,Request::get('dataInicio'),Request::get('dataFim'));
+    
+        return response()->json(array(
+            'message' => 'Recebido com sucesso.',
+            'data' => $postoRealizantes,
         ), 200);
     }
 

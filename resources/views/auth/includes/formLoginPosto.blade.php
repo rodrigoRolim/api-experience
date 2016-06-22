@@ -11,7 +11,7 @@
         <label>Senha</label>
        <div class="input-group">
 	        <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-            <input type="password" name="password" class="form-control" placeholder="Senha" required="" autocomplete="off">
+            <input type="password" id="password" name="password" class="form-control" placeholder="Senha" required="" autocomplete="off">
 	   </div>            
     </div>
     <button type="submit" class="btn btn-primary block full-width m-b">Acessar</button>

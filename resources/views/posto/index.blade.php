@@ -42,7 +42,7 @@
             </div>
             <div class="col-md-3">
                 <label class="textoBranco" name="situacao">Posto Realizante</label>
-                {!! Form::select('postoRealizante', $postoRealizante, '', array('class' => 'form-control m-b', 'id'=>'postoRealizante')) !!}
+                {!! Form::select('postoRealizante', [], '', array('class' => 'form-control m-b', 'id'=>'postoRealizante')) !!}
             </div>
             <div class="col-md-2">
                 <div class="input-group m-b filtrar col-md-12" style="margin-bottom:0px;padding-top:17px;">
@@ -151,6 +151,7 @@
 
             $("#dataInicio,#dataFim").on("change",function (){ 
                 getAcomodacao(); /*Pode ocausionar problema, caso limpe o seletor, buscará desde o inicio.*/
+                getPostoRealizante();
                 $('#btnFiltrar').removeClass('not-active');
             });
 
@@ -230,10 +231,47 @@
                     });
                     
                     $('#acomodacao').val(Cookies.get('acomodacao'));
-                    //Dispara o evento do botao click para iniciar a busca inicial            
-                    $('#btnFiltrar').trigger('click');
+                    //Dispara o evento do botao click para iniciar a busca inicial
+                    $("#acomodacao option:first").attr('selected','selected');            
+                    /*$('#btnFiltrar').trigger('click');*/
                 });
             }
+
+            //Carrega posto realizantes via ajax
+            function getPostoRealizante(){
+                var posto = '{{Auth::user()['posto']}}';
+                var postPostoRealizante = [
+                    {name:'posto', 'value' : posto},
+                    {name:'dataInicio', 'value' : $('#dataInicio').val()},
+                    {name:'dataFim', 'value' : $('#dataFim').val()}
+                ];
+                //Instancia a class Async
+                var async = new AsyncClass();
+                var dataResult = async.run('{{url("/")}}/posto/selectpostorealizante',postPostoRealizante,'POST');
+
+                dataResult.then(function(result){
+                    var selectPostoRealizante = $('#postoRealizante');
+                    selectPostoRealizante.empty();
+
+                    console.log(result);
+
+                    selectPostoRealizante.append($("<option/>").val('').text('Todos'));
+
+                    $.each(result.data,function(key,value){
+                        selectPostoRealizante.append($("<option/>").val(key).text(value));
+                    });
+
+                    console.log(selectPostoRealizante);
+                    
+                    $('#postoRealizante').val(Cookies.get('postoRealizante'));
+                    //Dispara o evento do botao click para iniciar a busca inicial            
+                    $("#postoRealizante option:first").attr('selected','selected');
+                    $('#btnFiltrar').trigger('click');
+                });
+
+            }
+
+
 
             //Abre filtro quando ta reduzido
             $(".menu-trigger").click(function() {
@@ -330,6 +368,7 @@
             });
             
             getAcomodacao();
+            getPostoRealizante();
         });
     </script>
 @stop

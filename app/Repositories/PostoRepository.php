@@ -70,7 +70,7 @@ class PostoRepository extends BaseRepository
                   INNER JOIN ".config('system.userAgilDB')."VEX_CLIENTES C ON a.registro = c.registro
                 WHERE a.posto = :idPosto
                     AND A.DATA_ATD BETWEEN TO_DATE(:dataInicio,'DD/MM/YYYY HH24:MI')
-                    AND TO_DATE(:dataFim,'DD/MM/YYYY HH24:MI')                   
+                    AND TO_DATE(:dataFim,'DD/MM/YYYY HH24:MI')       
                     AND (:acomodacao IS NULL OR A.ACOMODACAO = :acomodacao)
                     AND (:situacao IS NULL OR A.SITUACAO_EXAMES_EXPERIENCE = :situacao)
                     AND ".config('system.userAgilDB')."get_mnemonicos(a.posto,a.atendimento,:postoRealizante) is not null
@@ -143,18 +143,30 @@ class PostoRepository extends BaseRepository
      * Função responsavel por retornar todos os postos realizantes do posto logado
      * @return mixed
      */
-    public function getPostosRealizantes()
+    public function getPostosRealizantes($posto,$dataInicio,$dataFim)
     {
-        $sql = 'SELECT posto,nome FROM '.config('system.userAgilDB').'VEX_POSTOS WHERE realiza_exames = :tipo order by nome';
-        $data = DB::select(DB::raw($sql),[
-            'tipo' => 'S'
-        ]);
+        $sql = "SELECT DISTINCT 
+                    p.posto,p.nome 
+                FROM 
+                    ".config('system.userAgilDB')."VEX_ATENDIMENTOS a
+                  INNER JOIN 
+                    ".config('system.userAgilDB')."VEX_EXAMES e ON a.posto = e.posto AND a.atendimento = e.atendimento
+                  INNER JOIN 
+                    ".config('system.userAgilDB')."VEX_POSTOS p ON p.posto = e.posto_realizante
+                WHERE 
+                    a.posto = :posto AND a.DATA_ATD BETWEEN TO_DATE(:dataInicio,'DD/MM/YYYY HH24:MI') AND TO_DATE(:dataFim,'DD/MM/YYYY HH24:MI')
+                ORDER BY nome";
 
-        $postos[''] = 'Todos';
+        $data = DB::select(DB::raw($sql),[
+            'posto' => $posto,
+            'dataInicio' => $dataInicio,
+            'dataFim' => $dataFim
+        ]);
 
         foreach ($data as $key => $value) {
             $postos[$value->posto] = $value->nome;
         }
+
         return $postos;
     }
 
@@ -166,11 +178,14 @@ class PostoRepository extends BaseRepository
      */
     public function getPostosRealizantesAtendimento($posto,$atendimento)
     {
-        $sql = 'SELECT DISTINCT p.posto,p.nome 
+        $sql = 'SELECT 
+                    DISTINCT p.posto,p.nome 
                 FROM '.config('system.userAgilDB').'VEX_POSTOS p
-                  INNER JOIN '.config('system.userAgilDB').'VEX_EXAMES e ON e.posto_realizante = p.posto
-                WHERE p.realiza_exames = :tipo AND e.posto = :posto AND e.atendimento = :atendimento
-                ORDER BY p.nome';
+                    INNER JOIN '.config('system.userAgilDB').'VEX_EXAMES e ON e.posto_realizante = p.posto
+                WHERE 
+                    p.realiza_exames = :tipo AND e.posto = :posto AND e.atendimento = :atendimento
+                ORDER BY 
+                    p.nome';
         
         $data = DB::select(DB::raw($sql),[
             'tipo' => 'S',
