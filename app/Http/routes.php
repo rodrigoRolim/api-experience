@@ -36,6 +36,8 @@ Route::group(['prefix' => '/','middleware' => ['ehPosto','revalidate']], functio
     Route::controllers([
         'posto' => 'PostoController',
     ]);
+
+    Route::get('amostras','AsyncController@getAmostras');
 });
 
 Route::group(['prefix' => '/', 'middleware' => ['auth']], function () {

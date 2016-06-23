@@ -258,58 +258,6 @@ class AuthController extends Controller
         Redirect::back();
         //Retorna para a view de login
 
-
         return Redirect::to('/');
-    }
-
-    public function getTeste(){
-        $rtf = "{\rtf1\ansi\ansicpg1252\deff0{\fonttbl{\f0\fnil\fcharset0 Verdana;}}
-                {\colortbl ;\red0\green0\blue0;}
-                \viewkind4\uc1\pard\sb100\sa100\lang1046\b\f0\fs18 1)\'daLTIMA ATUALIZA\'c7\'c3O:\b0  18/10/2006
-                \par 2)\fs24  \b\fs18 PALAVRAS CHAVES\b0 ;GLICOSE\b 
-                \par \b0 3) \b\'c1REA:\b0 BIOQUIMICA I\fs24 
-                \par \pard\sb100\sa100\qj\fs18 4)\fs24  \b\fs18 CONDI\'c7\'d5ES\b0\fs24  :\fs18 soro ou plasma (fluoreto).
-                \par \b TEMPO DE JEJUM\b0\fs24  \fs18 
-                \par JO 8h ou C.O.M. \fs24 
-                \par \fs18 5)\b POSTO REALIZANTE\b0 
-                \par MATRIZ E POSTOS DE COLETA
-                \par 6)\b INSTRU\'c7\'d5ES
-                \par 
-                \par \pard\sb100\sa100\b0\fs24  7\fs18 )\b COMENT\'c1RIOS\b0\fs24  \fs18 
-                \par \pard\sb100\sa100\qj A presenca de um dos criterios abaixo (retirados da American Diabetes Association) e sua confirmacao num dia subsequente indica o diagnostico de diabetes melito: 
-                \par 1. Sintomas de diabetes melito com glicemia independente do jejum maior ou igual a 200 mg/dL). 
-                \par 2. Glicemia de jejum maior ou igual a 126 mg/dL. 
-                \par 3. Glicemia maior ou igual a 200 mg/dL, durante teste de tolerancia a glicose, 2 horas apos 75g de glicose anidra dissolvida em agua. 
-                \par OBS.: Pacientes com glicemia de jejum entre 100 e 125 mg/dL sao classificados como portadores de glicemia de jejum alterada. Pacientes com glicemia maior ou igual a 140 mg/ dL, 2 horas apos 75g de glicose anidra dissolvida em agua,sao considerados intolerantes a glicose. 
-                \par Leucocitose, hemolise e glicolise em amostras submetidas ao calor podem determinar hipoglicemia espuria. \fs24 
-                \par \b\fs18 8)PREVIS\'c3O DE ENTREGA\b0 
-                \par \fs24 1 dia.
-                \par \pard\cf1\b\fs22 
-                \par 9) COBERTURA
-                \par 
-                \par \b0 PARTICULAR E TODOS OS CONV\'caNIOS\b 
-                \par }";
-
-        $reader = new \App\Services\RtfReader();
-        $reader->Parse($rtf);
-        //$reader->root->dump(); // to see what the reader read
-        // dd($reader->root);
-
-        $formatter = new \App\Services\RtfHtml();
-        echo $formatter->Format($reader->root);
-
-        exit;
-        
-        // $reader->root->dump();
-
-   // * //$reader->root->dump(); // to see what the reader read
-
-
-
-        // $html = $formatter->Format($render->root);
-
-        // $formatter = new  \App\Services\RtfHtml();
-        // echo $html;
-        // exit;
     }
 }

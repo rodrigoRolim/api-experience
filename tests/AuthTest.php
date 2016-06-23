@@ -36,7 +36,21 @@ class AuthTest extends TestCase
      */
     public function testLoginPaciente()
     {
-        $this->post('/login', ['tipoAcesso' => 'PAC', 'tipoLoginPaciente' => 'ID', 'atendimento' => '00/001927' ,'password' => 'l1ukhl'])
-             ->seePageIs('/paciente');
+        
+        Session::start();
+
+        $credentials = array(
+            'tipoAcesso' => 'PAC',
+            'tipoLoginPaciente' => 'ID',
+            'atendimento' => '00/001927',
+            'password' => 'l1ukhl',
+            '_token' => csrf_token()
+        );
+
+        $response = $this->call('POST', '/auth/login', $credentials);
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertRedirectedTo('/auth/home');
+        
+
     }
 }

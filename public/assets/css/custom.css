@@ -349,6 +349,10 @@ ul{
    color: gray !important;
 }
 
+.semHover{
+	cursor: default !important;
+}
+
 .gray-bg{
 	background-color: #F3F3F4 !important;
 }

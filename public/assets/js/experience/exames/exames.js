@@ -22,31 +22,40 @@ ExamesClass.prototype.render = function(result,saldoDevedor,dataMsg){
         var msg = '';
         var opacity = '';
 
+        var situacaoExame = exame.class;
+
         $('#atendimento').html(exame.posto +'/'+ exame.atendimento);
 
         var visualiza = false;
 
-        if(exame.tipo_entrega == "*" && exame.class == "success-element" && !saldoDevedor){
+        console.log(exame);
+
+        if(exame.tipo_entrega == "*"){
+            visualiza = true;
+        
+            if(saldoDevedor){
+                opacity = 'opacity:0.6';
+                exame.class += ' semHover';
+                visualiza = false;
+            }
+
+            if(exame.class != 'success-element'){
+                visualiza = false;
+            }
+        }else{
+            msg = dataMsg['tipoEntregaInvalido'];
+            opacity = 'opacity:0.6';
+        }
+
+        if(situacaoExame == 'danger-element' && Number(exame.amostra) > 0){
+            exame.msg += ' <span style="color: red">(Nova amostra solicitada)</span>';
+        }
+
+        
+        if(visualiza){
             $('.boxSelectAll').html('<span><input type="checkbox" class="checkAll"></span>');
             check = "<div class='i-checks checkExames' data-posto='"+exame.posto+"' data-atendimento='"+exame.atendimento+"'><input type='checkbox' class='check' value='"+exame.correl+"'></div>";
-            visualiza = true;
         }
-
-        if(exame.tipo_entrega != "*"){
-            msg = dataMsg['tipoEntregaInvalido'];
-            exame.class = 'success-elementNoHov';
-            opacity = 'opacity:0.6';
-        }
-
-        if(saldoDevedor && exame.tipo_entrega == "*"){
-            exame.class = 'success-elementNoHov';
-            opacity = 'opacity:0.6';
-            visualiza = false;
-        }
-
-/*        if(saldoDevedor){
-            exame.class = 'success-elementNoHov';
-        }*/
         
         html += "<div class='col-md-6 boxExames' style='"+opacity+"' data-visu='"+visualiza+"' data-correl='"+exame.correl+"' data-atendimento='"+exame.atendimento+"' data-posto='"+exame.posto+"'>";
         html += "<li class='"+exame.class+" animated fadeInDownBig'>"+check;
