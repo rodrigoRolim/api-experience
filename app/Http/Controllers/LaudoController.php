@@ -14,17 +14,5 @@ class LaudoController extends Controller{
     	$cabecalho->make($xml);
 
     	echo $cabecalho->render();
-
-    	// dd($xml->bands->band['bandType']);
-
-  //   	if (file_exists($url)){
-		//     $xml = ;
-		//     print_r($xml);
-		// } else {
-		//     exit('Falha ao abrir test.xml.');
-		// }
-
-    	// echo 'bruno';
-    	// exit;
     }
 }

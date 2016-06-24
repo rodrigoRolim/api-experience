@@ -193,7 +193,8 @@
 
                         dataExameResult.then(function(exame){
                             if(exame.data != 'undefined'){
-                                render = exames.renderDetalheExame(exame.data,saldo);
+                                msgAmostra = "{!!config('system.messages.amostras.descricao')!!}";
+                                render = exames.renderDetalheExame(exame.data,msgAmostra);
                                 
                                 $('#modalTitleExames').html(render.title);
                                 $('#modalBodyExames').html(render.table);
@@ -262,8 +263,8 @@
                     var paginaPdf = window.open ('/impressao', '', ''); 
                     exportPdf(url,tipoAcesso,posto,atendimento,correl,'G',Cookies.get('cabecalho'),paginaPdf);
                 });
-           });
 
+           });
 
         });
     </script>

@@ -23,5 +23,5 @@ class Amostra extends BaseModel {
      *
      * @var string
      */
-    protected $primaryKey = 'CONVENIO';
+    protected $primaryKey = array('POSTO','ATENDIMENTO');
 }

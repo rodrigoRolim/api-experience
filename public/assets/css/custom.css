@@ -15,6 +15,9 @@ html, body{
 body{
 	overflow: hidden;	
 }
+.navbar img{
+	height: 45px;
+}
 
 #modalBody{
 	-webkit-touch-callout: initial; /* iOS Safari */
@@ -465,12 +468,6 @@ div.row.infoClienteMed{
 	margin-right: 10px;
 }
 
-#iconeAtd,
-#iconeSolic,
-#iconeAcom{
-
-}
-
 .boxExames{
 	padding-right: 0px;
 	padding-left: 0px;
@@ -602,6 +599,11 @@ div.row.infoClienteMed{
 	font-family: "Lucida Console", Monaco, monospace;
 	font-size: 1.2em;
 	border-bottom: 1px dashed #e5e5e5;	
+}
+
+.titleAmostra{
+	margin-top: 0px;
+	margin-bottom: 0px;
 }
 
 .analitos{

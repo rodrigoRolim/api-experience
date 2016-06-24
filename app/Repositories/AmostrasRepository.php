@@ -22,4 +22,20 @@ class AmostrasRepository extends BaseRepository
     {
         return 'App\Models\Amostra';
     }
+
+    /**
+     * Retorna dados da amostra.
+     *
+     * @return array
+     */
+    public function getAmostras($posto,$atendimento,$correl)
+    {
+        $sql = 'SELECT data_cad,data_cole,observacoes FROM '.config('system.userAgilDB').'VEX_AMOSTRAS  
+        		WHERE posto = :posto AND atendimento = :atendimento AND correl = :correl';
+
+        $dadosAmostra = DB::select(DB::raw($sql), 
+        	['posto' => $posto, 'atendimento' => $atendimento, 'correl' => $correl]);
+        
+        return $dadosAmostra;
+    }
 }

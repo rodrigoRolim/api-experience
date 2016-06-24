@@ -49,6 +49,9 @@ return [
         'exame' => [
             'tipoEntregaInvalido' => 'Este exame só poderá ser impresso no laboratório.'
         ],
+        'amostras' => [
+            'descricao' => 'Resultado obtido através de uma nova amostra.'
+        ],
     ],
     'qtdCaracterPosto' => env('APP_QTD_CHAR_POSTO'),
     'qtdCaracterAtend' => env('APP_QTD_CHAR_ATD'),

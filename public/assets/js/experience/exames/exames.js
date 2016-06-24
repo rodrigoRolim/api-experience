@@ -21,14 +21,13 @@ ExamesClass.prototype.render = function(result,saldoDevedor,dataMsg){
         var check = '';        
         var msg = '';
         var opacity = '';
+        var amostra = '';
 
         var situacaoExame = exame.class;
 
         $('#atendimento').html(exame.posto +'/'+ exame.atendimento);
 
         var visualiza = false;
-
-        console.log(exame);
 
         if(exame.tipo_entrega == "*"){
             visualiza = true;
@@ -48,7 +47,12 @@ ExamesClass.prototype.render = function(result,saldoDevedor,dataMsg){
         }
 
         if(situacaoExame == 'danger-element' && Number(exame.amostra) > 0){
-            exame.msg += ' <span style="color: red">(Nova amostra solicitada)</span>';
+            exame.msg += ' <span style="color: orange">(Nova amostra solicitada)</span>';
+        }
+
+        if(Number(exame.amostra) > 0){
+            amostra += "<i data-toggle='tooltip'";
+            amostra += "data-placement='right' title='Nova Amostra' class='fa fa-flask amostra'></i> ";
         }
 
         
@@ -60,7 +64,7 @@ ExamesClass.prototype.render = function(result,saldoDevedor,dataMsg){
         html += "<div class='col-md-6 boxExames' style='"+opacity+"' data-visu='"+visualiza+"' data-correl='"+exame.correl+"' data-atendimento='"+exame.atendimento+"' data-posto='"+exame.posto+"'>";
         html += "<li class='"+exame.class+" animated fadeInDownBig'>"+check;
         html += "<div class='dadosExames'>";
-        html += "<b>"+exame.mnemonico+"</b> | "+exame.nome_procedimento.trunc(31)+"<br>"+exame.msg+"<br>";
+        html += "<b>"+exame.mnemonico+"</b> | "+exame.nome_procedimento.trunc(31)+"<br>"+amostra+exame.msg+"<br>";
         html += "<div class='postoRealizante'> <span data-toggle='tooltip' data-placement='right' title='Posto Realizante'><i class='fa fa-hospital-o'></i> ";
         html += exame.nome_posto_realizante+" "+(exame.tipo_posto_realizante == 'A' ? '(Lab. Apoio)' : '')+"</span></div><span class='msgExameTipoEntrega'>"+msg+"</span></li></div>";
     });
@@ -74,9 +78,8 @@ ExamesClass.prototype.detalheExame = function(url,tipoAcesso,posto,atendimento,c
     return async.run(url+"/"+tipoAcesso+"/detalheatendimentoexamecorrel/"+posto+"/"+atendimento+"/"+corel);
 }
 
-ExamesClass.prototype.renderDetalheExame = function(exame){
-    var result = [];
-    console.log(exame);
+ExamesClass.prototype.renderDetalheExame = function(exame,msgAmostra){
+    var result = [];    
 
     result['title'] = exame.PROCEDIMENTO;
     result['table'] = '<table id="tabelaDetalhes" class="table table-striped">';
@@ -97,6 +100,9 @@ ExamesClass.prototype.renderDetalheExame = function(exame){
                             });
                             
                             result['table'] += '<tr><td id="finalDetalhamento" colspan="2">Liberado em '+exame.DATA_REALIZANTE+' por '+exame.REALIZANTE.NOME+' - '+ exame.REALIZANTE.TIPO_CR+' '+exame.REALIZANTE.UF_CONSELHO+' : '+exame.REALIZANTE.CRM+' Data e Hora da Coleta: '+exame.DATA_COLETA+'</td></tr>';
+                            if(Number(exame.AMOSTRAS) > 0){
+                                result['table'] += '<tr><td colspan="2" class="text-center">'+msgAmostra+'</td></tr>';                                  
+                            }
     result['table'] += '</table>';
     return result;
 }
