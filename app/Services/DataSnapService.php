@@ -35,6 +35,6 @@ class DataSnapService
         	return config('system.PDFUrlTemp').$result->result[0]->Value;
 		}
 
-		return $result->result[0]->Action;
+		return 'false';
 	}
 }
