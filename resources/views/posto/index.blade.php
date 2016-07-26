@@ -115,6 +115,14 @@
             //Inicia o tooltip
             $("body").tooltip({ selector: '[data-toggle=tooltip]' });
 
+            function buscaNoArray(array, attr, valor) {
+                for(var i = 0; i < array.length; i += 1) {
+                    if(array[i][attr] === valor) {
+                        return i;
+                    }
+                }
+            }
+
             $('input').iCheck({
                 checkboxClass: 'icheckbox_square-grey',
             });
@@ -179,6 +187,8 @@
                 //Alimenta o filtro com a data pre definida
                 $('#dataInicio').val(dataInicio);
                 $('#dataFim').val(dataFim);
+                $('#situacao').val('');
+                $('#postoRealizante').val('');
             }
 
             //Configura o componente de lista
@@ -253,15 +263,12 @@
                     var selectPostoRealizante = $('#postoRealizante');
                     selectPostoRealizante.empty();
 
-                    console.log(result);
 
                     selectPostoRealizante.append($("<option/>").val('').text('Todos'));
 
                     $.each(result.data,function(key,value){
                         selectPostoRealizante.append($("<option/>").val(key).text(value));
                     });
-
-                    console.log(selectPostoRealizante);
                     
                     $('#postoRealizante').val(Cookies.get('postoRealizante'));
                     //Dispara o evento do botao click para iniciar a busca inicial            
@@ -295,6 +302,16 @@
 
                 var formPosto = $('#formPosto');
                 var postData = formPosto.serializeArray();
+
+                if(buscaNoArray(postData,'name','situacao') == undefined){
+                    postData.push({name:'situacao',value:''});
+                }
+                if(buscaNoArray(postData,'name','postoRealizante') == undefined){
+                    postData.push({name:'postoRealizante',value:''});
+                }
+                if(buscaNoArray(postData,'name','acomodacao') == undefined){
+                    postData.push({name:'acomodacao',value:''});
+                }
 
                 //Instancia a class Async
                 var async = new AsyncClass();
