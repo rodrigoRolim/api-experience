@@ -162,6 +162,8 @@ class PostoRepository extends BaseRepository
             'dataInicio' => $dataInicio,
             'dataFim' => $dataFim
         ]);
+        
+        $postos = [];
 
         foreach ($data as $key => $value) {
             $postos[$value->posto] = $value->nome;

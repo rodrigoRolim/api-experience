@@ -23,7 +23,9 @@ class DataSnapService
 
 		$correlativos = implode(",", $correls['correl']);
 
-        $result = @file_get_contents(config('system.PDFUrl').$posto.'/'.$atendimento.'/'.$pure.'/'.$correlativos.'/'.$cabecalho);
+		$url = config('system.PDFUrl').$posto.'/'.$atendimento.'/'.$pure.'/'.$correlativos.'/'.$cabecalho;
+
+        $result = @file_get_contents($url);
 
 		if(!$result){
 			return 'false';

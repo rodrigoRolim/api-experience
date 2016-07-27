@@ -112,16 +112,7 @@
 
     <script type="text/javascript">
         $(document).ready(function (){
-            //Inicia o tooltip
             $("body").tooltip({ selector: '[data-toggle=tooltip]' });
-
-            function buscaNoArray(array, attr, valor) {
-                for(var i = 0; i < array.length; i += 1) {
-                    if(array[i][attr] === valor) {
-                        return i;
-                    }
-                }
-            }
 
             $('input').iCheck({
                 checkboxClass: 'icheckbox_square-grey',
@@ -144,7 +135,6 @@
                 Cookies.set('cabecalho',0);    
             });
 
-
             var picker = new Pikaday({ 
                 field: $('.datepicker')[0],
                 format: 'DD/MM/YYYY', 
@@ -156,16 +146,17 @@
                 maxDate: moment().toDate(), 
             });
 
-
-            $("#dataInicio,#dataFim").on("change",function (){ 
-                getAcomodacao(); /*Pode ocausionar problema, caso limpe o seletor, buscará desde o inicio.*/
-                getPostoRealizante();
-                $('#btnFiltrar').removeClass('not-active');
-            });
-
             VMasker($("#dataInicio")).maskPattern('99/99/9999');
             VMasker($("#dataFim")).maskPattern('99/99/9999');
 
+
+            //Abre filtro quando ta reduzido
+            $(".menu-trigger").click(function() {
+               $(".boxFiltroPosto").slideToggle(768, function() {
+                   $(this).toggleClass("nav-expanded").css('display', '');
+               });
+            });  
+            
             //Prepara a data do filtro de acordo com a configuração no arquivo .env
             var dataInicio = new moment();
             var dataFim = new moment();
@@ -216,23 +207,27 @@
                 if(txt == 'Todos'){
                      $(selecthashtag).css('background-color','white');
                 }else{
-                     $(selecthashtag).css('background-color','#CFECCF');                    
+                     $(selecthashtag).css('background-color','#CFECCF');
                 }
+            });
+
+            $("#dataInicio,#dataFim").on("change",function (){ 
+                $('#btnFiltrar').removeClass('not-active');
+
+                getItensFiltro();
 
             });
 
-            //Carrega acomodacao via ajax
-            function getAcomodacao(){
+            function getItensFiltro(){
                 var postAcomodacao = [
                     {name:'dataInicio', 'value' : $('#dataInicio').val()},
                     {name:'dataFim', 'value' : $('#dataFim').val()}
                 ];
-
-                //Instancia a class Async
+                
                 var async = new AsyncClass();
-                var dataResult = async.run('{{url("/")}}/posto/selectacomodacao',postAcomodacao,'POST');
+                var dataResultAcomodacao = async.run('{{url("/")}}/posto/selectacomodacao',postAcomodacao,'POST');
 
-                dataResult.then(function(result){
+                dataResultAcomodacao.then(function(result){
                     var selectAcomodacao = $('#acomodacao');
                     selectAcomodacao.empty();
 
@@ -242,50 +237,39 @@
                     
                     $('#acomodacao').val(Cookies.get('acomodacao'));
                     //Dispara o evento do botao click para iniciar a busca inicial
-                    $("#acomodacao option:first").attr('selected','selected');            
-                    /*$('#btnFiltrar').trigger('click');*/
-                });
-            }
+                    $("#acomodacao option:first").attr('selected','selected');
+                    
+                    var async = new AsyncClass();
 
-            //Carrega posto realizantes via ajax
-            function getPostoRealizante(){
-                var posto = '{{Auth::user()['posto']}}';
-                var postPostoRealizante = [
-                    {name:'posto', 'value' : posto},
-                    {name:'dataInicio', 'value' : $('#dataInicio').val()},
-                    {name:'dataFim', 'value' : $('#dataFim').val()}
-                ];
-                //Instancia a class Async
-                var async = new AsyncClass();
-                var dataResult = async.run('{{url("/")}}/posto/selectpostorealizante',postPostoRealizante,'POST');
+                    var posto = '{{Auth::user()['posto']}}';
+                    var postPostoRealizante = [
+                        {name:'posto', 'value' : posto},
+                        {name:'dataInicio', 'value' : $('#dataInicio').val()},
+                        {name:'dataFim', 'value' : $('#dataFim').val()}
+                    ];
 
-                dataResult.then(function(result){
-                    var selectPostoRealizante = $('#postoRealizante');
-                    selectPostoRealizante.empty();
+                    var dataResultPostoRealizante = async.run('{{url("/")}}/posto/selectpostorealizante',postPostoRealizante,'POST');
+                    
+                    dataResultPostoRealizante.then(function(result){
+                        var selectPostoRealizante = $('#postoRealizante');
+                        selectPostoRealizante.empty();
 
 
-                    selectPostoRealizante.append($("<option/>").val('').text('Todos'));
+                        selectPostoRealizante.append($("<option/>").val('').text('Todos'));
 
-                    $.each(result.data,function(key,value){
-                        selectPostoRealizante.append($("<option/>").val(key).text(value));
+                        $.each(result.data,function(key,value){
+                            selectPostoRealizante.append($("<option/>").val(key).text(value));
+                        });
+                        
+                        $('#postoRealizante').val(Cookies.get('postoRealizante'));
+                        //Dispara o evento do botao click para iniciar a busca inicial            
+                        $("#postoRealizante option:first").attr('selected','selected');
+                        
+                        $('#btnFiltrar').trigger('click');
                     });
                     
-                    $('#postoRealizante').val(Cookies.get('postoRealizante'));
-                    //Dispara o evento do botao click para iniciar a busca inicial            
-                    $("#postoRealizante option:first").attr('selected','selected');
-                    $('#btnFiltrar').trigger('click');
                 });
-
             }
-
-
-
-            //Abre filtro quando ta reduzido
-            $(".menu-trigger").click(function() {
-               $(".boxFiltroPosto").slideToggle(768, function() {
-                   $(this).toggleClass("nav-expanded").css('display', '');
-               });
-           });  
 
             //Evento do disparo do botão de filtro
             $('#btnFiltrar').click(function(e){
@@ -302,16 +286,6 @@
 
                 var formPosto = $('#formPosto');
                 var postData = formPosto.serializeArray();
-
-                if(buscaNoArray(postData,'name','situacao') == undefined){
-                    postData.push({name:'situacao',value:''});
-                }
-                if(buscaNoArray(postData,'name','postoRealizante') == undefined){
-                    postData.push({name:'postoRealizante',value:''});
-                }
-                if(buscaNoArray(postData,'name','acomodacao') == undefined){
-                    postData.push({name:'acomodacao',value:''});
-                }
 
                 //Instancia a class Async
                 var async = new AsyncClass();
@@ -383,9 +357,8 @@
                     $('#filtroPaciente').filterList();                    
                 });                
             });
-            
-            getAcomodacao();
-            getPostoRealizante();
+
+            getItensFiltro();
         });
     </script>
 @stop

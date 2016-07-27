@@ -108,6 +108,7 @@ class PostoController extends Controller {
     */
     public function postSelectpostorealizante(){
         $idPosto = $this->auth->user()['posto'];
+
         $postoRealizantes = $this->posto->getPostosRealizantes($idPosto,Request::get('dataInicio'),Request::get('dataFim'));
     
         return response()->json(array(
@@ -132,7 +133,7 @@ class PostoController extends Controller {
             $result = $this->posto->getAtendimentos(
                 $idPosto,
                 $requestData['dataInicio'],
-                $requestData['dataFim'],              
+                $requestData['dataFim'],
                 $requestData['acomodacao'],
                 $requestData['situacao'],
                 $requestData['postoRealizante']
