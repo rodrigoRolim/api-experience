@@ -80,29 +80,19 @@ class MedicoController extends Controller {
         //Pego da sessao do usuario o ID_MEDICO
         $idMedico = $this->auth->user()['id_medico'];
 
-        //Pego atraves do repositorio todos os postos e convenios que tem algum atendimento do médico
-        $postos = $this->medico->getPostoAtendimento($idMedico);
-        $convenios = $this->medico->getConvenioAtendimento($idMedico);
+        // //Pego atraves do repositorio todos os postos e convenios que tem algum atendimento do médico
+        // $postos = $this->medico->getPostoAtendimento($idMedico);
+        // $convenios = $this->medico->getConvenioAtendimento($idMedico);
 
         $result = BrowserDetect::isMobile() || BrowserDetect::isTablet();
 
         if($result == true){
-            return view('mobile.medico.index')->with(
-                array(
-                    'postos' => $postos,
-                    'convenios' => $convenios,
-                    )
-                );
+            return view('mobile.medico.index');
         }
 
 
         //Retorno para a view para alimentação do filtro inicial
-        return view('medico.index')->with(
-            array(
-                'postos' => $postos,
-                'convenios' => $convenios,
-            )
-        );
+        return view('medico.index');
     }
     /**
      * Metodo chamado via jquery para alimentar o grid dos pacientes do médico
@@ -191,6 +181,40 @@ class MedicoController extends Controller {
         return response()->json(array(
             'message' => 'Recebido com sucesso.',
             'data' => $exames,
+        ), 200);
+    }
+
+    /**
+     * Seleciona os convenios referentes as datas passadas no filtro.
+     * @param $idMedico
+     * @param $dataInicio
+     * @param $dataFim
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function postSelectconvenios(){
+        $idMedico = $this->auth->user()['id_medico'];
+        $convenios = $this->medico->getConvenioAtendimento($idMedico,Request::get('dataInicio'),Request::get('dataFim'));
+    
+        return response()->json(array(
+            'message' => 'Recebido com sucesso.',
+            'data' => $convenios,
+        ), 200);
+    }
+
+    /**
+     * Seleciona os postos de cadastro referentes as datas passadas no filtro.
+     * @param $idMedico
+     * @param $dataInicio
+     * @param $dataFim
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function postSelectpostoscadastro(){
+        $idMedico = $this->auth->user()['id_medico'];
+        $postosCadastro = $this->medico->getPostoAtendimento($idMedico,Request::get('dataInicio'),Request::get('dataFim'));
+    
+        return response()->json(array(
+            'message' => 'Recebido com sucesso.',
+            'data' => $postosCadastro,
         ), 200);
     }
 
