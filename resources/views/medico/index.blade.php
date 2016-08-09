@@ -32,11 +32,11 @@
             </div>
             <div class="col-md-2">
                 <label class="textoBranco" name="posto">Posto de Cadastro</label>
-                {!! Form::select('posto', $postos, '', array('class' => 'form-control m-b', 'id'=>'posto')) !!}
+                {!! Form::select('posto', [], '', array('class' => 'form-control m-b', 'id'=>'posto')) !!}
             </div>
             <div class="col-md-3">
                 <label class="textoBranco" name="convenio">Convênios</label>
-                {!! Form::select('convenio', $convenios, '', array('class' => 'form-control m-b', 'id'=>'convenio')) !!}
+                {!! Form::select('convenio', [], '', array('class' => 'form-control m-b', 'id'=>'convenio')) !!}
             </div>
             <div class="col-md-2">
                 <label class="textoBranco" name="situacao">Situação</label>
@@ -78,6 +78,8 @@
     <script src="{{ asset('/assets/js/plugins/sweetalert/sweetalert.min.js') }}"></script>
     <script src="{{ asset('/assets/js/plugins/js-cookie/js.cookie.js') }}"></script>
 
+    <script src="{{ asset('/assets/js/experience/async.js') }}"></script>
+
     <script type="text/javascript">
         $(document).ready(function (){
 
@@ -99,6 +101,8 @@
 
             $("#dataInicio,#dataFim").on("change",function (){ 
                 $('#btnFiltrar').removeClass('not-active');
+                getItensFiltro();
+    
             });
 
             $("#convenio, #situacao, #posto").change(function(e) {
@@ -115,6 +119,63 @@
                 }
 
             });
+
+            function getItensFiltro(){
+                var idMedico = '{{Auth::user()['id_medico']}}';
+                var postConvenios = [
+                    {name:'idMedico', 'value' : idMedico},
+                    {name:'dataInicio', 'value' : $('#dataInicio').val()},
+                    {name:'dataFim', 'value' : $('#dataFim').val()}
+                ];
+                
+                var async = new AsyncClass();
+                var dataResultConvenios = async.run('{{url("/")}}/medico/selectconvenios',postConvenios,'POST');
+
+                dataResultConvenios.then(function(result){
+                    var selectConvenio = $('#convenio');
+                    selectConvenio.empty();
+
+                    $.each(result.data,function(key,value){
+                        selectConvenio.append($("<option/>").val(key).text(value));
+                    });
+                    
+                    $('#convenio').val(Cookies.get('convenio'));
+                    //Dispara o evento do botao click para iniciar a busca inicial
+                    $('#convenio option:first').attr('value', '');
+                    console.log($('#convenio').val());
+
+                    $("#convenio option:first").attr('selected','selected');
+                    
+                    var async = new AsyncClass();
+
+                    var postPostosCadastro = [
+                        {name:'idMedico', 'value' : idMedico},
+                        {name:'dataInicio', 'value' : $('#dataInicio').val()},
+                        {name:'dataFim', 'value' : $('#dataFim').val()}
+                    ];
+
+                    var dataResultPostosCadastro = async.run('{{url("/")}}/medico/selectpostoscadastro',postPostosCadastro,'POST');
+                    
+                    dataResultPostosCadastro.then(function(result){
+                        var selectPostosCadastro = $('#posto');
+                        selectPostosCadastro.empty();
+
+
+                        selectPostosCadastro.append($("<option/>").val('').text('Todos'));
+
+                        $.each(result.data,function(key,value){
+                            selectPostosCadastro.append($("<option/>").val(key).text(value));
+                        });
+                        
+                        $('#posto').val(Cookies.get('posto'));
+                        //Dispara o evento do botao click para iniciar a busca inicial            
+                        $("#posto option:first").attr('selected','selected');
+                        
+                        $('#btnFiltrar').trigger('click');
+                    });
+                    
+                });
+            }
 
             $(".menu-trigger").click(function() {
                 $(".boxFiltro").slideToggle(400, function() {
@@ -136,7 +197,7 @@
                 $('#dataFim').val(Cookies.get('dataFim'));
                 $('#convenio').val(Cookies.get('convenio'));     
                 $('#situacao').val(Cookies.get('situacao'));     
-                $('#postoRealizante').val(Cookies.get('postoRealizante'));     
+                $('#posto').val(Cookies.get('posto'));     
             }else{
                 $('#dataInicio').val(dataInicio);
                 $('#dataFim').val(dataFim);
@@ -166,7 +227,7 @@
                 Cookies.set('dataFim', $('#dataFim').val());
                 Cookies.set('convenio', $('#convenio').val());
                 Cookies.set('situacao', $('#situacao').val());
-                Cookies.set('postoRealizante', $('#postoRealizante').val());
+                Cookies.set('posto', $('#posto').val());
 
                 if($('#dataInicio').val() == '' || $('#dataFim').val() == ''){
                     swal("Datas Não Preenchidas..", "Atençao, preencha os campos de Data(Inicial e Final), Para selecionar um periodo de tempo para qual deseja visualizar os atendimentos.", "warning"); 
@@ -179,10 +240,12 @@
                 getClientes(postData);
             });
 
-            $('#btnFiltrar').trigger('click');
+            // $('#btnFiltrar').trigger('click');
 
             function getClientes(postData){
                 $('#listFilter').html('<br><br><br><br><h2 class="textoTamanho"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando registros.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>');
+                
+                console.log(postData);
                 $.ajax({
                     url : '{{url("/")}}/medico/filterclientes',
                     type: 'POST',
@@ -251,6 +314,7 @@
                     }
                 });
             }
+            getItensFiltro();
         });
     </script>
 @stop

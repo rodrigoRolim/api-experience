@@ -113,22 +113,24 @@ class MedicoRepository extends BaseRepository
      * Retorna os postos que o medico tenha atendimento
      * @param $idMedico
      */
-    public function getPostoAtendimento($idMedico){
-        $sql = 'SELECT p.posto, p.nome
+    public function getPostoAtendimento($idMedico, $dataInicio, $dataFim){
+        $sql = "SELECT p.posto, p.nome
                 FROM
-                  '.config('system.userAgilDB').'vex_medicos M
-                  INNER JOIN '.config('system.userAgilDB').'vex_atendimentos A ON M.crm = A.solicitante
-                  INNER JOIN '.config('system.userAgilDB').'vex_postos P ON A.posto = p.posto
+                  ".config('system.userAgilDB')."vex_medicos M
+                  INNER JOIN ".config('system.userAgilDB')."vex_atendimentos A ON M.crm = A.solicitante
+                  INNER JOIN ".config('system.userAgilDB')."vex_postos P ON A.posto = p.posto
                 WHERE
-                  m.id_medico = :idMedico
+                  m.id_medico = :idMedico AND A.DATA_ATD BETWEEN TO_DATE(:dataInicio,'DD/MM/YYYY HH24:MI') AND TO_DATE(:dataFim,'DD/MM/YYYY HH24:MI')
                 GROUP BY p.posto,p.nome
-                ORDER BY p.nome';
+                ORDER BY p.nome";
 
         $data = DB::select(DB::raw($sql),[
             'idMedico' => $idMedico,
+            'dataInicio' => $dataInicio,
+            'dataFim' => $dataFim,
         ]);
 
-        $postos = array(''=>'Todos');
+        $postos = [];
 
         foreach ($data as $key => $value) {
             $postos[$value->posto] = $value->nome;
@@ -141,27 +143,32 @@ class MedicoRepository extends BaseRepository
      * Retorna os convenios que o medico tenha atendimento
      * @param $idMedico
      */
-    public function getConvenioAtendimento($idMedico)
+    public function getConvenioAtendimento($idMedico,$dataInicio,$dataFim)
     {
-        $sql = 'SELECT c.convenio,c.nome
+        $sql = "SELECT c.convenio,c.nome
                 FROM
-                  '.config('system.userAgilDB').'vex_medicos M
-                  INNER JOIN '.config('system.userAgilDB').'vex_atendimentos A ON M.crm = A.solicitante
-                  INNER JOIN '.config('system.userAgilDB').'vex_convenios C ON a.convenio = c.convenio
+                  ".config('system.userAgilDB')."vex_medicos M
+                  INNER JOIN ".config('system.userAgilDB')."vex_atendimentos A ON M.crm = A.solicitante
+                  INNER JOIN ".config('system.userAgilDB')."vex_convenios C ON a.convenio = c.convenio
                 WHERE
-                  m.id_medico = :IdMedico
+                  m.id_medico = :IdMedico AND A.DATA_ATD BETWEEN TO_DATE(:dataInicio,'DD/MM/YYYY HH24:MI') AND TO_DATE(:dataFim,'DD/MM/YYYY HH24:MI')
                 GROUP BY c.convenio,c.nome
-                ORDER BY c.nome';
+                ORDER BY c.nome";
 
         $data = DB::select(DB::raw($sql),[
             'idMedico' => $idMedico,
+            'dataInicio' => $dataInicio,
+            'dataFim' => $dataFim,
         ]);
 
-        $convenios = array(''=>'Selecione ');
+        $convenios = [];
 
         foreach ($data as $key => $value) {
             $convenios[$value->convenio] = $value->nome;
         }
+
+        array_unshift($convenios, "Selecione");
+
 
         return $convenios;
     }
