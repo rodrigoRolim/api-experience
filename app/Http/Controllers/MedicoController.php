@@ -3,7 +3,7 @@
 /**
 * Classe de Controle do Medico
 *
-* @author Bruno Araújo <brunoluan@gmail.com> e Vitor Queiroz <vitorvqz@gmail.com>
+* @author Bruno AraÃºjo <brunoluan@gmail.com> e Vitor Queiroz <vitorvqz@gmail.com>
 * @version 1.0
 */
 
@@ -80,32 +80,22 @@ class MedicoController extends Controller {
         //Pego da sessao do usuario o ID_MEDICO
         $idMedico = $this->auth->user()['id_medico'];
 
-        // //Pego atraves do repositorio todos os postos e convenios que tem algum atendimento do médico
+        // //Pego atraves do repositorio todos os postos e convenios que tem algum atendimento do mÃ©dico
         // $postos = $this->medico->getPostoAtendimento($idMedico);
         // $convenios = $this->medico->getConvenioAtendimento($idMedico);
 
         $mobile = BrowserDetect::isMobile() || BrowserDetect::isTablet();
 
-<<<<<<< HEAD
         if($mobile == true){
-            return view('mobile.medico.index')->with(
-                array(
-                    'postos' => $postos,
-                    'convenios' => $convenios,
-                    )
-                );
-=======
-        if($result == true){
             return view('mobile.medico.index');
->>>>>>> bdac6673839068cde0309f29318a46920abbb269
         }
 
 
-        //Retorno para a view para alimentação do filtro inicial
+        //Retorno para a view para alimentaÃ§Ã£o do filtro inicial
         return view('medico.index');
     }
     /**
-     * Metodo chamado via jquery para alimentar o grid dos pacientes do médico
+     * Metodo chamado via jquery para alimentar o grid dos pacientes do mÃ©dico
      * @return \Illuminate\Http\JsonResponse
      */
     public function postFilterclientes(){
@@ -134,7 +124,7 @@ class MedicoController extends Controller {
     }
 
     /**
-     * Função responsavel por retornar todos os atendimentos solicitados pelo medico ao paciente
+     * FunÃ§Ã£o responsavel por retornar todos os atendimentos solicitados pelo medico ao paciente
      * @param $registro
      * @return \Illuminate\View\View
      */
@@ -177,9 +167,9 @@ class MedicoController extends Controller {
      */
     public function getExamesatendimento($posto,$atendimento){
         //Verifico junto ao repositorio do medico se o atendimento foi ele que solicitou,
-        //dessa forma garanto que apenas o medico solicitante tenha acesso as informações
+        //dessa forma garanto que apenas o medico solicitante tenha acesso as informaÃ§Ãµes
         $ehAtendimentoMedico = $this->medico->ehAtendimentoMedico($this->auth->user()['id_medico'],$posto,$atendimento);
-        //Caso não encontre ele retorna o error 4040
+        //Caso nÃ£o encontre ele retorna o error 4040
         if(!$ehAtendimentoMedico){
             \App::abort(404);
         }
@@ -236,29 +226,29 @@ class MedicoController extends Controller {
      * @return \Illuminate\Http\JsonResponse
      */
     public function getDetalheatendimentoexamecorrel($posto,$atendimento,$correl){
-        //Verifica se o medico autenticado é o medico solicitante do atendimento
+        //Verifica se o medico autenticado Ã© o medico solicitante do atendimento
         $ehAtendimentoMedico = $this->medico->ehAtendimentoMedico($this->auth->user()['id_medico'],$posto,$atendimento);
 
-        //Caso não encontre registro, o sistema retorna o error 203
+        //Caso nÃ£o encontre registro, o sistema retorna o error 203
         if(!$ehAtendimentoMedico){
             return response()->json(array(
-                'message' => 'Atendimento não é do medico autenticado.'
+                'message' => 'Atendimento nÃ£o Ã© do medico autenticado.'
             ), 203);
         }
-        //Verifica se o atendimento tem saldo devedor, caso tenha o sistema não libera o acesso aos resultadoso
+        //Verifica se o atendimento tem saldo devedor, caso tenha o sistema nÃ£o libera o acesso aos resultadoso
         $saldoDevedor = $this->atendimento->getSaldoDevedor($posto,$atendimento);
 
         if($saldoDevedor){
             return response()->json(array(
-                'message' => 'Existe pendências'
+                'message' => 'Existe pendÃªncias'
             ), 203);
         }
-        //Retorna para a view os dados do resultado para exibição
+        //Retorna para a view os dados do resultado para exibiÃ§Ã£o
         $exames = $this->exames->getDetalheAtendimentoExameCorrel($posto, $atendimento,$correl);
 
         if(!$exames){
             return response()->json(array(
-                'message' => 'Você não tem permissão para acessar esse exame'
+                'message' => 'VocÃª nÃ£o tem permissÃ£o para acessar esse exame'
             ), 203);
         }
 
@@ -269,11 +259,11 @@ class MedicoController extends Controller {
     }
 
     /**
-     * Responsavel para enviar para o DataSnapService a solicitação de Gerar PDF
+     * Responsavel para enviar para o DataSnapService a solicitaÃ§Ã£o de Gerar PDF
      * @return string
      */
     public function postExportarpdf(){
-        //Pega os dados enviados na requisição
+        //Pega os dados enviados na requisiÃ§Ã£o
         $dados = current(Request::input('dados'));
         //Separa os dados o posto, atendimento e correl
         $posto = $dados['posto'];
@@ -308,7 +298,7 @@ class MedicoController extends Controller {
         if(!$ehAtendimentoMedico){
             \App::abort(404);
         }
-        //Solicito para o dataSnap a geração do PDF
+        //Solicito para o dataSnap a geraÃ§Ã£o do PDF
         return $this->dataSnap->exportarPdf($posto,$atendimento,$pure,$correlativos,$cabecalho);
     }
 
@@ -317,14 +307,14 @@ class MedicoController extends Controller {
     }
 
     /**
-     * Responsavel por alterar senha de acesso do médico
+     * Responsavel por alterar senha de acesso do mÃ©dico
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
     public function postAlterarsenha(){
-        //Faço a verificação dos campo enviados de acordo com as regras de validação do medico
+        //FaÃ§o a verificaÃ§Ã£o dos campo enviados de acordo com as regras de validaÃ§Ã£o do medico
         $validator = Validator::make(Request::all(), $this->medicoAcesso->getValidator());
 
-        //Caso não seja valido os dados
+        //Caso nÃ£o seja valido os dados
         if ($validator->fails()) {
             return response(['message'=>'Erro - Senhas devem ter entre 6 e 15 caracteres.','data' => Request::all()],400);
         }
@@ -332,11 +322,11 @@ class MedicoController extends Controller {
         //Gero o ID do medico com um md5 do ID_MEDICO
         $id = strtoupper(md5($this->auth->user()['id_medico']));
 
-        //Verifico a tenha atual do medico para liberar a alteração para a nova senha
+        //Verifico a tenha atual do medico para liberar a alteraÃ§Ã£o para a nova senha
         $verifyAcesso = $this->medicoAcesso->findWhere(['id' => $id, 'pure' => strtoupper(Request::input('senhaAtual'))])->count();
 
         if(!$verifyAcesso){
-            return response(['message'=>'Senha atual não confere','data' => Request::all()],203);
+            return response(['message'=>'Senha atual nÃ£o confere','data' => Request::all()],203);
         }
         //Envio os dados para o repository alterar a senha
         $acesso = $this->medicoAcesso->alterarSenha($id,Request::input('novaSenha'));
