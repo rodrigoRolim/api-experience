@@ -53,11 +53,13 @@ class AuthController extends Controller
      */
      public function getIndex()
      {
+        $mobile = BrowserDetect::isMobile() || BrowserDetect::isTablet();
+
         if(gethostname() == config('system.HOSTNAME_AUTOATENDIMENTO')){
             return redirect('/auth/autoatendimento');
         }
 
-        return view('auth.index');
+        return view('auth.index',compact('mobile'));
      }
 
     /**

@@ -41,7 +41,7 @@
                     @if(config('system.acessoMedico'))
                         <li class=""><a id="btnMedico" data-toggle="tab" href="#tabLoginMedico" aria-expanded="false">Médico</a></li>
                     @endif
-                    @if(config('system.acessoPosto'))
+                    @if(!$mobile && config('system.acessoPosto'))
                         <li class=""><a id="btnPosto" data-toggle="tab" href="#tabLoginPosto" aria-expanded="false">Posto</a></li>
                     @endif                   
                     </ul>
@@ -60,7 +60,7 @@
                             </div>
                         </div>
                     @endif
-                    @if(config('system.acessoPosto'))
+                    @if(!$mobile && config('system.acessoPosto'))
                         <div id="tabLoginPosto" class="tab-pane hidden">
                             <div class="panel-body">
                                 @include('auth.includes.formLoginPosto')

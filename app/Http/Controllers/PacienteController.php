@@ -59,11 +59,11 @@ class PacienteController extends Controller {
         //Envio os dados de autenticação do usuario para carregar todos os atendimentos
         $atendimentos = $this->atendimento->atendimentos($this->auth->user());
        
-        $result = BrowserDetect::isMobile() || BrowserDetect::isTablet();
+        $mobile = BrowserDetect::isMobile() || BrowserDetect::isTablet();
 
         $user = Auth::user(['tipoLoginPaciente']);
 
-        if($result == true){
+        if($mobile == true){
             return view('mobile.paciente.index',compact('atendimentos','tipoLoginPaciente'));            
         }
 

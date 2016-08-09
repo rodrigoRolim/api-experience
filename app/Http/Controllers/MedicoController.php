@@ -84,9 +84,9 @@ class MedicoController extends Controller {
         $postos = $this->medico->getPostoAtendimento($idMedico);
         $convenios = $this->medico->getConvenioAtendimento($idMedico);
 
-        $result = BrowserDetect::isMobile() || BrowserDetect::isTablet();
+        $mobile = BrowserDetect::isMobile() || BrowserDetect::isTablet();
 
-        if($result == true){
+        if($mobile == true){
             return view('mobile.medico.index')->with(
                 array(
                     'postos' => $postos,
@@ -157,11 +157,11 @@ class MedicoController extends Controller {
 
         $atendimentos[0]->nome = Formatar::nomeCurto($atendimentos[0]->nome);
 
-        $result = BrowserDetect::isMobile() || BrowserDetect::isTablet();
+        $mobile = BrowserDetect::isMobile() || BrowserDetect::isTablet();
 
         $user = Auth::user(['tipoAcesso']);
 
-        if($result == true){
+        if($mobile == true){
             return view('mobile.paciente.index',compact('atendimentos'));
         }
 
