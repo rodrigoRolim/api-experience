@@ -20,14 +20,13 @@ class DataSnapService
 	 * @return string
      */
 	public static function exportarPdf($posto,$atendimento,$pure,Array $correls,$cabecalho){
-
 		$correlativos = implode(",", $correls['correl']);
 
 		$url = config('system.PDFUrl').$posto.'/'.$atendimento.'/'.$pure.'/'.$correlativos.'/'.$cabecalho;
 
-        $result = @file_get_contents($url);
+		$result = @file_get_contents($url);
 
-		if(!$result){
+        if(!$result){
 			return 'false';
 		}
 
