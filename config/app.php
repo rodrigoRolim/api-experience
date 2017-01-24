@@ -140,6 +140,8 @@ return [
         Experience\Validation\ValidationServiceProvider::class,
         Prettus\Repository\Providers\LumenRepositoryServiceProvider::class,
 
+        Ipunkt\LaravelAnalytics\AnalyticsServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -210,5 +212,6 @@ return [
         'Form'      => Collective\Html\FormFacade::class,
         'Html'      => Collective\Html\HtmlFacade::class,
         'BrowserDetect' => hisorange\BrowserDetect\Facade\Parser::class,
+        'Analytics' => Ipunkt\LaravelAnalytics\AnalyticsFacade::class,
     ],
 ];

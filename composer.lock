@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "aedeec10c82dd57c45eb272a02258a05",
-    "content-hash": "3e0c90e300fa950d800ff7a08d2d32df",
+    "hash": "578fb6166f264e309dc4df2bc7f026a4",
+    "content-hash": "aa4543520b42722cec1d84f284df8f62",
     "packages": [
         {
             "name": "alchemy/binary-driver",
@@ -457,6 +457,59 @@
                 "traits"
             ],
             "time": "2014-05-01 21:28:53"
+        },
+        {
+            "name": "ipunkt/laravel-analytics",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ipunkt/laravel-analytics.git",
+                "reference": "35193df6f4371a694ccc0f022bcb679a37847eac"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ipunkt/laravel-analytics/zipball/35193df6f4371a694ccc0f022bcb679a37847eac",
+                "reference": "35193df6f4371a694ccc0f022bcb679a37847eac",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/config": "~5.0",
+                "illuminate/session": "~5.0",
+                "illuminate/support": "~5.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "laravel/framework": "~5.0"
+            },
+            "suggest": {
+                "martijnc/php-csp": "For handling Content Security Policy matters"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Ipunkt\\LaravelAnalytics\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Robert Kummer",
+                    "email": "r.kummer@ipunkt.biz"
+                }
+            ],
+            "description": "Analytics tracking for Laravel",
+            "keywords": [
+                "analytics",
+                "google analytics",
+                "javascript",
+                "laravel",
+                "php",
+                "statistics"
+            ],
+            "time": "2016-11-03 07:42:58"
         },
         {
             "name": "jakub-onderka/php-console-color",

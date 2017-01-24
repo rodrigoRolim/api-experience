@@ -12,6 +12,8 @@
     {!! Html::style('/assets/css/custom.css') !!}
     
     {!! Html::style('/assets/css/skins/'.config('system.skinPadrao')) !!}
+
+    {!! Analytics::render() !!}
     
     <link rel="shortcut icon" href="{{url()}}/assets/images/favicon.ico" />
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
