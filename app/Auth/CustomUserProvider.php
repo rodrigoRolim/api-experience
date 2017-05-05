@@ -20,6 +20,7 @@ use Experience\Util\Formatar;
 use Illuminate\Auth\GenericUser;
 use Illuminate\Contracts\Auth\UserProvider;
 use Illuminate\Contracts\Auth\Authenticatable as UserContract;
+use Auth;
 
 class CustomUserProvider implements UserProvider {
 
@@ -35,6 +36,11 @@ class CustomUserProvider implements UserProvider {
         return $identifier;
     }
 
+    public function byId($id)
+    {
+        dd('bruno');
+    }
+
     public function retrieveByToken($identifier, $token)
     {
         //Gera token de autenticação
@@ -44,6 +50,7 @@ class CustomUserProvider implements UserProvider {
 
     public function updateRememberToken(UserContract $user, $token)
     {
+
         $user->set("remember_token",$token);
         $user->save();
     }
@@ -52,9 +59,13 @@ class CustomUserProvider implements UserProvider {
     {
         //Envia os dados do credencias para a funcao de verificação
         $user =  $this->validaUser($credentials);
+
+        Auth::setUser($user);
+
         $this->user = $user;
         return $user;
     }
+
 
     public function validateCredentials(UserContract $user, array $credentials)
     {
@@ -67,7 +78,6 @@ class CustomUserProvider implements UserProvider {
         * De acordo com os tipos de acesso 'PAC = Acesso paciente,MED = Acesso Médico',POS = Acesso posto', 
         * faço as devidas verificação de acordo com suas particularidades
         */
-
         switch($credentials['tipoAcesso']){
             //Acesso do paciente
             case 'PAC':
@@ -124,6 +134,9 @@ class CustomUserProvider implements UserProvider {
                                     'pure' => $atendimentoAcesso[0]['pure'],
                                     'registro' => $cliente['registro'],
                                     'username' => $credentials['posto'].'/'.$credentials['atendimento'],
+                                    'posto' => $credentials['posto'],
+                                    'atendimento' => $credentials['atendimento'],
+                                    'password' => $credentials['password'],
                                 ),
                             );
                             //Cria a sessão do usuario
@@ -228,6 +241,7 @@ class CustomUserProvider implements UserProvider {
                                 'autoAtendimento' => false,
                             ),
                         );
+                        
                         //Cria a sessao do usuario
                         return new GenericUser($atributes);
                     }

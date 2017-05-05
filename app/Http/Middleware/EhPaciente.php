@@ -42,12 +42,27 @@ class EhPaciente
      */
     public function handle($request, Closure $next)
     {
-        $tipoAcesso = $this->auth->user()['tipoAcesso'];
+        $auth = $this->auth->user();
 
-        if ($tipoAcesso == 'PAC'){
-            return $next($request);
-        }else{
-            \App::abort(404);
+        switch (gettype($auth)) {
+            //Quando vem da API
+            case 'object':
+                if ($auth->id['tipoAcesso'] == 'PAC'){
+                    return $next($request);
+                }else{
+                    return response()->json(['error' => 'Não existe'], 404);
+                }    
+                break;
+            
+            //Quando vem da página inicial
+            case 'array':
+                if ($auth['tipoAcesso'] == 'PAC'){
+                    return $next($request);
+                }else{
+                    \App::abort(404);
+                }    
+
+                break;
         }
     }
 }

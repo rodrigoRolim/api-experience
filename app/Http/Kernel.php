@@ -33,5 +33,7 @@ class Kernel extends HttpKernel
         'ehMedico' => \App\Http\Middleware\EhMedico::class,
         'ehPosto' => \App\Http\Middleware\EhPosto::class,
         'revalidate' => \App\Http\Middleware\RevalidateBackHistory::class,
+        'jwt.auth' => \Tymon\JWTAuth\Middleware\GetUserFromToken::class,
+        'jwt.refresh' => \Tymon\JWTAuth\Middleware\RefreshToken::class
     ];
 }

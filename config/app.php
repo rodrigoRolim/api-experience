@@ -163,6 +163,8 @@ return [
          * Browser Detect
          */
         hisorange\BrowserDetect\Provider\BrowserDetectService::class,
+
+        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
     ],
 
     /*
@@ -213,5 +215,7 @@ return [
         'Html'      => Collective\Html\HtmlFacade::class,
         'BrowserDetect' => hisorange\BrowserDetect\Facade\Parser::class,
         'Analytics' => Ipunkt\LaravelAnalytics\AnalyticsFacade::class,
+        'JWTAuth'   => Tymon\JWTAuth\Facades\JWTAuth::class,
+        'JWTFactory' => Tymon\JWTAuthFacades\JWTFactory::class
     ],
 ];

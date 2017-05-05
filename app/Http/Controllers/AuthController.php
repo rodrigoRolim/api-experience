@@ -240,6 +240,8 @@ class AuthController extends Controller
      */
     public function getLogout()
     {
+        //Auth::logout();
+        
         //Limpa todos os cookie do fitro do médico
         unset($_COOKIE['dataInicio']);
         unset($_COOKIE['dataFim']);

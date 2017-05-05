@@ -46,6 +46,18 @@ Route::group(['prefix' => '/', 'middleware' => ['auth']], function () {
     });
 });
 
-Route::get('test', function(){
-    dd(DB::connection()->getPdo());
+Route::group(['prefix' => '/api/v1'], function()
+{
+    Route::post('authenticate', 'ApiController@authenticate');
+
+    Route::group(['prefix' => '/paciente','middleware' => ['jwt.auth','ehPaciente','revalidate']], function () {
+        Route::get('/atendimentos', 'ApiPacienteController@getAtendimentos');    
+        Route::get('/examesatendimento/{posto}/{atendimento}', 'ApiPacienteController@getExamesatendimento');    
+    });
+    
+    //Route::get('teste', 'ApiController@getTeste');
+
+
+
+    //Route::get('/atendimento/detalhe/{posto}/{atendimento}', 'ApiController@detalheatend');
 });

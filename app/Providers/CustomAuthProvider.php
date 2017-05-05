@@ -28,5 +28,4 @@ class CustomAuthProvider extends ServiceProvider {
     {
         //
     }
-
 }
