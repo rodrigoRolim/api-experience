@@ -17,6 +17,8 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 use BrowserDetect;
 
+use Experience\Util\Cript;
+
 use Redirect;
 use Session;
 
@@ -53,6 +55,10 @@ class AuthController extends Controller
      */
      public function getIndex()
      {
+
+        print_r(Cript::hash('bruno123', 'CEDRO'));
+        exit;
+
         $mobile = BrowserDetect::isMobile() || BrowserDetect::isTablet();
 
         if(gethostname() == config('system.HOSTNAME_AUTOATENDIMENTO')){
