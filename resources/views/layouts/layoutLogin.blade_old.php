@@ -29,10 +29,7 @@
 	<div id="wraper">
 		<div id="header">
 			<header>
-				<nav class="navbar navbar-static-top headLogin hidden-xs" role="navigation" style="margin-bottom: 0">
-					{!! Html::image(config('system.eXperienceLogoHorizontal'), 'logo_lab', array('title' => 'logo')) !!}
-				</nav>
-				<nav class="navbar navbar-static-top headLogin hidden-md hidden-lg" role="navigation" style="margin-bottom: 0">
+				<nav class="navbar navbar-static-top headLogin" role="navigation" style="margin-bottom: 0">
 					{!! Html::image(config('system.clienteLogo'), 'logo_lab', array('title' => 'logo')) !!}
 				</nav>
 			</header>
@@ -57,4 +54,3 @@
 	</div>
 </body>
 </html>
-

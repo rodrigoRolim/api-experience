@@ -27,7 +27,7 @@
 
 <body class="boxed-layout">
     <div id="wraper">
-        <div class="container">
+        <div class="container-fluid">
             <div id="header">
                 <nav class="navbar navbar-static-top headLogin headPadrao" role="navigation" style="margin-bottom: 0">
                     <div class="navbar-header logo">
@@ -39,7 +39,7 @@
                 </nav>
             </div>
         </div>
-        <div class="container">
+        <div class="container-fluid">
             <div id="wrapper">
                 @yield('left')                
                     @yield('content')                
