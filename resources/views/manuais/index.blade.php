@@ -55,8 +55,8 @@
                 </div>
                 <div class="modal-body" id="modalBody">
                       <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active"><a href="#instPac" aria-controls="instPac" role="tab" data-toggle="tab">Paciente</a></li>
-                        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Tecnico</a></li>
+                        <li role="presentation" class="active"><a href="#instPac" aria-controls="instPac" role="tab" data-toggle="tab">Instruções do Exame</a></li>
+                        <!--<li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Tecnico</a></li>-->
                       </ul>
                       <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="instPac">...</div>
