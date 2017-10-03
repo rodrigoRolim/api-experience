@@ -17,7 +17,7 @@ class Usuario extends BaseModel {
      * @var string
      */
 
-    protected $table = 'usuarios';
+    protected $table = 'vex_usuarios';
 
     /**
      * The database primary key

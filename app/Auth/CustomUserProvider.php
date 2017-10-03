@@ -255,7 +255,7 @@ class CustomUserProvider implements UserProvider {
             case 'POS';
                 $usuario = new Usuario();
 
-                $usuario = $usuario->where(['user_id' => strtoupper(strtolower($credentials['usuario']))])->get()->toArray();
+                $usuario = $usuario->where(['user_id' => strtoupper(strtolower($credentials['usuario'])), 'ativo' => 'S'])->get()->toArray();
 
                 $posto = new Posto();
                 $posto = $posto->where(['posto' => $credentials['posto']])->get()->toArray();

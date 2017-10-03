@@ -177,9 +177,9 @@
                 //Alimenta o filtro do os dados guardados em cache
                 $('#dataInicio').val(Cookies.get('dataInicio'));  
                 $('#dataFim').val(Cookies.get('dataFim'));
-                $('#situacao').val(Cookies.get('situacao'));     
+                $('#situacao').val(Cookies.get('situacao'));
                 $('#postoRealizante').val(Cookies.get('postoRealizante'));
-
+                $('#posto').val(Cookies.get('posto'));
             }else{
                 //Alimenta o filtro com a data pre definida
                 $('#dataInicio').val(dataInicio);
@@ -279,11 +279,14 @@
 
             //Evento do disparo do botão de filtro
             $('#btnFiltrar').click(function(e){
+                console.log('teste');
+
                 Cookies.set('dataInicio', $('#dataInicio').val());
                 Cookies.set('dataFim', $('#dataFim').val());
                 Cookies.set('acomodacao', $('#acomodacao').val());
                 Cookies.set('situacao', $('#situacao').val());
                 Cookies.set('postoRealizante', $('#postoRealizante').val());
+                Cookies.set('posto', $('#posto').val());
 
                 if($('#dataInicio').val() == '' || $('#dataFim').val() == ''){
                     swal("Datas Não Preenchidas..", "Atençao, preencha os campos de Data(Inicial e Final), Para selecionar um periodo de tempo para qual deseja visualizar os atendimentos.", "warning"); 

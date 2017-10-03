@@ -126,6 +126,9 @@ class ExamesRepository extends BaseRepository
             return false;
         }
 
+        //ATUALIZO QUE O EXAME FOI VISUALIZADO PELA INTERNET
+        
+
         return json_encode($result);
     }
 }
