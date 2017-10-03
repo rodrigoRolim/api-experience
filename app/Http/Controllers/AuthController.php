@@ -17,6 +17,7 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 use BrowserDetect;
 
+use App\Repositories\PostoRepository;
 use Experience\Util\Cript;
 
 use Redirect;
@@ -36,15 +37,18 @@ class AuthController extends Controller
     */
 
     protected $auth;
+    protected $postoRepository;
 
     /**
      * Create a new authentication controller instance.
      *
      * @param \Illuminate\Contracts\Auth\Guard     $auth
     */
-    public function __construct(Guard $auth)
+    public function __construct(Guard $auth, PostoRepository $posto)
     {
         $this->auth = $auth;
+        $this->postoRepository = $posto;
+
         $this->middleware('guest', ['except' => 'getLogout']);
     }
 
@@ -56,8 +60,8 @@ class AuthController extends Controller
      public function getIndex()
      {
 
-        print_r(Cript::hash('bruno123', 'CEDRO'));
-        exit;
+        //print_r(Cript::hash('bruno123', 'CEDRO'));
+        //exit;
 
         $mobile = BrowserDetect::isMobile() || BrowserDetect::isTablet();
 
@@ -65,7 +69,9 @@ class AuthController extends Controller
             return redirect('/auth/autoatendimento');
         }
 
-        return view('auth.index',compact('mobile'));
+        $postos = $this->postoRepository->orderBy('nome')->lists('nome', 'posto');
+
+        return view('auth.index', compact('mobile', 'postos'));
      }
 
     /**
@@ -212,7 +218,8 @@ class AuthController extends Controller
                 
                 //Cria array de validação
                 $validate = [
-                    'posto' => 'required|max:'.$qtdCaracter.'',                  
+                    'posto' => 'required|max:'.$qtdCaracter.'',
+                    'usuario' => 'required',
                     'password' => 'required',
                 ]; 
                                
@@ -221,9 +228,11 @@ class AuthController extends Controller
                 //Cria array para verificação de autenticação com o banco de dados
                 $credentials = [
                     'tipoAcesso' => 'POS',  
-                    'posto' => $request->input('posto'),                  
+                    'posto' => $request->input('posto'),
+                    'usuario' => $request->input('usuario'),
                     'password' => $request->input('password'),
                 ];
+                
                 break;
         }
 

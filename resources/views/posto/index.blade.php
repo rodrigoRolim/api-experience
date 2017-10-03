@@ -23,7 +23,10 @@
     <button class="menu-trigger text-center"> <i class="fa fa-filter fa-1x"> </i> Filtrar Atendimentos </button>
     <div class="col-md-12 corPadrao boxFiltroPosto">       
         <form id="formPosto">
-            <input hidden type="text" value="0" name="posto">
+            <div class="col-md-2">
+                <label class="textoBranco" name="situacao">Posto Cadastro</label>
+                {!! Form::select('posto',$postos, '', array('class' => 'form-control m-b', 'id'=>'posto')) !!}
+            </div>
             <div class="col-md-3">
                 <label class="textoBranco">Periodo:</label>
                 <div class="input-daterange input-group">
@@ -40,11 +43,11 @@
                 <label class="textoBranco" name="situacao">Situação</label>
                 {!! Form::select('situacao', config('system.selectFiltroSituacaoAtendimento'), '', array('class' => 'form-control m-b', 'id'=>'situacao')) !!}
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <label class="textoBranco" name="situacao">Posto Realizante</label>
                 {!! Form::select('postoRealizante', [], '', array('class' => 'form-control m-b', 'id'=>'postoRealizante')) !!}
             </div>
-            <div class="col-md-2">
+            <div class="col-md-1">
                 <div class="input-group m-b filtrar col-md-12" style="margin-bottom:0px;padding-top:17px;">
                     <a class="btn btn-warning btn-outline col-md-12 not-active" id="btnFiltrar"><i class="fa fa-filter fa-2"> </i> Filtrar</a>
                 </div>
@@ -112,6 +115,9 @@
 
     <script type="text/javascript">
         $(document).ready(function (){
+
+            $('#posto').val({{Auth::user()['posto']}});
+
             $("body").tooltip({ selector: '[data-toggle=tooltip]' });
 
             $('input').iCheck({
@@ -211,7 +217,7 @@
                 }
             });
 
-            $("#dataInicio,#dataFim").on("change",function (){ 
+            $("#dataInicio,#dataFim, #posto").on("change",function (){ 
                 $('#btnFiltrar').removeClass('not-active');
 
                 getItensFiltro();
@@ -241,7 +247,7 @@
                     
                     var async = new AsyncClass();
 
-                    var posto = '{{Auth::user()['posto']}}';
+                    var posto = $('#posto').val();
                     var postPostoRealizante = [
                         {name:'posto', 'value' : posto},
                         {name:'dataInicio', 'value' : $('#dataInicio').val()},

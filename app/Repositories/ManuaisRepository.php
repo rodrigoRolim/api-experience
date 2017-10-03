@@ -27,7 +27,7 @@ class ManuaisRepository extends BaseRepository
   public function getProcedimentos($descricao){
     $sql = "SELECT DISTINCT MNEMONICO as mnemonico, NOME as procedimento, NOME_SETOR as nome_setor, tipo_coleta, NOME_MATERIAL as material, HORA_COLE as hora_coleta
             FROM ".config('system.userAgilDB')."VEX_PROCEDIMENTOS
-            WHERE MNEMONICO LIKE(:input) OR NOME LIKE(:input)";
+            WHERE MNEMONICO LIKE(:input) OR NOME LIKE(:input) AND status = 'A'";
 
     $procedimentos = DB::select(DB::raw($sql),[
       'input' => $descricao

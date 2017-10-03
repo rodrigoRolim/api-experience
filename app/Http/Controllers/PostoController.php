@@ -68,7 +68,9 @@ class PostoController extends Controller {
         //Pega o id do posto na sessão
         $idPosto = $this->auth->user()['posto'];
 
-        return view('posto.index');
+        $postos = $this->posto->orderBy('nome')->lists('nome', 'posto');
+
+        return view('posto.index', compact('postos'));
     }
 
    /**
@@ -93,7 +95,7 @@ class PostoController extends Controller {
     *
     */
     public function postSelectacomodacao(){
-        $idPosto = $this->auth->user()['posto'];
+        $idPosto = Request::get('posto');
         $acomodacoes = $this->posto->getAcomodacoesPosto($idPosto,Request::get('dataInicio'),Request::get('dataFim'));
     
         return response()->json(array(
@@ -107,7 +109,7 @@ class PostoController extends Controller {
     *
     */
     public function postSelectpostorealizante(){
-        $idPosto = $this->auth->user()['posto'];
+        $idPosto = Request::get('posto');
 
         $postoRealizantes = $this->posto->getPostosRealizantes($idPosto,Request::get('dataInicio'),Request::get('dataFim'));
     
@@ -125,7 +127,7 @@ class PostoController extends Controller {
         //Pega os dados enviados do formulario do filtro
         $requestData = Request::all();
         //Pega o ID do posto na sessão
-        $idPosto = $this->auth->user()['posto'];
+        $idPosto = Request::get('posto');
 
         //Verifica se dataInicio e dataFim seja diferente de nulo
         if($requestData['dataInicio'] != null && $requestData['dataFim'] != null){

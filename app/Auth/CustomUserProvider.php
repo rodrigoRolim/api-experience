@@ -16,11 +16,14 @@ use App\Models\ClienteAcesso;
 use App\Models\Medico;
 use App\Models\MedicoAcesso;
 use App\Models\Posto;
+use App\Models\Usuario;
 use Experience\Util\Formatar;
 use Illuminate\Auth\GenericUser;
 use Illuminate\Contracts\Auth\UserProvider;
 use Illuminate\Contracts\Auth\Authenticatable as UserContract;
 use Auth;
+
+use Experience\Util\Cript;
 
 class CustomUserProvider implements UserProvider {
 
@@ -38,7 +41,7 @@ class CustomUserProvider implements UserProvider {
 
     public function byId($id)
     {
-        dd('bruno');
+        
     }
 
     public function retrieveByToken($identifier, $token)
@@ -60,7 +63,7 @@ class CustomUserProvider implements UserProvider {
         //Envia os dados do credencias para a funcao de verificação
         $user =  $this->validaUser($credentials);
 
-        Auth::setUser($user);
+        //Auth::setUser($user);
 
         $this->user = $user;
         return $user;
@@ -250,22 +253,28 @@ class CustomUserProvider implements UserProvider {
                 break;
             //Acesso do tipo POSTO
             case 'POS';
+                $usuario = new Usuario();
+
+                $usuario = $usuario->where(['user_id' => strtoupper(strtolower($credentials['usuario']))])->get()->toArray();
+
                 $posto = new Posto();
-                $posto = $posto->where(['posto' => $credentials['posto']])->get()->toArray();       
+                $posto = $posto->where(['posto' => $credentials['posto']])->get()->toArray();
                 //Verifica se o codigo do posto existe no banco de dados
-                if(sizeof($posto)){
+
+                if(sizeof($usuario)){
                     //Verifica se a senha esta correta
-                    if(strtoupper($posto[0]['pass']) == strtoupper($credentials['password'])){
+                    if($usuario[0]['senha'] == Cript::hash($credentials['password'], 'CEDRO')){
                         //Valores que seram guardados em cache, caso necessite de algo a mais pode ser implementado nesse objeto
                         $atributes = array(
                             'remember_token' => str_random(60),
                             'id' => array(
                                 'tipoAcesso' => 'POS',
-                                'nome' => $posto[0]['nome'],
+                                'nome' => $usuario[0]['user_id'],
                                 'posto' => $posto[0]['posto'],
                                 'autoAtendimento' => false,
                             ),
                         );
+
                         //Cria a sessao do usuario
                         return new GenericUser($atributes);
                     }
