@@ -263,7 +263,7 @@ class CustomUserProvider implements UserProvider {
 
                 if(sizeof($usuario)){
                     //Verifica se a senha esta correta
-                    if($usuario[0]['senha'] == Cript::hash($credentials['password'], 'CEDRO')){
+                    if($usuario[0]['senha'] == Cript::hash(strtoupper($credentials['password']), 'CEDRO')){
                         //Valores que seram guardados em cache, caso necessite de algo a mais pode ser implementado nesse objeto
                         $atributes = array(
                             'remember_token' => str_random(60),
