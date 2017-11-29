@@ -303,20 +303,6 @@ $(document).ready(function(){
              exportPdf(url,tipoAcesso,posto,atendimento,correl,'G',cabecalho,paginaPdf);
      });
 
-     $('#btnPdfDetalhe').click(function(e){
-        var checkboxes = $('input:checked');       
-            var correl = [];
-               checkboxes.each(function () {
-                    correl.push($(this).data('correl'));
-                  });   
-            if(correl.length == 0){
-              swal('','Selecione ao menos um Exame para exportação para o arquivo PDF.','error');
-            }
-            var cabecalho = true; 
-            var paginaPdf = window.open('/impressao', '', ''); 
-             exportPdf(url,tipoAcesso,posto,atendimento,correl,'G',cabecalho,paginaPdf);
-     });
-
 });  
 
 

@@ -2,7 +2,7 @@ if (window.history && window.history.pushState) {
 
 	window.history.pushState('', null, '');
 
-	$(window).on('popstate', function() { // Botão voltar do navegador pressionado
+	/*$(window).on('popstate', function() { // Botão voltar do navegador pressionado
 	  swal({   title: "Deseja sair do sistema?",   
 	  text: "Confirme clicando no botão sair.",   
 	  type: "warning",   
@@ -13,6 +13,6 @@ if (window.history && window.history.pushState) {
 	  {  
 	    window.location = '/auth/logout'; 
 	  });
-	});
+	});*/
 
 }
