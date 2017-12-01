@@ -1,24 +1,24 @@
-function getDescricaoExame(url,dadosExames,tipoAcesso){ 
+function getDescricaoExame(url,dadosExames,tipoAcesso){
     $.ajax({
         url : url+'/'+tipoAcesso+'/detalheatendimentoexamecorrel/'+dadosExames.posto+'/'+dadosExames.atendimento+'/'+dadosExames.correl+'',
-        type: 'GET',                            
+        type: 'GET',
         success:function(result){
-            if(result.data == '' || result.data == null){  
+            if(result.data == '' || result.data == null){
                $('.mdi-close').click();
-                    swal("Erro ao carregar descrição do exame..", "Não há resultados disponíveis para visualização.", "error");                                    
+                    swal("Erro ao carregar descrição do exame..", "Não há resultados disponíveis para visualização.", "error");
                     return false;
-                }      
-            var descricao = result.data;  
+                }
+            var descricao = result.data;
             var analitos = result.data.ANALITOS;
             var conteudo = '';
 
             $('.modal-titulo').html('');
             $('#tabelaDetalhes').html('');
-            $('.modal-titulo').append('&nbsp;&nbsp;'+descricao.PROCEDIMENTO); 
-            
+            $('.modal-titulo').append('&nbsp;&nbsp;'+descricao.PROCEDIMENTO);
+
             $('#rodapeDetalhe').append('Liberado em '+descricao.DATA_REALIZANTE+' por '+descricao.REALIZANTE.NOME+' - '+
                 descricao.REALIZANTE.TIPO_CR+' '+descricao.REALIZANTE.UF_CONSELHO+' : '+descricao.REALIZANTE.CRM+' Coletado em: '+descricao.DATA_COLETA);
-            $('#dvPdfDetalhe').html('<a href="#" id="btnPdfDetalhe" data-correl="'+dadosExames.correl+'" data-posto="'+dadosExames.posto+'" data-atendimento="'+dadosExames.atendimento+'" class="btn btnPdf">Gerar PDF</a>');  
+            $('#dvPdfDetalhe').html('<a href="#" id="btnPdfDetalhe" data-correl="'+dadosExames.correl+'" data-posto="'+dadosExames.posto+'" data-atendimento="'+dadosExames.atendimento+'" class="btn btnPdf">Gerar PDF</a>');
 
 
             $.each( analitos, function( index ){
@@ -26,8 +26,8 @@ function getDescricaoExame(url,dadosExames,tipoAcesso){
                 switch(analitos[index].UNIDADE) {
                     case 'NULL':
                         analitos[index].UNIDADE = '';
-                        break;                                                                      
-                }       
+                        break;
+                }
 
                 var valorAnalito = analitos[index].VALOR;
                 if(!isNaN(valorAnalito)){
@@ -45,8 +45,19 @@ function getDescricaoExame(url,dadosExames,tipoAcesso){
 
                 $('#tabelaDetalhes').append(conteudo);
 
-            });             
-       
+                $('#btnPdfDetalhe').click(function(e) {
+                  var cabecalho = true;
+                  var paginaPdf = window.open('/impressao', '', '');
+                  var posto = $(this).data('posto');
+                  var atendimento = $(this).data('atendimento');
+                  var correl = [];
+
+                  correl.push($(this).data('correl'));
+
+                  exportPdf(url,tipoAcesso,posto,atendimento,correl,'G',cabecalho,paginaPdf);
+                });
+            });
+
             if(result.data.length == 0){
                 $('.modal-conteudo').append('<h2 class="textoTamanho">Não foram encontrados atendimentos.</h2>');
             }
