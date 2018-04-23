@@ -19,6 +19,13 @@
 @stop
 
 @section('content')
+
+@include('layouts.includes.base.modalSeachPacienteByMedico')
+
+@section('statusFooter')
+    <span class="pull-right"><i class="fa fa-keyboard-o"></i> <b>SHIFT+Z: </b> Localizar Paciente</span>
+@stop
+
 <button class="menu-trigger text-center"> <i class="fa fa-filter fa-2x"> </i> Filtrar Atendimentos </button>
     <div class="col-md-12 corPadrao boxFiltro">
         <form id="formMedico">

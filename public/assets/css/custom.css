@@ -12,11 +12,16 @@ html, body{
 	cursor: default;
 }
 
+*:focus{
+	outline: none !important;
+}
+
+
 body{
 	overflow: hidden;	
 }
 .navbar img{
-	height: 45px;
+	height: 55px;
 }
 
 #modalBody{

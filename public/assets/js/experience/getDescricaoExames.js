@@ -45,7 +45,7 @@ function getDescricaoExame(url,dadosExames,tipoAcesso){
 
                 $('#tabelaDetalhes').append(conteudo);
 
-                $('#btnPdfDetalhe').click(function(e) {
+               /* $('#btnPdfDetalhe').click(function(e) {
                   var cabecalho = true;
                   var paginaPdf = window.open('/impressao', '', '');
                   var posto = $(this).data('posto');
@@ -55,7 +55,27 @@ function getDescricaoExame(url,dadosExames,tipoAcesso){
                   correl.push($(this).data('correl'));
 
                   exportPdf(url,tipoAcesso,posto,atendimento,correl,'G',cabecalho,paginaPdf);
-                });
+		 
+		  e.stopPropagation() 
+		  //e.preventDefault();
+
+                }); */
+            });
+
+	    $('#btnPdfDetalhe').click(function(e) {
+                  var cabecalho = true;
+                  var paginaPdf = window.open('/impressao', '', '');
+                  var posto = $(this).data('posto');
+                  var atendimento = $(this).data('atendimento');
+                  var correl = [];
+
+                  correl.push($(this).data('correl'));
+
+                  exportPdf(url,tipoAcesso,posto,atendimento,correl,'G',cabecalho,paginaPdf);
+
+                  e.stopPropagation()
+                  //e.preventDefault();
+                  
             });
 
             if(result.data.length == 0){

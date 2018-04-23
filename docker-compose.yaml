@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  web:
+    image: 'centos-php'
+    ports:
+      - '81:81'
+    volumes:
+      - .:/var/www/html
+      - ./vhost:/etc/httpd/sites

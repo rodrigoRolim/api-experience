@@ -13,6 +13,10 @@ function exportPdf(url,tipoAcesso,posto,atendimento,correl,tipo,cabecalho,pagina
                 paginaPdf.close();
                 swal("Problemas ao exportar o seus resultados, tente mais tarde.", "Tente novamente mais tarde!", "error");
             }             
+
+		return true;
        }
 	 });    
+
+    return true;
 }

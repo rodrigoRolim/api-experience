@@ -112,9 +112,11 @@ class MedicoController extends Controller {
                 $requestData['dataInicio'],
                 $requestData['dataFim'],
                 $requestData['posto'],
+		null,
                 $requestData['convenio'],
                 $requestData['situacao']
             );
+
             //retorno o json com os resultados para a view
             return response()->json(array(
                 'message' => 'Recebido com sucesso.',
@@ -337,4 +339,18 @@ class MedicoController extends Controller {
 
         return response(['message' => 'Salvo com sucesso.','data' => $acesso],200);
     }
+
+    public function postLocalizapaciente()
+    {
+        $nome = Request::input('paciente');
+        $nascimento = Request::input('nascimento');
+
+        $pacientes = $this->medico->localizapaciente($this->auth->user()['id_medico'], $nome, $nascimento);
+
+        return response()->json(array(
+            'message' => 'Recebido com sucesso.',
+            'data' => $pacientes,
+        ), 200);
+    }
+
 }

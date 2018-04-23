@@ -1,9 +1,10 @@
 a {
   color: #34b583;
 }
-a:hover {
+a:hover,a:focus {
   color: #ffb900;
 }
+
 .headLogin {
   background-color: #ffffff;
   border-bottom: 1px solid #34b583;

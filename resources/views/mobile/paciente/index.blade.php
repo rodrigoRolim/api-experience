@@ -302,9 +302,6 @@ $(document).ready(function(){
             var paginaPdf = window.open('/impressao', '', ''); 
              exportPdf(url,tipoAcesso,posto,atendimento,correl,'G',cabecalho,paginaPdf);
      });
-
 });  
 
-
 </script>
-

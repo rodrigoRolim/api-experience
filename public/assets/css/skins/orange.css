@@ -1,7 +1,7 @@
 a {
   color: #f5791f;
 }
-a:hover {
+a:hover,a:focus {
   color: #f99e5c;
 }
 .headLogin {

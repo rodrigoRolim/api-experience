@@ -11,21 +11,21 @@
     </style>
 @stop
 
-
 @section('content')
+
 <body class="animated fadeInDown gray-bg">
     <div class="loginColumns animated fadeInDown">
         <div class="row">
-            <div class="col-md-6 hidden-xs">
+            <div class="col-md-5 hidden-xs">
                 <h2 style="padding-top:8vh">
                     <a id="linkSobre" href="{{url('/')}}/sobre">
-                        <span class="text-navy">{!! Html::image(config('system.clienteLogo'), 'logo_exp', array('title' => 'eXperience - codemed', 'src'=>'experience/sobre', 'style'=>'height: 60px;')) !!}</span>
+                        <span class="text-navy">{!! Html::image(config('system.clienteLogo'), 'logo_exp', array('title' => 'eXperience - codemed', 'src'=>'experience/sobre', 'style'=>'height: 80px;')) !!}</span>
                         {!!config('system.loginText.subTitle')!!}
                     </a>
                 </h2>
                 {!!config('system.loginText.description')!!}
             </div>
-            <div class="col-md-6">
+            <div class="col-md-7">
                 @if (count($errors) == 1)
                     <div class="alert alert-danger alert-dismissable">
                         @foreach ($errors->all() as $error)
@@ -43,34 +43,47 @@
                     @endif
                     @if(!$mobile && config('system.acessoPosto'))
                         <li class=""><a id="btnPosto" data-toggle="tab" href="#tabLoginPosto" aria-expanded="false">Posto</a></li>
+                    @endif    
+                    @if(!$mobile && config('system.acessoParceiro'))
+                        <li class=""><a id="btnParceiro" data-toggle="tab" href="#tabLoginParceiro" aria-expanded="false">Parceiro</a></li>
                     @endif                   
                     </ul>
                     <div class="tab-content">
-                    @if(config('system.acessoPaciente'))
-                        <div id="tabLoginPaciente" class="tab-pane hidden">
-                            <div class="panel-body">
-                               @include('auth.includes.formLoginPaciente')
+                        @if(config('system.acessoPaciente'))
+                            <div id="tabLoginPaciente" class="tab-pane hidden">
+                                <div class="panel-body">
+                                   @include('auth.includes.formLoginPaciente')
+                                </div>
                             </div>
-                        </div>
-                    @endif
-                    @if(config('system.acessoMedico'))
-                        <div id="tabLoginMedico" class="tab-pane hidden">
-                            <div class="panel-body">
-                                @include('auth.includes.formLoginMedico')
+                        @endif
+                        @if(config('system.acessoMedico'))
+                            <div id="tabLoginMedico" class="tab-pane hidden">
+                                <div class="panel-body">
+                                    @include('auth.includes.formLoginMedico')
+                                </div>
                             </div>
-                        </div>
-                    @endif
-                    @if(!$mobile && config('system.acessoPosto'))
-                        <div id="tabLoginPosto" class="tab-pane hidden">
-                            <div class="panel-body">
-                                @include('auth.includes.formLoginPosto')
+                        @endif
+                        @if(!$mobile && config('system.acessoPosto'))
+                            <div id="tabLoginPosto" class="tab-pane hidden">
+                                <div class="panel-body">
+                                    @include('auth.includes.formLoginPosto')
+                                </div>
                             </div>
-                        </div>
-                    @endif
+                        @endif
+                        @if(!$mobile && config('system.acessoParceiro'))
+                            <div id="tabLoginParceiro" class="tab-pane hidden">
+                                <div class="panel-body">
+                                    @include('auth.includes.formLoginParceiro')
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
+
+        @include('auth.includes.modalAjudaPaciente')
+        
     </div>
 </body>
 <footer id="footer-login" class="hidden-lg hidden-md" style="background-color: white">
@@ -95,16 +108,26 @@
                         $('#tabLoginPaciente').removeClass('hidden');
                         $('#tabLoginPosto').addClass('hidden');
                         $('#tabLoginMedico').addClass('hidden');
+                        $('#tabLoginParceiro').addClass('hidden');
                         break;
                     case "Médico":
                         $('#cr').focus();
                         $('#tabLoginMedico').removeClass('hidden');
                         $('#tabLoginPosto').addClass('hidden');
                         $('#tabLoginPaciente').addClass('hidden');
+                        $('#tabLoginParceiro').addClass('hidden');
                         break;
                     case "Posto":
                         $('#posto').focus();
                         $('#tabLoginPosto').removeClass('hidden');
+                        $('#tabLoginPaciente').addClass('hidden');
+                        $('#tabLoginMedico').addClass('hidden');
+                        $('#tabLoginParceiro').addClass('hidden');
+                        break;
+                    case "Parceiro":
+                        $('#codparceiro').focus();
+                        $('#tabLoginParceiro').removeClass('hidden');
+                        $('#tabLoginPosto').addClass('hidden');
                         $('#tabLoginPaciente').addClass('hidden');
                         $('#tabLoginMedico').addClass('hidden');
                         break;
