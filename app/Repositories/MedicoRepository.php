@@ -39,37 +39,41 @@ class MedicoRepository extends BaseRepository
      *
      * @return array
      */
-    public function getClientes($idMedico, $dataInicio, $dataFim, $posto = null, $acomodacao = null, $convenio = null, $situacao = null)
+    public function getClientes($idMedico, $dataInicio = null, $dataFim = null, $paciente = null)
     {
         $sql = 'SELECT DISTINCT
                   c.nome,c.data_nas,c.registro,c.sexo,c.telefone,c.telefone2,a.acomodacao,'.config('system.userAgilDB').'get_atendimentos_solicitante(c.registro,m.id_medico,:maskPosto,:maskAtendimento) as atendimentos
                 FROM
                   '.config('system.userAgilDB').'VEX_ATENDIMENTOS A
                   INNER JOIN '.config('system.userAgilDB').'VEX_MEDICOS M ON A.solicitante = m.crm
-                  INNER JOIN '.config('system.userAgilDB')."VEX_CLIENTES C ON a.registro = c.registro
-                WHERE M.ID_MEDICO = :idMedico
-                    AND A.DATA_ATD >= TO_DATE(:dataInicio,'DD/MM/YYYY HH24:MI')
-                    AND A.DATA_ATD <= TO_DATE(:dataFim,'DD/MM/YYYY HH24:MI')
-                    AND (:posto IS NULL OR A.POSTO = :posto)
-                    AND (:acomodacao IS NULL OR A.ACOMODACAO = :acomodacao)
-                    AND (:convenio IS NULL OR A.CONVENIO = :convenio)
-                    AND (:situacao IS NULL OR A.SITUACAO_EXAMES_EXPERIENCE = :situacao)
-                ORDER BY c.nome";
+                  INNER JOIN '.config('system.userAgilDB').'VEX_CLIENTES C ON a.registro = c.registro
+                WHERE M.ID_MEDICO = :idMedico ';
+
+        $order = "ORDER BY c.nome ";
 
         $mask = config('system.atendimentoMask');
         $mask = explode('/', $mask);
 
-        $clientes = DB::select(DB::raw($sql), [
-            'idMedico' => $idMedico,
-            'dataInicio' => $dataInicio.' 00:00',
-            'dataFim' => $dataFim.' 23:59',
-            'maskPosto' => $mask[0],
-            'maskAtendimento' => $mask[1],
-            'posto' => $posto,
-            'convenio' => $convenio,
-            'acomodacao' => $acomodacao,
-            'situacao' => $situacao,
-        ]);
+        if($paciente == ""){
+            $sql .= "AND A.DATA_ATD >= TO_DATE(:dataInicio,'DD/MM/YYYY HH24:MI') AND A.DATA_ATD <= TO_DATE(:dataFim,'DD/MM/YYYY HH24:MI') ";
+        
+            $clientes = DB::select(DB::raw($sql.$order), [
+                'idMedico' => $idMedico,
+                'dataInicio' => $dataInicio.' 00:00',
+                'dataFim' => $dataFim.' 23:59',
+                'maskPosto' => $mask[0],
+                'maskAtendimento' => $mask[1],
+            ]);
+        }else{
+            $sql .= "AND c.nome LIKE :paciente ";
+
+            $clientes = DB::select(DB::raw($sql.$order), [
+                'idMedico' => $idMedico,
+                'paciente' => '%'.mb_strtoupper($paciente).'%',
+                'maskPosto' => $mask[0],
+                'maskAtendimento' => $mask[1],
+            ]);
+        }
 
         for ($i = 0; $i < sizeof($clientes); ++$i) {
             $atd = explode(',', $clientes[$i]->atendimentos);

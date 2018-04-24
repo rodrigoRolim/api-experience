@@ -99,30 +99,20 @@ class MedicoController extends Controller {
      * @return \Illuminate\Http\JsonResponse
      */
     public function postFilterclientes(){
-        //Pego todos os valores enviado do formulario
-        $requestData = Request::all();
         //Pego o ID_MEDICO da sessao do usuario
-        $idMedico = $this->auth->user()['id_medico']; 
+        $idMedico = $this->auth->user()['id_medico'];
 
-        //Verifico se da dataInicio e dataFim seja diferente de nulo
-        if($requestData['dataInicio'] != null && $requestData['dataFim'] != null){
-            //Passo os parametros para uma consulta via repositorio
-            $result = $this->medico->getClientes(
-                $idMedico,
-                $requestData['dataInicio'],
-                $requestData['dataFim'],
-                $requestData['posto'],
-		null,
-                $requestData['convenio'],
-                $requestData['situacao']
-            );
+        $dataInicio = Request::input('dataInicio');
+        $dataFim    = Request::input('dataFim');
+        $paciente   = Request::input('paciente');
 
-            //retorno o json com os resultados para a view
-            return response()->json(array(
-                'message' => 'Recebido com sucesso.',
-                'data' => $result,
-            ), 200);
-        }
+        $result = $this->medico->getClientes($idMedico, $dataInicio, $dataFim, $paciente);
+
+        //retorno o json com os resultados para a view
+        return response()->json(array(
+            'message' => 'Recebido com sucesso.',
+            'data' => $result,
+        ), 200);
     }
 
     /**

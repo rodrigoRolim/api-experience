@@ -20,8 +20,6 @@
 
 @section('content')
 
-@include('layouts.includes.base.modalSeachPacienteByMedico')
-
 @section('statusFooter')
     <span class="pull-right"><i class="fa fa-keyboard-o"></i> <b>SHIFT+Z: </b> Localizar Paciente</span>
 @stop
@@ -29,7 +27,7 @@
 <button class="menu-trigger text-center"> <i class="fa fa-filter fa-2x"> </i> Filtrar Atendimentos </button>
     <div class="col-md-12 corPadrao boxFiltro">
         <form id="formMedico">
-            <div class="col-md-3">
+            <div class="col-md-3" id="dvFiltroData">
                 <label class="textoBranco">Atendimentos por datas entre:</label>
                 <div class="input-daterange input-group" id="datepicker">
                     <input type="text" class="input-sm form-control datepicker" id="dataInicio" name="dataInicio">
@@ -37,21 +35,13 @@
                     <input type="text" class="input-sm form-control datepicker" id="dataFim" name="dataFim">
                 </div>
             </div>
-            <div class="col-md-2">
-                <label class="textoBranco" name="posto">Posto de Cadastro</label>
-                {!! Form::select('posto', [], '', array('class' => 'form-control m-b', 'id'=>'posto')) !!}
-            </div>
-            <div class="col-md-3">
-                <label class="textoBranco" name="convenio">Convênios</label>
-                {!! Form::select('convenio', [], '', array('class' => 'form-control m-b', 'id'=>'convenio')) !!}
-            </div>
-            <div class="col-md-2">
-                <label class="textoBranco" name="situacao">Situação</label>
-                {!! Form::select('situacao', config('system.selectFiltroSituacaoAtendimento'), '', array('class' => 'form-control m-b', 'id'=>'situacao')) !!}
+            <div class="col-md-7">
+                <label class="textoBranco" name="labelpaciente">Nome do Paciente</label>
+                {!! Form::text('paciente', '', array('class' => 'form-control m-b', 'id'=>'paciente')) !!}
             </div>
             <div class="col-md-2">
                 <div class="input-group m-b filtrar col-md-12" style="margin-bottom:0px;padding-top:17px;">
-                    <a class="btn btn-warning btn-outline col-md-12 not-active" id="btnFiltrar"><i class="fa fa-filter fa-2"> </i> Filtrar</a>
+                    <a class="btn btn-warning btn-outline col-md-12" id="btnFiltrar"><i class="fa fa-filter fa-2"> </i> Filtrar</a>
                 </div>
             </div>
         </form>
@@ -60,10 +50,10 @@
     <div class="wrapper wrapper-content">
         <div class="ibox-content">
             <div class="row">
-                <div class="input-group m-b">
+                <!--<div class="input-group m-b">
                     <span class="input-group-addon"><i class="fa fa-search"></i></span>
                     <input type="text" id="filtroPaciente" placeholder="Localizar paciente na relação abaixo" class="form-control">
-                </div>
+                </div>-->
                 <div class="contadorAtd">                    
                 </div>
                 <ul class="sortable-list connectList agile-list ui-sortable" id="listFilter"></ul>
@@ -92,6 +82,9 @@
 
             $("body").tooltip({ selector: '[data-toggle=tooltip]' });
 
+            var controleFiltro = 'D';
+
+            //Prepara o datePicker            
             var picker = new Pikaday({ 
                 field: $('.datepicker')[0],
                 format: 'DD/MM/YYYY', 
@@ -103,116 +96,49 @@
                 maxDate: moment().toDate(), 
             });
 
-            var padAtd = '{{config('system.atdMaskZeros')}}';
-            var padPos = '{{config('system.postoMaskZeros')}}';
-
-            $("#dataInicio,#dataFim").on("change",function (){ 
-                $('#btnFiltrar').removeClass('not-active');
-                getItensFiltro();
-    
-            });
-
-            $("#convenio, #situacao, #posto").change(function(e) {
-                select = e.target.id;
-                stringSelect = '#'+select+' option:selected';  
-                txt = $( stringSelect ).text();
-                selecthashtag = '#'+select;
-                $('#btnFiltrar').removeClass('not-active');
-
-                if(txt == 'Todos'){
-                     $(selecthashtag).css('background-color','white');
-                }else{
-                     $(selecthashtag).css('background-color','#CFECCF');                    
-                }
-
-            });
-
-            function getItensFiltro(){
-                var idMedico = '{{Auth::user()['id_medico']}}';
-                var postConvenios = [
-                    {name:'idMedico', 'value' : idMedico},
-                    {name:'dataInicio', 'value' : $('#dataInicio').val()},
-                    {name:'dataFim', 'value' : $('#dataFim').val()}
-                ];
-                
-                var async = new AsyncClass();
-                var dataResultConvenios = async.run('{{url("/")}}/medico/selectconvenios',postConvenios,'POST');
-
-                dataResultConvenios.then(function(result){
-                    var selectConvenio = $('#convenio');
-                    selectConvenio.empty();
-
-                    $.each(result.data,function(key,value){
-                        selectConvenio.append($("<option/>").val(key).text(value));
-                    });
-                    
-                    $('#convenio').val(Cookies.get('convenio'));
-                    //Dispara o evento do botao click para iniciar a busca inicial
-                    $('#convenio option:first').attr('value', '');
-                    console.log($('#convenio').val());
-
-                    $("#convenio option:first").attr('selected','selected');
-                    
-                    var async = new AsyncClass();
-
-                    var postPostosCadastro = [
-                        {name:'idMedico', 'value' : idMedico},
-                        {name:'dataInicio', 'value' : $('#dataInicio').val()},
-                        {name:'dataFim', 'value' : $('#dataFim').val()}
-                    ];
-
-                    var dataResultPostosCadastro = async.run('{{url("/")}}/medico/selectpostoscadastro',postPostosCadastro,'POST');
-                    
-                    dataResultPostosCadastro.then(function(result){
-                        var selectPostosCadastro = $('#posto');
-                        selectPostosCadastro.empty();
-
-
-                        selectPostosCadastro.append($("<option/>").val('').text('Todos'));
-
-                        $.each(result.data,function(key,value){
-                            selectPostosCadastro.append($("<option/>").val(key).text(value));
-                        });
-                        
-                        $('#posto').val(Cookies.get('posto'));
-                        //Dispara o evento do botao click para iniciar a busca inicial            
-                        $("#posto option:first").attr('selected','selected');
-                        
-                        $('#btnFiltrar').trigger('click');
-                    });
-                    
-                });
-            }
-
-            $(".menu-trigger").click(function() {
-                $(".boxFiltro").slideToggle(400, function() {
-                    $(this).toggleClass("nav-expanded").css('display', '');
-                });
-
-            });            
-           
             var dataInicio = new moment();
             var dataFim = new moment();
+
             var qtdDiasFiltro = {{config('system.medico.qtdDiasFiltro')}};    
 
             dataInicio = dataInicio.subtract(qtdDiasFiltro,'days');
             dataInicio = dataInicio.format('DD/MM/YYYY');
             dataFim = dataFim.format('DD/MM/YYYY');
 
-            if(Cookies.get('dataInicio') != null){ // Se o filtro foi utilizado durante a sessao, filtro sera automaticamente preenchido. Se não, rececebe valores padrões.
-                $('#dataInicio').val(Cookies.get('dataInicio'));  
+            var padAtd = '{{config('system.atdMaskZeros')}}';
+            var padPos = '{{config('system.postoMaskZeros')}}';
+
+            function checkFiltro(input){
+                if(input.val() == ''){
+                    controleFiltro = 'D';
+                    $('#dvFiltroData').css('opacity', '1');
+                }else{
+                    controleFiltro = 'N';
+                    $('#dvFiltroData').css('opacity', '0.5');
+                    $('#dvFiltroData').focus();
+                }
+            }
+
+            $('#paciente').keyup(function(){
+                checkFiltro($(this));
+            });
+
+            //Checo se existe filtro no cache
+            if(Cookies.get('dataInicio') != null){
+                $('#dataInicio').val(Cookies.get('dataInicio'));
                 $('#dataFim').val(Cookies.get('dataFim'));
-                $('#convenio').val(Cookies.get('convenio'));     
-                $('#situacao').val(Cookies.get('situacao'));     
-                $('#posto').val(Cookies.get('posto'));     
+                $('#paciente').val(Cookies.get('paciente'));
+
+                checkFiltro($('#paciente'));
             }else{
                 $('#dataInicio').val(dataInicio);
                 $('#dataFim').val(dataFim);
-            }         
+                $('#paciente').val('');
 
-            VMasker($("#dataInicio")).maskPattern('99/99/9999');
-            VMasker($("#dataFim")).maskPattern('99/99/9999');
+                checkFiltro($('#paciente'));
+            }
 
+            //Configura a lista de clientes
             $('#listFilter').slimScroll({
                 height: '63vh',
                 width:'100%',
@@ -226,33 +152,21 @@
                 touchScrollStep: 50,
                 alwaysVisible: true
             });
-
-            $('#filtroPaciente').filterList();             
-
+            
             $('#btnFiltrar').click(function(e){                
                 Cookies.set('dataInicio', $('#dataInicio').val());
                 Cookies.set('dataFim', $('#dataFim').val());
-                Cookies.set('convenio', $('#convenio').val());
-                Cookies.set('situacao', $('#situacao').val());
-                Cookies.set('posto', $('#posto').val());
-
-                if($('#dataInicio').val() == '' || $('#dataFim').val() == ''){
-                    swal("Datas Não Preenchidas..", "Atençao, preencha os campos de Data(Inicial e Final), Para selecionar um periodo de tempo para qual deseja visualizar os atendimentos.", "warning"); 
-                    return false;
-                }
-
+                Cookies.set('paciente', $('#paciente').val());
+                
                 var formMedico = $('#formMedico');
                 var postData = formMedico.serializeArray();
 
                 getClientes(postData);
             });
 
-            // $('#btnFiltrar').trigger('click');
-
             function getClientes(postData){
-                $('#listFilter').html('<br><br><br><br><h2 class="textoTamanho"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando registros.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>');
-                
-                console.log(postData);
+                $('#listFilter').html({{config('system.loading')}});
+
                 $.ajax({
                     url : '{{url("/")}}/medico/filterclientes',
                     type: 'POST',
@@ -260,7 +174,7 @@
                     success:function(result){
                         $('#listFilter').html('');
 
-                        $.each( result.data, function( index ){
+                         $.each( result.data, function( index ){
                             var cliente = result.data[index];
                             $('.contadorAtd').html('<h5 class="achouAtd">Foram encontrados ' + result.data.length + ' atendimentos para as datas selecionadas   .</h5>');
 
@@ -321,7 +235,9 @@
                     }
                 });
             }
-            getItensFiltro();
+
+            $('#btnFiltrar').trigger('click');
+         
         });
     </script>
 @stop
