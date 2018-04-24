@@ -20,10 +20,6 @@
 
 @section('content')
 
-@section('statusFooter')
-    <span class="pull-right"><i class="fa fa-keyboard-o"></i> <b>SHIFT+Z: </b> Localizar Paciente</span>
-@stop
-
 <button class="menu-trigger text-center"> <i class="fa fa-filter fa-2x"> </i> Filtrar Atendimentos </button>
     <div class="col-md-12 corPadrao boxFiltro">
         <form id="formMedico">
@@ -37,7 +33,7 @@
             </div>
             <div class="col-md-7">
                 <label class="textoBranco" name="labelpaciente">Nome do Paciente</label>
-                {!! Form::text('paciente', '', array('class' => 'form-control m-b', 'id'=>'paciente')) !!}
+                {!! Form::text('paciente', '', array('class' => 'form-control m-b', 'id'=>'paciente', 'placeholder' => 'Digite o nome do paciente')) !!}
             </div>
             <div class="col-md-2">
                 <div class="input-group m-b filtrar col-md-12" style="margin-bottom:0px;padding-top:17px;">
@@ -140,7 +136,7 @@
 
             //Configura a lista de clientes
             $('#listFilter').slimScroll({
-                height: '63vh',
+                height: '68vh',
                 width:'100%',
                 size: '12px',
                 railVisible: true,
@@ -224,7 +220,7 @@
                         });
                         
                         if(result.data.length == 0){
-                            $('#listFilter').append('<h2 class="textoTamanho">Não foram encontrados atendimentos.</h2>');
+                            $('#listFilter').append('<h2 class="textoTamanho">Não foram encontrados nenhum cliente para esse filtro.</h2>');
                             $('.contadorAtd').html('');
                         }
                     },
