@@ -20,10 +20,10 @@
 
 @section('content')
 
-<button class="menu-trigger text-center"> <i class="fa fa-filter fa-2x"> </i> Filtrar Atendimentos </button>
-    <div class="col-md-12 corPadrao boxFiltro">
+<button class="menu-trigger text-center" style="padding-bottom: 4px"> <i class="fa fa-filter fa-2x"> </i> Filtrar Atendimentos </button>
+    <div class="corPadrao boxFiltro">
         <form id="formMedico">
-            <div class="col-md-3" id="dvFiltroData">
+            <div class="col-md-3 col-xs-12 col-sm-5" id="dvFiltroData">
                 <label class="textoBranco">Atendimentos por datas entre:</label>
                 <div class="input-daterange input-group" id="datepicker">
                     <input type="text" class="input-sm form-control datepicker" id="dataInicio" name="dataInicio">
@@ -31,14 +31,12 @@
                     <input type="text" class="input-sm form-control datepicker" id="dataFim" name="dataFim">
                 </div>
             </div>
-            <div class="col-md-7">
+            <div class="col-md-7 col-xs-9 col-sm-5" style="padding-left: 10px;">
                 <label class="textoBranco" name="labelpaciente">Nome do Paciente</label>
                 {!! Form::text('paciente', '', array('class' => 'form-control m-b', 'id'=>'paciente', 'placeholder' => 'Digite o nome do paciente')) !!}
             </div>
-            <div class="col-md-2">
-                <div class="input-group m-b filtrar col-md-12" style="margin-bottom:0px;padding-top:17px;">
-                    <a class="btn btn-warning btn-outline col-md-12" id="btnFiltrar"><i class="fa fa-filter fa-2"> </i> Filtrar</a>
-                </div>
+            <div class="col-md-2 col-xs-2 col-sm-2 input-group m-b filtrar text-left" style="padding-top: 18px;">
+                <a class="btn btn-warning btn-outline" style="width: 100%" id="btnFiltrar"><i class="fa fa-filter fa-2"> </i> Filtrar</a>
             </div>
         </form>
     </div>
@@ -75,6 +73,18 @@
 
     <script type="text/javascript">
         $(document).ready(function (){
+
+            @if(BrowserDetect::isMobile() || BrowserDetect::isTablet())
+                $(".boxFiltro").addClass('boxInvisible');
+
+                $(".menu-trigger").click(function(){
+                    if($(".boxFiltro").hasClass('boxInvisible')){
+                        $(".boxFiltro").removeClass('boxInvisible');
+                    }else{
+                        $(".boxFiltro").addClass('boxInvisible');
+                    }
+                });
+            @endif
 
             $("body").tooltip({ selector: '[data-toggle=tooltip]' });
 

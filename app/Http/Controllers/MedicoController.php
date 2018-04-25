@@ -84,11 +84,13 @@ class MedicoController extends Controller {
         // $postos = $this->medico->getPostoAtendimento($idMedico);
         // $convenios = $this->medico->getConvenioAtendimento($idMedico);
 
+        /*
         $mobile = BrowserDetect::isMobile() || BrowserDetect::isTablet();
 
         if($mobile == true){
             return view('mobile.medico.index');
         }
+        */
 
 
         //Retorno para a view para alimentaÃ§Ã£o do filtro inicial
@@ -139,13 +141,15 @@ class MedicoController extends Controller {
 
         $atendimentos[0]->nome = Formatar::nomeCurto($atendimentos[0]->nome);
 
-        $mobile = BrowserDetect::isMobile() || BrowserDetect::isTablet();
-
         $user = Auth::user(['tipoAcesso']);
+
+        /*        
+        $mobile = BrowserDetect::isMobile() || BrowserDetect::isTablet();
 
         if($mobile == true){
             return view('mobile.paciente.index',compact('atendimentos'));
         }
+        */
 
         //Envia para a view os atendimentos
         return view('paciente.index',compact('atendimentos','user'));
@@ -161,6 +165,7 @@ class MedicoController extends Controller {
         //Verifico junto ao repositorio do medico se o atendimento foi ele que solicitou,
         //dessa forma garanto que apenas o medico solicitante tenha acesso as informaÃ§Ãµes
         $ehAtendimentoMedico = $this->medico->ehAtendimentoMedico($this->auth->user()['id_medico'],$posto,$atendimento);
+        
         //Caso nÃ£o encontre ele retorna o error 4040
         if(!$ehAtendimentoMedico){
             \App::abort(404);
