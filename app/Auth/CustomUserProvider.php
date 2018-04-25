@@ -279,6 +279,34 @@ class CustomUserProvider implements UserProvider {
                         return new GenericUser($atributes);
                     }
                 }
+
+                break;
+
+            case 'PAR':
+                $posto = new Posto();
+                $posto = $posto->where(['posto' => $credentials['posto']])->get()->toArray();
+
+                //Verifica se o codigo do posto existe no banco de dados
+                if(sizeof($posto)){
+                    //Verifica se a senha esta correta
+                    if(strtoupper($posto[0]['pass']) == strtoupper($credentials['password'])){
+                        //Valores que seram guardados em cache, caso necessite de algo a mais pode ser implementado nesse objeto
+                        $atributes = array(
+                            'remember_token' => str_random(60),
+                            'id' => array(
+                                'tipoAcesso' => 'PAR',
+                                'nome' => $posto[0]['nome'],
+                                'posto' => $posto[0]['posto'],
+                                'autoAtendimento' => false,
+                            ),
+                        );
+
+                        //Cria a sessao do usuario
+                        return new GenericUser($atributes);
+                    }
+                }
+
+                break;
         }
 
         return null;

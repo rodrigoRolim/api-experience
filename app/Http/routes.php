@@ -40,13 +40,21 @@ Route::group(['prefix' => '/','middleware' => ['ehPosto','revalidate']], functio
     Route::post('amostras','AsyncController@postSelectamostras');
 });
 
+Route::group(['prefix' => '/','middleware' => ['ehParceiro','revalidate']], function () {    
+    Route::controllers([
+        'parceiro' => 'ParceiroController',
+    ]);
+
+    Route::post('amostras','AsyncController@postSelectamostras');
+});
+
 Route::group(['prefix' => '/', 'middleware' => ['auth']], function () {
     Route::get('/impressao', function () {
         return view('layouts.exportacaoPdf');
     });
 });
 
-Route::group(['prefix' => '/api/v1'], function()
+/*Route::group(['prefix' => '/api/v1'], function()
 {
     Route::post('authenticate', 'ApiController@authenticate');
 
@@ -54,10 +62,4 @@ Route::group(['prefix' => '/api/v1'], function()
         Route::get('/atendimentos', 'ApiPacienteController@getAtendimentos');    
         Route::get('/examesatendimento/{posto}/{atendimento}', 'ApiPacienteController@getExamesatendimento');    
     });
-    
-    //Route::get('teste', 'ApiController@getTeste');
-
-
-
-    //Route::get('/atendimento/detalhe/{posto}/{atendimento}', 'ApiController@detalheatend');
-});
+});*/

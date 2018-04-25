@@ -234,6 +234,27 @@ class AuthController extends Controller
                 ];
                 
                 break;
+            
+            case 'PAR':
+                //Verifica no arquivo de configuração a quantidade de caracter do posto
+                $qtdCaracter = config('system.qtdCaracterPosto');
+                
+                //Cria array de validação
+                $validate = [
+                    'posto' => 'required|max:'.$qtdCaracter.'',                  
+                    'password' => 'required',
+                ]; 
+                               
+                $this->validate($request, $validate);
+
+                //Cria array para verificação de autenticação com o banco de dados
+                $credentials = [
+                    'tipoAcesso' => 'PAR',  
+                    'posto' => $request->input('posto'),                  
+                    'password' => $request->input('password'),
+                ];
+                
+                break;
         }
 
         /*

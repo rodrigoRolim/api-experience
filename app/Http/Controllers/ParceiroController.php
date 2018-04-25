@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Classe de Controle do Posto
+ * Classe de Controle do Parceiro
  *
  * @author Bruno Araújo <brunoluan@gmail.com> e Vitor Queiroz <vitorvqz@gmail.com>
  * @version 1.0
@@ -23,7 +23,7 @@ use Illuminate\Contracts\Auth\Guard;
 use Request;
 use Auth;
 
-class PostoController extends Controller {
+class ParceiroController extends Controller {
 
     protected $auth;    
     protected $convenio;
@@ -53,7 +53,7 @@ class PostoController extends Controller {
     {
         $this->auth = $auth;        
         $this->convenio = $convenio;
-        $this->posto = $parceiro;
+        $this->parceiro = $parceiro;
         $this->exames = $exames;
         $this->atendimento = $atendimento;
         $this->dataSnap = $dataSnap;
@@ -68,9 +68,7 @@ class PostoController extends Controller {
         //Pega o id do posto na sessão
         $idPosto = $this->auth->user()['posto'];
 
-        $parceiros = $this->posto->orderBy('nome')->lists('nome', 'posto');
-
-        return view('posto.index', compact('postos'));
+        return view('parceiro.index');
     }
 
    /**
@@ -82,7 +80,7 @@ class PostoController extends Controller {
         $parceiro = $dadosAtend[0];
         $atendimento = $dadosAtend[1];
 
-        $result = $this->posto->getAtendimento($parceiro,$atendimento);
+        $result = $this->parceiro->getAtendimento($parceiro,$atendimento);
 
         return response()->json(array(
             'message' => 'Recebido com sucesso.',
@@ -95,8 +93,8 @@ class PostoController extends Controller {
     *
     */
     public function postSelectacomodacao(){
-        $idPosto = Request::get('posto');
-        $acomodacoes = $this->posto->getAcomodacoesPosto($idPosto,Request::get('dataInicio'),Request::get('dataFim'));
+        $idPosto = $this->auth->user()['posto'];
+        $acomodacoes = $this->parceiro->getAcomodacoesPosto($idPosto,Request::get('dataInicio'),Request::get('dataFim'));
     
         return response()->json(array(
             'message' => 'Recebido com sucesso.',
@@ -109,9 +107,9 @@ class PostoController extends Controller {
     *
     */
     public function postSelectpostorealizante(){
-        $idPosto = Request::get('posto');
+        $idPosto = $this->auth->user()['posto'];
 
-        $parceiroRealizantes = $this->posto->getPostosRealizantes($idPosto,Request::get('dataInicio'),Request::get('dataFim'));
+        $parceiroRealizantes = $this->parceiro->getPostosRealizantes($idPosto,Request::get('dataInicio'),Request::get('dataFim'));
     
         return response()->json(array(
             'message' => 'Recebido com sucesso.',
@@ -127,12 +125,12 @@ class PostoController extends Controller {
         //Pega os dados enviados do formulario do filtro
         $requestData = Request::all();
         //Pega o ID do posto na sessão
-        $idPosto = Request::get('posto');
+        $idPosto = $this->auth->user()['posto'];
 
         //Verifica se dataInicio e dataFim seja diferente de nulo
         if($requestData['dataInicio'] != null && $requestData['dataFim'] != null){
             //Envia os valores para o repository filtrar
-            $result = $this->posto->getAtendimentos(
+            $result = $this->parceiro->getAtendimentos(
                 $idPosto,
                 $requestData['dataInicio'],
                 $requestData['dataFim'],
@@ -160,16 +158,24 @@ class PostoController extends Controller {
         $registro = base64_decode(strtr($registro, '-_', '+/'));
         $registro = (int) trim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, config('system.key'),$registro, MCRYPT_MODE_ECB, mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB), MCRYPT_RAND)));
 
+
+        $user = Auth::user();
+
+        //Só deixo acessar os pacientes do posto
+        if($user['posto'] != $parceiro){
+            \App::abort(404);
+        }
+
         //Lista todos os atendimentos do paciente para aquele posto
-        $atendimento = $this->posto->getAtendimentosPacienteByPosto($registro,$parceiro,$atendimento);
-        
+        //$atendimento = $this->parceiro->getAtendimentosPacienteByPosto($registro,$parceiro,$atendimento);
+        $atendimento = $this->parceiro->getAtendimentosPacienteByPosto($registro,$parceiro,$atendimento);
+
         if(!sizeof($atendimento)){
             \App::abort(404);
         }
 
-        $user = Auth::user();
-
-        return view('paciente.posto',compact('atendimento','user'));
+        
+        return view('paciente.parceiro',compact('atendimento','user'));
     }
 
     /**
@@ -181,11 +187,18 @@ class PostoController extends Controller {
      */
     public function getExamesatendimento($parceiro,$atendimento,$parceiroRealizante = null){
         //Verifica se o atendmiento é do posto
-        // $ehAtendimentoPosto = $this->posto->ehAtendimentoPosto($this->auth->user()['posto'],$atendimento);
+        // $ehAtendimentoPosto = $this->parceiro->ehAtendimentoPosto($this->auth->user()['posto'],$atendimento);
 
         // if(!$ehAtendimentoPosto){
         //     \App::abort(404);
         // }
+
+        $user = Auth::user();
+
+        //Só deixo acessar os pacientes do posto
+        if($user['posto'] != $parceiro){
+            \App::abort(404);
+        }
         
         //Lista os exames do atendimento
         $exames = $this->exames->getExames($parceiro, $atendimento,$parceiroRealizante);
@@ -204,8 +217,15 @@ class PostoController extends Controller {
      * @return \Illuminate\Http\JsonResponse
      */
     public function getDetalheatendimentoexamecorrel($parceiro,$atendimento,$correl){
+        $user = Auth::user();
+
+        //Só deixo acessar os pacientes do posto
+        if($user['posto'] != $parceiro){
+            \App::abort(404);
+        }
+
         //Verifica se o atendimento é do posto
-        $ehAtendimentoPosto = $this->posto->ehAtendimentoPosto($parceiro,$atendimento);
+        $ehAtendimentoPosto = $this->parceiro->ehAtendimentoPosto($parceiro,$atendimento);
 
         // if(!$ehAtendimentoPosto){
         //     return response()->json(array(
@@ -248,7 +268,14 @@ class PostoController extends Controller {
         $correlativos = $dados[0]['correlativos'];
         $cabecalho = $dados[0]['cabecalho'];
 
-        // $ehAtendimentoPosto = $this->posto->ehAtendimentoPosto($parceiro,$atendimento);
+        $user = Auth::user();
+
+        //Só deixo acessar os pacientes do posto
+        if($user['posto'] != $parceiro){
+            \App::abort(404);
+        }
+
+        // $ehAtendimentoPosto = $this->parceiro->ehAtendimentoPosto($parceiro,$atendimento);
 
         // if(!$ehAtendimentoPosto){
         //     \App::abort(404);

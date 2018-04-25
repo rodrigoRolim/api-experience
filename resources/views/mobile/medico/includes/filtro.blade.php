@@ -24,9 +24,17 @@
             <input type="date" id="dataFim" name="dataFim" class="datepicker">
         </div>
       </div>  
+      <div class="center-align"> Ou </div><br>
+      
+      <div class="row">
+        <div class="col l12 s12 m12">
+          <input type="text" id="paciente" name="paciente" class="datepicker" placeholder="Digite o nome do paciente">
+        </div>
+      </div>
+      
       <div class="row">
           <button id="btnFiltrar" class="btn waves-effect red lighten-1">Filtrar</button>
       </div>
-    </div>          
+    </div>
   </div>
 </div>
