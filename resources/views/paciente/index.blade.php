@@ -32,6 +32,7 @@
                 <li class="leftMenu {{ !$key ? 'active' : '' }}">
                     <a href="#" class="btnAtendimento"
                        data-posto="{{$atendimento->posto}}"
+                       data-paciente="{{$atendimento->nome}}"
                        data-atendimento="{{$atendimento->atendimento}}"
                        data-solicitante="{{$atendimento->nome_solicitante}}"
                        data-convenio="{{$atendimento->nome_convenio}}"
@@ -39,8 +40,7 @@
                        data-saldo="{{$atendimento->saldo_devedor}}"
                        data-acesso="{{$user['tipoAcesso']}}">
                         <b class="dataMini">
-                            <p class="text-center" style="margin:0px;line-height: 14px">{{$atendimento->data_atd}}<br>
-                                {{ $atendimento->data_atd}}</p>
+                            <p class="text-center" style="margin:0px;line-height: 14px; padding: 5px">{{$atendimento->data_atd}}<br></p>
                         </b>
                         <span class="nav-label mnemonicos"><strong>{{ $atendimento->data_atd}}</strong><br>
                             {{str_limit($atendimento->mnemonicos,56)}}</span>
@@ -52,55 +52,64 @@
 @stop
 
 @section('content')
-<div id="page-wrapper" class="gray-bg">
-     <div class="row-fluid infoCliente">
-         <div class="col-xs-12 areaPaciente">
-            @if(Auth::user()['tipoAcesso'] == 'MED')
-            <div class="col-xs-1">
-                <a href="{{url('/')}}/medico" class="btn btn-lg btnVoltarMedico pull-left"><i class="fa fa-arrow-left" style="font-size: 24px;"></i></a>                
+    <div id="page-wrapper" class="gray-bg">
+        <div class="row">
+            <div class="col-md-1 col-xs-3 col-sm-2">
+                @if(Auth::user()['tipoAcesso'] == 'MED')
+                    <a href="{{url('/')}}/medico" class="btn pull-left"><i class="fa fa-arrow-left" style="font-size: 24px;"></i></a>
+                @endif    
             </div>
-            @endif
-             <div class="col-xs-3">
-                 <div class="infoAtendimento">
-                     <i class="fa fa-heartbeat" data-toggle="tooltip" data-placement="bottom" title="Posto/Atendimento"> </i>
-                     <span id="atendimento"></span>
-                 </div>
-             </div>
-             <div class="col-xs-3">
-                 <div class="medicoSolicitante">             
-                     <i class="fa fa-user-md" data-toggle="tooltip" data-placement="bottom" title="Médico Solicitante"> </i>
-                     &nbsp;<span id="solicitante"></span>
-                 </div>
-             </div>
-                <div class="col-xs-3">
-                    <i class="fa fa-hospital-o" data-toggle="tooltip" data-placement="bottom" title="Acomodação"></i>
-                   <span id="acomodacao">{{$atendimento->acomodacao != '' ? $atendimento->acomodacao : 'Não Informado'}}</span>
-                </div>
-        <div class="i-checks allPac boxSelectAll"> </div>
-        </div> <!-- fim da div page-wrapper -->
 
-    <div class="row wrapper border-bottom white-bg page-heading">
-        <div class="ibox">
-            <div id="msgPendencias"></div> 
-	            <ul class="sortable-list connectList agile-list ui-sortable listaExames"></ul>
+            <div class="col-md-3 hidden-xs col-sm-3" style="padding: 8px 0px">
+                <i class="fa fa-heartbeat" data-toggle="tooltip" data-placement="bottom" title="Posto/Atendimento"></i>
+                <span id="atendimento"></span>
+            </div>
+
+            <div class="col-md-3 col-xs-7 col-sm-6" style="padding: 8px 0px">
+                @if(Auth::user()['tipoAcesso'] == 'MED')
+                    <i class="fa fa-user" data-toggle="tooltip" data-placement="bottom" title="Nome Paciente"> </i>&nbsp;
+                    <span id="paciente"></span>
+                @else
+                    <i class="fa fa-user-md" data-toggle="tooltip" data-placement="bottom" title="Médico Solicitante"> </i>&nbsp;
+                    <span id="solicitante"></span>
+                @endif
+            </div>
+
+            <div class="col-md-4 hidden-xs hidden-sm" style="padding: 8px 0px">
+                <i class="fa fa-hospital-o" data-toggle="tooltip" data-placement="bottom" title="Acomodação"></i>
+                <span id="acomodacao">{{$atendimento->acomodacao != '' ? $atendimento->acomodacao : 'Não Informado'}}</span>
+            </div>
+
+            <div class="col-md-1 col-sm-1 col-xs-1 text-center" style="padding: 8px 14px 0 0">
+                <div class="i-checks boxSelectAll"> </div>
+            </div>
+        </div>
+
+
+        <div class="row wrapper border-bottom white-bg page-heading" style="margin-top: 0px; padding-top: 0px">
+            <div class="ibox">
+                <div id="msgPendencias"></div> 
+                <ul class="sortable-list connectList agile-list ui-sortable listaExames" style="padding-top: 0px"></ul>
+                    
                 @include('layouts.includes.base.modalDetalhamentoExames')
-                    @if(Auth::user()['tipoAcesso'] == 'MED' || (Auth::user()['tipoAcesso'] == 'PAC' && Auth::user()['tipoLoginPaciente'] == 'CPF'))
-                           @include('layouts.includes.base.modalAlterarSenha')
-                    @endif
+
+                @if(Auth::user()['tipoAcesso'] == 'MED' || (Auth::user()['tipoAcesso'] == 'PAC' && Auth::user()['tipoLoginPaciente'] == 'CPF'))
+                    @include('layouts.includes.base.modalAlterarSenha')
+                @endif
         </div>
     </div>
+
     <div class="footer row-fluid" style="padding-left:6px">
-            <div class="col-md-8 col-sm-8" style="padding-left:0px">
-		 		<span class='statusAtendimentosViewPaciente'></span>
-		        <span class='statusFinalizados'></span>Finalizados 
-		        <span class='statusEmAndamento'></span>Em Processo
-		        <span class='statusPendencias'></span>Existem Pendências
-		        <span class='statusNaoRealizado'></span>Em Andamento
-            </div>  
-            <div id='btnPdfPrincipal' class='col-md-4 col-sm-4'>
-        		<button id="btnExportar" type='button' class='btn btn-danger pull-right'>Gerar PDF</button>
-    		</div>
-        </div>
+        <div class="col-md-8 col-sm-8 leg" style="padding-left:0px;font-size: 1em;padding-top: 0.7em">
+	 		<span class='statusAtendimentosViewPaciente'></span>
+	        <span class='statusFinalizados'></span>Finalizados 
+	        <span class='statusEmAndamento'></span>Em Processo
+	        <span class='statusPendencias'></span>Existem Pendências
+	        <span class='statusNaoRealizado'></span>Em Andamento
+        </div>  
+        <div id='btnPdfPrincipal' class='col-md-4 col-sm-4'>
+    		<button id="btnExportar" type='button' class='btn btn-danger pull-right'>Gerar PDF</button>
+		</div>
     </div>
 </div>
 @stop
@@ -120,6 +129,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
         	$("body").tooltip({ selector: '[data-toggle=tooltip]' });
+
             var tipoAcesso = '{{Auth::user()['tipoAcesso']}}';
             var auto = '{{Auth::user()['autoAtendimento']}}';
             var url = '{{url('/')}}';
@@ -165,15 +175,20 @@
             $('.btnAtendimento').click(function(e){
                 $('#msgPendencias').html('');
                 $('#solicitante').html('');
-                
-                
+                $('#paciente').html('');
+                                
                 //Adiciona o loading
                 $('.listaExames').html('{!!config("system.messages.loading")!!}');
 
                 var posto = $(e.currentTarget).data('posto');
                 var atendimento = $(e.currentTarget).data('atendimento');
                 var nomeSolicitante = $(e.currentTarget).data('solicitante');
+
+                var paciente = $(e.currentTarget).data('paciente');
+                $('#paciente').html(paciente);
+
                 $('#solicitante').append(nomeSolicitante);
+
                 saldo = $(e.currentTarget).data('saldo');
                 
                 var exames = new ExamesClass();

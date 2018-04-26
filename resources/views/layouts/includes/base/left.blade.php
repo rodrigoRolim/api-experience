@@ -1,36 +1,34 @@
 <nav class="navbar-default navbar-static-side" role="navigation">
-        <div class="topoMenu">
-            
-        </div>    
-        <ul class="nav metismenu" id="side-menu">
-         
-            
-            @foreach($atendimentos as $key => $atendimento)
-                <li class="{{ !$key ? 'active' : '' }}">
-                    <a href="#" class="btnAtendimento" 
-                        data-posto="{{$atendimento->posto}}" 
-                        data-atendimento="{{$atendimento->atendimento}}" 
-                        data-solicitante="{{$atendimento->nome_solicitante}}"
-                        data-convenio="{{$atendimento->nome_convenio}}"
-                        data-saldo="{{$atendimento->saldo_devedor}}">
-                        <b class="dataMini">
-                            <p class="text-center" style="margin:0px;line-height: 14px">{{ date('d/m',strtotime($atendimento->data_atd))}}<br>
-                            {{ date('Y',strtotime($atendimento->data_atd))}}</p>
-                        </b>
-                        <span class="nav-label mnemonicos"><strong>{{ date('d/m/y',strtotime($atendimento->data_atd))}}</strong><br>
-                        {{str_limit($atendimento->mnemonicos,56)}}</span>
-                    </a>
-                </li>
-            @endforeach
-        </ul>
+    <div class="topoMenu"></div>    
+    <ul class="nav metismenu" id="side-menu">
+        @foreach($atendimentos as $key => $atendimento)
+            <li class="{{ !$key ? 'active' : '' }}">
+                <a href="#" class="btnAtendimento" 
+                    data-posto="{{$atendimento->posto}}" 
+                    data-atendimento="{{$atendimento->atendimento}}" 
+                    data-solicitante="{{$atendimento->nome_solicitante}}"
+                    data-convenio="{{$atendimento->nome_convenio}}"
+                    data-saldo="{{$atendimento->saldo_devedor}}">
+                    <b class="dataMini">
+                        <p class="text-center" style="margin:0px;line-height: 14px">{{ date('d/m',strtotime($atendimento->data_atd))}}<br>
+                        {{ date('Y',strtotime($atendimento->data_atd))}}</p>
+                    </b>
+                    <span class="nav-label mnemonicos"><strong>{{ date('d/m/y',strtotime($atendimento->data_atd))}}</strong><br>
+                    {{str_limit($atendimento->mnemonicos,56)}}</span>
+                </a>
+            </li>
+        @endforeach
+    </ul>
 </nav>
 
 @section('script')
     @parent
+
     <script src="{{ asset('/assets/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $('li:first-child').addClass('active');
+            
             sizeBoxExames();
 
             $('.metismenu li i').attr('style','display:none');

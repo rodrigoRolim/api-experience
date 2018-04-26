@@ -41,8 +41,8 @@
         </div>
         <div class="container-fluid">
             <div id="wrapper">
-                @yield('left')                
-                    @yield('content')                
+                @yield('left')
+                @yield('content')
             </div>
         </div>
     </div>

@@ -1,7 +1,7 @@
 @extends('layouts.layoutBase')
 
 @section('stylesheets')
-{!! Html::style('/assets/css/plugins/sweetalert/sweetalert.css') !!}
+    {!! Html::style('/assets/css/plugins/sweetalert/sweetalert.css') !!}
     @parent
 @stop
 
@@ -44,12 +44,7 @@
     <div class="wrapper wrapper-content">
         <div class="ibox-content">
             <div class="row">
-                <!--<div class="input-group m-b">
-                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                    <input type="text" id="filtroPaciente" placeholder="Localizar paciente na relação abaixo" class="form-control">
-                </div>-->
-                <div class="contadorAtd">                    
-                </div>
+                <div class="contadorAtd"></div>
                 <ul class="sortable-list connectList agile-list ui-sortable" id="listFilter"></ul>
             </div>
         </div>
@@ -194,8 +189,8 @@
                                             '<div class="col-md-4 col-sm-6 col-xs-12 dadosPaciente text-left">'+
                                                 '<strong>'+cliente.nome+'</strong><br><i class="'+((cliente.sexo == "M")?"fa fa-mars":"fa fa-venus")+'"></i> &nbsp;'+cliente.idade+
                                             '</div>'+
-                                            '<div class="col-md-2 col-sm-6 col-xs-12 hidden-xs text-left">'+cliente.telefone+'</div>'+
-                                            '<div class="col-md-6 col-sm-12 col-xs-12 hidden-xs data-toggle="tooltip" data-placement="right" title="span"><Atendimento class=" ajusteFonte"></span>';
+                                            '<div class="col-md-2 col-sm-6 col-xs-12 hidden-xs hidden-sm text-left">'+cliente.telefone+'</div>'+
+                                            '<div class="col-md-6 col-sm-12 col-xs-12 hidden-xs hidden-sm data-toggle="tooltip" data-placement="right" title="span"><Atendimento class=" ajusteFonte"></span>';
                             var count = 0;
                             
                             $.each( cliente.atendimentos, function( index ){
