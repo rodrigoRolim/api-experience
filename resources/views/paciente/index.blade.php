@@ -138,12 +138,12 @@
                 tipoAcesso = 'medico';
             }
 
-            if(tipoAcesso == 'PAR'){
+            if(tipoAcesso == 'PAC'){
                 tipoAcesso = 'paciente';
             }
 
             $('.ibox').slimScroll({
-                height: '69vh',
+                height: '72vh',
                 railOpacity: 0.4,
                 wheelStep: 10,
                 size: '12px',

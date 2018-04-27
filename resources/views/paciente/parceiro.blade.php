@@ -263,9 +263,7 @@
                     var paginaPdf = window.open ('/impressao', '', ''); 
                     exportPdf(url,tipoAcesso,posto,atendimento,correl,'G',Cookies.get('cabecalho'),paginaPdf);
                 });
-
            });
-
         });
     </script>
 @stop
