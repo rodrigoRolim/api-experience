@@ -68,7 +68,7 @@ class PostoController extends Controller {
         //Pega o id do posto na sessão
         $idPosto = $this->auth->user()['posto'];
 
-        $parceiros = $this->posto->orderBy('nome')->lists('nome', 'posto');
+        $postos = $this->posto->orderBy('nome')->lists('nome', 'posto');
 
         return view('posto.index', compact('postos'));
     }

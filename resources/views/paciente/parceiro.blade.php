@@ -123,8 +123,8 @@
                 Cookies.set('cabecalho',0);    
             });
 
-            if(tipoAcesso == 'POS'){
-                tipoAcesso = 'posto';
+            if(tipoAcesso == 'PAR'){
+                tipoAcesso = 'parceiro';
             }
 
             var exames = new ExamesClass();

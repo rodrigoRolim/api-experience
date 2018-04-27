@@ -138,7 +138,7 @@
                 tipoAcesso = 'medico';
             }
 
-            if(tipoAcesso == 'PAC'){
+            if(tipoAcesso == 'PAR'){
                 tipoAcesso = 'paciente';
             }
 
