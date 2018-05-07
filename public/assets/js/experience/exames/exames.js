@@ -68,8 +68,10 @@ ExamesClass.prototype.render = function(result,saldoDevedor,dataMsg, tipo = 'DEF
         
         if(tipo != 'DEFAULT'){
             html += "<div class='postoRealizante'> <span data-toggle='tooltip' data-placement='right' title='Posto Realizante'><i class='fa fa-hospital-o'></i> ";
-            html += exame.nome_posto_realizante+" "+(exame.tipo_posto_realizante == 'A' ? '(Lab. Apoio)' : '')+"</span></div><span class='msgExameTipoEntrega'>"+msg+"</span></li></div>";
+            html += exame.nome_posto_realizante+" "+(exame.tipo_posto_realizante == 'A' ? '(Lab. Apoio)' : '')+"</span></div><span class='msgExameTipoEntrega'>"+msg+"</span>";
         }
+
+        html += "</li></div>";
     });
 
     return html;
