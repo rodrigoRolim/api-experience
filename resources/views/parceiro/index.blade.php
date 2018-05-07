@@ -24,27 +24,29 @@
     <div class="col-md-12 corPadrao boxFiltroPosto">       
         <form id="formPosto">
             <input hidden type="text" value="0" name="posto">
-            <div class="col-md-3">
-                <label class="textoBranco">Periodo:</label>
-                <div class="input-daterange input-group">
-                    <input type="text" class="input-sm form-control datepicker" id="dataInicio" name="dataInicio">
-                    <span class="input-group-addon">até</span>
-                    <input type="text" class="input-sm form-control datepicker" id="dataFim" name="dataFim">                    
+            <div id="dvFiltroData">
+                <div class="col-md-3" style="padding: 0px">
+                    <label class="textoBranco">Periodo:</label>
+                    <div class="input-daterange input-group">
+                        <input type="text" class="input-sm form-control datepicker" id="dataInicio" name="dataInicio">
+                        <span class="input-group-addon">até</span>
+                        <input type="text" class="input-sm form-control datepicker" id="dataFim" name="dataFim">                    
+                    </div>
+                </div>       
+                <div class="col-md-2">
+                    <label class="textoBranco" name="acomodacao">Acomodação</label>
+                    {!! Form::select('acomodacao', [], '', array('class' => 'form-control m-b', 'id'=>'acomodacao')) !!}
                 </div>
-            </div>       
-            <div class="col-md-2">
-                <label class="textoBranco" name="acomodacao">Acomodação</label>
-                {!! Form::select('acomodacao', [], '', array('class' => 'form-control m-b', 'id'=>'acomodacao')) !!}
+                <div class="col-md-2">
+                    <label class="textoBranco" name="situacao">Situação</label>
+                    {!! Form::select('situacao', config('system.selectFiltroSituacaoAtendimento'), '', array('class' => 'form-control m-b', 'id'=>'situacao')) !!}
+                </div>
             </div>
-            <div class="col-md-2">
-                <label class="textoBranco" name="situacao">Situação</label>
-                {!! Form::select('situacao', config('system.selectFiltroSituacaoAtendimento'), '', array('class' => 'form-control m-b', 'id'=>'situacao')) !!}
+            <div class="col-md-4" style="padding:0px">
+                <label class="textoBranco" name="paciente">Nome Paciente</label>
+                {!! Form::text('paciente', '', array('class' => 'form-control m-b', 'id'=>'paciente')) !!}
             </div>
-            <div class="col-md-3">
-                <label class="textoBranco" name="situacao">Posto Realizante</label>
-                {!! Form::select('postoRealizante', [], '', array('class' => 'form-control m-b', 'id'=>'postoRealizante')) !!}
-            </div>
-            <div class="col-md-2">
+            <div class="col-md-1">
                 <div class="input-group m-b filtrar col-md-12" style="margin-bottom:0px;padding-top:17px;">
                     <a class="btn btn-warning btn-outline col-md-12 not-active" id="btnFiltrar"><i class="fa fa-filter fa-2"> </i> Filtrar</a>
                 </div>
@@ -81,9 +83,7 @@
 @stop
 
 @section('statusFooter')
-    <span class='statusFinalizados'></span> Finalizados <span class='statusAguardando'></span> Parc. Finalizado
-    <span class='statusEmAndamento'></span> Em Processo <span class='statusPendencias'></span> Existem Pendências
-    <span class='statusNaoRealizado'></span>Em Andamento
+    {!!config('system.footer.atendimento')!!}
 
     <span class="pull-right">
         <span class="pull-left">
@@ -114,6 +114,25 @@
 
             $('input').iCheck({
                 checkboxClass: 'icheckbox_square-grey',
+            });
+
+            $('#paciente').val(Cookies.get('paciente'));
+
+            function checkFiltro(input){
+                if(input.val() == ''){
+                    controleFiltro = 'D';
+                    $('#dvFiltroData').css('opacity', '1');
+                }else{
+                    controleFiltro = 'N';
+                    $('#dvFiltroData').css('opacity', '0.5');
+                    $('#dvFiltroData').focus();
+                }
+                
+                $('#btnFiltrar').removeClass('not-active');
+            }
+
+            $('#paciente').keyup(function(){
+                checkFiltro($(this));
             });
 
             if(Cookies.get('cabecalho') == null){
@@ -172,12 +191,16 @@
                 $('#situacao').val(Cookies.get('situacao'));     
                 $('#postoRealizante').val(Cookies.get('postoRealizante'));
 
+                checkFiltro($('#paciente'));
+
             }else{
                 //Alimenta o filtro com a data pre definida
                 $('#dataInicio').val(dataInicio);
                 $('#dataFim').val(dataFim);
                 $('#situacao').val('');
                 $('#postoRealizante').val('');
+
+                checkFiltro($('#paciente'));
             }
 
             //Configura o componente de lista
@@ -276,7 +299,8 @@
                 Cookies.set('acomodacao', $('#acomodacao').val());
                 Cookies.set('situacao', $('#situacao').val());
                 Cookies.set('postoRealizante', $('#postoRealizante').val());
-
+                Cookies.set('paciente', $('#paciente').val());
+                
                 if($('#dataInicio').val() == '' || $('#dataFim').val() == ''){
                     swal("Datas Não Preenchidas..", "Atençao, preencha os campos de Data(Inicial e Final), Para selecionar um periodo de tempo para qual deseja visualizar os atendimentos.", "warning"); 
                     return false;

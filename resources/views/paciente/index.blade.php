@@ -102,10 +102,7 @@
     <div class="footer row-fluid" style="padding-left:6px">
         <div class="col-md-8 col-sm-8 leg" style="padding-left:0px;font-size: 1em;padding-top: 0.7em">
 	 		<span class='statusAtendimentosViewPaciente'></span>
-	        <span class='statusFinalizados'></span>Finalizados 
-	        <span class='statusEmAndamento'></span>Em Processo
-	        <span class='statusPendencias'></span>Existem Pendências
-	        <span class='statusNaoRealizado'></span>Em Andamento
+            {!!config('system.footer.atendimento')!!}
         </div>  
         <div id='btnPdfPrincipal' class='col-md-4 col-sm-4'>
     		<button id="btnExportar" type='button' class='btn btn-danger pull-right'>Gerar PDF</button>
@@ -214,6 +211,7 @@
 
                     $('.listaExames').html('');
                     $('#btnPdfPrincipal').hide();
+
                     $('.listaExames').append(exames.render(result,saldoDevedor,dataMsg));
                     
                     if(!saldoDevedor){

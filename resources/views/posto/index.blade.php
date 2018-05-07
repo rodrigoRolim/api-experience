@@ -85,9 +85,7 @@
 @stop
 
 @section('statusFooter')
-    <span class='statusFinalizados'></span> Finalizados <span class='statusAguardando'></span> Parc. Finalizado
-    <span class='statusEmAndamento'></span> Em Processo <span class='statusPendencias'></span> Existem Pendências
-    <span class='statusNaoRealizado'></span>Em Andamento
+    {{config('system.footer.atendimento')}}
 
     <span class="pull-right">
         <span class="pull-left">

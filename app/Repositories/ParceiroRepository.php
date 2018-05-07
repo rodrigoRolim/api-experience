@@ -62,32 +62,46 @@ class ParceiroRepository extends BaseRepository
      * @param null $postoRealizante
      * @return array
      */
-    public function getAtendimentos($idPosto,$dataInicio,$dataFim, $acomodacao=null,$situacao=null,$postoRealizante=null)
+    public function getAtendimentos($idPosto,$dataInicio,$dataFim, $acomodacao=null,$situacao=null,$paciente = null)
     {
         $sql = "SELECT DISTINCT
                    a.situacao_exames_experience, a.posto, a.atendimento,a.data_atd,a.nome_convenio, c.nome,c.data_nas,c.registro,c.sexo,c.telefone,c.telefone2, ".config('system.userAgilDB')."get_mnemonicos(a.posto, a.atendimento,:postoRealizante) as mnemonicos,a.data_entrega
                 FROM
                   ".config('system.userAgilDB')."VEX_ATENDIMENTOS A                  
                   INNER JOIN ".config('system.userAgilDB')."VEX_CLIENTES C ON a.registro = c.registro
-                WHERE a.posto = :idPosto
-                    AND A.DATA_ATD BETWEEN TO_DATE(:dataInicio,'DD/MM/YYYY HH24:MI')
-                    AND TO_DATE(:dataFim,'DD/MM/YYYY HH24:MI')       
-                    AND (:acomodacao IS NULL OR A.ACOMODACAO = :acomodacao)
-                    AND (:situacao IS NULL OR A.SITUACAO_EXAMES_EXPERIENCE = :situacao)
-                    AND ".config('system.userAgilDB')."get_mnemonicos(a.posto,a.atendimento,:postoRealizante) is not null
-                ORDER BY c.nome";
+                WHERE a.posto = :idPosto ";
+        
 
-        $clientes = DB::select(DB::raw($sql),[
-            'idPosto' => $idPosto,
-            'dataInicio' => $dataInicio.' 00:00',
-            'dataFim' => $dataFim.' 23:59',            
-            'acomodacao' => $acomodacao,
-            'situacao' => $situacao,
-            'postoRealizante' => $postoRealizante
-        ]);
+        if($paciente == ''){
+            $sql .= "AND A.DATA_ATD BETWEEN TO_DATE(:dataInicio,'DD/MM/YYYY HH24:MI')
+            AND TO_DATE(:dataFim,'DD/MM/YYYY HH24:MI')       
+            AND (:acomodacao IS NULL OR A.ACOMODACAO = :acomodacao)
+            AND (:situacao IS NULL OR A.SITUACAO_EXAMES_EXPERIENCE = :situacao)
+            AND ".config('system.userAgilDB')."get_mnemonicos(a.posto,a.atendimento,:postoRealizante) is not null ";
+
+            $sql .= "ORDER BY c.nome ";
+
+            $clientes = DB::select(DB::raw($sql),[
+                'idPosto' => $idPosto,
+                'dataInicio' => $dataInicio.' 00:00',
+                'dataFim' => $dataFim.' 23:59',            
+                'acomodacao' => $acomodacao,
+                'situacao' => $situacao,
+                'postoRealizante' => null
+            ]);
+        }else{
+            $sql .= "AND c.nome like :paciente ";
+
+            $sql .= "ORDER BY c.nome ";
+
+            $clientes = DB::select(DB::raw($sql),[
+                'idPosto' => $idPosto,
+                'paciente' => '%'.mb_strtoupper($paciente).'%',
+                'postoRealizante' => null
+            ]);
+        }
 
         return $this->renderCliente($clientes);
-        
     }
 
     /**

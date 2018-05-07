@@ -136,7 +136,7 @@ class ParceiroController extends Controller {
                 $requestData['dataFim'],
                 $requestData['acomodacao'],
                 $requestData['situacao'],
-                $requestData['postoRealizante']
+                $requestData['paciente']
             );
             //Retorna em Json
             return response()->json(array(
@@ -173,7 +173,6 @@ class ParceiroController extends Controller {
         if(!sizeof($atendimento)){
             \App::abort(404);
         }
-
         
         return view('paciente.parceiro',compact('atendimento','user'));
     }

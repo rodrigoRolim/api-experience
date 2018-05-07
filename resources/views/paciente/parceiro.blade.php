@@ -84,10 +84,7 @@
     @section('statusFooter')
     <div style='padding-left:0px;' class='col-md-6 col-sm-6'>
         <span class='statusAtendimentosViewPaciente'></span>
-        <span class='statusFinalizados'></span>Finalizados 
-        <span class='statusEmAndamento'></span>Em Processo
-        <span class='statusPendencias'></span>Existem Pendências
-        <span class='statusNaoRealizado'></span>Em Andamento
+        {!!config('system.footer.atendimento')!!}
     </div>
     <div id='btnPdfPrincipal' class='col-md-6 col-sm-6'>
         <button type='button' class='btn btn-danger pull-right'>Gerar PDF</button>

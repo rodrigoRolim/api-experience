@@ -67,7 +67,7 @@ return [
         'PF' => 'Parcialmente Finalizado',
         'EP' => 'Existêm pendências',
         'EA' => 'Em Andamento',
-        'NR' => 'Não Realizados'
+        //'NR' => 'Não Realizados'
     ],
     'medico' => [
         'qtdDiasFiltro' => env('APP_MEDICO_QTD_DIAS')
@@ -77,5 +77,9 @@ return [
     ],
     'experience' => [
         'sobre' => '<p> O <b>eXperience</b> é uma ferramenta que fornece a você, de forma objetiva e bastante simples, a possibilidade de verificar os resultados dos exames de seus clientes em qualquer lugar, a qualquer hora, acompanhando o andamento de suas análises.</p><p>Evite custos desnecessários. Esta é a mais nova proposta que temos para você</p>'
+    ],
+    'footer' => [
+        'atendimento' => "<span class='statusFinalizados'></span> Finalizados <span class='statusAguardando'></span> Parc. Finalizado
+        <span class='statusEmAndamento'></span> Em Andamento <span class='statusPendencias'></span> Existem Pendências"
     ]
 ];

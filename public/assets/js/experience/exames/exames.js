@@ -7,7 +7,7 @@ ExamesClass.prototype.get = function(url,tipoAcesso,posto,atendimento){
     return async.run(url+"/"+tipoAcesso+"/examesatendimento/"+posto+"/"+atendimento);
 }
 
-ExamesClass.prototype.render = function(result,saldoDevedor,dataMsg){
+ExamesClass.prototype.render = function(result,saldoDevedor,dataMsg, tipo = 'DEFAULT'){
     var html = '';
     $('.listaExames').html('');
     $('.boxSelectAll').html('');
@@ -65,8 +65,11 @@ ExamesClass.prototype.render = function(result,saldoDevedor,dataMsg){
         html += "<li class='"+exame.class+" animated fadeInDownBig'>"+check;
         html += "<div class='dadosExames'>";
         html += "<b>"+exame.mnemonico+"</b> | "+exame.nome_procedimento.trunc(31)+"<br>"+amostra+exame.msg+"<br>";
-        html += "<div class='postoRealizante'> <span data-toggle='tooltip' data-placement='right' title='Posto Realizante'><i class='fa fa-hospital-o'></i> ";
-        html += exame.nome_posto_realizante+" "+(exame.tipo_posto_realizante == 'A' ? '(Lab. Apoio)' : '')+"</span></div><span class='msgExameTipoEntrega'>"+msg+"</span></li></div>";
+        
+        if(tipo != 'DEFAULT'){
+            html += "<div class='postoRealizante'> <span data-toggle='tooltip' data-placement='right' title='Posto Realizante'><i class='fa fa-hospital-o'></i> ";
+            html += exame.nome_posto_realizante+" "+(exame.tipo_posto_realizante == 'A' ? '(Lab. Apoio)' : '')+"</span></div><span class='msgExameTipoEntrega'>"+msg+"</span></li></div>";
+        }
     });
 
     return html;
