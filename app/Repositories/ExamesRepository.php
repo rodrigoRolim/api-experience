@@ -63,7 +63,8 @@ class ExamesRepository extends BaseRepository
                 case 'ANDAMENTO':
                      //LARANJA
                     $exames[$key]['class'] = 'warning-element';
-                    $exames[$key]['msg'] = 'Em Processo';
+                    //$exames[$key]['msg'] = 'Em Processo';
+                    $exames[$key]['msg'] = 'Em Andamento';
                     $exames[$key]['view'] = false;
                     break;
                 case 'PENDENCIA':
