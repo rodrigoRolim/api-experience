@@ -42,8 +42,8 @@ function getExames(url,tipoAcesso,posto,atendimento){
 	                  '<div class="col s10">'+
 	                    visualizacao+
 	                    '<label for="todo'+index+'" class="nomeProcedimento">'+exame.mnemonico+' | '+exame.nome_procedimento+'</label>'+ 
-	                    '<span class="subInfoExame"> <em class="'+exame.corStatus+'">'+exame.msg+'</em> | '+exame.nome_posto_realizante+'</span>'+
-	                    impressao+
+	                    '<span class="subInfoExame"> <em class="'+exame.corStatus+'">'+exame.msg+'</em> | '+exame.nome_posto_realizante+'</span>'+impressao+
+	                    '<span class="subInfoExame"> <em class="'+exame.corStatus+'">'+exame.msg+'</em></span>'+
 	                    '</div>'+                          
 	                  '</div>'+
 

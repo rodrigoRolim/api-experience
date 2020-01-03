@@ -8,6 +8,12 @@
 .btnAtendimento.active{
 	background-color: #E0E0E0 !important;
 }
+
+.semLaudo{
+        margin-right: 10px !important;
+        border-left: 7px solid #cecece !important;
+}
+
 .tipoEntregaImpressao{
 	color: red !important;
 	font-size: 0.5em !important;

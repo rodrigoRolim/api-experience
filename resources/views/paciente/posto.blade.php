@@ -153,6 +153,7 @@
             });
 
             dataResult.then(function(result){
+                console.log(result)
                 var dataMsg = [];
                 dataMsg['tipoEntregaInvalido'] = "{!!config('system.messages.exame.tipoEntregaInvalido')!!}";
 

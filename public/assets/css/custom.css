@@ -16,6 +16,11 @@ html, body{
 	outline: none !important;
 }
 
+.tipoEntregaImpressao{
+	color: #9e0000 !important;
+	font-size: 1em !important;
+	margin-left: 0px !important;
+}
 
 body{
 	overflow: hidden;	
@@ -485,6 +490,11 @@ div.row.infoClienteMed{
 .checkExames{
 	float: right;
 	margin-top: 20px;
+}
+
+.semLaudo{
+	margin-right: 10px !important;
+	border-left: 5px solid #cecece !important;
 }
 
 .all{

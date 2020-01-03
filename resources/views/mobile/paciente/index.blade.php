@@ -189,7 +189,7 @@ $(document).ready(function(){
 
         var listaInfo = '<ul class="collection">'+
                           '<li id="idAtendimento" class="collection-item center-align"></li>'+
-                          '<li id="previsaoAtd" class="collection-item left-align bkfInfo"><b>PREVISÃO DE ENTREGA:</b><br></li>'+
+ //                         '<li id="previsaoAtd" class="collection-item left-align bkfInfo"><b>PREVISÃO DE ENTREGA:</b><br></li>'+
                           '<div id="convenioAtd" class="collection-item left-align bkfInfo"><b>CONVÊNIO:</b><br></div>'+
                           '<li id="solicitanteAtd" class="collection-item left-align bkfInfo"><b>MÉDICO SOLICITANTE:</b><br></li>'+
                         '</ul>';
@@ -199,7 +199,7 @@ $(document).ready(function(){
         $('.modal-content').html(''); 
         $('.modal-content').append(listaInfo);
         $('#idAtendimento').append('<strong>ID:</strong> <span>0'+posto+'/'+atendimento+' </span><br>'); 
-        $('#idAtendimento').append('<strong> </strong><span>'+dataAtendimento+' </span>');
+   //     $('#idAtendimento').append('<strong> </strong><span>'+dataAtendimento+' </span>');
         $('#previsaoAtd').append('<span class="right-align"> '+dataEntrega+' </span>'); 
         $('#convenioAtd').append('<span class="right-align"> '+convenio+' </span>'); 
         $('#solicitanteAtd').append('<span class="right-align">'+solicitante+'</span>'); 

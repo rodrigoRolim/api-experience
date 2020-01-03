@@ -110,7 +110,7 @@ class PostoController extends Controller {
     */
     public function postSelectpostorealizante(){
         $idPosto = Request::get('posto');
-
+      
         $parceiroRealizantes = $this->posto->getPostosRealizantes($idPosto,Request::get('dataInicio'),Request::get('dataFim'));
     
         return response()->json(array(
@@ -141,6 +141,7 @@ class PostoController extends Controller {
                 $requestData['postoRealizante']
             );
             //Retorna em Json
+           
             return response()->json(array(
                 'message' => 'Recebido com sucesso.',
                 'data' => $result,
@@ -158,7 +159,7 @@ class PostoController extends Controller {
     public function getPaciente($registro,$parceiro,$atendimento){
         //Faz a descriptografia do token enviado via get
         $registro = base64_decode(strtr($registro, '-_', '+/'));
-        $registro = (int) trim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, config('system.key'),$registro, MCRYPT_MODE_ECB, mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB), MCRYPT_RAND)));
+        $registro = (int) trim(@mcrypt_decrypt(MCRYPT_RIJNDAEL_256, config('system.key'),$registro, MCRYPT_MODE_ECB, @mcrypt_create_iv(@mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB), MCRYPT_RAND)));
 
         //Lista todos os atendimentos do paciente para aquele posto
         $atendimento = $this->posto->getAtendimentosPacienteByPosto($registro,$parceiro,$atendimento);
@@ -275,5 +276,14 @@ class PostoController extends Controller {
 
         //Envia para o servico do datasnap
         return $this->dataSnap->exportarPdf($parceiro,$atendimento,$pure,$correlativos,$cabecalho);
+    }
+
+    public function getLogs()
+    {
+        //pega todos os logs
+        $model = new \App\Models\Monitoramento();
+        $logs = $model->orderBy('created_at', 'desc')->limit(30)->get();
+
+        return view('posto.logs', compact('logs'));
     }
 }

@@ -42,7 +42,7 @@ class ParceiroRepository extends BaseRepository
                 INNER JOIN ".config('system.userAgilDB')."VEX_CLIENTES C ON a.registro = c.registro
               WHERE a.posto = :posto AND a.atendimento = :atendimento
                   AND ".config('system.userAgilDB')."get_mnemonicos(a.posto,a.atendimento,null) is not null
-              ORDER BY c.nome";
+              ORDER BY a.data_atd, c.nome";
 
         $clientes = DB::select(DB::raw($sql),[
           'posto' => $posto,
@@ -79,7 +79,7 @@ class ParceiroRepository extends BaseRepository
             AND (:situacao IS NULL OR A.SITUACAO_EXAMES_EXPERIENCE = :situacao)
             AND ".config('system.userAgilDB')."get_mnemonicos(a.posto,a.atendimento,:postoRealizante) is not null ";
 
-            $sql .= "ORDER BY c.nome ";
+            $sql .= "ORDER BY c.nome, a.data_atd ";
 
             $clientes = DB::select(DB::raw($sql),[
                 'idPosto' => $idPosto,
@@ -92,7 +92,7 @@ class ParceiroRepository extends BaseRepository
         }else{
             $sql .= "AND c.nome like :paciente ";
 
-            $sql .= "ORDER BY c.nome ";
+            $sql .= "ORDER BY c.nome, a.data_atd ";
 
             $clientes = DB::select(DB::raw($sql),[
                 'idPosto' => $idPosto,
@@ -115,7 +115,8 @@ class ParceiroRepository extends BaseRepository
       for($i=0;$i<sizeof($clientes);$i++){
           $clientes[$i]->idade = DataNascimento::idade($clientes[$i]->data_nas);
 
-          $key = mcrypt_encrypt(MCRYPT_RIJNDAEL_256, config('system.key'), $clientes[$i]->registro, MCRYPT_MODE_ECB, mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB), MCRYPT_RAND));
+          $key = @mcrypt_encrypt(MCRYPT_RIJNDAEL_256, config('system.key'), $clientes[$i]->registro, MCRYPT_MODE_ECB,
+            @mcrypt_create_iv(@mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB), MCRYPT_RAND));
           $id = strtr(rtrim(base64_encode($key), '='), '+/', '-_');
 
           $clientes[$i]->key = $id;

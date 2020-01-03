@@ -65,6 +65,10 @@ ExamesClass.prototype.render = function(result,saldoDevedor,dataMsg, tipo = 'DEF
         html += "<li class='"+exame.class+" animated fadeInDownBig'>"+check;
         html += "<div class='dadosExames'>";
         html += "<b>"+exame.mnemonico+"</b> | "+exame.nome_procedimento.trunc(31)+"<br>"+amostra+exame.msg+"<br>";
+
+	if(exame.tipo_entrega != '*'){
+      	   html += '<span class="tipoEntregaImpressao">Este exame só poderá ser impresso no laboratorio</span>';
+        }
         
         if(tipo != 'DEFAULT'){
             html += "<div class='postoRealizante'> <span data-toggle='tooltip' data-placement='right' title='Posto Realizante'><i class='fa fa-hospital-o'></i> ";

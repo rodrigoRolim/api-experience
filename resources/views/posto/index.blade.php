@@ -85,7 +85,7 @@
 @stop
 
 @section('statusFooter')
-    {{config('system.footer.atendimento')}}
+    {!!config('system.footer.atendimento')!!}
 
     <span class="pull-right">
         <span class="pull-left">

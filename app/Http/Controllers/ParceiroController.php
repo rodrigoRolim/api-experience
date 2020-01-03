@@ -95,7 +95,7 @@ class ParceiroController extends Controller {
     public function postSelectacomodacao(){
         $idPosto = $this->auth->user()['posto'];
         $acomodacoes = $this->parceiro->getAcomodacoesPosto($idPosto,Request::get('dataInicio'),Request::get('dataFim'));
-    
+
         return response()->json(array(
             'message' => 'Recebido com sucesso.',
             'data' => $acomodacoes,

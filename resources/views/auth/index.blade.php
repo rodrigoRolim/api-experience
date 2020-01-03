@@ -19,7 +19,7 @@
             <div class="col-md-5 hidden-xs">
                 <h2 style="padding-top:8vh">
                     <a id="linkSobre" href="{{url('/')}}/sobre">
-                        <span class="text-navy">{!! Html::image(config('system.clienteLogo'), 'logo_exp', array('title' => 'eXperience - codemed', 'src'=>'experience/sobre', 'style'=>'height: 80px;')) !!}</span>
+                        <span class="text-navy">{!! Html::image(config('system.clienteLogo'), 'logo_exp', array('title' => 'eXperience - codemed', 'src'=>'experience/sobre', 'style'=>'height: 50px;')) !!}</span>
                         {!!config('system.loginText.subTitle')!!}
                     </a>
                 </h2>
@@ -44,7 +44,7 @@
                     @if(!$mobile && config('system.acessoPosto'))
                         <li class=""><a id="btnPosto" data-toggle="tab" href="#tabLoginPosto" aria-expanded="false">Posto</a></li>
                     @endif    
-                    @if(!$mobile && config('system.acessoParceiro'))
+                    @if(config('system.acessoParceiro'))
                         <li class=""><a id="btnParceiro" data-toggle="tab" href="#tabLoginParceiro" aria-expanded="false">Parceiro</a></li>
                     @endif                   
                     </ul>
@@ -70,7 +70,7 @@
                                 </div>
                             </div>
                         @endif
-                        @if(!$mobile && config('system.acessoParceiro'))
+                        @if(config('system.acessoParceiro'))
                             <div id="tabLoginParceiro" class="tab-pane hidden">
                                 <div class="panel-body">
                                     @include('auth.includes.formLoginParceiro')
