@@ -13,6 +13,6 @@ class LaudoController extends Controller{
     	$cabecalho = new Cabecalho();
     	$cabecalho->make($xml);
 
-    	echo $cabecalho->render();
+    	return $cabecalho->render();
     }
 }

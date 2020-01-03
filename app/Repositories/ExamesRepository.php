@@ -88,12 +88,12 @@ class ExamesRepository extends BaseRepository
                     break;
             }
 
-            // if($exame['tipo_procedimento'] != 'L'){
-	    	//     $exames[$key]['class'] = 'semLaudo';
-            //     $exames[$key]['corStatus'] = '';
-            //     $exames[$key]['msg'] = '';
-            //     $exames[$key]['view'] = false;
-	        // }
+            if($exame['tipo_procedimento'] != 'L'){
+	    	    $exames[$key]['class'] = 'semLaudo';
+                $exames[$key]['corStatus'] = '';
+                $exames[$key]['msg'] = '';
+                $exames[$key]['view'] = false;
+	        }
 
         }
 

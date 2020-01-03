@@ -94,6 +94,7 @@ class AuthController extends Controller
     */
     public function postAutoatendimento(Request $request)
     {
+    
         //Pega o Id que ta em base64 e convert em json
         $id = base64_decode($request->input('id'),true);
         //Passa o json para Array

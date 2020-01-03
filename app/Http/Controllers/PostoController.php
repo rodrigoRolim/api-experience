@@ -242,6 +242,7 @@ class PostoController extends Controller {
      * @return string
      */
     public function postExportarpdf(){
+     
         //Captura os valores do exame selecionado
         $dados = Request::input('dados');
         $parceiro = (int) $dados[0]['posto'];

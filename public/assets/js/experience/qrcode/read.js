@@ -8,7 +8,10 @@ function isCanvasSupported(){
   return !!(elem.getContext && elem.getContext('2d'));
 }
 function success(stream) {
-    v.src = window.URL.createObjectURL(stream);
+    let video = document.getElementById('v');
+    video.srcObject = stream; //window.URL.createObjectURL(stream);
+    video.play();
+ 
     gUM=true;
     setTimeout(captureToCanvas, 500);
 }
