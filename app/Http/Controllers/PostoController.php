@@ -159,9 +159,12 @@ class PostoController extends Controller {
     public function getPaciente($registro,$parceiro,$atendimento){
         //Faz a descriptografia do token enviado via get
         $registro = base64_decode(strtr($registro, '-_', '+/'));
-        $registro = (int) trim(@mcrypt_decrypt(MCRYPT_RIJNDAEL_256, config('system.key'),$registro, MCRYPT_MODE_ECB, @mcrypt_create_iv(@mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB), MCRYPT_RAND)));
-
-        //Lista todos os atendimentos do paciente para aquele posto
+        //$registro = (int) trim(@mcrypt_decrypt(MCRYPT_RIJNDAEL_256, config('system.key'),$registro, MCRYPT_MODE_ECB, @mcrypt_create_iv(@mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB), MCRYPT_RAND)));
+        $cipher = "aes-128-gcm";
+        $ivlen = openssl_cipher_iv_length($cipher);
+        $iv = openssl_random_pseudo_bytes($ivlen);
+        $registro = (int) trim(openssl_encrypt($registro, $cipher, config('system.key'), $options=0, $iv, $tag));
+        //ista todos os atendimentos do paciente para aquele posto
         $atendimento = $this->posto->getAtendimentosPacienteByPosto($registro,$parceiro,$atendimento);
         
         if(!sizeof($atendimento)){
