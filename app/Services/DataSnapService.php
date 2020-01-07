@@ -25,7 +25,7 @@ class DataSnapService
      */
 	public static function exportarPdf($posto,$atendimento,$pure,Array $correls,$cabecalho){
 		$correlativos = implode(",", $correls['correl']);
-
+		
 		$url = config('system.PDFUrl').$posto.'/'.$atendimento.'/'.$pure.'/'.$correlativos.'/'.$cabecalho;
 
 		try {

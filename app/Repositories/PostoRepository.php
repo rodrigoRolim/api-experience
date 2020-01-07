@@ -96,14 +96,15 @@ class PostoRepository extends BaseRepository
      */    
     private function renderCliente($clientes){
       $dtNow = Carbon::now();
-
+      //$cipher = "aes-256-cbc";
       for($i=0;$i<sizeof($clientes);$i++){
           $clientes[$i]->idade = DataNascimento::idade($clientes[$i]->data_nas);
-
-          $key = mcrypt_encrypt(MCRYPT_RIJNDAEL_256, config('system.key'), $clientes[$i]->registro, MCRYPT_MODE_ECB, mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB), MCRYPT_RAND));
-          $id = strtr(rtrim(base64_encode($key), '='), '+/', '-_');
-
-          $clientes[$i]->key = $id;
+            
+          //$ivlen = openssl_cipher_iv_length($cipher);
+          //$iv = openssl_random_pseudo_bytes($ivlen);
+          //$key = openssl_encrypt($clientes[$i]->registro, $cipher, config('system.key'), 0, $iv);
+          //$id = strtr(rtrim(base64_encode($key), '='), '+/', '-_');
+          $clientes[$i]->key = $clientes[$i]->registro;
 
           switch ($clientes[$i]->situacao_exames_experience){
               case 'EA':
@@ -280,7 +281,7 @@ class PostoRepository extends BaseRepository
             ORDER BY data_atd DESC';
 
         $atendimento = DB::select(DB::raw($sql), ['registro' => $registro, 'idPosto' => $idPosto, 'idAtendimento' => $idAtendimento]);
-
+        print_r($atendimento);
         $atendimento = current($atendimento);
         $atendimento->idade = DataNascimento::idade($atendimento->data_nas);
         $atendimento->data_atd = Formatar::data($atendimento->data_atd,'Y-m-d H:i:s','d/m/Y');

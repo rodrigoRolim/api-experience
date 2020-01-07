@@ -155,7 +155,7 @@
         } 
 
         $(document).keypress(function(e) {
-            if(e.which == 13) { // enter
+            if(e.keyCode == 13) { // enter
                 event.preventDefault();
                 $('#senha').focus();
             }

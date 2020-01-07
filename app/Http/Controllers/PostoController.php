@@ -158,15 +158,21 @@ class PostoController extends Controller {
      */
     public function getPaciente($registro,$parceiro,$atendimento){
         //Faz a descriptografia do token enviado via get
-        $registro = base64_decode(strtr($registro, '-_', '+/'));
+
+     
         //$registro = (int) trim(@mcrypt_decrypt(MCRYPT_RIJNDAEL_256, config('system.key'),$registro, MCRYPT_MODE_ECB, @mcrypt_create_iv(@mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB), MCRYPT_RAND)));
-        $cipher = "aes-128-gcm";
-        $ivlen = openssl_cipher_iv_length($cipher);
-        $iv = openssl_random_pseudo_bytes($ivlen);
-        $registro = (int) trim(openssl_encrypt($registro, $cipher, config('system.key'), $options=0, $iv, $tag));
+        //$cipher = "aes-256-cbc";
+        //$ivlen = openssl_cipher_iv_length($cipher);
+        //$iv = openssl_random_pseudo_bytes($ivlen);
+        // print_r(config('system.key'));
+        //print_r($registro);
+        //$registro = openssl_decrypt($registro, $cipher, config('system.key'), 0, $iv);
+        //print_r(openssl_decrypt($reg, $cipher, config('system.key'), $options=0, $iv));
+        //print_r($registro);
         //ista todos os atendimentos do paciente para aquele posto
+  
         $atendimento = $this->posto->getAtendimentosPacienteByPosto($registro,$parceiro,$atendimento);
-        
+
         if(!sizeof($atendimento)){
             \App::abort(404);
         }
@@ -217,14 +223,15 @@ class PostoController extends Controller {
         //     ), 203);
         // }
         //Verifica saldo devedor do atendimento
+      
         $saldoDevedor = $this->atendimento->getSaldoDevedor($parceiro,$atendimento);
-
+        
         if($saldoDevedor){
             return response()->json(array(
                 'message' => 'Existe pendências'
             ), 203);
         }
-
+       
         //Verifica os detalhes do resultado do exame
         $exames = $this->exames->getDetalheAtendimentoExameCorrel($parceiro, $atendimento,$correl);
 

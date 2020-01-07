@@ -14,7 +14,7 @@ AsyncClass.prototype.run = function(url,postData,type){
     },
     error: function(jqXHR, textStatus, errorThrown){
         var msg = jqXHR.responseText;
-        console.log(msg)
+
         msg = JSON.parse(msg);
 
         objResult.status = false;

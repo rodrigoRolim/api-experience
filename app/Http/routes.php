@@ -63,9 +63,17 @@ Use Illuminate\Http\Request;
         Route::get('/examesatendimento/{posto}/{atendimento}', 'ApiPacienteController@getExamesatendimento');    
     });
 });*/
+
+/* @return a view */
+Route::get('/', function () {
+    return redirect('/auth');
+});
+// Route::group(['prefix' => '/paciente', 'middleware' => ['jwt.auth','ehPaciente','revalidate']], function () {
+//     Route::get()
+// })
 Route::get("auth", "AuthController@getIndex");
-Route::get("paciente", "PacienteController@getIndex")->middleware(['auth','ehPaciente','revalidate']);
-Route::get("paciente/examesatendimento/{posto}/{atendimento}", "PacienteController@getExamesatendimento")->middleware(['auth','ehPaciente','revalidate']);
+Route::get("paciente", "PacienteController@getIndex");//->middleware(['auth','ehPaciente','revalidate']);
+Route::get("paciente/examesatendimento/{posto}/{atendimento}", "PacienteController@getExamesatendimento");//->middleware(['auth','ehPaciente','revalidate']);
 Route::get("paciente/detalheatendimentoexamecorrel/{parceiro}/{atendimento}/{correl}", "PacienteController@getDetalheatendimentoexamecorrel")->middleware(['auth','ehPaciente','revalidate']);
 Route::post("paciente/exportarpdf", "PacienteController@postExportarpdf")->middleware(['auth','ehPaciente','revalidate']);
 Route::get("paciente/perfil", "PacienteController@getPerfil")->middleware(['auth','ehPaciente','revalidate']);
@@ -73,16 +81,16 @@ Route::post("paciente/alterarsenha", "PacienteController@postAlterarsenha")->mid
 Route::post("auth/login", "AuthController@postLogin");
 Route::post("auth/autoatendimento", "AuthController@postAutoatendimento");
 Route::get("auth/autoatendimento", "AuthController@getAutoatendimento");
-Route::get("auth/logout", "AuthController@getLogout");
+Route::get("auth/logout", "AuthController@getLogout")->middleware(['ehPosto','revalidate']);
 Route::get("posto", "PostoController@getIndex")->middleware(['ehPosto','revalidate']);
 Route::post("posto/selectpostorealizante", "PostoController@postSelectpostorealizante")->middleware(['ehPosto','revalidate']);
 Route::post("posto/selectacomodacao", "PostoController@postSelectacomodacao")->middleware(['ehPosto','revalidate']);
 Route::post("posto/localizaatendimento", "PostoController@postLocalizaatendimento")->middleware(['ehPosto','revalidate']);
 Route::post("posto/filteratendimentos", "PostoController@postFilteratendimentos")->middleware(['ehPosto','revalidate']);
 Route::get("posto/paciente/{registro}/{parceiro}/{atendimento}", "PostoController@getPaciente")->middleware(['ehPosto','revalidate']);
-Route::get("posto/examesatendimento/{parceiro}/{atendimento}/{parceiroRealizante}", "PostoController@getExamesatendimento")->middleware(['ehPosto','revalidate']);
+Route::get("posto/examesatendimento/{parceiro}/{atendimento}/{parceiroRealizante?}", "PostoController@getExamesatendimento")->middleware(['ehPosto','revalidate']);
 Route::get("posto/detalheatendimentoexamecorrel/{parceiro}/{atendimento}/{correl}", "PostoController@getDetalheatendimentoexamecorrel")->middleware(['ehPosto','revalidate']);
-Route::post("posto/pdf", "PostoController@postExportarpdf")->middleware(['ehPosto','revalidate']);
+Route::post("posto/exportarpdf", "PostoController@postExportarpdf")->middleware(['ehPosto','revalidate']);
 Route::get("posto/logs", "PostoController@getLogs")->middleware(['ehPosto','revalidate']);
 Route::get("laudo", "LaudoController@getIndex");
 Route::get("manuais", "ManuaisController@getIndex");
@@ -93,7 +101,7 @@ Route::get("medico/paciente/{registro}", "MedicoController@getPaciente")->middle
 Route::get("medico/examesatendimento/{posto}/{atendimento}", "MedicoController@getExamesatendimento")->middleware(['auth','ehMedico','revalidate']);
 Route::post("medico/selectconvenios", "MedicoController@postSelectconvenios")->middleware(['auth','ehMedico','revalidate']);
 Route::post("medico/selectpostoscadastro", "MedicoController@postSelectpostoscadastro")->middleware(['auth','ehMedico','revalidate']);
-Route::get("medico/detalheatendimentoexamecorrel/{posto}/{atendimento}/{correl}")->middleware(['auth','ehMedico','revalidate']);
+Route::get("medico/detalheatendimentoexamecorrel/{posto}/{atendimento}/{correl}", "MedicoController@getDetalheatendimentoexamecorrel")->middleware(['auth','ehMedico','revalidate']);
 Route::post("medico/exportarpdf", "MedicoController@postExportarpdf")->middleware(['auth','ehMedico','revalidate']);
 Route::get("medico/perfil", "MedicoController@getPerfil")->middleware(['auth','ehMedico','revalidate']);
 Route::post("medico/alterarsenha", "MedicoController@postAlterarsenha")->middleware(['auth','ehMedico','revalidate']);
@@ -107,6 +115,10 @@ Route::get("parceiro/paciente/{registro}/{parceiro}/{atendimento}", "ParceiroCon
 Route::get("parceiro/examesatendimento/{parceiro}/{atendimento}/{parceiroRealizante}", "ParceiroController@getExamesatendimento")->middleware(['ehParceiro','revalidate']);
 Route::get("parceiro/detalheatendimentoexamecorrel/{parceiro}/{atendimento}/{correl}", "ParceiroController@getDetalheatendimentoexamecorrel")->middleware(['ehParceiro','revalidate']);
 Route::post("parceiro/exportarpdf", "ParceiroController@postExportarpdf")->middleware(['ehParceiro','revalidate']);
+Route::post("amostras", "AsyncController@postSelectamostras")->middleware(['ehParceiro','revalidate']);
+Route::get("impressao", function () {
+    return view('layouts.exportacaoPdf');
+});
 // /medico/localizapaciente
 // /medico/paciente/'+pacientes.key+'
 // url()}}/'+tipoAcesso+'/alterarsenha

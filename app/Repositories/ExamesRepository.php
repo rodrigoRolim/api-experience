@@ -87,13 +87,13 @@ class ExamesRepository extends BaseRepository
                     $exames[$key]['view'] = false;
                     break;
             }
-
-            if($exame['tipo_procedimento'] != 'L'){
-	    	    $exames[$key]['class'] = 'semLaudo';
-                $exames[$key]['corStatus'] = '';
-                $exames[$key]['msg'] = '';
-                $exames[$key]['view'] = false;
-	        }
+            // tipo_procedimento não existe na view 
+            // if($exame['nome_procedimento'] != 'L'){
+	    	//     $exames[$key]['class'] = 'semLaudo';
+            //     $exames[$key]['corStatus'] = '';
+            //     $exames[$key]['msg'] = '';
+            //     $exames[$key]['view'] = false;
+	        // }
 
         }
 

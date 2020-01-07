@@ -262,7 +262,8 @@ class AuthController extends Controller
         * Enviada para o controller App\Auth\CustomUserProvider a array $credentials para validação do acesso
         */
         if ($this->auth->attempt($credentials, $request->has('remember'))) {
-            return redirect()->intended('/auth/home');
+ 
+            return redirect()->intended('/auth');
         }
 
         //Caso o usuario/senha não forem satisfatorio, retorna o formulario de login com a mensagem de acesso negado

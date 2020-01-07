@@ -296,13 +296,14 @@
                 var postData = formPosto.serializeArray();
 
                 //Instancia a class Async
-                var async = new AsyncClass();
+                var async = new AsyncClass();   
 
                 //Busca os dados do atendimento do posto
                 var dataResult = async.run('{{url("/")}}/posto/filteratendimentos',postData,'POST');
                 $('#listFilter').html('<br><br><br><br><h2 class="textoTamanho"><b><span class="fa fa-refresh iconLoad"></span><br>Carregando registros.</br><small>Esse processo pode levar alguns minutos. Aguarde!</small></h1>');                
                 
                 dataResult.then(function(result){
+                    console.log(result)
                     //Limpa a div de filter
                     $('#listFilter').html('');
                     //Prepara HTML para impressao no listFilter

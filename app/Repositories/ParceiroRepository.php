@@ -111,18 +111,18 @@ class ParceiroRepository extends BaseRepository
      */    
     private function renderCliente($clientes){
       $dtNow = Carbon::now();
-      $cipher = "aes-128-gcm";
+      //$cipher = "aes-256-cbc";
       for($i=0;$i<sizeof($clientes);$i++){
           $clientes[$i]->idade = DataNascimento::idade($clientes[$i]->data_nas);
-          $ivlen = openssl_cipher_iv_length($cipher);
-          $iv = openssl_random_pseudo_bytes($ivlen);
-          $key = openssl_encrypt($clientes[$i]->registro, $cipher, config('system.key'), $options=0, $iv, $tag);
+          //$ivlen = openssl_cipher_iv_length($cipher);
+          //$iv = openssl_random_pseudo_bytes($ivlen);
+          //$key = openssl_encrypt($clientes[$i]->registro, $cipher, config('system.key'), 0, $iv);
           // it is deprecated in php 7
           //$key = @mcrypt_encrypt(MCRYPT_RIJNDAEL_256, config('system.key'), $clientes[$i]->registro, MCRYPT_MODE_ECB,
            // @mcrypt_create_iv(@mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB), MCRYPT_RAND));
-          $id = strtr(rtrim(base64_encode($key), '='), '+/', '-_');
+          //$id = $key; //strtr(rtrim(base64_encode($key), '='), '+/', '-_');
 
-          $clientes[$i]->key = $id;
+          $clientes[$i]->key = $clientes[$i]->registro;
 
           switch ($clientes[$i]->situacao_exames_experience){
               case 'EA':
@@ -305,7 +305,7 @@ class ParceiroRepository extends BaseRepository
         $atendimento->data_atd = Formatar::data($atendimento->data_atd,'Y-m-d H:i:s','d/m/Y');
         $atendimento->data_entrega = Formatar::data($atendimento->data_entrega,'Y-m-d H:i:s','d/m/Y');
 
-        return $atendimento;
+        return $atendimento;    
     }
 
     /**
@@ -315,12 +315,14 @@ class ParceiroRepository extends BaseRepository
      * @return bool
      */
     public function ehAtendimentoPosto($idPosto,$atendimento){
+
         $sql = 'SELECT * FROM '.config('system.userAgilDB').'vex_atendimentos a                 
                 WHERE
                   posto = :idPosto
                 AND a.atendimento = :atendimento';
 
         $data = DB::select(DB::raw($sql),['idPosto'=>$idPosto,'atendimento'=>$atendimento]);
+ 
         return (bool) sizeof($data);
     }
 }
