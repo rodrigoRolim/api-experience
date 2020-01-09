@@ -119,7 +119,7 @@ class PacienteController extends Controller {
 
         return response()->json(array(
             'message' => 'Recebido com sucesso.',
-            'data' => json_encode($exames),
+            'data' => json_decode($exames),
         ), 200);
     }
 
