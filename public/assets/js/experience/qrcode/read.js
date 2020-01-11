@@ -24,8 +24,8 @@ function error(error) {
 function initCanvas(w,h)
 {
     gCanvas = document.getElementById("qr-canvas");
-    gCanvas.style.width = w + "px";
-    gCanvas.style.height = h + "px";
+    gCanvas.style.width = w + "vw";
+    gCanvas.style.height = h + "vh";
     gCanvas.width = w;
     gCanvas.height = h;
     gCtx = gCanvas.getContext("2d");
@@ -42,7 +42,7 @@ function read(text)
 
 function setwebcam()
 {
-    document.getElementById("result").innerHTML=" Lendo QR Code <span>.</span><span>.</span><span>.</span> ";
+    //document.getElementById("result").innerHTML=" Lendo QR Code <span>.</span><span>.</span><span>.</span> ";
     if(stype==1)
     {
         setTimeout(captureToCanvas, 500);    
@@ -100,7 +100,7 @@ function load()
 {
     if(isCanvasSupported() && window.File && window.FileReader)
     {
-        initCanvas(800, 600);
+        initCanvas(100, 100);
         qrcode.callback = read;
         setwebcam();
     }

@@ -89,7 +89,9 @@ ExamesClass.prototype.detalheExame = function(url,tipoAcesso,posto,atendimento,c
 
 ExamesClass.prototype.renderDetalheExame = function(exame,msgAmostra){
     var result = [];    
-
+    if (exame.length <= 0) {
+        return result;
+    }
     result['title'] = exame.PROCEDIMENTO;
     result['table'] = '<table id="tabelaDetalhes" class="table table-striped">';
                             $.each( exame.ANALITOS, function(index,analito){

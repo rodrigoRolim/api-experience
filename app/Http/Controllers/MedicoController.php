@@ -81,16 +81,15 @@ class MedicoController extends Controller {
         $idMedico = $this->auth->user()['id_medico'];
 
         // //Pego atraves do repositorio todos os postos e convenios que tem algum atendimento do mÃ©dico
-        // $postos = $this->medico->getPostoAtendimento($idMedico);
-        // $convenios = $this->medico->getConvenioAtendimento($idMedico);
+        //$postos = $this->medico->getPostoAtendimento($idMedico);
+        //$convenios = $this->medico->getConvenioAtendimento($idMedico);
 
-        /*
+        
         $mobile = BrowserDetect::isMobile() || BrowserDetect::isTablet();
 
         if($mobile == true){
             return view('mobile.medico.index');
         }
-        */
 
 
         //Retorno para a view para alimentaÃ§Ã£o do filtro inicial
@@ -126,8 +125,14 @@ class MedicoController extends Controller {
         //Como e passado o registro do cliente via get com encode token,
         //precisamos fazer a engenharia reversa para verificar junto ao
         //banco os dados a serem exibidos
-        $registro = base64_decode(strtr($registro, '-_', '+/'));
-        $registro = (int) trim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, config('system.key'),$registro, MCRYPT_MODE_ECB, mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB), MCRYPT_RAND)));
+        //print_r($registro);
+        //$cipher = "aes-256-cbc";
+        //$ivlen = openssl_cipher_iv_length($cipher);
+        //$iv = openssl_random_pseudo_bytes($ivlen);
+        //print_r($iv);
+        //$registro = base64_decode(strtr($registro, '-_', '+/'));
+        //print_r($registro);
+        //$registro = (int) trim(openssl_decrypt($registro, $cipher, config('system.key'), 0, config('system.key')));
 
         $idMedico = $this->auth->user()['id_medico'];
 

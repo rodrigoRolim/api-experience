@@ -1,6 +1,6 @@
-#v{
-    width:420px;
-    height:400px;            
+#v{   
+    margin: 0;
+    padding: 0;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 #qr-canvas{
@@ -11,7 +11,7 @@
     height:240px;
 }
 #outdiv{
-    width: 400px;
+    width: 100vw;
 }
 #result{
     margin-top: 20px;
@@ -46,4 +46,75 @@
 }
 #result span:nth-child(3) {
     animation-delay: .4s;
+}
+
+/* rodrigo rolim veras. e vai se fuder */
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 8vh 0;
+    width: 100vw;
+}
+.container-auto {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100vw;
+}
+#outdiv{
+    width: 420px;
+}
+.container-info {
+    text-align: center;
+    width: 20vw;
+}
+.container-info .btn {
+    padding: 12px 0;
+}
+.container-webcam {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 500px;
+}
+@media only screen and (max-width: 320px) {
+    .container-auto {
+        height: 60vh;
+    }
+    #outdiv{
+        width: 97vw;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .container-auto {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+        justify-content: space-around;
+        width: 100vw;
+    }
+    #outdiv{
+        width: 95vw;
+    }
+    .container-info {
+        font-size: 20px;
+        margin-top: 50px;
+        text-align: center;
+        width: 95vw;
+    }
+    .container-info h5 {
+        font-size: 1.2rem;
+    }
+    .container-info .btn {
+        font-size: 1.2rem;
+        font-weight: bolder;
+        padding: 18px 0;
+    }
+     .container-webcam {
+        justify-content: center;
+        width: 97vw;
+    }
 }

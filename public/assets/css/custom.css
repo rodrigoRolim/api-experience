@@ -2,6 +2,8 @@ html, body{
 	margin: 0;
 	padding: 0;
 	height: 100%;
+	width: 100vw;
+	font-size: 100%;
 	-webkit-touch-callout: none; /* iOS Safari */
 	  -webkit-user-select: none;   /* Chrome/Safari/Opera */
 	  -khtml-user-select: none;    /* Konqueror */
@@ -11,7 +13,10 @@ html, body{
 	                                  not supported by any browser */
 	cursor: default;
 }
-
+* {
+	margin: 0;
+	padding: 0;
+}
 *:focus{
 	outline: none !important;
 }
@@ -23,7 +28,7 @@ html, body{
 }
 
 body{
-	overflow: hidden;	
+	overflow: auto;	
 }
 .navbar img{
 	height: 55px;
@@ -231,8 +236,11 @@ ul{
 	text-align: center;
 	padding: 5px 0 5px 0;
 }
-
+#header {
+	width: 100vw;
+}
 .headPadrao{
+	width: 100%;
 	text-align: left;
 }
 
@@ -258,18 +266,21 @@ ul{
 /* ======== auth - LayoutLogin.blade.php - includes/formLogin ======= */
 
 #body{
-	padding: 10px;
-	padding-bottom: 60px;
+	display: flex;
+	flex-direction: column;
 }
 
 #footer{
-	position: absolute;
 	bottom: 0;
 	width: 100%;
 }
 
 #footer-login{
-	position: absolute;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	align-self: flex-end;
+	flex-direction: row;
 	bottom: 0;
 	width: 100%;
 	height: 35px;
@@ -291,9 +302,11 @@ ul{
 /* ========= layoutBase ======== */
 
 
-#wraper{
+#wraper {
+	display: flex;
+	flex-direction: column;
 	min-height: 100%;
-	position: relative;
+/* 	position: relative; */
 	font-size: 1.3em;
 }
 
@@ -979,7 +992,7 @@ div.row.infoClienteMed{
 	}
 
 	#navbar{
-		width: 20%;
+		width: 100%;
 	}
 	
 	.infoAtendimentoMedico{	
@@ -1059,10 +1072,6 @@ div.row.infoClienteMed{
 		padding: 0px;
 	}
 
-	.loginColumns{
-		padding: 0px;
-	}
-
 	/*.boxFiltro{
 		height: 300px;
 		display: none;
@@ -1086,4 +1095,7 @@ div.row.infoClienteMed{
 
 .boxInvisible{
 	display: none;
+}
+.tabs-body {
+	height: 12vh;
 }

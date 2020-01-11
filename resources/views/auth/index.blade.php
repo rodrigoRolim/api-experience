@@ -16,8 +16,8 @@
 <body class="animated fadeInDown gray-bg">
     <div class="loginColumns animated fadeInDown">
         <div class="row">
-            <div class="col-md-5 hidden-xs">
-                <h2 style="padding-top:8vh">
+            <div class="col-md-5 hidden-xs info-logo">
+                <h2>
                     <a id="linkSobre" href="{{url('/')}}/sobre">
                         <span class="text-navy">{!! Html::image(config('system.clienteLogo'), 'logo_exp', array('title' => 'eXperience - codemed', 'src'=>'experience/sobre', 'style'=>'height: 50px;')) !!}</span>
                         {!!config('system.loginText.subTitle')!!}
@@ -25,7 +25,7 @@
                 </h2>
                 {!!config('system.loginText.description')!!}
             </div>
-            <div class="col-md-7">
+            <div class="col-md-7 tabs-body">
                 @if (count($errors) == 1)
                     <div class="alert alert-danger alert-dismissable">
                         @foreach ($errors->all() as $error)
@@ -85,14 +85,15 @@
         @include('auth.includes.modalAjudaPaciente')
         
     </div>
+    <footer id="footer-login" class="hidden-lg hidden-md" style="background-color: white">
+        <div class="pull-right">
+            <a href="{{url()}}/sobre" target="_blank">
+                {!! Html::image(config('system.experienceLogo'), 'logo_exp', array('title' => 'eXperience - codemed','id'=>'logoRodape','style'=>'margin-right:20px;margin-top:4px;')) !!}
+            </a>
+        </div>
+    </footer>
 </body>
-<footer id="footer-login" class="hidden-lg hidden-md" style="background-color: white">
-    <div class="pull-right">
-        <a href="{{url()}}/sobre" target="_blank">
-            {!! Html::image(config('system.experienceLogo'), 'logo_exp', array('title' => 'eXperience - codemed','id'=>'logoRodape','style'=>'margin-right:20px;margin-top:4px;')) !!}
-        </a>
-    </div>
-</footer>
+
 @stop
 
 @section('script')

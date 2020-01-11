@@ -81,11 +81,14 @@ class MedicoRepository extends BaseRepository
             $clientes[$i]->atendimentos = $atd;
 
             $clientes[$i]->idade = DataNascimento::idade($clientes[$i]->data_nas);
+           // $cipher = "aes-256-cbc";
+           // $ivlen = openssl_cipher_iv_length($cipher);
+            //$iv = openssl_random_pseudo_bytes($ivlen);
+           // $key = openssl_encrypt($clientes[$i]->registro, $cipher, config('system.key'), 0, config('system.iv'));
+            //$key = mcrypt_encrypt(MCRYPT_RIJNDAEL_256, config('system.key'), $clientes[$i]->registro, MCRYPT_MODE_ECB, mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB), MCRYPT_RAND));
+            //$id = strtr(rtrim(base64_encode($key), '='), '+/', '-_');
 
-            $key = mcrypt_encrypt(MCRYPT_RIJNDAEL_256, config('system.key'), $clientes[$i]->registro, MCRYPT_MODE_ECB, mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB), MCRYPT_RAND));
-            $id = strtr(rtrim(base64_encode($key), '='), '+/', '-_');
-
-            $clientes[$i]->key = $id;
+            $clientes[$i]->key = $clientes[$i]->registro;
         }
 
         return $clientes;

@@ -255,7 +255,7 @@
                     var dataResultPostoRealizante = async.run('{{url("/")}}/posto/selectpostorealizante',postPostoRealizante,'POST');
                     
                     dataResultPostoRealizante.then(function(result){
-                        console.log(result);
+ 
                         var selectPostoRealizante = $('#postoRealizante');
                         selectPostoRealizante.empty();
 

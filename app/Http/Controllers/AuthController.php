@@ -94,26 +94,33 @@ class AuthController extends Controller
     */
     public function postAutoatendimento(Request $request)
     {
-    
+        //print($request->input('id'));
         //Pega o Id que ta em base64 e convert em json
-        $id = base64_decode($request->input('id'),true);
+        $id = $request->input('id'); //base64_decode($request->input('id'),true);
+        $result = explode(",", $id);
+        print($result[0]);
+       /*  $arr = array(
+            ""
+        ); */
         //Passa o json para Array
-        $acesso = json_decode($id,true);
-
+        /* print("'".$id."'");
+        $acesso = json_decode("'".$id."'", true);
+        print($acesso); */
+        //$acesso->asdasd;
         //Cria array para verificação de autenticação com o banco de dados
         $credentials = [
             'tipoAcesso' => 'AUTO',
             'tipoLoginPaciente' => 'ID',
-            'posto' => $acesso['posto'],
-            'atendimento' => $acesso['atendimento'],
-            'password' => $acesso['senha'],
+            'posto' => $result[0],//$acesso['posto'],
+            'atendimento' => $result[1],//$acesso['atendimento'],
+            'password' => $result[2]//$acesso['senha'],
         ];
-
+        
         /*
         * Enviada para o controller App\Auth\CustomUserProvider a array $credentials para validação do acesso
         */
         if ($this->auth->attempt($credentials, false)) {
-            return redirect()->intended('/auth/home');
+            return redirect()->intended('/auth/autoatendimento');
         }
 
         //Caso o usuario/senha não forem satisfatorio, retorna o formulario de login com a mensagem de acesso negado
@@ -157,7 +164,7 @@ class AuthController extends Controller
 
                     //Se validado separada o posto e atendimento enviado pelo formulario
                     $dadosAtend = explode('/',$request->input('atendimento'));
-
+                    //print_r($dadosAtend);
                     //Cria array para verificação de autenticação com o banco de dados
                     $credentials = [
                         'tipoAcesso' => 'PAC',
