@@ -7,11 +7,11 @@
 @stop
 
 @section('infoHead')
-    <div class="feed-element infoUser" style="margin-right: 10px">
+    <div class="feed-element infoUser" >
         <div class="pull-right media-body">
             <button data-toggle="dropdown" class="btn btn-usuario dropdown-toggle boxLogin">
                 <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span> <span class="caret"></span><br>
-            </button> 
+            </button>   
             <ul class="dropdown-menu pull-right itensInfoUser"> 
                     @if(Auth::user()['tipoAcesso'] == 'MED' || (Auth::user()['tipoAcesso'] == 'PAC' && Auth::user()['tipoLoginPaciente'] == 'CPF'))
                      <li class="item"><a class="btnShowModal"><i class="fa fa-user"></i> Alterar Senha</a></li>
@@ -86,10 +86,10 @@
         </div>
 
 
-        <div class="row wrapper border-bottom white-bg page-heading" style="margin-top: 0px; padding-top: 0px">
+        <div class="row wrapper border-bottom white-bg page-heading" >
             <div class="ibox">
                 <div id="msgPendencias"></div> 
-                <ul class="sortable-list connectList agile-list ui-sortable listaExames" style="padding-top: 0px"></ul>
+                <ul class="sortable-list connectList agile-list ui-sortable listaExames" ></ul>
                     
                 @include('layouts.includes.base.modalDetalhamentoExames')
 
@@ -99,12 +99,12 @@
         </div>
     </div>
 
-    <div class="footer row-fluid" style="padding-left:6px">
-        <div class="col-md-8 col-sm-8 leg" style="padding-left:0px;font-size: 1em;padding-top: 0.7em">
+    <div class="footer">
+        <div class="status-atendimento"  style="font-size: 1em;padding-top: 0.7em">
 	 		<span class='statusAtendimentosViewPaciente'></span>
             {!!config('system.footer.atendimento')!!}
         </div>  
-        <div id='btnPdfPrincipal' class='col-md-4 col-sm-4'>
+        <div id='btnPdfPrincipal'>
     		<button id="btnExportar" type='button' class='btn btn-danger pull-right'>Gerar PDF</button>
 		</div>
     </div>
@@ -144,9 +144,9 @@
                 railOpacity: 0.4,
                 wheelStep: 10,
                 size: '12px',
-                alwaysVisible: true,
+                alwaysVisible: false,
                 railVisible: true,
-                minwidth: '100%',
+                minwidth: '100vw',
                 touchScrollStep: 50,
             });
 

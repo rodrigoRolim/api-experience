@@ -35,7 +35,7 @@
                     <div class="navbar-header logo">
                         {!! Html::image(config('system.clienteLogo'), 'logo_lab', array('title' => 'logo')) !!}
                     </div>
-                    <div class="feed-element pull-right infoUser" style="margin-right: 10px">
+                    <div class="feed-element pull-right infoUser">
                         @yield('infoHead')
                     </div>
                 </nav>

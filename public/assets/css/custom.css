@@ -2,7 +2,7 @@ html, body{
 	margin: 0;
 	padding: 0;
 	height: 100%;
-	width: 100vw;
+	width: 100%;
 	font-size: 100%;
 	-webkit-touch-callout: none; /* iOS Safari */
 	  -webkit-user-select: none;   /* Chrome/Safari/Opera */
@@ -27,9 +27,6 @@ html, body{
 	margin-left: 0px !important;
 }
 
-body{
-	overflow: auto;	
-}
 .navbar img{
 	height: 55px;
 }
@@ -240,12 +237,14 @@ ul{
 	width: 100vw;
 }
 .headPadrao{
-	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
 	text-align: left;
 }
 
 .headPadrao img{
-	padding: 5px 10px 2px 15px;
+	margin: 5px 10px 2px 15px;
 }
 
 .boxImgUser{
@@ -286,9 +285,8 @@ ul{
 	height: 35px;
 }
 
-.footer{
-   padding-right: 0px;	
-}
+
+
 
 .text-danger{
 	margin-top: 0px;
@@ -305,11 +303,13 @@ ul{
 #wraper {
 	display: flex;
 	flex-direction: column;
-	min-height: 100%;
-/* 	position: relative; */
 	font-size: 1.3em;
 }
-
+#wrapper{
+	display: flex;
+	flex-direction: row;
+	width: 100vw;
+}
 .infoUser .img-circle{
 	padding: 0px;
 }
@@ -322,7 +322,8 @@ ul{
 /* ========= layoutBaseLeft ======== */
 
 #page-wrapper{
-	padding: 0px;
+	width: 84vw;
+	height: 100vh;
 }
 
 
@@ -412,6 +413,7 @@ ul{
 
 .ibox{
 	height: 69vh;
+	width: 100vw;
 }
 
 .page-heading{
@@ -713,7 +715,12 @@ div.row.infoClienteMed{
 	padding: 3px ;
 	font-size: 11px;
 }
-
+.feed-element{
+	width: 95%;
+	align-self: center;
+	padding: 0px;
+	margin: 0px;
+}
 
 @media (max-width: 1280px){
 
@@ -747,7 +754,6 @@ div.row.infoClienteMed{
 	font-size: 1.0em;
 	width: 100%;
 }
-
 
 @media (max-width: 375px){
 	.footer{
@@ -968,7 +974,7 @@ div.row.infoClienteMed{
 		height: 60px;
 	}
 
-	.infoUser{		
+	.infoUser{
 		text-align: center;		
 		margin-top: 5px;		
 	}
@@ -1041,12 +1047,11 @@ div.row.infoClienteMed{
 		/*min-height: 110px;*/
 	}
 
-	#side-menu {
-		
-	}
-
 	#wrapper{
-		overflow-x: visible; 
+		display: flex;
+		flex-direction: row;
+		width: 100vw;
+		overflow: auto; 
 	}
 
 
@@ -1098,4 +1103,23 @@ div.row.infoClienteMed{
 }
 .tabs-body {
 	height: 12vh;
+}
+/* rodrigo rolim */
+/* .container-pac {
+	display: flex;
+	flex-direction: row;
+	width: 80vw;
+} */
+.footer{
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	align-items: center;
+ }
+.status-atendimento {
+	width: 60vw;
+}
+#btnPdfPrincipal {
+	align-self: flex-end;
+	width: 18%;
 }

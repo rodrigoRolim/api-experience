@@ -27,19 +27,17 @@
 
 <body class="boxed-layout">
     <div id="wraper">
-        <div class="container-fluid">
-            <div id="header">
-                <nav class="navbar navbar-static-top headLogin headPadrao" role="navigation" style="margin-bottom: 0">
-                    <div class="navbar-header logo">
-                        {!! Html::image(config('system.clienteLogo'), 'logo_lab', array('title' => 'logo')) !!}
-                    </div>
-                    <div class="feed-element pull-right infoUser" style="margin-right: 10px">
-                        @yield('infoHead')
-                    </div>
-                </nav>
-            </div>
+        <div id="header">
+            <nav class="navbar navbar-static-top headLogin headPadrao" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header logo">
+                    {!! Html::image(config('system.clienteLogo'), 'logo_lab', array('title' => 'logo')) !!}
+                </div>
+                <div class="feed-element pull-right infoUser">
+                    @yield('infoHead')
+                </div>
+            </nav>
         </div>
-        <div class="container-fluid">
+        <div >
             <div id="wrapper">
                 @yield('left')
                 @yield('content')

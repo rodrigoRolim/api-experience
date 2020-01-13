@@ -24,8 +24,8 @@ function error(error) {
 function initCanvas(w,h)
 {
     gCanvas = document.getElementById("qr-canvas");
-    gCanvas.style.width = w + "vw";
-    gCanvas.style.height = h + "vh";
+    gCanvas.style.width = w + "px";
+    gCanvas.style.height = h + "px";
     gCanvas.width = w;
     gCanvas.height = h;
     gCtx = gCanvas.getContext("2d");
@@ -100,7 +100,7 @@ function load()
 {
     if(isCanvasSupported() && window.File && window.FileReader)
     {
-        initCanvas(100, 100);
+        initCanvas(500, 500);
         qrcode.callback = read;
         setwebcam();
     }
