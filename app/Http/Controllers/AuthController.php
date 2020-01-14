@@ -99,7 +99,8 @@ class AuthController extends Controller
         $id = $request->input('id'); //base64_decode($request->input('id'),true);
         print($id);
         $result = explode(",", $id);
-        if ($result) {
+ 
+        if (sizeof($result) != 3) {
             return redirect()->back()->withInput()->withErrors(config('system.messages.login.usuarioQrInvalido'));
         }
        /*  $arr = array(
@@ -111,14 +112,20 @@ class AuthController extends Controller
         print($acesso); */
         //$acesso->asdasd;
         //Cria array para verificação de autenticação com o banco de dados
-        $credentials = [
-            'tipoAcesso' => 'AUTO',
-            'tipoLoginPaciente' => 'ID',
-            'posto' => $result[0],//$acesso['posto'],
-            'atendimento' => $result[1],//$acesso['atendimento'],
-            'password' => $result[2]//$acesso['senha'],
-        ];
-        
+        try {
+
+            $credentials = [
+                'tipoAcesso' => 'AUTO',
+                'tipoLoginPaciente' => 'ID',
+                'posto' => $result[0],//$acesso['posto'],
+                'atendimento' => $result[1],//$acesso['atendimento'],
+                'password' => $result[2]//$acesso['senha'],
+            ];
+
+        } catch (exception $e) {
+            return redirect()->back()->withInput()->withErrors(config('system.messages.login.usuarioQrInvalido'));
+        }
+           
         /*
         * Enviada para o controller App\Auth\CustomUserProvider a array $credentials para validação do acesso
         */

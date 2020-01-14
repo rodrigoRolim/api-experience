@@ -8,7 +8,7 @@
 
 @section('infoHead')
     <div class="feed-element infoUser" >
-        <div class="pull-right media-body">
+        <div class="pull-right">
             <button data-toggle="dropdown" class="btn btn-usuario dropdown-toggle boxLogin">
                 <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span> <span class="caret"></span><br>
             </button>   

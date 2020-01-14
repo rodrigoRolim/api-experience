@@ -234,6 +234,7 @@ ul{
 	flex-direction: row;
 	justify-content: flex-start;
 	align-items: center;
+	width: 100%;
 }
 #header {
 	display: flex;
@@ -244,12 +245,12 @@ ul{
 .headPadrao{
 	display: flex;
 	flex-direction: row;
-	justify-content: center;
+	justify-content: space-around;
 	text-align: left;
 }
 
 .headPadrao img{
-	margin: 5px 10px 2px 15px;
+	margin: 5px 0;
 }
 
 .boxImgUser{
@@ -724,7 +725,6 @@ div.row.infoClienteMed{
 	font-size: 11px;
 }
 .feed-element{
-	width: 100%;
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-end;
@@ -732,7 +732,12 @@ div.row.infoClienteMed{
 	padding: 0px;
 	margin: 0px;
 }
-
+.infoUser {
+	width: 80%;
+}
+.logo {
+	width: 15%;
+}
 @media (max-width: 1280px){
 
 	.boxFiltroPosto{
@@ -1122,10 +1127,11 @@ div.row.infoClienteMed{
 	display: flex;
 	flex-direction: row;
 	width: 100%;
-	align-items: center;
+	justify-content: center;
+	padding: 13px 10px;
  }
 .status-atendimento {
-	width: 60vw;
+	width: 100%;
 }
 #btnPdfPrincipal {
 	align-self: flex-end;
