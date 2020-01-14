@@ -97,8 +97,11 @@ class AuthController extends Controller
         //print($request->input('id'));
         //Pega o Id que ta em base64 e convert em json
         $id = $request->input('id'); //base64_decode($request->input('id'),true);
+        print($id);
         $result = explode(",", $id);
-        
+        if ($result) {
+            return redirect()->back()->withInput()->withErrors(config('system.messages.login.usuarioQrInvalido'));
+        }
        /*  $arr = array(
             ""
         ); */
