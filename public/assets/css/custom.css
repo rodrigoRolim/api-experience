@@ -234,7 +234,10 @@ ul{
 	padding: 5px 0 5px 0;
 }
 #header {
-	width: 100vw;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 100%;
 }
 .headPadrao{
 	display: flex;
@@ -269,8 +272,8 @@ ul{
 	flex-direction: column;
 }
 
-#footer{
-	bottom: 0;
+#footer {
+	padding: 0;
 	width: 100%;
 }
 
@@ -304,11 +307,13 @@ ul{
 	display: flex;
 	flex-direction: column;
 	font-size: 1.3em;
+	height: 100vh;
 }
 #wrapper{
 	display: flex;
 	flex-direction: row;
 	width: 100vw;
+	height: 100vh;
 }
 .infoUser .img-circle{
 	padding: 0px;
@@ -412,8 +417,8 @@ ul{
 }
 
 .ibox{
-	height: 69vh;
-	width: 100vw;
+	height: 100vh;
+	width: 100%;
 }
 
 .page-heading{
@@ -527,10 +532,11 @@ div.row.infoClienteMed{
 	margin-left: 20px;
 }
 
-/*.wrapper-content{
-	margin-bottom: 40px;
-}
-*/
+/* .wrapper-content{
+	display: flex;
+	flex-direction: column;
+} */
+
 .listaExames{
 	padding-left: 10px;
 }
@@ -716,7 +722,10 @@ div.row.infoClienteMed{
 	font-size: 11px;
 }
 .feed-element{
-	width: 95%;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
 	align-self: center;
 	padding: 0px;
 	margin: 0px;
@@ -785,7 +794,7 @@ div.row.infoClienteMed{
 	}
 
 	.ibox-content{
-		padding-bottom: 50px;
+		padding-bottom: 100px;
 	}
 
 
@@ -1102,14 +1111,10 @@ div.row.infoClienteMed{
 	display: none;
 }
 .tabs-body {
-	height: 12vh;
+	height: 450px;
 }
 /* rodrigo rolim */
-/* .container-pac {
-	display: flex;
-	flex-direction: row;
-	width: 80vw;
-} */
+
 .footer{
 	display: flex;
 	flex-direction: row;
@@ -1122,4 +1127,34 @@ div.row.infoClienteMed{
 #btnPdfPrincipal {
 	align-self: flex-end;
 	width: 18%;
+}
+.media-body {
+	
+	width: 120px;
+}
+.ibox-content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+.boxed-layout {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+}
+.box-center {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 95%;
+	margin: 0 auto;
+}
+.container-posto {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+header {
+	width: 100%;
 }

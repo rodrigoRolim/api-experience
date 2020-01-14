@@ -494,7 +494,7 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
 }
 .navbar .dropdown-menu {
   margin-top: -9px;
-  margin-right: 2%;
+  margin-right: 5%;
 }
 .top-navigation .navbar-brand {
   background: #1ab394;
@@ -3319,11 +3319,7 @@ ol.unstyled {
 .footer {
   background: none repeat scroll 0 0 white;
   border-top: 1px solid #e7eaec;
-  bottom: 0;
-  left: 0;
   padding: 10px 20px;
-  position: absolute;
-  right: 0;
 }
 .footer.fixed_full {
   position: fixed;
@@ -4186,6 +4182,7 @@ body.modal-open {
   max-width: 800px;
   margin: 0 auto;
   height: 70vh;
+  margin-top: 100px;
 }
 .passwordBox {
   max-width: 460px;

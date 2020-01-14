@@ -49,25 +49,25 @@
 }
 
 /* rodrigo rolim veras. e vai se fuder */
-.container {
+.container-login {
     display: flex;
     flex-direction: row;
     justify-content: center;
     padding: 8vh 0;
-    width: 100vw;
+    width: 100%;
 }
 .container-auto {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    width: 100vw;
+    width: 100%;
 }
 #outdiv{
     width: 420px;
 }
 .container-info {
     text-align: center;
-    width: 20vw;
+    width: 40%;
 }
 .container-info .btn {
     padding: 12px 0;
@@ -80,10 +80,11 @@
 }
 @media only screen and (max-width: 320px) {
     .container-auto {
+        margin-top: 40px;
         height: 60vh;
     }
     #outdiv{
-        width: 97vw;
+        width: 100%;
     }
 }
 
@@ -91,19 +92,17 @@
     .container-auto {
         display: flex;
         flex-direction: column-reverse;
-        justify-content: center;
         align-items: center;
-        justify-content: space-around;
-        width: 100vw;
+        width: 100%;
     }
     #outdiv{
-        width: 95vw;
+        width: 100%;
     }
     .container-info {
         font-size: 20px;
         margin-top: 50px;
         text-align: center;
-        width: 95vw;
+        width: 100%;
     }
     .container-info h5 {
         font-size: 1.2rem;
@@ -115,6 +114,6 @@
     }
      .container-webcam {
         justify-content: center;
-        width: 97vw;
+        width: 100%;
     }
 }
