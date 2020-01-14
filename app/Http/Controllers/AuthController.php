@@ -98,7 +98,7 @@ class AuthController extends Controller
         //Pega o Id que ta em base64 e convert em json
         $id = $request->input('id'); //base64_decode($request->input('id'),true);
         $result = explode(",", $id);
-        print($result[0]);
+        
        /*  $arr = array(
             ""
         ); */

@@ -22,9 +22,10 @@
                     </a>
                     <h5>Posicione o QR Code em frente a Câmera</h5>
                     <h5>Não está conseguindo fazer o login?</h5>
-                    <a class="btn btn-primary col-xs-12" href="{{url('/')}}/auth/autoatendimento/1">Pressione aqui</a>
+                    <a class="btn btn-primary col-xs-12" href="{{url('/')}}/auth/">Pressione aqui</a>
                 </div>
                 <div class="container-webcam">
+                    <div class="scan-animated"></div>
                     <div id="outdiv"></div>
                     <div class="" id="result"></div>                    
                     <div class="">

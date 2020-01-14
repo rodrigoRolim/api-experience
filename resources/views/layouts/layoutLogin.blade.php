@@ -39,7 +39,7 @@
 		</div>
 		<div id="body">
 			<div id="main" role="main">
-				<div id="content" class="container">
+				<div id="content" class="container-login">
 					@yield('content')
 				</div>
 			</div>

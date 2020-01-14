@@ -17,7 +17,7 @@
                         data-convenio="{{$atendimento->nome_convenio}}" 
                         data-solicitante="{{$atendimento->nome_solicitante}}" 
                         data-dtatendimento="{{ $atendimento->data_atd }}"
-                        data-entrega="{{ date('d/m/20y',strtotime($atendimento->data_entrega))}}"  
+                        data-entrega="{{ $atendimento->data_entrega }}"  
                         data-posto="{{$atendimento->posto}}"
                         data-atendimento="{{$atendimento->atendimento}}" 
                         data-mnemonicos="{{$atendimento->mnemonicos}}" 
