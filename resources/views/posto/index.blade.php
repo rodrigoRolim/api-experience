@@ -278,7 +278,6 @@
 
             //Evento do disparo do botão de filtro
             $('#btnFiltrar').click(function(e){
-                console.log('teste');
 
                 Cookies.set('dataInicio', $('#dataInicio').val());
                 Cookies.set('dataFim', $('#dataFim').val());
