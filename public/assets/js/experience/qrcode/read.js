@@ -1,7 +1,7 @@
 var stype=0;
 var gUM=false;
 
-var vidhtml = '<video id="v" autoplay></video>';
+var vidhtml = '<h5>Posicione o QR Code em frente a Câmera</h5><video id="v" autoplay></video>';
 
 function isCanvasSupported(){
   var elem = document.createElement('canvas');

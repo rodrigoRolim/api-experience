@@ -10,9 +10,6 @@
     width:320px;
     height:240px;
 }
-#outdiv{
-    width: 100vw;
-}
 #result{
     margin-top: 20px;
     font-weight: bold;
@@ -48,12 +45,11 @@
     animation-delay: .4s;
 }
 
-/* rodrigo rolim veras. e vai se fuder */
+/* rodrigo rolim veras.*/
 .container-login {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    padding: 8vh 0;
     width: 100%;
 }
 .container-auto {
@@ -61,34 +57,49 @@
     flex-direction: row;
     justify-content: center;
     width: 100%;
+    margin-top: 38px;
 }
 #outdiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 60px 60px 60px;
+    background-color: white;
     width: 420px;
 }
+h5 {margin:0; padding:0; margin-bottom: 10px}
 .container-info {
-    text-align: center;
-    width: 40%;
+    text-align: left;
+    width: 33%;
 }
 .container-info .btn {
     padding: 12px 0;
 }
 .container-webcam {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: flex-end;
-    width: 500px;
+    width: 420px;
+    margin-left: 36px;
 }
-@media only screen and (max-width: 320px) {
+.container-info .versions {
+    font-size: 0.8rem;
+    display: flex;
+    flex-direction: column;
+}
+@media only screen and (max-width: 400px) {
     .container-auto {
-        margin-top: 40px;
-        height: 60vh;
+        margin-top: 50px;
     }
-    #outdiv{
+    #outdiv {
         width: 100%;
+    }
+    #outdiv h5 {
+        font-size: 0.5rem;
     }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 767px) {
     .container-auto {
         display: flex;
         flex-direction: column-reverse;
@@ -100,20 +111,16 @@
     }
     .container-info {
         font-size: 20px;
-        margin-top: 50px;
+        margin: 50px 0;
         text-align: center;
         width: 100%;
     }
     .container-info h5 {
         font-size: 1.2rem;
     }
-    .container-info .btn {
-        font-size: 1.2rem;
-        font-weight: bolder;
-        padding: 18px 0;
-    }
      .container-webcam {
         justify-content: center;
         width: 100%;
+        margin-left: 0px;
     }
 }

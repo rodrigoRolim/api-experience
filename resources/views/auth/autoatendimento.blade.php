@@ -15,20 +15,29 @@
     <div class="container animated fadeInDown">
         <div class="container-auto">
             @if ($keyboard == 0)
-
-                <div class="container-info">
+                <div class="container-info info-logo">
+                    <h2>
+                        <a id="linkSobre" href="{{url('/')}}/sobre">
+                            <span class="text-navy">{!! Html::image(config('system.clienteLogo'), 'logo_exp', array('title' => 'eXperience - codemed', 'src'=>'experience/sobre', 'style'=>'height: 90px;')) !!}</span>
+                            {!!config('system.loginText.subTitle')!!}
+                        </a>
+                    </h2>
+                    <div class="versions">
+                        <small>experience: {!!config('system.versao')!!}</small>
+                        <small id="version-ds"></small>
+                    </div>
+                </div>
+                <!-- <div class="container-info">
                     <a href="http://www.codemed.com.br" target="_new">
                         {!! Html::image(config('system.eXperienceLogoHorizontal'), 'logo_exp', array('title' => 'Experience', 'height' => 45)) !!}
                     </a>
                     <h5>Posicione o QR Code em frente a Câmera</h5>
                     <h5>Não está conseguindo fazer o login?</h5>
                     <a class="btn btn-primary col-xs-12" href="{{url('/')}}/auth/">Pressione aqui</a>
-                </div>
+                </div> -->
                 <div class="container-webcam">
                     <div class="scan-animated"></div>
-                    <div id="outdiv"></div>
-                    <div class="" id="result"></div>                    
-                    <div class="">
+                    <div class="centralizar">
                         @if (count($errors) == 1)
                             <div class="alert alert-danger alert-dismissable">
                                 @foreach ($errors->all() as $error)
@@ -39,6 +48,9 @@
                         
                         
                     </div>
+                    <div id="outdiv"></div>
+                    <div class="" id="result"></div>                    
+                   
                     <canvas id="qr-canvas"></canvas>
                 </div>
                 
@@ -101,6 +113,11 @@
     <script src="{{ asset('/assets/js/experience/qrcode/read.js') }}"></script>
     <script type="text/javascript"> 
         $(document).ready(function(){
+            //console.log("{{config('system.datasnap')}}")
+  /*           console.log("{{config('system.versao')}}") */
+          
+        
+           
             var qtdCaracterAtendimento = parseInt("{{config('system.qtdCaracterPosto')}}") + parseInt("{{config('system.qtdCaracterAtend')}}") 
 
             $('#footer').hide();
