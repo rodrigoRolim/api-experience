@@ -9,7 +9,8 @@
 
     {!! Html::style('/assets/css/animate.css') !!}
     {!! Html::style('/assets/css/inspinia.css') !!}
-    {!! Html::style('/assets/css/custom.css') !!}
+   <!--  {!! Html::style('/assets/css/custom.css') !!} -->
+    {!! Html::style('/assets/css/new/base.css') !!}
     
     {!! Html::style('/assets/css/skins/'.config('system.skinPadrao')) !!}
 

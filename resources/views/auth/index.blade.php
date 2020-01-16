@@ -17,6 +17,7 @@
     <div class="animated fadeInDown">
         <div class="container-login">
             <div class="info-logo container-info">
+                
                 <h2>
                     <a id="linkSobre" href="{{url('/')}}/sobre">
                         <span class="text-navy">{!! Html::image(config('system.clienteLogo'), 'logo_exp', array('title' => 'eXperience - codemed', 'src'=>'experience/sobre', 'style'=>'height: 90px;')) !!}</span>

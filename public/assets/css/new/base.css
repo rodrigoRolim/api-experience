@@ -1,0 +1,314 @@
+html, body{
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	width: 100%;
+	font-size: 10px;
+	-webkit-touch-callout: none; /* iOS Safari */
+	  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+	  -khtml-user-select: none;    /* Konqueror */
+	  -moz-user-select: none;      /* Firefox */
+	  -ms-user-select: none;       /* Internet Explorer/Edge */
+	  user-select: none;           /* Non-prefixed version, currently
+	                                  not supported by any browser */
+	cursor: default;
+}
+* {
+	margin: 0;
+	padding: 0;
+}
+*:focus{
+	outline: none !important;
+}
+
+.boxed-layout {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+}
+#wraper {
+	display: flex;
+	flex-direction: column;
+	font-size: 1.3em;
+	height: 100vh;
+}
+#wrapper{
+	display: flex;
+	flex-direction: row;
+	width: 100vw;
+	height: 100vh;
+}
+#header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 100%;
+}
+.headLogin{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	width: 100%;
+}
+.headPadrao{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	text-align: left;
+}
+
+.headPadrao img{
+	margin: 5px 0;
+}
+.logo {
+	width: 15%;
+}
+.feed-element{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-self: center;
+	padding: 0px;
+	margin: 0px;
+}
+.box-center {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 95%;
+	margin: 0 auto;
+}
+#footer {
+	padding: 0;
+	width: 100%;
+}
+.footer{
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	justify-content: center;
+	padding: 13px 10px;
+}
+.infoUser .img-circle{
+	padding: 0px;
+}
+.nav > li > a{
+	padding: 8px;
+}
+.infoUser {
+	width: 80%;
+}
+.areaStatusAtendimentos{
+	padding-left: 0px;
+}
+.metismenu li{
+	margin-bottom: 5px;
+}
+#side-menu {
+	margin-top: 10px;	
+}
+.centralizar{
+	text-align: center;
+}
+#page-wrapper{
+	width: 84vw;
+	height: 100vh;
+}
+.boxLogin{
+	font-size: 1em;	
+}
+.gray-bg{
+	background-color: #F3F3F4 !important;
+}
+.ibox-content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+.media-body {
+	
+	width: 120px;
+}
+.imprimirTimbrado{
+	margin-top: 5px;
+	margin-left: 10px; 
+	font-weight: bold;
+}
+#page-wrapper-posto{
+	padding: 0px;
+	margin-left: 0px;
+	border: 1px solid #E2E2E2;
+}
+.wrapper-content{
+	padding-bottom: 0px !important;
+}
+.inputBuscaPaciente{
+	margin-top: 5px;
+	margin-bottom: 2px;
+}
+#listFilter{
+	height: 54vh;
+	width: 98% !important;
+}
+#dvFiltroData	{
+	padding-left: 10px !important;
+	padding-right: 10px !important;
+}
+.input-sm, .form-control{
+	height: 34px;
+	margin-bottom: 10px;
+    border-radius: 3px 3px 3px 3px;
+}
+.not-active{
+	pointer-events: none;
+	cursor: default;
+	color: gray !important;
+ }
+.close{
+	font-size: 3em;
+	color: #055405;
+	opacity: .5;
+}
+.navbar img{
+	height: 55px;
+}
+.btn .btn-white{
+	border-radius: none;
+}
+.nav > li > a{
+	padding: 8px;
+}
+.status-atendimento {
+	width: 100%;
+}
+.areaStatusAtendimentos{
+	padding-left: 0px;
+}
+
+.statusAtendimentos{
+	font-size: 0.9em;
+}
+
+.statusAtendimentosViewPaciente{
+	margin-left: 0px;
+	font-size: 0.9em;
+}
+
+.statusFinalizados,.statusAguardando,.statusEmAndamento,.statusPendencias,.statusNaoRealizado{
+	border-left: solid 3px;
+	padding-right: 5px;
+	margin-left: 5px;
+}
+
+.statusFinalizados{
+	border-color: #1ab394;
+}
+
+.statusAguardando{
+	border-color: #F7F01D;
+}
+
+.statusEmAndamento{
+	border-color: #f8ac59;
+}
+
+.statusPendencias{
+	border-color: #ed5565;
+}
+
+.statusNaoRealizado{
+	border-color: #5D88FF;
+}
+.agile-list, li.warning-element, li.success-element, li.danger-element, li.aguardando-element, li.naoRealizado-element{
+	margin-right: 10px;
+}
+li.success-element {
+	display: flex;
+	flex-direction: column;
+}
+.checkExames{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+}
+.dadosExames {
+	display: flex;
+	flex-direction: column;
+/* 	height: 500px; */
+}
+.boxExames{
+	padding-right: 0px;
+	padding-left: 0px;
+}
+@media only screen and (max-width: 800px) {
+    .navbar-header.logo img{
+		height: 50px;
+		float: left;			
+		padding-left: 5px;
+		margin: 0px;
+    }
+	#side-menu{
+		padding-top: 30px;
+	}
+	.media-body{
+		float: right;
+		padding-right: 5px;
+		padding-top: 5px;
+		font-size: 0.8em;
+	}
+}
+@media only screen and (max-width: 420px) {
+    .feed-element{
+		padding: 0px;
+		margin: 0px;
+	}
+	.infoUser{
+		text-align: center;		
+		margin-top: 5px;		
+	}
+	#wrapper{
+		display: flex;
+		flex-direction: row;
+		width: 100vw;
+		overflow: auto; 
+	}
+	.metismenu li {
+		margin-bottom: 20px;
+	}
+
+	.metismenu {
+		padding-bottom: 60px;
+	}
+	.metismenu li a{
+		padding: 0px;
+	}
+	.navbar-header.logo img{
+		height: 50px;
+		float: left;			
+		padding-left: 5px;
+		margin: 0px;
+
+	}
+}
+@media (max-width: 375px){
+	.footer{
+		height: 70px;
+		font-size: 0.5em;
+	}
+
+	.footer .leg{
+		margin-bottom: 5px;
+	}
+
+	.footer .btn{
+		padding: 4px;
+	}
+}
+
+@media (max-height: 375px){
+	.footer{
+		height: 100px;
+		font-size: 0.8em;
+	}
+}

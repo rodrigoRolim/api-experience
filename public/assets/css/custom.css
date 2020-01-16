@@ -232,9 +232,30 @@ ul{
 .headLogin{
 	display: flex;
 	flex-direction: row;
-	justify-content: flex-start;
+	justify-content: space-between;
 	align-items: center;
 	width: 100%;
+}
+.headLogin span:first-child {
+	width: 100%;
+}
+/* .headLogin span:last-child {
+	width: 3.5%;
+} */
+.icon-camera-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	margin-right: 20px;
+	border: 1px solid rgb(201, 201, 201);
+	border-radius: 4px;
+}
+.camera {
+	margin: 0;
+	padding: 0;
+}
+.camera i {
+	color: rgb(201, 201, 201);
 }
 #header {
 	display: flex;
@@ -699,10 +720,6 @@ div.row.infoClienteMed{
 	padding-top: 10px;
 }
 
-.convAtdPos{
-	/*padding-top: 10px;*/
-}
-
 .btnVoltar,
 .btnVoltarMedico{
 	margin-right:10px;
@@ -960,10 +977,6 @@ div.row.infoClienteMed{
 }
 
 @media (max-width: 420px){
-	.filtrar{
-
-	}
-
 	.menu-trigger{
 		display: block;
 	}
@@ -1197,6 +1210,7 @@ header {
     display: flex;
     flex-direction: column;
 }
+
 @media only screen and (max-width: 767px) {
 	.container-login {
 		display: flex;

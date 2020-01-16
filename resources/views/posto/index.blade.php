@@ -34,7 +34,7 @@
                     <span class="input-group-addon">até</span>
                     <input type="text" class="input-sm form-control datepicker" id="dataFim" name="dataFim">                    
                 </div>
-            </div>       
+            </div>
             <div class="col-md-2">
                 <label class="textoBranco" name="acomodacao">Acomodação</label>
                 {!! Form::select('acomodacao', [], '', array('class' => 'form-control m-b', 'id'=>'acomodacao')) !!}

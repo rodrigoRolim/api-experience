@@ -29,11 +29,18 @@
 	<div id="wraper">
 		<div id="header">
 			<header>
-				<nav class="navbar navbar-static-top headLogin " role="navigation" style="margin-bottom: 0">
-					<a href="{{url()}}/sobre" target="_blank">
-						{!! Html::image(config('system.eXperienceLogoHorizontal'), 'logo_lab', array('title' => 'logo', 'class'=>'hidden-xs', 'style' => 'height: 25px; margin-left: 20px')) !!}
-						{!! Html::image(config('system.experienceLogo'), 'logo_exp', array('title' => 'eXperience - codemed', 'id' => 'logoRodape', 'class'=>'hidden-sm hidden-md hidden-lg', 'style'=>'margin-right:20px;margin-top:4px;')) !!}
-					</a>        
+				<nav class="navbar navbar-static-top headLogin" role="navigation" style="margin-bottom: 0">
+					<span>
+						<a href="{{url()}}/sobre" target="_blank">
+							{!! Html::image(config('system.eXperienceLogoHorizontal'), 'logo_lab', array('title' => 'logo', 'class'=>'hidden-xs', 'style' => 'height: 25px; margin-left: 20px')) !!}
+							{!! Html::image(config('system.experienceLogo'), 'logo_exp', array('title' => 'eXperience - codemed', 'id' => 'logoRodape', 'class'=>'hidden-sm hidden-md hidden-lg', 'style'=>'margin-right:20px;margin-top:4px;')) !!}
+						</a>
+					</span>
+					<!-- <span class="icon-camera-container">
+						<a href="{{url()}}/auth/autoatendimento">
+							<span class="camera"><i class="fa-2x fa fa-video-camera"></i></span>
+						</a>
+					</span>         -->
 				</nav>
 			</header>
 		</div>
