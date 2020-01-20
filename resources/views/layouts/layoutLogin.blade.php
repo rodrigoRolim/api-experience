@@ -36,11 +36,6 @@
 							{!! Html::image(config('system.experienceLogo'), 'logo_exp', array('title' => 'eXperience - codemed', 'id' => 'logoRodape', 'class'=>'hidden-sm hidden-md hidden-lg', 'style'=>'margin-right:20px;margin-top:4px;')) !!}
 						</a>
 					</span>
-					<!-- <span class="icon-camera-container">
-						<a href="{{url()}}/auth/autoatendimento">
-							<span class="camera"><i class="fa-2x fa fa-video-camera"></i></span>
-						</a>
-					</span>         -->
 				</nav>
 			</header>
 		</div>

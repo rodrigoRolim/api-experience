@@ -51,6 +51,9 @@
                     @endif    
                     @if(config('system.acessoParceiro'))
                         <li class=""><a id="btnParceiro" data-toggle="tab" href="#tabLoginParceiro" aria-expanded="false">Parceiro</a></li>
+                    @endif
+                    @if(config('system.acessoAutoAtendimento'))
+                        <li class=""><a id="btnAuto" href="#tabLoginQRcode" data-toggle="tab" aria-expandend="false">Acesso QR Code</a></li>
                     @endif                   
                     </ul>
                     <div class="tab-content">
@@ -82,6 +85,13 @@
                                 </div>
                             </div>
                         @endif
+                        @if(config('system.acessoAutoAtendimento'))
+                            <div id="tabLoginQRcode" class="tab-pane hidden">
+                                <div class="panel-body">
+                                    @include('auth.includes.formLoginAutoAtendimento')
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -106,41 +116,71 @@
     $(document).ready(function () {
  
         $('.footer').hide();
-        $('li').on('click', function() {
-            $('.nav').on('shown.bs.tab', function (e) {
-                var tabAtiva = $(e.target).text();
-                switch(tabAtiva) {
-                    case "Paciente":
-                        $('#atendimento').focus();
-                        $('#tabLoginPaciente').removeClass('hidden');
-                        $('#tabLoginPosto').addClass('hidden');
-                        $('#tabLoginMedico').addClass('hidden');
-                        $('#tabLoginParceiro').addClass('hidden');
-                        break;
-                    case "Médico":
-                        $('#cr').focus();
-                        $('#tabLoginMedico').removeClass('hidden');
-                        $('#tabLoginPosto').addClass('hidden');
-                        $('#tabLoginPaciente').addClass('hidden');
-                        $('#tabLoginParceiro').addClass('hidden');
-                        break;
-                    case "Posto":
-                        $('#posto').focus();
-                        $('#tabLoginPosto').removeClass('hidden');
-                        $('#tabLoginPaciente').addClass('hidden');
-                        $('#tabLoginMedico').addClass('hidden');
-                        $('#tabLoginParceiro').addClass('hidden');
-                        break;
-                    case "Parceiro":
-                        $('#codparceiro').focus();
-                        $('#tabLoginParceiro').removeClass('hidden');
-                        $('#tabLoginPosto').addClass('hidden');
-                        $('#tabLoginPaciente').addClass('hidden');
-                        $('#tabLoginMedico').addClass('hidden');
-                        break;
-                }        
-            });
+
+        $('.nav').on('shown.bs.tab', function (e) {
+            //debugger;
+            var tabAtiva = $(e.target).text();
+            switch(tabAtiva) {
+                case "Paciente":
+                    $('#atendimento').focus();
+                    $('#tabLoginPaciente').removeClass('hidden');
+                    $('#tabLoginPosto').addClass('hidden');
+                    $('#tabLoginMedico').addClass('hidden');
+                    $('#tabLoginParceiro').addClass('hidden');
+                    $('#tabLoginQRcode').addClass('hidden');
+                   
+                    if ($('#v').length == 1 && document.getElementById('v').srcObject !== null) {
+                        off_camera()
+                    }
+                    break;
+                case "Médico":
+                    $('#cr').focus();
+                    $('#tabLoginMedico').removeClass('hidden');
+                    $('#tabLoginPosto').addClass('hidden');
+                    $('#tabLoginPaciente').addClass('hidden');
+                    $('#tabLoginParceiro').addClass('hidden');
+                    $('#tabLoginQRcode').addClass('hidden');
+          
+                    if ($('#v').length == 1 && document.getElementById('v').srcObject !== null) {
+                        off_camera()
+                    }
+                    break;
+                case "Posto":
+                    $('#posto').focus();
+                    $('#tabLoginPosto').removeClass('hidden');
+                    $('#tabLoginPaciente').addClass('hidden');
+                    $('#tabLoginMedico').addClass('hidden');
+                    $('#tabLoginParceiro').addClass('hidden');
+                    $('#tabLoginQRcode').addClass('hidden');
+                   
+                    if ($('#v').length == 1 && document.getElementById('v').srcObject !== null) {
+                        off_camera()
+                    }
+                    break;
+                case "Parceiro":
+                    $('#codparceiro').focus();
+                    $('#tabLoginParceiro').removeClass('hidden');
+                    $('#tabLoginPosto').addClass('hidden');
+                    $('#tabLoginPaciente').addClass('hidden');
+                    $('#tabLoginMedico').addClass('hidden');
+                    $('#tabLoginQRcode').addClass('hidden');
+            
+                    if ($('#v').length == 1 && document.getElementById('v').srcObject !== null) {
+                        off_camera()
+                    }
+                    break;
+                case "Acesso QR Code":
+                    $('#QRcode').focus();
+                    $('#tabLoginQRcode').removeClass('hidden');
+                    $('#tabLoginParceiro').addClass('hidden');
+                    $('#tabLoginPosto').addClass('hidden');
+                    $('#tabLoginPaciente').addClass('hidden');
+                    $('#tabLoginMedico').addClass('hidden');
+                    init(!!!$("#v"))
+                    break;
+            }        
         });
+
 
         $('.nav-tabs li:first').addClass('active');
         $('.tab-content > div:first-child').addClass('active');

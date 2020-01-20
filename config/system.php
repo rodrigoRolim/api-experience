@@ -21,6 +21,7 @@ return [
     'acessoParceiro' => env('APP_ACESSO_PARCEIRO'),
     'AutoAtendimento' => 'Acesso QR CODE',
     'acessoPaciente' => env('APP_ACESSO_PACIENTE'),
+    'acessoAutoAtendimento' => env('APP_ACESSO_AUTOATENDIMENTO'),
     'acessoAutoAtendimentoTeclado' => env('APP_ACESSO_AUTOATENDIMENTO_TECLADO'),
     'HOSTNAME_AUTOATENDIMENTO' => env('HOSTNAME_AUTOATENDIMENTO'),
     'impressaoTimbrado' => env('CABECALHO'),

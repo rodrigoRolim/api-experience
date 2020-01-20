@@ -113,11 +113,8 @@
     <script src="{{ asset('/assets/js/experience/qrcode/read.js') }}"></script>
     <script type="text/javascript"> 
         $(document).ready(function(){
-            //console.log("{{config('system.datasnap')}}")
-  /*           console.log("{{config('system.versao')}}") */
-          
-        
-           
+
+                  
             var qtdCaracterAtendimento = parseInt("{{config('system.qtdCaracterPosto')}}") + parseInt("{{config('system.qtdCaracterAtend')}}") 
 
             $('#footer').hide();

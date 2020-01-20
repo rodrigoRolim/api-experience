@@ -4,7 +4,7 @@
     {!! Html::style('/assets/css/plugins/iCheck/custom.css') !!}
     {!! Html::style('/assets/css/plugins/datapicker/datepicker.css') !!}  
     {!! Html::style('/assets/css/plugins/sweetalert/sweetalert.css') !!}
-    {!! Html::style('/assets/css/new/paciente.css') !!}
+    {!! Html::style('/assets/css/custom.css') !!}
 @stop
 
 @section('infoHead')
