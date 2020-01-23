@@ -12,7 +12,7 @@ return [
     'eXperienceLogoHorizontal' =>  env('APP_LOGO_EXPERIENCE'),
     'clienteUrl'  => env('APP_CLIENTE_URL'),
     'PDFUrl'      => env('APP_PDF_URL'),
-    'datasnap'    => env('APP_DATASNAP_VERSION'),
+    'datasnap'    => env('APP_VERSION_DATASNAP'),
     'PDFUrlTemp'  => env('APP_PDF_TEMP'),
     'clienteUF'   => env('APP_CLIENTE_UF'),
     'clienteMsg'  => env('APP_CLIENTE_FONE'),

@@ -7,16 +7,17 @@
 @stop
 
 @section('infoHead')
-    <div class="media-body">        
-        <button data-toggle="dropdown" class="btn btn-usuario dropdown-toggle boxLogin">
-            <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span> <span class="caret"></span><br>
-        </button>         
-        <ul class="dropdown-menu pull-right itensInfoUser">
-            <li class="item imprimirTimbrado"><input id="checkTimbrado" type="checkbox"></i>&nbsp; Imprimir Cabeçalho</li>
-            <li style="border-bottom:1px solid #efefef; margin-top:8px"></li>          
-            <li class="item"><a href="{{url()}}/auth/logout"><i class="fa fa-sign-out"></i> Sair</a></li>
-        </ul>
-    </div>    
+
+<div class="infoUser">
+    <button data-toggle="dropdown" class="btn btn-usuario dropdown-toggle boxLogin">
+        <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span> <span class="caret"></span><br>
+    </button>         
+    <ul class="dropdown-menu pull-right itensInfoUser">
+        <li class="item imprimirTimbrado"><input id="checkTimbrado" type="checkbox"></i>&nbsp; Imprimir Cabeçalho</li>
+        <li style="border-bottom:1px solid #efefef; margin-top:8px"></li>          
+        <li class="item"><a href="{{url()}}/auth/logout"><i class="fa fa-sign-out"></i> Sair</a></li>
+    </ul>
+</div>  
 @stop
 
 @section('content')

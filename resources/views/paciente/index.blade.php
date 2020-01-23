@@ -8,19 +8,19 @@
 @stop
 
 @section('infoHead')
-    <div class="feed-element infoUser" >
-        <div class="pull-right">
-            <button data-toggle="dropdown" class="btn btn-usuario dropdown-toggle boxLogin">
-                <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span> <span class="caret"></span><br>
-            </button>   
-            <ul class="dropdown-menu pull-right itensInfoUser"> 
-                    @if(Auth::user()['tipoAcesso'] == 'MED' || (Auth::user()['tipoAcesso'] == 'PAC' && Auth::user()['tipoLoginPaciente'] == 'CPF'))
-                     <li class="item"><a class="btnShowModal"><i class="fa fa-user"></i> Alterar Senha</a></li>
-                    @endif
-                    <li class="item"><a href="{{url('/')}}/auth/logout"><i class="fa fa-sign-out"></i> Sair</a></li>
-            </ul>
-        </div>
-    </div>
+<!--     <div class="feed-element infoUser" > -->
+<div class="infoUser">
+    <button data-toggle="dropdown" class="btn btn-usuario dropdown-toggle boxLogin">
+        <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span> <span class="caret"></span><br>
+    </button>   
+    <ul class="dropdown-menu pull-right itensInfoUser"> 
+        @if(Auth::user()['tipoAcesso'] == 'MED' || (Auth::user()['tipoAcesso'] == 'PAC' && Auth::user()['tipoLoginPaciente'] == 'CPF'))
+            <li class="item"><a class="btnShowModal"><i class="fa fa-user"></i> Alterar Senha</a></li>
+        @endif
+        <li class="item"><a href="{{url('/')}}/auth/logout"><i class="fa fa-sign-out"></i> Sair</a></li>
+    </ul>
+</div>
+    <!-- </div> -->
 @stop
 
 @section('left')

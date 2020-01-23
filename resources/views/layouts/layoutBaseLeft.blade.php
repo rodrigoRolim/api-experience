@@ -9,8 +9,8 @@
 
     {!! Html::style('/assets/css/animate.css') !!}
     {!! Html::style('/assets/css/inspinia.css') !!}
-   <!--  {!! Html::style('/assets/css/custom.css') !!} -->
-    {!! Html::style('/assets/css/new/base.css') !!}
+    {!! Html::style('/assets/css/custom.css') !!}
+  <!--   {!! Html::style('/assets/css/new/base.css') !!} -->
     
     {!! Html::style('/assets/css/skins/'.config('system.skinPadrao')) !!}
 
@@ -28,7 +28,7 @@
 
 <body class="boxed-layout">
     <div id="wraper">
-        <div id="header">
+       <div id="col-md-12 header">
             <nav class="navbar navbar-static-top headLogin headPadrao" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header logo">
                     {!! Html::image(config('system.clienteLogo'), 'logo_lab', array('title' => 'logo')) !!}

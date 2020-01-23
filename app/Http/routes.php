@@ -3,7 +3,7 @@
 /**
 * Classe reponsável pelo controle de rodas da aplicação
 *
-* @author Bruno Araújo <brunoluan@gmail.com> e Vitor Queiroz <vitorvqz@gmail.com>
+* @author rodrigo rola
 * @version 1.0
 */
 Use Illuminate\Http\Request;
