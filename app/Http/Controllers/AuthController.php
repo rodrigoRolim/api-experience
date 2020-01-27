@@ -66,7 +66,7 @@ class AuthController extends Controller
         $mobile = BrowserDetect::isMobile() || BrowserDetect::isTablet();
 
         if(gethostname() == config('system.HOSTNAME_AUTOATENDIMENTO')){
-            return redirect('/auth/autoatendimento');
+            return redirect('/auth');
         }
 
         $postos = $this->postoRepository->orderBy('nome')->lists('nome', 'posto');
@@ -130,7 +130,7 @@ class AuthController extends Controller
         * Enviada para o controller App\Auth\CustomUserProvider a array $credentials para validação do acesso
         */
         if ($this->auth->attempt($credentials, false)) {
-            return redirect()->intended('/auth/autoatendimento');
+            return redirect()->intended('/auth');
         }
 
         //Caso o usuario/senha não forem satisfatorio, retorna o formulario de login com a mensagem de acesso negado

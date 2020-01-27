@@ -110,7 +110,7 @@ class PostoController extends Controller {
     */
     public function postSelectpostorealizante(){
         $idPosto = Request::get('posto');
-      
+        
         $parceiroRealizantes = $this->posto->getPostosRealizantes($idPosto,Request::get('dataInicio'),Request::get('dataFim'));
     
         return response()->json(array(
@@ -254,7 +254,9 @@ class PostoController extends Controller {
     public function postExportarpdf(){
      
         //Captura os valores do exame selecionado
+       
         $dados = Request::input('dados');
+
         $parceiro = (int) $dados[0]['posto'];
         $atendimento = $dados[0]['atendimento'];
         $correlativos = $dados[0]['correlativos'];
