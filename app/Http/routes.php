@@ -106,12 +106,12 @@ Route::group(['prefix' => '/manuais'], function () {
 /**/Route::get("/procedimentos/{descricao}", "ManuaisController@getProcedimentos");
 /**/Route::get("/preparo/{mnemonico}", "ManuaisController@getPreparo");
 });
-Route::group(['prefix' => '/medico', 'middleware' => ['auth','ehMedico','revalidate']], function () {
+Route::group(['prefix' => '/medico', /* 'middleware' => ['auth','ehMedico','revalidate'] */], function () {
 /**/Route::get("", "MedicoController@getIndex");
-/**/Route::post("/localizapaciente", "MedicoController@postLocalizapaciente");
-    Route::post("/filterclientes", "MedicoController@postFilterclientes");
+    Route::post("/localizapaciente", "MedicoController@postLocalizapaciente");
+/**/Route::post("/filterclientes", "MedicoController@postFilterclientes");
     Route::get("/paciente/{registro}", "MedicoController@getPaciente");
-    Route::get("/examesatendimento/{posto}/{atendimento}", "MedicoController@getExamesatendimento");
+/**/Route::get("/examesatendimento/{posto}/{atendimento}", "MedicoController@getExamesatendimento");
     Route::post("/selectconvenios", "MedicoController@postSelectconvenios");
     Route::post("/selectpostoscadastro", "MedicoController@postSelectpostoscadastro");
     Route::get("/detalheatendimentoexamecorrel/{posto}/{atendimento}/{correl}", "MedicoController@getDetalheatendimentoexamecorrel");
