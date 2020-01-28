@@ -78,7 +78,7 @@ class MedicoController extends Controller {
     public function getIndex()
     {
         //Pego da sessao do usuario o ID_MEDICO
-        $idMedico = $this->auth->user()['id_medico'];
+        $idMedico = 4832;//$this->auth->user()['id_medico'];
 
         // //Pego atraves do repositorio todos os postos e convenios que tem algum atendimento do mÃ©dico
         //$postos = $this->medico->getPostoAtendimento($idMedico);
@@ -101,7 +101,7 @@ class MedicoController extends Controller {
      */
     public function postFilterclientes(){
         //Pego o ID_MEDICO da sessao do usuario
-        $idMedico = $this->auth->user()['id_medico'];
+        $idMedico = 4832;//rand(1, 50000);//$this->auth->user()['id_medico'];
 
         $dataInicio = Request::input('dataInicio');
         $dataFim    = Request::input('dataFim');
@@ -112,7 +112,7 @@ class MedicoController extends Controller {
         //retorno o json com os resultados para a view
         return response()->json(array(
             'message' => 'Recebido com sucesso.',
-            'data' => $result,
+            'data' => $result
         ), 200);
     }
 
@@ -134,7 +134,7 @@ class MedicoController extends Controller {
         //print_r($registro);
         //$registro = (int) trim(openssl_decrypt($registro, $cipher, config('system.key'), 0, config('system.key')));
 
-        $idMedico = $this->auth->user()['id_medico'];
+        $idMedico = 4832; //$this->auth->user()['id_medico'];
 
         //Pego os atendimentos do paciente solicitado pelo medigo no repositorio
         $atendimentos = $this->medico->getAtendimentosPacienteByMedico($registro,$idMedico);
@@ -167,9 +167,10 @@ class MedicoController extends Controller {
      * @return \Illuminate\Http\JsonResponse
      */
     public function getExamesatendimento($posto,$atendimento){
+  
         //Verifico junto ao repositorio do medico se o atendimento foi ele que solicitou,
         //dessa forma garanto que apenas o medico solicitante tenha acesso as informaÃ§Ãµes
-        $ehAtendimentoMedico = $this->medico->ehAtendimentoMedico($this->auth->user()['id_medico'],$posto,$atendimento);
+        $ehAtendimentoMedico =  $this->medico->ehAtendimentoMedico(4832,$posto,$atendimento);// $this->medico->ehAtendimentoMedico($this->auth->user()['id_medico'],$posto,$atendimento);
         
         //Caso nÃ£o encontre ele retorna o error 4040
         if(!$ehAtendimentoMedico){
@@ -178,7 +179,7 @@ class MedicoController extends Controller {
 
         //Pega todos os exames do posto e atendimento
         $exames = $this->exames->getExames($posto, $atendimento);
-
+   
         //Retorna o objeto em Json para alimentar a view
         return response()->json(array(
             'message' => 'Recebido com sucesso.',
