@@ -1,0 +1,97 @@
+.listaExames{
+	padding-left: 10px;
+}
+
+.listaExames li{
+	min-height: 85px;
+}
+/* #page-wrapper{
+	width: 84vw;
+	height: 100vh;
+} */
+.page-heading{
+	padding-top: 10px;
+	/*padding-bottom: 60px;*/
+	margin-top: -10px;
+	margin-left: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	margin-right: 0px;
+	clear: both;
+	min-height: 84vh; /*Altura pagina paciente*/
+}
+.status-atendimento {
+	width: 100%;
+}
+.statusAtendimentosViewPaciente{
+	margin-left: 0px;
+	font-size: 0.9em;
+}
+#btnPdfPrincipal {
+	align-self: flex-end;
+	width: 18%;
+}
+.areaPacientePos{
+	padding-top: 1px;
+	font-size: 1em;
+	margin-bottom: 3px;
+	min-height: 45px;
+}
+.topoMenu{
+	background-color: rgba(255,255,255,0.3);
+	height: 65px;
+	font-size: 15px;
+	color: #fff;
+	text-align: center;
+	padding-top: 15px;
+}
+
+#page-wrapper-posto{
+	padding: 0px;
+	margin-left: 0px;
+	border: 1px solid #E2E2E2;
+}
+.nomePaciente{
+	font-size: 1.3em;
+}
+.ibox{
+	height: 100vh;
+	width: 100%;
+}
+#msgPendencias{
+	text-align: center;
+	color: red;
+	padding-bottom: 10px;
+	padding-right: 20px;
+}
+.btnVoltar {
+	margin-right:10px;
+	background-color: transparent;
+	border-color: transparent;
+	border-radius: 20px 20px 20px 20px;
+}
+
+@media only screen and (max-width: 800px) {
+    .statusAtendimentosViewPaciente{
+		font-size: 1em;
+    }
+    .topoMenu{
+		padding-top: 30px;
+		font-size: 9px;
+		height: 90px;
+    }
+	.ibox-content{
+        padding-bottom: 50px;
+        height: 68vh;
+    }
+}
+@media only screen and (max-width: 420px) {
+    .topoMenu{
+		padding-top: 20px;
+		height: 60px;
+		font-size: 9px;
+    }
+    .page-heading{
+        padding-bottom: 70px;
+    }
+}

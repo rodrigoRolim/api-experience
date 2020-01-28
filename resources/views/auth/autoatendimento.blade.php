@@ -12,38 +12,55 @@
 
 @section('content')
 <body class="animated fadeInDown gray-bg">
-    <div class="animated fadeInDown" style="padding:0px !important">
-        <div class="row">
+    <div class="container animated fadeInDown">
+        <div class="container-auto">
             @if ($keyboard == 0)
-                <div id="outdiv" style="margin:0 auto;"></div>
-                <div class="centralizar" id="result"></div>                    
-                <div class="centralizar">
-                    @if (count($errors) == 1)
-                        <div class="alert alert-danger alert-dismissable">
-                            @foreach ($errors->all() as $error)
-                                {{ $error }}
-                            @endforeach
-                        </div>
-                    @endif
-                    <h5>Posicione o QR Code em frente a Câmera</h5>
-                    <h5>Não está conseguindo fazer o login?</h5>
-                    <a class="btn btn-primary" href="{{url('/')}}/auth/autoatendimento/1">Pressione aqui</a>
+                <div class="container-info info-logo">
+                    <h2>
+                        <a id="linkSobre" href="{{url('/')}}/sobre">
+                            <span class="text-navy">{!! Html::image(config('system.clienteLogo'), 'logo_exp', array('title' => 'eXperience - codemed', 'src'=>'experience/sobre', 'style'=>'height: 90px;')) !!}</span>
+                            {!!config('system.loginText.subTitle')!!}
+                        </a>
+                    </h2>
+                    <div class="versions">
+                        <small>experience: {!!config('system.versao')!!}</small>
+                        <small id="version-ds"></small>
+                    </div>
                 </div>
-                <canvas id="qr-canvas" width="320" height="340"></canvas>
-
-                <div class="text-center" style="padding-top:20px"><br>
+                <!-- <div class="container-info">
                     <a href="http://www.codemed.com.br" target="_new">
                         {!! Html::image(config('system.eXperienceLogoHorizontal'), 'logo_exp', array('title' => 'Experience', 'height' => 45)) !!}
                     </a>
+                    <h5>Posicione o QR Code em frente a Câmera</h5>
+                    <h5>Não está conseguindo fazer o login?</h5>
+                    <a class="btn btn-primary col-xs-12" href="{{url('/')}}/auth/">Pressione aqui</a>
+                </div> -->
+                <div class="container-webcam">
+                    <div class="scan-animated"></div>
+                    <div class="centralizar">
+                        @if (count($errors) == 1)
+                            <div class="alert alert-danger alert-dismissable">
+                                @foreach ($errors->all() as $error)
+                                    {{ $error }}
+                                @endforeach
+                            </div>
+                        @endif
+                        
+                        
+                    </div>
+                    <div id="outdiv"></div>
+                    <div class="" id="result"></div>                    
+                   
+                    <canvas id="qr-canvas"></canvas>
                 </div>
-
+                
                 {!! Form::open(array('url'=>'/auth/autoatendimento','id'=> 'formAutoAtendimento', 'role'=> 'form')) !!}
                 	{!! Form::hidden('id','', array('id'=>'id')) !!}
                 {!! Form::close() !!}
             @endif
-
+        </div>
             @if($keyboard == 1)
-                <div class="loginColumns animated fadeInDown" style="padding-top:0px">
+                <div class="loginColumns animated fadeInDown">
                     <div class="row">
                         <div id="infoExperience" class="col-md-6">
                             <h2>
@@ -80,14 +97,13 @@
                     </div>
                 </div>
                 <div class="row col-md-offset-3">
-                    @if(config('system.acessoAutoAtendimentoTeclado') == TRUE)
+                    @if(config('system.acessoAutoAtendimentoTeclado'))
                         <div id="areaTeclado" style="margin-top:30px;">
                             @include('auth.includes.tecladoAutoAtendimento')
                         </div>
                     @endif
                 </div>
             @endif
-        </div>
     </div>
 </body>
 @stop
@@ -97,6 +113,8 @@
     <script src="{{ asset('/assets/js/experience/qrcode/read.js') }}"></script>
     <script type="text/javascript"> 
         $(document).ready(function(){
+
+                  
             var qtdCaracterAtendimento = parseInt("{{config('system.qtdCaracterPosto')}}") + parseInt("{{config('system.qtdCaracterAtend')}}") 
 
             $('#footer').hide();

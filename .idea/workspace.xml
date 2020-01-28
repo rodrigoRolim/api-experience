@@ -90,6 +90,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/resources/views/auth/includes/formLoginMedico.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/auth/includes/formLoginAutoAtendimento.blade.php" />
         <option value="$PROJECT_DIR$/config/system.php" />
         <option value="$PROJECT_DIR$/resources/views/layouts/layoutPadrao.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/layouts/layoutMedico.blade.php" />

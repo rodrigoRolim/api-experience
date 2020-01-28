@@ -15,7 +15,8 @@
         "predis/predis": "^1.1",
         "php-unoconv/php-unoconv": "~0.2",
         "ipunkt/laravel-analytics": "^1.3",
-        "tymon/jwt-auth": "0.5.*"
+        "tymon/jwt-auth": "0.5.*",
+        "twbs/bootstrap": "4.1.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

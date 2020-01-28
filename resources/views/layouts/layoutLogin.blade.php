@@ -29,17 +29,19 @@
 	<div id="wraper">
 		<div id="header">
 			<header>
-				<nav class="navbar navbar-static-top headLogin hidden-xs" role="navigation" style="margin-bottom: 0">
-					{!! Html::image(config('system.eXperienceLogoHorizontal'), 'logo_lab', array('title' => 'logo')) !!}
-				</nav>
-				<nav class="navbar navbar-static-top headLogin hidden-md hidden-lg" role="navigation" style="margin-bottom: 0">
-					{!! Html::image(config('system.clienteLogo'), 'logo_lab', array('title' => 'logo')) !!}
+				<nav class="navbar navbar-static-top headLogin" role="navigation" style="margin-bottom: 0">
+					<span>
+						<a href="{{url()}}/sobre" target="_blank">
+							{!! Html::image(config('system.eXperienceLogoHorizontal'), 'logo_lab', array('title' => 'logo', 'class'=>'hidden-xs', 'style' => 'height: 25px; margin-left: 20px')) !!}
+							{!! Html::image(config('system.experienceLogo'), 'logo_exp', array('title' => 'eXperience - codemed', 'id' => 'logoRodape', 'class'=>'hidden-sm hidden-md hidden-lg', 'style'=>'margin-right:20px;margin-top:4px;')) !!}
+						</a>
+					</span>
 				</nav>
 			</header>
 		</div>
 		<div id="body">
 			<div id="main" role="main">
-				<div id="content" class="container">
+				<div id="content" class="container-login">
 					@yield('content')
 				</div>
 			</div>
@@ -50,7 +52,12 @@
 		<script src="{{ asset('/assets/js/plugins/jasny/jasny-bootstrap.min.js') }}"></script>
 		<script src="{{ asset('/assets/js/plugins/datapicker/bootstrap-datepicker.js') }}"></script>
 		<script src="{{ asset('/assets/js/plugins/iCheck/icheck.min.js') }}"></script>
-
+		<script type="text/javascript">
+			$.getJSON("{{config('system.datasnap')}}", function (data) {
+				var version = data.result[0].Value
+				$('#version-ds').text('datasnap: '+version)
+        	})
+		</script>
 		@section('script')
 
 		@show

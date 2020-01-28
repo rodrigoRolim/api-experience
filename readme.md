@@ -48,7 +48,7 @@ Criando o virtual host
                 </Directory>
         </VirtualHost>
 
-Desenvolvedores
+Desenvolvedores Otários
 -------------
 * ** Bruno Araujo **
 * ** Vitor **

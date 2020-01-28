@@ -1,21 +1,42 @@
 var stype=0;
 var gUM=false;
-
-var vidhtml = '<video id="v" autoplay></video>';
+var localstream
+var vidhtml = '<h5>Posicione o QR Code em frente a Câmera</h5><video id="v" autoplay></video>';
 
 function isCanvasSupported(){
   var elem = document.createElement('canvas');
   return !!(elem.getContext && elem.getContext('2d'));
 }
 function success(stream) {
+    localstream = stream
     let video = document.getElementById('v');
     video.srcObject = stream; //window.URL.createObjectURL(stream);
-    video.play();
- 
+    on_camera()
+}
+function on_camera() {
+    document.getElementById('v').srcObject = localstream
+    document.getElementById('v').play();
     gUM=true;
     setTimeout(captureToCanvas, 500);
 }
+function off_camera() {
+    let play = document.getElementById('v').play()
+    let stream = document.getElementById('v').srcObject;
+    let tracks = stream.getTracks();
+    if (play !== undefined) {
+        play.then(_=> {
+            tracks.forEach(function (track) {
+                track.stop();
+            })
+            document.getElementById('v').srcObject = null
+        })
+        .catch((err) => {
+            console.log(err)
+        })
         
+    }
+   
+}        
 function error(error) {
     gUM=false;
     return;
@@ -42,12 +63,7 @@ function read(text)
 
 function setwebcam()
 {
-    document.getElementById("result").innerHTML=" Lendo QR Code <span>.</span><span>.</span><span>.</span> ";
-    if(stype==1)
-    {
-        setTimeout(captureToCanvas, 500);    
-        return;
-    }
+
     var n=navigator;
     document.getElementById("outdiv").innerHTML = vidhtml;
     v=document.getElementById("v");
@@ -100,7 +116,7 @@ function load()
 {
     if(isCanvasSupported() && window.File && window.FileReader)
     {
-        initCanvas(800, 600);
+        initCanvas(500, 500);
         qrcode.callback = read;
         setwebcam();
     }
@@ -112,3 +128,11 @@ function load()
         '<p id="mp1">try <a href="http://www.mozilla.com/firefox"><img src="firefox.png"/></a> or <a href="http://chrome.google.com"><img src="chrome_logo.gif"/></a> or <a href="http://www.opera.com"><img src="Opera-logo.png"/></a></p>';
     }
 }
+function init (hasVideo) {
+    if (hasVideo) {
+        on_camera();
+    } else {
+        load();
+    }
+}
+// 1. load camera

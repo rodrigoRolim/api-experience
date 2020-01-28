@@ -7,16 +7,17 @@
 @stop
 
 @section('infoHead')
-    <div class="media-body">        
-        <button data-toggle="dropdown" class="btn btn-usuario dropdown-toggle boxLogin">
-            <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span> <span class="caret"></span><br>
-        </button>         
-        <ul class="dropdown-menu pull-right itensInfoUser">
-            <li class="item imprimirTimbrado"><input id="checkTimbrado" type="checkbox"></i>&nbsp; Imprimir Cabeçalho</li>
-            <li style="border-bottom:1px solid #efefef; margin-top:8px"></li>          
-            <li class="item"><a href="{{url()}}/auth/logout"><i class="fa fa-sign-out"></i> Sair</a></li>
-        </ul>
-    </div>    
+
+<div class="infoUser">
+    <button data-toggle="dropdown" class="btn btn-usuario dropdown-toggle boxLogin">
+        <span class="font-bold"><strong>{{Auth::user()['nome']}}</strong></span> <span class="caret"></span><br>
+    </button>         
+    <ul class="dropdown-menu pull-right itensInfoUser">
+        <li class="item imprimirTimbrado"><input id="checkTimbrado" type="checkbox"></i>&nbsp; Imprimir Cabeçalho</li>
+        <li style="border-bottom:1px solid #efefef; margin-top:8px"></li>          
+        <li class="item"><a href="{{url()}}/auth/logout"><i class="fa fa-sign-out"></i> Sair</a></li>
+    </ul>
+</div>  
 @stop
 
 @section('content')
@@ -34,7 +35,7 @@
                     <span class="input-group-addon">até</span>
                     <input type="text" class="input-sm form-control datepicker" id="dataFim" name="dataFim">                    
                 </div>
-            </div>       
+            </div>
             <div class="col-md-2">
                 <label class="textoBranco" name="acomodacao">Acomodação</label>
                 {!! Form::select('acomodacao', [], '', array('class' => 'form-control m-b', 'id'=>'acomodacao')) !!}
@@ -255,7 +256,7 @@
                     var dataResultPostoRealizante = async.run('{{url("/")}}/posto/selectpostorealizante',postPostoRealizante,'POST');
                     
                     dataResultPostoRealizante.then(function(result){
-                        console.log(result);
+ 
                         var selectPostoRealizante = $('#postoRealizante');
                         selectPostoRealizante.empty();
 
@@ -278,7 +279,6 @@
 
             //Evento do disparo do botão de filtro
             $('#btnFiltrar').click(function(e){
-                console.log('teste');
 
                 Cookies.set('dataInicio', $('#dataInicio').val());
                 Cookies.set('dataFim', $('#dataFim').val());

@@ -14,18 +14,23 @@
 @section('content')
 
 <body class="animated fadeInDown gray-bg">
-    <div class="loginColumns animated fadeInDown">
-        <div class="row">
-            <div class="col-md-5 hidden-xs">
-                <h2 style="padding-top:8vh">
+    <div class="animated fadeInDown">
+        <div class="container-login">
+            <div class="info-logo container-info">
+                
+                <h2>
                     <a id="linkSobre" href="{{url('/')}}/sobre">
-                        <span class="text-navy">{!! Html::image(config('system.clienteLogo'), 'logo_exp', array('title' => 'eXperience - codemed', 'src'=>'experience/sobre', 'style'=>'height: 50px;')) !!}</span>
+                        <span class="text-navy">{!! Html::image(config('system.clienteLogo'), 'logo_exp', array('title' => 'eXperience - codemed', 'src'=>'experience/sobre', 'style'=>'height: 90px;')) !!}</span>
                         {!!config('system.loginText.subTitle')!!}
                     </a>
                 </h2>
-                {!!config('system.loginText.description')!!}
+                <div class="versions">
+                    <small>experience: {!!config('system.versao')!!}</small>
+                    <small id="version-ds"></small>
+                </div>
+               <!--  {!!config('system.loginText.description')!!} -->
             </div>
-            <div class="col-md-7">
+            <div class="tabs-body">
                 @if (count($errors) == 1)
                     <div class="alert alert-danger alert-dismissable">
                         @foreach ($errors->all() as $error)
@@ -46,6 +51,9 @@
                     @endif    
                     @if(config('system.acessoParceiro'))
                         <li class=""><a id="btnParceiro" data-toggle="tab" href="#tabLoginParceiro" aria-expanded="false">Parceiro</a></li>
+                    @endif
+                    @if(config('system.acessoAutoAtendimento'))
+                        <li class=""><a id="btnAuto" href="#tabLoginQRcode" data-toggle="tab" aria-expandend="false">Acesso QR Code</a></li>
                     @endif                   
                     </ul>
                     <div class="tab-content">
@@ -77,6 +85,13 @@
                                 </div>
                             </div>
                         @endif
+                        @if(config('system.acessoAutoAtendimento'))
+                            <div id="tabLoginQRcode" class="tab-pane hidden">
+                                <div class="panel-body">
+                                    @include('auth.includes.formLoginAutoAtendimento')
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -85,55 +100,87 @@
         @include('auth.includes.modalAjudaPaciente')
         
     </div>
+   <!--  <footer id="footer-login" class="hidden-lg hidden-md" style="background-color: white">
+        <div class="pull-right">
+            <a href="{{url()}}/sobre" target="_blank">
+                {!! Html::image(config('system.experienceLogo'), 'logo_exp', array('title' => 'eXperience - codemed','id'=>'logoRodape','style'=>'margin-right:20px;margin-top:4px;')) !!}
+            </a>        
+        </div>
+    </footer> -->
 </body>
-<footer id="footer-login" class="hidden-lg hidden-md" style="background-color: white">
-    <div class="pull-right">
-        <a href="{{url()}}/sobre" target="_blank">
-            {!! Html::image(config('system.experienceLogo'), 'logo_exp', array('title' => 'eXperience - codemed','id'=>'logoRodape','style'=>'margin-right:20px;margin-top:4px;')) !!}
-        </a>
-    </div>
-</footer>
+
 @stop
 
 @section('script')
 <script type="text/javascript"> 
     $(document).ready(function () {
+ 
         $('.footer').hide();
-        $('li').on('click', function() {
-            $('.nav').on('shown.bs.tab', function (e) {
-                var tabAtiva = $(e.target).text();
-                switch(tabAtiva) {
-                    case "Paciente":
-                        $('#atendimento').focus();
-                        $('#tabLoginPaciente').removeClass('hidden');
-                        $('#tabLoginPosto').addClass('hidden');
-                        $('#tabLoginMedico').addClass('hidden');
-                        $('#tabLoginParceiro').addClass('hidden');
-                        break;
-                    case "Médico":
-                        $('#cr').focus();
-                        $('#tabLoginMedico').removeClass('hidden');
-                        $('#tabLoginPosto').addClass('hidden');
-                        $('#tabLoginPaciente').addClass('hidden');
-                        $('#tabLoginParceiro').addClass('hidden');
-                        break;
-                    case "Posto":
-                        $('#posto').focus();
-                        $('#tabLoginPosto').removeClass('hidden');
-                        $('#tabLoginPaciente').addClass('hidden');
-                        $('#tabLoginMedico').addClass('hidden');
-                        $('#tabLoginParceiro').addClass('hidden');
-                        break;
-                    case "Parceiro":
-                        $('#codparceiro').focus();
-                        $('#tabLoginParceiro').removeClass('hidden');
-                        $('#tabLoginPosto').addClass('hidden');
-                        $('#tabLoginPaciente').addClass('hidden');
-                        $('#tabLoginMedico').addClass('hidden');
-                        break;
-                }        
-            });
+
+        $('.nav').on('shown.bs.tab', function (e) {
+            //debugger;
+            var tabAtiva = $(e.target).text();
+            switch(tabAtiva) {
+                case "Paciente":
+                    $('#atendimento').focus();
+                    $('#tabLoginPaciente').removeClass('hidden');
+                    $('#tabLoginPosto').addClass('hidden');
+                    $('#tabLoginMedico').addClass('hidden');
+                    $('#tabLoginParceiro').addClass('hidden');
+                    $('#tabLoginQRcode').addClass('hidden');
+                   
+                    if ($('#v').length == 1 && document.getElementById('v').srcObject !== null) {
+                        off_camera()
+                    }
+                    break;
+                case "Médico":
+                    $('#cr').focus();
+                    $('#tabLoginMedico').removeClass('hidden');
+                    $('#tabLoginPosto').addClass('hidden');
+                    $('#tabLoginPaciente').addClass('hidden');
+                    $('#tabLoginParceiro').addClass('hidden');
+                    $('#tabLoginQRcode').addClass('hidden');
+          
+                    if ($('#v').length == 1 && document.getElementById('v').srcObject !== null) {
+                        off_camera()
+                    }
+                    break;
+                case "Posto":
+                    $('#posto').focus();
+                    $('#tabLoginPosto').removeClass('hidden');
+                    $('#tabLoginPaciente').addClass('hidden');
+                    $('#tabLoginMedico').addClass('hidden');
+                    $('#tabLoginParceiro').addClass('hidden');
+                    $('#tabLoginQRcode').addClass('hidden');
+                   
+                    if ($('#v').length == 1 && document.getElementById('v').srcObject !== null) {
+                        off_camera()
+                    }
+                    break;
+                case "Parceiro":
+                    $('#codparceiro').focus();
+                    $('#tabLoginParceiro').removeClass('hidden');
+                    $('#tabLoginPosto').addClass('hidden');
+                    $('#tabLoginPaciente').addClass('hidden');
+                    $('#tabLoginMedico').addClass('hidden');
+                    $('#tabLoginQRcode').addClass('hidden');
+            
+                    if ($('#v').length == 1 && document.getElementById('v').srcObject !== null) {
+                        off_camera()
+                    }
+                    break;
+                case "Acesso QR Code":
+                    $('#QRcode').focus();
+                    $('#tabLoginQRcode').removeClass('hidden');
+                    $('#tabLoginParceiro').addClass('hidden');
+                    $('#tabLoginPosto').addClass('hidden');
+                    $('#tabLoginPaciente').addClass('hidden');
+                    $('#tabLoginMedico').addClass('hidden');
+                    init(!!!$("#v"))
+                    break;
+            }        
         });
+
 
         $('.nav-tabs li:first').addClass('active');
         $('.tab-content > div:first-child').addClass('active');

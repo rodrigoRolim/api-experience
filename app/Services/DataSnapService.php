@@ -27,12 +27,15 @@ class DataSnapService
 		$correlativos = implode(",", $correls['correl']);
 		
 		$url = config('system.PDFUrl').$posto.'/'.$atendimento.'/'.$pure.'/'.$correlativos.'/'.$cabecalho;
-
+		//print_r($url);
 		try {
 			$result = file_get_contents($url);
+			//print_r($result);
+			//file_put_contents("porra.pdf", $resultFile);
 			$result = json_decode($result);
-
+			//file_put_contents($result->result[0]->Value, $resultFile);
 			if($result->result[0]->Action != 'actERROR'){
+				
 	        	return config('system.PDFUrlTemp').$result->result[0]->Value;
 			}
 		} catch (\Exception $e) {

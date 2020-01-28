@@ -190,7 +190,6 @@
                         }); 
 
                         dataExameResult.then(function(exame){
-                            console.log(exame);
                             if(exame.data != 'undefined'){
                                 msgAmostra = "{!!config('system.messages.amostras.descricao')!!}";
                                 render = exames.renderDetalheExame(exame.data,msgAmostra);

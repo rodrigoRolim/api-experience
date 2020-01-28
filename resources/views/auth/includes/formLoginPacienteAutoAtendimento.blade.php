@@ -21,6 +21,7 @@
 			@if ($errors->has('password')) <p class="help-block">{{ $errors->first('password') }}</p> @endif
 	    </div>
 	</div>
+	
     <button type="submit" class="btn btn-primary block full-width m-b">Acessar</button>
 {!! Form::close() !!}
 
