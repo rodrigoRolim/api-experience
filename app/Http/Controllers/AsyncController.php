@@ -9,7 +9,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\AmostraRepository;
+use App\Repositories\AmostrasRepository;
 use Carbon\Carbon;
 
 use Illuminate\Contracts\Auth\Guard;
@@ -20,21 +20,21 @@ use Auth;
 class AsyncController extends Controller {
 
     protected $auth;    
-    protected $amostra;
+    protected $amostras;
 
     /**
      * Referenciada os repositorio/model utilizados no controlelr
      *
      * @param Guard $auth
-     * @param AmostraRepository $amostra
+     * @param AmostrasRepository $amostra
      */
     public function __construct(
         Guard $auth,        
-        AmostraRepository $amostra
+        AmostrasRepository $amostras
     )
     {
         $this->auth = $auth;        
-        $this->amostra = $amostra;
+        $this->amostras = $amostras;
     }
 
     /**
@@ -42,7 +42,7 @@ class AsyncController extends Controller {
     *
     */
     public function postSelectamostras(){
-        $idPosto = $this->auth->user()['posto'];
+        $idPosto = 0; //$this->auth->user()['posto'];
         $amostras = $this->amostras->getAmostras($idPosto,Request::get('atendimento'),Request::get('correl'));
     
         return response()->json(array(
