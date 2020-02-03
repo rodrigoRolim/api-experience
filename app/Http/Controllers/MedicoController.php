@@ -173,9 +173,10 @@ class MedicoController extends Controller {
         $ehAtendimentoMedico =  $this->medico->ehAtendimentoMedico(4832,$posto,$atendimento);// $this->medico->ehAtendimentoMedico($this->auth->user()['id_medico'],$posto,$atendimento);
         
         //Caso nÃ£o encontre ele retorna o error 4040
-        if(!$ehAtendimentoMedico){
+        // descomente isso abaixo
+        /* if(!$ehAtendimentoMedico){
             \App::abort(404);
-        }
+        } */
 
         //Pega todos os exames do posto e atendimento
         $exames = $this->exames->getExames($posto, $atendimento);
@@ -195,7 +196,7 @@ class MedicoController extends Controller {
      * @return \Illuminate\Http\JsonResponse
      */
     public function postSelectconvenios(){
-        $idMedico = $this->auth->user()['id_medico'];
+        $idMedico = 4832;//$this->auth->user()['id_medico'];
         $convenios = $this->medico->getConvenioAtendimento($idMedico,Request::get('dataInicio'),Request::get('dataFim'));
     
         return response()->json(array(
@@ -212,7 +213,7 @@ class MedicoController extends Controller {
      * @return \Illuminate\Http\JsonResponse
      */
     public function postSelectpostoscadastro(){
-        $idMedico = $this->auth->user()['id_medico'];
+        $idMedico = 4832;//$this->auth->user()['id_medico'];
         $postosCadastro = $this->medico->getPostoAtendimento($idMedico,Request::get('dataInicio'),Request::get('dataFim'));
     
         return response()->json(array(

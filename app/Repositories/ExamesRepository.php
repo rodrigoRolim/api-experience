@@ -33,6 +33,7 @@ class ExamesRepository extends BaseRepository
      * @return mixed
      */
     public function getExames($posto,$atendimento,$postoRealizante = null){
+
         if(!is_null($postoRealizante)){
             $exames = $this->findWhere(['posto' => $posto, 'atendimento' => $atendimento,'posto_rea' => $postoRealizante])->toArray();
         }else{
@@ -88,12 +89,12 @@ class ExamesRepository extends BaseRepository
                     break;
             }
             // tipo_procedimento não existe na view 
-            // if($exame['nome_procedimento'] != 'L'){
-	    	//     $exames[$key]['class'] = 'semLaudo';
-            //     $exames[$key]['corStatus'] = '';
-            //     $exames[$key]['msg'] = '';
-            //     $exames[$key]['view'] = false;
-	        // }
+            if($exame['nome_procedimento'] != 'L'){
+	    	     $exames[$key]['class'] = 'semLaudo';
+                 $exames[$key]['corStatus'] = '';
+                 $exames[$key]['msg'] = '';
+                 $exames[$key]['view'] = false;
+	        }
 
         }
 

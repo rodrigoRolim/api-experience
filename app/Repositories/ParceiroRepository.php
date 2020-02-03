@@ -322,7 +322,7 @@ class ParceiroRepository extends BaseRepository
                 AND a.atendimento = :atendimento';
 
         $data = DB::select(DB::raw($sql),['idPosto'=>$idPosto,'atendimento'=>$atendimento]);
- 
+
         return (bool) sizeof($data);
     }
 }

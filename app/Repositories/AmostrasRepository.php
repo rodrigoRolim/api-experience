@@ -10,7 +10,7 @@
 namespace App\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
-
+use DB;
 class AmostrasRepository extends BaseRepository
 {
     /**

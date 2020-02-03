@@ -55,9 +55,14 @@ class PacienteController extends Controller {
     public function getIndex()
     {
         //Pego da sessao o tipo de acesso do paciente
-        $tipoLoginPaciente = $this->auth->user()['tipoLoginPaciente'];
+        $tipoLoginPaciente = 'ID';//$this->auth->user()['tipoLoginPaciente'];
         //Envio os dados de autenticação do usuario para carregar todos os atendimentos
-        $atendimentos = $this->atendimento->atendimentos($this->auth->user());
+        $user_fixme = [
+            'username' => '00/010165',
+            'tipoLoginPaciente' => 'ID',
+            'tipoAcesso' => 'paciente'    
+        ]; 
+        $atendimentos = $this->atendimento->atendimentos($user_fixme/* $this->auth->user() */);
        
         $mobile = BrowserDetect::isMobile() || BrowserDetect::isTablet();
 
@@ -77,12 +82,12 @@ class PacienteController extends Controller {
      * @return \Illuminate\Http\JsonResponse
      */
     public function getExamesatendimento($posto,$atendimento){
-        //Verifico se o atendmiento enviado é do paciente, enviado os dados de acesso, posto e atendmiento
-        $ehCliente = $this->atendimento->ehCliente($this->auth,$posto,$atendimento);
-
+        //Verifico se o atendmiento enviado é do paciente, enviado os dados de acesso, posto e atendimento
+        //$ehCliente = $this->atendimento->ehCliente($this->auth,$posto,$atendimento);
+/* 
         if(!$ehCliente){
             \App::abort(404);
-        }
+        } */
         //Envio para a variavel todo os exames do atendimento
         $exames = $this->exames->getExames($posto, $atendimento);   
 
@@ -103,11 +108,11 @@ class PacienteController extends Controller {
         //Verifica se o usuario tem saldo devedor
         $saldoDevedor = $this->atendimento->getSaldoDevedor($posto,$atendimento);
 
-        if($saldoDevedor){
+       /*  if($saldoDevedor){
             return response()->json(array(
                 'message' => 'Existe pendências'
             ), 203);
-        }
+        } */
         //Carrega o resultado do exame solicitado
         $exames = $this->exames->getDetalheAtendimentoExameCorrel($posto, $atendimento,$correl);
 

@@ -107,7 +107,7 @@ class ParceiroController extends Controller {
     *
     */
     public function postSelectpostorealizante(){
-        $idPosto = $this->auth->user()['posto'];
+        $idPosto = 5; //$this->auth->user()['posto'];
 
         $parceiroRealizantes = $this->parceiro->getPostosRealizantes($idPosto,Request::get('dataInicio'),Request::get('dataFim'));
     
@@ -125,7 +125,7 @@ class ParceiroController extends Controller {
         //Pega os dados enviados do formulario do filtro
         $requestData = Request::all();
         //Pega o ID do posto na sessão
-        $idPosto = $this->auth->user()['posto'];
+        $idPosto = 5;//$this->auth->user()['posto'];
 
         //Verifica se dataInicio e dataFim seja diferente de nulo
         if($requestData['dataInicio'] != null && $requestData['dataFim'] != null){
@@ -141,7 +141,7 @@ class ParceiroController extends Controller {
             //Retorna em Json
             return response()->json(array(
                 'message' => 'Recebido com sucesso.',
-                'data' => $result,
+                'data' => $result
             ), 200);
         }
     }
@@ -155,21 +155,21 @@ class ParceiroController extends Controller {
      */
     public function getPaciente($registro,$parceiro,$atendimento){
         //Faz a descriptografia do token enviado via get
-        $registro = base64_decode(strtr($registro, '-_', '+/'));
-        $registro = (int) trim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, config('system.key'),$registro, MCRYPT_MODE_ECB, mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB), MCRYPT_RAND)));
+        //$registro = base64_decode(strtr($registro, '-_', '+/'));
+        //$registro = (int) trim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, config('system.key'),$registro, MCRYPT_MODE_ECB, mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB), MCRYPT_RAND)));
 
 
         $user = Auth::user();
 
         //Só deixo acessar os pacientes do posto
-        if($user['posto'] != $parceiro){
+        /* if($user['posto'] != $parceiro){
             \App::abort(404);
-        }
-
+        }*/
+ 
         //Lista todos os atendimentos do paciente para aquele posto
         //$atendimento = $this->parceiro->getAtendimentosPacienteByPosto($registro,$parceiro,$atendimento);
         $atendimento = $this->parceiro->getAtendimentosPacienteByPosto($registro,$parceiro,$atendimento);
-
+    
         if(!sizeof($atendimento)){
             \App::abort(404);
         }
@@ -186,18 +186,18 @@ class ParceiroController extends Controller {
      */
     public function getExamesatendimento($parceiro,$atendimento,$parceiroRealizante = null){
         //Verifica se o atendmiento é do posto
-        // $ehAtendimentoPosto = $this->parceiro->ehAtendimentoPosto($this->auth->user()['posto'],$atendimento);
+        $ehAtendimentoPosto = $this->parceiro->ehAtendimentoPosto(5/* $this->auth->user()['posto'] */,$atendimento);
 
-        // if(!$ehAtendimentoPosto){
-        //     \App::abort(404);
-        // }
+        if(!$ehAtendimentoPosto){
+            \App::abort(404);
+        }
 
         $user = Auth::user();
 
         //Só deixo acessar os pacientes do posto
-        if($user['posto'] != $parceiro){
+       /*  if($user['posto'] != $parceiro){
             \App::abort(404);
-        }
+        } */
         
         //Lista os exames do atendimento
         $exames = $this->exames->getExames($parceiro, $atendimento,$parceiroRealizante);
@@ -219,9 +219,9 @@ class ParceiroController extends Controller {
         $user = Auth::user();
 
         //Só deixo acessar os pacientes do posto
-        if($user['posto'] != $parceiro){
+        /* if($user['posto'] != $parceiro){
             \App::abort(404);
-        }
+        } */
 
         //Verifica se o atendimento é do posto
         $ehAtendimentoPosto = $this->parceiro->ehAtendimentoPosto($parceiro,$atendimento);
@@ -270,9 +270,9 @@ class ParceiroController extends Controller {
         $user = Auth::user();
 
         //Só deixo acessar os pacientes do posto
-        if($user['posto'] != $parceiro){
-            \App::abort(404);
-        }
+            /* if($user['posto'] != $parceiro){
+                \App::abort(404);
+            } */
 
         // $ehAtendimentoPosto = $this->parceiro->ehAtendimentoPosto($parceiro,$atendimento);
 
