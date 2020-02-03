@@ -53,7 +53,7 @@
                         <li class=""><a id="btnParceiro" data-toggle="tab" href="#tabLoginParceiro" aria-expanded="false">Parceiro</a></li>
                     @endif
                     @if(config('system.acessoAutoAtendimento'))
-                        <li class=""><a id="btnAuto" href="#tabLoginQRcode" data-toggle="tab" aria-expandend="false">Acesso QR Code</a></li>
+                        <li class=""><a id="btnAuto" href="#tabLoginQRcode" data-toggle="tab" aria-expandend="false">QR Code</a></li>
                     @endif                   
                     </ul>
                     <div class="tab-content">
@@ -118,7 +118,7 @@
         $('.footer').hide();
 
         $('.nav').on('shown.bs.tab', function (e) {
-            //debugger;
+
             var tabAtiva = $(e.target).text();
             switch(tabAtiva) {
                 case "Paciente":
@@ -169,7 +169,7 @@
                         off_camera()
                     }
                     break;
-                case "Acesso QR Code":
+                case "QR Code":
                     $('#QRcode').focus();
                     $('#tabLoginQRcode').removeClass('hidden');
                     $('#tabLoginParceiro').addClass('hidden');
