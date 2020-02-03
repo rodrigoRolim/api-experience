@@ -3,7 +3,7 @@ function ExamesClass(){}
 ExamesClass.prototype.get = function(url,tipoAcesso,posto,atendimento){
     var objResult = Object();
     var async = new AsyncClass();
-    
+    // tipoAcesso = "medico"
     return async.run(url+"/"+tipoAcesso+"/examesatendimento/"+posto+"/"+atendimento);
 }
 
@@ -84,6 +84,7 @@ ExamesClass.prototype.render = function(result,saldoDevedor,dataMsg, tipo = 'DEF
 
 ExamesClass.prototype.detalheExame = function(url,tipoAcesso,posto,atendimento,corel){
     var async = new AsyncClass();
+    //tipoAcesso = 'medico'
     return async.run(url+"/"+tipoAcesso+"/detalheatendimentoexamecorrel/"+posto+"/"+atendimento+"/"+corel);
 }
 

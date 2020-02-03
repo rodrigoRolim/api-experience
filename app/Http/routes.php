@@ -71,15 +71,15 @@ Route::get('/', function () {
 Route::get('/sobre', function () {
     return view('layouts.sobre');
 });
-Route::group(['prefix' => '/paciente', 'middleware' => ['auth','ehPaciente','revalidate']], function () {
-    Route::get("", "PacienteController@getIndex");
-    Route::get("/examesatendimento/{posto}/{atendimento}", "PacienteController@getExamesatendimento");
+Route::group(['prefix' => '/paciente', /* 'middleware' => ['auth','ehPaciente','revalidate'] */], function () {
+/**/Route::get("", "PacienteController@getIndex");
+/**/Route::get("/examesatendimento/{posto}/{atendimento}", "PacienteController@getExamesatendimento");
+/**/Route::get("/detalheatendimentoexamecorrel/{parceiro}/{atendimento}/{correl}", "PacienteController@getDetalheatendimentoexamecorrel");
+/**/Route::get("/perfil", "PacienteController@getPerfil");
+/**/Route::post("/alterarsenha", "PacienteController@postAlterarsenha");
     Route::post("/exportarpdf", "PacienteController@postExportarpdf");
-    Route::get("/detalheatendimentoexamecorrel/{parceiro}/{atendimento}/{correl}", "PacienteController@getDetalheatendimentoexamecorrel");
-    Route::get("/perfil", "PacienteController@getPerfil");
-    Route::post("/alterarsenha", "PacienteController@postAlterarsenha");
 });
-Route::group(['prefix' => '/posto', 'middleware' => ['ehPosto','revalidate']], function () {
+Route::group(['prefix' => '/posto', /* 'middleware' => ['ehPosto','revalidate'] */], function () {
 /**/Route::get("", "PostoController@getIndex"); 
 /**/Route::post("/selectpostorealizante", "PostoController@postSelectpostorealizante");
 /**/Route::post("/selectacomodacao", "PostoController@postSelectacomodacao");
@@ -92,11 +92,11 @@ Route::group(['prefix' => '/posto', 'middleware' => ['ehPosto','revalidate']], f
 /**/Route::get("/logs", "PostoController@getLogs");
 });
 Route::group(['prefix' => '/auth'], function () {
-    Route::get("", "AuthController@getIndex");
-    Route::post("/login", "AuthController@postLogin");
-    Route::post("/autoatendimento", "AuthController@postAutoatendimento");
-    Route::get("/autoatendimento", "AuthController@getAutoatendimento");
-    Route::get("/logout", "AuthController@getLogout");
+/**/Route::get("", "AuthController@getIndex");
+/**/Route::post("/login", "AuthController@postLogin");
+/**/Route::post("/autoatendimento", "AuthController@postAutoatendimento");
+/**/Route::get("/autoatendimento", "AuthController@getAutoatendimento");
+/**/Route::get("/logout", "AuthController@getLogout");
 });
 Route::group(['prefix' => '/laudo'], function () {
     Route::get("", "LaudoController@getIndex");
@@ -108,30 +108,30 @@ Route::group(['prefix' => '/manuais'], function () {
 });
 Route::group(['prefix' => '/medico', /* 'middleware' => ['auth','ehMedico','revalidate'] */], function () {
 /**/Route::get("", "MedicoController@getIndex");
-    Route::post("/localizapaciente", "MedicoController@postLocalizapaciente");
+/*a view não existe*/  Route::post("/localizapaciente", "MedicoController@postLocalizapaciente");
 /**/Route::post("/filterclientes", "MedicoController@postFilterclientes");
-    Route::get("/paciente/{registro}", "MedicoController@getPaciente");
+/**/Route::get("/paciente/{registro}", "MedicoController@getPaciente");
 /**/Route::get("/examesatendimento/{posto}/{atendimento}", "MedicoController@getExamesatendimento");
-    Route::post("/selectconvenios", "MedicoController@postSelectconvenios");
-    Route::post("/selectpostoscadastro", "MedicoController@postSelectpostoscadastro");
-    Route::get("/detalheatendimentoexamecorrel/{posto}/{atendimento}/{correl}", "MedicoController@getDetalheatendimentoexamecorrel");
-    Route::post("/exportarpdf", "MedicoController@postExportarpdf");
-    Route::get("/perfil", "MedicoController@getPerfil");
-    Route::post("/alterarsenha", "MedicoController@postAlterarsenha");
+/**/Route::post("/selectconvenios", "MedicoController@postSelectconvenios");
+/**/Route::post("/selectpostoscadastro", "MedicoController@postSelectpostoscadastro");
+/**/Route::get("/detalheatendimentoexamecorrel/{posto}/{atendimento}/{correl}", "MedicoController@getDetalheatendimentoexamecorrel");
+/**/Route::post("/exportarpdf", "MedicoController@postExportarpdf");
+/**/Route::get("/perfil", "MedicoController@getPerfil");
+/**/Route::post("/alterarsenha", "MedicoController@postAlterarsenha");
 });
-Route::group(['prefix' => '/parceiro', 'middleware' => ['ehParceiro','revalidate']], function () {
-    Route::get("", "ParceiroController@getIndex");
+Route::group(['prefix' => '/parceiro', /* 'middleware' => ['ehParceiro','revalidate'] */], function () {
+/**/Route::get("", "ParceiroController@getIndex");
     Route::post("/localizaatendimento", "ParceiroController@postLocalizaatendimento");
-    Route::post("/selectacomodacao", "ParceiroController@postSelectacomodacao");
-    Route::post("/selectpostorealizante", "ParceiroController@postSelectpostorealizante");
-    Route::post("/filteratendimentos", "ParceiroController@postFilteratendimentos");
-    Route::get("/paciente/{registro}/{parceiro}/{atendimento}", "ParceiroController@getPaciente");
-    Route::get("/examesatendimento/{parceiro}/{atendimento}/{parceiroRealizante}", "ParceiroController@getExamesatendimento");
-    Route::get("/detalheatendimentoexamecorrel/{parceiro}/{atendimento}/{correl}", "ParceiroController@getDetalheatendimentoexamecorrel");
-    Route::post("/exportarpdf", "ParceiroController@postExportarpdf");
+/**/Route::post("/selectacomodacao", "ParceiroController@postSelectacomodacao");
+/**/Route::post("/selectpostorealizante", "ParceiroController@postSelectpostorealizante");
+/**/Route::post("/filteratendimentos", "ParceiroController@postFilteratendimentos");
+/**/Route::get("/paciente/{registro}/{parceiro}/{atendimento}", "ParceiroController@getPaciente");
+/**/Route::get("/examesatendimento/{parceiro}/{atendimento}/{parceiroRealizante?}", "ParceiroController@getExamesatendimento");
+/**/Route::get("/detalheatendimentoexamecorrel/{parceiro}/{atendimento}/{correl}", "ParceiroController@getDetalheatendimentoexamecorrel");
+/**/Route::post("/exportarpdf", "ParceiroController@postExportarpdf");
 });
-Route::group(['prefix' => 'amostras', 'middleware' => ['ehParceiro','revalidate']], function () {
-    Route::post("", "AsyncController@postSelectamostras");
+Route::group(['prefix' => '/amostras', /* 'middleware' => ['ehParceiro','revalidate'] */], function () {
+/**/Route::post("", "AsyncController@postSelectamostras");
 });
 
 Route::get("impressao",function () {
