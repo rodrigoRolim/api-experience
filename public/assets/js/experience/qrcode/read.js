@@ -10,12 +10,11 @@ function isCanvasSupported(){
 function success(stream) {
     localstream = stream
     let video = document.getElementById('v');
-    video.srcObject = stream; //window.URL.createObjectURL(stream);
-    on_camera()
+    on_camera(video)
 }
-function on_camera() {
-    document.getElementById('v').srcObject = localstream
-    document.getElementById('v').play();
+function on_camera(video) {
+    video.srcObject = localstream
+    video.play();
     gUM=true;
     setTimeout(captureToCanvas, 500);
 }
