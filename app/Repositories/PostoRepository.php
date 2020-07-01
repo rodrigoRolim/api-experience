@@ -14,7 +14,7 @@ use Prettus\Repository\Eloquent\BaseRepository;
 use Experience\Util\DataNascimento;
 use Experience\Util\Formatar;
 use DB;
-
+use Crypt;
 class PostoRepository extends BaseRepository
 {
     /**
@@ -95,15 +95,15 @@ class PostoRepository extends BaseRepository
      * @return array
      */    
     private function renderCliente($clientes){
+
       $dtNow = Carbon::now();
-      //$cipher = "aes-256-cbc";
       for($i=0;$i<sizeof($clientes);$i++){
+
           $clientes[$i]->idade = DataNascimento::idade($clientes[$i]->data_nas);
-            
-          //$ivlen = openssl_cipher_iv_length($cipher);
-          //$iv = openssl_random_pseudo_bytes($ivlen);
-          //$key = openssl_encrypt($clientes[$i]->registro, $cipher, config('system.key'), 0, $iv);
-          //$id = strtr(rtrim(base64_encode($key), '='), '+/', '-_');
+          
+          $key = Crypt::encrypt($clientes[$i]->registro);
+
+          $id = strtr(rtrim(base64_encode($key), '='), '+/', '-_');
           $clientes[$i]->key = $clientes[$i]->registro;
 
           switch ($clientes[$i]->situacao_exames_experience){
@@ -281,7 +281,6 @@ class PostoRepository extends BaseRepository
             ORDER BY data_atd DESC';
 
         $atendimento = DB::select(DB::raw($sql), ['registro' => $registro, 'idPosto' => $idPosto, 'idAtendimento' => $idAtendimento]);
-        print_r($atendimento);
         $atendimento = current($atendimento);
         $atendimento->idade = DataNascimento::idade($atendimento->data_nas);
         $atendimento->data_atd = Formatar::data($atendimento->data_atd,'Y-m-d H:i:s','d/m/Y');

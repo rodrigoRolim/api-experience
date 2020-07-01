@@ -15,7 +15,7 @@ use Experience\Util\DataNascimento;
 use Experience\Util\Formatar;
 use DB;
 use Auth;
-
+use Crypt;
 class ParceiroRepository extends BaseRepository
 {
     /**
@@ -111,16 +111,11 @@ class ParceiroRepository extends BaseRepository
      */    
     private function renderCliente($clientes){
       $dtNow = Carbon::now();
-      //$cipher = "aes-256-cbc";
+
       for($i=0;$i<sizeof($clientes);$i++){
-          $clientes[$i]->idade = DataNascimento::idade($clientes[$i]->data_nas);
-          //$ivlen = openssl_cipher_iv_length($cipher);
-          //$iv = openssl_random_pseudo_bytes($ivlen);
-          //$key = openssl_encrypt($clientes[$i]->registro, $cipher, config('system.key'), 0, $iv);
-          // it is deprecated in php 7
-          //$key = @mcrypt_encrypt(MCRYPT_RIJNDAEL_256, config('system.key'), $clientes[$i]->registro, MCRYPT_MODE_ECB,
-           // @mcrypt_create_iv(@mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB), MCRYPT_RAND));
-          //$id = $key; //strtr(rtrim(base64_encode($key), '='), '+/', '-_');
+        $key = Crypt::encrypt($clientes[$i]->registro);
+
+        $id = strtr(rtrim(base64_encode($key), '='), '+/', '-_');
 
           $clientes[$i]->key = $clientes[$i]->registro;
 

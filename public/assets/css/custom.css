@@ -347,7 +347,38 @@ ul{
 	padding: 8px;
 }
 
-
+.container-auth {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+.container-keyboard {
+	display: none;
+	flex-direction: row;
+	justify-content: center;
+	width: 100%;
+}
+.keyboard {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+}
+.clean-key {
+	width: 122px;
+	height: 55px;
+    padding: 5px;
+}
+.numeric, .alfa, .KeyPadrao, .undo-key {
+    width: 55px;
+    height: 55px;
+    padding: 5px;
+}
+.btn-keyboard {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+}
 /* ========= layoutBaseLeft ======== */
 
 #page-wrapper{
@@ -1133,7 +1164,7 @@ div.row.infoClienteMed{
 	display: none;
 }
 .tabs-body {
-	height: 450px;
+	height: 400px;
 }
 /* rodrigo rolim */
 
@@ -1204,10 +1235,10 @@ header {
 	justify-content: center;
 	margin: 0 auto;
 	width: 97%;
-	margin-top: 38px;
+	margin: 30px 0;
 }
 .tabs-container {
-	width: 420px;
+	width: 400px;
 }
 .container-info .versions {
     font-size: 0.8rem;

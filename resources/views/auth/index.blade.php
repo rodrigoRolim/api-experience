@@ -14,7 +14,7 @@
 @section('content')
 
 <body class="animated fadeInDown gray-bg">
-    <div class="animated fadeInDown">
+    <div class="container-auth animated fadeInDown">
         <div class="container-login">
             <div class="info-logo container-info">
                 
@@ -61,6 +61,7 @@
                             <div id="tabLoginPaciente" class="tab-pane hidden">
                                 <div class="panel-body">
                                    @include('auth.includes.formLoginPaciente')
+                                  
                                 </div>
                             </div>
                         @endif
@@ -95,11 +96,21 @@
                     </div>
                 </div>
             </div>
-        </div>
+            <div class="container-keyboard hidden-xs" id="areaTeclado">
+            @if(config('system.acessoAutoAtendimentoTeclado'))
+             
+                @include('auth.includes.tecladoAutoAtendimento')
 
+            @endif
+            </div>
+            
+           
+        </div>
+        
         @include('auth.includes.modalAjudaPaciente')
         
     </div>
+    
    <!--  <footer id="footer-login" class="hidden-lg hidden-md" style="background-color: white">
         <div class="pull-right">
             <a href="{{url()}}/sobre" target="_blank">
@@ -116,7 +127,15 @@
     $(document).ready(function () {
  
         $('.footer').hide();
+        $('#active-keyboard').on('click', function (e) {
 
+            if ($('.container-keyboard').css('display') == 'none' ) {
+                $('.container-keyboard').css('display', 'flex')
+            } else {
+                $('.container-keyboard').css('display', 'none')
+            }
+           
+        })
         $('.nav').on('shown.bs.tab', function (e) {
 
             var tabAtiva = $(e.target).text();
@@ -207,7 +226,56 @@
                 $('#senha').focus();
             }
         });
+        var qtdCaracterAtendimento = parseInt("{{config('system.qtdCaracterPosto')}}") + parseInt("{{config('system.qtdCaracterAtend')}}") 
 
+        $('#footer').hide();
+        $('#btnPaciente').click();
+
+        //Funções Teclado Numerico
+        var elementoFocado = 'atendimento'; //default preenche atendimento
+        $(".alfa").css("opacity", 0.5);
+        $(".btnOpc").css("opacity", 1);
+
+        $('#atendimento, #senha').focus(function() {
+            elementoFocado = $(':focus')[0].id;
+
+            $("#atendimento").attr('style','background-color:#fff');
+            $("#senha").attr('style','background-color:#fff');
+
+            if(elementoFocado == 'atendimento'){
+                $(".alfa").css("opacity", 0.5);
+                $(".btnOpc").css("opacity", 1);
+            }
+
+            if(elementoFocado == 'senha'){
+                $(".alfa").css("opacity", 1);
+            }
+            
+            $("#"+elementoFocado).attr('style','background-color:#EFFFE8');
+        });
+
+        $('.btnSetNumero').on('click', function(){
+            $('#'+elementoFocado).val($('#'+elementoFocado).val()+this.value);                
+            tamanhoInput = $('#'+elementoFocado).val();
+            if(tamanhoInput.length == 9){
+                $('#senha').focus();
+            }
+            VMasker($('#atendimento')).maskPattern("{{config('system.atendimentoMask')}}");
+        });
+
+        $('#upperTeclado').on('click', function() {
+            $('.btnSetNumero').toggleClass('upper lower');
+        });
+
+        $('#btnLimpar').on('click', function() {
+            apagar =  $('#'+elementoFocado).val().slice(0, -1);
+            document.getElementById(elementoFocado).value = apagar;
+            VMasker($('#atendimento')).maskPattern("{{config('system.atendimentoMask')}}");
+        });
+
+        $('#btnLimparTudo').on('click', function() {
+            $('#'+elementoFocado).val('');
+        });
     });
 </script>
 @stop

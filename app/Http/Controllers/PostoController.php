@@ -22,6 +22,7 @@ use Illuminate\Contracts\Auth\Guard;
 
 use Request;
 use Auth;
+use Crypt;
 
 class PostoController extends Controller {
 
@@ -159,17 +160,8 @@ class PostoController extends Controller {
     public function getPaciente($registro,$parceiro,$atendimento){
         //Faz a descriptografia do token enviado via get
 
-     
-        //$registro = (int) trim(@mcrypt_decrypt(MCRYPT_RIJNDAEL_256, config('system.key'),$registro, MCRYPT_MODE_ECB, @mcrypt_create_iv(@mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB), MCRYPT_RAND)));
-        //$cipher = "aes-256-cbc";
-        //$ivlen = openssl_cipher_iv_length($cipher);
-        //$iv = openssl_random_pseudo_bytes($ivlen);
-        // print_r(config('system.key'));
-        //print_r($registro);
-        //$registro = openssl_decrypt($registro, $cipher, config('system.key'), 0, $iv);
-        //print_r(openssl_decrypt($reg, $cipher, config('system.key'), $options=0, $iv));
-        //print_r($registro);
-        //ista todos os atendimentos do paciente para aquele posto
+        //$registro = base64_decode(strtr($registro, '-_', '+/'));
+        //$registro = Crypt::decrypt($registro);
   
         $atendimento = $this->posto->getAtendimentosPacienteByPosto($registro,$parceiro,$atendimento);
 

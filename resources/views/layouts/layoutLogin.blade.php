@@ -29,7 +29,7 @@
 	<div id="wraper">
 		<div id="header">
 			<header>
-				<nav class="navbar navbar-static-top headLogin" role="navigation" style="margin-bottom: 0">
+				<nav class="navbar navbar-static-top headLogin hidden-md hidden-lg" role="navigation" style="margin-bottom: 0">
 					<span>
 						<a href="{{url()}}/sobre" target="_blank">
 							{!! Html::image(config('system.eXperienceLogoHorizontal'), 'logo_lab', array('title' => 'logo', 'class'=>'hidden-xs', 'style' => 'height: 25px; margin-left: 20px')) !!}

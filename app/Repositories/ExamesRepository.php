@@ -81,7 +81,7 @@ class ExamesRepository extends BaseRepository
                     $exames[$key]['msg'] = '';
                     $exames[$key]['view'] = false;
                 default:
-                    //CINZA - NAO REALIZADO
+                    //PURPLE - NAO REALIZADO
                     $exames[$key]['class'] = 'naoRealizado-element';
                     $exames[$key]['corStatus'] = 'corStatusNaoRealizado';
                     $exames[$key]['msg'] = 'Em Andamento';

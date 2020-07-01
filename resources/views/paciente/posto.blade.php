@@ -153,7 +153,7 @@
             });
 
             dataResult.then(function(result){
-                console.log(result)
+
                 var dataMsg = [];
                 dataMsg['tipoEntregaInvalido'] = "{!!config('system.messages.exame.tipoEntregaInvalido')!!}";
 
@@ -197,6 +197,7 @@
                                 $('#modalTitleExames').html(render.title);
                                 $('#modalBodyExames').html(render.table);
                                 $('#modalFooterExames #btn').html('<a href="#" id="btnPdfDetalhe" data-correl="'+correl+'" data-posto="'+posto+'" data-atendimento="'+atendimento+'" class="btn btn-danger btnPdf">Gerar PDF</a>');
+                                $('#modalExames').modal('show');
                             }
 
                             $('#btnPdfDetalhe').click(function(e){                               

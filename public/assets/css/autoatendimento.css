@@ -16,9 +16,9 @@
     font-size: 2em;
 }
 
-.numeric, .alfa, .keyPadrao{
+/* .numeric, .alfa, .keyPadrao{
     padding:15px 22px 15px 22px !important;
-}
+} */
 
 @keyframes blink {
 0% {

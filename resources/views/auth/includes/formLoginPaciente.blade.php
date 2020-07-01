@@ -46,6 +46,9 @@
 		</div>
 		@if ($errors->has('password')) <p class="help-block">{{ $errors->first('password') }}</p> @endif
 		</div>
+		<div class="form-group pull-left hidden-xs">
+			<span id="active-keyboard"><i class="fa fa-keyboard-o fa-2x" aria-hidden="true"></i></span>
+		</div>
 		<div class="form-group pull-right">
 			<a id="modal" href="#" data-toggle="modal" data-target="#modalPaciente" >Dúvidas <i class="fa fa-question-circle"></i> </a>
 		</div>
@@ -59,6 +62,7 @@
 		$('#itemCliente').hide();
 		$('#auto-atendimento').hide();
 	     $(document).ready(function(){
+
 	     	$('#atendimento').focus();
 	     	
 	     	$('.i-checks').iCheck({
@@ -94,7 +98,10 @@
 					document.getElementById("atendimento").focus();
 				}
 
-	        });
+			});
+			$('#active-keyboard').on('click', function (e) {
+				console.log(e)
+			})
 	    });
 	</script>
 
